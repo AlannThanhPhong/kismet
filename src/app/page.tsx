@@ -7,6 +7,7 @@ import {
   Menu,
   Play,
 } from "lucide-react";
+import InvitationCatalog from "./components/InvitationCatalog";
 
 const features = [
   {
@@ -66,6 +67,7 @@ export default function Home() {
         <nav className="nav-links" aria-label="Điều hướng chính">
           <a href="#cach-mo-hoat-dong">Mơ có gì</a>
           <a href="#mau-thiep">Mẫu thiệp</a>
+          <a href="#danh-sach-thiep">Thiệp cưới</a>
           <a href="#loi-thuong">Lời thương</a>
         </nav>
         <a className="nav-cta" href="#bat-dau">
@@ -73,7 +75,7 @@ export default function Home() {
         </a>
         <details className="mobile-menu">
           <summary aria-label="Mở menu"><Menu size={22} /></summary>
-          <nav aria-label="Điều hướng di động"><a href="#cach-mo-hoat-dong">Mơ có gì</a><a href="#mau-thiep">Mẫu thiệp</a><a href="#loi-thuong">Lời thương</a><a href="#bat-dau">Tạo thiệp của bạn</a></nav>
+          <nav aria-label="Điều hướng di động"><a href="#cach-mo-hoat-dong">Mơ có gì</a><a href="#mau-thiep">Mẫu thiệp</a><a href="#danh-sach-thiep">Thiệp cưới</a><a href="#loi-thuong">Lời thương</a><a href="#bat-dau">Tạo thiệp của bạn</a></nav>
         </details>
       </header>
 
@@ -147,6 +149,8 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <InvitationCatalog />
 
       <section className="start-cta" id="bat-dau">
         <div className="cta-flower">✳</div><div className="section-kicker">MỘT CHƯƠNG MỚI SẮP MỞ RA</div>
