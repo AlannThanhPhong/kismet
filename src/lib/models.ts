@@ -4,6 +4,8 @@ export type Invitation = {
   _id: ObjectId;
   code: string;
   slug: string;
+  displayTitle?: string;
+  displayCouple?: string;
   couple: { partnerOne: string; partnerTwo: string };
   event: { date: Date; venue: string; address?: string };
   createdAt: Date;

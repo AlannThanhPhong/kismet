@@ -1,0 +1,7 @@
+Generated with the built-in image_gen tool using the user's screenshot as a lettering reference.
+Selected output: exec-dd3dac5f-708d-4aa0-a39c-f620406ba33e.png
+
+Final prompt:
+Create the final clean typography asset. Image 1 screenshot is the reference for precise HONG KONG glyph shapes; image 2 generated yellow lettering is a draft that MUST BE CLEANED. Exact single line text "HONG KONG 1999". Remove EVERY distressed speckle, rough edge, grunge, stray pixel, inner texture, dark outline and any photographic residue. Absolutely pure clean flat #FFD500 glyph fills, perfectly smooth vector-like antialiased contours. Transparent holes inside O/G/9 and between letters must be completely empty. Match screenshot letter proportions: broad almost circular O, gently tapering serif strokes and slightly sloped diagonal N; elegant high contrast Miracle display lettering, NOT heavy slab serif. Increase only hairline thickness enough to be visible. TIGHT CROP to glyphs with only 12px transparent padding each side, no big empty area above or below. Actual transparent background, no shadow, no other text, no image. This is finished website title artwork.
+
+Integration: cropped transparent padding without changing glyphs; CSS alpha mask sets the visible lettering color to exactly #FFD500. Accessible label: HONG KONG 1999.

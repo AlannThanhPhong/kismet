@@ -1,11 +1,14 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { ArrowRight } from "lucide-react";
+import Image from "next/image";
+import { ArrowUpRight, Heart } from "lucide-react";
 
 type InvitationSummary = {
   code: string;
   slug: string;
+  displayTitle?: string;
+  displayCouple?: string;
   couple: { partnerOne: string; partnerTwo: string };
   event: { date: string; venue: string };
   coverImage?: string;
@@ -41,36 +44,42 @@ export default function InvitationCatalog() {
   useEffect(() => { void loadInvitations(); }, [loadInvitations]);
 
   return (
-    <section className="invitation-catalog" id="danh-sach-thiep">
-      <div className="invitation-catalog-heading">
+    <section className="invitation-catalog section-wrap" id="danh-sach-thiep" aria-labelledby="catalog-title">
+      <div className="invitation-catalog-heading" data-reveal>
         <div>
-          <div className="section-kicker">NHỮNG NGÀY VUI ĐANG ĐƯỢC KỂ</div>
-          <h2>Thiệp cưới <em>của chúng mình.</em></h2>
+          <p className="section-kicker">01 / NHỮNG LỜI MỜI ĐÃ ĐƯỢC VIẾT</p>
+          <h2 id="catalog-title">Hai người. Một ngày.<br /><em>Một chuyện tình để nhớ.</em></h2>
         </div>
-        <span>{!loaded ? "…" : failed ? "—" : items.length.toString().padStart(2, "0")} THIỆP</span>
+        <div className="catalog-aside"><p>Mỗi chiếc thiệp là một thế giới nhỏ.<br />Mở ra, và ghé vào ngày vui của hai bạn.</p><span>{!loaded ? "…" : failed ? "—" : items.length.toString().padStart(2, "0")} CHUYỆN TÌNH <Heart size={12} /></span></div>
       </div>
       {items.length ? (
         <>
         {!databaseConnected && <p className="invitation-catalog-empty">Bạn đang xem thiệp mẫu.</p>}
         <div className="invitation-catalog-grid">
-          {items.map((item) => (
+          {items.map((item, index) => (
             <a className="invitation-list-card" href={`/thiep/${encodeURIComponent(item.code)}`} key={item.code}>
               <div className={`invitation-list-image${item.code === "20260110-NHVVAM" ? " invitation-list-image-full" : ""}`}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={item.coverImage ?? "/wedding-invitations/20261027-KHVT/images/0V7A7519-800.webp"} alt={`Thiệp cưới ${item.couple.partnerOne} và ${item.couple.partnerTwo}`} />
-                <span className="invitation-card-arrow"><ArrowRight size={17} /></span>
+                <Image src={item.coverImage ?? "/wedding-invitations/20261027-KHVT/images/0V7A7519-800.webp"} alt={`Thiệp cưới ${item.couple.partnerOne} và ${item.couple.partnerTwo}`} fill sizes="(max-width: 700px) 90vw, (max-width: 1200px) 45vw, 530px" unoptimized={Boolean(item.coverImage?.startsWith("http"))} />
+                <span className="invitation-image-index">THE WEDDING STORIES / {(index + 1).toString().padStart(2, "0")}</span>
+                <span className="invitation-card-arrow"><ArrowUpRight size={23} strokeWidth={1.25} /></span>
+                <span className="invitation-open-label">MỞ LỜI MỜI</span>
               </div>
               <div className="invitation-list-caption">
-                <div><span>MÃ THIỆP · {item.code}</span><h3>{item.couple.partnerOne} <i>&</i> {item.couple.partnerTwo}</h3></div>
-                <time dateTime={item.event.date}>{new Date(item.event.date).toLocaleDateString("vi-VN")}</time>
+                <div>
+                  <span>{item.displayCouple ?? `${item.couple.partnerOne} & ${item.couple.partnerTwo}`}</span>
+                  <h3>{item.displayTitle ?? item.code}</h3>
+                </div>
+                <time dateTime={item.event.date}>{new Date(item.event.date).toLocaleDateString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" })}</time>
               </div>
             </a>
           ))}
         </div>
         </>
+      ) : !loaded ? (
+        <div className="catalog-loading" role="status"><span className="sr-only">Đang tải những tấm thiệp…</span><div /><div /></div>
       ) : (
-        <p className="invitation-catalog-empty">
-          {!loaded ? "Đang tải những tấm thiệp…" : failed ? "Chưa tải được danh sách thiệp. Bạn thử lại nhé." : "Chưa có thiệp nào."}
+        <p className="invitation-catalog-empty" role="status">
+          {failed ? "Chưa tải được danh sách thiệp. Bạn thử lại nhé." : "Chưa có thiệp nào."}
           {failed && <button type="button" className="invitation-retry" onClick={() => void loadInvitations()}>Tải lại</button>}
         </p>
       )}
