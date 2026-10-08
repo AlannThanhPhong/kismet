@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Mơ — Thiệp cưới online, theo cách của hai bạn",
+  title: "kIsmet love — Thiệp cưới & những chuyện tình",
   description:
-    "Tạo thiệp cưới online thật riêng, gửi lời mời thật gần. Thiết kế tinh tế, RSVP tiện lợi và lưu giữ khoảnh khắc của hai bạn.",
+    "Gói câu chuyện của hai bạn vào một chiếc thiệp cưới online. Khám phá những lời mời, hình ảnh và giai điệu dành riêng cho ngày mình chung đôi.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

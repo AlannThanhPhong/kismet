@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="vi">
 <head>
   <meta charset="utf-8">
@@ -9,6 +9,10 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preload" href="images/best.jpg" as="image">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="bicycle-intro.css">
+  <link rel="preload" href="images/vintage-bicycle-left.png" as="image">
+  <link rel="preload" href="images/tropical-bouquet-v2.png" as="image">
+  <link rel="preload" href="images/green-amaranthus-trail.png" as="image">
   <script src="invitation.js" defer></script>
 </head>
 <body class="intro-locked">
@@ -16,21 +20,50 @@
     <div class="play-decoration" aria-hidden="true">
       <div class="intro-border"><span>✦</span><span>✦</span><span>✦</span><span>✦</span></div>
       <div class="intro-arch"></div>
-      <div class="intro-heading"><p>THIỆP BÁO HỶ</p><span class="intro-happiness">囍</span><span class="intro-blessing">佳偶天成</span></div>
-      <div class="intro-signature"><p>Huyền Vy <em>&</em> Anh Minh</p><span>10 <i>·</i> 01 <i>·</i> 2026</span><small>CHẠM ĐỂ MỞ THƯỚC PHIM CỦA CHÚNG MÌNH</small></div>
-      <span class="intro-side intro-side-left">良緣永結</span><span class="intro-side intro-side-right">百年好合</span>
+      <div class="intro-heading"><p class="intro-hongkong"><span class="intro-hongkong-art" role="img" aria-label="HONG KONG 1999"></span></p><span class="intro-happiness">囍</span></div>
+      <div class="intro-signature"><p>Huyền Vy <em>&</em> Anh Minh</p><span>10 <i>·</i> 01 <i>·</i> 2026</span><small>CHẠM VÀO XE ĐẠP ĐỂ MỞ THIỆP</small></div>
     </div>
-    <button class="intro-play" id="intro-play" type="button" aria-label="Mở thiệp cưới · Bắt đầu thước phim">
-      <svg class="play-seal" viewBox="0 0 160 160" fill="none" aria-hidden="true">
-        <path class="seal-fill" d="M48 5h64l43 43v64l-43 43H48L5 112V48Z"/>
-        <path class="seal-outline" d="M48 5h64l43 43v64l-43 43H48L5 112V48Z"/>
-        <path class="seal-inner" d="M51 13h58l38 38v58l-38 38H51l-38-38V51Z"/>
-        <path class="seal-detail" d="M57 23h46M57 137h46M23 57v46M137 57v46M40 40l6 6m68 68 6 6M120 40l-6 6m-68 68-6 6"/>
-        <path class="seal-flower" d="m80 19 3 6-3 6-3-6Zm0 110 3 6-3 6-3-6ZM19 80l6-3 6 3-6 3Zm110 0 6-3 6 3-6 3Z"/>
+    <button class="intro-play" id="intro-play" type="button" aria-label="Bấm vào xe đạp để mở thiệp">
+      <svg class="intro-bicycle" viewBox="50 140 1350 820" aria-hidden="true">
+        <defs>
+          <g id="bicycle-stationary-details" fill="currentColor" stroke="currentColor">
+            <path d="M435 431L330 701" fill="none" stroke-width="30"/>
+            <path d="M934 386L1118 695L1285 410" fill="none" stroke-width="24"/>
+            <path d="M702 650L1080 640L1102 671L1018 707L685 719Z" stroke-width="5"/>
+            <path d="M330 701L585 720M1118 695L852 800" fill="none" stroke-width="12"/>
+          </g>
+          <mask id="bicycle-front-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1448" height="1086">
+            <ellipse cx="330" cy="701" rx="224" ry="212" fill="white"/>
+            <use href="#bicycle-stationary-details" color="black"/>
+          </mask>
+          <mask id="bicycle-rear-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1448" height="1086">
+            <ellipse cx="1118" cy="695" rx="218" ry="211" fill="white"/>
+            <use href="#bicycle-stationary-details" color="black"/>
+          </mask>
+          <mask id="bicycle-frame-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1448" height="1086">
+            <rect width="1448" height="1086" fill="white"/>
+            <ellipse cx="330" cy="701" rx="224" ry="212" fill="black"/>
+            <ellipse cx="1118" cy="695" rx="218" ry="211" fill="black"/>
+            <use href="#bicycle-stationary-details" color="white"/>
+          </mask>
+        </defs>
+        <g class="bicycle-wheel bicycle-wheel-front" mask="url(#bicycle-front-mask)"><svg x="106" y="489" width="448" height="424" viewBox="0 0 448 448" preserveAspectRatio="none"><g class="bicycle-wheel-rotor"><path d="M224 224L446.00 224.00"/><path d="M224 224L442.63 262.55"/><path d="M224 224L432.61 299.93"/><path d="M224 224L416.26 335.00"/><path d="M224 224L394.06 366.70"/><path d="M224 224L366.70 394.06"/><path d="M224 224L335.00 416.26"/><path d="M224 224L299.93 432.61"/><path d="M224 224L262.55 442.63"/><path d="M224 224L224.00 446.00"/><path d="M224 224L185.45 442.63"/><path d="M224 224L148.07 432.61"/><path d="M224 224L113.00 416.26"/><path d="M224 224L81.30 394.06"/><path d="M224 224L53.94 366.70"/><path d="M224 224L31.74 335.00"/><path d="M224 224L15.39 299.93"/><path d="M224 224L5.37 262.55"/><path d="M224 224L2.00 224.00"/><path d="M224 224L5.37 185.45"/><path d="M224 224L15.39 148.07"/><path d="M224 224L31.74 113.00"/><path d="M224 224L53.94 81.30"/><path d="M224 224L81.30 53.94"/><path d="M224 224L113.00 31.74"/><path d="M224 224L148.07 15.39"/><path d="M224 224L185.45 5.37"/><path d="M224 224L224.00 2.00"/><path d="M224 224L262.55 5.37"/><path d="M224 224L299.93 15.39"/><path d="M224 224L335.00 31.74"/><path d="M224 224L366.70 53.94"/><path d="M224 224L394.06 81.30"/><path d="M224 224L416.26 113.00"/><path d="M224 224L432.61 148.07"/><path d="M224 224L442.63 185.45"/><circle cx="224" cy="224" r="10"/></g></svg></g>
+        <g class="bicycle-wheel bicycle-wheel-rear" mask="url(#bicycle-rear-mask)"><svg x="900" y="484" width="436" height="422" viewBox="0 0 448 448" preserveAspectRatio="none"><g class="bicycle-wheel-rotor"><path d="M224 224L446.00 224.00"/><path d="M224 224L442.63 262.55"/><path d="M224 224L432.61 299.93"/><path d="M224 224L416.26 335.00"/><path d="M224 224L394.06 366.70"/><path d="M224 224L366.70 394.06"/><path d="M224 224L335.00 416.26"/><path d="M224 224L299.93 432.61"/><path d="M224 224L262.55 442.63"/><path d="M224 224L224.00 446.00"/><path d="M224 224L185.45 442.63"/><path d="M224 224L148.07 432.61"/><path d="M224 224L113.00 416.26"/><path d="M224 224L81.30 394.06"/><path d="M224 224L53.94 366.70"/><path d="M224 224L31.74 335.00"/><path d="M224 224L15.39 299.93"/><path d="M224 224L5.37 262.55"/><path d="M224 224L2.00 224.00"/><path d="M224 224L5.37 185.45"/><path d="M224 224L15.39 148.07"/><path d="M224 224L31.74 113.00"/><path d="M224 224L53.94 81.30"/><path d="M224 224L81.30 53.94"/><path d="M224 224L113.00 31.74"/><path d="M224 224L148.07 15.39"/><path d="M224 224L185.45 5.37"/><path d="M224 224L224.00 2.00"/><path d="M224 224L262.55 5.37"/><path d="M224 224L299.93 15.39"/><path d="M224 224L335.00 31.74"/><path d="M224 224L366.70 53.94"/><path d="M224 224L394.06 81.30"/><path d="M224 224L416.26 113.00"/><path d="M224 224L432.61 148.07"/><path d="M224 224L442.63 185.45"/><circle cx="224" cy="224" r="10"/></g></svg></g>
+        <image class="bicycle-frame" href="images/vintage-bicycle-left.png" width="1448" height="1086" mask="url(#bicycle-frame-mask)"/>
+        <ellipse class="bouquet-contact-shadow" cx="1155" cy="403" rx="116" ry="9" fill="#17170f" opacity=".3"/>
+        <g class="bouquet-trailing-greenery">
+          <g transform="translate(1134 389)"><svg class="bouquet-trail" x="-11" y="-3" width="52" height="282" viewBox="410 0 300 1536" preserveAspectRatio="none"><image href="images/green-amaranthus-trail.png" width="1024" height="1536"/></svg></g>
+          <g transform="translate(1183 400)"><svg class="bouquet-trail bouquet-trail-secondary" x="-10" y="-3" width="48" height="321" viewBox="410 0 300 1536" preserveAspectRatio="none"><image href="images/green-amaranthus-trail.png" width="1024" height="1536"/></svg></g>
+          <g transform="translate(1230 408)"><svg class="bouquet-trail bouquet-trail-short" x="-10" y="-3" width="46" height="224" viewBox="410 0 300 1536" preserveAspectRatio="none"><image href="images/green-amaranthus-trail.png" width="1024" height="1536"/></svg></g>
+        </g>
+        <g class="bicycle-bouquet" transform="translate(980 405) rotate(78)"><image href="images/tropical-bouquet-v2.png" x="-117.5" y="-350" width="235" height="350"/></g>
+        <g class="bouquet-rack-tie" fill="none" stroke-linecap="round">
+          <path d="M1080 395Q1071 413 1085 428Q1098 434 1102 411" stroke="#4e3e25" stroke-width="9"/>
+          <path d="M1080 395Q1071 413 1085 428Q1098 434 1102 411" stroke="#b9a27a" stroke-width="5"/>
+          <path d="M1081 400Q1091 402 1101 411" stroke="#e1cda7" stroke-width="4"/>
+        </g>
       </svg>
-      <span class="play-kicker" aria-hidden="true">囍 · 喜宴</span>
-      <span class="play-title" aria-hidden="true" lang="zh-Hant">開場</span>
-      <span class="play-action"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 2v8l7-4Z" fill="currentColor"/></svg>MỞ THIỆP</span>
+      <span class="play-action">MỞ THIỆP <span aria-hidden="true">↗</span></span>
     </button>
     <div class="film-intro" id="film-intro" hidden aria-hidden="true">
       <p class="intro-film-label">THƯỚC PHIM CỦA CHÚNG MÌNH</p>
@@ -44,7 +77,7 @@
   <main>
     <section class="hero" aria-labelledby="couple-name">
       <div class="hero-copy">
-        <div class="edition"><span>THIỆP BÁO HỶ</span><span>佳偶天成</span></div>
+        <div class="edition"><span>THIỆP BÁO HỶ</span></div>
         <div class="double-happiness" aria-hidden="true">囍</div>
         <p class="eyebrow">TRÂN TRỌNG KÍNH MỜI</p>
         <h1 id="couple-name">Huyền Vy <span class="ampersand">&</span> Anh Minh</h1>
@@ -53,7 +86,7 @@
         <a class="button gold-button" id="view-invitation" href="#loi-moi">Mở thiệp mời <span>↓</span></a>
         <span class="hero-footnote">HỮU DUYÊN THIÊN LÝ NĂNG TƯƠNG NGỘ</span>
       </div>
-      <div class="hero-picture"><img src="images/best.jpg" alt="Ảnh cưới Huyền Vy và Anh Minh" width="800" height="533" fetchpriority="high"><div class="photo-border" aria-hidden="true"></div><span class="vertical-note">良緣永結 · TRỌN ĐỜI BÊN NHAU</span><div class="photo-caption"><span>CHUYỆN TÌNH CHÚNG MÌNH</span><span>一生一世</span></div></div>
+      <div class="hero-picture"><img src="images/best.jpg" alt="Ảnh cưới Huyền Vy và Anh Minh" width="800" height="533" fetchpriority="high"><div class="photo-border" aria-hidden="true"></div><span class="vertical-note">TRỌN ĐỜI BÊN NHAU</span><div class="photo-caption"><span>CHUYỆN TÌNH CHÚNG MÌNH</span></div></div>
     </section>
     <div class="ticker" aria-hidden="true"><span>囍</span> NGÀY VUI CỦA CHÚNG MÌNH <span>✦</span> HUYỀN VY & ANH MINH <span>囍</span> 10 THÁNG 01 NĂM 2026 <span>✦</span> TRĂM NĂM HẠNH PHÚC</div>
 
@@ -80,7 +113,7 @@
       <button class="button outline-button" id="save-date" type="button">Lưu ngày vào lịch <span>＋</span></button>
     </section>
 
-    <section class="film-section" aria-labelledby="film-title"><img src="images/photo_2026-10-08_13-26-05.jpg" alt="Khoảnh khắc bên nhau của Huyền Vy và Anh Minh" width="896" height="1200" loading="lazy"><div class="film-copy"><p class="eyebrow">THEO NĂM THÁNG, VẪN LÀ NHAU</p><h2 id="film-title">Giữa vạn người,<br><em>mình tìm thấy nhau.</em></h2><p>Và từ hôm nay,<br>mọi con đường đều là đường về chung một nhà.</p><span aria-hidden="true">一生一世</span></div></section>
+    <section class="film-section" aria-labelledby="film-title"><img src="images/photo_2026-10-08_13-26-05.jpg" alt="Khoảnh khắc bên nhau của Huyền Vy và Anh Minh" width="896" height="1200" loading="lazy"><div class="film-copy"><p class="eyebrow">THEO NĂM THÁNG, VẪN LÀ NHAU</p><h2 id="film-title">Giữa vạn người,<br><em>mình tìm thấy nhau.</em></h2><p>Và từ hôm nay,<br>mọi con đường đều là đường về chung một nhà.</p></div></section>
 
     <section class="album section-space" id="anh-cuoi" aria-labelledby="album-title"><div class="section-heading"><div><p class="eyebrow">03 / THƯỚC PHIM CỦA HAI ĐỨA</p><h2 id="album-title">Những ngày<br><em>có nhau.</em></h2></div><p class="album-note">Một chút hoài niệm.<br>Một tình yêu rất mới.<br><span>Chạm ảnh để xem lớn ↗</span></p></div>
       <div class="gallery">
@@ -94,11 +127,26 @@
         <button class="gallery-item gallery-portrait" type="button"><img src="images/photo_2026-10-08_13-24-23.jpg" alt="Ảnh cưới Huyền Vy và Anh Minh 8" loading="lazy" width="533" height="800"><span>08 / CHUYỆN CHÚNG MÌNH</span></button>
         <button class="gallery-item gallery-portrait" type="button"><img src="images/photo_2026-10-08_13-26-05.jpg" alt="Ảnh cưới Huyền Vy và Anh Minh 9" loading="lazy" width="533" height="800"><span>09 / CHUYỆN CHÚNG MÌNH</span></button>
         <button class="gallery-item gallery-portrait" type="button"><img src="images/photo_2026-10-08_13-26-08.jpg" alt="Ảnh cưới Huyền Vy và Anh Minh 10" loading="lazy" width="533" height="800"><span>10 / CHUYỆN CHÚNG MÌNH</span></button>
-        <button class="gallery-item gallery-landscape" type="button"><img src="images/photo_2026-10-08_13-26-10.jpg" alt="Ảnh cưới Huyền Vy và Anh Minh 11" loading="lazy" width="800" height="533"><span>11 / CHUYỆN CHÚNG MÌNH</span></button>
-        <button class="gallery-item gallery-landscape" type="button"><img src="images/photo_2026-10-08_13-26-12.jpg" alt="Ảnh cưới Huyền Vy và Anh Minh 12" loading="lazy" width="800" height="533"><span>12 / CHUYỆN CHÚNG MÌNH</span></button>
-        <button class="gallery-item gallery-landscape" type="button"><img src="images/photo_2026-10-08_13-26-14.jpg" alt="Ảnh cưới Huyền Vy và Anh Minh 13" loading="lazy" width="2560" height="1707"><span>13 / CHUYỆN CHÚNG MÌNH</span></button>
-        <button class="gallery-item gallery-landscape" type="button"><img src="images/best.jpg" alt="Ảnh cưới Huyền Vy và Anh Minh 14" loading="lazy" width="800" height="533"><span>14 / MỘT ĐỜI BÊN NHAU</span></button>
-        <button class="gallery-item gallery-portrait" type="button"><img src="images/couple-portrait.jpg" alt="Huyền Vy và Anh Minh bên bó hoa cưới" loading="lazy" width="533" height="800"><span>15 / NGÀY MÌNH CHUNG ĐÔI</span></button>
+        <div class="gallery-ending">
+          <div class="gallery-ending-left">
+            <button class="gallery-item gallery-landscape" type="button"><img src="images/photo_2026-10-08_13-26-12.jpg" alt="Ảnh cưới Huyền Vy và Anh Minh 11" loading="lazy" width="800" height="533"><span>11 / CHUYỆN CHÚNG MÌNH</span></button>
+            <button class="gallery-item gallery-landscape" type="button"><img src="images/photo_2026-10-08_13-26-14.jpg" alt="Ảnh cưới Huyền Vy và Anh Minh 12" loading="lazy" width="2560" height="1707"><span>12 / CHUYỆN CHÚNG MÌNH</span></button>
+            <button class="gallery-item gallery-landscape" type="button"><img src="images/photo_2026-10-08_15-17-40.jpg" alt="Ảnh cưới đen trắng của Huyền Vy và Anh Minh" loading="lazy" width="800" height="533"><span>13 / NGÀY MÌNH CHUNG ĐÔI</span></button>
+          </div>
+          <div class="gallery-ending-right">
+            <div class="gallery-ending-copy">
+              <p><em>Cảm ơn chuyến đi nửa vòng Trái Đất năm ấy.</em></p>
+              <p>Cảm ơn vì giữa muôn vạn bước chân, chúng ta đã không bỏ lỡ nhau</p>
+            </div>
+            <div class="gallery-ending-portraits">
+              <button class="gallery-item gallery-portrait" type="button"><img class="gallery-crop-right" src="images/photo_2026-10-08_13-26-10.jpg" alt="Huyền Vy tựa bên Anh Minh, khung ảnh dọc" loading="lazy" width="800" height="533"><span>14 / BÌNH YÊN BÊN NHAU</span></button>
+              <button class="gallery-item gallery-portrait" type="button"><img src="images/photo_2026-10-08_15-19-20.jpg" alt="Anh Minh nâng tay Huyền Vy giữa phố đêm" loading="lazy" width="533" height="800"><span>15 / CÙNG NHAU ĐI KHẮP CHỐN</span></button>
+            </div>
+            <div class="gallery-ending-copy">
+              <p><em>Từ nay về sau: Hạnh phúc này là thật, và thước phim này sẽ đi cùng chúng ta qua năm tháng.</em></p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 

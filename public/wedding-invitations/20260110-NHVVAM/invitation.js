@@ -103,6 +103,7 @@
   function showPhoto(index) {
     photoIndex = (index + photos.length) % photos.length;
     const source = photos[photoIndex].querySelector('img');
+    largePhoto.classList.toggle('gallery-crop-right', source.classList.contains('gallery-crop-right'));
     largePhoto.src = source.src; largePhoto.alt = source.alt;
     document.getElementById('photo-caption').textContent = photos[photoIndex].querySelector('span').textContent;
     document.getElementById('photo-count').textContent = `${photoIndex + 1} / ${photos.length}`;

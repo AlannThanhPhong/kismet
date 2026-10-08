@@ -1,0 +1,4 @@
+Built-in image_gen edit of hong-kong-1999-lettering-cropped.png.
+
+Prompt:
+Edit this generated lettering asset. Exact text "HONG KONG 1999" unchanged, one line. Make ALL letter strokes about 15% thinner than the reference, including O curves, G, N diagonals, H stems, serifs and digits. Preserve the distinctive glyph silhouettes, broad circular O proportions, serif shapes, spacing, height, orientation and yellow #FFD500. Smooth clean edges and remove stray speckles outside lettering and inside counters, no texture no outlines no shadows. True transparent background. Crop closely to the text with a small transparent safety margin. Only change stroke thickness and clean noise; do not replace with another typeface.

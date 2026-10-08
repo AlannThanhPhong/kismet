@@ -1,0 +1,4 @@
+Built-in image_gen edit of hong-kong-1999-lettering-thin-cropped.png.
+
+Prompt:
+Edit the supplied lettering image. Exact text "HONG KONG 1999", one horizontal line. Make the lettering TWICE AS THIN: reduce the thickness of every main stroke by 50 percent compared with the input. This must be a clearly visible major reduction, especially H vertical stems, N diagonals, O curved sides, G sides, K stems and all digits. Preserve overall letter height, widths, broad circular O silhouettes, layout, serif style and spacing. Enlarge internal counters to achieve thinner strokes without shrinking the letters. Elegant light regular display serif, not bold. Solid #FFD500 yellow, transparent background. Clean smooth contours, empty transparent counters, no distressed speckles or texture or outlines. No extra text, shadow or background. Small safe transparent margins around the full text.

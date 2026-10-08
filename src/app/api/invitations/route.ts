@@ -37,11 +37,11 @@ export async function GET() {
       );
     }
     const items = await invitations.find({}, {
-      projection: { code: 1, slug: 1, couple: 1, event: 1, template: 1, coverImage: 1, createdAt: 1 },
+      projection: { code: 1, slug: 1, displayTitle: 1, displayCouple: 1, couple: 1, event: 1, template: 1, coverImage: 1, createdAt: 1 },
     }).sort({ createdAt: -1 }).toArray();
     return NextResponse.json(items.map(({ _id, ...item }) => {
       const design = designedInvitations.find((entry) => entry.code === item.code);
-      return { ...item, ...(design ? { coverImage: design.coverImage } : {}) };
+      return { ...item, ...(design ? { coverImage: design.coverImage, displayTitle: item.displayTitle ?? design.displayTitle, displayCouple: item.displayCouple ?? ("displayCouple" in design ? design.displayCouple : undefined) } : {}) };
     }));
   } catch (error) {
     console.error("Could not list invitations", error);
