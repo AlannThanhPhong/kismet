@@ -55,7 +55,7 @@ export default function InvitationCatalog() {
         <div className="invitation-catalog-grid">
           {items.map((item) => (
             <a className="invitation-list-card" href={`/thiep/${encodeURIComponent(item.code)}`} key={item.code}>
-              <div className="invitation-list-image">
+              <div className={`invitation-list-image${item.code === "20260110-NHVVAM" ? " invitation-list-image-full" : ""}`}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={item.coverImage ?? "/wedding-invitations/20261027-KHVT/images/0V7A7519-800.webp"} alt={`Thiệp cưới ${item.couple.partnerOne} và ${item.couple.partnerTwo}`} />
                 <span className="invitation-card-arrow"><ArrowRight size={17} /></span>

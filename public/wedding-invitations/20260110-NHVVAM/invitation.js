@@ -46,19 +46,19 @@
     const track = film.querySelector('.film-track');
     const frames = [...track.children];
     const filmWindow = film.querySelector('.film-window');
-    const distance = frames.at(-1).offsetLeft - frames[0].offsetLeft;
+    const distance = frames.at(-1).offsetTop - frames[0].offsetTop;
     try {
       if (!reducedMotion.matches) {
         await track.animate([
-          { transform: 'translateX(0)' },
-          { transform: 'translateX(-' + distance + 'px)' }
+          { transform: 'translateY(0)' },
+          { transform: 'translateY(-' + distance + 'px)' }
         ], { duration: 3900, easing: 'cubic-bezier(.2,.65,.3,1)', fill: 'forwards' }).finished;
       }
-      track.style.transform = 'translateX(-' + distance + 'px)';
+      track.style.transform = 'translateY(-' + distance + 'px)';
       if (!reducedMotion.matches) await new Promise(resolve => setTimeout(resolve, 250));
       opening.classList.add('is-zooming');
       const rect = filmWindow.getBoundingClientRect();
-      const scale = Math.max(innerWidth / rect.width, innerHeight / rect.height) * 1.08;
+      const scale = Math.min(innerWidth / rect.width, innerHeight / rect.height) * 0.95;
       status.textContent = 'Thiệp cưới Huyền Vy và Anh Minh';
       await Promise.all([
         filmWindow.animate([{ transform: 'scale(1)' }, { transform: 'scale(' + (reducedMotion.matches ? 1 : scale) + ')' }], { duration: reducedMotion.matches ? 500 : 850, easing: 'cubic-bezier(.4,0,.2,1)', fill: 'forwards' }).finished,
