@@ -2,6 +2,7 @@ import { MongoServerError } from "mongodb";
 import { NextResponse } from "next/server";
 import { getDatabase } from "@/lib/mongodb";
 import type { Invitation } from "@/lib/models";
+import { designedInvitations } from "@/lib/designed-invitations";
 
 export const runtime = "nodejs";
 
@@ -17,34 +18,24 @@ function invitationCode(dateText: string, partnerOne: string, partnerTwo: string
 
 export async function GET() {
   if (!process.env.MONGODB_URI) {
-    return NextResponse.json([{
-      code: "20261027-KHVT",
-      slug: "20261027-KHVT",
-      couple: { partnerOne: "Kim Hiên", partnerTwo: "Văn Tài" },
-      event: { date: "2026-10-27T02:00:00.000Z", venue: "Tư gia nhà gái", address: "Tổ 10, ấp Tân Đông 1, xã Tân Lập" },
-      template: "kim-hien-van-tai",
-      coverImage: "/wedding-invitations/20261027-KHVT/images/0V7A7519-800.webp",
-    }], { headers: { "X-MongoDB-Status": "unconfigured" } });
+    return NextResponse.json(designedInvitations, { headers: { "X-MongoDB-Status": "unconfigured" } });
   }
 
   try {
     const db = await getDatabase();
     const invitations = db.collection<Invitation>("invitations");
     await invitations.createIndex({ code: 1 }, { unique: true, partialFilterExpression: { code: { $type: "string" } } });
-    const firstCode = "20261027-KHVT";
-    await invitations.updateOne(
-      { code: firstCode },
-      { $setOnInsert: {
-        code: firstCode,
-        slug: firstCode,
-        couple: { partnerOne: "Kim Hiên", partnerTwo: "Văn Tài" },
-        event: { date: new Date("2026-10-27T02:00:00.000Z"), venue: "Tư gia nhà gái", address: "Tổ 10, ấp Tân Đông 1, xã Tân Lập" },
-        template: "kim-hien-van-tai",
-        coverImage: "/wedding-invitations/20261027-KHVT/images/0V7A7519-800.webp",
-        createdAt: new Date(), updatedAt: new Date(),
-      } },
-      { upsert: true },
-    );
+    for (const design of designedInvitations) {
+      await invitations.updateOne(
+        { code: design.code },
+        { $setOnInsert: {
+          ...design,
+          event: { ...design.event, date: new Date(design.event.date) },
+          createdAt: new Date(), updatedAt: new Date(),
+        } },
+        { upsert: true },
+      );
+    }
     const items = await invitations.find({}, {
       projection: { code: 1, slug: 1, couple: 1, event: 1, template: 1, coverImage: 1, createdAt: 1 },
     }).sort({ createdAt: -1 }).toArray();

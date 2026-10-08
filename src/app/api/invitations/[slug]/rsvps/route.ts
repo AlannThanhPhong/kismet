@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getDatabase } from "@/lib/mongodb";
 import type { Invitation, Rsvp } from "@/lib/models";
+import { designedInvitations } from "@/lib/designed-invitations";
 
 export const runtime = "nodejs";
 
@@ -34,7 +35,14 @@ export async function POST(
   try {
     const { slug } = await params;
     const db = await getDatabase();
-    const invitation = await db.collection<Invitation>("invitations").findOne({ slug });
+    const invitations = db.collection<Invitation>("invitations");
+    const design = designedInvitations.find((item) => item.slug === slug);
+    if (design) {
+      await invitations.updateOne({ code: design.code }, { $setOnInsert: {
+        ...design, event: { ...design.event, date: new Date(design.event.date) }, createdAt: new Date(), updatedAt: new Date(),
+      } }, { upsert: true });
+    }
+    const invitation = await invitations.findOne({ slug });
     if (!invitation) return NextResponse.json({ error: "Không tìm thấy thiệp." }, { status: 404 });
 
     const rsvp: Omit<Rsvp, "_id"> = {
