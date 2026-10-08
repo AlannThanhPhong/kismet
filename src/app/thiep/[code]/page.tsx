@@ -3,18 +3,14 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getDatabase } from "@/lib/mongodb";
 import type { Invitation } from "@/lib/models";
+import { designedInvitations } from "@/lib/designed-invitations";
 import "./invitation.css";
-
-const firstInvitation = {
-  code: "20261027-KHVT",
-  couple: { partnerOne: "Kim Hiên", partnerTwo: "Văn Tài" },
-  event: { date: "2026-10-27T02:00:00.000Z", venue: "Tư gia nhà gái", address: "Tổ 10, ấp Tân Đông 1, xã Tân Lập" },
-};
 
 type Props = { params: Promise<{ code: string }> };
 
 async function findInvitation(code: string) {
-  if (code === firstInvitation.code) return firstInvitation;
+  const designed = designedInvitations.find((item) => item.code === code);
+  if (designed) return designed;
   try {
     const db = await getDatabase();
     return db.collection<Invitation>("invitations").findOne({ code });
@@ -27,7 +23,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { code } = await params;
   const invitation = await findInvitation(code);
   if (!invitation) return { title: "Không tìm thấy thiệp cưới" };
-  return { title: `${invitation.couple.partnerOne} & ${invitation.couple.partnerTwo} | Thiệp cưới` };
+  const title = `${invitation.couple.partnerOne} & ${invitation.couple.partnerTwo} | Thiệp cưới`;
+  const design = designedInvitations.find((item) => item.code === code);
+  return { title, description: `Trân trọng kính mời đến chung vui tại ${invitation.event.venue}.`, ...(design ? { openGraph: { title, images: [design.coverImage] } } : {}) };
 }
 
 export default async function InvitationPage({ params }: Props) {
@@ -35,8 +33,8 @@ export default async function InvitationPage({ params }: Props) {
   const invitation = await findInvitation(code);
   if (!invitation) notFound();
 
-  if (code === firstInvitation.code) {
-    return <iframe className="full-invitation" src={`/wedding-invitations/${code}/index.html`} title={`Thiệp cưới ${invitation.couple.partnerOne} và ${invitation.couple.partnerTwo}`} />;
+  if (designedInvitations.some((item) => item.code === code)) {
+    return <iframe className="full-invitation" src={`/wedding-invitations/${code}/index.html`} allow="autoplay" title={`Thiệp cưới ${invitation.couple.partnerOne} và ${invitation.couple.partnerTwo}`} />;
   }
 
   const date = new Date(invitation.event.date);
