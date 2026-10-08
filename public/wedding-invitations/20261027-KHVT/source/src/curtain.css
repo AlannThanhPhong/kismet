@@ -1,0 +1,8 @@
+/* Cloth geometry and pleat compression follow one continuous timeline. */
+.cover-panel{overflow:hidden;transition:none;background:transparent;transform:none;backface-visibility:visible}
+.curtain-fabric{display:block;position:absolute;inset:0;width:100%;height:100%}
+.cover-right .curtain-fabric{transform:scaleX(-1)}
+.cover-panel::after{transition:opacity .4s ease}
+.opening .cover-panel::after{opacity:0}
+.cover.opening>.botanical,.cover.opening .botanical-mirror{opacity:0;transition:opacity .4s ease}
+.opening .cover-content{transform:translateY(-12px) scale(.98);transition:opacity .35s ease,transform .5s ease}
