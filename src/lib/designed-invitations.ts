@@ -14,6 +14,6 @@ export const designedInvitations = [
     couple: { partnerOne: "Nguyễn Huyền Vy", partnerTwo: "Viên Anh Minh" },
     event: { date: "2026-01-10T10:00:00.000Z", venue: "Victory – Sảnh Valentine", address: "12 Mai Hắc Đế, phường Buôn Ma Thuột, tỉnh Đắk Lắk" },
     template: "hong-kong-maroon",
-    coverImage: "/wedding-invitations/20260110-NHVVAM/images/best.jpg",
+    coverImage: "/wedding-invitations/20260110-NHVVAM/images/couple-portrait.jpg",
   },
 ];
