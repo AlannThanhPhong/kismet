@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { currencyForCountry } from "@/lib/pricing";
+import { getVisitorCountry } from "@/lib/visitor-country";
 import { ArrowDown, ArrowRight, Heart, Phone, Sparkles } from "lucide-react";
 import TemplateShowcase from "./components/TemplateShowcase";
 import Features50 from "./components/Features50";
@@ -41,7 +43,8 @@ const questions = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const currency = currencyForCountry(await getVisitorCountry());
   return (
     <main className="kismet-home" id="top">
       <HomeEffects />
@@ -52,7 +55,7 @@ export default function Home() {
       {/* Top Promotion Announcement Bar */}
       <aside className="announcement-top-bar" aria-label="Thông báo ưu đãi mùa cưới">
         <div className="announcement-inner">
-          <span>✧ <strong>ƯU ĐÃI MÙA CƯỚI 2026:</strong> Tặng thiết kế Monogram Logo Dâu & Rể trị giá 200.000đ khi đặt thiệp hôm nay!</span>
+          <span>✧ <strong>ƯU ĐÃI MÙA CƯỚI 2026:</strong> Tặng thiết kế Monogram Logo Dâu & Rể{currency === "VND" ? " trị giá 200.000đ" : ""} khi đặt thiệp hôm nay!</span>
           <span className="pill-dot">·</span>
           <span>Hotline tư vấn: <a className="announcement-hotline" href="tel:0827274387">0827274387</a></span>
         </div>
@@ -111,7 +114,7 @@ export default function Home() {
               <span className="trust-label">Gửi thiệp muôn nơi</span>
             </div>
             <div className="trust-item">
-              <span className="trust-num">Tiết kiệm 80%</span>
+              <span className="trust-num">{currency === "VND" ? "Tiết kiệm 80%" : "Giá trọn gói"}</span>
               <span className="trust-label">So với thiệp in giấy</span>
             </div>
           </div>
@@ -191,19 +194,19 @@ export default function Home() {
       </div>
 
       {/* 01. Rich Filterable Template Showcase (Cinelove + Zenlove + Nhà Có Hỷ + TheSimple) */}
-      <TemplateShowcase />
+      <TemplateShowcase currency={currency} />
 
       {/* 02. Smart 5.0 Interactive Features (meWedding + Cinelove + Nhà Có Hỷ) */}
       <Features50 />
 
       {/* 03. Why Choose Online / Pain Points & Solutions (Zenlove + meWedding) */}
-      <WhyChooseOnline />
+      <WhyChooseOnline currency={currency} />
 
       {/* 04. Side-by-side Comparison Table */}
-      <ComparisonSection />
+      <ComparisonSection currency={currency} />
 
       {/* 05. Transparent Pricing Packages (Nhà Có Hỷ + meWedding) */}
-      <PricingSection />
+      <PricingSection currency={currency} />
 
       {/* 06. 4-Step Simple Workflow */}
       <WorkflowSection />

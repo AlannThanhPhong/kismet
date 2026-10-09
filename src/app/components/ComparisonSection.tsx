@@ -1,12 +1,13 @@
 "use client";
 
 import { Check, Heart, Sparkles, X } from "lucide-react";
+import { packagePrice, type PricingCurrency } from "@/lib/pricing";
 
-export default function ComparisonSection() {
+export default function ComparisonSection({ currency }: { currency: PricingCurrency }) {
   const comparisonRows = [
     {
       feature: "Chi phí thực hiện",
-      online: "Chỉ từ 500.000đ trọn gói, không phát sinh",
+      online: `Chỉ từ ${packagePrice("standard", currency)} trọn gói, không phát sinh`,
       onlineGood: true,
       paper: "Tốn 2.000.000đ - 4.500.000đ in ấn",
       paperGood: false,

@@ -3,7 +3,8 @@
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import { ArrowUpRight, Eye, Heart, Monitor, Music2, Smartphone, Sparkles } from "lucide-react";
-import { WEDDING_TEMPLATES, type TemplateCategory, type WeddingTemplateItem } from "@/lib/templates-data";
+import { templatesForCurrency, type TemplateCategory, type WeddingTemplateItem } from "@/lib/templates-data";
+import { packagePrice, type PricingCurrency } from "@/lib/pricing";
 import LivePreviewModal from "./LivePreviewModal";
 
 const CATEGORIES: { key: TemplateCategory; label: string }[] = [
@@ -12,14 +13,15 @@ const CATEGORIES: { key: TemplateCategory; label: string }[] = [
   { key: "modern", label: "Trong Trẻo / Minimal" },
 ];
 
-export default function TemplateShowcase() {
+export default function TemplateShowcase({ currency }: { currency: PricingCurrency }) {
   const [activeCategory, setActiveCategory] = useState<TemplateCategory>("all");
   const [selectedPreview, setSelectedPreview] = useState<WeddingTemplateItem | null>(null);
+  const templates = useMemo(() => templatesForCurrency(currency), [currency]);
 
   const filteredTemplates = useMemo(() => {
-    if (activeCategory === "all") return WEDDING_TEMPLATES;
-    return WEDDING_TEMPLATES.filter((item) => item.category === activeCategory);
-  }, [activeCategory]);
+    if (activeCategory === "all") return templates;
+    return templates.filter((item) => item.category === activeCategory);
+  }, [activeCategory, templates]);
 
   return (
     <section className="template-showcase-section section-wrap" id="kho-mau-thiep" aria-labelledby="catalog-title">
@@ -32,7 +34,7 @@ export default function TemplateShowcase() {
         </h2>
         <p className="section-subheading">
           Hiện có 2 mẫu thiệp thực tế để bạn trải nghiệm. Mỗi chiếc thiệp được chăm chút tỉ mỉ từ màu sắc, phông chữ đến hiệu ứng chuyển động.
-          Mẫu Kim Hiên & Văn Tài thuộc gói 800.000đ; mẫu Huyền Vy & Anh Minh thuộc gói Custom.
+          Mẫu Kim Hiên & Văn Tài thuộc gói {packagePrice("premium", currency)}; mẫu Huyền Vy & Anh Minh thuộc gói Custom.
           Tương thích hoàn hảo trên mọi kích thước màn hình điện thoại, máy tính bảng và máy tính để bàn.
         </p>
 
@@ -66,10 +68,10 @@ export default function TemplateShowcase() {
             >
               {cat.label}
               {cat.key === "all" ? (
-                <span className="pill-count">{WEDDING_TEMPLATES.length}</span>
+                <span className="pill-count">{templates.length}</span>
               ) : (
                 <span className="pill-count">
-                  {WEDDING_TEMPLATES.filter((t) => t.category === cat.key).length}
+                  {templates.filter((t) => t.category === cat.key).length}
                 </span>
               )}
             </button>
