@@ -65,7 +65,16 @@ export function HomeEffects() {
   </button>;
 }
 
-const links = [{ href: "#danh-sach-thiep", title: "Những lời mời" }, { href: "#mau-thiep", title: "Cảm hứng" }, { href: "#loi-thuong", title: "Chuyện của kIsmet love" }];
+const links = [
+  { href: "#kho-mau-thiep", title: "Mẫu thiệp" },
+  { href: "#tinh-nang-50", title: "Tính năng 5.0" },
+  { href: "#ly-do-chon", title: "Vì sao chọn" },
+  { href: "#so-sanh", title: "So sánh" },
+  { href: "#bang-gia", title: "Bảng giá" },
+  { href: "#quy-trinh", title: "Quy trình" },
+  { href: "#cam-nhan", title: "Cảm nhận" },
+  { href: "#hoi-dap", title: "Hỏi đáp" },
+];
 
 export function HomeNavigation() {
   const [open, setOpen] = useState(false);
@@ -78,7 +87,11 @@ export function HomeNavigation() {
   return <>
     <nav className="nav-links" aria-label="Điều hướng chính">{links.map(link => <a key={link.href} href={link.href}>{link.title}</a>)}</nav>
     <button className="mobile-menu-button" onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="mobile-navigation" aria-label={open ? "Đóng menu" : "Mở menu"}>{open ? <X size={23} /> : <Menu size={23} />}</button>
-    <nav className="mobile-navigation" id="mobile-navigation" hidden={!open} aria-label="Điều hướng di động">{links.map(link => <a key={link.href} href={link.href} onClick={() => setOpen(false)}>{link.title}<ArrowRight size={18} /></a>)}<a href="#bat-dau" onClick={() => setOpen(false)}>Kể chuyện cùng kIsmet love <Heart size={17} /></a></nav>
+    <nav className="mobile-navigation" id="mobile-navigation" hidden={!open} aria-label="Điều hướng di động">
+      {links.map(link => <a key={link.href} href={link.href} onClick={() => setOpen(false)}>{link.title}<ArrowRight size={18} /></a>)}
+      <a href="#bat-dau" onClick={() => setOpen(false)}>Đặt thiệp cùng kIsmet love <Heart size={17} /></a>
+      <a href="tel:0827274387" onClick={() => setOpen(false)} style={{ color: "#0068ff" }}>Gọi tư vấn: 0827274387</a>
+    </nav>
   </>;
 }
 
