@@ -1,8 +1,9 @@
 "use client";
 
 import { AlertCircle, CheckCircle2, Clock, DollarSign, Heart, MapPin, Sparkles, Users } from "lucide-react";
+import { packagePrice, type PricingCurrency } from "@/lib/pricing";
 
-export default function WhyChooseOnline() {
+export default function WhyChooseOnline({ currency }: { currency: PricingCurrency }) {
   const problems = [
     {
       icon: Clock,
@@ -36,8 +37,8 @@ export default function WhyChooseOnline() {
       desc: "Khách bấm xác nhận có đi hay không, đi mấy người, ăn chay hay mặn. Dâu Rể kiểm soát bàn tiệc chính xác 100%.",
     },
     {
-      title: "Tiết Kiệm 80% Chi Phí",
-      desc: "Chỉ từ 500.000đ cho trọn gói thiệp cưới điện tử hiện đại, không phát sinh bất kỳ phụ phí in ấn hay vận chuyển.",
+      title: currency === "VND" ? "Tiết Kiệm 80% Chi Phí" : "Chi Phí Trọn Gói Minh Bạch",
+      desc: `Chỉ từ ${packagePrice("standard", currency)} cho trọn gói thiệp cưới điện tử hiện đại, không phát sinh bất kỳ phụ phí in ấn hay vận chuyển.`,
     },
     {
       title: "Đong Đầy Cảm Xúc & Kỷ Niệm",

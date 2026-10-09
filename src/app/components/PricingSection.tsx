@@ -1,14 +1,15 @@
 "use client";
 
 import { Check, Gift, Heart, Sparkles, Star } from "lucide-react";
+import { packageAmount, packagePrice, type PricingCurrency } from "@/lib/pricing";
 
-export default function PricingSection() {
+export default function PricingSection({ currency }: { currency: PricingCurrency }) {
   const packages = [
     {
       id: "standard",
       name: "GÓI TIÊU CHUẨN",
       subtitle: "Gói Thương",
-      price: "500.000",
+      price: packageAmount("standard", currency),
       sampleLabel: "Mẫu thiệp sẽ bổ sung sau",
       sampleUrl: null,
       period: "đ / trọn gói",
@@ -36,7 +37,7 @@ export default function PricingSection() {
       id: "premium",
       name: "GÓI NÂNG CAO",
       subtitle: "Gói Chung Đôi",
-      price: "800.000",
+      price: packageAmount("premium", currency),
       sampleLabel: "Xem mẫu Kim Hiên & Văn Tài",
       sampleUrl: "/thiep/20261027-KHVT",
       period: "đ / trọn gói",
@@ -61,7 +62,7 @@ export default function PricingSection() {
       id: "bespoke",
       name: "GÓI MAY ĐO ĐỘC BẢN",
       subtitle: "Gói Vĩnh Cửu",
-      price: "1.800.000",
+      price: packageAmount("bespoke", currency),
       sampleLabel: "Mẫu thiệp sẽ bổ sung sau",
       sampleUrl: null,
       period: "đ / trọn gói",
@@ -112,7 +113,7 @@ export default function PricingSection() {
           <em>đầu tư nhỏ cho kỷ niệm lớn.</em>
         </h2>
         <p className="section-subheading">
-          Ba gói trọn gói 500.000đ, 800.000đ, 1.800.000đ và gói Custom theo nhu cầu.
+          Ba gói trọn gói {packagePrice("standard", currency)}, {packagePrice("premium", currency)}, {packagePrice("bespoke", currency)} và gói Custom theo nhu cầu.
           Chọn gói phù hợp để lưu giữ khoảnh khắc của hai bạn.
         </p>
       </div>
@@ -145,8 +146,9 @@ export default function PricingSection() {
 
             <div className="pricing-card-price">
               <div className="price-main">
+                {pkg.id !== "custom" && currency === "USD" && <span className="price-currency">$</span>}
                 <span className="price-amount">{pkg.price}</span>
-                {pkg.id !== "custom" && <span className="price-unit">đ</span>}
+                {pkg.id !== "custom" && <span className="price-unit">{currency === "VND" ? "đ" : "USD"}</span>}
               </div>
               <span className="price-note">{pkg.id === "custom" ? pkg.period : "Giá trọn gói"}</span>
             </div>
@@ -187,7 +189,7 @@ export default function PricingSection() {
           <Gift size={20} className="commit-icon" />
           <div>
             <strong>Quà tặng mùa cưới</strong>
-            <p>Tặng kèm thiết kế Monogram Logo tên Dâu Rể trị giá 200.000đ khi đặt thiệp hôm nay.</p>
+            <p>Tặng kèm thiết kế Monogram Logo tên Dâu Rể{currency === "VND" ? " trị giá 200.000đ" : ""} khi đặt thiệp hôm nay.</p>
           </div>
         </div>
         <div className="commit-item">

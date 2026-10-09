@@ -1,3 +1,5 @@
+import { packagePrice, type PricedPackage, type PricingCurrency } from "./pricing";
+
 export type TemplateCategory = "all" | "vintage" | "modern" | "luxury" | "romantic";
 
 export type WeddingTemplateItem = {
@@ -8,6 +10,7 @@ export type WeddingTemplateItem = {
   category: TemplateCategory;
   categoryLabel: string;
   packageLabel: string;
+  packageId?: PricedPackage;
   badge?: string;
   badgeType?: "hot" | "signature" | "top1" | "vintage" | "new" | "sale";
   description: string;
@@ -52,8 +55,9 @@ export const WEDDING_TEMPLATES: WeddingTemplateItem[] = [
     coupleName: "Kim Hiên & Văn Tài",
     category: "modern",
     categoryLabel: "Trong Trẻo / Minimal",
-    packageLabel: "Gói 800.000đ",
-    badge: "GÓI 800.000đ",
+    packageId: "premium",
+    packageLabel: "Gói Nâng Cao",
+    badge: "GÓI NÂNG CAO",
     badgeType: "hot",
     description: "Nhẹ nhàng, thanh lịch như lời hẹn ước đầu tiên. Tông màu trắng ngà và xanh xám thiên nhiên tạo cảm giác bình yên, sâu lắng.",
     tone: "Trắng Ngà & Xanh Dịu",
@@ -67,3 +71,11 @@ export const WEDDING_TEMPLATES: WeddingTemplateItem[] = [
     hasQr: true,
   },
 ];
+
+export function templatesForCurrency(currency: PricingCurrency): WeddingTemplateItem[] {
+  return WEDDING_TEMPLATES.map((template) => template.packageId ? {
+    ...template,
+    packageLabel: `Gói ${packagePrice(template.packageId, currency)}`,
+    badge: `GÓI ${packagePrice(template.packageId, currency)}`,
+  } : template);
+}
