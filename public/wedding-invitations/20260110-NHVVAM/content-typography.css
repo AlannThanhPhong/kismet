@@ -30,6 +30,7 @@
 }
 
 #invitation-content h1 { font-size: clamp(48px, 5.2vw, 72px); }
+#invitation-content #couple-name:focus { outline: none; }
 #invitation-content h2 { font-size: clamp(34px, 3.8vw, 56px); }
 #invitation-content h2 em { font-style: normal; }
 #invitation-content .family h3 { font-size: clamp(24px, 2.2vw, 30px); }
@@ -77,9 +78,80 @@
 @media (max-width: 600px) {
   #invitation-content h1 { font-size: clamp(44px, 12vw, 60px); }
   #invitation-content h2 { font-size: clamp(30px, 8.5vw, 40px); }
-  #invitation-content .event-card h3 { font-size: 28px; }
+  #invitation-content .celebration { padding-inline: 16px; }
+  #invitation-content .event-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+  #invitation-content .event-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 24px 8px 14px;
+  }
+  #invitation-content .event-index {
+    top: 5px;
+    right: 8px;
+    font-size: 10px;
+  }
+  #invitation-content .event-card .eyebrow {
+    font-size: 7px;
+    letter-spacing: .5px;
+    min-height: 2.8em;
+  }
+  #invitation-content .event-time {
+    font-size: clamp(26px, 7vw, 36px);
+    white-space: nowrap;
+    margin: 14px 0;
+  }
+  #invitation-content .event-time span { font-size: .6em; }
+  #invitation-content .event-card h3 {
+    font-size: clamp(12px, 3.2vw, 16px);
+    line-height: 1.4;
+    min-height: 4.2em;
+    margin-bottom: 12px;
+    overflow-wrap: anywhere;
+  }
+  #invitation-content .event-card > p:not(.eyebrow):not(.event-time) {
+    font-size: 9px;
+    line-height: 1.7;
+    min-height: 0;
+    margin-bottom: 12px;
+    overflow-wrap: anywhere;
+  }
+  #invitation-content .event-card .text-link {
+    align-self: flex-start;
+    margin-top: auto;
+    padding-top: 8px;
+    font-size: 8px;
+    letter-spacing: 0;
+  }
   #invitation-content .rsvp-copy h2 { font-size: 32px; }
   #invitation-content .intro { font-size: 14px; }
-  #invitation-content .family .muted { font-size: 12px; }
+  #invitation-content .family-grid {
+    grid-template-columns: minmax(0, 1fr) 20px minmax(0, 1fr);
+    gap: 8px;
+    align-items: center;
+    margin: 35px auto 30px;
+  }
+  #invitation-content .family { min-width: 0; }
+  #invitation-content .family h3 {
+    font-size: clamp(16px, 4.2vw, 22px);
+    line-height: 1.4;
+    margin-top: 12px;
+    text-wrap: balance;
+  }
+  #invitation-content .family p {
+    font-size: 11px;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+  }
+  #invitation-content .family .saint {
+    font-size: 11px;
+    margin: 8px 0 14px;
+  }
+  #invitation-content .family .muted { font-size: 10px; }
+  #invitation-content .family .eyebrow { letter-spacing: 1.5px; }
+  #invitation-content .family-symbol { font-size: 28px; }
   #invitation-content .invitation-quote { font-size: 16px; }
 }
