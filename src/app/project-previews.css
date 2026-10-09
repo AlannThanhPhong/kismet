@@ -1,1 +1,89 @@
 .ws-announcement{gap:15px;flex-wrap:wrap}.ws-hotlines{display:flex;align-items:center;justify-content:center;gap:14px;font-size:11px}.ws-hotlines>a{font-weight:500;letter-spacing:.4px;text-decoration:underline;text-underline-offset:3px}.ws-project-preview{position:relative;aspect-ratio:3/4;width:100%;overflow:hidden;background:var(--ws-beige)}.ws-project-preview>img{object-fit:cover}.ws-project-preview>div{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:end;align-items:center;gap:8px;padding:18px 10px;background:linear-gradient(transparent 50%,#443f3699);color:var(--ws-paper)}.ws-project-preview small{font-size:7px;letter-spacing:1px}.ws-project-preview span{font:24px/1.15 var(--serif);text-align:center}.ws-mega-samples .ws-project-preview{aspect-ratio:4/3;min-height:150px}.ws-mega-samples .ws-project-preview span{font-size:20px;margin:0}.ws-mega-samples .ws-project-preview>div{padding:12px}.white-store .ws-hero-project{padding:0;border:6px solid var(--ws-paper);background:var(--ws-paper)}.ws-hero-small .ws-project-preview span{font-size:19px}.ws-hero-small .ws-project-preview small{font-size:5px}.ws-quick-art>.ws-project-preview{max-width:360px;margin:auto;aspect-ratio:3/4}.ws-quick-art>.ws-project-preview span{font-size:32px}.ws-contact-dock{position:fixed;bottom:24px;right:24px;z-index:25;display:flex;flex-direction:column;gap:6px;background:var(--ws-sage);border:1px solid var(--ws-taupe);box-shadow:0 6px 20px #443f3615;padding:12px 16px;border-radius:4px}.ws-contact-dock>span{font-size:9px;color:var(--ws-muted)}.ws-contact-dock>a{display:flex;align-items:center;justify-content:space-between;gap:18px;font-size:12px;font-weight:500}.ws-contact-dock>a:hover{text-decoration:underline}@media(max-width:600px){.ws-announcement{gap:5px;padding-block:9px}.ws-announcement>span{width:100%;text-align:center}.ws-hotlines{font-size:10px;gap:12px}.ws-contact-dock{left:12px;right:12px;bottom:10px;display:grid;grid-template-columns:1fr 1fr;padding:11px 14px;gap:12px}.ws-contact-dock>span{display:none}.ws-contact-dock>a{justify-content:center;gap:8px;font-size:12px}.ws-footer{padding-bottom:70px}.ws-hero-main .ws-project-preview span{font-size:25px}.ws-hero-small .ws-project-preview span{font-size:17px}.ws-mega-samples .ws-project-preview{min-height:110px}}
+.ws-zalo-dock {
+  position: fixed;
+  right: max(24px, env(safe-area-inset-right));
+  bottom: calc(24px + env(safe-area-inset-bottom));
+  z-index: 25;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.white-store .ws-zalo-trigger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 50px;
+  padding: 7px 20px 7px 7px;
+  border: 1px solid #e4ddd3;
+  border-radius: 999px;
+  background: #fffcf8;
+  color: #443f36;
+  box-shadow: 0 4px 20px #443f3612;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background .2s, box-shadow .2s;
+}
+
+.white-store .ws-zalo-trigger:hover {
+  background: #f8f4ed;
+  box-shadow: 0 6px 24px #443f3620;
+}
+
+.ws-zalo-icon {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #e7ecdf;
+  color: #526047;
+}
+
+.ws-zalo-panel {
+  width: min(260px, calc(100vw - 32px));
+  padding: 18px 14px 14px;
+  border: 1px solid #e4ddd3;
+  border-radius: 20px;
+  background: #fffcf8;
+  box-shadow: 0 12px 40px #443f361a;
+}
+
+.ws-zalo-heading {
+  display: grid;
+  gap: 5px;
+  margin: 0 4px 14px;
+}
+
+.ws-zalo-heading > span { font-size: 13px; color: #443f36; }
+.ws-zalo-heading em { font-family: var(--serif); }
+.ws-zalo-heading small { font-size: 11px; color: #746d63; }
+
+.ws-zalo-panel > a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 48px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #f1f3ec;
+  color: #443f36;
+  font-size: 15px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  text-decoration: none;
+  transition: background .2s;
+}
+
+.ws-zalo-panel > a + a { margin-top: 8px; }
+.ws-zalo-panel > a:hover { background: #e4e9dc; }
+.ws-zalo-panel > a svg { color: #667359; }
+.ws-zalo-dock :focus-visible { outline: 2px solid #667359; outline-offset: 4px; }
+
+@media (max-width: 600px) {
+  .ws-zalo-dock {
+    right: max(16px, env(safe-area-inset-right));
+    bottom: calc(16px + env(safe-area-inset-bottom));
+  }
+}
