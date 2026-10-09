@@ -51,7 +51,7 @@
 #invitation-content h2 em { font-style: normal; }
 #invitation-content .family h3 { font-size: clamp(24px, 2.2vw, 30px); }
 
-#invitation-content :is(.hero-caption, .family .saint, .invitation-quote, .film-copy > p:last-of-type, .album-note, footer > p, .hero-footnote) {
+#invitation-content :is(.hero-caption, .family .saint, .invitation-quote, .film-copy > p:last-of-type, .album-note, footer > p) {
   font-family: var(--sans);
   font-style: normal;
   line-height: 1.8;
@@ -75,7 +75,7 @@
 #invitation-content .gallery-ending-copy em { font-style: inherit; }
 
 #invitation-content :is(#rsvp-title, #album-title, #film-title, #invitation-title),
-#invitation-content :is(.family h3, .family p, .family .saint, .family .muted, .hero-footnote) {
+#invitation-content :is(.family h3, .family p, .family .saint, .family .muted) {
   font-family: Cormorant, Georgia, serif;
   font-weight: 400;
   font-style: italic;
@@ -86,6 +86,12 @@
 }
 #invitation-content .family .eyebrow {
   font-family: Cormorant, Georgia, serif;
+}
+
+#invitation-content #hero-quote {
+  font-family: Allura, Vibes, cursive;
+  font-weight: 400;
+  font-style: normal;
 }
 
 #invitation-content :is(.hero-date strong, .date-stamp strong, .event-index, .event-time, .timeline > div > span) {
