@@ -1,0 +1,27 @@
+.white-store {
+  background-image: url("/home/paper-grain.svg"), url("/home/botanical-embossed.svg");
+  background-size: 180px 180px, 1200px 1400px;
+  background-position: left top, center top;
+  background-repeat: repeat, repeat-y;
+}
+
+@media (max-width: 600px) {
+  .white-store {
+    background-size: 180px 180px, 720px 840px;
+  }
+}
+
+.ws-nav-item > .ws-nav-pencil {
+  position: relative;
+  isolation: isolate;
+}
+
+.ws-nav-pencil::before {
+  content: "";
+  position: absolute;
+  inset: -5px -18px;
+  z-index: -1;
+  background: url("/home/pink-pencil-circle.svg") center / 100% 100% no-repeat;
+  transform: rotate(-4deg);
+  pointer-events: none;
+}
