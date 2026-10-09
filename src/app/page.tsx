@@ -100,18 +100,14 @@ export default async function Home() {
           </div>
 
           {/* Trust stats row */}
-          <div className="hero-trust-row" aria-label="Thống kê niềm tin">
+          <div className="hero-trust-row" aria-label="Thống kê nổi bật">
             <div className="trust-item">
-              <span className="trust-num">1.200+</span>
-              <span className="trust-label">Cặp đôi tin chọn</span>
-            </div>
-            <div className="trust-item">
-              <span className="trust-num">2</span>
-              <span className="trust-label">Mẫu thiệp hiện có</span>
+              <span className="trust-num">2 Mẫu</span>
+              <span className="trust-label">Thiệp cưới thực tế</span>
             </div>
             <div className="trust-item">
               <span className="trust-num">1 Chạm</span>
-              <span className="trust-label">Gửi thiệp muôn nơi</span>
+              <span className="trust-label">Gửi Zalo & Web muôn nơi</span>
             </div>
             <div className="trust-item">
               <span className="trust-num">{currency === "VND" ? "Tiết kiệm 80%" : "Giá trọn gói"}</span>

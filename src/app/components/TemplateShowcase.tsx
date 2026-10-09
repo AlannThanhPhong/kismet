@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Image from "next/image";
-import { ArrowUpRight, Eye, Heart, Monitor, Music2, Smartphone, Sparkles } from "lucide-react";
+import { ArrowUpRight, Eye, Heart, Monitor, Smartphone, Sparkles } from "lucide-react";
 import { templatesForCurrency, type TemplateCategory, type WeddingTemplateItem } from "@/lib/templates-data";
 import { packagePrice, type PricingCurrency } from "@/lib/pricing";
 import LivePreviewModal from "./LivePreviewModal";
@@ -33,7 +33,7 @@ export default function TemplateShowcase({ currency }: { currency: PricingCurren
           <em>cho câu chuyện của hai bạn.</em>
         </h2>
         <p className="section-subheading">
-          Hiện có 2 mẫu thiệp thực tế để bạn trải nghiệm. Mỗi chiếc thiệp được chăm chút tỉ mỉ từ màu sắc, phông chữ đến hiệu ứng chuyển động.
+          Hiện có 2 mẫu thiệp cưới thực tế để bạn trải nghiệm. Mỗi chiếc thiệp được chăm chút tỉ mỉ từ màu sắc, phông chữ đến hiệu ứng chuyển động và âm nhạc.
           Mẫu Kim Hiên & Văn Tài thuộc gói {packagePrice("premium", currency)}; mẫu Huyền Vy & Anh Minh thuộc gói Custom.
           Tương thích hoàn hảo trên mọi kích thước màn hình điện thoại, máy tính bảng và máy tính để bàn.
         </p>
@@ -79,11 +79,11 @@ export default function TemplateShowcase({ currency }: { currency: PricingCurren
         </div>
       </div>
 
-      {/* Templates Grid */}
+      {/* Templates Grid (Bày khung chữ nhật thanh lịch, bo góc nhẹ nhàng, kích thước gọn 3/4) */}
       <div className="templates-showcase-grid" data-reveal>
         {filteredTemplates.map((item, idx) => (
           <article className="template-card-item" key={item.id}>
-            {/* Card Preview Window with cinelove-inspired hover pan */}
+            {/* Card Preview Window */}
             <div className="template-card-preview">
               {/* Badge */}
               {item.badge && (
@@ -92,14 +92,18 @@ export default function TemplateShowcase({ currency }: { currency: PricingCurren
                 </span>
               )}
 
-              {/* Image Frame */}
+              {/* Quick index stamp */}
+              <span className="template-card-num">0{idx + 1}</span>
+
+              {/* Image Frame with auto-scroll on hover */}
               <div className="template-image-scroll-frame">
                 <Image
                   src={item.coverImage}
                   alt={`Thiệp cưới ${item.name} - ${item.coupleName}`}
                   fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 50vw"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 420px"
                   className="template-scroll-image"
+                  priority={idx === 0}
                 />
               </div>
 
@@ -112,7 +116,7 @@ export default function TemplateShowcase({ currency }: { currency: PricingCurren
                     onClick={() => setSelectedPreview(item)}
                     aria-label={`Xem thử thiệp ${item.name} trên điện thoại và máy tính`}
                   >
-                    <Eye size={16} />
+                    <Eye size={15} />
                     <span>Xem thử (ĐT & PC)</span>
                   </button>
 
@@ -123,7 +127,7 @@ export default function TemplateShowcase({ currency }: { currency: PricingCurren
                     className="action-btn-live"
                     aria-label={`Mở thiệp ${item.name} trực tiếp`}
                   >
-                    <ArrowUpRight size={16} />
+                    <ArrowUpRight size={15} />
                     <span>Xem thiệp thật</span>
                   </a>
                 </div>
@@ -134,9 +138,6 @@ export default function TemplateShowcase({ currency }: { currency: PricingCurren
                   {item.hasMap && <span title="Bản đồ chỉ đường">🗺️ Bản đồ</span>}
                 </div>
               </div>
-
-              {/* Quick index stamp */}
-              <span className="template-card-num">{(idx + 1).toString().padStart(2, "0")}</span>
             </div>
 
             {/* Card Content & Metadata */}
@@ -168,7 +169,7 @@ export default function TemplateShowcase({ currency }: { currency: PricingCurren
               </p>
 
               <p className="template-desc">{item.description}</p>
-              <p className="card-category-tag">{item.packageLabel}</p>
+              {item.packageLabel && <p className="card-package-tag">{item.packageLabel}</p>}
 
               <div className="template-card-footer">
                 <button
