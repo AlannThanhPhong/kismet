@@ -66,7 +66,7 @@ export function ConsultationDialog({ onClose, templateName, packageName }: Consu
   const context = [templateName && `Mẫu ${templateName}`, packageName].filter(Boolean).join(" · ");
   const message = context
     ? `Mình muốn được tư vấn thiệp cưới kIsmet love: ${context}.`
-    : "Mình muốn được tư vấn thiết kế thiệp cưới kIsmet love.";
+    : "Mình muốn được tư vấn thiết kế thiệp cưới kIsmet love";
 
   if (typeof document === "undefined") return null;
 
@@ -93,7 +93,7 @@ export function ConsultationDialog({ onClose, templateName, packageName }: Consu
       </button>
       <p className="consultation-kicker">kIsmet love</p>
       <h2 id={titleId}>Mình cùng tạo thiệp nhé?</h2>
-      <p id={descriptionId} className="consultation-description">Chọn một số điện thoại để gọi tư vấn hoặc nhắn qua Zalo.</p>
+      <p id={descriptionId} className="consultation-description">Chọn một số điện thoại để gọi tư vấn hoặc nhắn qua Zalo</p>
       {context && <p className="consultation-context">{context}</p>}
       <div className="consultation-phone-list">
         {CONTACT_PHONES.map((phone) => (
@@ -108,7 +108,7 @@ export function ConsultationDialog({ onClose, templateName, packageName }: Consu
           <MessageCircle size={20} aria-hidden="true" /> Nhắn Zalo: {phone.label}
         </a>
       ))}
-      <p className="consultation-note">Tư vấn miễn phí, cùng bạn chọn mẫu phù hợp.</p>
+      <p className="consultation-note">Tư vấn miễn phí, cùng bạn chọn mẫu phù hợp</p>
     </dialog>,
     document.body,
   );

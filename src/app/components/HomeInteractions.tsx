@@ -127,8 +127,8 @@ export function HomeNavigation() {
 }
 
 const moods = [
-  { label: "Hoài niệm", title: "Một thước phim tình yêu.", description: "Ánh vàng, đỏ rượu và những khung hình có chút hạt phim. Dành cho một chuyện tình mang dư vị rất riêng.", image: "/wedding-invitations/20260110-NHVVAM/images/best.jpg", code: "20260110-NHVVAM", name: "HONG KONG 1999", colors: ["#642634", "#b88756", "#eddbb5"], note: "a love like the movies", className: "nostalgic" },
-  { label: "Trong trẻo", title: "Dịu dàng như lời hẹn đầu.", description: "Trắng ngà, xanh lá và một bó hoa nhỏ. Để hình ảnh của hai bạn kể câu chuyện nhẹ nhàng, tự nhiên nhất.", image: "/wedding-invitations/20261027-KHVT/images/0V7A7519-800.webp", code: "20261027-KHVT", name: "NGÀY MÌNH CHUNG ĐÔI", colors: ["#64715c", "#c7c9b7", "#f2eee3"], note: "simply, beautifully us", className: "airy" },
+  { label: "Hoài niệm", title: "Một thước phim tình yêu", description: "Ánh vàng, đỏ rượu và những khung hình có chút hạt phim Dành cho một chuyện tình mang dư vị rất riêng", image: "/wedding-invitations/20260110-NHVVAM/images/best.jpg", code: "20260110-NHVVAM", name: "HONG KONG 1999", colors: ["#642634", "#b88756", "#eddbb5"], note: "a love like the movies", className: "nostalgic" },
+  { label: "Trong trẻo", title: "Dịu dàng như lời hẹn đầu", description: "Trắng ngà, xanh lá và một bó hoa nhỏ Để hình ảnh của hai bạn kể câu chuyện nhẹ nhàng, tự nhiên nhất", image: "/wedding-invitations/20261027-KHVT/images/0V7A7519-800.webp", code: "20261027-KHVT", name: "NGÀY MÌNH CHUNG ĐÔI", colors: ["#64715c", "#c7c9b7", "#f2eee3"], note: "simply, beautifully us", className: "airy" },
 ];
 
 export function Moodboard() {
@@ -152,10 +152,10 @@ export function Moodboard() {
 export function LoveEnvelope() {
   const [open, setOpen] = useState(false);
   return <div className={`love-envelope${open ? " is-open" : ""}`}>
-    <div className="envelope-letter" id="envelope-letter" aria-hidden={!open} inert={!open}><span>Dear you,</span><p>Mỗi chuyện tình đẹp<br />bắt đầu từ một lời chào.</p><a href="#kho-mau-thiep">Xem những lời mời <ArrowRight size={14} /></a></div>
+    <div className="envelope-letter" id="envelope-letter" aria-hidden={!open} inert={!open}><span>Dear you,</span><p>Mỗi chuyện tình đẹp<br />bắt đầu từ một lời chào</p><a href="#kho-mau-thiep">Xem những lời mời <ArrowRight size={14} /></a></div>
     <div className="envelope-back" /><div className="envelope-flap" /><div className="envelope-front" />
     <button className="envelope-seal" onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="envelope-letter" aria-label={open ? "Đóng thư từ kIsmet love" : "Mở thư từ kIsmet love"}><Heart size={22} strokeWidth={1} /></button>
-    <span className="envelope-hint">{open ? "một lời chào, một khởi đầu mới." : "chạm vào trái tim để mở thư"}</span>
+    <span className="envelope-hint">{open ? "một lời chào, một khởi đầu mới" : "chạm vào trái tim để mở thư"}</span>
   </div>;
 }
 

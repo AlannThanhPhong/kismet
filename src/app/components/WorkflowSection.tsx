@@ -8,25 +8,25 @@ export default function WorkflowSection() {
       number: "01",
       icon: Palette,
       title: "Chọn Mẫu Thiệp",
-      desc: "Xem 2 mẫu thiệp hiện có của kIsmet love. Chọn phong cách phù hợp nhất với gu thẩm mỹ và không gian tiệc cưới của hai bạn.",
+      desc: "Xem 2 mẫu thiệp hiện có của kIsmet love Chọn phong cách phù hợp nhất với gu thẩm mỹ và không gian tiệc cưới của hai bạn",
     },
     {
       number: "02",
       icon: FileEdit,
       title: "Gửi Thông Tin & Ảnh",
-      desc: "Gửi thông tin ngày giờ, địa điểm 2 bên gia đình, bài hát tình yêu yêu thích cùng bộ ảnh cưới của bạn theo hướng dẫn khi tư vấn qua điện thoại.",
+      desc: "Gửi thông tin ngày giờ, địa điểm 2 bên gia đình, bài hát tình yêu yêu thích cùng bộ ảnh cưới của bạn theo hướng dẫn khi tư vấn qua điện thoại",
     },
     {
       number: "03",
       icon: CheckCheck,
       title: "Xem Thử & Chỉnh Sửa",
-      desc: "Nhận bản demo hoàn thiện trong 24 giờ. Trải nghiệm trực tiếp trên điện thoại và yêu cầu chỉnh sửa đến khi hai bạn ưng ý 100%.",
+      desc: "Nhận bản demo hoàn thiện trong 24 giờ Trải nghiệm trực tiếp trên điện thoại và yêu cầu chỉnh sửa đến khi hai bạn ưng ý 100%",
     },
     {
       number: "04",
       icon: Send,
       title: "Nhận Link & Gửi Thiệp",
-      desc: "Nhận đường link chính thức kèm tên từng khách mời. Chia sẻ ngay qua Messenger và háo hức đón nhận lời chúc phúc.",
+      desc: "Nhận đường link chính thức kèm tên từng khách mời Chia sẻ ngay qua Messenger và háo hức đón nhận lời chúc phúc",
     },
   ];
 
@@ -36,10 +36,10 @@ export default function WorkflowSection() {
         <p className="section-kicker">06 / ĐƠN GIẢN & NHANH CHÓNG</p>
         <h2 id="workflow-title">
           4 bước để sở hữu thiệp cưới online<br />
-          <em>sẵn sàng chỉ trong 24 giờ.</em>
+          <em>sẵn sàng chỉ trong 24 giờ</em>
         </h2>
         <p className="section-subheading">
-          Quy trình tinh gọn, không cần biết kỹ thuật hay cài đặt phức tạp. Đội ngũ kIsmet love hỗ trợ trọn gói từ A đến Z.
+          Quy trình tinh gọn, không cần biết kỹ thuật hay cài đặt phức tạp Đội ngũ kIsmet love hỗ trợ trọn gói từ A đến Z
         </p>
       </div>
 

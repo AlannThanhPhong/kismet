@@ -72,7 +72,7 @@ export default function ComparisonSection({ currency }: { currency: PricingCurre
           <em>lựa chọn thiệp cưới điện tử?</em>
         </h2>
         <p className="section-subheading">
-          Sự kết hợp hoàn hảo giữa công nghệ tiện ích và sự chân thành, tinh tế trong từng lời mời gửi đến người thân yêu.
+          Sự kết hợp hoàn hảo giữa công nghệ tiện ích và sự chân thành, tinh tế trong từng lời mời gửi đến người thân yêu
         </p>
       </div>
 

@@ -52,19 +52,19 @@ document.querySelector('#app').innerHTML = `
         <div class="hero-copy">
           <p class="eyebrow hero-enter">THIỆP MỜI LỄ VU QUY</p>
           <div class="hero-title hero-enter"><span class="small-script">Chúng mình cưới!</span><h2><span class="hero-name">Kim Hiên</span><span class="hero-amp">&</span><span class="hero-name">Văn Tài</span></h2></div>
-          <div class="hero-enter">${flourish}<p class="hero-message">Hạnh phúc là khi hành trình phía trước<br />có một người để cùng bước chung.</p></div>
+          <div class="hero-enter">${flourish}<p class="hero-message">Hạnh phúc là khi hành trình phía trước<br />có một người để cùng bước chung</p></div>
           <div class="hero-date hero-enter"><span>THỨ BA</span><strong>27.10.2026</strong><span>TƯ GIA NHÀ GÁI</span></div>
           <a href="#invitation-details" class="text-link hero-enter">CÙNG MỞ RA NGÀY HẠNH PHÚC ${icon('down')}</a>
           ${botanical}
         </div>
-        <div class="hero-image"><img src="/wedding-invitations/20261027-KHVT/images/0V7A7519-1200.webp" srcset="/wedding-invitations/20261027-KHVT/images/0V7A7519-800.webp 800w, /wedding-invitations/20261027-KHVT/images/0V7A7519-1200.webp 1200w" sizes="(max-width: 760px) 100vw, 50vw" width="1200" height="1800" fetchpriority="high" alt="Ảnh chính cô dâu Kim Hiên và chú rể Văn Tài" /><span class="photo-note">You & me, forever.</span><div class="image-frame"></div></div>
+        <div class="hero-image"><img src="/wedding-invitations/20261027-KHVT/images/0V7A7519-1200.webp" srcset="/wedding-invitations/20261027-KHVT/images/0V7A7519-800.webp 800w, /wedding-invitations/20261027-KHVT/images/0V7A7519-1200.webp 1200w" sizes="(max-width: 760px) 100vw, 50vw" width="1200" height="1800" fetchpriority="high" alt="Ảnh chính cô dâu Kim Hiên và chú rể Văn Tài" /><span class="photo-note">You & me, forever</span><div class="image-frame"></div></div>
         <div class="hero-bottom">SAVE THE DATE <span>✦</span> 27 OCTOBER 2026 <span>✦</span> TOGETHER FOREVER</div>
       </section>
 
       <section class="invitation-section section-space" id="invitation-details">
         <div class="section-intro reveal"><p class="eyebrow">TỪ HAI GIA ĐÌNH, MỘT NIỀM HẠNH PHÚC</p><h2 class="script-heading">Trân trọng báo tin</h2>${flourish}</div>
         <div class="families reveal"><div><p class="eyebrow">NHÀ GÁI</p><p class="parent"><span><span class="parent-label">Ông</span> <strong>Trần Quang Hồ</strong></span><span><span class="parent-label">Bà</span> <strong>Trần Thị Phượng</strong></span></p><p class="address">Tổ 10, ấp Tân Đông 1,<br />xã Tân Lập</p></div><span class="family-symbol" aria-hidden="true">囍</span><div><p class="eyebrow">NHÀ TRAI</p><p class="parent"><span><span class="parent-label">Ông</span> <strong>Lê Văn Lộc</strong></span><span><span class="parent-label">Bà</span> <strong>Hà Thị Kim Cương</strong></span></p><p class="address">Trường An, Trường Tây,<br />Long Hoa, Tây Ninh</p></div></div>
-        <div class="couple-announcement reveal"><p class="eyebrow">LỄ VU QUY CỦA HAI CON CHÚNG TÔI</p><div class="full-names"><div><h3>Trần Thị Kim Hiên</h3><span>ÚT NỮ</span></div><span class="name-and">&</span><div><h3>Lê Văn Tài</h3><span>ÚT NAM</span></div></div><p class="invitation-prose">Thật hạnh phúc khi ngày vui của chúng tôi<br class="desktop-break" /> có sự hiện diện và lời chúc phúc của bạn.</p></div>
+        <div class="couple-announcement reveal"><p class="eyebrow">LỄ VU QUY CỦA HAI CON CHÚNG TÔI</p><div class="full-names"><div><h3>Trần Thị Kim Hiên</h3><span>ÚT NỮ</span></div><span class="name-and">&</span><div><h3>Lê Văn Tài</h3><span>ÚT NAM</span></div></div><p class="invitation-prose">Thật hạnh phúc khi ngày vui của chúng tôi<br class="desktop-break" /> có sự hiện diện và lời chúc phúc của bạn</p></div>
       </section>
 
       <section class="celebration section-space" id="celebration">${botanical}<div class="section-intro reveal"><p class="eyebrow">HẸN BẠN VÀO NGÀY HẠNH PHÚC</p><h2 class="script-heading">Ngày mình chung đôi</h2><p>Thứ Ba, ngày 27 tháng 10 năm 2026</p><p class="lunar">Nhằm ngày 18 tháng 9 năm Âm lịch</p></div>
@@ -86,16 +86,16 @@ document.querySelector('#app').innerHTML = `
         <div class="countdown-wrap reveal"><p class="eyebrow" id="countdown-label">ĐẾM NGƯỢC ĐẾN NGÀY CHUNG ĐÔI</p><div class="countdown" id="countdown" aria-label="Thời gian còn lại đến hôn lễ"><div><strong id="days">00</strong><span>NGÀY</span></div><i>:</i><div><strong id="hours">00</strong><span>GIỜ</span></div><i>:</i><div><strong id="minutes">00</strong><span>PHÚT</span></div><i>:</i><div><strong id="seconds">00</strong><span>GIÂY</span></div></div></div>
       </section>
 
-      <section class="album-section section-space" id="album"><div class="album-heading reveal"><div><p class="eyebrow">NHỮNG KHOẢNH KHẮC CỦA CHÚNG MÌNH</p><h2 class="script-heading">Một tình yêu, một đời</h2></div><p>Giữ lại những dịu dàng,<br />để mai này cùng nhớ.</p></div><div class="gallery">${photos.map((p, i) => `<button class="gallery-item reveal ${p.wide ? 'gallery-wide' : ''}" data-photo="${i}" aria-label="Xem ảnh ${i + 1}: ${p.caption}">${photo(p.id)}<span class="gallery-caption"><span>${p.caption}</span>${icon('expand')}</span></button>`).join('')}</div></section>
+      <section class="album-section section-space" id="album"><div class="album-heading reveal"><div><p class="eyebrow">NHỮNG KHOẢNH KHẮC CỦA CHÚNG MÌNH</p><h2 class="script-heading">Một tình yêu, một đời</h2></div><p>Giữ lại những dịu dàng,<br />để mai này cùng nhớ</p></div><div class="gallery">${photos.map((p, i) => `<button class="gallery-item reveal ${p.wide ? 'gallery-wide' : ''}" data-photo="${i}" aria-label="Xem ảnh ${i + 1}: ${p.caption}">${photo(p.id)}<span class="gallery-caption"><span>${p.caption}</span>${icon('expand')}</span></button>`).join('')}</div></section>
 
       <section class="location-section section-space" id="location" aria-labelledby="location-title">
         <div class="section-intro reveal"><p class="eyebrow">ĐỊA ĐIỂM TỔ CHỨC</p><h2 class="script-heading" id="location-title">Đường đến ngày vui</h2></div>
-        <p class="map-pending reveal" id="map-pending">${icon('pin')} Bản đồ chỉ đường sẽ được cập nhật sớm.</p>
+        <p class="map-pending reveal" id="map-pending">${icon('pin')} Bản đồ chỉ đường sẽ được cập nhật sớm</p>
         <div class="venue-map reveal" id="venue-map" hidden><div class="venue-map-heading">${icon('pin')}<div><h3>Hẹn bạn tại tư gia</h3><p>${wedding.address}</p></div></div><iframe id="map-embed" title="Bản đồ địa điểm tổ chức Lễ Vu Quy Kim Hiên và Văn Tài" width="600" height="450" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
         <div class="location-actions reveal"><a class="button button-red" id="map-link" hidden target="_blank" rel="noopener noreferrer">${icon('pin')} CHỈ ĐƯỜNG</a></div>
       </section>
 
-      <section class="thank-you"><div class="thank-photo">${photo('0V7A7908')}</div><div class="thank-overlay"></div><div class="thank-content reveal"><p class="eyebrow">SỰ HIỆN DIỆN CỦA BẠN LÀ NIỀM VINH HẠNH CỦA GIA ĐÌNH</p><h2>Hẹn gặp bạn<br /><span>trong ngày vui!</span></h2>${flourish}<p>Cảm ơn bạn đã là một phần<br />trong ngày đặc biệt của chúng mình.</p><span class="thank-signature">Kim Hiên & Văn Tài</span></div></section>
+      <section class="thank-you"><div class="thank-photo">${photo('0V7A7908')}</div><div class="thank-overlay"></div><div class="thank-content reveal"><p class="eyebrow">SỰ HIỆN DIỆN CỦA BẠN LÀ NIỀM VINH HẠNH CỦA GIA ĐÌNH</p><h2>Hẹn gặp bạn<br /><span>trong ngày vui!</span></h2>${flourish}<p>Cảm ơn bạn đã là một phần<br />trong ngày đặc biệt của chúng mình</p><span class="thank-signature">Kim Hiên & Văn Tài</span></div></section>
       <footer><a class="monogram" href="#home">H<span>&</span>T</a><p>MỘT ĐỜI BÊN NHAU · 27.10.2026</p><a href="#home" class="back-top" aria-label="Về đầu trang">${icon('down')}</a></footer>
     </main>
     <div class="scroll-progress" aria-hidden="true"></div>
@@ -131,12 +131,12 @@ function syncAudio() {
 function playMusic() {
   // Call play synchronously inside the click gesture so mobile browsers allow audio.
   const promise = audio.play();
-  if (promise) promise.catch(() => toast('Chạm vào biểu tượng loa trên thanh đầu trang để phát nhạc nhé.'));
+  if (promise) promise.catch(() => toast('Chạm vào biểu tượng loa trên thanh đầu trang để phát nhạc nhé'));
 }
 audio.volume = 0.65;
 audio.addEventListener('play', syncAudio);
 audio.addEventListener('pause', syncAudio);
-audio.addEventListener('error', () => { if (opened) toast('Nhạc chưa tải được. Bạn thử bật lại nhạc sau một chút nhé.'); });
+audio.addEventListener('error', () => { if (opened) toast('Nhạc chưa tải được Bạn thử bật lại nhạc sau một chút nhé'); });
 musicButton.addEventListener('click', () => audio.paused ? playMusic() : audio.pause());
 
 document.querySelector('#open-invitation').addEventListener('click', async () => {
@@ -223,12 +223,12 @@ if (wedding.mapsEmbedUrl) {
 document.querySelector('#save-date').addEventListener('click', () => {
   const escape = (value) => value.replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/,/g, '\\,').replace(/;/g, '\\;');
   const stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
-  const calendar = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//HienTai//Wedding//VI', 'CALSCALE:GREGORIAN', 'BEGIN:VEVENT', 'UID:hien-tai-20261027@wedding.local', `DTSTAMP:${stamp}`, 'DTSTART:20261027T040000Z', 'DTEND:20261027T060000Z', `SUMMARY:${escape('Tiệc cưới Kim Hiên & Văn Tài')}`, `LOCATION:${escape(wedding.address)}`, `DESCRIPTION:${escape('Lễ Vu Quy lúc 9 giờ. Nhập tiệc lúc 11 giờ tại tư gia nhà gái. Ngày 27/10/2026 (18/9 Âm lịch).')}`, 'BEGIN:VALARM', 'TRIGGER:-P1D', 'ACTION:DISPLAY', 'DESCRIPTION:Ngày mai dự tiệc cưới Kim Hiên & Văn Tài', 'END:VALARM', 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
+  const calendar = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//HienTai//Wedding//VI', 'CALSCALE:GREGORIAN', 'BEGIN:VEVENT', 'UID:hien-tai-20261027@wedding.local', `DTSTAMP:${stamp}`, 'DTSTART:20261027T040000Z', 'DTEND:20261027T060000Z', `SUMMARY:${escape('Tiệc cưới Kim Hiên & Văn Tài')}`, `LOCATION:${escape(wedding.address)}`, `DESCRIPTION:${escape('Lễ Vu Quy lúc 9 giờ Nhập tiệc lúc 11 giờ tại tư gia nhà gái Ngày 27/10/2026 (18/9 Âm lịch)')}`, 'BEGIN:VALARM', 'TRIGGER:-P1D', 'ACTION:DISPLAY', 'DESCRIPTION:Ngày mai dự tiệc cưới Kim Hiên & Văn Tài', 'END:VALARM', 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
   const url = URL.createObjectURL(new Blob([calendar], { type: 'text/calendar;charset=utf-8' }));
   const a = document.createElement('a');
   a.href = url; a.download = 'Kim-Hien-Van-Tai-27-10-2026.ics'; a.click();
   setTimeout(() => URL.revokeObjectURL(url), 10000);
-  toast('Đã tạo lịch ngày vui. Mở tệp vừa tải để thêm vào lịch của bạn.');
+  toast('Đã tạo lịch ngày vui Mở tệp vừa tải để thêm vào lịch của bạn');
 });
 
 const lightbox = document.querySelector('#lightbox');

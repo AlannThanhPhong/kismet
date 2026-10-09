@@ -7,6 +7,12 @@
 .white-store .pricing-card-item{background:var(--ws-paper);border:1px solid var(--ws-beige);border-radius:4px;padding:32px 20px 22px;box-shadow:none;transform:none}
 .white-store .pricing-card-item:hover{transform:translateY(-4px);box-shadow:0 12px 25px #443f3610}
 .white-store .is-popular-card{border:2px solid var(--ws-taupe);background:linear-gradient(var(--ws-sage),var(--ws-paper) 220px);z-index:auto}
+.white-store .is-custom-card{
+  background:
+    radial-gradient(ellipse 110% 280px at 85% 0%, #EFC7C280, #EFC7C200 80%),
+    radial-gradient(ellipse 90% 240px at 0% 65px, #EFC7C240, #EFC7C200 85%),
+    var(--ws-paper);
+}
 .white-store .pricing-top-ribbon{background:var(--ws-beige);color:var(--ws-ink);box-shadow:none;font-size:8px;white-space:nowrap;padding:5px 12px}
 .white-store .is-popular-card .pricing-top-ribbon{background:var(--ws-sage);border:1px solid var(--ws-taupe)}
 .white-store .pricing-card-header{min-height:175px;text-align:left;margin-bottom:16px}

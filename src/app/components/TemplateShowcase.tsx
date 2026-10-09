@@ -33,11 +33,11 @@ export default function TemplateShowcase({ currency }: { currency: PricingCurren
         <p className="section-kicker">01 / KHO GIAO DIỆN THIỆP CƯỚI ĐIỆN TỬ</p>
         <h2 id="catalog-title">
           Chọn phong cách riêng<br />
-          <em>cho câu chuyện của hai bạn.</em>
+          <em>cho câu chuyện của hai bạn</em>
         </h2>
         <p className="section-subheading">
-          Khám phá các mẫu thiệp cưới trực quan: Mẫu Tiêu Chuẩn {packagePrice("standard", currency)}, Mẫu Nâng Cao {packagePrice("premium", currency)} (Kim Hiên & Văn Tài), và Mẫu May Đo Độc Bản {packagePrice("bespoke", currency)} (Huyền Vy & Anh Minh).
-          Bạn có thể thử thay ảnh của chính mình vào mẫu Tiêu Chuẩn và Nâng Cao để xem trước diện mạo thiệp.
+          Khám phá các mẫu thiệp cưới trực quan: Mẫu Tiêu Chuẩn {packagePrice("standard", currency)}, Mẫu Nâng Cao {packagePrice("premium", currency)} (Kim Hiên & Văn Tài), và Mẫu May Đo Độc Bản {packagePrice("bespoke", currency)} (Huyền Vy & Anh Minh)
+          Bạn có thể thử thay ảnh của chính mình vào mẫu Tiêu Chuẩn và Nâng Cao để xem trước diện mạo thiệp
         </p>
 
         {/* Device compatibility badge */}
@@ -63,8 +63,8 @@ export default function TemplateShowcase({ currency }: { currency: PricingCurren
             <Sparkles size={13} />
             <span>THỬ ẢNH CƯỚI CỦA BẠN</span>
           </div>
-          <h3>Ướm ảnh của hai bạn vào mẫu thiệp yêu thích.</h3>
-          <p>Tải ảnh từ điện thoại hoặc máy tính để xem thử mẫu Tiêu Chuẩn và Nâng Cao trước khi đặt dịch vụ.</p>
+          <h3>Ướm ảnh của hai bạn vào mẫu thiệp yêu thích</h3>
+          <p>Tải ảnh từ điện thoại hoặc máy tính để xem thử mẫu Tiêu Chuẩn và Nâng Cao trước khi đặt dịch vụ</p>
         </div>
         <div className="promo-banner-actions">
           <Link href="/thu-thiep?package=standard" className="btn-banner-try-500k">

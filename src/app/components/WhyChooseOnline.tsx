@@ -8,33 +8,33 @@ export default function WhyChooseOnline({ currency }: { currency: PricingCurrenc
     {
       icon: Clock,
       title: "Mất Quá Nhiều Thời Gian",
-      desc: "Phải dành hàng tuần lễ chạy xe đi gửi thiệp giấy tận tay từng người, mệt mỏi và dễ trễ hạn trước ngày cưới.",
+      desc: "Phải dành hàng tuần lễ chạy xe đi gửi thiệp giấy tận tay từng người, mệt mỏi và dễ trễ hạn trước ngày cưới",
     },
     {
       icon: Users,
       title: "Bất An Về Số Khách Mời",
-      desc: "Không biết ai sẽ đến, ai bận việc gia đình, dẫn đến việc đặt thừa hoặc thiếu bàn tiệc cưới gây lãng phí lớn.",
+      desc: "Không biết ai sẽ đến, ai bận việc gia đình, dẫn đến việc đặt thừa hoặc thiếu bàn tiệc cưới gây lãng phí lớn",
     },
     {
       icon: DollarSign,
       title: "Chi Phí In Ấn Đắt Đỏ",
-      desc: "In thiệp giấy cao cấp tốn từ 1.5 - 3 triệu đồng. In thừa thì bỏ đi, in thiếu lại phải đặt lại với giá rất cao.",
+      desc: "In thiệp giấy cao cấp tốn từ 1.5 - 3 triệu đồng In thừa thì bỏ đi, in thiếu lại phải đặt lại với giá rất cao",
     },
     {
       icon: AlertCircle,
       title: "Khó Gửi Bạn Bè Ở Xa",
-      desc: "Bạn bè ở xa, ở quê hoặc nước ngoài không thể nhận thiệp kịp lúc, chụp ảnh gửi thiệp giấy thì thiếu trang trọng.",
+      desc: "Bạn bè ở xa, ở quê hoặc nước ngoài không thể nhận thiệp kịp lúc, chụp ảnh gửi thiệp giấy thì thiếu trang trọng",
     },
   ];
 
   const solutions = [
     {
       title: "Gửi 100+ Khách Trong 1 Giây",
-      desc: "Chỉ cần 1 đường link gửi qua Messenger hoặc SMS. Khách ở bất kỳ đâu cũng mở thiệp ngay tức thì.",
+      desc: "Chỉ cần 1 đường link gửi qua Messenger hoặc SMS Khách ở bất kỳ đâu cũng mở thiệp ngay tức thì",
     },
     {
       title: "Xác Nhận Tham Dự (RSVP) Tức Thì",
-      desc: "Khách bấm xác nhận có đi hay không, đi mấy người, ăn chay hay mặn. Dâu Rể kiểm soát bàn tiệc chính xác 100%.",
+      desc: "Khách bấm xác nhận có đi hay không, đi mấy người, ăn chay hay mặn Dâu Rể kiểm soát bàn tiệc chính xác 100%",
     },
     {
       title: currency === "VND" ? "Tiết Kiệm 80% Chi Phí" : "Chi Phí Trọn Gói Minh Bạch",
@@ -42,7 +42,7 @@ export default function WhyChooseOnline({ currency }: { currency: PricingCurrenc
     },
     {
       title: "Đong Đầy Cảm Xúc & Kỷ Niệm",
-      desc: "Có nhạc nền du dương, album ảnh cưới HD, lời chúc phúc và bản đồ chỉ đường. Lưu giữ kỷ niệm mãi mãi.",
+      desc: "Có nhạc nền du dương, album ảnh cưới HD, lời chúc phúc và bản đồ chỉ đường Lưu giữ kỷ niệm mãi mãi",
     },
   ];
 
@@ -55,8 +55,8 @@ export default function WhyChooseOnline({ currency }: { currency: PricingCurrenc
           <em>nhưng có quá nhiều bận tâm?</em>
         </h2>
         <p className="section-subheading">
-          Chuẩn bị đám cưới có hàng trăm việc phải lo toan. Hãy để chiếc thiệp cưới điện tử kIsmet love
-          giúp bạn giải tỏa mọi lo âu về việc mời tiệc và chuẩn bị đón tiếp khách quý.
+          Chuẩn bị đám cưới có hàng trăm việc phải lo toan Hãy để chiếc thiệp cưới điện tử kIsmet love
+          giúp bạn giải tỏa mọi lo âu về việc mời tiệc và chuẩn bị đón tiếp khách quý
         </p>
       </div>
 
@@ -111,7 +111,7 @@ export default function WhyChooseOnline({ currency }: { currency: PricingCurrenc
           <div className="solution-footer-box">
             <Heart size={20} className="solution-heart" />
             <p>
-              <strong>Hàng ngàn dâu rể thế hệ mới</strong> đã tin tưởng lựa chọn kIsmet love để ngày chung đôi thêm trọn vẹn.
+              <strong>Hàng ngàn dâu rể thế hệ mới</strong> đã tin tưởng lựa chọn kIsmet love để ngày chung đôi thêm trọn vẹn
             </p>
           </div>
         </div>

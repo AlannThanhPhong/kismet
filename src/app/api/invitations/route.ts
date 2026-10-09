@@ -45,7 +45,7 @@ export async function GET() {
     }));
   } catch (error) {
     console.error("Could not list invitations", error);
-    return NextResponse.json({ error: "Không thể tải danh sách thiệp. Hãy kiểm tra cấu hình MongoDB." }, { status: 503 });
+    return NextResponse.json({ error: "Không thể tải danh sách thiệp Hãy kiểm tra cấu hình MongoDB" }, { status: 503 });
   }
 }
 
@@ -54,11 +54,11 @@ export async function POST(request: Request) {
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json({ error: "JSON không hợp lệ." }, { status: 400 });
+    return NextResponse.json({ error: "JSON không hợp lệ" }, { status: 400 });
   }
 
   if (!body || typeof body !== "object") {
-    return NextResponse.json({ error: "Dữ liệu thiệp không hợp lệ." }, { status: 400 });
+    return NextResponse.json({ error: "Dữ liệu thiệp không hợp lệ" }, { status: 400 });
   }
 
   const input = body as Record<string, unknown>;
@@ -72,7 +72,7 @@ export async function POST(request: Request) {
 
   const dateText = typeof event?.date === "string" ? event.date : "";
   if (!/^\d{4}-\d{2}-\d{2}/.test(dateText) || !partnerOne || !partnerTwo || !venue || Number.isNaN(date.getTime())) {
-    return NextResponse.json({ error: "Cần tên hai người, ngày cưới hợp lệ và địa điểm." }, { status: 400 });
+    return NextResponse.json({ error: "Cần tên hai người, ngày cưới hợp lệ và địa điểm" }, { status: 400 });
   }
 
   const code = invitationCode(dateText, partnerOne, partnerTwo);
@@ -96,9 +96,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ id: result.insertedId.toString(), ...invitation }, { status: 201 });
   } catch (error) {
     if (error instanceof MongoServerError && error.code === 11000) {
-      return NextResponse.json({ error: "Đường dẫn thiệp này đã được sử dụng." }, { status: 409 });
+      return NextResponse.json({ error: "Đường dẫn thiệp này đã được sử dụng" }, { status: 409 });
     }
     console.error("Could not create invitation", error);
-    return NextResponse.json({ error: "Không thể tạo thiệp lúc này." }, { status: 500 });
+    return NextResponse.json({ error: "Không thể tạo thiệp lúc này" }, { status: 500 });
   }
 }
