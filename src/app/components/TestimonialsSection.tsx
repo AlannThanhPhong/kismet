@@ -30,7 +30,7 @@ export default function TestimonialsSection() {
       <div className="section-header-centered" data-reveal>
         <p className="section-kicker">07 / CHUYỆN TÌNH TỪ CÁC CẶP ĐÔI</p>
         <h2 id="testi-title">
-          Hơn 1.200+ lời thương<br />
+          Những lời thương chân thành<br />
           <em>đã được gửi trao trọn vẹn.</em>
         </h2>
         <p className="section-subheading">

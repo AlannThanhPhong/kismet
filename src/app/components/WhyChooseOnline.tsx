@@ -111,7 +111,7 @@ export default function WhyChooseOnline({ currency }: { currency: PricingCurrenc
           <div className="solution-footer-box">
             <Heart size={20} className="solution-heart" />
             <p>
-              Hơn <strong>1.200+ cặp đôi</strong> đã tin tưởng lựa chọn kIsmet love để ngày chung đôi thêm trọn vẹn.
+              <strong>Hàng ngàn dâu rể thế hệ mới</strong> đã tin tưởng lựa chọn kIsmet love để ngày chung đôi thêm trọn vẹn.
             </p>
           </div>
         </div>
