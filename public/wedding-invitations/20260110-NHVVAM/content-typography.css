@@ -65,6 +65,29 @@
 #invitation-content :is(.film-copy > p:last-of-type, .album-note) { font-size: 18px; }
 #invitation-content footer > p { font-size: 20px; }
 
+#invitation-content .gallery-ending-copy {
+  font-family: Cormorant, Georgia, serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(22px, 2vw, 28px);
+  line-height: 1.5;
+}
+#invitation-content .gallery-ending-copy em { font-style: inherit; }
+
+#invitation-content :is(#rsvp-title, #album-title, #film-title, #invitation-title),
+#invitation-content :is(.family h3, .family p, .family .saint, .family .muted, .hero-footnote) {
+  font-family: Cormorant, Georgia, serif;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0;
+}
+#invitation-content :is(#album-title, #film-title, #invitation-title, #rsvp-title) em {
+  font-style: inherit;
+}
+#invitation-content .family .eyebrow {
+  font-family: Cormorant, Georgia, serif;
+}
+
 #invitation-content :is(.hero-date strong, .date-stamp strong, .event-index, .event-time, .timeline > div > span) {
   font-family: var(--sans);
   font-style: normal;
@@ -86,12 +109,14 @@
 }
 
 #invitation-content .rsvp-copy h2 {
+  color: var(--cream);
   font-size: clamp(30px, 3vw, 44px);
   line-height: 1.4;
   text-wrap: balance;
 }
 
 @media (max-width: 600px) {
+  #invitation-content .gallery-ending-copy { font-size: 16px; }
   #invitation-content h1 { font-size: clamp(44px, 12vw, 60px); }
   #invitation-content h2 { font-size: clamp(30px, 8.5vw, 40px); }
   #invitation-content .celebration { padding-inline: 16px; }
