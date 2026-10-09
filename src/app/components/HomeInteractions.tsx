@@ -1,8 +1,9 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, Heart, Menu, Pause, Play, X } from "lucide-react";
+import { CONTACT_PHONES } from "@/lib/contact";
 
 export function HomeEffects() {
   const [paused, setPaused] = useState(false);
@@ -24,8 +25,32 @@ export function HomeEffects() {
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.08 });
+    }, { threshold: 0 });
     root.querySelectorAll("[data-reveal]").forEach((element) => observer.observe(element));
+    const revealAnchorTarget = (hash: string) => {
+      if (!hash.startsWith("#") || hash.length < 2) return;
+      let target: HTMLElement | null;
+      try {
+        target = document.getElementById(decodeURIComponent(hash.slice(1)));
+      } catch {
+        return;
+      }
+      if (!target || !root.contains(target)) return;
+      [target, ...target.querySelectorAll<HTMLElement>("[data-reveal]")].forEach((element) => {
+        if (!element.matches("[data-reveal]")) return;
+        element.classList.add("is-visible");
+        observer.unobserve(element);
+      });
+    };
+    const revealClickedAnchor = (event: MouseEvent) => {
+      if (!(event.target instanceof Element)) return;
+      const link = event.target.closest<HTMLAnchorElement>('a[href^="#"]');
+      if (link) revealAnchorTarget(link.getAttribute("href") ?? "");
+    };
+    const revealCurrentAnchor = () => revealAnchorTarget(window.location.hash);
+    root.addEventListener("click", revealClickedAnchor);
+    window.addEventListener("hashchange", revealCurrentAnchor);
+    revealCurrentAnchor();
     const art = root.querySelector<HTMLElement>(".hero-art");
     let frame = 0;
     const pointer = (event: PointerEvent) => {
@@ -42,6 +67,8 @@ export function HomeEffects() {
     art?.addEventListener("pointerleave", reset);
     return () => {
       observer.disconnect();
+      root.removeEventListener("click", revealClickedAnchor);
+      window.removeEventListener("hashchange", revealCurrentAnchor);
       cancelAnimationFrame(frame);
       media.removeEventListener("change", updatePreference);
       art?.removeEventListener("pointermove", pointer);
@@ -89,15 +116,19 @@ export function HomeNavigation() {
     <button className="mobile-menu-button" onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="mobile-navigation" aria-label={open ? "Đóng menu" : "Mở menu"}>{open ? <X size={23} /> : <Menu size={23} />}</button>
     <nav className="mobile-navigation" id="mobile-navigation" hidden={!open} aria-label="Điều hướng di động">
       {links.map(link => <a key={link.href} href={link.href} onClick={() => setOpen(false)}>{link.title}<ArrowRight size={18} /></a>)}
-      <a href="#bat-dau" onClick={() => setOpen(false)}>Đặt thiệp cùng kIsmet love <Heart size={17} /></a>
-      <a href="tel:0827274387" onClick={() => setOpen(false)} style={{ color: "#0068ff" }}>Gọi tư vấn: 0827274387</a>
+      <a href="/thu-thiep" onClick={() => setOpen(false)}>Tạo thiệp cùng kIsmet love <Heart size={17} /></a>
+      {CONTACT_PHONES.map((phone) => (
+        <a key={phone.number} href={`tel:${phone.number}`} onClick={() => setOpen(false)} style={{ color: "#0068ff" }}>
+          Gọi tư vấn: {phone.label}
+        </a>
+      ))}
     </nav>
   </>;
 }
 
 const moods = [
-  { label: "Hoài niệm", title: "Một thước phim tình yêu.", description: "Ánh vàng, đỏ rượu và những khung hình có chút hạt phim. Dành cho một chuyện tình mang dư vị rất riêng.", image: "/home/images/nostalgic-wedding.jpg", code: "20260110-NHVVAM", name: "HONG KONG 1999", colors: ["#642634", "#b88756", "#eddbb5"], note: "a love like the movies", className: "nostalgic" },
-  { label: "Trong trẻo", title: "Dịu dàng như lời hẹn đầu.", description: "Trắng ngà, xanh lá và một bó hoa nhỏ. Để hình ảnh của hai bạn kể câu chuyện nhẹ nhàng, tự nhiên nhất.", image: "/home/images/garden-wedding.jpg", code: "20261027-KHVT", name: "NGÀY MÌNH CHUNG ĐÔI", colors: ["#64715c", "#c7c9b7", "#f2eee3"], note: "simply, beautifully us", className: "airy" },
+  { label: "Hoài niệm", title: "Một thước phim tình yêu.", description: "Ánh vàng, đỏ rượu và những khung hình có chút hạt phim. Dành cho một chuyện tình mang dư vị rất riêng.", image: "/wedding-invitations/20260110-NHVVAM/images/best.jpg", code: "20260110-NHVVAM", name: "HONG KONG 1999", colors: ["#642634", "#b88756", "#eddbb5"], note: "a love like the movies", className: "nostalgic" },
+  { label: "Trong trẻo", title: "Dịu dàng như lời hẹn đầu.", description: "Trắng ngà, xanh lá và một bó hoa nhỏ. Để hình ảnh của hai bạn kể câu chuyện nhẹ nhàng, tự nhiên nhất.", image: "/wedding-invitations/20261027-KHVT/images/0V7A7519-800.webp", code: "20261027-KHVT", name: "NGÀY MÌNH CHUNG ĐÔI", colors: ["#64715c", "#c7c9b7", "#f2eee3"], note: "simply, beautifully us", className: "airy" },
 ];
 
 export function Moodboard() {
@@ -121,9 +152,10 @@ export function Moodboard() {
 export function LoveEnvelope() {
   const [open, setOpen] = useState(false);
   return <div className={`love-envelope${open ? " is-open" : ""}`}>
-    <div className="envelope-letter" id="envelope-letter" aria-hidden={!open} inert={!open}><span>Dear you,</span><p>Mỗi chuyện tình đẹp<br />bắt đầu từ một lời chào.</p><a href="#danh-sach-thiep">Xem những lời mời <ArrowRight size={14} /></a></div>
+    <div className="envelope-letter" id="envelope-letter" aria-hidden={!open} inert={!open}><span>Dear you,</span><p>Mỗi chuyện tình đẹp<br />bắt đầu từ một lời chào.</p><a href="#kho-mau-thiep">Xem những lời mời <ArrowRight size={14} /></a></div>
     <div className="envelope-back" /><div className="envelope-flap" /><div className="envelope-front" />
     <button className="envelope-seal" onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="envelope-letter" aria-label={open ? "Đóng thư từ kIsmet love" : "Mở thư từ kIsmet love"}><Heart size={22} strokeWidth={1} /></button>
     <span className="envelope-hint">{open ? "một lời chào, một khởi đầu mới." : "chạm vào trái tim để mở thư"}</span>
   </div>;
 }
+

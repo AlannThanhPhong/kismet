@@ -1,0 +1,39 @@
+.white-store .pricing-section{width:min(1240px,calc(100% - 96px));margin:0 auto;padding:20px 0 85px;background:var(--ws-paper);scroll-margin-top:30px}
+.white-store .pricing-section .section-header-centered{margin-bottom:48px}
+.white-store .pricing-section .section-kicker{color:var(--ws-muted);font-size:9px;letter-spacing:2px;margin-bottom:12px}
+.white-store .pricing-section h2{font-size:clamp(38px,4vw,55px)}
+.white-store .pricing-section .section-subheading{max-width:720px;margin:22px auto 0;font-size:12px;line-height:1.9;color:var(--ws-muted)}
+.white-store .pricing-cards-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.white-store .pricing-card-item{background:var(--ws-paper);border:1px solid var(--ws-beige);border-radius:4px;padding:32px 20px 22px;box-shadow:none;transform:none}
+.white-store .pricing-card-item:hover{transform:translateY(-4px);box-shadow:0 12px 25px #443f3610}
+.white-store .is-popular-card{border:2px solid var(--ws-taupe);background:linear-gradient(var(--ws-sage),var(--ws-paper) 220px);z-index:auto}
+.white-store .pricing-top-ribbon{background:var(--ws-beige);color:var(--ws-ink);box-shadow:none;font-size:8px;white-space:nowrap;padding:5px 12px}
+.white-store .is-popular-card .pricing-top-ribbon{background:var(--ws-sage);border:1px solid var(--ws-taupe)}
+.white-store .pricing-card-header{min-height:175px;text-align:left;margin-bottom:16px}
+.white-store .pkg-subtitle{color:var(--ws-muted);font-size:18px;margin-bottom:9px}
+.white-store .pricing-section .pkg-name{color:var(--ws-ink);font-size:25px;line-height:1.15;margin-bottom:12px}
+.white-store .pricing-section .pkg-desc{color:var(--ws-muted);font-size:11px;line-height:1.8;min-height:0}
+.white-store .pricing-card-header .text-link{display:inline-block;color:var(--ws-ink);font-size:10px;line-height:1.7;margin-top:15px;border-bottom:1px solid var(--ws-taupe)}
+.white-store .pricing-card-price{border-color:var(--ws-beige);text-align:left;margin-bottom:22px;padding-block:20px}
+.white-store .price-main{justify-content:flex-start;gap:5px}
+.white-store .price-amount{font-size:43px;font-weight:400;color:var(--ws-ink)}
+.white-store .price-currency,.white-store .price-unit{color:var(--ws-muted);font-weight:400;font-size:12px}
+.white-store .price-note{color:var(--ws-muted);font-size:9px;margin-top:8px;letter-spacing:.5px}
+.white-store .pricing-card-header>.price-note{margin-top:15px;letter-spacing:0}
+.white-store .features-list-title{color:var(--ws-ink);font-size:9px;margin-bottom:16px;letter-spacing:1px}
+.white-store .pkg-features-list{gap:13px}
+.white-store .pkg-features-list li{color:var(--ws-ink);font-size:11px;line-height:1.8;gap:8px}
+.white-store .feat-check{color:var(--ws-muted);width:14px;margin-top:3px}
+.white-store .pricing-card-body{margin-bottom:25px}
+.white-store .pricing-card-cta .button{display:flex;width:100%;justify-content:center;align-items:center;min-height:46px;padding:12px 8px;font-size:10px;color:var(--ws-ink);background:var(--ws-paper);border:1px solid var(--ws-taupe);box-shadow:none!important;border-radius:2px}
+.white-store .pricing-card-cta .button-wine{background:var(--ws-sage)}
+.white-store .pricing-card-cta .button:hover{background:var(--ws-beige);transform:none}
+.white-store .pricing-commit-box{background:var(--ws-blush);border:1px solid var(--ws-beige);box-shadow:none;border-radius:4px;padding:25px;gap:25px;margin-top:32px}
+.white-store .commit-icon,.white-store .commit-item strong{color:var(--ws-ink)}
+.white-store .commit-item strong{font-size:12px;font-weight:500}
+.white-store .commit-item p{color:var(--ws-muted);font-size:10px;line-height:1.9}
+.ws-price-link{font-size:10px;white-space:nowrap;padding:6px 0;border-bottom:1px solid var(--ws-taupe)}
+.ws-hero-actions{flex-wrap:wrap;gap:14px 22px}
+@media(max-width:1200px){.white-store .pricing-cards-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}.white-store .pricing-card-header{min-height:150px}.ws-price-link{display:none}}
+@media(max-width:1100px){.white-store .pricing-section{width:calc(100% - 48px)}}
+@media(max-width:600px){.white-store .pricing-section{width:calc(100% - 36px);padding-block:10px 55px}.white-store .pricing-cards-grid{grid-template-columns:1fr;gap:30px}.white-store .pricing-card-item{padding:30px 24px 24px}.white-store .pricing-card-header{min-height:0}.white-store .pricing-section .section-header-centered{margin-bottom:35px}.white-store .pricing-section h2{font-size:38px}.white-store .pricing-card-price{margin-top:8px}.white-store .price-amount{font-size:48px}.white-store .pricing-commit-box{grid-template-columns:1fr;padding:22px;gap:22px}.white-store .pkg-features-list li{font-size:12px}.white-store .pricing-card-cta .button{font-size:11px}}

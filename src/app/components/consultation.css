@@ -1,0 +1,170 @@
+.consultation-trigger {
+  appearance: none;
+  font-family: inherit;
+}
+
+.consultation-trigger.header-contact,
+.consultation-trigger.bottom-bar-action {
+  background: transparent;
+  border: 0;
+}
+
+.consultation-trigger.header-contact {
+  border-bottom: 1px solid var(--wine);
+}
+
+.consultation-dialog {
+  position: fixed;
+  inset: 0;
+  width: min(460px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: 34px 28px 26px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: 1px solid #ded2c4;
+  border-radius: 22px;
+  background: #faf6ef;
+  color: #392f2d;
+  box-shadow: 0 24px 90px #25161750;
+  font-family: var(--sans, Arial, sans-serif);
+}
+
+.consultation-dialog::backdrop {
+  background: #2b1a21a6;
+  backdrop-filter: blur(4px);
+}
+
+.consultation-dialog a:focus-visible,
+.consultation-dialog button:focus-visible {
+  outline: 2px solid #692d3c;
+  outline-offset: 4px;
+}
+
+.consultation-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ded2c4;
+  border-radius: 50%;
+  background: #fff8f1;
+  color: #692d3c;
+}
+
+.consultation-kicker {
+  margin: 0 42px 12px 0;
+  color: #692d3c;
+  font-size: 13px;
+}
+
+.consultation-dialog h2 {
+  margin: 0;
+  padding-right: 10px;
+  color: #692d3c;
+  font-family: var(--serif, Georgia, serif);
+  font-weight: 400;
+  font-size: clamp(30px, 7vw, 38px);
+  line-height: 1.2;
+}
+
+.consultation-description {
+  margin: 14px 0 20px;
+  color: #786e66;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.consultation-context {
+  margin: 0 0 18px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #f2eadf;
+  color: #692d3c;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.consultation-phone-list {
+  display: grid;
+  gap: 12px;
+}
+
+.consultation-phone {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 18px;
+  border: 1px solid #ded2c4;
+  border-radius: 12px;
+  background: #fff;
+  color: #692d3c;
+  text-decoration: none;
+}
+
+.consultation-phone:hover {
+  border-color: #692d3c;
+  background: #fff8f1;
+}
+
+.consultation-phone svg {
+  flex-shrink: 0;
+}
+
+.consultation-phone span {
+  display: grid;
+  gap: 4px;
+}
+
+.consultation-phone small {
+  font-size: 11px;
+  color: #786e66;
+}
+
+.consultation-phone strong {
+  font-size: 19px;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.consultation-zalo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #0068ff;
+  color: white;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.consultation-zalo:hover {
+  background: #0057d8;
+}
+
+.consultation-note {
+  margin: 16px 0 0;
+  color: #786e66;
+  font-size: 11px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+@media (max-width: 380px) {
+  .consultation-dialog {
+    padding: 30px 20px 22px;
+  }
+
+  .consultation-zalo {
+    font-size: 12px;
+  }
+}

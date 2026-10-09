@@ -2,20 +2,23 @@
 
 import { useMemo, useState } from "react";
 import Image from "next/image";
-import { ArrowUpRight, Eye, Heart, Monitor, Smartphone, Sparkles } from "lucide-react";
+import Link from "next/link";
+import { ArrowUpRight, Camera, Eye, Heart, Monitor, Smartphone, Sparkles } from "lucide-react";
 import { templatesForCurrency, type TemplateCategory, type WeddingTemplateItem } from "@/lib/templates-data";
 import { packagePrice, type PricingCurrency } from "@/lib/pricing";
 import LivePreviewModal from "./LivePreviewModal";
+import ConsultationButton, { ConsultationDialog } from "./ConsultationButton";
 
 const CATEGORIES: { key: TemplateCategory; label: string }[] = [
   { key: "all", label: "Tất cả mẫu thiệp" },
-  { key: "vintage", label: "Hoài Niệm / Film" },
   { key: "modern", label: "Trong Trẻo / Minimal" },
+  { key: "vintage", label: "Hoài Niệm / Film" },
 ];
 
 export default function TemplateShowcase({ currency }: { currency: PricingCurrency }) {
   const [activeCategory, setActiveCategory] = useState<TemplateCategory>("all");
   const [selectedPreview, setSelectedPreview] = useState<WeddingTemplateItem | null>(null);
+  const [selectedConsultation, setSelectedConsultation] = useState<WeddingTemplateItem | null>(null);
   const templates = useMemo(() => templatesForCurrency(currency), [currency]);
 
   const filteredTemplates = useMemo(() => {
@@ -33,9 +36,8 @@ export default function TemplateShowcase({ currency }: { currency: PricingCurren
           <em>cho câu chuyện của hai bạn.</em>
         </h2>
         <p className="section-subheading">
-          Hiện có 2 mẫu thiệp cưới thực tế để bạn trải nghiệm. Mỗi chiếc thiệp được chăm chút tỉ mỉ từ màu sắc, phông chữ đến hiệu ứng chuyển động và âm nhạc.
-          Mẫu Kim Hiên & Văn Tài thuộc gói {packagePrice("premium", currency)}; mẫu Huyền Vy & Anh Minh thuộc gói Custom.
-          Tương thích hoàn hảo trên mọi kích thước màn hình điện thoại, máy tính bảng và máy tính để bàn.
+          Khám phá các mẫu thiệp cưới trực quan: Mẫu Tiêu Chuẩn {packagePrice("standard", currency)}, Mẫu Nâng Cao {packagePrice("premium", currency)} (Kim Hiên & Văn Tài), và Mẫu May Đo Độc Bản {packagePrice("bespoke", currency)} (Huyền Vy & Anh Minh).
+          Bạn có thể thử thay ảnh của chính mình vào mẫu Tiêu Chuẩn và Nâng Cao để xem trước diện mạo thiệp.
         </p>
 
         {/* Device compatibility badge */}
@@ -54,15 +56,37 @@ export default function TemplateShowcase({ currency }: { currency: PricingCurren
         </div>
       </div>
 
-      {/* Filter Tabs */}
+      {/* Interactive Try Photos Banner */}
+      <div className="try-photos-promo-banner" data-reveal>
+        <div className="promo-banner-text">
+          <div className="promo-banner-badge">
+            <Sparkles size={13} />
+            <span>THỬ ẢNH CƯỚI CỦA BẠN</span>
+          </div>
+          <h3>Ướm ảnh của hai bạn vào mẫu thiệp yêu thích.</h3>
+          <p>Tải ảnh từ điện thoại hoặc máy tính để xem thử mẫu Tiêu Chuẩn và Nâng Cao trước khi đặt dịch vụ.</p>
+        </div>
+        <div className="promo-banner-actions">
+          <Link href="/thu-thiep?package=standard" className="btn-banner-try-500k">
+            <Camera size={14} />
+            <span>Thử mẫu Tiêu Chuẩn</span>
+          </Link>
+          <Link href="/thu-thiep?package=premium" className="btn-banner-try-800k">
+            <Camera size={14} />
+            <span>Thử mẫu Nâng Cao</span>
+          </Link>
+        </div>
+      </div>
+
+      {/* Style filters */}
       <div className="category-filters-wrapper" data-reveal>
-        <div className="category-filters" role="tablist" aria-label="Bộ lọc phong cách thiệp cưới">
+        <div className="category-filters" role="group" aria-label="Bộ lọc phong cách thiệp cưới">
           {CATEGORIES.map((cat) => (
             <button
               key={cat.key}
               type="button"
-              role="tab"
-              aria-selected={activeCategory === cat.key}
+              aria-pressed={activeCategory === cat.key}
+              aria-controls="template-results"
               className={`filter-pill ${activeCategory === cat.key ? "is-active" : ""}`}
               onClick={() => setActiveCategory(cat.key)}
             >
@@ -79,8 +103,8 @@ export default function TemplateShowcase({ currency }: { currency: PricingCurren
         </div>
       </div>
 
-      {/* Templates Grid (Bày khung chữ nhật thanh lịch, bo góc nhẹ nhàng, kích thước gọn 3/4) */}
-      <div className="templates-showcase-grid" data-reveal>
+      {/* Template cards keep their width when filtering. */}
+      <div className="templates-showcase-grid" id="template-results" data-reveal>
         {filteredTemplates.map((item, idx) => (
           <article className="template-card-item" key={item.id}>
             {/* Card Preview Window */}
@@ -93,15 +117,15 @@ export default function TemplateShowcase({ currency }: { currency: PricingCurren
               )}
 
               {/* Quick index stamp */}
-              <span className="template-card-num">0{idx + 1}</span>
+              <span className="template-card-num">{(templates.indexOf(item) + 1).toString().padStart(2, "0")}</span>
 
-              {/* Image Frame with auto-scroll on hover */}
+              {/* Cover image */}
               <div className="template-image-scroll-frame">
                 <Image
                   src={item.coverImage}
                   alt={`Thiệp cưới ${item.name} - ${item.coupleName}`}
                   fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 420px"
+                  sizes="(max-width: 640px) 90vw, (max-width: 1100px) 45vw, 342px"
                   className="template-scroll-image"
                   priority={idx === 0}
                 />
@@ -120,6 +144,17 @@ export default function TemplateShowcase({ currency }: { currency: PricingCurren
                     <span>Xem thử (ĐT & PC)</span>
                   </button>
 
+                  {item.tryUrl && (
+                    <Link
+                      href={item.tryUrl}
+                      className="action-btn-try-photo"
+                      aria-label={`Thử thay ảnh của bạn vào mẫu ${item.name}`}
+                    >
+                      <Camera size={14} />
+                      <span>Thử thay ảnh của bạn</span>
+                    </Link>
+                  )}
+
                   <a
                     href={item.liveDemoUrl || `/thiep/${item.code}`}
                     target="_blank"
@@ -128,7 +163,7 @@ export default function TemplateShowcase({ currency }: { currency: PricingCurren
                     aria-label={`Mở thiệp ${item.name} trực tiếp`}
                   >
                     <ArrowUpRight size={15} />
-                    <span>Xem thiệp thật</span>
+                    <span>Mở mẫu thiệp</span>
                   </a>
                 </div>
 
@@ -153,15 +188,13 @@ export default function TemplateShowcase({ currency }: { currency: PricingCurren
               </div>
 
               <h3 className="template-title">
-                <a
-                  href={item.liveDemoUrl || `/thiep/${item.code}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setSelectedPreview(item);
-                  }}
+                <button
+                  type="button"
+                  onClick={() => setSelectedPreview(item)}
+                  aria-label={`Xem thử mẫu ${item.name}`}
                 >
                   {item.name}
-                </a>
+                </button>
               </h3>
 
               <p className="template-couple">
@@ -177,13 +210,24 @@ export default function TemplateShowcase({ currency }: { currency: PricingCurren
                   className="card-quick-preview-link"
                   onClick={() => setSelectedPreview(item)}
                 >
-                  <span>Mô phỏng trải nghiệm</span>
-                  <ArrowUpRight size={14} />
+                  <Eye size={14} />
+                  <span>Xem thử</span>
                 </button>
 
-                <a href="#bat-dau" className="card-choose-btn">
-                  Đặt mẫu này
-                </a>
+                {item.tryUrl && (
+                  <Link href={item.tryUrl} className="card-quick-try-btn">
+                    <Camera size={13} />
+                    <span>Thử thay ảnh</span>
+                  </Link>
+                )}
+
+                <ConsultationButton
+                  className="card-choose-btn"
+                  templateName={item.name}
+                  packageName={item.packageLabel}
+                >
+                  Liên hệ đặt mẫu
+                </ConsultationButton>
               </div>
             </div>
           </article>
@@ -194,7 +238,18 @@ export default function TemplateShowcase({ currency }: { currency: PricingCurren
       <LivePreviewModal
         template={selectedPreview}
         onClose={() => setSelectedPreview(null)}
+        onChoose={(template) => {
+          setSelectedPreview(null);
+          setSelectedConsultation(template);
+        }}
       />
+      {selectedConsultation && (
+        <ConsultationDialog
+          templateName={selectedConsultation.name}
+          packageName={selectedConsultation.packageLabel}
+          onClose={() => setSelectedConsultation(null)}
+        />
+      )}
     </section>
   );
 }

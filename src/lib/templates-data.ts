@@ -19,35 +19,39 @@ export type WeddingTemplateItem = {
   colors: string[];
   coverImage: string;
   liveDemoUrl?: string;
+  tryUrl?: string;
   hasMusic: boolean;
   hasRsvp: boolean;
   hasMap: boolean;
   hasGallery: boolean;
   hasQr: boolean;
+  packageTier?: "standard" | "premium" | "bespoke" | "custom";
   packageLabel?: string;
 };
 
 export const WEDDING_TEMPLATES: WeddingTemplateItem[] = [
   {
-    id: "hong-kong-1999",
-    code: "20260110-NHVVAM",
-    name: "HONG KONG 1999",
-    coupleName: "Huyền Vy & Anh Minh",
-    category: "vintage",
-    categoryLabel: "Hoài Niệm / Film",
-    badge: "SIGNATURE",
-    badgeType: "signature",
+    id: "mau-tieu-chuan-500k",
+    code: "mau-500k",
+    name: "MINIMAL IVORY",
+    coupleName: "Thu Hà & Đức Anh",
+    category: "modern",
+    categoryLabel: "Trong trẻo / Minimal",
+    badge: "MẪU TIÊU CHUẨN",
+    badgeType: "new",
     frameShape: "rect-soft",
-    description: "Điện ảnh Hồng Kông thập niên 90. Ánh đỏ rượu vang quý phái, hạt phim hoài niệm và phông chữ Serif cổ điển.",
-    tone: "Đỏ Rượu & Vàng Cổ Điển",
-    colors: ["#642634", "#b88756", "#eddbb5"],
-    coverImage: "/wedding-invitations/20260110-NHVVAM/images/photo_2026-10-08_13-24-23.jpg",
-    liveDemoUrl: "/thiep/20260110-NHVVAM",
+    description: "Thiết kế tối giản, hiện đại và thanh lịch. Tích hợp 01 địa điểm & bản đồ chỉ đường, hộp mừng cưới VietQR, album 10 ảnh chất lượng cao và form xác nhận RSVP.",
+    tone: "Trắng Ngà & Vàng Champagne",
+    colors: ["#ede6db", "#b59e7f", "#3a2e28"],
+    coverImage: "/home/images/garden-wedding.jpg",
+    liveDemoUrl: "/thu-thiep?package=standard&view=preview",
+    tryUrl: "/thu-thiep?package=standard",
     hasMusic: true,
     hasRsvp: true,
     hasMap: true,
     hasGallery: true,
     hasQr: true,
+    packageTier: "standard",
   },
   {
     id: "ngay-minh-chung-doi",
@@ -55,27 +59,59 @@ export const WEDDING_TEMPLATES: WeddingTemplateItem[] = [
     name: "NGÀY MÌNH CHUNG ĐÔI",
     coupleName: "Kim Hiên & Văn Tài",
     category: "modern",
-    categoryLabel: "Trong Trẻo / Minimal",
-    badge: "HOT NHẤT 2026",
+    categoryLabel: "Trong trẻo / Minimal",
+    badge: "MẪU NÂNG CAO",
     badgeType: "hot",
     frameShape: "rect-soft",
-    description: "Nhẹ nhàng, thanh lịch như lời hẹn đầu tiên. Tông màu trắng ngà và xanh dịu tạo cảm giác sâu lắng.",
+    description: "Mẫu thực tế của Kim Hiên & Văn Tài. Bìa phong bì mở thiệp sang trọng, tích hợp 2 bên Nhà Trai & Nhà Gái (2 bản đồ), album 30 ảnh HD, 2 mã VietQR và tặng logo tên riêng.",
     tone: "Trắng Ngà & Xanh Dịu",
     colors: ["#64715c", "#c7c9b7", "#f2eee3"],
     coverImage: "/wedding-invitations/20261027-KHVT/images/0V7A7519-800.webp",
     liveDemoUrl: "/thiep/20261027-KHVT",
+    tryUrl: "/thu-thiep?package=premium",
     hasMusic: true,
     hasRsvp: true,
     hasMap: true,
     hasGallery: true,
     hasQr: true,
+    packageTier: "premium",
+  },
+  {
+    id: "hong-kong-1999",
+    code: "20260110-NHVVAM",
+    name: "HONG KONG 1999",
+    coupleName: "Huyền Vy & Anh Minh",
+    category: "vintage",
+    categoryLabel: "Hoài niệm / Film",
+    badge: "CUSTOMIZED",
+    badgeType: "signature",
+    frameShape: "rect-soft",
+    description: "Mẫu thực tế của Huyền Vy & Anh Minh. Điện ảnh Hồng Kông thập niên 90 độc bản. Hiệu ứng hoạt họa xe đạp, hạt phim hoài niệm, thư tình và thiết kế riêng 1-1.",
+    tone: "Đỏ Rượu & Vàng Cổ Điển",
+    colors: ["#642634", "#b88756", "#eddbb5"],
+    coverImage: "/wedding-invitations/20260110-NHVVAM/images/best.jpg",
+    liveDemoUrl: "/thiep/20260110-NHVVAM",
+    hasMusic: true,
+    hasRsvp: true,
+    hasMap: true,
+    hasGallery: true,
+    hasQr: true,
+    packageTier: "custom",
   },
 ];
 
 export function templatesForCurrency(currency: PricingCurrency = "VND"): (WeddingTemplateItem & { packageLabel?: string })[] {
   return WEDDING_TEMPLATES.map((item) => {
-    const isCustom = item.id === "hong-kong-1999";
-    const packageLabel = isCustom ? "Gói Custom · Thiết kế riêng" : `Gói Premium · ${packagePrice("premium", currency)}`;
+    let packageLabel = "";
+    if (item.packageTier === "standard") {
+      packageLabel = `Basic · ${packagePrice("standard", currency)}`;
+    } else if (item.packageTier === "premium") {
+      packageLabel = `Standard · ${packagePrice("premium", currency)}`;
+    } else if (item.packageTier === "custom") {
+      packageLabel = "Customized · Liên hệ";
+    } else {
+      packageLabel = `Premium · ${packagePrice("bespoke", currency)}`;
+    }
     return {
       ...item,
       packageLabel,

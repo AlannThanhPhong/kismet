@@ -40,7 +40,7 @@ export default async function InvitationPage({ params }: Props) {
   const date = new Date(invitation.event.date);
   return (
     <main className="invitation-fallback">
-      <Link className="invitation-back" href="/#danh-sach-thiep">← Tất cả thiệp</Link>
+      <Link className="invitation-back" href="/#kho-mau-thiep">← Tất cả thiệp</Link>
       <section className="invitation-fallback-card">
         <span className="section-kicker">MỘT NGÀY ĐẶC BIỆT · MỘT ĐỜI BÊN NHAU</span>
         <p className="invitation-fallback-script">Trân trọng kính mời</p>

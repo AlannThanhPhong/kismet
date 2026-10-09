@@ -1,0 +1,20 @@
+.white-store .mood-section{padding-block:75px;background:var(--ws-sage);margin-bottom:75px}
+.white-store .mood-section::before{display:none}
+.ws-mood-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:60px;align-items:center}
+.white-store .mood-intro{text-align:left}
+.white-store .mood-intro>p:last-child{color:var(--ws-muted);font-size:12px;line-height:2;margin-top:24px}
+.white-store .mood-intro h2{font-size:clamp(40px,4vw,56px)}
+.white-store .mood-intro em{color:var(--ws-ink)}
+.white-store .mood-tabs{border-color:var(--ws-taupe);margin-bottom:24px;justify-content:flex-start}
+.white-store .mood-tabs button{color:var(--ws-muted);padding:14px 18px;font-size:11px;border-bottom:2px solid transparent}
+.white-store .mood-tabs button[aria-selected=true]{color:var(--ws-ink);border-color:var(--ws-ink);background:var(--ws-beige)}
+.white-store .mood-panel{background:var(--ws-paper);padding:20px;grid-template-columns:1fr 1fr;gap:25px;box-shadow:0 12px 28px #443f3610}
+.white-store .mood-photo{background:var(--ws-beige)}
+.white-store .mood-swatches span{border-color:var(--ws-paper);width:30px;height:30px}
+.white-store .mood-description h3{font-size:34px;color:var(--ws-ink);margin-top:14px;line-height:1.1}
+.white-store .mood-description p{font-size:11px;color:var(--ws-muted);margin-top:18px;line-height:1.9}
+.white-store .mood-label{color:var(--ws-muted);font-size:8px;letter-spacing:1.4px}
+.white-store .mood-description .text-link{display:inline-flex;align-items:center;gap:8px;padding-bottom:6px;border-bottom:1px solid var(--ws-taupe);color:var(--ws-ink);font-size:10px;margin-top:20px}
+.white-store .mood-heart{color:var(--ws-blush);opacity:1}
+@media(max-width:1000px){.ws-mood-layout{grid-template-columns:1fr;gap:35px}.white-store .mood-panel{max-width:700px;margin:0}.white-store .mood-intro h2{font-size:48px}}
+@media(max-width:600px){.white-store .mood-section{padding-block:45px;margin-bottom:40px}.white-store .mood-intro h2{font-size:42px}.white-store .mood-intro>p:last-child{font-size:11px}.white-store .mood-panel{grid-template-columns:1fr;gap:22px;padding:18px}.white-store .mood-description h3{font-size:34px}.white-store .mood-photo{aspect-ratio:4/3}.white-store .mood-description{padding:0 3px 10px}.white-store .mood-tabs button{padding:13px 16px}.white-store .mood-swatches{margin-bottom:18px}}
