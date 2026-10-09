@@ -16,7 +16,7 @@ export default function PricingSection({ currency }: { currency: PricingCurrency
       period: "đ / trọn gói",
       badge: "BASIC",
       isPopular: false,
-      description: "Phù hợp cho đám cưới đơn giản, đầy đủ các tính năng cơ bản cần thiết.",
+      description: "Phù hợp cho đám cưới đơn giản, đầy đủ các tính năng cơ bản cần thiết",
       features: [
         "Lưu trữ thiệp online trong 06 tháng",
         "01 Địa điểm & Bản đồ Google Maps",
@@ -31,14 +31,14 @@ export default function PricingSection({ currency }: { currency: PricingCurrency
     {
       id: "premium",
       name: "Standard",
-      subtitle: "Gói Chung Đôi (Mẫu KHVT)",
+      subtitle: "Gói Chung Đôi",
       price: packageAmount("premium", currency),
       sampleLabel: "Xem mẫu Kim Hiên & Văn Tài",
       sampleUrl: "/thiep/20261027-KHVT",
       period: "đ / trọn gói",
       badge: "PHỔ BIẾN NHẤT",
       isPopular: true,
-      description: "Trải nghiệm hoàn hảo nhất cho ngày cưới với đầy đủ tiện ích và lưu giữ trong 2 năm.",
+      description: "Trải nghiệm hoàn hảo nhất cho ngày cưới với đầy đủ tiện ích và lưu giữ trong 2 năm",
       features: [
         "Lưu trữ thiệp online trong 2 năm",
         "Tích hợp đầy đủ 2 bên Nhà Trai & Nhà Gái (2 bản đồ)",
@@ -61,7 +61,7 @@ export default function PricingSection({ currency }: { currency: PricingCurrency
       period: "đ / trọn gói",
       badge: "ĐỘC BẢN",
       isPopular: false,
-      description: "Dành cho các cặp đôi muốn một chiếc thiệp độc nhất vô nhị theo câu chuyện tình yêu riêng.",
+      description: "Dành cho các cặp đôi muốn một chiếc thiệp độc nhất vô nhị theo câu chuyện tình yêu riêng",
       features: [
         "Toàn bộ đặc quyền của gói Standard",
         "LƯU TRỮ VĨNH VIỄN TRỌN ĐỜI",
@@ -84,7 +84,7 @@ export default function PricingSection({ currency }: { currency: PricingCurrency
       period: "Báo giá theo yêu cầu",
       badge: null,
       isPopular: false,
-      description: "Thiết kế và tính năng được tư vấn riêng theo nhu cầu, phong cách và ngân sách của hai bạn.",
+      description: "Thiết kế và tính năng được tư vấn riêng theo nhu cầu, phong cách và ngân sách của hai bạn",
       features: [
         "Tư vấn ý tưởng và phong cách thiệp riêng",
         "Tùy chỉnh giao diện theo yêu cầu",
@@ -101,11 +101,11 @@ export default function PricingSection({ currency }: { currency: PricingCurrency
         <p className="section-kicker">05 / CHI PHÍ MINH BẠCH & HỢP LÝ</p>
         <h2 id="pricing-title">
           Bảng giá dịch vụ thiệp cưới online<br />
-          <em>đầu tư nhỏ cho kỷ niệm lớn.</em>
+          <em>đầu tư nhỏ cho kỷ niệm lớn</em>
         </h2>
         <p className="section-subheading">
-          Basic {packagePrice("standard", currency)}, Standard {packagePrice("premium", currency)}, Premium {packagePrice("bespoke", currency)} và Customized báo giá theo nhu cầu.
-          Chọn gói phù hợp để lưu giữ khoảnh khắc của hai bạn.
+          Basic {packagePrice("standard", currency)}, Standard {packagePrice("premium", currency)}, Premium {packagePrice("bespoke", currency)} và Customized báo giá theo nhu cầu
+          Chọn gói phù hợp để lưu giữ khoảnh khắc của hai bạn
         </p>
       </div>
 
@@ -113,7 +113,7 @@ export default function PricingSection({ currency }: { currency: PricingCurrency
         {packages.map((pkg) => (
           <article
             key={pkg.id}
-            className={`pricing-card-item ${pkg.isPopular ? "is-popular-card" : ""}`}
+            className={`pricing-card-item ${pkg.isPopular ? "is-popular-card" : ""} ${pkg.id === "custom" ? "is-custom-card" : ""}`}
           >
             {pkg.badge && (
               <div className="pricing-top-ribbon">
@@ -174,21 +174,21 @@ export default function PricingSection({ currency }: { currency: PricingCurrency
           <Gift size={20} className="commit-icon" />
           <div>
             <strong>Quà tặng mùa cưới</strong>
-            <p>Tặng kèm thiết kế Monogram Logo tên Dâu Rể{currency === "VND" ? " trị giá 200.000đ" : ""} khi đặt thiệp hôm nay.</p>
+            <p>Tặng kèm thiết kế Monogram Logo tên Dâu Rể{currency === "VND" ? " trị giá 200.000đ" : ""} khi đặt thiệp hôm nay</p>
           </div>
         </div>
         <div className="commit-item">
           <Sparkles size={20} className="commit-icon" />
           <div>
             <strong>Chỉnh sửa tận tâm</strong>
-            <p>Hỗ trợ chỉnh sửa đến khi hai bạn hoàn toàn hài lòng trước khi gửi link chính thức.</p>
+            <p>Hỗ trợ chỉnh sửa đến khi hai bạn hoàn toàn hài lòng trước khi gửi link chính thức</p>
           </div>
         </div>
         <div className="commit-item">
           <Heart size={20} className="commit-icon" />
           <div>
             <strong>Bảo mật thông tin</strong>
-            <p>Bảo mật tuyệt đối hình ảnh, số điện thoại và thông tin cá nhân của Dâu Rể.</p>
+            <p>Bảo mật tuyệt đối hình ảnh, số điện thoại và thông tin cá nhân của Dâu Rể</p>
           </div>
         </div>
       </div>

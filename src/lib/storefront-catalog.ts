@@ -2,11 +2,11 @@ import { templatesForCurrency, type WeddingTemplateItem } from "./templates-data
 import { PACKAGE_PRICES, type PricingCurrency } from "./pricing";
 
 export const PACKAGES = [
-  { id: "basic", name: "Basic", note: "Một lời mời giản đơn", features: "RSVP · 1 bản đồ · Nhạc nền · VietQR", description: "Website thiệp cưới nhỏ gọn, đầy đủ thông tin thiết yếu cho ngày vui của hai bạn." },
-  { id: "standard", name: "Standard", note: "Đủ đầy cho ngày chung đôi", features: "RSVP · 2 bản đồ · Album HD · Hiệu ứng", description: "Trải nghiệm thiệp cưới với phong bì mở thiệp, âm nhạc và album ảnh, như dự án Kim Hiên & Văn Tài." },
-  { id: "premium", name: "Premium", note: "Thêm một chút diệu kỳ", features: "Đặc quyền Standard · Lưu trữ trọn đời · Hỗ trợ ưu tiên", description: "Gói đầy đủ đặc quyền, lưu giữ ngày vui lâu dài. Liên hệ studio để xem mẫu phù hợp." },
-  { id: "customized", name: "Customized", note: "Chỉ riêng câu chuyện của bạn", features: "Concept riêng · Thiết kế 1–1 · Hoạt họa", description: "Cùng studio tạo một chiếc thiệp độc bản theo câu chuyện và concept của hai bạn." },
-  { id: "self-customized", name: "Self-Customized", note: "Tự tay viết lời thương", features: "Editor trực tiếp · Font & màu · Kéo thả · Lưu trên thiết bị", description: "Chọn một thiết kế, thay tên, màu sắc và từng dòng chữ ngay trong trình duyệt." },
+  { id: "basic", name: "Basic", note: "Một lời mời giản đơn", features: "RSVP · 1 bản đồ · Nhạc nền · VietQR", description: "Website thiệp cưới nhỏ gọn, đầy đủ thông tin thiết yếu cho ngày vui của hai bạn" },
+  { id: "standard", name: "Standard", note: "Đủ đầy cho ngày chung đôi", features: "RSVP · 2 bản đồ · Album HD · Hiệu ứng", description: "Trải nghiệm thiệp cưới với phong bì mở thiệp, âm nhạc và album ảnh, như dự án Kim Hiên & Văn Tài" },
+  { id: "premium", name: "Premium", note: "Thêm một chút diệu kỳ", features: "Đặc quyền Standard · Lưu trữ trọn đời · Hỗ trợ ưu tiên", description: "Gói đầy đủ đặc quyền, lưu giữ ngày vui lâu dài Liên hệ studio để xem mẫu phù hợp" },
+  { id: "customized", name: "Customized", note: "Chỉ riêng câu chuyện của bạn", features: "Concept riêng · Thiết kế 1–1 · Hoạt họa", description: "Cùng studio tạo một chiếc thiệp độc bản theo câu chuyện và concept của hai bạn" },
+  { id: "self-customized", name: "Self-Customized", note: "Tự tay viết lời thương", features: "Editor trực tiếp · Font & màu · Kéo thả · Lưu trên thiết bị", description: "Chọn một thiết kế, thay tên, màu sắc và từng dòng chữ ngay trong trình duyệt" },
 ] as const;
 export type PackageId = typeof PACKAGES[number]["id"];
 export const STYLES = ["Minimalist", "Floral", "Luxury", "Vintage", "Modern", "Boho", "Classic", "Rustic"] as const;

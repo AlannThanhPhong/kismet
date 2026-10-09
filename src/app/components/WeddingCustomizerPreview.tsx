@@ -461,7 +461,7 @@ const DEFAULT_EDITOR_DATA_500K: WeddingEditorData = {
 
   // Dress Code
   showDressCode: false,
-  dressCodeDescription: "Trang phục lịch sự, trang nhã (Be / Trắng / Pastel).",
+  dressCodeDescription: "Trang phục lịch sự, trang nhã (Be / Trắng / Pastel)",
   dressCodeColors: [
     { name: "Trắng", hex: "#FFFFFF", selected: true },
     { name: "Be", hex: "#F5ECE1", selected: true },
@@ -1410,7 +1410,7 @@ export default function WeddingCustomizerPreview({
                         placeholder="THÔNG TIN LỄ CƯỚI"
                       />
                       <span className="field-hint">
-                        Tiêu đề in phía trên mục này trên thiệp. Để trống nếu bạn muốn bỏ hẳn.
+                        Tiêu đề in phía trên mục này trên thiệp Để trống nếu bạn muốn bỏ hẳn
                       </span>
                     </div>
 
@@ -1562,7 +1562,7 @@ export default function WeddingCustomizerPreview({
                       </div>
                     </div>
                     <span className="field-hint">
-                      Giờ chính hiển thị lớn trên thiệp, dùng cho đếm ngược và thêm vào lịch.
+                      Giờ chính hiển thị lớn trên thiệp, dùng cho đếm ngược và thêm vào lịch
                     </span>
 
                     <div className="segmented-order-section">
@@ -1860,7 +1860,7 @@ export default function WeddingCustomizerPreview({
                     <div className="info-alert-box">
                       <Sparkles size={14} />
                       <span>
-                        Bật để gợi ý trang phục cho khách mời theo màu sắc chủ đạo của tiệc cưới.
+                        Bật để gợi ý trang phục cho khách mời theo màu sắc chủ đạo của tiệc cưới
                       </span>
                     </div>
 
@@ -1891,7 +1891,7 @@ export default function WeddingCustomizerPreview({
                                 </button>
                               ))}
                             </div>
-                          ) : <p className="dress-color-empty">Chọn màu bên dưới để hiển thị trên thiệp.</p>}
+                          ) : <p className="dress-color-empty">Chọn màu bên dưới để hiển thị trên thiệp</p>}
                         </div>
                         <p className="dress-color-count">Hiển thị {filteredDressColors.length} / {data.dressCodeColors.length} màu</p>
                         <div className="dress-code-palette-grid" role="group" aria-label="Chọn màu trang phục">
@@ -1919,7 +1919,7 @@ export default function WeddingCustomizerPreview({
                         </div>
                         {filteredDressColors.length === 0 && (
                           <div className="dress-color-empty">
-                            <p>Không tìm thấy màu phù hợp.</p>
+                            <p>Không tìm thấy màu phù hợp</p>
                             <button type="button" className="dress-reset-filters" onClick={() => { setDressColorSearch(""); setDressColorFamily(""); }}>Xem tất cả 150 màu</button>
                           </div>
                         )}
@@ -1969,7 +1969,7 @@ export default function WeddingCustomizerPreview({
                     <div className="info-alert-box">
                       <Sparkles size={14} />
                       <span>
-                        Bật để hiển thị lịch trình các hoạt động trong ngày cưới (đón khách, lễ gia tiên, khai tiệc...) cho khách dễ theo dõi.
+                        Bật để hiển thị lịch trình các hoạt động trong ngày cưới (đón khách, lễ gia tiên, khai tiệc) cho khách dễ theo dõi
                       </span>
                     </div>
 
@@ -2079,7 +2079,7 @@ export default function WeddingCustomizerPreview({
                   <div className="cd-card-body">
                     {data.bankAccounts.length === 0 ? (
                       <div className="empty-box-state">
-                        <p>Chưa có phương thức nào. Nhấn nút bên dưới để thêm.</p>
+                        <p>Chưa có phương thức nào Nhấn nút bên dưới để thêm</p>
                       </div>
                     ) : (
                       <div className="bank-accounts-list">
@@ -2238,7 +2238,7 @@ export default function WeddingCustomizerPreview({
                       />
                     </div>
                     <p className="card-subtitle-note">
-                      Áp dụng cho tất cả khách. Để thay đổi riêng từng khách, chỉnh trong phần Quản lý khách mời.
+                      Áp dụng cho tất cả khách Để thay đổi riêng từng khách, chỉnh trong phần Quản lý khách mời
                     </p>
                   </div>
                 )}
@@ -2263,7 +2263,7 @@ export default function WeddingCustomizerPreview({
                 {openSections.sharePreview && (
                   <div className="cd-card-body">
                     <p className="card-subtitle-note">
-                      Ảnh hiển thị khi bạn gửi link thiệp qua Zalo, Facebook, Messenger. Chọn 1 trong 2 kiểu bên dưới.
+                      Ảnh hiển thị khi bạn gửi link thiệp qua Zalo, Facebook, Messenger Chọn 1 trong 2 kiểu bên dưới
                     </p>
 
                     {/* Segmented switch: Phong bì thiệp vs Ảnh của bạn */}
@@ -2286,8 +2286,8 @@ export default function WeddingCustomizerPreview({
 
                     <p className="field-hint">
                       {data.sharePreviewType === "envelope"
-                        ? "Phong bì thiệp của bạn. Với link mời riêng, ảnh sẽ hiện tên khách được mời."
-                        : "Ảnh cưới đại diện của bạn sẽ hiển thị khi chia sẻ link."}
+                        ? "Phong bì thiệp của bạn Với link mời riêng, ảnh sẽ hiện tên khách được mời"
+                        : "Ảnh cưới đại diện của bạn sẽ hiển thị khi chia sẻ link"}
                     </p>
 
                     {/* REALISTIC SOCIAL SHARE CARD PREVIEW */}
@@ -2324,7 +2324,7 @@ export default function WeddingCustomizerPreview({
                       </div>
 
                       <p className="cache-warning-note">
-                        Zalo và Facebook lưu tạm ảnh xem trước, nên ảnh có thể chưa cập nhật ngay sau khi bạn chỉnh sửa. Nếu cần làm mới, xem hướng dẫn xóa cache.
+                        Zalo và Facebook lưu tạm ảnh xem trước, nên ảnh có thể chưa cập nhật ngay sau khi bạn chỉnh sửa Nếu cần làm mới, xem hướng dẫn xóa cache
                       </p>
                     </div>
                   </div>
@@ -2344,7 +2344,7 @@ export default function WeddingCustomizerPreview({
               <div className="viewport-title-tag">
                 <span>Trực quan thời gian thực</span>
                 <strong>
-                  {data.packageType === "premium" ? "Gói 800k (Mẫu KHVT)" : "Gói 500k (Minimal Ivory)"}
+                  {data.packageType === "premium" ? "Gói 800k" : "Gói 500k (Minimal Ivory)"}
                 </strong>
               </div>
 
@@ -2521,7 +2521,7 @@ export default function WeddingCustomizerPreview({
                   type="text"
                   value={tempBankName}
                   onChange={(e) => setTempBankName(e.target.value)}
-                  placeholder="MB Bank, Vietcombank, Techcombank..."
+                  placeholder="MB Bank, Vietcombank, Techcombank"
                 />
               </div>
 
@@ -2705,7 +2705,7 @@ export default function WeddingCustomizerPreview({
             </div>
             <div className="modal-content-list wishes-manager-list">
               {data.guestbookWishes.length === 0 ? (
-                <p className="empty-modal-text">Chưa có lời chúc nào trong sổ lưu bút.</p>
+                <p className="empty-modal-text">Chưa có lời chúc nào trong sổ lưu bút</p>
               ) : (
                 data.guestbookWishes.map((w) => (
                   <div key={w.id} className="wish-manager-card">
@@ -2759,7 +2759,7 @@ export default function WeddingCustomizerPreview({
             <div className="modal-summary-content">
               <h3>Bản xem trước thiệp đã sẵn sàng!</h3>
               <p>
-                Cảm ơn hai bạn đã thiết kế thiệp cùng KISMET. Đội ngũ kỹ thuật & thiết kế sẽ hoàn thiện bản chính thức có tên miền riêng, nhạc bản quyền và hệ thống quản lý khách mời.
+                Cảm ơn hai bạn đã thiết kế thiệp cùng KISMET Đội ngũ kỹ thuật & thiết kế sẽ hoàn thiện bản chính thức có tên miền riêng, nhạc bản quyền và hệ thống quản lý khách mời
               </p>
 
               <div className="modal-data-summary">
@@ -3141,7 +3141,7 @@ function LiveTemplateDocument({
             <div className="rsvp-success-state">
               <Sparkles size={24} className="sparkle-gold" />
               <h3>Cảm ơn quý khách!</h3>
-              <p>Phản hồi của quý khách đã được gửi đến cô dâu & chú rể.</p>
+              <p>Phản hồi của quý khách đã được gửi đến cô dâu & chú rể</p>
             </div>
           ) : (
             <form
@@ -3174,7 +3174,7 @@ function LiveTemplateDocument({
                   required
                   value={rsvpGuestName}
                   onChange={(e) => setRsvpGuestName(e.target.value)}
-                  placeholder="Họ và tên của bạn..."
+                  placeholder="Họ và tên của bạn"
                 />
               </div>
 
@@ -3198,7 +3198,7 @@ function LiveTemplateDocument({
                       ) : (
                         <input
                           type="text"
-                          placeholder="Câu trả lời của bạn..."
+                          placeholder="Câu trả lời của bạn"
                           className="q-text-input"
                         />
                       )}
@@ -3231,7 +3231,7 @@ function LiveTemplateDocument({
                   required
                   value={inputWishName}
                   onChange={(e) => setInputWishName(e.target.value)}
-                  placeholder="Tên của bạn..."
+                  placeholder="Tên của bạn"
                 />
                 <select
                   value={inputWishRel}
@@ -3249,7 +3249,7 @@ function LiveTemplateDocument({
                 required
                 value={inputWishMsg}
                 onChange={(e) => setInputWishMsg(e.target.value)}
-                placeholder="Gửi lời chúc ngọt ngào nhất đến cặp đôi..."
+                placeholder="Gửi lời chúc ngọt ngào nhất đến cặp đôi"
               />
 
               <button type="submit" className="btn-send-wish">

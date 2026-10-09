@@ -1,29 +1,85 @@
-/* Same local Be Vietnam Pro / Great Vibes font files as Kim Hien & Van Tai. */
-#invitation-content{--sans:Vietnam,Arial,sans-serif;--script:Vibes,cursive;--serif:var(--script);font-family:var(--sans);font-synthesis:none}
-#invitation-content :is(h1,h2,h3){font-family:var(--script);font-weight:400;font-style:normal;letter-spacing:0;line-height:1.4}
-#invitation-content h1{font-size:clamp(64px,6.5vw,96px);line-height:1.25}
-#invitation-content h2 em{font-style:normal}
-#invitation-content :is(.ampersand,.family-symbol,.rsvp-signature,.footer-names){font-family:var(--script);font-style:normal;letter-spacing:0}
-#invitation-content :is(.hero-caption,.family .saint,.invitation-quote,.film-copy>p:last-of-type,.album-note,footer>p){font-family:var(--sans);font-style:normal;line-height:1.9}
-#invitation-content .hero-caption{font-size:14px}
-#invitation-content .family .saint{font-size:12px}
-#invitation-content .invitation-quote{font-size:14px}
-#invitation-content :is(.film-copy>p:last-of-type,.album-note){font-size:14px}
-#invitation-content footer>p{font-size:16px}
-#invitation-content :is(.hero-date strong,.date-stamp strong,.event-index,.event-time,.timeline>div>span){font-family:var(--sans);font-style:normal;letter-spacing:0;font-weight:400;font-variant-numeric:tabular-nums}
-#invitation-content .hero-date strong{font-size:26px}
-#invitation-content .date-stamp strong{font-size:38px;line-height:1.5}
-#invitation-content .event-time{font-size:52px;line-height:1.3}
-#invitation-content .event-time span{font-size:30px}
-#invitation-content .timeline>div>span{font-size:22px}
-#invitation-content :is(.double-happiness,.small-happiness,.footer-happiness){font-family:'Times New Roman',serif}
-@media(max-width:600px){
-  #invitation-content h1{font-size:clamp(58px,16vw,76px)}
-  #invitation-content h2{font-size:46px}
-  #invitation-content .family h3{font-size:36px}
-  #invitation-content .event-card h3{font-size:38px}
-  #invitation-content .date-stamp strong{font-size:30px}
-  #invitation-content .hero-date strong{font-size:24px}
-  #invitation-content .timeline>div>span{font-size:20px}
-  #invitation-content .rsvp-copy h2{font-size:50px}
+@font-face {
+  font-family: Nunito;
+  src: url('fonts/nunito-variable.ttf') format('truetype');
+  font-weight: 200 1000;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Allura;
+  src: url('fonts/allura-regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+#invitation-content {
+  --sans: Nunito, Vietnam, Arial, sans-serif;
+  --serif: var(--sans);
+  font-family: var(--sans);
+  font-synthesis: none;
+}
+
+#invitation-content :is(h1, h2, h3) {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: 0;
+  line-height: 1.3;
+}
+
+#invitation-content h1 { font-size: clamp(48px, 5.2vw, 72px); }
+#invitation-content h2 { font-size: clamp(34px, 3.8vw, 56px); }
+#invitation-content h2 em { font-style: normal; }
+#invitation-content .family h3 { font-size: clamp(24px, 2.2vw, 30px); }
+
+#invitation-content :is(.hero-caption, .family .saint, .invitation-quote, .film-copy > p:last-of-type, .album-note, footer > p, .hero-footnote) {
+  font-family: var(--sans);
+  font-style: normal;
+  line-height: 1.8;
+}
+
+#invitation-content .intro { font-size: 15px; }
+#invitation-content .family p { font-size: 14px; }
+#invitation-content .family .saint { font-size: 14px; }
+#invitation-content .family .muted { font-size: 13px; }
+#invitation-content .invitation-quote { font-size: 18px; }
+#invitation-content :is(.film-copy > p:last-of-type, .album-note) { font-size: 18px; }
+#invitation-content footer > p { font-size: 20px; }
+
+#invitation-content :is(.hero-date strong, .date-stamp strong, .event-index, .event-time, .timeline > div > span) {
+  font-family: var(--sans);
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+#invitation-content :is(.double-happiness, .small-happiness, .footer-happiness) {
+  font-family: 'Times New Roman', serif;
+}
+
+#invitation-content :is(.rsvp-signature, .footer-names) {
+  font-family: Allura, Vibes, cursive;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: .3px;
+  line-height: 1.5;
+}
+
+#invitation-content .rsvp-copy h2 {
+  font-size: clamp(30px, 3vw, 44px);
+  line-height: 1.4;
+  text-wrap: balance;
+}
+
+@media (max-width: 600px) {
+  #invitation-content h1 { font-size: clamp(44px, 12vw, 60px); }
+  #invitation-content h2 { font-size: clamp(30px, 8.5vw, 40px); }
+  #invitation-content .event-card h3 { font-size: 28px; }
+  #invitation-content .rsvp-copy h2 { font-size: 32px; }
+  #invitation-content .intro { font-size: 14px; }
+  #invitation-content .family .muted { font-size: 12px; }
+  #invitation-content .invitation-quote { font-size: 16px; }
 }

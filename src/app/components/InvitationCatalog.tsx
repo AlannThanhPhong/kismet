@@ -26,9 +26,9 @@ export default function InvitationCatalog() {
     for (let attempt = 0; attempt < 3; attempt++) {
       try {
         const response = await fetch("/api/invitations", { cache: "no-store", signal: AbortSignal.timeout(15000) });
-        if (!response.ok) throw new Error("Không thể tải danh sách thiệp.");
+        if (!response.ok) throw new Error("Không thể tải danh sách thiệp");
         const data: InvitationSummary[] = await response.json();
-        if (!Array.isArray(data)) throw new Error("Danh sách thiệp không hợp lệ.");
+        if (!Array.isArray(data)) throw new Error("Danh sách thiệp không hợp lệ");
         setDatabaseConnected(response.headers.get("X-MongoDB-Status") !== "unconfigured");
         setItems(data);
         setLoaded(true);
@@ -48,13 +48,13 @@ export default function InvitationCatalog() {
       <div className="invitation-catalog-heading" data-reveal>
         <div>
           <p className="section-kicker">01 / NHỮNG LỜI MỜI ĐÃ ĐƯỢC VIẾT</p>
-          <h2 id="catalog-title">Hai người. Một ngày.<br /><em>Một chuyện tình để nhớ.</em></h2>
+          <h2 id="catalog-title">Hai người Một ngày<br /><em>Một chuyện tình để nhớ</em></h2>
         </div>
-        <div className="catalog-aside"><p>Mỗi chiếc thiệp là một thế giới nhỏ.<br />Mở ra, và ghé vào ngày vui của hai bạn.</p><span>{!loaded ? "…" : failed ? "—" : items.length.toString().padStart(2, "0")} CHUYỆN TÌNH <Heart size={12} /></span></div>
+        <div className="catalog-aside"><p>Mỗi chiếc thiệp là một thế giới nhỏ<br />Mở ra, và ghé vào ngày vui của hai bạn</p><span>{!loaded ? "…" : failed ? "—" : items.length.toString().padStart(2, "0")} CHUYỆN TÌNH <Heart size={12} /></span></div>
       </div>
       {items.length ? (
         <>
-        {!databaseConnected && <p className="invitation-catalog-empty">Bạn đang xem thiệp mẫu.</p>}
+        {!databaseConnected && <p className="invitation-catalog-empty">Bạn đang xem thiệp mẫu</p>}
         <div className="invitation-catalog-grid">
           {items.map((item, index) => (
             <a className="invitation-list-card" href={`/thiep/${encodeURIComponent(item.code)}`} key={item.code}>
@@ -79,7 +79,7 @@ export default function InvitationCatalog() {
         <div className="catalog-loading" role="status"><span className="sr-only">Đang tải những tấm thiệp…</span><div /><div /></div>
       ) : (
         <p className="invitation-catalog-empty" role="status">
-          {failed ? "Chưa tải được danh sách thiệp. Bạn thử lại nhé." : "Chưa có thiệp nào."}
+          {failed ? "Chưa tải được danh sách thiệp Bạn thử lại nhé" : "Chưa có thiệp nào"}
           {failed && <button type="button" className="invitation-retry" onClick={() => void loadInvitations()}>Tải lại</button>}
         </p>
       )}

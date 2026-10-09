@@ -12,7 +12,7 @@ export default function TestimonialsSection() {
       date: "Tháng 01 / 2026",
       avatar: "/wedding-invitations/20260110-NHVVAM/images/photo_2026-10-08_13-24-23.jpg",
       quote:
-        "Tụi mình chọn mẫu Hong Kong 1999 vì yêu nét điện ảnh cổ điển. Bạn bè ai mở link thiệp cũng bất ngờ vì nhạc tự động phát và hiệu ứng hạt phim quá nghệ thuật. Bố mẹ và họ hàng ở xa cũng tấm tắc khen vì xem bản đồ chỉ đường rất rõ ràng.",
+        "Tụi mình chọn mẫu Hong Kong 1999 vì yêu nét điện ảnh cổ điển Bạn bè ai mở link thiệp cũng bất ngờ vì nhạc tự động phát và hiệu ứng hạt phim quá nghệ thuật Bố mẹ và họ hàng ở xa cũng tấm tắc khen vì xem bản đồ chỉ đường rất rõ ràng",
     },
     {
       couple: "Kim Hiên & Văn Tài",
@@ -21,7 +21,7 @@ export default function TestimonialsSection() {
       date: "Tháng 10 / 2026",
       avatar: "/wedding-invitations/20261027-KHVT/images/0V7A7519-800.webp",
       quote:
-        "Cực kỳ ấn tượng với tính năng RSVP xác nhận tham dự. Tụi mình tính toán chính xác được số lượng khách đi tiệc để đặt bàn cưới không bị lãng phí. Thiệp mở trên điện thoại vuốt siêu mượt, hình ảnh cưới sắc nét từng chi tiết.",
+        "Cực kỳ ấn tượng với tính năng RSVP xác nhận tham dự Tụi mình tính toán chính xác được số lượng khách đi tiệc để đặt bàn cưới không bị lãng phí Thiệp mở trên điện thoại vuốt siêu mượt, hình ảnh cưới sắc nét từng chi tiết",
     },
   ];
 
@@ -31,10 +31,10 @@ export default function TestimonialsSection() {
         <p className="section-kicker">07 / CHUYỆN TÌNH TỪ CÁC CẶP ĐÔI</p>
         <h2 id="testi-title">
           Những lời thương chân thành<br />
-          <em>đã được gửi trao trọn vẹn.</em>
+          <em>đã được gửi trao trọn vẹn</em>
         </h2>
         <p className="section-subheading">
-          Hạnh phúc lớn nhất của kIsmet love là được đồng hành cùng Dâu Rể trong thời khắc thiêng liêng nhất của cuộc đời.
+          Hạnh phúc lớn nhất của kIsmet love là được đồng hành cùng Dâu Rể trong thời khắc thiêng liêng nhất của cuộc đời
         </p>
       </div>
 

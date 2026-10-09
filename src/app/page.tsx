@@ -9,7 +9,7 @@ import "./mood-white.css";
 import "./home-background.css";
 
 const title = "kIsmet love — Thiệp cưới online theo cách của hai bạn";
-const description = "Tạo thiệp cưới online thật riêng, gửi lời mời thật gần. Thiết kế tinh tế, RSVP tiện lợi và lưu giữ khoảnh khắc của hai bạn cùng kIsmet love.";
+const description = "Tạo thiệp cưới online thật riêng, gửi lời mời thật gần Thiết kế tinh tế, RSVP tiện lợi và lưu giữ khoảnh khắc của hai bạn cùng kIsmet love";
 
 export const metadata: Metadata = {
   title,

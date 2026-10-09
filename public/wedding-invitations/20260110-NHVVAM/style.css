@@ -89,6 +89,7 @@ dialog{background:#210707;color:var(--cream);border:1px solid var(--line);paddin
 .gallery-ending-portraits{display:flex;flex-direction:column;gap:16px;min-width:0}
 .gallery-ending-copy{align-self:center;text-align:center;font-family:var(--serif);font-size:clamp(16px,1.6vw,23px);line-height:1.55;color:var(--cream)}
 .gallery-ending-copy:first-child{text-align:left}
+.gallery-ending-copy:last-child{text-align:left}
 .gallery-ending-copy p+p{margin-top:14px}
 .gallery-ending-copy em{font-weight:400;color:var(--cream)}
 .gallery-item img.gallery-crop-right{aspect-ratio:2/3;object-fit:cover;object-position:right center}
@@ -97,6 +98,36 @@ dialog{background:#210707;color:var(--cream);border:1px solid var(--line);paddin
 @media(max-width:600px){.gallery-ending{column-gap:18px}.gallery-ending-right{gap:14px}.gallery-ending-portraits{gap:10px}.gallery-ending-copy{font-size:11px;line-height:1.5}.gallery-ending-copy p+p{margin-top:10px}.gallery-ending .gallery-item>span{font-size:5px;letter-spacing:.1px;line-height:1.7}}
 
 /* Keep the full photograph visible in every invitation layout. */
+.invitation-arrow{
+  display:inline-block;
+  width:1.15em;
+  height:1.15em;
+  min-width:12px;
+  min-height:12px;
+  vertical-align:-.2em;
+  flex-shrink:0;
+  color:var(--gold);
+}
+.gold-button .invitation-arrow,.event-card.featured .invitation-arrow{color:inherit}
+@media(max-width:600px){
+  .gallery > .gallery-mobile-centered{
+    grid-column:1/-1;
+    justify-self:center;
+    width:70%;
+  }
+}
+.hero-copy .hero-footnote{
+  max-width:100%;
+  margin-top:12px;
+  padding:14px 22px;
+  border:1px solid var(--gold);
+  border-radius:16px;
+  font-family:var(--serif);
+  font-size:clamp(20px,1.8vw,26px);
+  line-height:1.5;
+  letter-spacing:0;
+  color:var(--gold);
+}
 .hero-picture{display:flex;flex-direction:column;justify-content:center;background:var(--deep)}
 .hero-picture:after{display:none}
 .hero-picture .photo-caption{position:static;padding:20px 28px}

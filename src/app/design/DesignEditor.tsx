@@ -35,7 +35,7 @@ function Editor({ item }: { item: ReturnType<typeof getCatalog>[number] }) {
 
   useEffect(() => {
     try { const value: unknown = JSON.parse(localStorage.getItem(key) ?? "null"); if (validDraft(value)) setDraft(value); }
-    catch { setSaveMessage("Không thể đọc bản nháp trên thiết bị."); }
+    catch { setSaveMessage("Không thể đọc bản nháp trên thiết bị"); }
     setReady(true);
   }, [key]);
   useEffect(() => {
@@ -43,7 +43,7 @@ function Editor({ item }: { item: ReturnType<typeof getCatalog>[number] }) {
     setSaveMessage("Đang lưu trên thiết bị…");
     const timer = setTimeout(() => {
       try { localStorage.setItem(key, JSON.stringify(draft)); setSaveMessage("Đã lưu trên thiết bị"); }
-      catch { setSaveMessage("Không thể lưu. Hãy tải SVG để giữ thiết kế."); }
+      catch { setSaveMessage("Không thể lưu Hãy tải SVG để giữ thiết kế"); }
     }, 450);
     return () => clearTimeout(timer);
   }, [draft, ready, key]);
@@ -57,7 +57,7 @@ function Editor({ item }: { item: ReturnType<typeof getCatalog>[number] }) {
         const result = await response.json();
         if (!response.ok) throw new Error(result.error);
         if (!controller.signal.aborted) { dirty.current = false; setCloudMessage("Đã tự lưu lên đám mây"); }
-      } catch (error) { if (!controller.signal.aborted) setCloudMessage(error instanceof Error ? error.message : "Chưa thể đồng bộ."); }
+      } catch (error) { if (!controller.signal.aborted) setCloudMessage(error instanceof Error ? error.message : "Chưa thể đồng bộ"); }
     }, 1200);
     return () => { clearTimeout(timer); controller.abort(); };
   }, [draft, ready, cloudEnabled, item.id]);
@@ -99,11 +99,11 @@ function Editor({ item }: { item: ReturnType<typeof getCatalog>[number] }) {
     try {
       const response = await fetch(`/api/designs/${item.id}`, action === "save" ? { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(draft) } : { cache: "no-store" });
       const result = await response.json();
-      if (!response.ok) throw new Error(result.error ?? "Chưa thể đồng bộ. Vui lòng thử lại.");
-      if (latestDraft.current !== sentDraft) { setCloudMessage("Thiết kế vừa thay đổi. Hãy lưu bản mới để đồng bộ."); return; }
-      if (action === "load") { if (!validDraft(result.draft)) throw new Error("Bản nháp không hợp lệ."); setDraft(result.draft); setSelected(result.draft.layers.find((layer: InvitationLayer) => layer.side === side)?.id ?? ""); }
+      if (!response.ok) throw new Error(result.error ?? "Chưa thể đồng bộ Vui lòng thử lại");
+      if (latestDraft.current !== sentDraft) { setCloudMessage("Thiết kế vừa thay đổi Hãy lưu bản mới để đồng bộ"); return; }
+      if (action === "load") { if (!validDraft(result.draft)) throw new Error("Bản nháp không hợp lệ"); setDraft(result.draft); setSelected(result.draft.layers.find((layer: InvitationLayer) => layer.side === side)?.id ?? ""); }
       dirty.current = false; setCloudEnabled(true); setCloudMessage(action === "save" ? "Đã lưu lên đám mây · Tự lưu đã bật" : "Đã tải bản nháp từ đám mây");
-    } catch (error) { setCloudMessage(error instanceof Error ? error.message : "Kết nối bị gián đoạn."); }
+    } catch (error) { setCloudMessage(error instanceof Error ? error.message : "Kết nối bị gián đoạn"); }
     finally { setCloudLoading(false); }
   }
   return <main className="design-studio">
@@ -116,7 +116,7 @@ function Editor({ item }: { item: ReturnType<typeof getCatalog>[number] }) {
         <div className="ds-fields"><label>Cỡ chữ<input type="number" min={8} max={80} value={current.size} onChange={event => update({ size: Math.max(8, Math.min(80, Number(event.target.value) || 8)) })} /></label><label>Màu chữ<input type="color" value={current.color} onChange={event => update({ color: event.target.value })} /></label></div>
         <div className="ds-fields"><label>Vị trí ngang<input type="number" min={0} max={400} value={Math.round(current.x)} onChange={event => update({ x: Math.max(0, Math.min(400, Number(event.target.value))) })} /></label><label>Vị trí dọc<input type="number" min={0} max={540} value={Math.round(current.y)} onChange={event => update({ y: Math.max(0, Math.min(540, Number(event.target.value))) })} /></label></div>
         <button className="ds-delete" disabled={draft.layers.length <= 1} onClick={() => { change(value => ({ ...value, layers: value.layers.filter(layer => layer.id !== selected) })); setSelected(""); }}><Trash2 size={14} /> Xóa lớp chữ</button>
-      </> : <p>Chọn một dòng chữ trên thiệp hoặc trong danh sách lớp để chỉnh sửa.</p>}
+      </> : <p>Chọn một dòng chữ trên thiệp hoặc trong danh sách lớp để chỉnh sửa</p>}
         <label>Màu nền<input type="color" value={draft.background} onChange={event => change(value => ({ ...value, background: event.target.value }))} /></label>
         <div className="ds-palette">{["#FBF6F3", "#D1C4B8", "#B7A895", "#D1D9C8", "#EFC7C2"].map(color => <button key={color} aria-label={`Nền ${color}`} style={{ background: color }} onClick={() => change(value => ({ ...value, background: color }))} />)}</div>
         <button className="ds-outline" onClick={add} disabled={draft.layers.length >= 40}><Plus size={15} /> Thêm chữ</button>
@@ -125,8 +125,8 @@ function Editor({ item }: { item: ReturnType<typeof getCatalog>[number] }) {
         <div className="ds-canvas-scroll"><div ref={canvas} className="ds-canvas" style={{ width: 360 * zoom }} onPointerMove={move} onPointerUp={() => { drag.current = null; }} onPointerCancel={() => { drag.current = null; }}><InvitationArtwork item={item} layers={draft.layers} side={side} background={draft.background} selected={selected} onSelect={setSelected} onPointerDown={pointer} /></div></div><p className="ds-hint">Chạm vào chữ để chọn · Kéo chữ để đổi vị trí · Sửa nội dung ở bảng bên trái</p>
       </section>
       <aside className="ds-panel ds-layers"><p className="ws-kicker"><Layers size={13} /> CÁC LỚP THIẾT KẾ</p><h2>{side === "front" ? "Mặt trước" : "Mặt sau"}</h2><div className="ds-layer-list">{draft.layers.filter(layer => layer.side === side).map(layer => <button key={layer.id} aria-pressed={selected === layer.id} onClick={() => setSelected(layer.id)}><span>T</span>{layer.text || "Chữ trống"}</button>)}</div>
-        <div className="ds-cloud"><h3>Bản nháp đám mây</h3><p>Bản nháp gắn với phiên trình duyệt này. Lưu trước khi tải lại để giữ thay đổi.</p><button className="ds-outline" disabled={!ready || cloudLoading} onClick={() => cloud("save")}>Lưu lên đám mây</button><button className="ds-outline" disabled={!ready || cloudLoading || dirty.current} onClick={() => cloud("load")}>Tải bản đã lưu</button></div>
-        <button className="ds-outline" onClick={() => { change({ layers: initialLayers(item), background: item.background }); setSelected("front-1"); setSide("front"); }}><RotateCcw size={14} /> Dùng lại bố cục gốc</button><p className="ds-note">SVG là thiệp tĩnh. Chọn Standard hoặc Premium trong kho mẫu nếu cần website có RSVP, nhạc và bản đồ.</p>
+        <div className="ds-cloud"><h3>Bản nháp đám mây</h3><p>Bản nháp gắn với phiên trình duyệt này Lưu trước khi tải lại để giữ thay đổi</p><button className="ds-outline" disabled={!ready || cloudLoading} onClick={() => cloud("save")}>Lưu lên đám mây</button><button className="ds-outline" disabled={!ready || cloudLoading || dirty.current} onClick={() => cloud("load")}>Tải bản đã lưu</button></div>
+        <button className="ds-outline" onClick={() => { change({ layers: initialLayers(item), background: item.background }); setSelected("front-1"); setSide("front"); }}><RotateCcw size={14} /> Dùng lại bố cục gốc</button><p className="ds-note">SVG là thiệp tĩnh Chọn Standard hoặc Premium trong kho mẫu nếu cần website có RSVP, nhạc và bản đồ</p>
       </aside>
     </div>
   </main>;

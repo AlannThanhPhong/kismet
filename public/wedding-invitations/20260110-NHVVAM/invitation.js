@@ -68,16 +68,8 @@
       opening.hidden = true;
       content.inert = false;
       document.body.classList.remove('intro-locked');
-      document.getElementById('view-invitation').focus({ preventScroll: true });
+      document.getElementById('couple-name').focus({ preventScroll: true });
     }
-  });
-
-  document.getElementById('view-invitation').addEventListener('click', (event) => {
-    event.preventDefault();
-    // Start playback within the tap gesture before moving to the invitation.
-    void playMusic();
-    history.replaceState(null, '', '#loi-moi');
-    document.getElementById('loi-moi').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
   });
 
   document.getElementById('save-date').addEventListener('click', () => {
@@ -86,7 +78,7 @@
       'UID:20260110-NHVVAM@mo-wedding', 'DTSTAMP:20260101T000000Z', 'DTSTART:20260110T100000Z', 'DTEND:20260110T140000Z',
       'SUMMARY:Tiệc cưới Huyền Vy & Anh Minh',
       'LOCATION:Victory – Sảnh Valentine\\, 12 Mai Hắc Đế\\, Buôn Ma Thuột\\, Đắk Lắk',
-      'DESCRIPTION:Đón khách 17:00. Làm lễ 17:30. Khai tiệc 17:45. Giờ Việt Nam.',
+      'DESCRIPTION:Đón khách 17:00 Làm lễ 17:30 Khai tiệc 17:45 Giờ Việt Nam',
       'END:VEVENT', 'END:VCALENDAR', '',
     ].join('\r\n');
     const url = URL.createObjectURL(new Blob([calendar], { type: 'text/calendar;charset=utf-8' }));
@@ -127,7 +119,7 @@
     event.preventDefault();
     const data = new FormData(form);
     const guestName = String(data.get('guestName') || '').trim();
-    if (!guestName) { document.getElementById('guest-name').focus(); status.textContent = 'Bạn điền tên trước khi gửi nhé.'; status.dataset.error = 'true'; return; }
+    if (!guestName) { document.getElementById('guest-name').focus(); status.textContent = 'Bạn điền tên trước khi gửi nhé'; status.dataset.error = 'true'; return; }
     submit.disabled = true; status.dataset.error = 'false'; status.textContent = 'Đang gửi lời hồi âm…';
     try {
       const response = await fetch(`/api/invitations/${code}/rsvps`, {
@@ -135,12 +127,12 @@
         body: JSON.stringify({ guestName, attending: data.get('attending') === 'true', guestCount: Number(data.get('guestCount')), message: String(data.get('message') || '').trim() }),
       });
       const result = await response.json();
-      if (!response.ok) throw new Error(result.error || 'Chưa gửi được lời hồi âm. Bạn thử lại nhé.');
-      status.textContent = 'Đã gửi lời hồi âm. Cảm ơn bạn đã dành tình cảm cho chúng mình!';
+      if (!response.ok) throw new Error(result.error || 'Chưa gửi được lời hồi âm Bạn thử lại nhé');
+      status.textContent = 'Đã gửi lời hồi âm Cảm ơn bạn đã dành tình cảm cho chúng mình!';
       form.reset(); countField.hidden = false;
     } catch (error) {
       status.dataset.error = 'true';
-      status.textContent = error.name === 'TimeoutError' ? 'Kết nối mất nhiều thời gian. Bạn thử gửi lại nhé.' : error.message || 'Chưa gửi được lời hồi âm. Bạn thử lại nhé.';
+      status.textContent = error.name === 'TimeoutError' ? 'Kết nối mất nhiều thời gian Bạn thử gửi lại nhé' : error.message || 'Chưa gửi được lời hồi âm Bạn thử lại nhé';
     } finally { submit.disabled = false; }
   });
 })();
