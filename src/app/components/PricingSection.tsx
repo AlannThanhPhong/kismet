@@ -2,18 +2,19 @@
 
 import { Check, Gift, Heart, Sparkles, Star } from "lucide-react";
 import { packageAmount, packagePrice, type PricingCurrency } from "@/lib/pricing";
+import ConsultationButton from "./ConsultationButton";
 
 export default function PricingSection({ currency }: { currency: PricingCurrency }) {
   const packages = [
     {
       id: "standard",
-      name: "GÓI TIÊU CHUẨN",
+      name: "Basic",
       subtitle: "Gói Thương",
       price: packageAmount("standard", currency),
-      sampleLabel: "Mẫu thiệp sẽ bổ sung sau",
-      sampleUrl: null,
+      sampleLabel: "Xem mẫu Basic & Thử ảnh",
+      sampleUrl: "/thu-thiep?package=standard",
       period: "đ / trọn gói",
-      badge: null,
+      badge: "BASIC",
       isPopular: false,
       description: "Phù hợp cho đám cưới đơn giản, đầy đủ các tính năng cơ bản cần thiết.",
       features: [
@@ -25,23 +26,17 @@ export default function PricingSection({ currency }: { currency: PricingCurrency
         "Form RSVP nhận xác nhận tham dự",
         "Hỗ trợ chỉnh sửa thông tin 02 lần",
       ],
-      notIncluded: [
-        "Lưu trữ trọn đời",
-        "Tích hợp Video cưới",
-        "Link mời đích danh từng khách",
-        "Tặng thiết kế Logo Monogram riêng",
-      ],
-      ctaText: "Chọn gói Tiêu Chuẩn",
+      ctaText: "Chọn gói Basic",
     },
     {
       id: "premium",
-      name: "GÓI NÂNG CAO",
-      subtitle: "Gói Chung Đôi",
+      name: "Standard",
+      subtitle: "Gói Chung Đôi (Mẫu KHVT)",
       price: packageAmount("premium", currency),
       sampleLabel: "Xem mẫu Kim Hiên & Văn Tài",
       sampleUrl: "/thiep/20261027-KHVT",
       period: "đ / trọn gói",
-      badge: "GÓI NÂNG CAO",
+      badge: "PHỔ BIẾN NHẤT",
       isPopular: true,
       description: "Trải nghiệm hoàn hảo nhất cho ngày cưới với đầy đủ tiện ích và lưu giữ trong 2 năm.",
       features: [
@@ -54,52 +49,49 @@ export default function PricingSection({ currency }: { currency: PricingCurrency
         "🎁 TẶNG THIẾT KẾ LOGO TÊN DÂU & RỂ RIÊNG",
         "Chỉnh sửa không giới hạn đến ngày cưới",
       ],
-      notIncluded: [],
-      ctaText: "Chọn gói Chung Đôi",
+      ctaText: "Chọn gói Standard",
     },
     {
       id: "bespoke",
-      name: "GÓI MAY ĐO ĐỘC BẢN",
+      name: "Premium",
       subtitle: "Gói Vĩnh Cửu",
       price: packageAmount("bespoke", currency),
-      sampleLabel: "Mẫu thiệp sẽ bổ sung sau",
+      sampleLabel: "Liên hệ studio để xem mẫu Premium",
       sampleUrl: null,
       period: "đ / trọn gói",
-      badge: "THIẾT KẾ RIÊNG 1-1",
+      badge: "ĐỘC BẢN",
       isPopular: false,
-      description: "Dành cho các cặp đôi muốn một chiếc thiệp độc nhất vô nhị theo câu chuyện tình yêu.",
+      description: "Dành cho các cặp đôi muốn một chiếc thiệp độc nhất vô nhị theo câu chuyện tình yêu riêng.",
       features: [
-        "Toàn bộ đặc quyền của Gói Chung Đôi",
+        "Toàn bộ đặc quyền của gói Standard",
         "LƯU TRỮ VĨNH VIỄN TRỌN ĐỜI",
         "RSVP thông minh + Bảng tổng hợp lời chúc real-time",
         "Designer thiết kế giao diện độc quyền theo yêu cầu 1-1",
         "Tùy biến tone màu, layout & font chữ riêng biệt",
-        "Hiệu ứng đặc biệt (Hạt phim, cánh hoa rơi, pháo hoa)",
+        "Hiệu ứng đặc biệt (Hạt phim, hoạt họa intro, pháo hoa)",
         "Ưu tiên hoàn thiện siêu tốc trong 12 giờ",
         "Chăm sóc riêng 24/7 suốt mùa cưới",
       ],
-      notIncluded: [],
-      ctaText: "Tư vấn gói May Đo Độc Bản",
+      ctaText: "Tư vấn gói Premium",
     },
     {
       id: "custom",
-      name: "GÓI CUSTOM",
+      name: "Customized",
       subtitle: "Theo nhu cầu của bạn",
       price: "Liên hệ",
-      sampleLabel: "Xem mẫu Huyền Vy & Anh Minh",
+      sampleLabel: "Xem dự án Huyền Vy & Anh Minh",
       sampleUrl: "/thiep/20260110-NHVVAM",
       period: "Báo giá theo yêu cầu",
       badge: null,
       isPopular: false,
-      description: "Thiết kế và tính năng được tư vấn riêng theo nhu cầu, phong cách và ngân sách của khách hàng.",
+      description: "Thiết kế và tính năng được tư vấn riêng theo nhu cầu, phong cách và ngân sách của hai bạn.",
       features: [
         "Tư vấn ý tưởng và phong cách thiệp riêng",
         "Tùy chỉnh giao diện theo yêu cầu",
         "Thống nhất tính năng và nội dung cần có",
         "Báo giá theo phạm vi thực hiện",
       ],
-      notIncluded: [],
-      ctaText: "Tư vấn gói Custom",
+      ctaText: "Tư vấn gói Customized",
     },
   ];
 
@@ -112,7 +104,7 @@ export default function PricingSection({ currency }: { currency: PricingCurrency
           <em>đầu tư nhỏ cho kỷ niệm lớn.</em>
         </h2>
         <p className="section-subheading">
-          Ba gói trọn gói {packagePrice("standard", currency)}, {packagePrice("premium", currency)}, {packagePrice("bespoke", currency)} và gói Custom theo nhu cầu.
+          Basic {packagePrice("standard", currency)}, Standard {packagePrice("premium", currency)}, Premium {packagePrice("bespoke", currency)} và Customized báo giá theo nhu cầu.
           Chọn gói phù hợp để lưu giữ khoảnh khắc của hai bạn.
         </p>
       </div>
@@ -161,22 +153,16 @@ export default function PricingSection({ currency }: { currency: PricingCurrency
                     <span>{feat}</span>
                   </li>
                 ))}
-                {pkg.notIncluded.map((feat, i) => (
-                  <li key={i} className="feat-unavailable">
-                    <span className="feat-dash">—</span>
-                    <span>{feat}</span>
-                  </li>
-                ))}
               </ul>
             </div>
 
             <div className="pricing-card-cta">
-              <a
-                href="#bat-dau"
+              <ConsultationButton
+                packageName={pkg.name}
                 className={`button ${pkg.isPopular ? "button-wine btn-glow" : "button-outline"}`}
               >
                 {pkg.ctaText} ↗
-              </a>
+              </ConsultationButton>
             </div>
           </article>
         ))}

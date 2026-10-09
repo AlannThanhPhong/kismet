@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ArrowUp, Heart, Phone, Sparkles } from "lucide-react";
+import ConsultationButton from "./ConsultationButton";
 
 export default function FloatingBar() {
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -10,6 +11,7 @@ export default function FloatingBar() {
     const checkScroll = () => {
       setShowScrollTop(window.scrollY > 400);
     };
+    checkScroll();
     window.addEventListener("scroll", checkScroll, { passive: true });
     return () => window.removeEventListener("scroll", checkScroll);
   }, []);
@@ -22,15 +24,14 @@ export default function FloatingBar() {
     <>
       {/* Mobile Sticky Bottom Action Bar */}
       <nav className="mobile-bottom-action-bar" aria-label="Thao tác nhanh trên điện thoại">
-        <a
-          href="tel:0827274387"
+        <ConsultationButton
           className="bottom-bar-action bar-action-phone"
         >
           <span className="action-icon-pill phone-bg">
             <Phone size={18} />
           </span>
           <span>Gọi tư vấn</span>
-        </a>
+        </ConsultationButton>
 
         <a href="#kho-mau-thiep" className="bottom-bar-action bar-action-templates">
           <span className="action-icon-pill heart-bg">
@@ -39,7 +40,7 @@ export default function FloatingBar() {
           <span>Kho Mẫu Thiệp</span>
         </a>
 
-        <a href="#bat-dau" className="bottom-bar-action bar-action-primary">
+        <a href="/thu-thiep" className="bottom-bar-action bar-action-primary">
           <span className="action-icon-pill primary-bg">
             <Sparkles size={18} />
           </span>
@@ -49,16 +50,14 @@ export default function FloatingBar() {
 
       {/* Floating Action Buttons (Desktop & Tablet) */}
       <aside className="desktop-floating-actions" aria-label="Hỗ trợ trực tuyến">
-        <a
-          href="tel:0827274387"
+        <ConsultationButton
           className="floating-btn floating-phone"
-          aria-label="Gọi tư vấn: 0827274387"
-          title="Gọi tư vấn: 0827274387"
         >
           <Phone size={22} />
-          <span className="floating-tooltip">Gọi tư vấn</span>
+          <span className="sr-only">Chọn số điện thoại tư vấn</span>
+          <span className="floating-tooltip" aria-hidden="true">Gọi tư vấn</span>
           <span className="phone-ping-pulse" aria-hidden="true" />
-        </a>
+        </ConsultationButton>
 
         {showScrollTop && (
           <button
