@@ -51,48 +51,134 @@ musicToggle.addEventListener('click', () => {
 });
 
 const balloonColors = ['#f7ce46', '#eebc30', '#ffe58a', '#27ad64', '#3f8751', '#95c868'];
-const balloonFragment = document.createDocumentFragment();
-for (let row = 0; row < 16; row += 1) {
-  for (let column = 0; column < 12; column += 1) {
-    const balloon = document.createElement('span');
-    balloon.className = 'opening-balloon';
-    balloon.style.cssText = `--x:${column * 9.5 - 6 + Math.random() * 2}vw;--y:0;--color:${balloonColors[Math.floor(Math.random() * balloonColors.length)]};--delay:${row * 0.1 + Math.random() * 0.025}s;--tilt:${Math.random() * 24 - 12}deg;--drift:${Math.random() * 6 - 3}vw;`;
-    balloonFragment.appendChild(balloon);
-  }
-}
-balloonLayer.appendChild(balloonFragment);
+const flightAssets = ['balloon-bouquet-photo.webp', 'flight-cloud-photo.webp', 'flight-sky-photo.webp'];
+const flightReady = Promise.all(flightAssets.map(src => {
+  const image = new Image();
+  image.src = src;
+  return image.decode().catch(() => {});
+}));
 
-openingPlay.addEventListener('click', () => {
+openingPlay.addEventListener('click', async () => {
   if (openingStarted) return;
   openingStarted = true;
   // Call play synchronously within the click so audio starts with this gesture.
-  playMusic();
+  void playMusic();
   openingPlay.disabled = true;
-  openingPlay.setAttribute('aria-label', 'Đang phát ONLY — LeeHi và mở thiệp');
-  openingScreen.classList.add('is-playing');
-  balloonLayer.classList.add('is-rising');
-
-  window.setTimeout(() => {
+  openingPlay.setAttribute('aria-label', 'Đang mở thiệp');
+  document.querySelector('.opening-hint').textContent = 'Cùng bay lên với chúng mình…';
+  const animations = [];
+  function move(element, frames, duration, easing = 'ease-in-out', iterations = 1) {
+    const animation = element.animate(frames, { duration, easing, iterations, fill: 'forwards' });
+    animations.push(animation);
+    return animation.finished;
+  }
+  function reveal() {
     openingScreen.hidden = true;
     document.body.classList.remove('invitation-closed');
     document.body.classList.add('invitation-opening');
     window.scrollTo(0, 0);
-  }, reducedMotion ? 200 : 1000);
-
-  window.setTimeout(() => {
     invitationContent.classList.add('is-revealing');
-  }, reducedMotion ? 250 : 1900);
-
-  window.setTimeout(() => {
-    balloonLayer.replaceChildren();
+  }
+  try {
+    // Bound the decode wait so a slow image never leaves the invitation locked.
+    let decodeTimeout;
+    await Promise.race([flightReady, new Promise(resolve => { decodeTimeout = setTimeout(resolve, 4500); })]);
+    clearTimeout(decodeTimeout);
+    balloonLayer.innerHTML = '<div class="flight-sky"></div><div class="flight-bouquet"><img src="balloon-bouquet-photo.webp" alt="" width="841" height="1870"></div><div class="flight-veil"></div>';
+    const sky = balloonLayer.querySelector('.flight-sky');
+    const bouquet = balloonLayer.querySelector('.flight-bouquet');
+    const veil = balloonLayer.querySelector('.flight-veil');
+    const width = innerWidth;
+    const height = innerHeight;
+    function cloud(x, y, size, kind) {
+      const element = document.createElement('div');
+      element.className = `flight-cloud is-${kind}`;
+      element.style.cssText = `left:${x}px;top:${y}px;width:${size}px;height:${size * 2 / 3}px`;
+      balloonLayer.appendChild(element);
+      return element;
+    }
+    const distant = [-.35, .55, -.15].map((x, index) => cloud(width * x, -height * (.7 + index * .4), width * (.8 + index * .2), 'distant'));
+    const bankSize = Math.max(width * 1.45, height * 1.2);
+    const banks = Array.from({ length: 6 }, (_, index) => cloud(
+      width / 2 - bankSize / 2 + (index % 2 ? .18 : -.18) * width,
+      height * (Math.floor(index / 2) * .38 - .32), bankSize, 'cover',
+    ));
+    openingScreen.classList.add('is-departing');
+    balloonLayer.classList.add('is-rising');
+    if (reducedMotion) {
+      await move(veil, [{ opacity: 0 }, { opacity: 1 }], 180);
+      reveal();
+      await move(veil, [{ opacity: 1 }, { opacity: 0 }], 250);
+    } else {
+      // Gentle wind sway runs independently of the camera's upward motion.
+      void move(bouquet.querySelector('img'), [
+        { transform: 'rotate(-2deg)' }, { transform: 'rotate(2deg)' }, { transform: 'rotate(-2deg)' },
+      ], 3800, 'ease-in-out', 3).catch(() => {});
+      balloonLayer.dataset.stage = 'rising';
+      await Promise.all([
+        move(sky, [{ opacity: 0 }, { opacity: 1 }], 900),
+        move(bouquet, [
+          { transform: 'translate(-50%, 100svh) scale(.94)' },
+          { transform: 'translate(-50%, -50%) scale(1)' },
+        ], 2200, 'cubic-bezier(.22,.55,.3,1)'),
+      ]);
+      openingScreen.hidden = true;
+      balloonLayer.dataset.stage = 'tracking';
+      await Promise.all([
+        move(sky, [{ transform: 'translateY(0)' }, { transform: 'translateY(25%)' }], 3000, 'linear'),
+        move(bouquet, [
+          { transform: 'translate(-50%, -50%) scale(1)' },
+          { transform: 'translate(-48%, -57%) scale(.97)' },
+        ], 3000),
+        ...distant.map((element, index) => move(element, [
+          { transform: 'translateY(0)', opacity: 0 },
+          { opacity: .48, offset: .2 },
+          { transform: `translateY(${height * (1.35 + index * .38)}px) scale(1.18)`, opacity: .65 },
+        ], 3000, 'linear')),
+      ]);
+      balloonLayer.dataset.stage = 'enveloping';
+      await Promise.all([
+        ...banks.map((element, index) => move(element, [
+          { transform: `translate(${index % 2 ? 12 : -12}%, -105svh) scale(.85)`, opacity: 0 },
+          { opacity: 1, offset: .3 },
+          { transform: 'translate(0, 0) scale(1.12)', opacity: 1 },
+        ], 1900, 'cubic-bezier(.25,.1,.25,1)')),
+        move(bouquet, [
+          { transform: 'translate(-48%, -57%) scale(.97)', opacity: 1 },
+          { transform: 'translate(-50%, -65%) scale(.88)', opacity: .65 },
+        ], 1900),
+        move(veil, [{ opacity: 0 }, { opacity: 0, offset: .65 }, { opacity: 1 }], 1900),
+      ]);
+      // The mist is now fully opaque before the balloons disappear beneath it.
+      balloonLayer.dataset.stage = 'covered';
+      bouquet.hidden = true;
+      sky.hidden = true;
+      distant.forEach(element => { element.hidden = true; });
+      reveal();
+      await move(veil, [{ opacity: 1 }, { opacity: 1 }], 350);
+      balloonLayer.dataset.stage = 'parting';
+      await Promise.all([
+        move(veil, [{ opacity: 1 }, { opacity: .25, offset: .55 }, { opacity: 0 }], 2100),
+        ...banks.map((element, index) => move(element, [
+          { transform: 'translate(0, 0) scale(1.12)', opacity: 1 },
+          { transform: `translate(${index % 2 ? 85 : -85}vw, ${index < 2 ? -35 : 35}svh) scale(1.3)`, opacity: 0 },
+        ], 2100, 'cubic-bezier(.25,0,.4,1)')),
+      ]);
+    }
+  } catch (error) {
+    console.warn('Opening animation interrupted', error);
+  } finally {
+    reveal();
     balloonLayer.hidden = true;
+    animations.forEach(animation => animation.cancel());
+    balloonLayer.replaceChildren();
     document.body.classList.remove('invitation-opening');
     invitationContent.inert = false;
     const title = document.querySelector('#couple-title');
     title.tabIndex = -1;
     title.focus({ preventScroll: true });
     celebrate();
-  }, reducedMotion ? 500 : 3150);
+  }
 });
 
 const lightbox = document.querySelector('.lightbox');

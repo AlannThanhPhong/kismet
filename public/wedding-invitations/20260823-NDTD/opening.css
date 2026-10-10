@@ -1,0 +1,81 @@
+/* Keep the full photograph proportional, including when browser chrome resizes. */
+.opening-screen {
+  isolation: isolate;
+  padding: 24px;
+  background-color: #f4f58b;
+  background-image: url('paper-grain.svg');
+}
+.opening-layout {
+  position: relative;
+  z-index: 1;
+  min-height: calc(100svh - 48px);
+  gap: 20px;
+}
+.opening-polaroid,
+.opening-player {
+  width: 100%;
+  min-width: 0;
+}
+.opening-polaroid p { overflow-wrap: anywhere; }
+.opening-polaroid > span { text-align: center; }
+.opening-polaroid { background: #fffde4; }
+.opening-polaroid > span { margin-top: 12px; }
+.opening-decoration { display: none; }
+
+@media (min-width: 700px) {
+  .opening-layout {
+    /* Fit the complete portrait and player on tall desktop screens. */
+    width: min(500px, max(280px, calc((100svh - 410px) * 1600 / 2401 + 40px)));
+  }
+  .opening-polaroid { padding: 18px 20px; }
+  .opening-polaroid h2 { font-size: 32px; }
+  .opening-polaroid p { font-size: 29px; margin-top: 12px; }
+  .opening-polaroid > span { font-size: 25px; }
+  .opening-player { padding: 18px 22px; }
+  .opening-track h3 { font-size: 18px; }
+  .opening-controls { margin-inline: 32px; gap: 20px; }
+  .opening-output { right: -32px; width: 28px; height: 28px; }
+}
+
+/* Fine botanical lines, ribbon bows and a double stationery border. */
+@media (min-width: 960px) {
+  .opening-decoration {
+    display: block;
+    position: fixed;
+    inset: 24px;
+    border: 1px solid #7d916650;
+    outline: 1px solid #7d916628;
+    outline-offset: -8px;
+    border-radius: 120px 120px 8px 8px;
+    pointer-events: none;
+  }
+  .opening-decoration::before,
+  .opening-decoration::after {
+    content: '';
+    position: absolute;
+    inset-block: 36px;
+    left: clamp(12px, 3vw, 60px);
+    width: clamp(160px, 19vw, 280px);
+    background: url('opening-botanical.svg') center / contain no-repeat;
+    opacity: .65;
+  }
+  .opening-decoration::after {
+    left: auto;
+    right: clamp(12px, 3vw, 60px);
+    transform: scaleX(-1);
+  }
+}
+
+@media (max-width: 480px) {
+  .opening-screen { padding: 20px; }
+  .opening-layout { min-height: calc(100svh - 40px); gap: 20px; }
+}
+
+@media (min-width: 700px) and (max-height: 820px) {
+  .opening-layout { gap: 14px; }
+  .opening-polaroid { padding-block: 14px; }
+  .opening-polaroid h2 { font-size: 28px; }
+  .opening-polaroid > span { font-size: 22px; margin-top: 8px; }
+  .opening-player { padding-block: 14px; }
+  .opening-track h3 { font-size: 16px; }
+}

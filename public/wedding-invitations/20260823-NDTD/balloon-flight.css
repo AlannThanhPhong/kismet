@@ -1,0 +1,16 @@
+/* Photographic layers move at different speeds to suggest camera altitude. */
+.balloon-layer { isolation:isolate; }
+.balloon-layer[hidden] { display:none; }
+.flight-sky { position:absolute;inset:-50% -12% -5%;background:#278eb9 url('flight-sky-photo.webp') center bottom / cover no-repeat;opacity:0; }
+.flight-bouquet { position:absolute;left:50%;top:50%;width:min(65vw,330px,31svh);transform:translate(-50%,110svh);z-index:1; }
+.flight-bouquet img { display:block;width:100%;height:auto;transform-origin:50% 85%; }
+.flight-cloud { position:absolute;opacity:0;background:url('flight-cloud-photo.webp') center / 100% 100% no-repeat; }
+.flight-cloud.is-distant { z-index:0;filter:blur(1px); }
+.flight-cloud.is-cover { z-index:2; }
+.flight-cloud.is-cover:nth-child(even) { filter:blur(2px); }
+.flight-veil { position:absolute;inset:-3%;z-index:3;background:linear-gradient(#ffffffb3,#f6faffc9),url('flight-cloud-photo.webp') 50% 65% / cover no-repeat,#f4f8fb;opacity:0; }
+.opening-screen.is-departing .opening-layout { opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .9s ease; }
+.invitation-opening .invitation-content { opacity:1;transition:none; }
+@media(prefers-reduced-motion:reduce) {
+  .opening-screen.is-departing .opening-layout { transition:none;transform:none; }
+}

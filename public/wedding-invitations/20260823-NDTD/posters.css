@@ -35,7 +35,10 @@
 .poster-pair .hero-script {
   top: 7%;
   font-size: 24cqw;
+  color: #fff;
+  text-shadow: 0 1px 8px #17281540;
 }
+.poster-pair .hero-photo::after { background: none; }
 .poster-pair .hero-script span { margin-top: 1.5cqw; }
 .poster-pair .hero h1 { font-size: 8cqw; }
 .poster-pair .hero .ampersand { margin: 0 .5cqw; }
@@ -50,7 +53,8 @@
   padding: 1.3cqw 3cqw;
 }
 .poster-pair .hero .open-link span { font-size: 4cqw; }
-.poster-pair .married-heading h2 { font-size: 33cqw; }
+.poster-pair .married-heading h2 { font-size: 33cqw; color: #ffff00; }
+.poster-pair .married-doodles { color: #ffff00; }
 .poster-pair .married-heading h2 em { font-size: .9em; }
 .poster-pair .married-heading > p:last-child { font-size: 2.7cqw; }
 .poster-pair .photo-label { font-size: 7cqw; }
