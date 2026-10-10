@@ -1,6 +1,15 @@
 // Information transcribed from each couple's supplied paper invitation.
 export const designedInvitations = [
   {
+    code: "20260823-NDTD",
+    slug: "20260823-NDTD",
+    displayTitle: "CHỈ CẦN LÀ EM",
+    couple: { partnerOne: "Ngọc Dung", partnerTwo: "Thanh Điền" },
+    event: { date: "2026-08-23T04:00:00.000Z", venue: "Tư gia", address: "139 Hồ Tùng Mậu, khóm Hòa Bình, phường Châu Đốc, tỉnh An Giang" },
+    template: "korean-garden-green",
+    coverImage: "/wedding-invitations/20260823-NDTD/images/web/hero.webp",
+  },
+  {
     code: "20261027-KHVT",
     slug: "20261027-KHVT",
     displayTitle: "NGÀY MÌNH CHUNG ĐÔI",

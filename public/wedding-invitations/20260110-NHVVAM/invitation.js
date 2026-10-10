@@ -74,7 +74,7 @@
 
   document.getElementById('save-date').addEventListener('click', () => {
     const calendar = [
-      'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Mo//Wedding Invitation//VI', 'CALSCALE:GREGORIAN', 'BEGIN:VEVENT',
+      'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//KISMET LOVE//Wedding Invitation//VI', 'CALSCALE:GREGORIAN', 'BEGIN:VEVENT',
       'UID:20260110-NHVVAM@mo-wedding', 'DTSTAMP:20260101T000000Z', 'DTSTART:20260110T100000Z', 'DTEND:20260110T140000Z',
       'SUMMARY:Tiệc cưới Huyền Vy & Anh Minh',
       'LOCATION:Victory – Sảnh Valentine\\, 12 Mai Hắc Đế\\, Buôn Ma Thuột\\, Đắk Lắk',

@@ -1,0 +1,76 @@
+/* Three photographic chapters, each with its own rhythm. */
+.album { max-width: 1060px; }
+.album-heading { margin-bottom: 64px; }
+.album-chapter { position: relative; margin-bottom: 72px; padding: clamp(20px, 4vw, 48px); }
+.chapter-heading { position: relative; margin-bottom: 32px; text-align: center; }
+.chapter-number { display: block; margin-bottom: 18px; color: #9ba38c; font: italic 24px/1 Serif, Georgia, serif; }
+.chapter-number::after { content: ''; display: block; width: 28px; height: 1px; margin: 14px auto 0; background: #c6ccba; }
+.chapter-heading h3 { margin: 12px 0; color: var(--ink); font: 400 clamp(28px, 4vw, 44px)/1.2 Serif, Georgia, serif; }
+.chapter-heading h3 em { font-weight: 400; }
+.chapter-heading > p:last-child { color: var(--muted); font-size: 12px; line-height: 1.8; }
+.album .gallery { display: grid; columns: auto; gap: clamp(10px, 1.8vw, 20px); }
+.album .gallery-item { display: block; min-width: 0; width: 100%; margin: 0; align-self: start; position: relative; background: transparent; }
+.album .gallery-item img { width: 100%; height: auto; object-fit: contain; }
+.chapter-caption { margin-top: 28px; color: #6f7d61; text-align: center; font: 30px/1.2 Script, cursive; }
+.chapter-caption span { display: inline-block; font: 20px Serif, Georgia, serif; }
+
+/* White studio: a quiet magazine spread with two landscape interludes. */
+.chapter-studio { background: #fffefa; border: 1px solid #e3e2d7; }
+.gallery-studio { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-areas: 'a a b c' 'a a d e' 'f f g g' 'h h g g'; }
+.gallery-studio .shot-1 { grid-area: a; }
+.gallery-studio .shot-2 { grid-area: b; }
+.gallery-studio .shot-3 { grid-area: c; }
+.gallery-studio .shot-4 { grid-area: d; }
+.gallery-studio .shot-5 { grid-area: e; }
+.gallery-studio .shot-6 { grid-area: f; }
+.gallery-studio .shot-7 { grid-area: g; }
+.gallery-studio .shot-8 { grid-area: h; }
+
+/* Garden vows: a large opening portrait and a staggered gallery. */
+.chapter-garden { background: #e9eedf; }
+.gallery-garden { grid-template-columns: repeat(6, minmax(0, 1fr)); align-items: start; }
+.gallery-garden .shot-1 { grid-column: 1 / 5; grid-row: 1 / 3; padding: 8px; background: #fffef9; box-shadow: 0 5px 16px #30402d0c; }
+.gallery-garden .shot-2 { grid-column: 5 / 7; margin-top: 28px; }
+.gallery-garden .shot-3 { grid-column: 5 / 7; }
+.gallery-garden .shot-4 { grid-column: 1 / 4; margin-top: 20px; }
+.gallery-garden .shot-5 { grid-column: 4 / 7; margin-top: 64px; }
+
+/* Everyday photographs: lightly tilted prints on a warm scrapbook page. */
+.chapter-days { background: #f2eee4; border: 1px solid #e5dfcf; }
+.gallery-days { grid-template-columns: repeat(6, minmax(0, 1fr)); padding: 14px 6px; gap: 28px !important; align-items: center; }
+.gallery-days .gallery-item { grid-column: span 2; padding: 8px 8px 30px; background: #fffefa; box-shadow: 0 4px 12px #514b3612; transform: rotate(-3deg); align-self: center; }
+.gallery-days .gallery-item::after { content: ''; position: absolute; top: -8px; left: calc(50% - 23px); width: 46px; height: 17px; background: #c6c9ab80; transform: rotate(-4deg); pointer-events: none; }
+.gallery-days .shot-2, .gallery-days .shot-5 { transform: rotate(3deg); margin-top: 32px; }
+.gallery-days .shot-3 { transform: rotate(-1.5deg); }
+.gallery-days .shot-4 { grid-column: span 4; transform: rotate(1.5deg); margin: 12px 0; }
+.gallery-days .shot-6 { grid-column: span 3; transform: rotate(-3deg); }
+.gallery-days .shot-7 { grid-column: span 3; transform: rotate(2deg); }
+
+@media (max-width: 700px) {
+  .album { padding: 0 12px; }
+  .album-heading { margin-bottom: 36px; }
+  .album-chapter { padding: 26px 16px; margin-bottom: 40px; }
+  .chapter-heading { margin-bottom: 24px; }
+  .chapter-heading .eyebrow { font-size: 8px; letter-spacing: 2px; }
+  .chapter-heading > p:last-child { max-width: 240px; margin: auto; font-size: 11px; }
+  .chapter-heading h3 { font-size: 30px; }
+  .chapter-number { margin-bottom: 14px; font-size: 21px; }
+  .album .gallery { gap: 10px; }
+  .gallery-studio { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-areas: 'a a' 'b c' 'f f' 'd e' 'h h' 'g g'; }
+  .gallery-studio .shot-1, .gallery-studio .shot-7 { width: 82%; justify-self: center; }
+  .gallery-studio .shot-3, .gallery-studio .shot-5 { margin-top: 22px; }
+  .gallery-garden .shot-1 { padding: 5px; }
+  .gallery-garden .shot-2 { margin-top: 12px; }
+  .gallery-garden .shot-4 { margin-top: 8px; }
+  .gallery-garden .shot-5 { margin-top: 32px; }
+  .gallery-days { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-areas: 'a b' 'c e' 'd d' 'f g'; gap: 22px 15px !important; padding: 12px 3px; }
+  .gallery-days .gallery-item { grid-column: auto; padding: 5px 5px 22px; }
+  .gallery-days .shot-1 { grid-area: a; }
+  .gallery-days .shot-2 { grid-area: b; }
+  .gallery-days .shot-3 { grid-area: c; }
+  .gallery-days .shot-4 { grid-area: d; width: 100%; }
+  .gallery-days .shot-5 { grid-area: e; }
+  .gallery-days .shot-6 { grid-area: f; }
+  .gallery-days .shot-7 { grid-area: g; }
+  .chapter-caption { font-size: 26px; margin-top: 24px; }
+}

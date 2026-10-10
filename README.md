@@ -1,4 +1,4 @@
-# Mơ — Thiệp cưới online
+# KISMET LOVE — Thiệp cưới online
 
 Landing page giới thiệu dịch vụ thiệp cưới online, xây dựng với Next.js App Router, TypeScript và Tailwind CSS v4.
 

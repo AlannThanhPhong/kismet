@@ -19,5 +19,8 @@ export type Rsvp = {
   attending: boolean;
   guestCount: number;
   message?: string;
+  publishMessage?: boolean;
+  responseTokenHash?: string;
+  updatedAt?: Date;
   createdAt: Date;
 };

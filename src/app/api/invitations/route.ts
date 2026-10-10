@@ -41,7 +41,7 @@ export async function GET() {
     }).sort({ createdAt: -1 }).toArray();
     return NextResponse.json(items.map(({ _id, ...item }) => {
       const design = designedInvitations.find((entry) => entry.code === item.code);
-      return { ...item, ...(design ? { coverImage: design.coverImage, displayTitle: item.displayTitle ?? design.displayTitle, displayCouple: item.displayCouple ?? ("displayCouple" in design ? design.displayCouple : undefined) } : {}) };
+      return { ...item, ...(design ? { coverImage: design.coverImage, displayTitle: design.displayTitle, displayCouple: item.displayCouple ?? ("displayCouple" in design ? design.displayCouple : undefined) } : {}) };
     }));
   } catch (error) {
     console.error("Could not list invitations", error);

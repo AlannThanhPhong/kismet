@@ -1,0 +1,13 @@
+/* Designer's 1–1 overrides: palette, typography, and layout for this invitation. */
+:root {
+  --paper: #f6f8f2;
+  --ink: #244b35;
+  --text: #3e4a3d;
+  --muted: #687463;
+  --line: #ccd7c4;
+  --green: #e9efdf;
+  --premium-width: 980px;
+  --premium-heading-font: Serif, Georgia, serif;
+  --premium-body-font: Sans, Arial, sans-serif;
+  --premium-columns: 2;
+}
