@@ -2,7 +2,7 @@
 
 Màn mở đầu hiện dùng nền xanh lá nhạt, ảnh hai bạn đeo kính (`images/web/hero.webp`), tiêu đề viết tay “Chỉ cần là em”, ngày cưới 23/08/2026, dòng nhạc “Đang phát, Giai điệu đôi ta!” và tên “Dunger x ĐT”. Giữ font Script cho chữ trên polaroid và ngày phía dưới. Nút ban đầu là ▶; chỉ phát nhạc và mở thiệp khi khách bấm.
 
-Hai poster mở đầu nằm trên cùng một hàng ở mọi kích thước màn hình, giữ trọn ảnh và tự thu theo chiều cao viewport để mở thiệp là thấy đủ cả hai. `posters.css` chỉnh layout và chữ/nét vẽ theo độ rộng từng ảnh; ảnh xem trước trong `previews/poster-pair-390.png` và `previews/poster-pair-1440.png`.
+Hai poster mở đầu nằm trên cùng một hàng trên máy tính; trên điện thoại (≤600px), mỗi ảnh nằm một hàng theo chiều dọc và dùng hết chiều rộng khả dụng, giữ trọn ảnh. `posters.css` chỉnh layout và chữ/nét vẽ theo độ rộng từng ảnh; ảnh xem trước trong `previews/poster-pair-390.png` và `previews/poster-pair-1440.png` được tạo trước thay đổi bố cục điện thoại này.
 
 ## Tiện ích Premium
 
