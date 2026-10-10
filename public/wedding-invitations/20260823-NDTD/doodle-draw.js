@@ -6,6 +6,83 @@
   const cache = new Map();
   let sequence = 0;
 
+  function motif(name, yellow = false) {
+    const element = document.createElement('span');
+    element.className = 'doodle scattered-doodle';
+    element.dataset.doodle = name;
+    element.dataset.color = yellow ? '#FCE205' : '#5b9dce';
+    element.setAttribute('aria-hidden', 'true');
+    return element;
+  }
+  function motifRow(names) {
+    const row = document.createElement('div');
+    row.className = 'doodle-scatter-row';
+    row.setAttribute('aria-hidden', 'true');
+    names.forEach((name, index) => row.append(motif(name, index === 1)));
+    return row;
+  }
+  const openingMotifs = [
+    'flower', 'girl-portrait', 'boy-portrait', 'happy-pair', 'heart-people', 'cat-fish',
+    'sun', 'daisy-pencil', 'love', 'cat-skate', 'bow', 'smile',
+    'sprig', 'bouquet', 'butterfly', 'girl-flower', 'cat-bold', 'cat-outline',
+    'lovebirds', 'radiant-heart', 'flower-solid', 'daisy-solid', 'heart-hug',
+  ];
+  const openingDecoration = document.querySelector('.opening-decoration');
+  if (openingDecoration) {
+    openingDecoration.replaceChildren();
+    const panels = ['left', 'right'].map(side => {
+      const panel = document.createElement('div');
+      panel.className = `opening-motif-panel opening-motif-panel-${side}`;
+      openingDecoration.append(panel);
+      return panel;
+    });
+    const loosePositions = [
+      [17, 8, 1.08, -14], [60, 5, .72, 12], [85, 23, .84, -8],
+      [41, 27, 1.02, 7], [12, 40, .68, -5], [72, 43, .86, 19],
+      [30, 54, .9, -10], [88, 61, .64, 10], [57, 69, .72, -19],
+      [16, 78, .96, 4], [81, 88, 1.03, -9], [40, 94, .68, 16],
+    ];
+    const phonePositions = [
+      [16, 6], [58, 8], [84, 17], [37, 20], [12, 29], [66, 29],
+      [87, 39], [40, 37], [15, 45], [68, 48], [36, 54], [84, 57],
+      [12, 65], [57, 64], [86, 71], [42, 74], [12, 81], [64, 81],
+      [85, 90], [39, 91], [14, 96], [82, 5], [63, 97],
+    ];
+    openingMotifs.forEach((name, index) => {
+      const element = motif(name);
+      element.className = 'doodle opening-doodle opening-motif';
+      const [x, y, scale, tilt] = loosePositions[index % 12];
+      const [phoneX, phoneY] = phonePositions[index];
+      element.style.cssText = `--motif-x:${index < 12 ? x : 100 - x}%;--motif-y:${y}%;--motif-size:${scale};--motif-tilt:${tilt}deg;--phone-x:${phoneX}%;--phone-y:${phoneY}%`;
+      panels[index < 12 ? 0 : 1].append(element);
+    });
+    const updateCoverWidth = () => {
+      document.querySelector('.opening-screen').style.setProperty('--opening-center-width',
+        `${document.querySelector('.opening-layout').getBoundingClientRect().width}px`);
+    };
+    updateCoverWidth();
+    new ResizeObserver(updateCoverWidth).observe(document.querySelector('.opening-layout'));
+  }
+  // Keep illustrations in the whitespace, clear of photos and interactive controls.
+  const placements = [
+    ['.album-heading', ['daisy-pencil', 'smile']],
+    ['.paper.invitation', ['heart-people', 'flower-solid']],
+    ['.chapter-days .gallery', ['cat-fish', 'daisy-solid']],
+    ['.chapter-garden .gallery', ['smile', 'radiant-heart']],
+    ['.chapter-studio .gallery', ['cat-skate', 'flower-solid']],
+    ['.location-grid', ['daisy-solid', 'cat-fish']],
+    ['#rsvp-form', ['boy-portrait', 'girl-portrait']],
+    ['#open-guestbook', ['cat-skate', 'smile']],
+  ];
+  placements.forEach(([selector, names]) => {
+    const anchor = document.querySelector(selector);
+    if (!anchor) return;
+    const row = motifRow(names);
+    if (selector === '.album-heading' || selector === '.paper.invitation') anchor.append(row);
+    else anchor.after(row);
+  });
+  document.querySelector('.closing .back-link')?.before(motifRow(['flower-solid', 'radiant-heart']));
+
   // Real SVG strokes let each drawing reveal along its original pencil lines.
   document.querySelectorAll('.chapter-heading').forEach(heading => {
     const chapter = heading.closest('.album-chapter');
@@ -70,17 +147,20 @@
       .find(value => value.startsWith('doodle--'))?.slice(8);
     if (!name || name === 'heart-couple') return;
     try {
-      if (!cache.has(name)) cache.set(name, fetch(new URL(`${name}.svg`, assetBase))
+      if (!cache.has(name)) cache.set(name, fetch(new URL(`${name}.svg?v=reference-portraits`, assetBase))
         .then(response => { if (!response.ok) throw new Error('Missing doodle'); return response.text(); }));
       const source = await cache.get(name);
       const parsed = new DOMParser().parseFromString(source, 'image/svg+xml');
       if (parsed.querySelector('parsererror')) throw new Error('Invalid doodle');
       const svg = document.importNode(parsed.documentElement, true);
-      const color = element.dataset.color || (element.classList.contains('opening-doodle') ? '#5b9dce' : null);
+      const color = element.classList.contains('opening-doodle') ? '#5b9dce' : element.dataset.color;
       if (color) {
         svg.querySelectorAll('[stroke], [fill]').forEach(node => {
           ['stroke', 'fill'].forEach(attribute => {
-            if (node.getAttribute(attribute) === '#315ba3') node.setAttribute(attribute, color);
+            const original = node.getAttribute(attribute);
+            if (original === '#315ba3' ||
+                (element.classList.contains('opening-doodle') && original === '#FCE205'))
+              node.setAttribute(attribute, color);
           });
         });
       }

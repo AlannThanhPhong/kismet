@@ -1,8 +1,8 @@
-/* Keep the full photograph proportional, including when browser chrome resizes. */
+/* Crop the excess sky from the cover while preserving the couple and full width. */
 .opening-screen {
   isolation: isolate;
   padding: 24px;
-  background-color: #f4f58b;
+  background-color: #FCE205;
   background-image: url('paper-grain.svg');
 }
 .opening-layout {
@@ -20,6 +20,15 @@
 .opening-polaroid > span { text-align: right; }
 .opening-polaroid { background: #fffde4; }
 .opening-polaroid > span { margin-top: 12px; }
+.opening-photo { position: relative; aspect-ratio: 1600 / 2001; overflow: hidden; }
+.opening-polaroid .opening-photo img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  transform: translateY(-16.66%);
+}
 .opening-decoration { display: none; }
 
 @media (min-width: 700px) {

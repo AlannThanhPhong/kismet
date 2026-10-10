@@ -12,15 +12,15 @@
   <link rel="stylesheet" href="personalization.css">
   <link rel="stylesheet" href="premium.css?v=continuous-guestbook">
   <link rel="stylesheet" href="posters.css?v=fce205-posters">
-  <link rel="stylesheet" href="album.css?v=corner-photo-captions">
-  <link rel="stylesheet" href="opening.css?v=right-aligned-cover-date">
-  <link rel="stylesheet" href="doodles.css?v=fce205-motifs">
+  <link rel="stylesheet" href="album.css?v=studio-new-portrait-mobile-order">
+  <link rel="stylesheet" href="opening.css?v=fce205-cropped-cover-date">
+  <link rel="stylesheet" href="doodles.css?v=loose-cover-motifs">
   <link rel="stylesheet" href="balloon-flight.css?v=continuous-real-frame">
   <link rel="preload" href="balloon-bouquet-real-fce205.png" as="image">
   <link rel="preload" href="flight-sky-photo.webp" as="image">
   <script src="premium-config.js" defer></script>
   <script src="invitation.js?v=fce205-real-frame" defer></script>
-  <script src="doodle-draw.js?v=fce205-motifs" defer></script>
+  <script src="doodle-draw.js?v=loose-cover-motifs" defer></script>
   <script src="guestbook-open.js?v=continuous-music" defer></script>
   <noscript><style>.opening-screen{display:none!important}.invitation-closed{overflow:auto!important}.invitation-closed .invitation-content{visibility:visible!important}</style></noscript>
 </head>
@@ -28,18 +28,22 @@
   <section class="opening-screen" aria-labelledby="opening-title">
     <div class="opening-decoration" aria-hidden="true">
       <span class="doodle doodle--flower opening-doodle opening-doodle-flower"></span>
-      <span class="doodle doodle--sun opening-doodle opening-doodle-sun" data-color="#FCE205"></span>
-      <span class="doodle doodle--sprig opening-doodle opening-doodle-sprig" data-color="#FCE205"></span>
+      <span class="doodle doodle--sun opening-doodle opening-doodle-sun"></span>
+      <span class="doodle doodle--sprig opening-doodle opening-doodle-sprig"></span>
       <span class="doodle doodle--love opening-doodle opening-doodle-love"></span>
       <span class="doodle opening-doodle opening-doodle-bow" data-doodle="happy-pair"></span>
       <span class="doodle opening-doodle opening-doodle-butterfly" data-doodle="cat-outline"></span>
+      <span class="doodle opening-doodle opening-doodle-daisy" data-doodle="daisy-pencil"></span>
+      <span class="doodle opening-doodle opening-doodle-smile" data-doodle="smile"></span>
+      <span class="doodle opening-doodle opening-doodle-fish" data-doodle="cat-fish"></span>
+      <span class="doodle opening-doodle opening-doodle-skate" data-doodle="cat-skate"></span>
     </div>
     <div class="opening-layout">
       <p class="opening-date">Chủ nhật, 23 tháng 08 năm 2026</p>
       <div class="opening-polaroid">
         <h2 id="opening-title">Chỉ cần là em</h2>
         <div class="opening-photo"><img src="images/web/hero.webp" width="1600" height="2401" alt="Thanh Điền và Ngọc Dung đeo kính, ngồi bên nhau trên thảm cỏ xanh" fetchpriority="high"></div>
-        <span>23 tháng 08, 2026</span>
+        <span>23/08/2026</span>
       </div>
       <div class="opening-player">
         <div class="opening-track"><div><h3>Đang phát, Giai điệu đôi ta!</h3><p>Dunger x ĐT</p></div><span class="opening-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></div>
@@ -97,14 +101,14 @@
     </section>
     <section class="portraits" aria-label="Cô dâu và chú rể">
       <article class="portrait portrait-bride" aria-labelledby="bride-title">
-        <span class="doodle doodle--girl-flower portrait-doodle" aria-hidden="true"></span>
+        <span class="doodle doodle--girl-flower portrait-doodle" data-doodle="girl-portrait" data-color="#5b9dce" aria-hidden="true"></span>
         <svg class="portrait-connection" viewBox="0 0 342 216" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M26 0C26 28 4 30 4 65C4 118 8 155 35 177C50 190 77 197 88 189C103 178 80 173 80 189C80 207 129 195 148 216" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>
         <button class="portrait-photo" type="button" aria-label="Xem ảnh cô dâu Ngọc Dung"><img src="images/web/album-16.webp" alt="Ngọc Dung trong chiếc váy cưới trắng, cầm hoa giữa khu vườn xanh" loading="lazy" width="1600" height="2400"></button>
         <!-- Có thể thay lời nhắn trong portrait-message để viết riêng cho cô dâu. -->
         <div class="portrait-copy"><p class="eyebrow">THE BRIDE</p><h2 id="bride-title">Ngọc Dung</h2><p class="portrait-note">To my love,</p><p class="portrait-message">Em từng yêu những ngày bình yên<br>Rồi em gặp anh,<br>và bình yên có một cái tên</p><p class="portrait-signature">Cùng anh, qua những mùa thương</p></div>
       </article>
       <article class="portrait portrait-groom" aria-labelledby="groom-title">
-        <span class="doodle doodle--sun portrait-doodle" aria-hidden="true"></span>
+        <span class="doodle doodle--sun portrait-doodle" data-doodle="boy-portrait" data-color="#5b9dce" aria-hidden="true"></span>
         <button class="portrait-photo" type="button" aria-label="Xem ảnh chú rể Thanh Điền"><img src="images/web/album-17.webp" alt="Thanh Điền trong bộ vest đen, giấu bó hoa sau lưng giữa khu vườn xanh" loading="lazy" width="1600" height="2400"></button>
         <!-- Có thể thay lời nhắn trong portrait-message để viết riêng cho chú rể. -->
         <div class="portrait-copy"><p class="eyebrow">THE GROOM</p><h2 id="groom-title">Thanh Điền</h2><p class="portrait-note">Always, with you</p><p class="portrait-message">Anh muốn cùng em đi thật chậm,<br>qua những ngày rất đỗi bình thường<br>Để mỗi lần ngoảnh lại,<br>vẫn thấy chúng mình bên nhau</p><p class="portrait-signature">Từ hôm nay, đến mãi sau này</p></div>
@@ -139,7 +143,7 @@
       <section class="album-chapter chapter-studio" aria-labelledby="studio-title">
         <div class="chapter-heading"><span class="chapter-number" aria-hidden="true">03</span><p class="eyebrow">KEEP ME<br>COMPANY</p><h3 id="studio-title">Từ hai người xa lạ, <em>thành một góc nhà êm</em></h3><p>Hôm nay, ngày mai và sau này… luôn luôn là chúng ta</p></div>
         <div class="gallery gallery-studio">
-          <button class="gallery-item shot-1" type="button" aria-label="Xem ảnh cưới studio nền trắng · thanh điền & ngọc dung · 1"><img src="images/web/album-01.webp" alt="Ảnh cưới studio nền trắng · Thanh Điền & Ngọc Dung · 1" loading="lazy" width="1600" height="2401"></button>
+          <button class="gallery-item shot-1" type="button" aria-label="Xem ảnh cưới studio nền trắng · thanh điền & ngọc dung · 1"><img src="images/web/studio-new-portrait.jpg" alt="Thanh Điền nắm tay Ngọc Dung, cô dâu cầm hoa che mặt" loading="lazy" width="1706" height="2560"></button>
           <button class="gallery-item shot-2" type="button" aria-label="Xem ảnh cưới studio nền trắng · thanh điền & ngọc dung · 2"><img src="images/web/album-02.webp" alt="Ảnh cưới studio nền trắng · Thanh Điền & Ngọc Dung · 2" loading="lazy" width="1600" height="2401"></button>
           <button class="gallery-item shot-3" type="button" aria-label="Xem ảnh cưới studio nền trắng · thanh điền & ngọc dung · 3"><img src="images/web/album-19.webp" alt="Ảnh cưới studio nền trắng · Thanh Điền & Ngọc Dung · 3" loading="lazy" width="1600" height="2401"></button>
           <button class="gallery-item shot-4" type="button" aria-label="Xem ảnh cưới studio nền trắng · thanh điền & ngọc dung · 4"><img src="images/web/album-20.webp" alt="Ảnh cưới studio nền trắng · Thanh Điền & Ngọc Dung · 4" loading="lazy" width="1600" height="2400"></button>

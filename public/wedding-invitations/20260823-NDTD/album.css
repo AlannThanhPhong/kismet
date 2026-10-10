@@ -68,9 +68,9 @@
   .chapter-heading h3 { font-size: 30px; }
   .chapter-number { margin-bottom: 14px; font-size: 21px; }
   .album .gallery { gap: 10px; }
-  .gallery-studio { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-areas: 'a a' 'b c' 'f f' 'd e' 'h h' 'g g'; }
-  .gallery-studio .shot-1, .gallery-studio .shot-7 { width: 82%; justify-self: center; }
-  .gallery-studio .shot-3, .gallery-studio .shot-5 { margin-top: 22px; }
+  .gallery-studio { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-areas: 'e e' 'b c' 'f f' 'd a' 'h h' 'g g'; }
+  .gallery-studio .shot-5, .gallery-studio .shot-7 { width: 82%; justify-self: center; }
+  .gallery-studio .shot-3, .gallery-studio .shot-1 { margin-top: 22px; }
   .gallery-garden .shot-1 { padding: 5px; }
   .gallery-garden .shot-2 { margin-top: 12px; }
   .gallery-garden .shot-4 { margin-top: 8px; }
