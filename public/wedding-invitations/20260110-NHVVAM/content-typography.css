@@ -62,26 +62,27 @@
 #invitation-content .family .saint { font-size: 14px; }
 #invitation-content .family .muted { font-size: 13px; }
 #invitation-content .invitation-quote { font-size: 18px; }
-#invitation-content :is(.film-copy > p:last-of-type, .album-note) { font-size: 18px; }
+#invitation-content .film-copy > p:last-of-type { font-size: 10.8px; }
+#invitation-content .album-note { font-size: 18px; }
 #invitation-content footer > p { font-size: 20px; }
 
 #invitation-content .gallery-ending-copy {
   font-family: Cormorant, Georgia, serif;
   font-weight: 400;
   font-style: italic;
-  font-size: clamp(22px, 2vw, 28px);
+  font-size: clamp(13.2px, 1.2vw, 16.8px);
   line-height: 1.5;
 }
 #invitation-content .gallery-ending-copy em { font-style: inherit; }
 
-#invitation-content :is(#rsvp-title, #album-title, #film-title, #invitation-title),
+#invitation-content :is(#rsvp-title, #album-title, #film-title, #invitation-title, #event-title),
 #invitation-content :is(.family h3, .family p, .family .saint, .family .muted) {
   font-family: Cormorant, Georgia, serif;
   font-weight: 400;
   font-style: italic;
   letter-spacing: 0;
 }
-#invitation-content :is(#album-title, #film-title, #invitation-title, #rsvp-title) em {
+#invitation-content :is(#album-title, #film-title, #invitation-title, #rsvp-title, #event-title) em {
   font-style: inherit;
 }
 #invitation-content .family .eyebrow {
@@ -122,7 +123,8 @@
 }
 
 @media (max-width: 600px) {
-  #invitation-content .gallery-ending-copy { font-size: 16px; }
+  #invitation-content .gallery-ending-copy { font-size: 9.6px; }
+  #invitation-content .film-copy > p:last-of-type { font-size: 10.8px; }
   #invitation-content h1 { font-size: clamp(44px, 12vw, 60px); }
   #invitation-content h2 { font-size: clamp(30px, 8.5vw, 40px); }
   #invitation-content .celebration { padding-inline: 16px; }
