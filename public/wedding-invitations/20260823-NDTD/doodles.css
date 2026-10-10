@@ -82,6 +82,21 @@
 .doodle-inline > svg { display: block; width: 100%; height: 100%; overflow: visible; }
 .has-inline-doodles::before, .has-inline-doodles::after { content: none; }
 .chapter-doodle { display: block; pointer-events: none; user-select: none; }
+.doodle-scatter-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  width: min(480px, 100%);
+  margin: 26px auto 20px;
+  pointer-events: none;
+}
+.scattered-doodle { flex: 0 1 100px; width: 100px; height: 110px; opacity: .9; }
+.scattered-doodle:first-child { transform: rotate(-8deg); }
+.scattered-doodle:last-child { transform: rotate(9deg); }
+.closing .doodle-scatter-row { width: min(300px, 100%); }
+.chapter-doodle-last, .chapter-doodle-extra { display: inline-block; vertical-align: middle; }
+.chapter-doodle-extra { width: 105px; height: 100px; margin: 20px 0 0 24px; opacity: .8; }
 .chapter-garden .chapter-doodle-first { background-image: url('doodles/sprig.svg'); }
 .chapter-days .chapter-doodle-first { background-image: url('doodles/sun.svg'); }
 .chapter-garden .chapter-doodle-last { background-image: url('doodles/lovebirds.svg'); }
@@ -89,8 +104,8 @@
 .chapter-doodle.doodle-inline { background-image: none; }
 .chapter-heading.has-inline-doodles > p:not(.eyebrow) { color: var(--muted); font-size: 12px; line-height: 1.8; }
 .opening-doodle { position: absolute; display: none; opacity: .8; }
-.opening-doodle-bow { background-image: url('doodles/bow.svg'); }
-.opening-doodle-butterfly { background-image: url('doodles/butterfly.svg'); }
+.opening-doodle-bow { background-image: url('doodles/happy-pair.svg'); }
+.opening-doodle-butterfly { background-image: url('doodles/cat-outline.svg'); }
 .opening-doodle.doodle-inline { background-image: none; }
 .opening-doodle > svg {
   animation: opening-doodle-sway 6s ease-in-out infinite alternate;
@@ -113,10 +128,23 @@
   .opening-doodle-love { right: 8%; bottom: 16%; height: clamp(150px, 25svh, 285px); }
   .opening-doodle-bow { left: 16%; top: 44%; width: clamp(80px, 8vw, 125px); height: 100px; transform: rotate(-12deg); }
   .opening-doodle-butterfly { right: 17%; top: 43%; width: clamp(80px, 8vw, 125px); height: 100px; transform: rotate(10deg); }
+  .opening-doodle-daisy { left: 22%; top: 5%; width: 85px; height: 85px; }
+  .opening-doodle-smile { right: 22%; top: 5%; width: 75px; height: 75px; }
+  .opening-doodle-fish { left: 22%; bottom: 4%; width: 100px; height: 110px; }
+  .opening-doodle-skate { right: 22%; bottom: 4%; width: 100px; height: 110px; }
+}
+@media (max-width: 959px) {
+  .opening-decoration { display: block; position: absolute; inset: 0; pointer-events: none; }
+  .opening-doodle-daisy, .opening-doodle-smile { display: block; width: 42px; height: 42px; top: 10px; }
+  .opening-doodle-daisy { left: 6px; }
+  .opening-doodle-smile { right: 6px; }
 }
 @media (max-width: 700px) {
+  .doodle-scatter-row { width: min(260px, 100%); margin: 20px auto 16px; gap: 18px; }
+  .scattered-doodle { flex-basis: 70px; width: 70px; height: 78px; }
   .chapter-doodle-first { width: 57px; height: 66px; left: 0; top: 0; }
   .chapter-doodle-last { width: 78px; height: 66px; margin-top: 16px; }
+  .chapter-doodle-extra { width: 78px; height: 80px; margin: 16px 0 0 16px; }
   .chapter-heading.has-inline-doodles > p:not(.eyebrow) { max-width: 240px; margin: auto; font-size: 11px; }
 }
 @media (min-width: 1280px) {
@@ -144,4 +172,49 @@
   .chapter-heading::before { width: 57px; height: 66px; left: 0; top: 0; }
   .chapter-heading::after { width: 78px; height: 66px; margin-top: 16px; }
   .closing-doodle { width: 102px; height: 102px; margin-bottom: 14px; background-size: 87px 87px; }
+}
+
+/* Loose compositions keep each drawing independent of rows and columns. */
+.opening-motif-panel {
+  position: absolute;
+  top: 5%;
+  bottom: 5%;
+  width: min(430px, calc((100% - var(--opening-center-width, 500px)) / 2 - 40px));
+}
+.opening-motif-panel-left { left: 14px; }
+.opening-motif-panel-right { right: 14px; }
+.opening-motif-panel .opening-motif {
+  display: block;
+  position: absolute;
+  left: var(--motif-x);
+  top: var(--motif-y);
+  width: calc(clamp(54px, 6.5vw, 105px) * var(--motif-size));
+  height: calc(clamp(60px, 11svh, 115px) * var(--motif-size));
+  transform: translate(-50%, -50%) rotate(var(--motif-tilt));
+  opacity: .95;
+}
+.doodle-scatter-row:nth-of-type(even) .scattered-doodle:first-child { transform: rotate(-15deg) translateY(9px); }
+.doodle-scatter-row .scattered-doodle:last-child { transform: rotate(12deg) translateY(-7px) scale(.88); }
+@media (max-width: 959px) {
+  .opening-decoration {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: clamp(860px, 250vw, 1080px);
+    flex-shrink: 0;
+    margin: 24px auto 0;
+    display: block;
+    border: 0;
+  }
+  .opening-layout { order: 0; }
+  .opening-screen { display: flex; flex-direction: column; }
+  .opening-screen[hidden] { display: none; }
+  .opening-decoration { order: 1; }
+  .opening-motif-panel { inset: 0; width: 100%; }
+  .opening-motif-panel .opening-motif {
+    left: var(--phone-x);
+    top: var(--phone-y);
+    width: calc(clamp(50px, 16vw, 78px) * var(--motif-size));
+    height: calc(clamp(58px, 19vw, 90px) * var(--motif-size));
+  }
 }

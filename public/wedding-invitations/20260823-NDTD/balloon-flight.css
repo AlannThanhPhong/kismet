@@ -1,16 +1,24 @@
-/* Photographic layers move at different speeds to suggest camera altitude. */
-.balloon-layer { isolation:isolate; }
-.balloon-layer[hidden] { display:none; }
-.flight-sky { position:absolute;inset:-50% -12% -5%;background:#278eb9 url('flight-sky-photo.webp') center bottom / cover no-repeat;opacity:0; }
-.flight-bouquet { position:absolute;left:50%;top:50%;width:min(65vw,330px,31svh);transform:translate(-50%,110svh);z-index:1; }
-.flight-bouquet img { display:block;width:100%;height:auto;transform-origin:50% 85%; }
-.flight-cloud { position:absolute;opacity:0;background:url('flight-cloud-photo.webp') center / 100% 100% no-repeat; }
-.flight-cloud.is-distant { z-index:0;filter:blur(1px); }
-.flight-cloud.is-cover { z-index:2; }
-.flight-cloud.is-cover:nth-child(even) { filter:blur(2px); }
-.flight-veil { position:absolute;inset:-3%;z-index:3;background:linear-gradient(#ffffffb3,#f6faffc9),url('flight-cloud-photo.webp') 50% 65% / cover no-repeat,#f4f8fb;opacity:0; }
-.opening-screen.is-departing .opening-layout { opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .9s ease; }
-.invitation-opening .invitation-content { opacity:1;transition:none; }
-@media(prefers-reduced-motion:reduce) {
-  .opening-screen.is-departing .opening-layout { transition:none;transform:none; }
+/* A stationary photographic sky and a balloon rig carrying the real photo panels. */
+.balloon-layer { isolation: isolate; }
+.balloon-layer[hidden] { display: none; }
+.flight-sky { position: absolute; inset: 0; background: #b4e2f7 url('flight-sky-photo.webp') center / cover no-repeat; }
+.flight-rig { position: absolute; left: 50%; top: 50%; width: min(70vw, 480px, 65svh); transform: translate(-50%, 100svh); z-index: 1; }
+.flight-balloons { width: min(58%, 28svh); margin: 0 auto; }
+.flight-balloons img { display: block; width: 100%; height: auto; }
+.flight-tether { display: block; width: 48px; height: 38px; margin: 0 auto; overflow: visible; }
+.tether-snap { opacity: 0; }
+.flight-card { position: relative; width: 100%; padding: 0; }
+.flight-frame { position: absolute; top: 0; left: 0; transform-origin: top left; }
+.flight-placeholder { max-width: 100%; }
+.flight-card.is-zooming { position: fixed; z-index: 2; transform-origin: top left; }
+.opening-screen.is-departing .opening-layout { opacity: 0; transition: opacity .5s ease; }
+.invitation-content.is-revealing { opacity: 1; }
+@media (max-width: 600px) {
+  .flight-sky { background-position: 50% 70%; }
+  .flight-rig { width: min(48vw, 180px, 26svh); }
+  .flight-balloons { width: 82%; }
+  .flight-tether { width: 38px; height: 30px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .opening-screen.is-departing .opening-layout { transition: none; }
 }
