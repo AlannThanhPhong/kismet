@@ -54,7 +54,12 @@ export default function Guestbook({ initiallyUnlocked }: { initiallyUnlocked: bo
   }, [unlocked, revision]);
 
   return <main className="private-guestbook">
-    <a className="guestbook-back" href="/thiep/20260823-NDTD">← Về thiệp cưới</a>
+    <a className="guestbook-back" href="/thiep/20260823-NDTD" onClick={event => {
+      if (window.parent !== window && new URLSearchParams(window.location.search).get("embedded") === "1") {
+        event.preventDefault();
+        window.parent.postMessage({ type: "kismet:close-guestbook" }, window.location.origin);
+      }
+    }}>← Về thiệp cưới</a>
     <header><p className="guestbook-kicker">LOVE NOTES</p><h1>Những lời chúc <em>ở lại.</em></h1><p>Thanh Điền & Ngọc Dung · 23.08.2026</p></header>
     {!unlocked ? <form className="guestbook-login" onSubmit={async event => {
       event.preventDefault(); if (busy) return; setBusy(true); setStatus("");

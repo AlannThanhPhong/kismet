@@ -64,7 +64,7 @@ test('Premium invitation works at mobile/desktop sizes and safely renders wishes
   } finally { await browser.close(); }
 });
 
-test('Guestbook button requires a password, opens a separate page, and locks again', async () => {
+test('Guestbook button requires a password, opens over the invitation, and locks again', async () => {
   const browser = await chromium.launch({ channel: 'msedge', headless: true });
   const page = await browser.newPage({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' });
   const errors = [];
@@ -85,9 +85,10 @@ test('Guestbook button requires a password, opens a separate page, and locks aga
     await inner.waitForFunction(() => document.querySelector('#unlock-status').textContent.includes('chưa đúng'));
     await frame.locator('#unlock-password').fill('TDND23082026');
     await frame.locator('#guestbook-unlock-form [type=submit]').click();
-    await page.waitForURL('**/thiep/20260823-NDTD/loi-chuc');
-    await page.locator('.guestbook-totals').waitFor();
-    assert.equal(await page.locator('.guestbook-login').count(), 0);
+    await page.waitForURL('**/thiep/20260823-NDTD#loi-chuc');
+    const guestbook = inner.frameLocator('.guestbook-page');
+    await guestbook.locator('.guestbook-totals').waitFor();
+    assert.equal(await guestbook.locator('.guestbook-login').count(), 0);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
     assert.equal(await page.evaluate(() => document.cookie.includes('kismet-ntdt-guestbook')), false);
     await page.screenshot({ path: 'public/wedding-invitations/20260823-NDTD/previews/private-guestbook-390.png' });
@@ -97,27 +98,27 @@ test('Guestbook button requires a password, opens a separate page, and locks aga
       wishes: [{ id: 'qa', guestName: '<img src=x onerror=alert(1)>', message: '<script>window.qaInjected=true</script>', createdAt: '2026-10-10T00:00:00Z' }] };
     await page.route('**/rsvps/summary', route => route.fulfill({ json: snapshot }));
     await page.route('**/rsvps/stream', route => route.fulfill({ contentType: 'text/event-stream', body: `data: ${JSON.stringify(snapshot)}\n\n` }));
-    await page.getByRole('button', { name: 'Cập nhật danh sách' }).click();
-    await page.locator('.guestbook-table tbody tr').first().waitFor();
-    assert.equal(await page.locator('.guestbook-table tbody tr').count(), 2);
-    await page.getByRole('searchbox').fill('Bạn thân');
-    assert.equal(await page.locator('.guestbook-table tbody tr').count(), 1);
-    await page.locator('.guestbook-table summary').click();
-    assert.match(await page.locator('.response-detail').innerText(), /Đi cùng: 2 người/);
-    assert.equal(await page.locator('.response-detail script').count(), 0);
-    await page.getByRole('searchbox').fill('');
-    await page.locator('.guestbook-filters select').selectOption('no');
-    assert.equal(await page.locator('.guestbook-table tbody tr').count(), 1);
-    assert.match(await page.locator('.guestbook-table tbody').innerText(), /Bạn ở xa/);
+    await guestbook.getByRole('button', { name: 'Cập nhật danh sách' }).click();
+    await guestbook.locator('.guestbook-table tbody tr').first().waitFor();
+    assert.equal(await guestbook.locator('.guestbook-table tbody tr').count(), 2);
+    await guestbook.getByRole('searchbox').fill('Bạn thân');
+    assert.equal(await guestbook.locator('.guestbook-table tbody tr').count(), 1);
+    await guestbook.locator('.guestbook-table summary').click();
+    assert.match(await guestbook.locator('.response-detail').innerText(), /Đi cùng: 2 người/);
+    assert.equal(await guestbook.locator('.response-detail script').count(), 0);
+    await guestbook.getByRole('searchbox').fill('');
+    await guestbook.locator('.guestbook-filters select').selectOption('no');
+    assert.equal(await guestbook.locator('.guestbook-table tbody tr').count(), 1);
+    assert.match(await guestbook.locator('.guestbook-table tbody').innerText(), /Bạn ở xa/);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
-    await page.getByRole('button', { name: 'Lời chúc (' }).click();
-    await page.locator('.guestbook-grid article').waitFor();
-    assert.equal(await page.locator('.guestbook-grid script, .guestbook-grid img').count(), 0);
+    await guestbook.getByRole('button', { name: 'Lời chúc (' }).click();
+    await guestbook.locator('.guestbook-grid article').waitFor();
+    assert.equal(await guestbook.locator('.guestbook-grid script, .guestbook-grid img').count(), 0);
     assert.equal(await page.evaluate(() => window.qaInjected), undefined);
-    await page.getByRole('button', { name: 'Khóa sổ lưu bút' }).click();
-    await page.locator('.guestbook-login').waitFor();
-    assert.equal(await page.locator('.guestbook-totals, .guestbook-grid').count(), 0);
-    await page.reload();
+    await guestbook.getByRole('button', { name: 'Khóa sổ lưu bút' }).click();
+    await guestbook.locator('.guestbook-login').waitFor();
+    assert.equal(await guestbook.locator('.guestbook-totals, .guestbook-grid').count(), 0);
+    await page.goto(`${base}/thiep/20260823-NDTD/loi-chuc`);
     assert.equal(await page.locator('.guestbook-login').isVisible(), true);
     assert.deepEqual(errors, []);
   } finally { await page.close(); await browser.close(); }
