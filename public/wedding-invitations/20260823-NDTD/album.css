@@ -45,6 +45,15 @@
 .gallery-days .shot-4 { grid-column: span 4; transform: rotate(1.5deg); margin: 12px 0; }
 .gallery-days .shot-6 { grid-column: span 3; transform: rotate(-3deg); }
 .gallery-days .shot-7 { grid-column: span 3; transform: rotate(2deg); }
+.gallery-days .gallery-item.has-caption { padding-bottom: 10px; }
+.photo-handwritten-caption {
+  display: block;
+  margin: 10px 3px 0;
+  color: var(--ink);
+  font: italic clamp(18px, 1.8vw, 23px)/1.35 Script, cursive;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
 
 @media (max-width: 700px) {
   .album { padding: 0 12px; }

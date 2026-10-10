@@ -8,8 +8,9 @@
 .gallery{display:block;columns:3;column-gap:16px}.gallery-item{display:inline-block;width:100%;margin:0 0 16px;break-inside:avoid;vertical-align:top}.gallery-item img{aspect-ratio:auto;object-fit:contain}.lightbox-nav{position:absolute;top:50%;width:44px;height:44px;border:1px solid #82947f;background:#244b35;color:white;cursor:pointer;font-size:24px}.lightbox-prev{left:12px}.lightbox-next{right:12px}@media(max-width:700px){.gallery{columns:2;column-gap:10px}.gallery-item{margin-bottom:10px}.lightbox-nav{width:36px;height:44px}}
 
 .portraits{width:min(980px,calc(100% - 48px));margin:110px auto 0;display:grid;gap:90px}.portrait{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:70px}.portrait-photo{display:block;width:100%;padding:0;border:0;background:var(--green);cursor:zoom-in;overflow:hidden}.portrait-photo img{height:auto;transition:transform .5s}.portrait-photo:hover img{transform:scale(1.025)}.portrait-copy{padding:24px 0;color:var(--ink)}.portrait-copy h2{font:clamp(42px,5vw,64px)/1.15 Serif,Georgia,serif;margin:16px 0 26px}.portrait-note{font:34px/1.4 Script,cursive;margin-bottom:18px}.portrait-message{font-size:15px;line-height:2.2;overflow-wrap:anywhere}.portrait-signature{font-size:11px;color:var(--muted);margin-top:28px;padding-top:18px;border-top:1px solid var(--line)}.portrait-groom .portrait-photo{grid-column:2;grid-row:1}.portrait-groom .portrait-copy{grid-column:1;grid-row:1;text-align:right}
+.portrait-connection{display:none}
 @media(max-width:700px){
-  .portraits{width:calc(100% - 48px);margin-top:65px;gap:60px}
+  .portraits{width:calc(100% - 48px);margin-top:40px;gap:36px}
   .portrait{grid-template-columns:minmax(0,1fr);gap:0}
   .portrait .portrait-photo{width:86%;max-width:320px;justify-self:start}
   .portrait-copy,.portrait-groom .portrait-copy{grid-column:1;grid-row:2;padding:26px 0 0}
@@ -21,6 +22,23 @@
   .portrait-note{font-size:31px;margin-bottom:12px}
   .portrait-message{font-size:13px;line-height:2.1}
   .portrait-signature{margin-top:22px;padding-top:16px}
+  /* Mirror the names beside the photos; keep all other text below. */
+  .portrait{grid-template-columns:minmax(0,72fr) minmax(0,28fr);column-gap:12px;align-items:start}
+  .portrait-bride .portrait-photo{grid-column:1;grid-row:1;width:100%;max-width:none}
+  .portrait .portrait-copy{display:contents}
+  .portrait .portrait-copy h2{grid-column:2;grid-row:1;align-self:center;min-width:0;margin:0;font-size:clamp(27px,7.8vw,42px);line-height:1.15;text-align:left;color:var(--ink)}
+  .portrait .portrait-copy>p{grid-column:1/-1;text-align:right;color:var(--ink)}
+  .portrait .eyebrow{grid-row:2;margin-top:12px}
+  .portrait .portrait-note{grid-row:3;font-size:28px;margin:6px 0}
+  .portrait .portrait-message{grid-row:4;line-height:1.8}
+  .portrait .portrait-signature{grid-row:5;margin-top:12px;padding-top:10px;color:var(--muted)}
+  .portrait-groom{grid-template-columns:minmax(0,28fr) minmax(0,72fr)}
+  .portrait-groom .portrait-photo{grid-column:2;grid-row:1;width:100%;max-width:none}
+  .portrait-groom .portrait-copy h2{grid-column:1;text-align:right;font-size:clamp(25px,7vw,38px)}
+  .portrait-groom .portrait-copy>p{text-align:left}
+  .portrait .portrait-photo:hover img{transform:none}
+  .portrait-bride{position:relative}
+  .portrait-connection{display:block;position:absolute;grid-column:1/-1;grid-row:2/6;left:0;top:0;width:100%;height:calc(100% + 36px);color:#8a9c7f;opacity:.7;pointer-events:none;overflow:visible}
 }
 @media(prefers-reduced-motion:reduce){.portrait-photo img{transition:none}.portrait-photo:hover img{transform:none}}
 
@@ -34,7 +52,7 @@
 .opening-screen[hidden]{display:none}
 .opening-layout{width:min(460px,100%);min-height:calc(100svh - 76px);margin:auto;display:flex;flex-direction:column;justify-content:center;gap:26px}
 .opening-date{text-align:center;font:600 clamp(13px,2vw,18px)/1.5 Sans,sans-serif;letter-spacing:.5px}
-.opening-polaroid{background:#fff5d8;color:#244b35;padding:20px 25px 18px;border-radius:14px;box-shadow:0 18px 65px #10261555;transform:rotate(-2deg)}
+.opening-polaroid{background:#fff5d8;color:#244b35;padding:20px 25px 18px;border-radius:14px;box-shadow:0 18px 65px #10261555}
 .opening-polaroid h2{font:clamp(28px,5vw,39px)/1.15 Script,cursive;font-weight:400;margin:0 0 12px;white-space:nowrap}
 .opening-polaroid img{width:100%;height:clamp(220px,39svh,410px);object-fit:cover;object-position:50% 52%}
 .opening-polaroid p{font:clamp(25px,5vw,36px)/1.2 Script,cursive;text-align:center;margin:15px 0 3px}
@@ -71,9 +89,8 @@
 @media(min-width:700px){.opening-player{padding:20px 30px 18px}.opening-controls{margin:0 50px;gap:35px}.opening-controls button{height:44px}.opening-output{right:-45px;width:32px;height:32px}.opening-seek svg{width:44px;height:31px}.opening-play-icon{width:36px;height:36px}}
 @media(max-width:360px){.opening-player{padding:14px 20px}.opening-track h3{font-size:15px}.opening-wave{right:-5px;gap:1px}.opening-wave i{width:2px}.opening-controls{gap:14px;margin:0 30px}.opening-output{right:-30px;width:25px;height:25px}}
 
-.opening-photo{height:clamp(220px,39svh,410px);overflow:hidden}
-.opening-polaroid .opening-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 80%;transform:scale(1.55);transform-origin:50% 75%}
-@media(max-width:480px){.opening-photo{height:clamp(210px,37svh,350px)}}
+.opening-photo{aspect-ratio:1600/2401}
+.opening-polaroid .opening-photo img{width:100%;height:auto;object-fit:contain}
 
 /* Botanical stationery for the family announcement and invitation. */
 .paper.invitation{width:min(760px,calc(100% - 48px));padding:70px 60px 65px;border:6px solid #42694f;background:#fffef8;box-shadow:0 12px 35px #244b3510;isolation:isolate;color:#424c3c}

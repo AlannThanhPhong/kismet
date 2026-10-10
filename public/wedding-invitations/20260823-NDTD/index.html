@@ -8,24 +8,38 @@
   <title>Thanh Điền &amp; Ngọc Dung · 23.08.2026</title>
   <link rel="icon" href="cover.svg" type="image/svg+xml">
   <link rel="preload" href="images/web/hero.webp" as="image">
-  <link rel="stylesheet" href="style.css?v=mobile-portraits">
+  <link rel="stylesheet" href="style.css?v=responsive-portraits-thread">
   <link rel="stylesheet" href="personalization.css">
   <link rel="stylesheet" href="premium.css?v=continuous-guestbook">
-  <link rel="stylesheet" href="posters.css?v=mobile-stacked">
-  <link rel="stylesheet" href="album.css?v=balanced-chapters">
+  <link rel="stylesheet" href="posters.css?v=yellow-artistic-posters">
+  <link rel="stylesheet" href="album.css?v=handwritten-photo-captions">
+  <link rel="stylesheet" href="opening.css?v=lemon-photo-cover">
+  <link rel="stylesheet" href="doodles.css?v=sky-blue-moving-motifs">
+  <link rel="stylesheet" href="balloon-flight.css?v=photographic-flight">
+  <link rel="preload" href="balloon-bouquet-photo.webp" as="image">
+  <link rel="preload" href="flight-cloud-photo.webp" as="image">
+  <link rel="preload" href="flight-sky-photo.webp" as="image">
   <script src="premium-config.js" defer></script>
-  <script src="invitation.js?v=automatic-wishes" defer></script>
+  <script src="invitation.js?v=photographic-flight" defer></script>
+  <script src="doodle-draw.js?v=sky-blue-moving-motifs" defer></script>
   <script src="guestbook-open.js?v=continuous-music" defer></script>
   <noscript><style>.opening-screen{display:none!important}.invitation-closed{overflow:auto!important}.invitation-closed .invitation-content{visibility:visible!important}</style></noscript>
 </head>
 <body class="invitation-closed">
   <section class="opening-screen" aria-labelledby="opening-title">
+    <div class="opening-decoration" aria-hidden="true">
+      <span class="doodle doodle--flower opening-doodle opening-doodle-flower"></span>
+      <span class="doodle doodle--sun opening-doodle opening-doodle-sun"></span>
+      <span class="doodle doodle--sprig opening-doodle opening-doodle-sprig"></span>
+      <span class="doodle doodle--love opening-doodle opening-doodle-love"></span>
+      <span class="doodle opening-doodle opening-doodle-bow" data-doodle="bow"></span>
+      <span class="doodle opening-doodle opening-doodle-butterfly" data-doodle="butterfly"></span>
+    </div>
     <div class="opening-layout">
       <p class="opening-date">Chủ nhật, 23 tháng 08 năm 2026</p>
       <div class="opening-polaroid">
         <h2 id="opening-title">Chỉ cần là em</h2>
         <div class="opening-photo"><img src="images/web/hero.webp" width="1600" height="2401" alt="Thanh Điền và Ngọc Dung đeo kính, ngồi bên nhau trên thảm cỏ xanh" fetchpriority="high"></div>
-        <p>Thanh Điền &amp; Ngọc Dung</p>
         <span>23 tháng 08, 2026</span>
       </div>
       <div class="opening-player">
@@ -49,10 +63,7 @@
   <main>
     <div class="poster-pair" role="group" aria-label="Hai ảnh mở đầu ngày cưới">
     <section class="hero" aria-labelledby="couple-title">
-      <div class="hero-copy"><p class="eyebrow">— OUR WEDDING DAY —</p><p class="hero-script">Our<br><span>Wonderful day!</span></p>
-        <h1 id="couple-title">Thanh Điền <span class="ampersand">&amp;</span> Ngọc Dung</h1>
-        <p class="hero-date">23 <span>·</span> 08 <span>·</span> 2026</p>
-        <p class="hero-caption">Một ngày chung đôi. Một đời bên nhau.</p>
+      <div class="hero-copy"><p class="eyebrow">— OUR WEDDING DAY —</p><p id="couple-title" class="hero-script">Our<br><span>Wonderful day!</span></p>
       </div>
       <figure class="hero-photo"><img src="images/web/hero.webp" width="1600" height="2401" alt="Thanh Điền và Ngọc Dung ngồi bên nhau trên thảm cỏ xanh" fetchpriority="high"></figure>
       <svg class="poster-doodles" viewBox="0 0 600 900" fill="none" aria-hidden="true" focusable="false">
@@ -61,13 +72,14 @@
       </svg>
     </section>
     <section class="married" aria-labelledby="married-title">
-      <div class="married-heading"><p class="eyebrow">CÙNG NHAU, TỪ HÔM NAY</p><h2 id="married-title"><span>We are</span><span>getting</span><em>married!</em></h2><p>Mời bạn đến cùng chúng mình<br>viết nên một ngày thật đẹp.</p></div>
+      <div class="married-heading"><h2 id="married-title"><span>We are</span><span>getting</span><em>married!</em></h2></div>
       <img src="images/web/married.webp" width="1600" height="2401" alt="Hai bạn tựa lưng bên nhau trong khu vườn xanh" loading="eager">
-      <svg class="poster-doodles married-doodles" viewBox="0 0 600 900" fill="none" aria-hidden="true" focusable="false"><g stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M513 274 C499 247 478 265 491 283 L511 305 C530 283 541 256 526 253 C517 252 512 264 513 274Z"/><path d="M75 468 C64 447 50 461 58 474 L74 492 C86 473 101 455 89 451 C80 448 75 458 75 468Z"/><path d="M470 469 Q506 485 523 509 M510 506 L525 512 L524 497"/><path d="M113 422 Q83 430 75 449 M72 437 L74 451 L89 446"/></g></svg>
-      <p class="photo-label label-bride" aria-hidden="true">Ngọc Dung</p><p class="photo-label label-groom" aria-hidden="true">Thanh Điền</p>
+      <svg class="poster-doodles married-doodles" viewBox="0 0 600 900" fill="none" aria-hidden="true" focusable="false"><g stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M513 274 C499 247 478 265 491 283 L511 305 C530 283 541 256 526 253 C517 252 512 264 513 274Z"/><path d="M75 468 C64 447 50 461 58 474 L74 492 C86 473 101 455 89 451 C80 448 75 458 75 468Z"/></g></svg>
     </section>
     </div>
     <section class="paper invitation" id="loi-moi" aria-labelledby="invitation-title">
+      <span class="doodle doodle--sprig invitation-doodle-left" aria-hidden="true"></span>
+      <span class="doodle doodle--bouquet invitation-doodle-right" aria-hidden="true"></span>
       <div class="invitation-foliage" aria-hidden="true"><img class="foliage-top" src="botanical-sprig.svg?v=line-art" alt=""><img class="foliage-bottom" src="botanical-sprig.svg?v=line-art" alt=""></div>
       <div class="families">
         <div><h2>NHÀ TRAI</h2><p>Ông Nguyễn Thanh Quí<br>Bà Trần Thị Thu Hà</p><p class="muted">P. Châu Đốc, T. An Giang</p></div>
@@ -86,20 +98,47 @@
     </section>
     <section class="portraits" aria-label="Cô dâu và chú rể">
       <article class="portrait portrait-bride" aria-labelledby="bride-title">
+        <span class="doodle doodle--girl-flower portrait-doodle" aria-hidden="true"></span>
+        <svg class="portrait-connection" viewBox="0 0 342 216" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M26 0C26 28 4 30 4 65C4 118 8 155 35 177C50 190 77 197 88 189C103 178 80 173 80 189C80 207 129 195 148 216" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>
         <button class="portrait-photo" type="button" aria-label="Xem ảnh cô dâu Ngọc Dung"><img src="images/web/album-16.webp" alt="Ngọc Dung trong chiếc váy cưới trắng, cầm hoa giữa khu vườn xanh" loading="lazy" width="1600" height="2400"></button>
         <!-- Có thể thay lời nhắn trong portrait-message để viết riêng cho cô dâu. -->
         <div class="portrait-copy"><p class="eyebrow">THE BRIDE</p><h2 id="bride-title">Ngọc Dung</h2><p class="portrait-note">To my love,</p><p class="portrait-message">Em từng yêu những ngày bình yên.<br>Rồi em gặp anh,<br>và bình yên có một cái tên.</p><p class="portrait-signature">Cùng anh, qua những mùa thương.</p></div>
       </article>
       <article class="portrait portrait-groom" aria-labelledby="groom-title">
+        <span class="doodle doodle--sun portrait-doodle" aria-hidden="true"></span>
         <button class="portrait-photo" type="button" aria-label="Xem ảnh chú rể Thanh Điền"><img src="images/web/album-17.webp" alt="Thanh Điền trong bộ vest đen, giấu bó hoa sau lưng giữa khu vườn xanh" loading="lazy" width="1600" height="2400"></button>
         <!-- Có thể thay lời nhắn trong portrait-message để viết riêng cho chú rể. -->
         <div class="portrait-copy"><p class="eyebrow">THE GROOM</p><h2 id="groom-title">Thanh Điền</h2><p class="portrait-note">Always, with you.</p><p class="portrait-message">Anh muốn cùng em đi thật chậm,<br>qua những ngày rất đỗi bình thường.<br>Để mỗi lần ngoảnh lại,<br>vẫn thấy chúng mình bên nhau.</p><p class="portrait-signature">Từ hôm nay, đến mãi sau này.</p></div>
       </article>
     </section>
     <section class="album" aria-labelledby="album-title">
-      <div class="album-heading"><p class="eyebrow">OUR LITTLE MOMENTS</p><h2 id="album-title">Những ngày <em>có nhau.</em></h2><p>Ba chương nhỏ, một câu chuyện thương.</p></div>
+      <div class="album-heading"><p class="eyebrow">OUR LITTLE MOMENTS</p><h2 id="album-title">Những ngày <em>có nhau.</em></h2><p>Mỗi ngày đến công ty, đều có lý do để chờ đợi.</p></div>
+      <section class="album-chapter chapter-days" aria-labelledby="days-title">
+        <div class="chapter-heading"><span class="chapter-number" aria-hidden="true">01</span><p class="eyebrow">OUR EVERYDAY LOVE</p><h3 id="days-title">Đồng nghiệp là <em>định mệnh</em></h3><p>Bước qua những bỡ ngỡ, tìm thấy một chốn bình yên.</p></div>
+        <div class="gallery gallery-days">
+          <button class="gallery-item has-caption shot-1" type="button" aria-label="Xem ảnh đời thường trên bãi cỏ · thanh điền & ngọc dung · 1"><img src="images/web/album-07.webp" alt="Ảnh đời thường trên bãi cỏ · Thanh Điền & Ngọc Dung · 1" loading="lazy" width="1600" height="2401"><span class="photo-handwritten-caption">Em – sinh viên bỡ ngỡ ngày đầu đi làm.</span></button>
+          <button class="gallery-item shot-2" type="button" aria-label="Xem ảnh đời thường trên bãi cỏ · thanh điền & ngọc dung · 2"><img src="images/web/album-03.webp" alt="Ảnh đời thường trên bãi cỏ · Thanh Điền & Ngọc Dung · 2" loading="lazy" width="1600" height="2401"></button>
+          <button class="gallery-item shot-3" type="button" aria-label="Xem ảnh đời thường trên bãi cỏ · thanh điền & ngọc dung · 3"><img src="images/web/album-08.webp" alt="Ảnh đời thường trên bãi cỏ · Thanh Điền & Ngọc Dung · 3" loading="lazy" width="1600" height="2401"></button>
+          <button class="gallery-item shot-4" type="button" aria-label="Xem ảnh đời thường trên bãi cỏ · thanh điền & ngọc dung · 4"><img src="images/web/album-10.webp" alt="Ảnh đời thường trên bãi cỏ · Thanh Điền & Ngọc Dung · 4" loading="lazy" width="1600" height="1066"></button>
+          <button class="gallery-item has-caption shot-5" type="button" aria-label="Xem ảnh đời thường trên bãi cỏ · thanh điền & ngọc dung · 5"><img src="images/web/album-09.webp" alt="Ảnh đời thường trên bãi cỏ · Thanh Điền & Ngọc Dung · 5" loading="lazy" width="1600" height="2401"><span class="photo-handwritten-caption">Anh – bất ngờ dịu dàng nhất chốn công sở</span></button>
+          <button class="gallery-item shot-6" type="button" aria-label="Xem ảnh đời thường trên bãi cỏ · thanh điền & ngọc dung · 6"><img src="images/web/album-04.webp" alt="Ảnh đời thường trên bãi cỏ · Thanh Điền & Ngọc Dung · 6" loading="lazy" width="1600" height="2401"></button>
+          <button class="gallery-item shot-7" type="button" aria-label="Xem ảnh đời thường trên bãi cỏ · thanh điền & ngọc dung · 7"><img src="images/web/album-06.webp" alt="Ảnh đời thường trên bãi cỏ · Thanh Điền & Ngọc Dung · 7" loading="lazy" width="1600" height="2401"></button>
+        </div>
+        <p class="chapter-caption">Little moments, lots of love<span aria-hidden="true"> ♡</span></p>
+      </section>
+      <section class="album-chapter chapter-garden" aria-labelledby="garden-title">
+        <div class="chapter-heading"><span class="chapter-number" aria-hidden="true">02</span><p class="eyebrow">Found you, kept you.</p><h3 id="garden-title">Đồng nghiệp <em>rồi thành thương.</em></h3><p>Hết hạn thử việc, bắt đầu một đời thương yêu.</p></div>
+        <div class="gallery gallery-garden">
+          <button class="gallery-item shot-1" type="button" aria-label="Xem ảnh áo cưới trong khu vườn xanh · thanh điền & ngọc dung · 1"><img src="images/web/album-13.webp" alt="Ảnh áo cưới trong khu vườn xanh · Thanh Điền & Ngọc Dung · 1" loading="lazy" width="1600" height="2401"></button>
+          <button class="gallery-item shot-2" type="button" aria-label="Xem ảnh áo cưới trong khu vườn xanh · thanh điền & ngọc dung · 2"><img src="images/web/album-15.webp" alt="Ảnh áo cưới trong khu vườn xanh · Thanh Điền & Ngọc Dung · 2" loading="lazy" width="1600" height="2400"></button>
+          <button class="gallery-item shot-3" type="button" aria-label="Xem ảnh áo cưới trong khu vườn xanh · thanh điền & ngọc dung · 3"><img src="images/web/album-18.webp" alt="Ảnh áo cưới trong khu vườn xanh · Thanh Điền & Ngọc Dung · 3" loading="lazy" width="1600" height="2400"></button>
+          <button class="gallery-item shot-4" type="button" aria-label="Xem ảnh áo cưới trong khu vườn xanh · thanh điền & ngọc dung · 4"><img src="images/web/album-05.webp" alt="Ảnh áo cưới trong khu vườn xanh · Thanh Điền & Ngọc Dung · 4" loading="lazy" width="1600" height="2401"></button>
+          <button class="gallery-item shot-5" type="button" aria-label="Xem ảnh áo cưới trong khu vườn xanh · thanh điền & ngọc dung · 5"><img src="images/web/album-14.webp" alt="Ảnh áo cưới trong khu vườn xanh · Thanh Điền & Ngọc Dung · 5" loading="lazy" width="1600" height="2401"></button>
+        </div>
+        <p class="chapter-caption">Our forever begins here<span aria-hidden="true"> ♡</span></p>
+      </section>
       <section class="album-chapter chapter-studio" aria-labelledby="studio-title">
-        <div class="chapter-heading"><span class="chapter-number" aria-hidden="true">01</span><p class="eyebrow">THE WHITE STUDIO</p><h3 id="studio-title">Một khung trời <em>chỉ có đôi ta.</em></h3><p>Nền trắng, ánh sáng dịu và những yêu thương thật gần.</p></div>
+        <div class="chapter-heading"><span class="chapter-number" aria-hidden="true">03</span><p class="eyebrow">KEEP ME<br>COMPANY</p><h3 id="studio-title">Từ hai người xa lạ, <em>thành một góc nhà êm.</em></h3><p>Hôm nay, ngày mai và sau này… luôn luôn là chúng ta.</p></div>
         <div class="gallery gallery-studio">
           <button class="gallery-item shot-1" type="button" aria-label="Xem ảnh cưới studio nền trắng · thanh điền & ngọc dung · 1"><img src="images/web/album-01.webp" alt="Ảnh cưới studio nền trắng · Thanh Điền & Ngọc Dung · 1" loading="lazy" width="1600" height="2401"></button>
           <button class="gallery-item shot-2" type="button" aria-label="Xem ảnh cưới studio nền trắng · thanh điền & ngọc dung · 2"><img src="images/web/album-02.webp" alt="Ảnh cưới studio nền trắng · Thanh Điền & Ngọc Dung · 2" loading="lazy" width="1600" height="2401"></button>
@@ -112,30 +151,6 @@
         </div>
         <p class="chapter-caption">Just the two of us<span aria-hidden="true"> ♡</span></p>
       </section>
-      <section class="album-chapter chapter-garden" aria-labelledby="garden-title">
-        <div class="chapter-heading"><span class="chapter-number" aria-hidden="true">02</span><p class="eyebrow">VOWS IN THE GARDEN</p><h3 id="garden-title">Ngày mình <em>chung đôi.</em></h3><p>Váy trắng chạm cỏ xanh, mình chạm vào một đời có nhau.</p></div>
-        <div class="gallery gallery-garden">
-          <button class="gallery-item shot-1" type="button" aria-label="Xem ảnh áo cưới trong khu vườn xanh · thanh điền & ngọc dung · 1"><img src="images/web/album-13.webp" alt="Ảnh áo cưới trong khu vườn xanh · Thanh Điền & Ngọc Dung · 1" loading="lazy" width="1600" height="2401"></button>
-          <button class="gallery-item shot-2" type="button" aria-label="Xem ảnh áo cưới trong khu vườn xanh · thanh điền & ngọc dung · 2"><img src="images/web/album-15.webp" alt="Ảnh áo cưới trong khu vườn xanh · Thanh Điền & Ngọc Dung · 2" loading="lazy" width="1600" height="2400"></button>
-          <button class="gallery-item shot-3" type="button" aria-label="Xem ảnh áo cưới trong khu vườn xanh · thanh điền & ngọc dung · 3"><img src="images/web/album-18.webp" alt="Ảnh áo cưới trong khu vườn xanh · Thanh Điền & Ngọc Dung · 3" loading="lazy" width="1600" height="2400"></button>
-          <button class="gallery-item shot-4" type="button" aria-label="Xem ảnh áo cưới trong khu vườn xanh · thanh điền & ngọc dung · 4"><img src="images/web/album-05.webp" alt="Ảnh áo cưới trong khu vườn xanh · Thanh Điền & Ngọc Dung · 4" loading="lazy" width="1600" height="2401"></button>
-          <button class="gallery-item shot-5" type="button" aria-label="Xem ảnh áo cưới trong khu vườn xanh · thanh điền & ngọc dung · 5"><img src="images/web/album-14.webp" alt="Ảnh áo cưới trong khu vườn xanh · Thanh Điền & Ngọc Dung · 5" loading="lazy" width="1600" height="2401"></button>
-        </div>
-        <p class="chapter-caption">Our forever begins here<span aria-hidden="true"> ♡</span></p>
-      </section>
-      <section class="album-chapter chapter-days" aria-labelledby="days-title">
-        <div class="chapter-heading"><span class="chapter-number" aria-hidden="true">03</span><p class="eyebrow">OUR EVERYDAY LOVE</p><h3 id="days-title">Bình yên là <em>có nhau.</em></h3><p>Một chút nắng, một chút vui, những ngày rất đỗi chúng mình.</p></div>
-        <div class="gallery gallery-days">
-          <button class="gallery-item shot-1" type="button" aria-label="Xem ảnh đời thường trên bãi cỏ · thanh điền & ngọc dung · 1"><img src="images/web/album-07.webp" alt="Ảnh đời thường trên bãi cỏ · Thanh Điền & Ngọc Dung · 1" loading="lazy" width="1600" height="2401"></button>
-          <button class="gallery-item shot-2" type="button" aria-label="Xem ảnh đời thường trên bãi cỏ · thanh điền & ngọc dung · 2"><img src="images/web/album-03.webp" alt="Ảnh đời thường trên bãi cỏ · Thanh Điền & Ngọc Dung · 2" loading="lazy" width="1600" height="2401"></button>
-          <button class="gallery-item shot-3" type="button" aria-label="Xem ảnh đời thường trên bãi cỏ · thanh điền & ngọc dung · 3"><img src="images/web/album-08.webp" alt="Ảnh đời thường trên bãi cỏ · Thanh Điền & Ngọc Dung · 3" loading="lazy" width="1600" height="2401"></button>
-          <button class="gallery-item shot-4" type="button" aria-label="Xem ảnh đời thường trên bãi cỏ · thanh điền & ngọc dung · 4"><img src="images/web/album-10.webp" alt="Ảnh đời thường trên bãi cỏ · Thanh Điền & Ngọc Dung · 4" loading="lazy" width="1600" height="1066"></button>
-          <button class="gallery-item shot-5" type="button" aria-label="Xem ảnh đời thường trên bãi cỏ · thanh điền & ngọc dung · 5"><img src="images/web/album-09.webp" alt="Ảnh đời thường trên bãi cỏ · Thanh Điền & Ngọc Dung · 5" loading="lazy" width="1600" height="2401"></button>
-          <button class="gallery-item shot-6" type="button" aria-label="Xem ảnh đời thường trên bãi cỏ · thanh điền & ngọc dung · 6"><img src="images/web/album-04.webp" alt="Ảnh đời thường trên bãi cỏ · Thanh Điền & Ngọc Dung · 6" loading="lazy" width="1600" height="2401"></button>
-          <button class="gallery-item shot-7" type="button" aria-label="Xem ảnh đời thường trên bãi cỏ · thanh điền & ngọc dung · 7"><img src="images/web/album-06.webp" alt="Ảnh đời thường trên bãi cỏ · Thanh Điền & Ngọc Dung · 7" loading="lazy" width="1600" height="2401"></button>
-        </div>
-        <p class="chapter-caption">Little moments, lots of love<span aria-hidden="true"> ♡</span></p>
-      </section>
     </section>
     <section class="premium-section" aria-labelledby="locations-title">
       <p class="eyebrow">ĐƯỜNG ĐẾN NGÀY CHUNG ĐÔI</p><h2 id="locations-title">Hẹn bạn <em>ở đây.</em></h2>
@@ -147,6 +162,7 @@
     <section class="premium-section wedding-video" hidden aria-labelledby="video-title"><p class="eyebrow">OUR WEDDING FILM</p><h2 id="video-title">Một thước phim <em>của chúng mình.</em></h2><video controls preload="none" playsinline poster="images/web/hero.webp"></video></section>
     <section class="premium-section wedding-gifts" hidden aria-labelledby="gifts-title"><p class="eyebrow">GỬI THƯƠNG ĐẾN CHÚNG MÌNH</p><h2 id="gifts-title">Hộp <em>mừng cưới.</em></h2><p>Tình cảm của bạn là món quà quý nhất.</p><div class="gift-grid"></div><p class="gift-status" role="status"></p></section>
     <section class="premium-section rsvp-section" id="xac-nhan" aria-labelledby="rsvp-title">
+      <span class="doodle doodle--bouquet rsvp-doodle" aria-hidden="true"></span>
       <p class="eyebrow">MỘT LỜI HẸN, MỘT NIỀM VUI</p><h2 id="rsvp-title">Bạn sẽ <em>đến chứ?</em></h2><p>Cho chúng mình biết để đón tiếp bạn thật chu đáo.</p>
       <form id="rsvp-form" class="premium-card">
         <label for="guest-name">Tên của bạn</label><input id="guest-name" name="guestName" autocomplete="name" required maxlength="120" placeholder="Chúng mình gọi bạn là…">
@@ -164,7 +180,7 @@
       <button class="button secondary" id="open-guestbook" type="button">Mở lời chúc & danh sách xác nhận ↗</button>
       <noscript><a href="/thiep/20260823-NDTD/loi-chuc" target="_top">Mở trang sổ lưu bút</a></noscript>
     </section>
-    <section class="closing"><p class="eyebrow">SỰ HIỆN DIỆN CỦA QUÝ KHÁCH</p><h2>Là niềm vinh hạnh<br>cho gia đình chúng tôi.</h2><p class="script">Rất hân hạnh được đón tiếp!</p><p class="host">Út Hà</p><a href="/#danh-sach-thiep" target="_top" class="back-link">← Những lời mời khác</a></section>
+    <section class="closing"><span class="doodle doodle--heart-couple closing-doodle" aria-hidden="true"></span><p class="eyebrow">SỰ HIỆN DIỆN CỦA QUÝ KHÁCH</p><h2>Là niềm vinh hạnh<br>cho gia đình chúng tôi.</h2><p class="script">Rất hân hạnh được đón tiếp!</p><p class="host">Út Hà</p><a href="/#danh-sach-thiep" target="_top" class="back-link">← Những lời mời khác</a></section>
   </main>
   <footer>THANH ĐIỀN &amp; NGỌC DUNG <span>23.08.2026</span></footer>
   </div>

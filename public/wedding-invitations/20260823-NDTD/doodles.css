@@ -1,0 +1,147 @@
+/* Blue pencil motifs inspired by the supplied flowers, sunshine and lovers. */
+.doodle {
+  display: block;
+  width: 120px;
+  height: 135px;
+  background: center / contain no-repeat;
+  pointer-events: none;
+  user-select: none;
+  opacity: .8;
+}
+.doodle--flower { background-image: url('doodles/flower.svg'); }
+.doodle--sun { background-image: url('doodles/sun.svg'); }
+.doodle--sprig { background-image: url('doodles/sprig.svg'); }
+.doodle--bouquet { background-image: url('doodles/bouquet.svg'); }
+.doodle--love { background-image: url('doodles/love.svg'); }
+.doodle--heart-couple { background-image: url('doodles/heart-couple-green.png'); }
+.doodle--girl-flower { background-image: url('doodles/girl-flower.svg'); }
+
+.invitation > .doodle, .rsvp-doodle { display: none; }
+.portrait { position: relative; }
+.portrait-doodle { position: absolute; bottom: 12px; right: 24px; width: 97.5px; height: 117px; }
+.portrait-groom .portrait-doodle { left: 24px; right: auto; }
+.closing-doodle {
+  width: 123px;
+  height: 123px;
+  margin: 0 auto 20px;
+  background-color: #fff5d8;
+  border-radius: 50%;
+  background-size: 105px 105px;
+  transform: none;
+  opacity: 1;
+}
+.chapter-heading::before, .chapter-doodle-first {
+  content: '';
+  position: absolute;
+  left: 12px;
+  top: 0;
+  width: 105px;
+  height: 112.5px;
+  background: url('doodles/flower.svg') center / contain no-repeat;
+  opacity: .7;
+  pointer-events: none;
+  transform: rotate(-12deg);
+}
+.chapter-garden .chapter-heading::before { background-image: url('doodles/sprig.svg'); }
+.chapter-days .chapter-heading::before { background-image: url('doodles/sun.svg'); }
+.chapter-heading::after, .chapter-doodle-last {
+  content: '';
+  display: block;
+  width: 105px;
+  height: 90px;
+  margin: 20px auto 0;
+  background: url('doodles/bow.svg') center / contain no-repeat;
+  opacity: .75;
+  pointer-events: none;
+}
+.chapter-garden .chapter-heading::after { background-image: url('doodles/lovebirds.svg'); }
+.chapter-days .chapter-heading::after { background-image: url('doodles/butterfly.svg'); }
+
+@media (min-width: 960px) {
+  .opening-decoration::before,
+  .opening-decoration::after {
+    width: clamp(150px, 19.5vw, 270px);
+    left: clamp(28px, 8vw, 140px);
+    background-image: url('doodles/flower.svg'), url('doodles/sun.svg');
+    background-position: center 16%, center 80%;
+    background-size: 100% 225px, 78% 195px;
+    background-repeat: no-repeat;
+    opacity: .8;
+  }
+  .opening-decoration::after {
+    left: auto;
+    right: clamp(28px, 8vw, 140px);
+    background-image: url('doodles/sprig.svg'), url('doodles/love.svg');
+    background-size: 86% 270px, 100% 285px;
+    transform: none;
+  }
+}
+
+/* Inline SVG versions preserve the layout while animating individual strokes. */
+.doodle-inline { background-image: none; }
+.doodle-inline > svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.has-inline-doodles::before, .has-inline-doodles::after { content: none; }
+.chapter-doodle { display: block; pointer-events: none; user-select: none; }
+.chapter-garden .chapter-doodle-first { background-image: url('doodles/sprig.svg'); }
+.chapter-days .chapter-doodle-first { background-image: url('doodles/sun.svg'); }
+.chapter-garden .chapter-doodle-last { background-image: url('doodles/lovebirds.svg'); }
+.chapter-days .chapter-doodle-last { background-image: url('doodles/butterfly.svg'); }
+.chapter-doodle.doodle-inline { background-image: none; }
+.chapter-heading.has-inline-doodles > p:not(.eyebrow) { color: var(--muted); font-size: 12px; line-height: 1.8; }
+.opening-doodle { position: absolute; display: none; opacity: .8; }
+.opening-doodle-bow { background-image: url('doodles/bow.svg'); }
+.opening-doodle-butterfly { background-image: url('doodles/butterfly.svg'); }
+.opening-doodle.doodle-inline { background-image: none; }
+.opening-doodle > svg {
+  animation: opening-doodle-sway 6s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+.opening-doodle:nth-child(even) > svg { animation-delay: -3s; animation-duration: 7s; }
+@keyframes opening-doodle-sway {
+  from { transform: translateY(-5px) rotate(-3deg); }
+  to { transform: translateY(5px) rotate(3deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .opening-doodle > svg { animation: none; }
+}
+@media (min-width: 960px) {
+  .opening-decoration::before, .opening-decoration::after { content: none; }
+  .opening-doodle { display: block; width: clamp(110px, 13vw, 225px); height: clamp(130px, 17svh, 225px); }
+  .opening-doodle-flower { left: 8%; top: 15%; }
+  .opening-doodle-sun { left: 8%; bottom: 16%; }
+  .opening-doodle-sprig { right: 8%; top: 15%; }
+  .opening-doodle-love { right: 8%; bottom: 16%; height: clamp(150px, 25svh, 285px); }
+  .opening-doodle-bow { left: 16%; top: 44%; width: clamp(80px, 8vw, 125px); height: 100px; transform: rotate(-12deg); }
+  .opening-doodle-butterfly { right: 17%; top: 43%; width: clamp(80px, 8vw, 125px); height: 100px; transform: rotate(10deg); }
+}
+@media (max-width: 700px) {
+  .chapter-doodle-first { width: 57px; height: 66px; left: 0; top: 0; }
+  .chapter-doodle-last { width: 78px; height: 66px; margin-top: 16px; }
+  .chapter-heading.has-inline-doodles > p:not(.eyebrow) { max-width: 240px; margin: auto; font-size: 11px; }
+}
+@media (min-width: 1280px) {
+  .invitation > .doodle { display: block; position: absolute; width: 157.5px; height: 217.5px; }
+  .invitation-doodle-left { left: -185px; top: 22%; transform: rotate(-12deg); }
+  .invitation-doodle-right { right: -185px; bottom: 18%; transform: rotate(9deg); }
+  .rsvp-section { position: relative; }
+  .rsvp-doodle { display: block; position: absolute; width: 135px; height: 195px; left: -155px; top: 40%; transform: rotate(-8deg); }
+}
+@media (max-width: 700px) {
+  /* Place small drawings in the empty side of the two message headings. */
+  .portrait-doodle {
+    grid-column: 1 / -1;
+    grid-row: 2 / 4;
+    top: 9px;
+    bottom: auto;
+    left: 36px;
+    right: auto;
+    width: 60px;
+    height: 84px;
+    opacity: .75;
+    transform: rotate(-8deg);
+  }
+  .portrait-groom .portrait-doodle { left: auto; right: 3px; width: 57px; height: 63px; top: 16px; transform: rotate(10deg); }
+  .chapter-heading::before { width: 57px; height: 66px; left: 0; top: 0; }
+  .chapter-heading::after { width: 78px; height: 66px; margin-top: 16px; }
+  .closing-doodle { width: 102px; height: 102px; margin-bottom: 14px; background-size: 87px 87px; }
+}
