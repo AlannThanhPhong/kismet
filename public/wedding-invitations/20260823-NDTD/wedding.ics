@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//KISMET LOVE//Thanh Dien Ngoc Dung//VI
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:20260823-NDTD@mo-wedding
+DTSTAMP:20261010T000000Z
+DTSTART:20260823T040000Z
+SUMMARY:Tiệc cưới Thanh Điền & Ngọc Dung
+LOCATION:139 Hồ Tùng Mậu\, khóm Hòa Bình\,
+  phường Châu Đốc\, An Giang
+DESCRIPTION:Tiệc cưới lúc 11:00 giờ Việt Nam.
+  Hôn lễ lúc 09:00 cùng ngày tại tư gia.
+END:VEVENT
+END:VCALENDAR

@@ -36,7 +36,7 @@ export default function TemplateShowcase({ currency }: { currency: PricingCurren
           <em>cho câu chuyện của hai bạn</em>
         </h2>
         <p className="section-subheading">
-          Khám phá các mẫu thiệp cưới trực quan: Mẫu Tiêu Chuẩn {packagePrice("standard", currency)}, Mẫu Nâng Cao {packagePrice("premium", currency)} (Kim Hiên & Văn Tài), và Mẫu May Đo Độc Bản {packagePrice("bespoke", currency)} (Huyền Vy & Anh Minh)
+          Khám phá các mẫu thiệp cưới trực quan: Basic {packagePrice("standard", currency)}, Standard {packagePrice("premium", currency)} (Kim Hiên & Văn Tài), Premium {packagePrice("bespoke", currency)} (Thanh Điền & Ngọc Dung) và Customized (Huyền Vy & Anh Minh) báo giá theo yêu cầu
           Bạn có thể thử thay ảnh của chính mình vào mẫu Tiêu Chuẩn và Nâng Cao để xem trước diện mạo thiệp
         </p>
 

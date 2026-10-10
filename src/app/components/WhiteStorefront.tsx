@@ -162,6 +162,16 @@ export default function WhiteStorefront({ currency }: { currency: PricingCurrenc
     </section>
     <div className="ws-trust-strip"><span><MousePointer2 size={17} /> Tự chỉnh sửa dễ dàng</span><span><Mail size={17} /> Gửi lời mời trong một chạm</span><span><Leaf size={17} /> Nhẹ nhàng với môi trường</span><span><Heart size={17} /> Riêng như chuyện tình của bạn</span></div>
 
+    <section className="ws-projects ws-wrap" id="danh-sach-thiep" aria-labelledby="projects-title">
+      <div className="ws-section-heading"><div><p className="ws-kicker">REAL WEDDING WEBSITES</p><h2 id="projects-title">Dự án thiệp <em>theo gói</em></h2></div><p>Chọn một dự án để mở thiệp thực tế<br />và xem phong cách của từng gói</p></div>
+      <div className="ws-projects-grid">{items.filter(item => item.template?.liveDemoUrl?.startsWith("/thiep/")).map(item => <article className="ws-project-entry" key={item.id}>
+        <a className="ws-project-cover" href={item.template!.liveDemoUrl} target="_blank" rel="noopener noreferrer" aria-label={`Xem thiệp ${item.template!.coupleName}`}><ProjectArtwork item={item} /></a>
+        <div className="ws-project-meta"><span>{PACKAGES.find(pack => pack.id === item.packageId)?.name}</span><strong>{item.price}</strong></div>
+        <h3>{item.template!.coupleName}</h3><p>{item.template!.categoryLabel}</p>
+        <a className="ws-text-link" href={item.template!.liveDemoUrl} target="_blank" rel="noopener noreferrer">Xem thiệp trực tiếp <ExternalLink size={14} /></a>
+      </article>)}</div>
+    </section>
+
     <section className="ws-catalog ws-wrap" id="kho-mau-thiep" aria-labelledby="catalog-title">
       <div className="ws-section-heading"><div><p className="ws-kicker">THE WEDDING COLLECTION</p><h2 id="catalog-title">Tìm một lời mời <em>thật riêng</em></h2></div><p>Từ tối giản đến lãng mạn<br />Có một thiết kế dành cho câu chuyện của bạn</p></div>
       <div className="ws-package-tabs" role="group" aria-label="Chọn gói thiệp"><button aria-pressed={!pkg} onClick={() => setPkg("")}>Tất cả mẫu</button>{PACKAGES.map(pack => <button key={pack.id} aria-pressed={pkg === pack.id} onClick={() => setPkg(pack.id)}>{pack.name}{pack.id === "self-customized" && <span><Paintbrush size={10} /> Tự thiết kế</span>}</button>)}</div>

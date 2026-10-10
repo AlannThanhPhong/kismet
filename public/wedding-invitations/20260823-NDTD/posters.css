@@ -1,0 +1,65 @@
+/* Both complete photos fit in the first viewport, including on narrow phones. */
+.poster-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(18px, 3.5vw, 44px);
+  width: min(1120px, calc(100% - 32px), calc(133.25svh - 160px));
+  margin: 20px auto 40px;
+  align-items: start;
+}
+.poster-pair .hero,
+.poster-pair .married {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  aspect-ratio: 1600 / 2401;
+  container-type: inline-size;
+  overflow: hidden;
+}
+.poster-pair .hero-photo,
+.poster-pair .hero-photo img,
+.poster-pair .married > img {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: contain;
+}
+.poster-pair .hero-copy .eyebrow,
+.poster-pair .married-heading .eyebrow {
+  font-size: 2cqw;
+  letter-spacing: .65cqw;
+}
+.poster-pair .hero-script {
+  top: 7%;
+  font-size: 24cqw;
+}
+.poster-pair .hero-script span { margin-top: 1.5cqw; }
+.poster-pair .hero h1 { font-size: 8cqw; }
+.poster-pair .hero .ampersand { margin: 0 .5cqw; }
+.poster-pair .hero-date { font-size: 4.5cqw; letter-spacing: .8cqw; }
+.poster-pair .hero-date span { margin: 0 1cqw; }
+.poster-pair .hero-caption { bottom: 8%; font-size: 2.7cqw; padding: 0 2cqw; }
+.poster-pair .hero .open-link {
+  font-size: 2.5cqw;
+  line-height: 1.2;
+  letter-spacing: .45cqw;
+  gap: 4cqw;
+  padding: 1.3cqw 3cqw;
+}
+.poster-pair .hero .open-link span { font-size: 4cqw; }
+.poster-pair .married-heading h2 { font-size: 33cqw; }
+.poster-pair .married-heading h2 em { font-size: .9em; }
+.poster-pair .married-heading > p:last-child { font-size: 2.7cqw; }
+.poster-pair .photo-label { font-size: 7cqw; }
+/* Separate photographic prints with a quiet white edge. */
+.poster-pair .hero,
+.poster-pair .married {
+  outline: clamp(3px, .45vw, 6px) solid #fffefa;
+  box-shadow: 0 5px 18px #34452e0d;
+}
+@media (max-width: 600px) {
+  .poster-pair { width: min(calc(100% - 24px), calc(133.25svh - 160px)); margin-top: 16px; margin-bottom: 32px; }
+}

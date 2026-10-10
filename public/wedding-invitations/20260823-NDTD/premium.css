@@ -1,0 +1,54 @@
+[hidden]{display:none!important}
+.premium-section{width:min(var(--premium-width),calc(100% - 48px));margin:85px auto;text-align:center;font-family:var(--premium-body-font)}
+.premium-section h2{font:clamp(36px,5vw,58px)/1.15 var(--premium-heading-font);color:var(--ink);margin:15px 0 22px}
+.premium-section h3{font:30px/1.2 var(--premium-heading-font);color:var(--ink);margin:0 0 16px}
+.premium-section>p:not(.eyebrow){font-size:14px;color:var(--muted);margin-bottom:24px}
+.location-grid,.gift-grid,.wish-grid{display:grid;grid-template-columns:repeat(var(--premium-columns),minmax(0,1fr));gap:22px}
+.premium-card,.wish-card{padding:30px;border:1px solid var(--line);background:#fffef8;border-radius:3px}
+.premium-card p{font-size:14px;margin-bottom:18px}.premium-card .button{display:inline-block;cursor:pointer}
+.wedding-video video{display:block;width:100%;max-height:600px;background:var(--green)}
+.gift-grid img{width:min(240px,100%);margin:18px auto}.gift-grid .account-number{font-size:19px;letter-spacing:1px;overflow-wrap:anywhere}
+#rsvp-form{max-width:620px;margin:30px auto;text-align:left;display:grid;gap:12px}
+#rsvp-form>label,#rsvp-form legend{font-size:14px;font-weight:600}
+#rsvp-form input:not([type=radio]):not([type=checkbox]),#rsvp-form textarea{width:100%;font:16px/1.6 var(--premium-body-font);padding:11px 14px;background:var(--paper);color:var(--text);border:1px solid var(--line);border-radius:2px}
+#rsvp-form textarea{resize:vertical}#rsvp-form fieldset{padding:14px;border:1px solid var(--line);margin:6px 0}
+#rsvp-form .rsvp-choice{display:flex;gap:10px;align-items:baseline;font-weight:400;font-size:14px;margin:8px 0}
+#rsvp-form input[type=radio],#rsvp-form input[type=checkbox]{accent-color:var(--ink);flex-shrink:0}
+#rsvp-form input:focus-visible,#rsvp-form textarea:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+#rsvp-form .rsvp-note{font-size:12px;color:var(--muted);margin:0}#rsvp-form button{cursor:pointer;margin-top:8px}
+#rsvp-form button:disabled{opacity:.6;cursor:wait}#rsvp-status{margin:0;color:var(--ink)}
+.rsvp-totals{display:grid;grid-template-columns:repeat(3,1fr);border-block:1px solid var(--line);padding:20px 0;margin:25px 0;gap:8px}
+.rsvp-totals p{font-size:12px}.rsvp-totals strong{display:block;font:36px/1.2 var(--premium-heading-font);color:var(--ink)}
+.wish-card{text-align:left;overflow-wrap:anywhere}.wish-card blockquote{margin:0 0 20px;font:22px/1.5 var(--premium-heading-font);white-space:pre-wrap}.wish-card p{font-size:13px;color:var(--ink)}.wish-card time{display:block;font-size:11px;color:var(--muted);margin-top:5px}
+#refresh-wishes{margin-top:25px;cursor:pointer}
+#open-guestbook{cursor:pointer}
+/* Open location columns and a fine reply outline on the invitation paper. */
+.location-grid { gap: 0; margin-top: 36px; }
+.location-grid .premium-card { padding: 12px 30px; border: 0; border-radius: 0; background: transparent; }
+.location-grid .premium-card + .premium-card { border-left: 1px solid #dce2d4; }
+.location-grid .premium-card h3 { font-size: 32px; margin-bottom: 20px; }
+.location-grid .premium-card p { line-height: 1.9; }
+.location-grid .button { padding: 5px 0; border: 0; border-bottom: 1px solid #aab79c; background: transparent; color: var(--ink); font-size: 12px; }
+.location-grid .button:hover { color: #61834d; border-bottom-color: #61834d; }
+#rsvp-form { gap: 14px; padding: clamp(24px, 4vw, 44px); border: 1px solid #cdd5c4; border-radius: 8px; background: transparent; box-shadow: none; }
+#rsvp-form > label, #rsvp-form legend { font-size: 12px; font-weight: 600; color: var(--ink); }
+#rsvp-form input:not([type=radio]):not([type=checkbox]), #rsvp-form textarea { background: transparent; border: 0; border-bottom: 1px solid #cdd5c4; border-radius: 0; padding: 13px 2px; }
+#rsvp-form input::placeholder, #rsvp-form textarea::placeholder { color: #6c7864; opacity: 1; }
+#rsvp-form fieldset { border: 0; padding: 16px 0 12px; margin: 8px 0; border-block: 1px solid #e7eadd; min-width: 0; }
+#rsvp-form legend { padding: 0 8px 0 0; }
+#rsvp-form .rsvp-choice { margin: 10px 0; gap: 12px; }
+#rsvp-form .rsvp-note { line-height: 1.8; font-size: 11px; }
+#rsvp-form button { border-radius: 30px; padding: 14px 20px; font-size: 13px; }
+.guestbook-section #open-guestbook { border: 0; border-bottom: 1px solid #aab79c; padding: 8px 0; background: transparent; font-size: 12px; }
+.guestbook-section #open-guestbook:hover { color: #61834d; border-bottom-color: #61834d; }
+@media (max-width: 600px) {
+  .location-grid .premium-card { padding: 24px 12px; }
+  .location-grid .premium-card + .premium-card { border-left: 0; border-top: 1px solid #dce2d4; margin: 8px 20px 0; }
+}
+.guestbook-unlock{width:min(420px,calc(100% - 32px));padding:28px;border:1px solid var(--line);background:var(--paper);color:var(--ink)}
+.guestbook-unlock::backdrop{background:#13201899}.guestbook-unlock form{display:grid;gap:16px}.guestbook-unlock h2{font:36px/1.2 Serif,Georgia,serif}.guestbook-unlock input{width:100%;padding:12px;border:1px solid var(--line);font:16px Sans,Arial,sans-serif;background:#fffef8;color:var(--ink)}.guestbook-unlock form>div{display:flex;justify-content:flex-end;gap:12px}.guestbook-unlock button{cursor:pointer}.guestbook-unlock button:disabled{opacity:.6;cursor:wait}.guestbook-unlock input:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.film-grain{position:fixed;inset:0;z-index:30;background:url('paper-grain.svg');opacity:.055;pointer-events:none;mix-blend-mode:multiply}
+.fireworks-layer{position:fixed;inset:0;z-index:40;pointer-events:none;overflow:hidden}.firework-spark{position:absolute;width:5px;height:5px;border-radius:50%;background:var(--spark-color);left:var(--spark-x);top:var(--spark-y);animation:firework-burst 1.4s ease-out var(--spark-delay) both}
+@keyframes firework-burst{0%{opacity:0;transform:translate(0,0) scale(.4)}15%{opacity:1}100%{opacity:0;transform:translate(var(--spark-dx),var(--spark-dy)) scale(.1)}}
+@media(max-width:600px){.premium-section{width:calc(100% - 36px);margin:60px auto}.location-grid,.gift-grid,.wish-grid{grid-template-columns:1fr}.premium-card,.wish-card{padding:22px}.rsvp-totals strong{font-size:30px}}
+@media(prefers-reduced-motion:reduce){.film-grain,.fireworks-layer{display:none}}

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getDatabase } from "@/lib/mongodb";
 import type { Invitation, Rsvp } from "@/lib/models";
 import { designedInvitations } from "@/lib/designed-invitations";
+import { createHash } from "node:crypto";
 
 export const runtime = "nodejs";
 
@@ -25,10 +26,13 @@ export async function POST(
   const attending = input.attending;
   const guestCount = input.guestCount === undefined ? 1 : input.guestCount;
   const message = typeof input.message === "string" ? input.message.trim() : undefined;
+  const responseToken = input.responseToken;
 
   if (!guestName || guestName.length > 120 || typeof attending !== "boolean" ||
       !Number.isInteger(guestCount) || (guestCount as number) < 1 || (guestCount as number) > 20 ||
-      (message?.length ?? 0) > 1000) {
+      (message?.length ?? 0) > 1000 ||
+      (input.publishMessage !== undefined && typeof input.publishMessage !== "boolean") ||
+      (responseToken !== undefined && (typeof responseToken !== "string" || !/^[a-f0-9-]{36}$/i.test(responseToken)))) {
     return NextResponse.json({ error: "Tên khách, xác nhận tham dự hoặc số lượng khách không hợp lệ" }, { status: 400 });
   }
 
@@ -51,9 +55,24 @@ export async function POST(
       attending,
       guestCount: attending ? guestCount as number : 0,
       ...(message ? { message } : {}),
+      publishMessage: slug === "20260823-NDTD" || input.publishMessage === true,
       createdAt: new Date(),
     };
-    const result = await db.collection<Omit<Rsvp, "_id">>("rsvps").insertOne(rsvp);
+    const responses = db.collection<Rsvp>("rsvps");
+    if (typeof responseToken === "string") {
+      const responseTokenHash = createHash("sha256").update(responseToken).digest("hex");
+      // The unique partial index makes retrying or editing one guest's response atomic.
+      await responses.createIndex({ invitationId: 1, responseTokenHash: 1 }, {
+        unique: true, partialFilterExpression: { responseTokenHash: { $type: "string" } },
+      });
+      const { createdAt, ...changes } = rsvp;
+      const result = await responses.updateOne({ invitationId: invitation._id, responseTokenHash }, {
+        $set: { ...changes, message: message || "", updatedAt: new Date() },
+        $setOnInsert: { createdAt, responseTokenHash },
+      }, { upsert: true });
+      return NextResponse.json({ saved: true, updated: result.upsertedCount === 0 }, { status: result.upsertedCount ? 201 : 200 });
+    }
+    const result = await responses.insertOne(rsvp as Rsvp);
     return NextResponse.json({ id: result.insertedId.toString(), ...rsvp }, { status: 201 });
   } catch (error) {
     console.error("Could not save RSVP", error);
