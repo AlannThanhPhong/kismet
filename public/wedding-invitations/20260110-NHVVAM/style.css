@@ -137,3 +137,5 @@ dialog{background:#210707;color:var(--cream);border:1px solid var(--line);paddin
 .film-section>img{position:static;width:100%;height:auto;opacity:1}
 .film-section:after{display:none}
 @media(max-width:600px){.hero-picture{aspect-ratio:auto}.film-section{grid-template-columns:1fr;gap:32px;padding:48px 24px}.film-section>img{opacity:1}.hero-picture .photo-caption{padding:18px 24px}}
+.ticker-details{display:contents}
+@media(max-width:600px){.ticker{justify-content:center}.ticker-details{display:none}}
