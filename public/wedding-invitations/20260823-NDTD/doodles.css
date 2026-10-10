@@ -82,6 +82,8 @@
 .doodle-inline > svg { display: block; width: 100%; height: 100%; overflow: visible; }
 .has-inline-doodles::before, .has-inline-doodles::after { content: none; }
 .chapter-doodle { display: block; pointer-events: none; user-select: none; }
+.chapter-doodle-last, .chapter-doodle-extra { display: inline-block; vertical-align: middle; }
+.chapter-doodle-extra { width: 105px; height: 100px; margin: 20px 0 0 24px; opacity: .8; }
 .chapter-garden .chapter-doodle-first { background-image: url('doodles/sprig.svg'); }
 .chapter-days .chapter-doodle-first { background-image: url('doodles/sun.svg'); }
 .chapter-garden .chapter-doodle-last { background-image: url('doodles/lovebirds.svg'); }
@@ -89,8 +91,8 @@
 .chapter-doodle.doodle-inline { background-image: none; }
 .chapter-heading.has-inline-doodles > p:not(.eyebrow) { color: var(--muted); font-size: 12px; line-height: 1.8; }
 .opening-doodle { position: absolute; display: none; opacity: .8; }
-.opening-doodle-bow { background-image: url('doodles/bow.svg'); }
-.opening-doodle-butterfly { background-image: url('doodles/butterfly.svg'); }
+.opening-doodle-bow { background-image: url('doodles/happy-pair.svg'); }
+.opening-doodle-butterfly { background-image: url('doodles/cat-outline.svg'); }
 .opening-doodle.doodle-inline { background-image: none; }
 .opening-doodle > svg {
   animation: opening-doodle-sway 6s ease-in-out infinite alternate;
@@ -117,6 +119,7 @@
 @media (max-width: 700px) {
   .chapter-doodle-first { width: 57px; height: 66px; left: 0; top: 0; }
   .chapter-doodle-last { width: 78px; height: 66px; margin-top: 16px; }
+  .chapter-doodle-extra { width: 78px; height: 80px; margin: 16px 0 0 16px; }
   .chapter-heading.has-inline-doodles > p:not(.eyebrow) { max-width: 240px; margin: auto; font-size: 11px; }
 }
 @media (min-width: 1280px) {

@@ -17,7 +17,7 @@
   min-width: 0;
 }
 .opening-polaroid p { overflow-wrap: anywhere; }
-.opening-polaroid > span { text-align: center; }
+.opening-polaroid > span { text-align: right; }
 .opening-polaroid { background: #fffde4; }
 .opening-polaroid > span { margin-top: 12px; }
 .opening-decoration { display: none; }

@@ -55,6 +55,9 @@
   overflow-wrap: anywhere;
 }
 
+.photo-handwritten-caption.caption-left { text-align: left; }
+.photo-handwritten-caption.caption-right { text-align: right; }
+
 @media (max-width: 700px) {
   .album { padding: 0 12px; }
   .album-heading { margin-bottom: 36px; }

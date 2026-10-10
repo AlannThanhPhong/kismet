@@ -50,124 +50,124 @@ musicToggle.addEventListener('click', () => {
   else music.pause();
 });
 
-const balloonColors = ['#f7ce46', '#eebc30', '#ffe58a', '#27ad64', '#3f8751', '#95c868'];
-const flightAssets = ['balloon-bouquet-photo.webp', 'flight-cloud-photo.webp', 'flight-sky-photo.webp'];
-const flightReady = Promise.all(flightAssets.map(src => {
-  const image = new Image();
-  image.src = src;
-  return image.decode().catch(() => {});
-}));
-
+const balloonColors = ['#FCE205', '#FCE205', '#FCE205', '#27ad64', '#3f8751', '#95c868'];
 openingPlay.addEventListener('click', async () => {
   if (openingStarted) return;
   openingStarted = true;
-  // Call play synchronously within the click so audio starts with this gesture.
   void playMusic();
   openingPlay.disabled = true;
   openingPlay.setAttribute('aria-label', 'Đang mở thiệp');
   document.querySelector('.opening-hint').textContent = 'Cùng bay lên với chúng mình…';
   const animations = [];
-  function move(element, frames, duration, easing = 'ease-in-out', iterations = 1) {
-    const animation = element.animate(frames, { duration, easing, iterations, fill: 'forwards' });
+  const realFrame = document.querySelector('.poster-pair');
+  const savedFrameStyle = realFrame.getAttribute('style');
+  const secondPanel = realFrame.querySelector('.married');
+  const savedSecondStyle = secondPanel.getAttribute('style');
+  let placeholder;
+  function restoreFrame() {
+    if (!placeholder) return;
+    placeholder.replaceWith(realFrame);
+    realFrame.classList.remove('flight-frame');
+    if (savedFrameStyle === null) realFrame.removeAttribute('style');
+    else realFrame.setAttribute('style', savedFrameStyle);
+    if (savedSecondStyle === null) secondPanel.removeAttribute('style');
+    else secondPanel.setAttribute('style', savedSecondStyle);
+    placeholder = null;
+  }
+  function move(element, frames, duration, easing = 'ease-in-out') {
+    const animation = element.animate(frames, { duration, easing, fill: 'forwards' });
     animations.push(animation);
     return animation.finished;
   }
   function reveal() {
     openingScreen.hidden = true;
     document.body.classList.remove('invitation-closed');
-    document.body.classList.add('invitation-opening');
     window.scrollTo(0, 0);
     invitationContent.classList.add('is-revealing');
   }
   try {
-    // Bound the decode wait so a slow image never leaves the invitation locked.
-    let decodeTimeout;
-    await Promise.race([flightReady, new Promise(resolve => { decodeTimeout = setTimeout(resolve, 4500); })]);
-    clearTimeout(decodeTimeout);
-    balloonLayer.innerHTML = '<div class="flight-sky"></div><div class="flight-bouquet"><img src="balloon-bouquet-photo.webp" alt="" width="841" height="1870"></div><div class="flight-veil"></div>';
+    balloonLayer.innerHTML = `<div class="flight-sky"></div><div class="flight-rig">
+      <div class="flight-balloons"><img src="balloon-bouquet-real-fce205.png" alt="" width="320" height="320"></div>
+      <svg class="flight-tether" viewBox="0 0 100 80" aria-hidden="true"><g fill="none" stroke="#58a7d4" stroke-width="3" stroke-linecap="round"><path class="tether-upper" d="M50 0Q43 19 50 38"/><path class="tether-lower" d="M50 42Q57 62 50 80"/><path class="tether-joint" d="M50 38v4"/><path class="tether-snap" d="m35 33-7-4m7 16-7 4m37-16 7-4m-7 16 7 4"/></g></svg>
+      <div class="flight-card"></div></div>`;
     const sky = balloonLayer.querySelector('.flight-sky');
-    const bouquet = balloonLayer.querySelector('.flight-bouquet');
-    const veil = balloonLayer.querySelector('.flight-veil');
-    const width = innerWidth;
-    const height = innerHeight;
-    function cloud(x, y, size, kind) {
-      const element = document.createElement('div');
-      element.className = `flight-cloud is-${kind}`;
-      element.style.cssText = `left:${x}px;top:${y}px;width:${size}px;height:${size * 2 / 3}px`;
-      balloonLayer.appendChild(element);
-      return element;
-    }
-    const distant = [-.35, .55, -.15].map((x, index) => cloud(width * x, -height * (.7 + index * .4), width * (.8 + index * .2), 'distant'));
-    const bankSize = Math.max(width * 1.45, height * 1.2);
-    const banks = Array.from({ length: 6 }, (_, index) => cloud(
-      width / 2 - bankSize / 2 + (index % 2 ? .18 : -.18) * width,
-      height * (Math.floor(index / 2) * .38 - .32), bankSize, 'cover',
-    ));
+    const rig = balloonLayer.querySelector('.flight-rig');
+    const balloons = balloonLayer.querySelector('.flight-balloons');
+    const card = balloonLayer.querySelector('.flight-card');
+    const mobile = innerWidth <= 600;
+    const originalRect = realFrame.getBoundingClientRect();
+    const panelHeight = mobile ? realFrame.querySelector('.hero').getBoundingClientRect().height : originalRect.height;
+    const layout = getComputedStyle(realFrame);
+    placeholder = document.createElement('div');
+    placeholder.className = 'flight-placeholder';
+    placeholder.setAttribute('aria-hidden', 'true');
+    Object.assign(placeholder.style, { width: `${originalRect.width}px`, height: `${originalRect.height}px`, margin: layout.margin, visibility: 'hidden' });
+    realFrame.before(placeholder);
+    // Carry the actual DOM panel at its original layout size, scaled as one piece.
+    // On phones the first full-size portrait is the landing frame.
+    if (mobile) secondPanel.style.display = 'none';
+    realFrame.classList.add('flight-frame');
+    const balloonRatio = mobile ? .82 : .66;
+    const tetherHeight = mobile ? 30 : 38;
+    const imageRatio = 1.02;
+    const rideWidth = Math.min(innerWidth * (mobile ? .74 : .82), mobile ? 330 : 680,
+      (innerHeight * .90 - tetherHeight) / (panelHeight / originalRect.width + balloonRatio * imageRatio));
+    const carryScale = rideWidth / originalRect.width;
+    rig.style.width = `${rideWidth}px`;
+    balloons.style.width = `${rideWidth * balloonRatio}px`;
+    Object.assign(card.style, { width: `${rideWidth}px`, height: `${panelHeight * carryScale}px` });
+    Object.assign(realFrame.style, { width: `${originalRect.width}px`, maxWidth: 'none', margin: '0', transform: `scale(${carryScale})` });
+    card.append(realFrame);
+    let decodeTimer;
+    await Promise.race([
+      Promise.all([...rig.querySelectorAll('img')].map(image => image.decode().catch(() => {}))),
+      new Promise(resolve => { decodeTimer = setTimeout(resolve, 2000); }),
+    ]);
+    clearTimeout(decodeTimer);
     openingScreen.classList.add('is-departing');
+    balloonLayer.hidden = false;
     balloonLayer.classList.add('is-rising');
+    balloonLayer.dataset.stage = 'rising';
     if (reducedMotion) {
-      await move(veil, [{ opacity: 0 }, { opacity: 1 }], 180);
       reveal();
-      await move(veil, [{ opacity: 1 }, { opacity: 0 }], 250);
+      await move(balloonLayer, [{ opacity: 1 }, { opacity: 0 }], 250);
     } else {
-      // Gentle wind sway runs independently of the camera's upward motion.
-      void move(bouquet.querySelector('img'), [
-        { transform: 'rotate(-2deg)' }, { transform: 'rotate(2deg)' }, { transform: 'rotate(-2deg)' },
-      ], 3800, 'ease-in-out', 3).catch(() => {});
-      balloonLayer.dataset.stage = 'rising';
-      await Promise.all([
-        move(sky, [{ opacity: 0 }, { opacity: 1 }], 900),
-        move(bouquet, [
-          { transform: 'translate(-50%, 100svh) scale(.94)' },
-          { transform: 'translate(-50%, -50%) scale(1)' },
-        ], 2200, 'cubic-bezier(.22,.55,.3,1)'),
-      ]);
+      await move(rig, [
+        { transform: 'translate(-50%, 100svh) rotate(-3deg)' },
+        { transform: 'translate(-50%, -45%) rotate(1deg)', offset: .75 },
+        { transform: 'translate(-50%, -50%) rotate(0deg)' },
+      ], 4200, 'cubic-bezier(.2,.55,.3,1)');
       openingScreen.hidden = true;
-      balloonLayer.dataset.stage = 'tracking';
+      balloonLayer.dataset.stage = 'snapping';
+      balloonLayer.querySelector('.tether-joint').style.opacity = '0';
       await Promise.all([
-        move(sky, [{ transform: 'translateY(0)' }, { transform: 'translateY(25%)' }], 3000, 'linear'),
-        move(bouquet, [
-          { transform: 'translate(-50%, -50%) scale(1)' },
-          { transform: 'translate(-48%, -57%) scale(.97)' },
-        ], 3000),
-        ...distant.map((element, index) => move(element, [
-          { transform: 'translateY(0)', opacity: 0 },
-          { opacity: .48, offset: .2 },
-          { transform: `translateY(${height * (1.35 + index * .38)}px) scale(1.18)`, opacity: .65 },
-        ], 3000, 'linear')),
+        move(balloonLayer.querySelector('.tether-upper'), [{ transform: 'translateY(0)' }, { transform: 'translateY(-15px)', opacity: 0 }], 450),
+        move(balloonLayer.querySelector('.tether-lower'), [{ transform: 'translateY(0)' }, { transform: 'translateY(12px)', opacity: 0 }], 450),
+        move(balloonLayer.querySelector('.tether-snap'), [{ opacity: 0 }, { opacity: 1, offset: .25 }, { opacity: 0 }], 450),
+        move(balloons, [{ transform: 'translateY(0)', opacity: 1 }, { transform: 'translateY(-90svh) rotate(-8deg)', opacity: 0 }], 900, 'ease-in'),
       ]);
-      balloonLayer.dataset.stage = 'enveloping';
-      await Promise.all([
-        ...banks.map((element, index) => move(element, [
-          { transform: `translate(${index % 2 ? 12 : -12}%, -105svh) scale(.85)`, opacity: 0 },
-          { opacity: 1, offset: .3 },
-          { transform: 'translate(0, 0) scale(1.12)', opacity: 1 },
-        ], 1900, 'cubic-bezier(.25,.1,.25,1)')),
-        move(bouquet, [
-          { transform: 'translate(-48%, -57%) scale(.97)', opacity: 1 },
-          { transform: 'translate(-50%, -65%) scale(.88)', opacity: .65 },
-        ], 1900),
-        move(veil, [{ opacity: 0 }, { opacity: 0, offset: .65 }, { opacity: 1 }], 1900),
-      ]);
-      // The mist is now fully opaque before the balloons disappear beneath it.
-      balloonLayer.dataset.stage = 'covered';
-      bouquet.hidden = true;
-      sky.hidden = true;
-      distant.forEach(element => { element.hidden = true; });
+      balloonLayer.dataset.stage = 'zooming';
+      const from = card.getBoundingClientRect();
+      balloonLayer.append(card);
+      card.classList.add('is-zooming');
+      Object.assign(card.style, { left: `${from.left}px`, top: `${from.top}px`, width: `${from.width}px`, height: `${from.height}px` });
+      rig.hidden = true;
       reveal();
-      await move(veil, [{ opacity: 1 }, { opacity: 1 }], 350);
-      balloonLayer.dataset.stage = 'parting';
+      const target = placeholder.getBoundingClientRect();
+      const landingScale = originalRect.width / from.width;
       await Promise.all([
-        move(veil, [{ opacity: 1 }, { opacity: .25, offset: .55 }, { opacity: 0 }], 2100),
-        ...banks.map((element, index) => move(element, [
-          { transform: 'translate(0, 0) scale(1.12)', opacity: 1 },
-          { transform: `translate(${index % 2 ? 85 : -85}vw, ${index < 2 ? -35 : 35}svh) scale(1.3)`, opacity: 0 },
-        ], 2100, 'cubic-bezier(.25,0,.4,1)')),
+        move(card, [
+          { transform: 'translate(0,0) scale(1)' },
+          { transform: `translate(${target.left - from.left}px,${target.top - from.top}px) scale(${landingScale})` },
+        ], 2300, 'cubic-bezier(.3,0,.15,1)'),
+        move(sky, [{ opacity: 1 }, { opacity: 1, offset: .35 }, { opacity: 0 }], 2300),
       ]);
+      restoreFrame();
     }
   } catch (error) {
     console.warn('Opening animation interrupted', error);
   } finally {
+    restoreFrame();
     reveal();
     balloonLayer.hidden = true;
     animations.forEach(animation => animation.cancel());
@@ -180,7 +180,6 @@ openingPlay.addEventListener('click', async () => {
     celebrate();
   }
 });
-
 const lightbox = document.querySelector('.lightbox');
 const lightboxImage = lightbox.querySelector('img');
 const photoButtons = [...document.querySelectorAll('.gallery-item, .portrait-photo')];

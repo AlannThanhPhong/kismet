@@ -17,9 +17,16 @@
       motif.dataset.doodle = index === 0
         ? (garden ? 'sprig' : days ? 'sun' : 'flower')
         : (garden ? 'lovebirds' : days ? 'butterfly' : 'bow');
+      if ((index === 0 && (garden || days)) || (index === 1 && !garden && !days))
+        motif.dataset.color = '#FCE205';
       motif.setAttribute('aria-hidden', 'true');
       heading.append(motif);
     });
+    const extra = document.createElement('span');
+    extra.className = 'chapter-doodle chapter-doodle-extra';
+    extra.dataset.doodle = garden ? 'cat-outline' : days ? 'happy-pair' : 'cat-bold';
+    extra.setAttribute('aria-hidden', 'true');
+    heading.append(extra);
     heading.classList.add('has-inline-doodles');
   });
 
@@ -69,10 +76,11 @@
       const parsed = new DOMParser().parseFromString(source, 'image/svg+xml');
       if (parsed.querySelector('parsererror')) throw new Error('Invalid doodle');
       const svg = document.importNode(parsed.documentElement, true);
-      if (element.classList.contains('opening-doodle')) {
+      const color = element.dataset.color || (element.classList.contains('opening-doodle') ? '#5b9dce' : null);
+      if (color) {
         svg.querySelectorAll('[stroke], [fill]').forEach(node => {
           ['stroke', 'fill'].forEach(attribute => {
-            if (node.getAttribute(attribute) === '#315ba3') node.setAttribute(attribute, '#5b9dce');
+            if (node.getAttribute(attribute) === '#315ba3') node.setAttribute(attribute, color);
           });
         });
       }

@@ -79,7 +79,7 @@ export const WEDDING_TEMPLATES: WeddingTemplateItem[] = [
   {
     id: "korean-garden-green",
     code: "20260823-NDTD",
-    name: "WE ARE GETTING MARRIED",
+    name: "JUST ONLY YOU",
     coupleName: "Thanh Điền & Ngọc Dung",
     category: "modern",
     categoryLabel: "Hàn Quốc / Xanh lá",
