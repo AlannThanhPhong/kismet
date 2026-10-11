@@ -6,11 +6,11 @@
   const cache = new Map();
   let sequence = 0;
 
-  function motif(name, yellow = false) {
+  function motif(name) {
     const element = document.createElement('span');
     element.className = 'doodle scattered-doodle';
     element.dataset.doodle = name;
-    element.dataset.color = yellow ? '#FCE205' : '#5b9dce';
+    element.dataset.color = '#5b9dce';
     element.setAttribute('aria-hidden', 'true');
     return element;
   }
@@ -18,14 +18,12 @@
     const row = document.createElement('div');
     row.className = 'doodle-scatter-row';
     row.setAttribute('aria-hidden', 'true');
-    names.forEach((name, index) => row.append(motif(name, index === 1)));
+    names.forEach(name => row.append(motif(name)));
     return row;
   }
   const openingMotifs = [
-    'flower', 'girl-portrait', 'boy-portrait', 'happy-pair', 'heart-people', 'cat-fish',
-    'sun', 'daisy-pencil', 'love', 'cat-skate', 'bow', 'smile',
-    'sprig', 'bouquet', 'butterfly', 'girl-flower', 'cat-bold', 'cat-outline',
-    'lovebirds', 'radiant-heart', 'flower-solid', 'daisy-solid', 'heart-hug',
+    'flower', 'girl-portrait', 'cat-skate', 'bow',
+    'boy-portrait', 'butterfly', 'lovebirds', 'heart-hug',
   ];
   const openingDecoration = document.querySelector('.opening-decoration');
   if (openingDecoration) {
@@ -37,24 +35,22 @@
       return panel;
     });
     const loosePositions = [
-      [17, 8, 1.08, -14], [60, 5, .72, 12], [85, 23, .84, -8],
-      [41, 27, 1.02, 7], [12, 40, .68, -5], [72, 43, .86, 19],
-      [30, 54, .9, -10], [88, 61, .64, 10], [57, 69, .72, -19],
-      [16, 78, .96, 4], [81, 88, 1.03, -9], [40, 94, .68, 16],
+      [62, 14, .92, -14], [80, 38, .72, 9],
+      [55, 63, .84, -8], [75, 85, .78, 16],
+      [26, 22, .8, -9], [45, 46, .9, 14],
+      [20, 71, .78, -12], [40, 90, .86, 7],
     ];
     const phonePositions = [
-      [16, 6], [58, 8], [84, 17], [37, 20], [12, 29], [66, 29],
-      [87, 39], [40, 37], [15, 45], [68, 48], [36, 54], [84, 57],
-      [12, 65], [57, 64], [86, 71], [42, 74], [12, 81], [64, 81],
-      [85, 90], [39, 91], [14, 96], [82, 5], [63, 97],
+      [20, 12], [63, 36], [19, 60], [55, 85],
+      [78, 18], [32, 40], [79, 65], [25, 91],
     ];
     openingMotifs.forEach((name, index) => {
       const element = motif(name);
       element.className = 'doodle opening-doodle opening-motif';
-      const [x, y, scale, tilt] = loosePositions[index % 12];
+      const [x, y, scale, tilt] = loosePositions[index];
       const [phoneX, phoneY] = phonePositions[index];
-      element.style.cssText = `--motif-x:${index < 12 ? x : 100 - x}%;--motif-y:${y}%;--motif-size:${scale};--motif-tilt:${tilt}deg;--phone-x:${phoneX}%;--phone-y:${phoneY}%`;
-      panels[index < 12 ? 0 : 1].append(element);
+      element.style.cssText = `--motif-x:${x}%;--motif-y:${y}%;--motif-size:${scale};--motif-tilt:${tilt}deg;--phone-x:${phoneX}%;--phone-y:${phoneY}%`;
+      panels[index < 4 ? 0 : 1].append(element);
     });
     const updateCoverWidth = () => {
       document.querySelector('.opening-screen').style.setProperty('--opening-center-width',
@@ -66,7 +62,6 @@
   // Keep illustrations in the whitespace, clear of photos and interactive controls.
   const placements = [
     ['.album-heading', ['daisy-pencil', 'smile']],
-    ['.paper.invitation', ['heart-people', 'flower-solid']],
     ['.chapter-days .gallery', ['cat-fish', 'daisy-solid']],
     ['.chapter-garden .gallery', ['smile', 'radiant-heart']],
     ['.chapter-studio .gallery', ['cat-skate', 'flower-solid']],
@@ -78,7 +73,7 @@
     const anchor = document.querySelector(selector);
     if (!anchor) return;
     const row = motifRow(names);
-    if (selector === '.album-heading' || selector === '.paper.invitation') anchor.append(row);
+    if (selector === '.album-heading') anchor.append(row);
     else anchor.after(row);
   });
   document.querySelector('.closing .back-link')?.before(motifRow(['flower-solid', 'radiant-heart']));
@@ -94,8 +89,7 @@
       motif.dataset.doodle = index === 0
         ? (garden ? 'sprig' : days ? 'sun' : 'flower')
         : (garden ? 'lovebirds' : days ? 'butterfly' : 'bow');
-      if ((index === 0 && (garden || days)) || (index === 1 && !garden && !days))
-        motif.dataset.color = '#FCE205';
+      motif.dataset.color = '#5b9dce';
       motif.setAttribute('aria-hidden', 'true');
       heading.append(motif);
     });
@@ -106,6 +100,19 @@
     heading.append(extra);
     heading.classList.add('has-inline-doodles');
   });
+
+  // Alternate colors in reading order from the album heading down the page.
+  const album = document.querySelector('.album');
+  if (album) {
+    let patternIndex = 0;
+    document.querySelectorAll('.doodle, [data-doodle]').forEach(element => {
+      if (element.classList.contains('doodle--heart-couple')) return;
+      if (album.contains(element) ||
+          (album.compareDocumentPosition(element) & Node.DOCUMENT_POSITION_FOLLOWING)) {
+        element.dataset.color = patternIndex++ % 2 === 0 ? '#5b9dce' : '#FCE205';
+      }
+    });
+  }
 
   function reveal(element) {
     if (!pending.has(element)) return;
@@ -153,13 +160,12 @@
       const parsed = new DOMParser().parseFromString(source, 'image/svg+xml');
       if (parsed.querySelector('parsererror')) throw new Error('Invalid doodle');
       const svg = document.importNode(parsed.documentElement, true);
-      const color = element.classList.contains('opening-doodle') ? '#5b9dce' : element.dataset.color;
+      const color = element.dataset.color || '#5b9dce';
       if (color) {
         svg.querySelectorAll('[stroke], [fill]').forEach(node => {
           ['stroke', 'fill'].forEach(attribute => {
             const original = node.getAttribute(attribute);
-            if (original === '#315ba3' ||
-                (element.classList.contains('opening-doodle') && original === '#FCE205'))
+            if (original === '#315ba3' || original === '#FCE205')
               node.setAttribute(attribute, color);
           });
         });
