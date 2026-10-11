@@ -87,7 +87,7 @@ openingPlay.addEventListener('click', async () => {
   }
   try {
     balloonLayer.innerHTML = `<div class="flight-sky"></div><div class="flight-rig">
-      <div class="flight-balloons"><img src="balloon-bouquet-real-fce205.png" alt="" width="320" height="320"></div>
+      <div class="flight-balloons"><img src="balloon-bouquet-smiley.png" alt="" width="320" height="320"></div>
       <svg class="flight-tether" viewBox="0 0 100 80" aria-hidden="true"><g fill="none" stroke="#58a7d4" stroke-width="3" stroke-linecap="round"><path class="tether-upper" d="M50 0Q43 19 50 38"/><path class="tether-lower" d="M50 42Q57 62 50 80"/><path class="tether-joint" d="M50 38v4"/><path class="tether-snap" d="m35 33-7-4m7 16-7 4m37-16 7-4m-7 16 7 4"/></g></svg>
       <div class="flight-card"></div></div>`;
     const sky = balloonLayer.querySelector('.flight-sky');

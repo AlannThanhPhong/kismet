@@ -8,7 +8,6 @@
 .gallery{display:block;columns:3;column-gap:16px}.gallery-item{display:inline-block;width:100%;margin:0 0 16px;break-inside:avoid;vertical-align:top}.gallery-item img{aspect-ratio:auto;object-fit:contain}.lightbox-nav{position:absolute;top:50%;width:44px;height:44px;border:1px solid #82947f;background:#244b35;color:white;cursor:pointer;font-size:24px}.lightbox-prev{left:12px}.lightbox-next{right:12px}@media(max-width:700px){.gallery{columns:2;column-gap:10px}.gallery-item{margin-bottom:10px}.lightbox-nav{width:36px;height:44px}}
 
 .portraits{width:min(980px,calc(100% - 48px));margin:110px auto 0;display:grid;gap:90px}.portrait{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:70px}.portrait-photo{display:block;width:100%;padding:0;border:0;background:var(--green);cursor:zoom-in;overflow:hidden}.portrait-photo img{height:auto;transition:transform .5s}.portrait-photo:hover img{transform:scale(1.025)}.portrait-copy{padding:24px 0;color:var(--ink)}.portrait-copy h2{font:clamp(42px,5vw,64px)/1.15 Serif,Georgia,serif;margin:16px 0 26px}.portrait-note{font:34px/1.4 Script,cursive;margin-bottom:18px}.portrait-message{font-size:15px;line-height:2.2;overflow-wrap:anywhere}.portrait-signature{font-size:11px;color:var(--muted);margin-top:28px;padding-top:18px;border-top:1px solid var(--line)}.portrait-groom .portrait-photo{grid-column:2;grid-row:1}.portrait-groom .portrait-copy{grid-column:1;grid-row:1;text-align:right}
-.portrait-connection{display:none}
 @media(max-width:700px){
   .portraits{width:calc(100% - 48px);margin-top:40px;gap:36px}
   .portrait{grid-template-columns:minmax(0,1fr);gap:0}
@@ -38,8 +37,11 @@
   .portrait-groom .portrait-copy>p{text-align:left}
   .portrait .portrait-photo:hover img{transform:none}
   .portrait-bride{position:relative}
-  .portrait-connection{display:block;position:absolute;grid-column:1/-1;grid-row:2/6;left:0;top:0;width:100%;height:calc(100% + 36px);color:#8a9c7f;opacity:.7;pointer-events:none;overflow:visible}
 }
+/* Separate the closing lines and mirror their alignment across the two portraits. */
+.portrait .portrait-signature{margin-top:28px;padding-top:20px}
+.portrait-bride .portrait-copy>.portrait-signature{text-align:left}
+.portrait-groom .portrait-copy>.portrait-signature{text-align:right}
 @media(prefers-reduced-motion:reduce){.portrait-photo img{transition:none}.portrait-photo:hover img{transform:none}}
 
 .music-toggle{position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:10;display:flex;align-items:center;gap:8px;padding:10px 16px;border:1px solid #ccd7c4;border-radius:30px;background:var(--paper);color:var(--ink);box-shadow:0 3px 16px #14261a20;font:12px Sans,sans-serif;cursor:pointer}.music-toggle>span:first-child{font-size:21px;line-height:1}.music-toggle[aria-pressed="true"]{background:var(--ink);color:var(--paper)}.music-toggle:focus-visible{outline:3px solid #81976e;outline-offset:4px}@media(max-width:700px){.music-toggle{right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));padding:9px 13px}}

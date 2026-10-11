@@ -179,10 +179,10 @@
   position: absolute;
   top: 5%;
   bottom: 5%;
-  width: min(430px, calc((100% - var(--opening-center-width, 500px)) / 2 - 40px));
+  width: min(300px, calc((100% - var(--opening-center-width, 500px)) / 2 - 48px));
 }
-.opening-motif-panel-left { left: 14px; }
-.opening-motif-panel-right { right: 14px; }
+.opening-motif-panel-left { right: calc(50% + var(--opening-center-width, 500px) / 2 + 28px); }
+.opening-motif-panel-right { left: calc(50% + var(--opening-center-width, 500px) / 2 + 28px); }
 .opening-motif-panel .opening-motif {
   display: block;
   position: absolute;
@@ -200,7 +200,7 @@
     position: relative;
     inset: auto;
     width: 100%;
-    height: clamp(860px, 250vw, 1080px);
+    height: clamp(360px, 110vw, 480px);
     flex-shrink: 0;
     margin: 24px auto 0;
     display: block;
