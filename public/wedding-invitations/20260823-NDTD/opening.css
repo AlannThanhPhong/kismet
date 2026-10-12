@@ -33,6 +33,23 @@
 }
 .opening-decoration { display: none; }
 
+/* Keep the play button centered and every control inside even a narrow card. */
+.opening-controls {
+  grid-template-columns: 28px repeat(3, minmax(0, 1fr)) 28px;
+  margin: 0;
+  gap: clamp(2px, 1vw, 8px);
+}
+.opening-controls::before { content: ''; }
+.opening-controls button { min-width: 0; gap: 0; }
+.opening-controls button svg { display: block; max-width: 100%; }
+.opening-output {
+  position: static;
+  width: 28px;
+  height: 28px;
+  justify-self: end;
+}
+.opening-output svg { display: block; }
+
 @media (min-width: 700px) {
   .opening-layout {
     /* Fit the complete portrait and player on tall desktop screens. */
@@ -44,8 +61,6 @@
   .opening-polaroid > span { font-size: 25px; }
   .opening-player { padding: 18px 22px; }
   .opening-track h3 { font-size: 18px; }
-  .opening-controls { margin-inline: 32px; gap: 20px; }
-  .opening-output { right: -32px; width: 28px; height: 28px; }
 }
 
 /* Fine botanical lines, ribbon bows and a double stationery border. */

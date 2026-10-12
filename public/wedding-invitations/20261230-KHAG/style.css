@@ -1,0 +1,61 @@
+﻿:root { color-scheme: light; --paper: #FAEBD7; --ink: #152238; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: Georgia, "Times New Roman", serif; }
+.invitation { width: min(100%, 900px); margin: auto; background: var(--paper); text-align: center; }
+.invitation-hero { padding: 48px 16px 40px; }
+.eyebrow { margin: 0 0 28px; font: 10px/1.8 "Courier New", monospace; letter-spacing: 3px; }
+.hero-quote { margin: 10px 0 24px; font: italic clamp(30px, 6vw, 48px)/1.25 Georgia, serif; }
+.message { font-size: 15px; line-height: 1.9; }
+h1[tabindex="-1"]:focus { outline: none; }
+.content-block { max-width: 670px; margin: auto; padding: 76px 32px; }
+h2 { margin: 0 0 30px; font-size: clamp(30px, 5vw, 45px); line-height: 1.25; font-weight: 400; }
+.celebration { border-top: 1px solid rgb(21 34 56 / .15); }
+time { display: block; margin: 32px 0; }
+.date { display: block; font-size: 32px; letter-spacing: 3px; }
+.hour { display: block; margin-top: 12px; font: 14px/1.5 "Courier New", monospace; letter-spacing: 3px; }
+.venue { margin: 35px 0; }
+.venue h2 { margin-bottom: 18px; font-style: italic; }
+.ballroom, address { font: 12px/1.9 "Courier New", monospace; letter-spacing: .5px; }
+address { max-width: 360px; margin: auto; font-style: normal; }
+.map { display: inline-block; margin-top: 28px; padding: 14px 24px; border: 1px solid var(--ink); color: var(--paper); background: var(--ink); font: 12px/1.5 "Courier New", monospace; text-decoration: none; }
+.map:hover { color: var(--ink); background: var(--paper); }
+a:focus-visible, summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 5px; }
+.closing { font-size: 15px; line-height: 1.8; font-style: italic; }
+.countdown { display: flex; justify-content: center; gap: 22px; margin: 48px 0; }
+.countdown[hidden] { display: none; }
+.countdown strong { display: block; font: 22px/1.5 "Courier New", monospace; font-weight: 400; }
+.countdown span { font: 8px/1.5 "Courier New", monospace; letter-spacing: 1px; }
+.scroll-note { display: inline-flex; flex-direction: column; gap: 15px; color: var(--ink); font: 10px/1.5 "Courier New", monospace; letter-spacing: 2px; text-decoration: none; }
+.scroll-note span { font-size: 24px; }
+.chapter-photo { position: relative; margin: 0; }
+.chapter-photo img { display: block; width: 100%; height: auto; }
+.hero-photo img { max-height: 950px; object-fit: cover; object-position: center; }
+.chapter-photo figcaption { position: absolute; inset: auto 0 0; padding: 70px 24px 40px; background: linear-gradient(transparent, rgb(21 34 56 / .65)); color: var(--paper); font: italic clamp(24px, 4vw, 40px)/1.3 Georgia, serif; }
+.story p, .invitation-footer p { font-size: 16px; line-height: 1.95; }
+.story .eyebrow, .invitation-footer .eyebrow { font-size: 10px; line-height: 1.8; }
+.story-subtitle { font-style: italic; }
+blockquote { margin: 36px 0 0; padding: 28px 0; border-top: 1px solid rgb(21 34 56 / .2); font: italic clamp(23px, 4vw, 31px)/1.5 Georgia, serif; }
+.photo-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 0 22px; }
+.photo-pair img { width: 100%; height: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+.album-section { padding: 60px 22px 20px; }
+.wedding-album, .album-more-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.wedding-album a { display: block; }
+.wedding-album img { display: block; width: 100%; height: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+.album-more { grid-column: 1 / -1; }
+.album-more summary { width: fit-content; cursor: pointer; margin: 28px auto 38px; padding: 14px 22px; border: 1px solid var(--ink); font: 11px/1.8 "Courier New", monospace; letter-spacing: 1px; }
+.album-fallback { width: 100%; }
+.invitation-footer { padding-bottom: 110px; }
+.invitation-footer h2 { font-size: 26px; }
+.invitation-footer .footer-date { margin-top: 36px; font: 10px/1.8 "Courier New", monospace; letter-spacing: 2px; }
+@media (max-width: 480px) {
+  .invitation-hero { padding: 34px 12px; }
+  .content-block { padding: 56px 26px; }
+  .story p, .invitation-footer p { font-size: 15px; }
+  .eyebrow { letter-spacing: 2px; }
+  .photo-pair, .album-section { padding-inline: 12px; }
+  .photo-pair, .wedding-album, .album-more-grid { gap: 8px; }
+  .chapter-photo figcaption { padding: 55px 20px 28px; }
+  .invitation-footer { padding-bottom: 100px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }

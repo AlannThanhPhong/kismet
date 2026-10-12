@@ -1,0 +1,439 @@
+/* ==========================================================================
+   20261230-KHAG: TYPEWRITER & RISING PAPER OPENING CEREMONY
+   Background: #152238 | Paper: #FAEBD7 | HD typewriter, envelope on paper
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&display=swap');
+
+body.is-opening-locked {
+  overflow: hidden;
+  background-color: #152238;
+}
+
+body.is-opening-locked .invitation {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(18px);
+}
+body.is-opening-locked.is-revealing-invitation .invitation {
+  opacity: 1;
+  transform: none;
+}
+
+.invitation {
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ==========================================================================
+   OPENING SCREEN CONTAINER (#152238)
+   ========================================================================== */
+.typewriter-opening {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  background-color: #152238;
+  background-image: radial-gradient(circle at 50% 42%, rgba(33, 55, 92, 0.45) 0%, rgba(21, 34, 56, 1) 75%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: max(18px, env(safe-area-inset-top)) 16px max(16px, env(safe-area-inset-bottom));
+  user-select: none;
+  overflow: hidden;
+  transition: opacity 0.85s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.85s;
+}
+
+.typewriter-opening.is-dismissed {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   TOP MESSAGE: "You have a message" (Typewriter Font & Typing Effect)
+   ========================================================================== */
+.typewriter-header {
+  position: relative;
+  z-index: 10;
+  margin-top: clamp(32px, 8svh, 80px);
+  margin-bottom: clamp(4px, 1svh, 12px);
+  min-height: 2.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.typewriter-headline {
+  margin: 0;
+  font-family: "Courier Prime", "Courier New", Courier, monospace;
+  font-weight: 700;
+  font-size: clamp(20px, 4.6vw, 29px);
+  letter-spacing: 0.06em;
+  color: #FAEBD7;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+  display: inline-flex;
+  align-items: center;
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  width: 2.5px;
+  height: 1.05em;
+  background-color: #FAEBD7;
+  margin-left: 4px;
+  vertical-align: middle;
+  animation: cursorBlink 0.85s steps(1) infinite;
+}
+
+.typewriter-cursor.is-done {
+  animation: cursorBlink 1.1s steps(1) infinite;
+  opacity: 0.75;
+}
+
+@keyframes cursorBlink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+/* ==========================================================================
+   CENTER/BOTTOM STAGE: TYPEWRITER + RISING PAPER
+   ========================================================================== */
+.typewriter-stage-wrap {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: clamp(36px, 7svh, 72px);
+}
+
+/* The assembly coordinates paper slot relative to the typewriter width */
+.typewriter-assembly {
+  position: relative;
+  /* Scale width by viewport height so paper + typewriter always fit 100% in 100svh */
+  width: min(90vw, calc(44svh * 1.333), 420px);
+  aspect-ratio: 4 / 3;
+  flex-shrink: 0;
+}
+
+/* Subtle mechanical keystroke vibration while typing/feeding */
+.typewriter-assembly.is-typing-active .typewriter-front-layer,
+.typewriter-assembly.is-typing-active .typewriter-back-layer {
+  animation: machineChatter 0.14s ease-in-out infinite alternate;
+}
+
+@keyframes machineChatter {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(0.8px); }
+}
+
+/* Layer 1: Back Platen & Side Levers (Behind the Paper) */
+.typewriter-back-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(0 16px 18px rgba(5, 11, 22, 0.4));
+}
+
+/* Layer 2: Paper Slot Clipping Viewport
+   Sits right at the platen entry line (80.8% from bottom of typewriter)
+   and extends high above the typewriter so the long paper can rise out */
+.paper-slot-viewport {
+  position: absolute;
+  left: 22.5%;
+  width: 55%;
+  bottom: 87.5%;
+  height: clamp(320px, 62svh, 520px);
+  z-index: 2;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+/* The physical textured paper sheet */
+.rising-paper-sheet {
+  position: relative;
+  width: 100%;
+  background-color: #FAEBD7;
+  aspect-ratio: 3 / 4;
+  border-radius: 2px 2px 0 0;
+  padding: clamp(10px, 1.8svh, 16px) clamp(10px, 2.2vw, 15px) 48px;
+  box-shadow:
+    0 -4px 18px rgba(7, 14, 26, 0.38),
+    inset 0 0 0 1px rgba(21, 34, 56, 0.08),
+    inset 0 -16px 20px -10px rgba(15, 23, 38, 0.28);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  /* Start tucked deep inside the typewriter platen slot: only a small blank top lip shows */
+  transform: translate3d(0, 88%, 0);
+  will-change: transform;
+}
+
+/* Slow, realistic paper feed upwards out of the typewriter */
+.rising-paper-sheet.is-rising {
+  transition: transform 4.2s cubic-bezier(0.22, 0.68, 0.32, 1);
+  transform: translate3d(0, 0%, 0);
+}
+
+/* Bottom roller shadow on the paper right where it meets the platen */
+.paper-Slot-shadow {
+  position: absolute;
+  left: 22.5%;
+  width: 55%;
+  bottom: 87.5%;
+  height: 14px;
+  z-index: 3;
+  background: linear-gradient(to top, rgba(10, 16, 26, 0.48) 0%, rgba(10, 16, 26, 0.12) 55%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Metal Paper Bail Bar across the paper (with two small rubber rollers) */
+.typewriter-bail-bar {
+  position: absolute;
+  left: 21.8%;
+  width: 56.4%;
+  top: 10.4%;
+  height: 3px;
+  z-index: 4;
+  background: linear-gradient(180deg, #f0f2f5 0%, #8b929a 55%, #2c3137 100%);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.42);
+  pointer-events: none;
+}
+
+.typewriter-bail-bar::before,
+.typewriter-bail-bar::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  width: 11%;
+  height: 8px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #45494e 0%, #17191c 60%, #0d0e10 100%);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.typewriter-bail-bar::before {
+  left: 17%;
+}
+
+.typewriter-bail-bar::after {
+  right: 17%;
+}
+
+/* Layer 3: Front Typewriter Carriage & Keyboard (In front of the bottom of the paper) */
+.typewriter-front-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  clip-path: polygon(0 0, 22.5% 0, 22.5% 12.5%, 77.5% 12.5%, 77.5% 0, 100% 0, 100% 100%, 0 100%);
+}
+
+/* Text button to read the invitation */
+.paper-envelope-btn {
+  position: relative;
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 2px 0 0;
+  margin: 0 auto;
+  width: 92%;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  outline: none;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.paper-envelope-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.paper-envelope-btn:active {
+  transform: translateY(0) scale(0.99);
+}
+
+.paper-envelope-btn:focus-visible {
+  outline: 1.5px dashed #152238;
+  outline-offset: 3px;
+}
+
+.paper-envelope-picture {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 5px 8px rgb(21 34 56 / .18));
+}
+.paper-envelope-art {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 475 / 560;
+}
+.paper-envelope-art .paper-envelope-picture {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transition: opacity .55s ease, transform .65s ease;
+}
+.paper-envelope-closed {
+  clip-path: inset(2.4% 1.5% 3% 1.7%);
+}
+.paper-envelope-art .paper-envelope-open {
+  opacity: 0;
+  transform: translateY(8px);
+}
+.paper-envelope-btn.is-opening .paper-envelope-closed { opacity: 0; }
+.paper-envelope-btn.is-opening .paper-envelope-open { opacity: 1; transform: none; }
+
+/* ==========================================================================
+   REPLAY BUTTON ON MAIN INVITATION VIEW
+   ========================================================================== */
+.invitation-controls {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 90;
+  max-width: calc(100vw - 32px);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.replay-typewriter-btn,
+.music-toggle-btn {
+  background: #FAEBD7;
+  color: #152238;
+  border: 1px solid #152238;
+  padding: 8px 14px;
+  font-family: "Courier Prime", "Courier New", monospace;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.replay-typewriter-btn:hover,
+.music-toggle-btn:hover {
+  background: #152238;
+  color: #FAEBD7;
+  transform: translateY(-1px);
+}
+.music-toggle-btn[hidden] { display: none; }
+.invitation-controls button:focus-visible { outline: 2px solid #152238; outline-offset: 3px; }
+
+/* One envelope travels from the typewriter paper into the page. */
+.envelope-transition {
+  position: relative;
+  height: clamp(430px, 65svh, 610px);
+  display: grid;
+  place-items: center;
+  opacity: 0;
+}
+.envelope-transition[hidden] { display: none; }
+.envelope-transition.is-visible { opacity: 1; }
+.opening-envelope {
+  position: relative;
+  width: min(78vw, 420px, 60svh);
+  aspect-ratio: 475 / 560;
+  container-type: inline-size;
+  transform-origin: top left;
+  filter: drop-shadow(0 12px 18px rgb(21 34 56 / .18));
+}
+.opening-envelope.is-in-paper { width: 100%; }
+.opening-envelope.is-zooming { z-index: 10001; }
+.envelope-state-closed, .envelope-state-open {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  left: 0;
+  bottom: 0;
+  pointer-events: none;
+  transition: opacity 1.2s ease, transform 1.5s cubic-bezier(.22, 1, .36, 1);
+}
+.envelope-state-closed { clip-path: inset(2.4% 1.5% 3% 1.7%); }
+.envelope-state-open { opacity: 0; transform: translateY(10%); }
+.opening-envelope.is-unsealed .envelope-state-closed { opacity: 0; }
+.opening-envelope.is-unsealed .envelope-state-open { opacity: 1; transform: none; }
+.envelope-letter {
+  position: absolute;
+  z-index: 2;
+  top: 27%;
+  left: 12%;
+  width: 76%;
+  height: 38%;
+  color: #152238;
+  padding: 3% 2%;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 1s ease, transform 1s ease;
+  pointer-events: none;
+}
+.opening-envelope.is-extracted .envelope-letter { opacity: 1; transform: none; }
+.letter-kicker { margin: 0 0 5%; font: 2.1cqw/1.4 "Courier New", monospace; letter-spacing: .3cqw; }
+.letter-names { margin: 0; font: 5.3cqw/1.3 Georgia, serif; letter-spacing: .15cqw; }
+.letter-names em { font-size: .65em; }
+.letter-date { margin: 5% 0 4%; font: 2.8cqw/1.4 "Courier New", monospace; }
+.letter-place { margin: 0; font: 4cqw/1.3 Georgia, serif; }
+body.is-opening-locked .invitation-controls { visibility: hidden; }
+.typewriter-opening.is-zooming-away {
+  background-color: transparent;
+  background-image: none;
+  pointer-events: none;
+}
+.typewriter-opening.is-zooming-away .typewriter-header,
+.typewriter-opening.is-zooming-away .typewriter-stage-wrap {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+body.is-revealing-invitation .invitation { transition: none; }
+
+@media (max-width: 480px) {
+  .typewriter-assembly {
+    width: min(92vw, calc(44svh * 1.333), 390px);
+  }
+  .paper-slot-viewport {
+    height: clamp(300px, 60svh, 460px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .typewriter-opening,
+  .invitation,
+  .rising-paper-sheet.is-rising,
+  .paper-envelope-btn,
+  .paper-tap-prompt { transition: none; }
+  .envelope-transition,
+  .envelope-state-open,
+  .envelope-state-closed,
+  .envelope-letter,
+  .typewriter-opening.is-zooming-away .typewriter-header,
+  .typewriter-opening.is-zooming-away .typewriter-stage-wrap { transition: none; }
+  .paper-envelope-art .paper-envelope-picture { transition: none; }
+  .typewriter-cursor,
+  .typewriter-assembly.is-typing-active .typewriter-front-layer,
+  .typewriter-assembly.is-typing-active .typewriter-back-layer,
+  .typewriter-opening.is-ready-to-open .paper-tap-prompt { animation: none; }
+}
