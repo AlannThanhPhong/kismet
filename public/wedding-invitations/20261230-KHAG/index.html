@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#152238">
+    <title>KHAM HUYNH &amp; ANH GIA | Thiệp cưới</title>
+    <meta name="description" content="Trân trọng kính mời đến chung vui cùng KHAM HUYNH và ANH GIA lúc 5:30PM ngày 30.12.2026 tại Diamond Palace, GRAND BALLROOM - 2ND FLOOR.">
+    <link rel="preload" href="./assets/typewriter-hd.png" as="image">
+    <link rel="preload" href="./assets/envelope-closed.png" as="image">
+    <link rel="preload" href="./assets/envelope-open.png" as="image">
+    <link rel="stylesheet" href="./style.css?v=20261012-story">
+    <link rel="stylesheet" href="./opening.css?v=20261012-continuous-zoom">
+    <script src="./opening.js?v=20261012-continuous-zoom" defer></script>
+    <noscript>
+      <style>
+        .typewriter-opening { display: none !important; }
+        .replay-typewriter-btn { display: none !important; }
+        body.is-opening-locked { overflow: auto !important; }
+        body.is-opening-locked .invitation { opacity: 1 !important; pointer-events: auto !important; transform: none !important; }
+        .envelope-transition[hidden] { display: grid !important; }
+        .envelope-letter { opacity: 1 !important; transform: none !important; }
+        .envelope-state-open { opacity: 1 !important; }
+        .envelope-state-closed { opacity: 0 !important; }
+        .envelope-flap { transform: rotateX(180deg) !important; z-index: 0 !important; }
+        .envelope-seal { display: none !important; }
+      </style>
+    </noscript>
+  </head>
+  <body class="is-opening-locked">
+    <!-- Hiệu ứng mở đầu khi mới vào web: Máy đánh chữ & tờ giấy chạy chầm chậm lên -->
+    <section
+      class="typewriter-opening"
+      id="typewriter-opening"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Hiệu ứng mở thiệp cưới KHAM HUYNH và ANH GIA"
+    >
+      <!-- 3. Dòng text "You have a message" gõ từng chữ trên phần máy -->
+      <header class="typewriter-header">
+        <p class="typewriter-headline" aria-label="You have a message">
+          <span id="typed-message"></span>
+          <span class="typewriter-cursor" id="typewriter-cursor" aria-hidden="true"></span>
+        </p>
+      </header>
+
+      <!-- 1. Máy đánh chữ có tờ giấy chạy chầm chậm lên -->
+      <div class="typewriter-stage-wrap">
+        <div class="typewriter-assembly" id="typewriter-assembly">
+          <!-- Lớp sau máy đánh chữ (trục cuốn giấy phía sau) -->
+          <img
+            class="typewriter-back-layer"
+            src="./assets/typewriter-hd.png"
+            alt=""
+            aria-hidden="true"
+          >
+
+          <!-- Khe cuộn giấy: tờ giấy từ từ chạy từ trong máy lên -->
+          <div class="paper-slot-viewport">
+            <div class="rising-paper-sheet" id="rising-paper-sheet">
+              <!-- Trên giấy chỉ có hình phong bì, bấm hình để mở thiệp -->
+              <button
+                type="button"
+                class="paper-envelope-btn"
+                id="envelope-trigger"
+                aria-label="Đọc thiệp cưới KHAM HUYNH và ANH GIA"
+              >
+              </button>
+            </div>
+          </div>
+
+          <!-- Đổ bóng khe trục lăn & Thanh kim loại giữ giấy -->
+          <div class="paper-Slot-shadow" aria-hidden="true"></div>
+          <div class="typewriter-bail-bar" aria-hidden="true"></div>
+
+          <!-- Lớp trước máy đánh chữ (thân máy & bàn phím đè lên chân tờ giấy) -->
+          <img
+            class="typewriter-front-layer"
+            src="./assets/typewriter-hd.png"
+            width="1448"
+            height="1086"
+            alt="Máy đánh chữ cổ điển"
+          >
+        </div>
+      </div>
+    </section>
+
+    <main class="invitation" id="main-invitation">
+    <section class="invitation-hero" aria-label="Our wedding invitation">
+      <p class="eyebrow">A LOVE LETTER FROM US</p>
+    <!-- Phong bì được giữ ngay đầu trang sau khi mở -->
+    <div class="envelope-transition" id="envelope-transition" hidden>
+      <div class="opening-envelope">
+        <img class="envelope-state-closed" src="./assets/envelope-closed.png" alt="" aria-hidden="true" width="476" height="334">
+        <img class="envelope-state-open" src="./assets/envelope-open.png" alt="" aria-hidden="true" width="475" height="560">
+        <div class="envelope-letter">
+          <p class="letter-kicker">WRITTEN IN THE STARS</p>
+          <h1 class="letter-names" tabindex="-1" id="invitation-title">KHAM HUYNH<br><em>and</em><br>ANH GIA</h1>
+          <p class="letter-date">30.12.2026 · 5:30PM</p>
+          <p class="letter-place">Diamond Palace</p>
+        </div>
+      </div>
+    </div>
+
+      <p class="hero-quote">Found you, kept you.</p>
+      <p class="message">Cordially invite you to celebrate their wedding day.<br>Join us as two companions of work, life, and love<br>promise a lifetime together.</p>
+    </section>
+    <section class="celebration content-block" aria-labelledby="celebration-title">
+      <p class="eyebrow">PLEASE JOIN US</p>
+      <h2 id="celebration-title">An evening to remember</h2>
+      <time datetime="2026-12-30T17:30:00+07:00">
+        <span class="date">30.12.2026</span>
+        <span class="hour">5:30PM</span>
+      </time>
+      <section class="venue" aria-label="Địa điểm tiệc cưới">
+        <h2>Diamond Palace</h2>
+        <p class="ballroom">GRAND BALLROOM - 2ND FLOOR</p>
+        <address>333 NGUYEN VAN LUONG, PHU LAM, TP HCM</address>
+        <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Diamond%20Palace%2C%20333%20NGUYEN%20VAN%20LUONG%2C%20PHU%20LAM%2C%20TP%20HCM" target="_blank" rel="noopener noreferrer">Xem chỉ đường <span aria-hidden="true">↗</span></a>
+      </section>
+      <p class="closing">Sự hiện diện của bạn là niềm vui của chúng mình.</p>
+      <div class="countdown" id="countdown" aria-label="Time until our wedding" hidden>
+        <div><strong data-count="days">00</strong><span>DAYS</span></div>
+        <div><strong data-count="hours">00</strong><span>HOURS</span></div>
+        <div><strong data-count="minutes">00</strong><span>MINUTES</span></div>
+        <div><strong data-count="seconds">00</strong><span>SECONDS</span></div>
+      </div>
+      <a class="scroll-note" href="#our-story">OUR STORY <span aria-hidden="true">↓</span></a>
+    </section>
+    <figure class="chapter-photo hero-photo">
+      <img src="./images/hero-bw.jpg" alt="KHAM HUYNH and ANH GIA walking together among the trees" width="1200" height="1800" loading="lazy">
+      <figcaption>Still, it was you.</figcaption>
+    </figure>
+    <section class="content-block story" id="our-story" aria-labelledby="story-title">
+      <p class="eyebrow">OUR STORY</p>
+      <h2 id="story-title">From city strolls to<br>walking through life together.</h2>
+      <p class="story-subtitle">Colleagues, partners, and lifelong companions.</p>
+      <p>It began with shared desks and late-night city walks—wandering through glowing streets and towering buildings. From trusted colleagues to business partners, and finally to lifelong companions, every step has led us right here.</p>
+      <blockquote>“Started with work, stayed for a lifetime.”</blockquote>
+    </section>
+    <div class="photo-pair">
+      <img src="./images/photo_2026-10-12_15-06-20.jpg" alt="A quiet embrace" loading="lazy">
+      <img src="./images/photo_2026-10-12_15-06-43.jpg" alt="Holding hands, side by side" loading="lazy">
+    </div>
+    <section class="content-block story">
+      <p class="eyebrow">TWO PATHS CROSSED IN THE HEART OF THE CITY</p>
+      <h2>Late nights in the city,<br>a lifetime by your side.</h2>
+      <p>From navigating deadlines side by side to wandering downtown streets under midnight lights, we turned ordinary moments into our own forever story.</p>
+      <blockquote>“Every street we walked was just a step closer to home.”</blockquote>
+      <p>We built a partnership in work, a friendship in life, and a love that found its rhythm in the quiet magic of midnight city lights.</p>
+    </section>
+    <figure class="chapter-photo">
+      <img src="./images/photo_2026-10-12_15-06-58.jpg" alt="Together under an open sky" loading="lazy">
+      <figcaption>Walking hand in hand, through the city and into forever.</figcaption>
+    </figure>
+    <section class="content-block story">
+      <p class="eyebrow">OUR FAVORITE STEP YET</p>
+      <h2>Written in the stars.</h2>
+      <p>We’ve walked miles of city streets together—from office doors to quiet downtown corners. Now, we take our favorite step yet: toward each other, forever.</p>
+      <p>In the bustling heart of the city, amidst quiet evening strolls and endless conversations after work, we found something enduring. We invite you to witness the beginning of our greatest journey yet.</p>
+      <blockquote>“Lover of night walks, partner in all things.”</blockquote>
+    </section>
+    <section class="album-section" aria-labelledby="album-title">
+      <p class="eyebrow">LITTLE MOMENTS, OUR FOREVER</p>
+      <h2 id="album-title">The days that led us here</h2>
+      <div class="wedding-album" id="wedding-album"></div>
+      <noscript><img class="album-fallback" src="./images/photo_2026-10-12_15-06-10.jpg" alt="Wedding portrait of KHAM HUYNH and ANH GIA" loading="lazy"></noscript>
+    </section>
+    <footer class="content-block invitation-footer">
+      <p class="eyebrow">WITH LOVE</p>
+      <h2>KHAM HUYNH <em>&amp;</em> ANH GIA</h2>
+      <p>Please join us for an evening of warmth, laughter, and timeless memories as we celebrate the story we’ve walked so far.</p>
+      <p>Your presence will make our celebration complete as we raise a glass to love, partnership, and new beginnings.</p>
+      <p class="footer-date">30.12.2026 · DIAMOND PALACE</p>
+    </footer>
+    </main>
+
+    <audio id="wedding-music" preload="auto" loop>
+      <source src="./audio/wedding-music.m4a" type="audio/mp4">
+      <source src="./audio/wedding-music.weba" type="audio/webm">
+    </audio>
+    <div class="invitation-controls">
+    <button type="button" class="music-toggle-btn" id="music-toggle" aria-pressed="false" hidden>Bật nhạc</button>
+    <button
+      type="button"
+      class="replay-typewriter-btn"
+      id="replay-typewriter-btn"
+      title="Xem lại hiệu ứng máy đánh chữ mở thiệp"
+    >
+      ⌨ Xem lại mở thiệp
+    </button>
+    </div>
+  </body>
+</html>

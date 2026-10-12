@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000">
+  <rect width="800" height="1000" fill="#FAEBD7"/>
+  <rect x="28" y="28" width="744" height="944" fill="none" stroke="#152238"/>
+  <rect x="40" y="40" width="720" height="920" fill="none" stroke="#152238"/>
+  <g text-anchor="middle" font-family="Georgia, serif" fill="#152238">
+    <text x="400" y="240" font-size="76" fill="#152238">K &amp; A</text>
+    <text x="400" y="320" font-family="Arial, sans-serif" font-size="16" letter-spacing="5">WEDDING INVITATION</text>
+    <text x="400" y="440" font-size="48">KHAM HUYNH</text>
+    <text x="400" y="506" font-size="34" fill="#152238">&amp;</text>
+    <text x="400" y="575" font-size="48">ANH GIA</text>
+    <path d="M290 635h220" stroke="#152238"/>
+    <text x="400" y="714" font-size="38">30.12.2026</text>
+    <text x="400" y="767" font-family="Arial, sans-serif" font-size="22" letter-spacing="3">5:30PM</text>
+    <text x="400" y="846" font-size="30">Diamond Palace</text>
+  </g>
+</svg>
