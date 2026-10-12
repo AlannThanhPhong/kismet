@@ -9,9 +9,12 @@
     <link rel="preload" href="./assets/typewriter-hd.png" as="image">
     <link rel="preload" href="./assets/envelope-closed.png" as="image">
     <link rel="preload" href="./assets/envelope-open.png" as="image">
-    <link rel="stylesheet" href="./style.css?v=20261012-story">
-    <link rel="stylesheet" href="./opening.css?v=20261012-continuous-zoom">
-    <script src="./opening.js?v=20261012-continuous-zoom" defer></script>
+    <link rel="stylesheet" href="./style.css?v=20261012-beige-hero">
+    <link rel="preload" href="./assets/white-green-bouquet-reference.png" as="image">
+    <link rel="preload" href="./images/hero-bw.jpg" as="image">
+    <link rel="preload" href="./assets/ivory-rose-frame.png" as="image">
+    <link rel="stylesheet" href="./opening.css?v=20261012-beige-hero">
+    <script src="./opening.js?v=20261012-gold-seal-slow-rise" defer></script>
     <noscript>
       <style>
         .typewriter-opening { display: none !important; }
@@ -20,6 +23,7 @@
         body.is-opening-locked .invitation { opacity: 1 !important; pointer-events: auto !important; transform: none !important; }
         .envelope-transition[hidden] { display: grid !important; }
         .envelope-letter { opacity: 1 !important; transform: none !important; }
+        .letter-photo, .letter-paper-backing, .letter-paper, .letter-bouquet, .letter-date { opacity: 1 !important; translate: none !important; }
         .envelope-state-open { opacity: 1 !important; }
         .envelope-state-closed { opacity: 0 !important; }
         .envelope-flap { transform: rotateX(180deg) !important; z-index: 0 !important; }
@@ -63,7 +67,7 @@
                 type="button"
                 class="paper-envelope-btn"
                 id="envelope-trigger"
-                aria-label="Đọc thiệp cưới KHAM HUYNH và ANH GIA"
+                aria-label="Bấm con dấu để mở thiệp cưới KHAM HUYNH và ANH GIA"
               >
               </button>
             </div>
@@ -90,14 +94,31 @@
       <p class="eyebrow">A LOVE LETTER FROM US</p>
     <!-- Phong bì được giữ ngay đầu trang sau khi mở -->
     <div class="envelope-transition" id="envelope-transition" hidden>
+      <p class="hero-couple-names">KHAM HUYNH <em>&amp;</em> ANH GIA</p>
       <div class="opening-envelope">
         <img class="envelope-state-closed" src="./assets/envelope-closed.png" alt="" aria-hidden="true" width="476" height="334">
         <img class="envelope-state-open" src="./assets/envelope-open.png" alt="" aria-hidden="true" width="475" height="560">
         <div class="envelope-letter">
+          <div class="letter-paper-backing" aria-hidden="true"></div>
+          <figure class="letter-photo">
+            <img class="letter-portrait" src="./images/hero-bw.jpg" alt="KHAM HUYNH and ANH GIA walking together" width="533" height="800">
+            <img class="letter-ornate-frame" src="./assets/ivory-rose-frame.png" alt="" aria-hidden="true" width="1024" height="1536">
+          </figure>
+          <div class="letter-paper">
           <p class="letter-kicker">WRITTEN IN THE STARS</p>
-          <h1 class="letter-names" tabindex="-1" id="invitation-title">KHAM HUYNH<br><em>and</em><br>ANH GIA</h1>
-          <p class="letter-date">30.12.2026 · 5:30PM</p>
-          <p class="letter-place">Diamond Palace</p>
+          <h1 class="letter-heading" tabindex="-1" id="invitation-title">Walk<br>With Us</h1>
+          </div>
+          <img class="letter-envelope-front" src="./assets/envelope-open.png" alt="" aria-hidden="true" width="475" height="560">
+          <img class="letter-matching-seal" src="./assets/envelope-closed.png" alt="" aria-hidden="true" width="476" height="334">
+          <time class="letter-date" datetime="2026-12-30T17:30:00+07:00">
+            <svg class="letter-heart" viewBox="0 0 240 180" aria-hidden="true">
+              <path d="M120 35C83-11 12 9 12 60C12 111 81 150 120 174C159 150 228 111 228 60C228 9 157-11 120 35Z" fill="#faf3e7" stroke="#d4c7b0" stroke-width="2"/>
+              <path d="M120 46C82 5 24 18 24 62C24 106 84 141 120 161C156 141 216 106 216 62C216 18 158 5 120 46Z" fill="none" stroke="#d4c7b0" stroke-width="5" stroke-dasharray="1 5" stroke-linecap="round"/>
+              <path d="M120 53C84 15 32 26 32 65C32 102 88 134 120 151C152 134 208 102 208 65C208 26 156 15 120 53Z" fill="none" stroke="#e1d5c2" stroke-width="1"/>
+            </svg>
+            <span class="letter-date-value">30.12.2026<small>5:30PM</small></span>
+          </time>
+          <img class="letter-bouquet" src="./assets/white-green-bouquet-reference.png" alt="Hoa cưới trắng xanh với rum, lan và dền rủ" width="1024" height="1536">
         </div>
       </div>
     </div>
@@ -128,7 +149,7 @@
       <a class="scroll-note" href="#our-story">OUR STORY <span aria-hidden="true">↓</span></a>
     </section>
     <figure class="chapter-photo hero-photo">
-      <img src="./images/hero-bw.jpg" alt="KHAM HUYNH and ANH GIA walking together among the trees" width="1200" height="1800" loading="lazy">
+      <img src="./images/hero-bw.jpg" alt="KHAM HUYNH and ANH GIA walking together among the trees" width="533" height="800" loading="lazy">
       <figcaption>Still, it was you.</figcaption>
     </figure>
     <section class="content-block story" id="our-story" aria-labelledby="story-title">

@@ -102,11 +102,17 @@
 .invitation-foliage img{position:absolute;width:140px;opacity:.85}
 .foliage-top{top:-95px;left:-55px;transform:rotate(155deg)}
 .foliage-bottom{bottom:-100px;right:-42px;transform:rotate(-28deg)}
-.invitation .families{gap:32px;text-align:center;font:17px/1.65 Serif,Georgia,serif}
-.invitation .families>div{min-width:0}
+.invitation .families{container-type:inline-size;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(10px,3vw,32px);row-gap:0;text-align:center;font:17px/1.65 Serif,Georgia,serif}
+.invitation .families>div{min-width:0;display:flex;flex-direction:column;align-items:center}
+.invitation .families .family-parent{font-size:clamp(12px,4cqw,17px);line-height:1.65;text-wrap:balance;overflow-wrap:break-word}
 .invitation .families h2{font:14px/1.3 Serif,Georgia,serif;letter-spacing:3px;margin-bottom:14px}
 .invitation .families h2:after{content:'';display:block;width:34px;height:1px;background:#b0b596;margin:12px auto 0}
-.invitation .families .muted{font:12px/1.65 Sans,Arial,sans-serif;margin-top:10px}
+.invitation .families .muted{font:clamp(9px,2.8cqw,12px)/1.65 Sans,Arial,sans-serif;margin-top:auto;padding-top:10px;text-wrap:balance}
+@supports(grid-template-rows:subgrid){
+  .invitation .families{grid-template-rows:repeat(4,auto)}
+  .invitation .families>div{display:grid;grid-row:span 4;grid-template-rows:subgrid;justify-items:center;align-items:start}
+  .invitation .families .muted{margin-top:0}
+}
 .invitation .announcement{margin:42px 0 12px;font-size:10px;letter-spacing:2px;line-height:2.2}
 .invitation .couple{position:relative;display:flex;flex-direction:column;justify-content:center;width:320px;max-width:100%;min-height:310px;margin:0 auto;font:30px/1.3 Serif,Georgia,serif;letter-spacing:2px;text-transform:uppercase}
 .invitation .couple p{position:relative;z-index:1}
@@ -135,9 +141,9 @@
 @media(max-width:700px){
   .paper.invitation{width:calc(100% - 28px);padding:42px 22px 38px;border-width:5px}
   .paper.invitation:after{inset:7px}
-  .invitation .families{gap:16px;font-size:15px;line-height:1.65}
+  .invitation .families{column-gap:clamp(10px,3vw,16px);font-size:15px;line-height:1.65}
   .invitation .families h2{font-size:12px;letter-spacing:2px}
-  .invitation .families .muted{font-size:10px}
+  .invitation .families .muted{font-size:clamp(9px,2.8cqw,10px)}
   .invitation .announcement{margin-top:32px;font-size:9px;letter-spacing:1.4px}
   .invitation .couple{width:270px;min-height:278px;font-size:26px;letter-spacing:1.5px}
   .invitation .wreath{width:100px;height:252px;top:14px}
@@ -149,7 +155,7 @@
 }
 @media(max-width:360px){
   .paper.invitation{padding-left:18px;padding-right:18px}
-  .invitation .families{gap:10px;font-size:14px}.invitation .families .muted{font-size:9px}
+  .invitation .families{column-gap:10px;font-size:14px}.invitation .families .muted{font-size:9px}
   .invitation .couple{font-size:24px}.invitation .wreath{width:90px}
   .invitation .wreath-left{left:-14px}.invitation .wreath-right{right:-14px}
   .invitation .event-time time span{padding:0 12px}

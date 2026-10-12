@@ -26,12 +26,18 @@
 /* Open location columns and a fine reply outline on the invitation paper. */
 .link-arrow { display: inline-block; vertical-align: -.12em; flex-shrink: 0; }
 .location-grid { gap: 0; margin-top: 36px; }
-.location-grid .premium-card { padding: 12px 30px; border: 0; border-radius: 0; background: transparent; }
+.location-grid .premium-card { display: flex; flex-direction: column; align-items: center; padding: 12px 30px; border: 0; border-radius: 0; background: transparent; }
 .location-grid .premium-card + .premium-card { border-left: 1px solid #dce2d4; }
 .location-grid .premium-card h3 { font-size: 32px; margin-bottom: 20px; }
 .location-grid .premium-card p { line-height: 1.9; }
-.location-grid .button { padding: 5px 0; border: 0; border-bottom: 1px solid #aab79c; background: transparent; color: var(--ink); font-size: 12px; }
+.location-grid .button { align-self: center; margin-top: auto; padding: 5px 0; border: 0; border-bottom: 1px solid #aab79c; background: transparent; color: var(--ink); font-size: 12px; }
 .location-grid .button:hover { color: #61834d; border-bottom-color: #61834d; }
+/* Share content rows so unequal address lengths keep both columns aligned. */
+@supports (grid-template-rows: subgrid) {
+  .location-grid { grid-template-rows: repeat(4, auto); }
+  .location-grid .premium-card { display: grid; grid-row: span 4; grid-template-rows: subgrid; justify-items: center; align-items: start; }
+  .location-grid .button { margin-top: 0; }
+}
 #rsvp-form { gap: 14px; padding: clamp(24px, 4vw, 44px); border: 1px solid #cdd5c4; border-radius: 8px; background: transparent; box-shadow: none; }
 #rsvp-form > label, #rsvp-form legend { font-size: 12px; font-weight: 600; color: var(--ink); }
 #rsvp-form input:not([type=radio]):not([type=checkbox]), #rsvp-form textarea { background: transparent; border: 0; border-bottom: 1px solid #cdd5c4; border-radius: 0; padding: 13px 2px; }
@@ -47,8 +53,8 @@
   .location-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 28px; }
   .location-grid .premium-card { padding: 12px 10px; min-width: 0; }
   .location-grid .premium-card + .premium-card { border-left: 1px solid #dce2d4; border-top: 0; margin: 0; }
-  .location-grid .premium-card h3 { font-size: 26px; margin-bottom: 16px; }
-  .location-grid .premium-card p { font-size: 12px; overflow-wrap: anywhere; }
+  .location-grid .premium-card h3 { font-size: 24px; margin-bottom: 16px; }
+  .location-grid .premium-card p { font-size: 11px; overflow-wrap: break-word; }
   .location-grid .button { font-size: 10px; }
 }
 .guestbook-unlock{width:min(420px,calc(100% - 32px));padding:28px;border:1px solid var(--line);background:var(--paper);color:var(--ink)}

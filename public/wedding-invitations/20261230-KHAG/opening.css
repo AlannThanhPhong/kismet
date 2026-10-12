@@ -69,8 +69,8 @@ body.is-opening-locked.is-revealing-invitation .invitation {
 
 .typewriter-headline {
   margin: 0;
-  font-family: "Courier Prime", "Courier New", Courier, monospace;
-  font-weight: 700;
+  font-family: "Courier New", monospace;
+  font-weight: 400;
   font-size: clamp(20px, 4.6vw, 29px);
   letter-spacing: 0.06em;
   color: #FAEBD7;
@@ -340,7 +340,7 @@ body.is-opening-locked.is-revealing-invitation .invitation {
   transform: translateY(-1px);
 }
 .music-toggle-btn[hidden] { display: none; }
-.invitation-controls button:focus-visible { outline: 2px solid #152238; outline-offset: 3px; }
+.invitation-controls button:focus-visible { outline: 2px solid #FAEBD7; outline-offset: 3px; }
 
 /* One envelope travels from the typewriter paper into the page. */
 .envelope-transition {
@@ -352,6 +352,17 @@ body.is-opening-locked.is-revealing-invitation .invitation {
 }
 .envelope-transition[hidden] { display: none; }
 .envelope-transition.is-visible { opacity: 1; }
+.hero-couple-names {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  color: #152238;
+  font: 500 clamp(21px, 4.6vw, 34px)/1.3 "Cormorant Garamond", Georgia, serif;
+  letter-spacing: .035em;
+}
+.hero-couple-names em { font-weight: 400; font-size: .85em; }
 .opening-envelope {
   position: relative;
   width: min(78vw, 420px, 60svh);
@@ -369,7 +380,7 @@ body.is-opening-locked.is-revealing-invitation .invitation {
   left: 0;
   bottom: 0;
   pointer-events: none;
-  transition: opacity 1.2s ease, transform 1.5s cubic-bezier(.22, 1, .36, 1);
+  transition: opacity .5s ease, transform .6s cubic-bezier(.22, 1, .36, 1);
 }
 .envelope-state-closed { clip-path: inset(2.4% 1.5% 3% 1.7%); }
 .envelope-state-open { opacity: 0; transform: translateY(10%); }
@@ -378,24 +389,120 @@ body.is-opening-locked.is-revealing-invitation .invitation {
 .envelope-letter {
   position: absolute;
   z-index: 2;
-  top: 27%;
-  left: 12%;
-  width: 76%;
-  height: 38%;
+  inset: 0;
   color: #152238;
-  padding: 3% 2%;
   text-align: center;
   opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 1s ease, transform 1s ease;
+  clip-path: inset(0 -15% 0 -15%);
+  transition: opacity .5s ease;
   pointer-events: none;
 }
-.opening-envelope.is-extracted .envelope-letter { opacity: 1; transform: none; }
-.letter-kicker { margin: 0 0 5%; font: 2.1cqw/1.4 "Courier New", monospace; letter-spacing: .3cqw; }
-.letter-names { margin: 0; font: 5.3cqw/1.3 Georgia, serif; letter-spacing: .15cqw; }
-.letter-names em { font-size: .65em; }
-.letter-date { margin: 5% 0 4%; font: 2.8cqw/1.4 "Courier New", monospace; }
-.letter-place { margin: 0; font: 4cqw/1.3 Georgia, serif; }
+.opening-envelope.is-unsealed .envelope-letter { opacity: 1; transform: none; }
+.letter-photo, .letter-paper-backing, .letter-paper, .letter-bouquet, .letter-date {
+  opacity: 0;
+  translate: 0 25cqw;
+  transition: translate 2s cubic-bezier(.25, .46, .45, .94), opacity 2s ease;
+}
+.opening-envelope.is-unsealed :is(.letter-photo, .letter-paper-backing, .letter-paper, .letter-bouquet, .letter-date) {
+  opacity: 1;
+  translate: 0 0;
+}
+.letter-photo {
+  position: absolute;
+  top: 16%;
+  left: 6%;
+  width: 45%;
+  height: 51%;
+  margin: 0;
+  filter: drop-shadow(0 4px 6px rgb(21 34 56 / .18));
+  transform: rotate(-8deg);
+}
+.letter-photo .letter-portrait {
+  position: absolute;
+  left: 15%;
+  top: 16%;
+  display: block;
+  width: 70%;
+  height: 66%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.letter-photo .letter-ornate-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.letter-paper-backing {
+  position: absolute;
+  top: 14%;
+  left: 49%;
+  width: 44%;
+  height: 52%;
+  background: repeating-linear-gradient(90deg, #152238 0 1.5cqw, #f9f0e2 1.5cqw 3cqw);
+  box-shadow: 0 3px 8px rgb(21 34 56 / .12);
+  transform: rotate(2deg);
+}
+.letter-paper {
+  position: absolute;
+  top: 18%;
+  left: 51%;
+  width: 40%;
+  height: 48%;
+  padding: 5% 2% 2%;
+  background: #faf3e7 url('./paper-texture.jpg') center / cover;
+  border: 1px solid #b7a382;
+  outline: 1px solid #b7a382;
+  outline-offset: -5px;
+  box-shadow: 0 4px 12px rgb(21 34 56 / .16);
+  transform: rotate(5deg);
+}
+.letter-kicker { margin: 0 0 9%; font: 1.7cqw/1.4 "Courier Prime", monospace; letter-spacing: .15cqw; }
+.letter-heading { margin: 0 0 8%; font: italic 9.2cqw/.95 "Cormorant Garamond", Georgia, serif; font-weight: 500; letter-spacing: -.25cqw; }
+.letter-envelope-front {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(0 44%, 49% 71%, 100% 44%, 100% 100%, 0 100%);
+}
+.letter-date {
+  position: absolute;
+  z-index: 2;
+  top: 48%;
+  left: 27%;
+  width: 47%;
+  height: 27%;
+  margin: 0;
+  color: #152238;
+  font: 5cqw/1.3 "Cormorant Garamond", Georgia, serif;
+  letter-spacing: .15cqw;
+  filter: drop-shadow(0 2px 4px rgb(21 34 56 / .15));
+}
+.letter-heart { position: absolute; inset: 0; width: 100%; height: 100%; }
+.letter-date .letter-date-value { position: absolute; top: 39%; left: 0; width: 100%; margin: 0; font: inherit; letter-spacing: inherit; }
+.letter-date-value small { display: block; margin-top: 2%; font: 1.8cqw/1.3 "Courier Prime", monospace; letter-spacing: .15cqw; }
+.letter-matching-seal {
+  position: absolute;
+  z-index: 4;
+  left: 0;
+  top: 35.5%;
+  width: 100%;
+  height: auto;
+  /* Reuse the original gold seal, instead of the open asset's brown seal. */
+  clip-path: ellipse(9% 13% at 50.5% 62%);
+}
+.letter-bouquet {
+  position: absolute;
+  z-index: 5;
+  top: 39%;
+  right: -11%;
+  width: 44%;
+  height: auto;
+  filter: drop-shadow(0 3px 4px rgb(21 34 56 / .15));
+  transform: none;
+}
 body.is-opening-locked .invitation-controls { visibility: hidden; }
 .typewriter-opening.is-zooming-away {
   background-color: transparent;
@@ -429,6 +536,7 @@ body.is-revealing-invitation .invitation { transition: none; }
   .envelope-state-open,
   .envelope-state-closed,
   .envelope-letter,
+  .letter-photo, .letter-paper-backing, .letter-paper, .letter-bouquet, .letter-date,
   .typewriter-opening.is-zooming-away .typewriter-header,
   .typewriter-opening.is-zooming-away .typewriter-stage-wrap { transition: none; }
   .paper-envelope-art .paper-envelope-picture { transition: none; }

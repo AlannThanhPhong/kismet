@@ -147,7 +147,8 @@
     if (assemblyEl) assemblyEl.classList.remove("is-typing-active");
 
     if (!envelope || !envelopeTransition) return;
-    envelope.classList.add("is-unsealed");
+    // Start the contents rising together, then zoom after their two-second reveal.
+    envelope.classList.add("is-unsealed", "is-extracted");
     const finish = () => {
       openingRoot.classList.add("is-dismissed");
       openingRoot.inert = true;
@@ -183,8 +184,7 @@
       envelope.classList.add("is-extracted");
       zoomIntoPage();
     } else {
-      schedule(() => envelope.classList.add("is-extracted"), 1000);
-      schedule(zoomIntoPage, 2300);
+      schedule(zoomIntoPage, 2200);
     }
   }
 

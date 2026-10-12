@@ -38,7 +38,7 @@ export default async function InvitationPage({ params }: Props) {
       code === "20260823-NDTD"
         ? "?v=20261012-natural-smiley-directions"
         : code === "20261230-KHAG"
-          ? "?v=20261012-continuous-envelope-zoom"
+          ? "?v=20261012-beige-hero"
           : "";
     return <iframe className="full-invitation" src={`/wedding-invitations/${code}/index.html${revision}`} allow="autoplay" title={`Thiệp cưới ${invitation.couple.partnerOne} và ${invitation.couple.partnerTwo}`} />;
   }
