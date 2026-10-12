@@ -34,7 +34,8 @@ export default async function InvitationPage({ params }: Props) {
   if (!invitation) notFound();
 
   if (designedInvitations.some((item) => item.code === code)) {
-    return <iframe className="full-invitation" src={`/wedding-invitations/${code}/index.html`} allow="autoplay" title={`Thiệp cưới ${invitation.couple.partnerOne} và ${invitation.couple.partnerTwo}`} />;
+    const revision = code === "20260823-NDTD" ? "?v=20261012-unframed-cover" : "";
+    return <iframe className="full-invitation" src={`/wedding-invitations/${code}/index.html${revision}`} allow="autoplay" title={`Thiệp cưới ${invitation.couple.partnerOne} và ${invitation.couple.partnerTwo}`} />;
   }
 
   const date = new Date(invitation.event.date);
