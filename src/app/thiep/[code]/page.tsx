@@ -34,7 +34,7 @@ export default async function InvitationPage({ params }: Props) {
   if (!invitation) notFound();
 
   if (designedInvitations.some((item) => item.code === code)) {
-    const revision = code === "20260823-NDTD" ? "?v=20261012-unframed-cover" : "";
+    const revision = code === "20260823-NDTD" ? "?v=20261012-natural-smiley-directions" : "";
     return <iframe className="full-invitation" src={`/wedding-invitations/${code}/index.html${revision}`} allow="autoplay" title={`Thiệp cưới ${invitation.couple.partnerOne} và ${invitation.couple.partnerTwo}`} />;
   }
 
