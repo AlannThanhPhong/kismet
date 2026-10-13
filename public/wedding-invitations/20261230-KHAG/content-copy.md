@@ -22,14 +22,18 @@ From navigating deadlines side by side to wandering downtown streets under midni
 
 KHAM HUYNH & ANH GIA
 
-Cordially invite you to celebrate their wedding day.
-Join us as two companions of work, life, and love promise a lifetime together.
+It began with shared desks and late-night city walks—wandering through glowing streets and towering buildings. From trusted colleagues to business partners, and finally to lifelong companions, every step has led us right here.
 
 30.12.2026 · 5:30PM (UTC+7)
 
 Diamond Palace
 GRAND BALLROOM - 2ND FLOOR
 333 NGUYEN VAN LUONG, PHU LAM, TP HCM
+
+Get directions
+
+Cordially invite you to celebrate our wedding day.
+Join us as two companions of work, life, and love promise a lifetime together
 
 ## Quotes
 

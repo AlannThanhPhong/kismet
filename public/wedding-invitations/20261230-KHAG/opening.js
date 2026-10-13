@@ -194,15 +194,23 @@
   const album = document.getElementById("wedding-album");
   const photoTimes = ["15-06-10", "15-06-14", "15-06-17", "15-06-20", "15-06-23", "15-06-25", "15-06-28", "15-06-31", "15-06-33", "15-06-37", "15-06-40", "15-06-43", "15-06-46", "15-06-49", "15-06-54", "15-06-57", "15-06-58", "15-07-01", "15-07-03", "15-07-05", "15-07-07", "15-07-10"];
   if (album) {
+    const usedPhotos = new Set(
+      Array.from(document.querySelectorAll(".invitation img"))
+        .filter((img) => img.compareDocumentPosition(album) & Node.DOCUMENT_POSITION_FOLLOWING)
+        .map((img) => img.src)
+    );
+    const remainingPhotos = photoTimes.filter((time) =>
+      !usedPhotos.has(new URL(`./images/photo_2026-10-12_${time}.jpg`, document.baseURI).href)
+    );
     const more = document.createElement("details");
     more.className = "album-more";
     const summary = document.createElement("summary");
-    summary.textContent = "VIEW ALL 22 PHOTOS";
+    summary.textContent = `VIEW ALL ${remainingPhotos.length} PHOTOS`;
     more.append(summary);
     const grid = document.createElement("div");
     grid.className = "album-more-grid";
     more.append(grid);
-    photoTimes.forEach((time, index) => {
+    remainingPhotos.forEach((time, index) => {
       const link = document.createElement("a");
       link.href = `./images/photo_2026-10-12_${time}.jpg`;
       link.target = "_blank";
@@ -215,7 +223,7 @@
       link.append(img);
       (index < 6 ? album : grid).append(link);
     });
-    album.append(more);
+    if (remainingPhotos.length > 6) album.append(more);
   }
 
   const countdown = document.getElementById("countdown");
