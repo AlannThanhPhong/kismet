@@ -1,4 +1,4 @@
-# KHAM HUYNH & ANH GIA — supplied copy
+# An Huynh & Pham Anh — supplied copy
 
 ## Titles
 
@@ -20,7 +20,7 @@ From navigating deadlines side by side to wandering downtown streets under midni
 
 ## Invitation
 
-KHAM HUYNH & ANH GIA
+An Huynh & Pham Anh
 
 It began with shared desks and late-night city walks—wandering through glowing streets and towering buildings. From trusted colleagues to business partners, and finally to lifelong companions, every step has led us right here.
 

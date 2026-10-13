@@ -1,4 +1,4 @@
-# KHAM HUYNH & ANH GIA
+# An Huynh & Pham Anh
 
 Thư mục thiệp mới: `20261230-KHAG`, lấy chữ cái đầu theo thứ tự tên người dùng cung cấp.
 
@@ -23,7 +23,7 @@ Màn mở đầu giữ máy đánh chữ và hiệu ứng tờ giấy chạy lê
 
 Phong bì dùng hai trạng thái ảnh `assets/envelope-closed.png` và `assets/envelope-open.png`, kiểu giấy navy có vân và dấu sáp theo mẫu người dùng gửi. Khi bấm con dấu, ảnh cưới trong khung oval kem với viền nổi và hoa hồng (`assets/ivory-rose-frame.png`) bên trái, giấy sọc navy phía sau tờ giấy có dòng chữ lớn “Walk With Us” bên phải, giấy hình tim viền chấm nổi ghi ngày 30.12.2026 và giờ 5:30PM ở giữa, cùng hoa trắng xanh trồi lên đồng thời trong 2 giây. Con dấu sau khi mở dùng lại phần con dấu vàng của ảnh phong bì đóng bằng CSS clip-path để giữ nguyên màu. Bó hoa `assets/white-green-bouquet-reference.png` được chỉnh bằng Imagegen từ ảnh tham chiếu người dùng gửi, bỏ tay và nền, giữ bố cục cụm hoa rum, hồng môn xanh, lan trắng phía trên, cành xanh bên phải và các dây dền rủ dài phía dưới; nền trong suốt. Sau 2,2 giây, chính phần tử `.opening-envelope` phóng lớn và di chuyển vào đầu trang nội dung bằng Web Animations/FLIP trong 1,8 giây. Máy đánh chữ mờ dần trong lúc phóng lớn. Nút xem lại đưa toàn bộ bố cục về phong bì đóng; chế độ giảm chuyển động mở ngay.
 
-Tên KHAM HUYNH & ANH GIA đặt thành một dòng riêng phía trên phong bì đã mở; tờ giấy bên trong giữ chữ “Walk With Us”. Phong bì đã mở được giữ lại trong luồng trang; cuộn xuống là thông tin tiệc, đếm ngược, ảnh chủ đề, câu chuyện và album 22 ảnh. Ảnh cưới dùng bộ ảnh riêng của hai bạn. Có chế độ giảm chuyển động và nút xem lại, đưa chính phong bì về giấy. Khi tắt JavaScript, lá thiệp mở và nội dung vẫn đọc được.
+Tên An Huynh & Pham Anh đặt thành một dòng riêng phía trên phong bì đã mở; tờ giấy bên trong giữ chữ “Walk With Us”. Phong bì đã mở được giữ lại trong luồng trang; cuộn xuống là thông tin tiệc, đếm ngược, ảnh chủ đề, câu chuyện và album 22 ảnh. Ảnh cưới dùng bộ ảnh riêng của hai bạn. Có chế độ giảm chuyển động và nút xem lại, đưa chính phong bì về giấy. Khi tắt JavaScript, lá thiệp mở và nội dung vẫn đọc được.
 
 Nội dung tiếng Anh lấy từ bộ text và quotes người dùng gửi, được bố trí theo câu chuyện đồng nghiệp, dạo phố và bạn đồng hành trọn đời. Bản đầy đủ lưu tại `content-copy.md`.
 
