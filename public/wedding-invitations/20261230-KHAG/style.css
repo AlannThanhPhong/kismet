@@ -1,3 +1,17 @@
+@font-face {
+  font-family: "Libre Caslon Display";
+  src: url("./fonts/LibreCaslonDisplay-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("./fonts/CormorantGaramond-Variable.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+}
 :root { color-scheme: dark; --paper: #FAEBD7; --ink: #152238; }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -17,6 +31,7 @@ h1[tabindex="-1"]:focus { outline: none; }
 .content-block { max-width: 670px; margin: auto; padding: 76px 32px; }
 h2 { margin: 0 0 30px; font-size: clamp(30px, 5vw, 45px); line-height: 1.25; font-weight: 400; }
 .celebration { border-top: 1px solid rgb(250 235 215 / .2); }
+#celebration-title { font-family: "Libre Caslon Display", Georgia, serif; }
 time { display: block; margin: 32px 0; }
 .date { display: block; font-size: 32px; letter-spacing: 3px; }
 .hour { display: block; margin-top: 12px; font: 14px/1.5 "Courier New", monospace; letter-spacing: 3px; }
@@ -40,10 +55,30 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--paper); outlin
 .chapter-photo figcaption { position: absolute; inset: auto 0 0; padding: 70px 24px 40px; background: linear-gradient(transparent, rgb(21 34 56 / .65)); color: var(--paper); font: italic clamp(24px, 4vw, 40px)/1.3 Georgia, serif; }
 .story p, .invitation-footer p { font-size: 16px; line-height: 1.95; }
 .story .eyebrow, .invitation-footer .eyebrow { font-size: 10px; line-height: 1.8; }
-.story-subtitle { font-style: italic; }
+#our-story, .story-chapter { max-width: 900px; }
+#story-title, .story-chapter-title { font-family: "Cormorant Garamond", Georgia, serif; }
+.story-intro { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: clamp(24px, 4vw, 48px); margin-top: 40px; }
+.story-intro-photo { margin: 0; }
+.story-intro-photo img { display: block; width: 100%; height: auto; }
+.story-intro p { margin: 0; text-align: left; }
+@media (max-width: 600px) {
+  .story-intro { grid-template-columns: 1fr; gap: 24px; }
+}
 blockquote { margin: 36px 0 0; padding: 28px 0; border-top: 1px solid rgb(250 235 215 / .2); font: italic clamp(23px, 4vw, 31px)/1.5 Georgia, serif; }
-.photo-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 0 22px; }
-.photo-pair img { width: 100%; height: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+.companions-gallery, .portraits-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 40px; }
+.companions-gallery img, .portraits-gallery img { display: block; width: 100%; height: auto; }
+.companions-gallery-wide { grid-column: 1 / -1; }
+.partnership-gallery { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: clamp(18px, 3vw, 44px); }
+.partnership-landscapes, .partnership-portraits { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.partnership-gallery img { display: block; width: 100%; height: auto; }
+.partnership-portraits-column { display: grid; grid-template-rows: minmax(min-content, 1fr) auto minmax(min-content, 1fr); gap: clamp(16px, 2vw, 28px); min-width: 0; }
+.partnership-copy { align-self: center; margin: 0; text-align: left; font: italic clamp(16px, 2.5vw, 23px)/1.55 "Cormorant Garamond", Georgia, serif; }
+@media (max-width: 600px) {
+  .partnership-gallery { column-gap: 18px; }
+  .partnership-landscapes, .partnership-portraits { gap: 10px; }
+  .partnership-portraits-column { gap: 14px; }
+  .partnership-copy { font-size: 12px; line-height: 1.5; }
+}
 .album-section { padding: 60px 22px 20px; }
 .wedding-album, .album-more-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
 .wedding-album a { display: block; }
@@ -59,8 +94,8 @@ blockquote { margin: 36px 0 0; padding: 28px 0; border-top: 1px solid rgb(250 23
   .content-block { padding: 56px 26px; }
   .story p, .invitation-footer p { font-size: 15px; }
   .eyebrow { letter-spacing: 2px; }
-  .photo-pair, .album-section { padding-inline: 12px; }
-  .photo-pair, .wedding-album, .album-more-grid { gap: 8px; }
+  .album-section { padding-inline: 12px; }
+  .companions-gallery, .portraits-gallery, .wedding-album, .album-more-grid { gap: 8px; }
   .chapter-photo figcaption { padding: 55px 20px 28px; }
   .invitation-footer { padding-bottom: 100px; }
 }

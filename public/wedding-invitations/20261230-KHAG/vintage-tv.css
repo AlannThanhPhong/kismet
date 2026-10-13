@@ -1,0 +1,32 @@
+.content-block.tv-story { max-width: none; padding-inline: 0; }
+.lifetime-poster { width: 100%; margin: 0; background: var(--ink); }
+.lifetime-poster img { display: block; width: 100%; height: auto; mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 90%, transparent), linear-gradient(to right, transparent, #000 12%, #000 90%, transparent); mask-composite: intersect; }
+.tv-story > :not(.vintage-tv) { width: calc(100% - 64px); max-width: 606px; margin-inline: auto; }
+.vintage-tv { position: relative; width: 100%; aspect-ratio: 900 / 552; margin: 38px 0 0; isolation: isolate; }
+.vintage-tv-frame { position: absolute; inset: 0; z-index: 2; display: block; width: 100%; height: 100%; object-fit: fill; pointer-events: none; }
+.vintage-tv-screen { position: absolute; z-index: 1; left: 7.6%; top: 10.7%; width: 66.5%; height: 72%; overflow: hidden; border-radius: 9% / 12%; background: #171611; }
+.vintage-tv-track { display: flex; height: 100%; width: 100%; }
+.vintage-tv-track a { display: block; flex: 0 0 100%; height: 100%; }
+.vintage-tv-track img { width: 100%; height: 100%; display: block; object-fit: cover; }
+.vintage-tv-screen::after { content: ''; position: absolute; inset: 0; pointer-events: none; border-radius: inherit; box-shadow: inset 0 0 20px rgb(0 0 0 / .45); background: repeating-linear-gradient(transparent 0 3px, rgb(0 0 0 / .035) 3px 4px); }
+.vintage-tv-screen:has(a:focus-visible) { outline: 2px solid var(--paper); outline-offset: 4px; }
+.story .tv-hint { font: 10px/1.8 'Courier New', monospace; opacity: .7; margin: 8px 0 26px; }
+.story .tv-typewriter { font: italic clamp(17px, 3vw, 22px)/1.8 'Cormorant Garamond', Georgia, serif; min-height: 8em; margin: 0 auto 30px; text-align: center; }
+.tv-cursor { display: none; width: 1px; height: 1em; margin-left: 3px; vertical-align: -.1em; background: currentColor; }
+.tv-typewriter.is-typing .tv-cursor { display: inline-block; animation: tv-blink .8s steps(1) infinite; }
+@keyframes tv-blink { 50% { opacity: 0; } }
+.portraits-gallery img { aspect-ratio: 2 / 3; object-fit: cover; }
+.tv-lightbox { position: fixed; inset: 0; margin: auto; padding: 50px 48px; border: 0; width: 100vw; height: 100dvh; max-width: none; max-height: none; background: rgb(9 14 22 / .97); color: var(--paper); overflow: hidden; }
+.tv-lightbox[open] { display: grid; place-items: center; }
+.tv-lightbox::backdrop { background: rgb(9 14 22 / .92); }
+.tv-lightbox-photo { display: block; max-width: 100%; max-height: calc(100dvh - 120px); width: auto; height: auto; object-fit: contain; animation: tv-photo-in .25s ease-out; }
+@keyframes tv-photo-in { from { opacity: 0; transform: scale(.95); } to { opacity: 1; transform: scale(1); } }
+.tv-lightbox button { position: absolute; padding: 8px; width: 44px; height: 44px; border: 1px solid rgb(250 235 215 / .3); border-radius: 50%; background: #152238; color: var(--paper); font: 28px/1 Georgia, serif; cursor: pointer; }
+.tv-lightbox button:focus-visible { outline: 2px solid var(--paper); outline-offset: 4px; }
+.tv-lightbox-close { right: 14px; top: 14px; }
+.tv-lightbox-prev { left: 8px; top: calc(50% - 22px); }
+.tv-lightbox-next { right: 8px; top: calc(50% - 22px); }
+.tv-lightbox-count { position: absolute; bottom: 14px; margin: 0; font: 12px/1.5 'Courier New', monospace; }
+body.tv-photo-open { overflow: hidden; }
+@media (max-width: 480px) { .tv-story > :not(.vintage-tv) { width: calc(100% - 52px); } .tv-lightbox { padding-inline: 34px; } .tv-lightbox-prev, .tv-lightbox-next { width: 32px !important; height: 40px !important; } .tv-lightbox-prev { left: 1px; } .tv-lightbox-next { right: 1px; } }
+@media (prefers-reduced-motion: reduce) { .tv-lightbox-photo, .tv-cursor { animation: none !important; } }

@@ -1,0 +1,4 @@
+Original transparent TV frame matching the user's reference:
+https://pngimg.com/uploads/tv/tv_PNG39234.png
+Downloaded 2026-10-13. Original pixels and alpha preserved.
+The website widens the frame using CSS to fit landscape photos.
