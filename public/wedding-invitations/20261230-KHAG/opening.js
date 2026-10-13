@@ -218,7 +218,7 @@
       link.setAttribute("aria-label", `Open wedding photo ${index + 1} in full size`);
       const img = document.createElement("img");
       img.src = link.href;
-      img.alt = `KHAM HUYNH and ANH GIA — wedding memory ${index + 1}`;
+      img.alt = `An Huynh and Pham Anh — wedding memory ${index + 1}`;
       img.loading = "lazy";
       link.append(img);
       (index < 6 ? album : grid).append(link);

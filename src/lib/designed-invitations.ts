@@ -4,7 +4,7 @@ export const designedInvitations = [
     code: "20261230-KHAG",
     slug: "20261230-KHAG",
     displayTitle: "FOUND YOU, KEPT YOU",
-    couple: { partnerOne: "KHAM HUYNH", partnerTwo: "ANH GIA" },
+    couple: { partnerOne: "An Huynh", partnerTwo: "Pham Anh" },
     event: { date: "2026-12-30T10:30:00.000Z", venue: "Diamond Palace – GRAND BALLROOM - 2ND FLOOR", address: "333 NGUYEN VAN LUONG, PHU LAM, TP HCM" },
     template: "kham-huynh-anh-gia",
     coverImage: "/wedding-invitations/20261230-KHAG/images/hero-bw.jpg",
