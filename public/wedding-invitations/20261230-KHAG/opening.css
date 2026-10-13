@@ -39,7 +39,8 @@ body.is-opening-locked.is-revealing-invitation .invitation {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: clamp(20px, 4svh, 40px);
   padding: max(18px, env(safe-area-inset-top)) 16px max(16px, env(safe-area-inset-bottom));
   user-select: none;
   overflow: hidden;
@@ -58,8 +59,9 @@ body.is-opening-locked.is-revealing-invitation .invitation {
 .typewriter-header {
   position: relative;
   z-index: 10;
-  margin-top: clamp(32px, 8svh, 80px);
-  margin-bottom: clamp(4px, 1svh, 12px);
+  margin-top: clamp(12px, 4svh, 40px);
+  margin-bottom: 0;
+  flex-shrink: 0;
   min-height: 2.2em;
   display: flex;
   align-items: center;
@@ -104,21 +106,23 @@ body.is-opening-locked.is-revealing-invitation .invitation {
    ========================================================================== */
 .typewriter-stage-wrap {
   position: relative;
-  flex: 1;
+  flex: 1 1 0;
+  min-height: 0;
+  container-type: size;
   width: 100%;
   max-width: 480px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  padding-bottom: clamp(36px, 7svh, 72px);
+  margin-bottom: clamp(12px, 3svh, 32px);
 }
 
 /* The assembly coordinates paper slot relative to the typewriter width */
 .typewriter-assembly {
   position: relative;
-  /* Scale width by viewport height so paper + typewriter always fit 100% in 100svh */
-  width: min(90vw, calc(44svh * 1.333), 420px);
+  /* Reserve room for BOTH the machine and its fully raised paper below the header. */
+  width: min(100cqw, calc(100cqh / 1.5), 420px);
   aspect-ratio: 4 / 3;
   flex-shrink: 0;
 }
@@ -169,7 +173,8 @@ body.is-opening-locked.is-revealing-invitation .invitation {
   background-color: #FAEBD7;
   aspect-ratio: 3 / 4;
   border-radius: 2px 2px 0 0;
-  padding: clamp(10px, 1.8svh, 16px) clamp(10px, 2.2vw, 15px) 48px;
+  padding: 5% 6% 16%;
+  flex-shrink: 0;
   box-shadow:
     0 -4px 18px rgba(7, 14, 26, 0.38),
     inset 0 0 0 1px rgba(21, 34, 56, 0.08),
@@ -345,17 +350,16 @@ body.is-opening-locked.is-revealing-invitation .invitation {
 /* One envelope travels from the typewriter paper into the page. */
 .envelope-transition {
   position: relative;
-  height: clamp(430px, 65svh, 610px);
   display: grid;
-  place-items: center;
+  justify-items: center;
+  gap: clamp(24px, 4vw, 36px);
+  padding-bottom: 24px;
   opacity: 0;
 }
 .envelope-transition[hidden] { display: none; }
 .envelope-transition.is-visible { opacity: 1; }
 .hero-couple-names {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
   width: 100%;
   margin: 0;
   color: #152238;
@@ -518,9 +522,6 @@ body.is-opening-locked .invitation-controls { visibility: hidden; }
 body.is-revealing-invitation .invitation { transition: none; }
 
 @media (max-width: 480px) {
-  .typewriter-assembly {
-    width: min(92vw, calc(44svh * 1.333), 390px);
-  }
   .paper-slot-viewport {
     height: clamp(300px, 60svh, 460px);
   }
