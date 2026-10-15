@@ -318,8 +318,8 @@ body.is-opening-locked.is-revealing-invitation .invitation {
    ========================================================================== */
 .invitation-controls {
   position: fixed;
-  right: 16px;
-  bottom: 16px;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: max(16px, env(safe-area-inset-bottom));
   z-index: 90;
   max-width: calc(100vw - 32px);
   display: flex;
@@ -348,6 +348,37 @@ body.is-opening-locked.is-revealing-invitation .invitation {
   transform: translateY(-1px);
 }
 .music-toggle-btn[hidden] { display: none; }
+.music-toggle-btn {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border-radius: 50%;
+  background: #152238;
+  color: #FAEBD7;
+  border: 1px solid #FAEBD7;
+  letter-spacing: 0;
+}
+.music-clef {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font: 32px/1 "Segoe UI Symbol", "Apple Symbols", "Noto Music", serif;
+  transform: translateY(-1px);
+}
+.music-toggle-btn:hover { background: #1d2f4a; color: #FAEBD7; }
+.music-toggle-btn[aria-pressed="true"] { box-shadow: 0 0 0 3px rgb(250 235 215 / .15), 0 4px 14px rgb(0 0 0 / .25); }
+.music-toggle-btn[aria-pressed="false"]::after {
+  content: "";
+  position: absolute;
+  width: 28px;
+  height: 2px;
+  background: currentColor;
+  transform: rotate(-45deg);
+  border-radius: 2px;
+}
 .invitation-controls button:focus-visible { outline: 2px solid #FAEBD7; outline-offset: 3px; }
 
 /* One envelope travels from the typewriter paper into the page. */
