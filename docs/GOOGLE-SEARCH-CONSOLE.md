@@ -265,3 +265,34 @@ Ngày kiểm tra tiếp:
 - [ ] Đã ghi nhận người phụ trách và lịch theo dõi.
 
 Các ô này chỉ đánh dấu khi có kết quả thật trên production/Search Console. Việc bổ sung mã nguồn không tự hoàn tất xác minh DNS, gửi sitemap hoặc xác nhận Google đã lập chỉ mục.
+
+## 14. Logo cạnh đường dẫn trên Google (favicon)
+
+Đã dùng ảnh logo do chủ website cung cấp: chữ K đỏ trên nền kem. File được sao chép nguyên bản, không vẽ lại hoặc đổi màu.
+
+| Thông tin | Cấu hình |
+| --- | --- |
+| Tên thương hiệu | kIsmet love |
+| Tên thay thế | KISMET LOVE |
+| Website | `https://www.kismet-love.com/` |
+| Ảnh logo công khai | `https://www.kismet-love.com/brand/kismet-love-logo.jpg` |
+| Kích thước, định dạng | 1254 × 1254 px, JPEG, hình vuông |
+| Favicon | Thẻ `rel="icon"` trong metadata toàn website |
+| Biểu tượng iOS | Thẻ `rel="apple-touch-icon"` |
+| Khai báo thương hiệu | JSON-LD `Organization.logo`, liên kết với `WebSite.publisher` trên trang chủ |
+| Ảnh khi chia sẻ trang chủ | Open Graph và Twitter dùng cùng logo |
+
+Favicon là biểu tượng nhỏ cạnh tên website trong kết quả tìm kiếm. Khai báo `Organization.logo` bổ sung thông tin nhận diện tổ chức; đây là hai khai báo riêng. Biểu tượng SVG cũ đã được bỏ để tránh trình duyệt chọn nhầm. Không thêm địa chỉ, hồ sơ mạng xã hội hay thông tin pháp lý chưa được xác nhận.
+
+Sau khi deploy lên Vercel:
+
+1. Mở URL ảnh logo ở bảng trên, kiểm tra hiển thị đúng và không cần đăng nhập.
+2. Mở trang chủ, xem nguồn HTML, tìm `rel="icon"` để xác nhận dùng `/brand/kismet-love-logo.jpg`.
+3. Tìm `application/ld+json`, xác nhận có `Organization` và URL logo đúng tên miền chính.
+4. Dùng [Rich Results Test](https://search.google.com/test/rich-results) kiểm tra URL trang chủ và lỗi dữ liệu tổ chức nếu có.
+5. Trong Search Console, kiểm tra `https://www.kismet-love.com/`, chạy live test rồi yêu cầu lập chỉ mục trang chủ.
+6. Chờ Google thu thập lại. Không có nút tải riêng favicon lên Search Console. Giữ URL ảnh ổn định và không chặn Googlebot/Googlebot-Image.
+
+Logo trên tab trình duyệt có thể còn lưu cache; thử cửa sổ ẩn danh. Việc Google thay favicon có thể mất vài ngày đến vài tuần và không được bảo đảm. Google dùng favicon theo hostname, nên các thiệp cùng `www.kismet-love.com` sẽ dùng biểu tượng website trong tìm kiếm, không có favicon Google riêng cho từng cặp đôi.
+
+Tham khảo [favicon trong Google Tìm kiếm](https://developers.google.com/search/docs/appearance/favicon-in-search?hl=vi) và [dữ liệu có cấu trúc Organization](https://developers.google.com/search/docs/appearance/structured-data/organization?hl=vi).

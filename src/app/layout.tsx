@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { SITE_URL } from "@/lib/seo";
+import { BRAND_LOGO, SITE_URL } from "@/lib/seo";
 import "./globals.css";
 
 export const viewport: Viewport = {
@@ -10,6 +10,12 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+  applicationName: "kIsmet love",
+  icons: {
+    icon: [{ url: BRAND_LOGO.url, type: "image/jpeg", sizes: "1254x1254" }],
+    shortcut: BRAND_LOGO.url,
+    apple: [{ url: BRAND_LOGO.url, sizes: "1254x1254", type: "image/jpeg" }],
+  },
   verification: {
     google: process.env.GOOGLE_SITE_VERIFICATION?.trim() || undefined,
   },
@@ -26,6 +32,7 @@ export const metadata: Metadata = {
     "mẫu thiệp cưới đẹp",
   ],
   openGraph: {
+    images: [BRAND_LOGO],
     siteName: "kIsmet love",
     title: "kIsmet love — Thiệp cưới điện tử & Website đám cưới 5.0",
     description:
@@ -34,6 +41,7 @@ export const metadata: Metadata = {
     locale: "vi_VN",
   },
   twitter: {
+    images: [BRAND_LOGO.url],
     card: "summary",
     title: "kIsmet love — Thiệp cưới điện tử & Website đám cưới 5.0",
     description: "Gói câu chuyện của hai bạn vào một chiếc thiệp cưới online thông minh Âm nhạc, hình ảnh, bản đồ và lời thương trọn vẹn",
