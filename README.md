@@ -2,6 +2,12 @@
 
 Landing page giới thiệu dịch vụ thiệp cưới online, xây dựng với Next.js App Router, TypeScript và Tailwind CSS v4.
 
+## Google Search Console và lập chỉ mục
+
+Xem [hướng dẫn chi tiết bằng tiếng Việt](docs/GOOGLE-SEARCH-CONSOLE.md) để kiểm tra bản triển khai, xác minh DNS/thẻ HTML, gửi sitemap, yêu cầu lập chỉ mục và theo dõi lỗi trong Search Console.
+
+Website cung cấp `/robots.txt` và `/sitemap.xml`; tên miền chuẩn được cấu hình trong `src/lib/seo.ts`. Nếu xác minh tài sản tiền tố URL bằng thẻ HTML, đặt `GOOGLE_SITE_VERIFICATION` theo `.env.example`, sau đó build/deploy lại. Xác minh tài sản miền bằng DNS không cần biến này.
+
 ## Chạy trên máy
 
 ```bash

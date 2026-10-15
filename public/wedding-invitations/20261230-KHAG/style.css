@@ -68,6 +68,9 @@ blockquote { margin: 36px 0 0; padding: 28px 0; border-top: 1px solid rgb(250 23
 .companions-gallery, .portraits-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 40px; }
 .companions-gallery img, .portraits-gallery img { display: block; width: 100%; height: auto; }
 .companions-gallery-wide { grid-column: 1 / -1; }
+.content-block.partnership-intro { padding-bottom: 0; }
+.partnership-intro blockquote { padding-bottom: 0; }
+.content-block.partnership-gallery { padding-top: 32px; }
 .partnership-gallery { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: clamp(18px, 3vw, 44px); }
 .partnership-landscapes, .partnership-portraits { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
 .partnership-gallery img { display: block; width: 100%; height: auto; }

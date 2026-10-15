@@ -85,7 +85,7 @@ body.is-opening-locked.is-revealing-invitation .invitation {
   display: inline-block;
   width: 2.5px;
   height: 1.05em;
-  background-color: #FAEBD7;
+  background-color: #fff;
   margin-left: 4px;
   vertical-align: middle;
   animation: cursorBlink 0.85s steps(1) infinite;
@@ -171,7 +171,11 @@ body.is-opening-locked.is-revealing-invitation .invitation {
   position: relative;
   width: 100%;
   background-color: #FAEBD7;
-  aspect-ratio: 3 / 4;
+  background-image: url('./assets/floral-paper-blue.png');
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  aspect-ratio: 9 / 16;
   border-radius: 2px 2px 0 0;
   padding: 5% 6% 16%;
   flex-shrink: 0;
