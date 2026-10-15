@@ -1,4 +1,5 @@
-.content-block.tv-story { max-width: none; padding-inline: 0; }
+.content-block.tv-story { max-width: none; padding-inline: 0; padding-bottom: 0; }
+.tv-story > blockquote { padding-bottom: 0; }
 .tv-story > :not(.vintage-tv) { width: calc(100% - 64px); max-width: 606px; margin-inline: auto; }
 .vintage-tv { position: relative; width: 100%; aspect-ratio: 900 / 552; margin: 38px 0 0; isolation: isolate; }
 .vintage-tv-frame { position: absolute; inset: 0; z-index: 2; display: block; width: 100%; height: 100%; object-fit: fill; pointer-events: none; }
@@ -73,9 +74,10 @@ body.tv-photo-open { overflow: hidden; }
   transform: rotate(-8deg);
   font: 400 18cqi/1.1 'Great Vibes', cursive;
 }
+.chronicles-title > span { display: block; }
 .chronicles-title small {
   display: block;
-  margin: 4cqi 14% 0 0;
+  margin: -4cqi 14% 0 0;
   text-align: right;
-  font: italic 400 7cqi/1.2 'Cormorant Garamond', Georgia, serif;
+  font: italic 400 6cqi/1.2 'Cormorant Garamond', Georgia, serif;
 }
