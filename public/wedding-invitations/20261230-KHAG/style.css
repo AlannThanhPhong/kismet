@@ -98,7 +98,7 @@ blockquote { margin: 36px 0 0; padding: 28px 0; border-top: 1px solid rgb(250 23
 .album-more summary { width: fit-content; cursor: pointer; margin: 28px auto 38px; padding: 14px 22px; border: 1px solid var(--paper); font: 11px/1.8 "Courier New", monospace; letter-spacing: 1px; }
 .album-fallback { width: 100%; }
 .invitation-footer { padding-bottom: 110px; }
-.invitation-footer h2 { font-size: clamp(28px, 7.5vw, 42px); }
+.footer-signature { display: block; width: 100%; max-width: 600px; height: auto; margin: 24px auto 30px; }
 .invitation-footer .footer-date { margin-top: 36px; font: 10px/1.8 "Courier New", monospace; letter-spacing: 2px; }
 @media (max-width: 480px) {
   .invitation-hero { padding: 34px 12px; }

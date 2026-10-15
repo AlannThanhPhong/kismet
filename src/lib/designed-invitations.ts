@@ -7,7 +7,7 @@ export const designedInvitations = [
     couple: { partnerOne: "An Huynh", partnerTwo: "Pham Anh" },
     event: { date: "2026-12-30T10:30:00.000Z", venue: "Diamond Palace – GRAND BALLROOM - 2ND FLOOR", address: "333 NGUYEN VAN LUONG, PHU LAM, TP HCM" },
     template: "kham-huynh-anh-gia",
-    coverImage: "/wedding-invitations/20261230-KHAG/images/hero-bw.jpg",
+    coverImage: "/wedding-invitations/20261230-KHAG/images/hero-forest-bw.jpg",
   },
   {
     code: "20260823-NDTD",

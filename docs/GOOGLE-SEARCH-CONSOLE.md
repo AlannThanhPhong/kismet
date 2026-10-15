@@ -20,7 +20,7 @@ Thêm tài sản chỉ tạo nơi quản lý dữ liệu, không tự đưa webs
 | --- | --- | --- |
 | Tên miền chính | `src/lib/seo.ts` | Nguồn URL dùng chung |
 | Sitemap | `src/app/sitemap.ts` → `/sitemap.xml` | Liệt kê trang công khai muốn đề xuất lập chỉ mục |
-| Robots | `src/app/robots.ts` → `/robots.txt` | Cho phép crawl website; hạn chế crawl API |
+| Robots | `src/app/robots.ts` → `/robots.txt` | Cho phép crawl website và API đánh giá/mẫu thiệp cần để render; hạn chế API còn lại |
 | Mã xác minh Google | `src/app/layout.tsx` | Đọc `GOOGLE_SITE_VERIFICATION` để xuất thẻ meta |
 | Metadata trang chủ | `src/app/page.tsx` | Tiêu đề, mô tả, canonical, thông tin chia sẻ |
 | Tên website | JSON-LD `WebSite` trên trang chủ | Khai báo tên kIsmet love và URL |
@@ -71,6 +71,8 @@ https://www.kismet-love.com/sitemap.xml
 ```text
 User-Agent: *
 Allow: /
+Allow: /api/reviews
+Allow: /api/templates
 Disallow: /api/
 
 Sitemap: https://www.kismet-love.com/sitemap.xml
@@ -188,7 +190,7 @@ Vào **Lập chỉ mục → Trang / Pages**; chọn một lý do, mở URL mẫ
 | Đã phát hiện, chưa lập chỉ mục | Kiểm tra hosting ổn định và liên kết đến trang; tiếp tục theo dõi |
 | Đã thu thập, chưa lập chỉ mục | Kiểm tra nội dung thực tế, giá trị riêng và trùng lặp; bổ sung thông tin hữu ích |
 | Bị loại trừ bởi noindex | `/design` là chủ đích; nếu trang chủ bị báo thì kiểm tra metadata và header hosting |
-| Bị chặn bởi robots.txt | API là chủ đích; trang chủ và trang tạo thiệp cần crawl được |
+| Bị chặn bởi robots.txt | Các API khác bị chặn là chủ đích; `/api/reviews` và `/api/templates` phải tải được để Google render trang chủ |
 | Trang thay thế có canonical phù hợp | Có thể đúng với `/thu-thiep`; xác nhận đích là `/tao-thiep` |
 | Google chọn canonical khác | Kiểm tra host, chuyển hướng, liên kết và nội dung trùng |
 | Trang có chuyển hướng | Kiểm tra đích; sitemap phải dùng URL cuối cùng |
@@ -296,3 +298,18 @@ Sau khi deploy lên Vercel:
 Logo trên tab trình duyệt có thể còn lưu cache; thử cửa sổ ẩn danh. Việc Google thay favicon có thể mất vài ngày đến vài tuần và không được bảo đảm. Google dùng favicon theo hostname, nên các thiệp cùng `www.kismet-love.com` sẽ dùng biểu tượng website trong tìm kiếm, không có favicon Google riêng cho từng cặp đôi.
 
 Tham khảo [favicon trong Google Tìm kiếm](https://developers.google.com/search/docs/appearance/favicon-in-search?hl=vi) và [dữ liệu có cấu trúc Organization](https://developers.google.com/search/docs/appearance/structured-data/organization?hl=vi).
+
+## 15. Search Console báo hai tài nguyên XHR bị robots.txt chặn
+
+Trang chủ tải mẫu thiệp qua `/api/templates?...` và đánh giá qua `/api/reviews?stars=...`. Chặn toàn bộ `/api/` mà không có ngoại lệ sẽ ngăn Google tải hai nguồn dữ liệu này khi render trang. Mã nguồn đã bổ sung `Allow` cho `/api/templates` và `/api/reviews`; các đường dẫn cụ thể này được ưu tiên hơn quy tắc `Disallow: /api/`.
+
+Hai API trả header `X-Robots-Tag: noindex`: Google được đọc dữ liệu để hiển thị nội dung trang chủ, còn phản hồi JSON không được đề xuất làm kết quả tìm kiếm độc lập. Không thêm URL API vào sitemap hay gửi yêu cầu lập chỉ mục API.
+
+Sau khi deploy bản sửa:
+
+1. Mở `/robots.txt` trên tên miền thật, xác nhận có hai dòng `Allow` như phần 4.
+2. Trong Search Console, kiểm tra URL trang chủ → **Kiểm tra URL đang hoạt động**.
+3. Mở tài nguyên trang, kiểm tra hai XHR không còn báo bị robots.txt chặn. Nếu còn, kiểm tra Google đã đọc bản robots mới chưa; báo cáo cũ có thể chưa cập nhật.
+4. Kiểm tra HTML/ảnh chụp được render và gửi yêu cầu lập chỉ mục lại trang chủ nếu phù hợp.
+
+Tham khảo [SEO cho JavaScript của Google](https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics?hl=vi).

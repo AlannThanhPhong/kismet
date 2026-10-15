@@ -89,7 +89,7 @@ export const WEDDING_TEMPLATES: WeddingTemplateItem[] = [
     description: "Thiệp của An Huynh & Pham Anh với máy đánh chữ, phong bì mở thành lá thư ở đầu trang, câu chuyện tình yêu và album 22 ảnh cưới.",
     tone: "Navy & Kem",
     colors: ["#152238", "#FAEBD7"],
-    coverImage: "/wedding-invitations/20261230-KHAG/images/hero-bw.jpg",
+    coverImage: "/wedding-invitations/20261230-KHAG/images/hero-forest-bw.jpg",
     liveDemoUrl: "/thiep/20261230-KHAG",
     hasMusic: true,
     hasRsvp: false,
