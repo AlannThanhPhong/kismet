@@ -1,6 +1,7 @@
 ﻿import { currencyForCountry } from "@/lib/pricing";
 import { getVisitorCountry } from "@/lib/visitor-country";
 import type { Metadata } from "next";
+import { SITE_URL } from "@/lib/seo";
 import WhiteStorefront from "./components/WhiteStorefront";
 import "./white-storefront.css";
 import "./pricing-white.css";
@@ -27,5 +28,17 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  return <WhiteStorefront currency={currencyForCountry(await getVisitorCountry())} />;
+  const website = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "kIsmet love",
+    alternateName: "KISMET LOVE",
+    url: SITE_URL,
+    inLanguage: "vi-VN",
+  };
+
+  return <>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(website).replace(/</g, "\\u003c") }} />
+    <WhiteStorefront currency={currencyForCountry(await getVisitorCountry())} />
+  </>;
 }

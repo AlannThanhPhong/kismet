@@ -4,6 +4,7 @@ import WeddingCustomizerClient from "./WeddingCustomizerClient";
 import "./customizer.css";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/tao-thiep" },
   title: "Tạo & Chỉnh Sửa Thiệp Cưới Online | Thử Thay Ảnh & Điền Thông Tin Dâu Rể",
   description:
     "Trải nghiệm tự do điền thông tin dâu rể, thông tin gia đình hai bên, tiệc cưới, lễ cưới, hộp mừng VietQR và thay ảnh vào mẫu thiệp Gói 500k & 800k trước khi đặt dịch vụ tại kIsmet love",

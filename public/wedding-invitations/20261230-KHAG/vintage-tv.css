@@ -1,6 +1,4 @@
 .content-block.tv-story { max-width: none; padding-inline: 0; }
-.lifetime-poster { width: 100%; margin: 0; background: var(--ink); }
-.lifetime-poster img { display: block; width: 100%; height: auto; mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 90%, transparent), linear-gradient(to right, transparent, #000 12%, #000 90%, transparent); mask-composite: intersect; }
 .tv-story > :not(.vintage-tv) { width: calc(100% - 64px); max-width: 606px; margin-inline: auto; }
 .vintage-tv { position: relative; width: 100%; aspect-ratio: 900 / 552; margin: 38px 0 0; isolation: isolate; }
 .vintage-tv-frame { position: absolute; inset: 0; z-index: 2; display: block; width: 100%; height: 100%; object-fit: fill; pointer-events: none; }
@@ -30,3 +28,54 @@
 body.tv-photo-open { overflow: hidden; }
 @media (max-width: 480px) { .tv-story > :not(.vintage-tv) { width: calc(100% - 52px); } .tv-lightbox { padding-inline: 34px; } .tv-lightbox-prev, .tv-lightbox-next { width: 32px !important; height: 40px !important; } .tv-lightbox-prev { left: 1px; } .tv-lightbox-next { right: 1px; } }
 @media (prefers-reduced-motion: reduce) { .tv-lightbox-photo, .tv-cursor { animation: none !important; } }
+
+@font-face {
+  font-family: 'Great Vibes';
+  src: url('./fonts/GreatVibes-Regular.ttf') format('truetype');
+  font-display: swap;
+  font-weight: 400;
+}
+.chronicles-poster {
+  container-type: inline-size;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  margin: 0;
+  background: var(--ink);
+  color: #fffaf0;
+}
+.chronicles-poster > img {
+  position: absolute;
+  left: 24%;
+  top: 14%;
+  width: 52%;
+  height: auto;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+}
+.chronicles-the {
+  position: absolute;
+  z-index: 1;
+  top: 9%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font: 400 15cqi/1 'Libre Caslon Display', Georgia, serif;
+}
+.chronicles-title {
+  position: absolute;
+  z-index: 1;
+  top: 72%;
+  left: 5%;
+  width: 90%;
+  color: inherit;
+  text-align: center;
+  transform: rotate(-8deg);
+  font: 400 18cqi/1.1 'Great Vibes', cursive;
+}
+.chronicles-title small {
+  display: block;
+  margin: 4cqi 14% 0 0;
+  text-align: right;
+  font: italic 400 7cqi/1.2 'Cormorant Garamond', Georgia, serif;
+}

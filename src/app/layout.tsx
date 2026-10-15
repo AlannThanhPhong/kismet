@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { SITE_URL } from "@/lib/seo";
 import "./globals.css";
 
 export const viewport: Viewport = {
@@ -8,7 +9,10 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.kismet-love.com"),
+  metadataBase: new URL(SITE_URL),
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION?.trim() || undefined,
+  },
   title: "kIsmet love — Thiệp cưới điện tử & Website đám cưới 5.0",
   description:
     "Nền tảng tạo thiệp cưới online và website đám cưới tinh tế thời 5.0 Tích hợp nhạc nền tự động, album ảnh cưới HD, bản đồ Google Maps và xác nhận tham dự (RSVP) tức thì trên điện thoại và máy tính",
