@@ -23,8 +23,10 @@
 
   function syncMusicButton() {
     if (!music || !musicToggle) return;
-    const playing = !music.paused;
-    musicToggle.textContent = playing ? "Tắt nhạc" : "Bật nhạc";
+    const playing = !music.paused && !music.ended && !music.error;
+    const label = playing ? "Tắt nhạc" : "Bật nhạc";
+    musicToggle.setAttribute("aria-label", label);
+    musicToggle.title = label;
     musicToggle.setAttribute("aria-pressed", String(playing));
   }
 
@@ -39,6 +41,8 @@
     music.addEventListener("play", syncMusicButton);
     music.addEventListener("pause", syncMusicButton);
     music.addEventListener("error", syncMusicButton);
+    music.addEventListener("ended", syncMusicButton);
+    syncMusicButton();
   }
   if (musicToggle && music) {
     musicToggle.addEventListener("click", () => {

@@ -19,8 +19,8 @@
     <link rel="preload" href="./assets/white-green-bouquet-reference.png" as="image">
     <link rel="preload" href="./images/hero-forest-bw.jpg" as="image">
     <link rel="preload" href="./assets/ivory-rose-frame.png" as="image">
-    <link rel="stylesheet" href="./opening.css?v=20261015-paper-texture-path">
-    <script src="./opening.js?v=20261013-unique-album" defer></script>
+    <link rel="stylesheet" href="./opening.css?v=20261015-navy-music-toggle">
+    <script src="./opening.js?v=20261015-music-clef-toggle" defer></script>
     <noscript>
       <style>
         .typewriter-opening { display: none !important; }
@@ -280,6 +280,11 @@
       <p class="tv-lightbox-count" aria-live="polite"></p>
     </dialog>
 
+    <div class="invitation-controls">
+      <button id="music-toggle" class="music-toggle-btn" type="button" aria-label="Bật nhạc" title="Bật nhạc" aria-pressed="false" hidden>
+        <span class="music-clef" aria-hidden="true">&#119070;</span>
+      </button>
+    </div>
     <audio id="wedding-music" preload="auto" loop>
       <source src="./audio/wedding-music.m4a" type="audio/mp4">
       <source src="./audio/wedding-music.weba" type="audio/webm">
