@@ -33,6 +33,6 @@ npm.cmd run build
 
 Không tự triển khai lên tên miền hoặc dịch vụ hosting từ thay đổi này.
 
-Bản production dùng `.next-white`, bản development dùng `.next` để tránh ghi đè tệp khi chạy song song. Có thể chọn thư mục khác bằng biến môi trường `KISMET_BUILD_DIR`.
+Bản production dùng `.next`, bản development dùng `.next-dev` để tránh ghi đè tệp khi chạy song song. Thư mục được chọn theo chế độ chạy trong `next.config.ts`.
 
 Kiểm tra đã thực hiện: build production và TypeScript đạt; HTTP 200 cho `/`, `/design`, `/thu-thiep`, `/tao-thiep`; API lọc theo gói/tính năng, giá VNĐ theo quốc gia, kết quả trống, phân trang, chi tiết mẫu và các phản hồi 400/403/404/413 đạt. Không ghi dữ liệu thật vào database khi kiểm tra. Chưa kiểm thử tương tác bằng trình duyệt và chưa xác minh lưu MongoDB/đăng ký email thành công với dịch vụ thực tế.

@@ -59,10 +59,18 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--paper); outlin
 #story-title, .story-chapter-title { font-family: "Cormorant Garamond", Georgia, serif; }
 .story-intro { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: clamp(24px, 4vw, 48px); margin-top: 40px; }
 .story-intro-photo { margin: 0; }
+.story-intro-photo:only-child { grid-column: 2; }
 .story-intro-photo img { display: block; width: 100%; height: auto; }
 .story-intro p { margin: 0; text-align: left; }
 @media (max-width: 600px) {
-  .story-intro { grid-template-columns: 1fr; gap: 24px; }
+  /* Keep the alternating photo/copy pairs side by side on phones. */
+  .story-intro { gap: clamp(16px, 5.3vw, 24px); }
+  .story .story-intro p { font-size: clamp(9px, 2vw, 12px); line-height: 1.9; }
+  #our-story, .story[aria-labelledby="walking-title"] { padding-inline: clamp(16px, 4.2vw, 26px); }
+  #our-story { padding-bottom: 36px; }
+  .story[aria-labelledby="walking-title"] { padding-top: 40px; }
+  .story[aria-labelledby="walking-title"] .story-intro { margin-top: 20px; }
+  #walking-title { font-size: clamp(22px, 5.3vw, 30px); }
 }
 blockquote { margin: 36px 0 0; padding: 28px 0; border-top: 1px solid rgb(250 235 215 / .2); font: italic clamp(23px, 4vw, 31px)/1.5 Georgia, serif; }
 .companions-gallery, .portraits-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 40px; }
@@ -90,7 +98,7 @@ blockquote { margin: 36px 0 0; padding: 28px 0; border-top: 1px solid rgb(250 23
 .album-more summary { width: fit-content; cursor: pointer; margin: 28px auto 38px; padding: 14px 22px; border: 1px solid var(--paper); font: 11px/1.8 "Courier New", monospace; letter-spacing: 1px; }
 .album-fallback { width: 100%; }
 .invitation-footer { padding-bottom: 110px; }
-.invitation-footer h2 { font-size: 26px; }
+.invitation-footer h2 { font-size: clamp(28px, 7.5vw, 42px); }
 .invitation-footer .footer-date { margin-top: 36px; font: 10px/1.8 "Courier New", monospace; letter-spacing: 2px; }
 @media (max-width: 480px) {
   .invitation-hero { padding: 34px 12px; }

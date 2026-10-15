@@ -12,6 +12,8 @@
   let pausedOffset = 0;
   let lastTime = 0;
   let offset = 0;
+  const invitation = document.querySelector('.invitation');
+  let photos = [];
   // Duplicate one cycle for a seamless horizontal film, keeping copies out of keyboard navigation.
   links.forEach(link => {
     const copy = link.cloneNode(true);
@@ -19,23 +21,69 @@
     copy.setAttribute('aria-hidden', 'true');
     track.append(copy);
   });
-  const allLinks = Array.from(track.querySelectorAll('a'));
-  function showPhoto(index) {
-    selected = (index + links.length) % links.length;
-    const source = links[selected].querySelector('img');
-    const photo = dialog.querySelector('img');
-    photo.src = links[selected].href;
-    photo.alt = source.alt;
-    dialog.querySelector('.tv-lightbox-count').textContent = `${selected + 1} / ${links.length}`;
+  function isPhoto(img) {
+    return img instanceof HTMLImageElement && img.hasAttribute('src') &&
+      !img.matches('[aria-hidden="true"], .vintage-tv-frame') &&
+      !img.closest('[aria-hidden="true"], button');
   }
-  allLinks.forEach((link, index) => link.addEventListener('click', event => {
-    event.preventDefault();
-    previousFocus = link;
+  function preparePhotos() {
+    invitation.querySelectorAll('img').forEach(img => {
+      if (!isPhoto(img)) return;
+      img.classList.add('enlargeable-photo');
+      const link = img.closest('a');
+      const trigger = link || img;
+      trigger.setAttribute('aria-haspopup', 'dialog');
+      if (!link) {
+        img.tabIndex = 0;
+        img.setAttribute('role', 'button');
+        img.setAttribute('aria-label', `Xem ảnh lớn: ${img.alt || 'Ảnh cưới'}`);
+      }
+    });
+  }
+  preparePhotos();
+  // Include album photos inserted later and the portrait moved out of the opening envelope.
+  new MutationObserver(preparePhotos).observe(invitation, { childList: true, subtree: true });
+  function showPhoto(index) {
+    selected = (index + photos.length) % photos.length;
+    const source = photos[selected];
+    const photo = dialog.querySelector('img');
+    photo.src = source.url;
+    photo.alt = source.alt;
+    dialog.querySelector('.tv-lightbox-count').textContent = `${selected + 1} / ${photos.length}`;
+  }
+  function openPhoto(img) {
+    const unique = new Map();
+    invitation.querySelectorAll('img').forEach(source => {
+      if (isPhoto(source)) {
+        const url = source.currentSrc || source.src;
+        if (!unique.has(url)) unique.set(url, { url, alt: source.alt });
+      }
+    });
+    photos = Array.from(unique.values());
+    const index = photos.findIndex(photo => photo.url === (img.currentSrc || img.src));
+    if (index < 0) return;
+    previousFocus = img.closest('a') || img;
     pausedOffset = offset;
     showPhoto(index);
     document.body.classList.add('tv-photo-open');
     dialog.showModal();
-  }));
+  }
+  invitation.addEventListener('click', event => {
+    if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    let img = event.target.closest('img');
+    // Captions and lettering layered over a photo should open that photo too.
+    if (!img) img = event.target.closest('.chapter-photo, .chronicles-poster, .monogram-photo, .glance-collage, .letter-photo')?.querySelector('img');
+    if (!img || (!img.matches('.enlargeable-photo') && !img.closest('.vintage-tv-track'))) return;
+    if (img.closest('button')) return;
+    event.preventDefault();
+    openPhoto(img);
+  });
+  invitation.addEventListener('keydown', event => {
+    if ((event.key === 'Enter' || event.key === ' ') && event.target.matches('img.enlargeable-photo')) {
+      event.preventDefault();
+      openPhoto(event.target);
+    }
+  });
   dialog.querySelector('.tv-lightbox-close').addEventListener('click', () => dialog.close());
   dialog.querySelector('.tv-lightbox-prev').addEventListener('click', () => showPhoto(selected - 1));
   dialog.querySelector('.tv-lightbox-next').addEventListener('click', () => showPhoto(selected + 1));

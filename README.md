@@ -17,6 +17,8 @@ npm run dev
 
 Mở [http://localhost:3000](http://localhost:3000) để xem trang.
 
+Development dùng `.next-dev`, còn `npm run build` và `npm run start` dùng `.next` để build production không ghi đè cache của dev server đang chạy. Sau khi thay đổi cấu hình này, khởi động lại dev server.
+
 ## Giá theo quốc gia IP
 
 Trang chủ xác định quốc gia trên server cho từng lượt truy cập. Chỉ mã quốc gia `VN` dùng VNĐ; các nước khác hoặc không xác định được quốc gia đều dùng USD. Không sử dụng ngôn ngữ trình duyệt, múi giờ hoặc cookie để chọn giá.
