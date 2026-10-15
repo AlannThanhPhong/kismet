@@ -28,9 +28,18 @@ Thêm tài sản chỉ tạo nơi quản lý dữ liệu, không tự đưa webs
 | Trang thử thiệp | `src/app/thu-thiep/page.tsx` | Canonical về `/tao-thiep` vì dùng cùng giao diện |
 | Bàn thiết kế | `src/app/design/page.tsx` | `noindex, follow` cho công cụ chỉnh sửa |
 
-Sitemap hiện có **2 URL**: trang chủ và `/tao-thiep`. Không đưa `/thu-thiep`, `/design`, API, URL tham số, sổ lưu bút hoặc thiệp khách hàng vào sitemap. Không có ngày `lastmod` giả theo mỗi lần tải/build.
+Sitemap hiện có **ít nhất 6 URL**: trang chủ, `/tao-thiep` và bốn thiệp có sẵn bên dưới. Thiệp khác trong collection `invitations` của MongoDB được tự động thêm theo `code`, không lặp lại thiệp có sẵn. Sitemap đọc dữ liệu mỗi lần được yêu cầu; không cần deploy lại chỉ để thêm thiệp trong database.
 
-Việc loại thiệp khỏi sitemap **không ngăn Google lập chỉ mục thiệp**. Quy tắc lập chỉ mục thiệp hiện có được giữ nguyên. Nếu muốn thiệp riêng tư, cần thiết kế quyền truy cập; `noindex` chỉ xử lý tìm kiếm, không bảo vệ nội dung khỏi người biết URL. Với thiệp iframe, phải xem xét cả `/thiep/<code>` lẫn HTML tại `/wedding-invitations/<code>/`.
+| Cặp đôi | URL thiệp trong sitemap |
+| --- | --- |
+| An Huynh & Pham Anh | `/thiep/20261230-KHAG` |
+| Ngọc Dung & Thanh Điền | `/thiep/20260823-NDTD` |
+| Kim Hiên & Văn Tài | `/thiep/20261027-KHVT` |
+| Nguyễn Huyền Vy & Viên Anh Minh | `/thiep/20260110-NHVVAM` |
+
+Không đưa `/thu-thiep`, `/design`, API, URL tham số hoặc sổ lưu bút vào sitemap. Không có ngày `lastmod` giả theo mỗi lần tải/build. Nếu MongoDB chưa được cấu hình hoặc tạm lỗi, sitemap vẫn chứa hai trang dịch vụ và bốn thiệp có sẵn; các thiệp chỉ có trong database sẽ thiếu cho tới khi kết nối hoạt động lại.
+
+Trang `/thiep/<code>` có canonical riêng và cho phép lập chỉ mục. Sitemap dùng đường dẫn này thay vì thêm cả bản HTML `/wedding-invitations/<code>/`. Sổ lưu bút giữ `noindex`. Nếu muốn thiệp riêng tư, cần thiết kế quyền truy cập; `noindex` chỉ xử lý tìm kiếm, không bảo vệ nội dung khỏi người biết URL.
 
 Tham khảo [quy tắc noindex](https://developers.google.com/search/docs/crawling-indexing/block-indexing?hl=vi) và [cách khai báo tên website](https://developers.google.com/search/docs/appearance/site-names?hl=vi).
 
@@ -67,7 +76,7 @@ Disallow: /api/
 Sitemap: https://www.kismet-love.com/sitemap.xml
 ```
 
-Sitemap phải là XML chứa hai địa chỉ đúng tên miền, không phải trang HTML báo lỗi. Các trang cần lập chỉ mục phải trả `200`, không bị chuyển về trang lỗi.
+Sitemap phải là XML chứa các địa chỉ đúng tên miền, bao gồm bốn thiệp kể trên, không phải trang HTML báo lỗi. Các trang cần lập chỉ mục phải trả `200`, không bị chuyển về trang lỗi.
 
 Để kiểm tra bằng PowerShell:
 
@@ -149,13 +158,13 @@ Không nhập cả thẻ `<meta>` hoặc chuỗi `google-site-verification=` và
 https://www.kismet-love.com/sitemap.xml
 ```
 
-Kỳ vọng sau khi xử lý: trạng thái **Thành công / Success**, phát hiện hai URL theo cấu hình hiện tại. Số URL phát hiện không phải số URL đã được lập chỉ mục. Nếu báo **Không thể tìm nạp / Couldn't fetch**, kiểm tra URL ở trình duyệt, HTTP status, CDN/firewall và đúng phạm vi tài sản trước khi gửi lại.
+Kỳ vọng sau khi xử lý: trạng thái **Thành công / Success**, phát hiện ít nhất sáu URL theo cấu hình hiện tại. Số URL phát hiện không phải số URL đã được lập chỉ mục. Nếu báo **Không thể tìm nạp / Couldn't fetch**, kiểm tra URL ở trình duyệt, HTTP status, CDN/firewall và đúng phạm vi tài sản trước khi gửi lại.
 
 [Hướng dẫn báo cáo sitemap](https://support.google.com/webmasters/answer/7451001?hl=vi).
 
 ## 8. Kiểm tra và yêu cầu lập chỉ mục từng trang
 
-Làm trước với trang chủ, sau đó `/tao-thiep`:
+Làm trước với trang chủ, sau đó `/tao-thiep` và các URL `/thiep/<code>` trong sitemap:
 
 1. Dán URL đầy đủ vào thanh **Kiểm tra URL / Inspect any URL** ở trên cùng → Enter.
 2. Đọc kết quả của bản Google đã biết.
@@ -224,7 +233,7 @@ Google có thể tạo lại tiêu đề hoặc mô tả khi hiển thị. Khôn
 | Thời điểm | Công việc | Bằng chứng cần lưu |
 | --- | --- | --- |
 | Ngày triển khai | Kiểm tra HTTPS, nguồn HTML, sitemap, robots | Ngày deploy và kết quả HTTP |
-| Sau triển khai | Xác minh tài sản, gửi sitemap, yêu cầu hai URL | Ngày xác minh và trạng thái gửi |
+| Sau triển khai | Xác minh tài sản, gửi sitemap, yêu cầu các URL quan trọng | Ngày xác minh và trạng thái gửi |
 | Sau 2–3 ngày | Kiểm tra sitemap và URL quan trọng | Lần đọc sitemap, trạng thái URL |
 | Hàng tuần | Xem báo cáo Trang, xử lý lỗi cần sửa | URL lỗi, nguyên nhân, ngày sửa |
 | Hàng tháng | So sánh hiệu suất và cải thiện nội dung | Trang/truy vấn có hiển thị, lượt nhấp |
@@ -248,10 +257,10 @@ Ngày kiểm tra tiếp:
 ## 13. Checklist bàn giao
 
 - [ ] Bản SEO đã được triển khai trên đúng tên miền.
-- [ ] Hai URL trong sitemap tải được và canonical đúng.
+- [ ] Các URL trong sitemap tải được và canonical đúng, bao gồm thiệp từng cặp đôi.
 - [ ] Tài sản đã được xác minh bằng tài khoản quản lý lâu dài.
 - [ ] Sitemap đã gửi và được Google đọc thành công.
-- [ ] Đã kiểm tra trực tiếp hai URL, gửi yêu cầu nếu phù hợp.
+- [ ] Đã kiểm tra trực tiếp các URL quan trọng, gửi yêu cầu nếu phù hợp.
 - [ ] Phân biệt được kết quả live test với trạng thái đã lập chỉ mục.
 - [ ] Đã ghi nhận người phụ trách và lịch theo dõi.
 
