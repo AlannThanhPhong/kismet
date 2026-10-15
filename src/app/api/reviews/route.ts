@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getDatabase } from "@/lib/mongodb";
 
 export async function GET(request: NextRequest) {
-  const headers = { "Cache-Control": "private, no-store" };
+  const headers = { "Cache-Control": "private, no-store", "X-Robots-Tag": "noindex" };
   if (!process.env.MONGODB_URI) return NextResponse.json({ reviews: [] }, { headers });
   const stars = Number(request.nextUrl.searchParams.get("stars"));
   try {
