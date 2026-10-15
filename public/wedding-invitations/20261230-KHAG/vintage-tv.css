@@ -27,6 +27,8 @@
 .tv-lightbox-next { right: 8px; top: calc(50% - 22px); }
 .tv-lightbox-count { position: absolute; bottom: 14px; margin: 0; font: 12px/1.5 'Courier New', monospace; }
 body.tv-photo-open { overflow: hidden; }
+.enlargeable-photo { cursor: zoom-in; pointer-events: auto; }
+.enlargeable-photo:focus-visible { outline: 2px solid var(--paper); outline-offset: 4px; }
 @media (max-width: 480px) { .tv-story > :not(.vintage-tv) { width: calc(100% - 52px); } .tv-lightbox { padding-inline: 34px; } .tv-lightbox-prev, .tv-lightbox-next { width: 32px !important; height: 40px !important; } .tv-lightbox-prev { left: 1px; } .tv-lightbox-next { right: 1px; } }
 @media (prefers-reduced-motion: reduce) { .tv-lightbox-photo, .tv-cursor { animation: none !important; } }
 
