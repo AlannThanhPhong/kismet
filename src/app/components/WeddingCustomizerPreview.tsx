@@ -54,6 +54,7 @@ import { DEFAULT_WEDDING_SONG, WEDDING_SONGS } from "@/lib/wedding-songs";
 import { DRESS_COLOR_FAMILIES, DRESS_COLOR_PALETTE, normalizeColorSearch, swatchCheckColor } from "@/lib/dress-colors";
 
 export type CustomizerPackage = "standard" | "premium";
+export type InvitationStyle = "minimalist" | "red-artline" | "bnw" | "muted-color" | "mid-century";
 
 export interface CeremonyItem {
   id: string;
@@ -102,6 +103,7 @@ export interface BankAccountItem {
 
 export interface WeddingEditorData {
   packageType: CustomizerPackage;
+  invitationStyle: InvitationStyle;
   // 1. Lời mở đầu
   useDefaultIntro: boolean;
   introText: string;
@@ -215,6 +217,7 @@ export interface WeddingEditorData {
 
 const DEFAULT_EDITOR_DATA_800K: WeddingEditorData = {
   packageType: "premium",
+  invitationStyle: "minimalist",
   useDefaultIntro: true,
   introText: "WELCOME TO OUR WEDDING",
   groomFullName: "Lê Văn Tài",
@@ -397,6 +400,7 @@ const DEFAULT_EDITOR_DATA_800K: WeddingEditorData = {
 
 const DEFAULT_EDITOR_DATA_500K: WeddingEditorData = {
   packageType: "standard",
+  invitationStyle: "minimalist",
   useDefaultIntro: true,
   introText: "WELCOME TO OUR WEDDING",
   groomFullName: "Nguyễn Đức Anh",
@@ -528,16 +532,39 @@ const DEFAULT_EDITOR_DATA_500K: WeddingEditorData = {
 
 interface WeddingCustomizerPreviewProps {
   initialPackage?: CustomizerPackage;
+  initialStyle?: InvitationStyle;
   currency?: PricingCurrency;
   previewOnly?: boolean;
 }
 
-function createEditorData(packageType: CustomizerPackage): WeddingEditorData {
+function createEditorData(packageType: CustomizerPackage, invitationStyle: InvitationStyle = "minimalist"): WeddingEditorData {
   const defaults = packageType === "standard" ? DEFAULT_EDITOR_DATA_500K : DEFAULT_EDITOR_DATA_800K;
-  return {
+  const sample = invitationStyle === "red-artline" ? {
     ...defaults,
+    groomFullName: "Nguyễn Minh Anh",
+    brideFullName: "Trần Bảo Ngọc",
+    groomShortName: "Minh Anh",
+    brideShortName: "Bảo Ngọc",
+    partyDate: "2026-09-19",
+    showCeremony: true,
+    ceremonies: [
+      { id: "artline-ceremony-1", name: "Lễ Thành Hôn", time: "14:30", date: "19/09/2026", venue: "Nhà hàng Whitmore", address: "Số 18, phố Hoàng Hoa Thám, Hà Nội" },
+    ],
+    showDressCode: true,
+    dressCodeDescription: "Cùng chúng mình chọn sắc trắng, đỏ rượu và những gam màu trầm dịu nhé.",
+    showTimeline: true,
+    timelineItems: [
+      { id: "artline-timeline-1", time: "14:30", title: "Đón khách", description: "Gặp nhau tại khu vườn" },
+      { id: "artline-timeline-2", time: "15:30", title: "Lễ Thành Hôn", description: "Cùng chứng kiến lời hẹn ước" },
+      { id: "artline-timeline-3", time: "16:30", title: "Tiệc mừng", description: "Một buổi chiều bên gia đình và bạn bè" },
+      { id: "artline-timeline-4", time: "21:00", title: "Kết thúc buổi tiệc", description: "Cảm ơn bạn đã đến chung vui" },
+    ],
+  } : defaults;
+  return {
+    ...sample,
+    invitationStyle,
     dressCodeColors: DRESS_COLOR_PALETTE.map((color) => {
-      const original = defaults.dressCodeColors.find((item) => item.hex.toLowerCase() === color.hex.toLowerCase());
+      const original = sample.dressCodeColors.find((item) => item.hex.toLowerCase() === color.hex.toLowerCase());
       return { name: original?.name ?? color.name, hex: color.hex, selected: original?.selected ?? false };
     }),
   };
@@ -602,11 +629,13 @@ function CustomizerModal({ title, className = "modal-inner-card", onClose, child
 
 export default function WeddingCustomizerPreview({
   initialPackage = "premium",
+  initialStyle = "minimalist",
   currency = "VND",
   previewOnly = false,
 }: WeddingCustomizerPreviewProps) {
   // Main form data
-  const [data, setData] = useState<WeddingEditorData>(() => createEditorData(initialPackage));
+  const [data, setData] = useState<WeddingEditorData>(() => createEditorData(initialPackage, initialStyle));
+  const [trialReady, setTrialReady] = useState(!previewOnly);
   const [dressColorSearch, setDressColorSearch] = useState("");
   const [dressColorFamily, setDressColorFamily] = useState("");
   const selectedDressColors = data.dressCodeColors.filter((color) => color.selected);
@@ -626,6 +655,7 @@ export default function WeddingCustomizerPreview({
   const [activeTab, setActiveTab] = useState<"edit" | "preview" | "split">("split");
   const [previewDevice, setPreviewDevice] = useState<"mobile" | "desktop">("mobile");
   const [isPlayingMusic, setIsPlayingMusic] = useState(false);
+  const [previewingSongId, setPreviewingSongId] = useState<string | null>(null);
   const [isPublishModalOpen, setIsPublishModalOpen] = useState(false);
 
   // Modals for newly requested sections
@@ -675,9 +705,39 @@ export default function WeddingCustomizerPreview({
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
+  // A trial preview is opened in a new tab. sessionStorage is copied to that
+  // tab by the browser, so the current draft stays available there.
+  useEffect(() => {
+    if (!previewOnly) return;
+    try {
+      const saved = sessionStorage.getItem("kismet-wedding-trial-preview");
+      if (saved) {
+        const parsed = JSON.parse(saved) as WeddingEditorData;
+        if (parsed && typeof parsed === "object" && parsed.groomShortName && parsed.brideShortName) {
+          setData({ ...parsed, invitationStyle: parsed.invitationStyle ?? initialStyle });
+        }
+      }
+    } catch {
+      // Keep the default sample available if the preview draft is unavailable.
+    } finally {
+      setTrialReady(true);
+    }
+  }, [previewOnly, initialStyle]);
+
+  const exportTrialPreview = () => {
+    try {
+      sessionStorage.setItem("kismet-wedding-trial-preview", JSON.stringify(data));
+      const previewUrl = `/tao-thiep?view=preview&style=${data.invitationStyle}`;
+      const preview = window.open(previewUrl, "_blank");
+      if (!preview) window.location.assign(previewUrl);
+    } catch {
+      window.location.assign(`/tao-thiep?view=preview&style=${data.invitationStyle}`);
+    }
+  };
+
   // Switch package
   const handleSwitchPackage = (pkg: CustomizerPackage) => {
-    setData(createEditorData(pkg));
+    setData(createEditorData(pkg, data.invitationStyle));
     setDressColorSearch("");
     setDressColorFamily("");
   };
@@ -703,7 +763,26 @@ export default function WeddingCustomizerPreview({
     if (audioRef.current) {
       audioRef.current.src = song.src;
       audioRef.current.play().then(() => setIsPlayingMusic(true)).catch(() => {});
+      setPreviewingSongId(song.id);
     }
+  };
+
+  const handlePreviewSong = (song: (typeof WEDDING_SONGS)[0]) => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (previewingSongId === song.id && isPlayingMusic) {
+      audio.pause();
+      setPreviewingSongId(null);
+      return;
+    }
+    audio.pause();
+    audio.src = song.src;
+    audio.currentTime = 0;
+    setPreviewingSongId(song.id);
+    audio.play().then(() => setIsPlayingMusic(true)).catch(() => {
+      setIsPlayingMusic(false);
+      setPreviewingSongId(null);
+    });
   };
 
   // Upload Hero Image
@@ -893,8 +972,13 @@ export default function WeddingCustomizerPreview({
   }, [data.groomShortName, data.brideShortName]);
 
   if (previewOnly) {
+    if (!trialReady) return <main className="standalone-invitation-preview trial-loading">Đang mở bản xem thử…</main>;
     return (
-      <main className="standalone-invitation-preview" aria-label={`Thiệp cưới ${firstPerson} và ${secondPerson}`}>
+      <main className="standalone-invitation-preview is-trial" aria-label={`Thiệp cưới ${firstPerson} và ${secondPerson}`}>
+        <header className="trial-preview-bar">
+          <a href="/tao-thiep">← Quay lại chỉnh sửa</a>
+          <span>kIsmet <em>love</em> · BẢN XEM THỬ</span>
+        </header>
         <audio
           ref={audioRef}
           src={data.musicTrack}
@@ -915,6 +999,12 @@ export default function WeddingCustomizerPreview({
           toggleMusic={toggleMusic}
           onAddWish={handleAddLiveWish}
         />
+        <section className="trial-preview-lock">
+          <span>✦ BẢN XEM THỬ</span>
+          <h2>Một phần lời mời của {firstPerson} & {secondPerson}</h2>
+          <p>Bạn đang xem phần mở đầu của mẫu. Các phần lịch trình, địa điểm, album ảnh và RSVP sẽ được hoàn thiện trong thiệp chính thức.</p>
+          <a href="/tao-thiep">Tiếp tục chỉnh sửa mẫu</a>
+        </section>
       </main>
     );
   }
@@ -987,13 +1077,28 @@ export default function WeddingCustomizerPreview({
           <button
             type="button"
             className="btn-publish-order"
-            onClick={() => setIsPublishModalOpen(true)}
+            onClick={exportTrialPreview}
           >
             <Sparkles size={14} />
-            <span>Xuất bản</span>
+            <span>Xuất bản xem thử</span>
           </button>
         </div>
       </header>
+
+      <nav className="invitation-style-picker" aria-label="Phong cách thiệp">
+        <span>PHONG CÁCH</span>
+        {([
+          ["minimalist", "Minimalist", "#e9e5df", "#4f4a45"],
+          ["red-artline", "Red Artline", "#f5f0eb", "#801b36"],
+          ["bnw", "B&W", "#f4f4f2", "#191919"],
+          ["muted-color", "Muted Color", "#e6e2d8", "#718078"],
+          ["mid-century", "Mid Century", "#e9d8be", "#b35536"],
+        ] as const).map(([style, label, paper, ink]) => (
+          <button key={style} type="button" className={`style-choice ${data.invitationStyle === style ? "is-selected" : ""}`} aria-pressed={data.invitationStyle === style} onClick={() => setData((previous) => ({ ...previous, invitationStyle: style }))}>
+            <i style={{ background: paper, borderColor: ink }} />{label}
+          </button>
+        ))}
+      </nav>
 
       {/* ================================================================= */}
       {/* MAIN WORKSPACE: LEFT FORM + RIGHT LIVE PREVIEW CANVAS              */}
@@ -2470,6 +2575,16 @@ export default function WeddingCustomizerPreview({
                   </div>
                   <button
                     type="button"
+                    className={`btn-preview-song ${previewingSongId === song.id && isPlayingMusic ? "is-playing" : ""}`}
+                    aria-label={previewingSongId === song.id && isPlayingMusic ? `Tạm dừng ${song.title}` : `Nghe thử ${song.title}`}
+                    aria-pressed={previewingSongId === song.id && isPlayingMusic}
+                    onClick={() => handlePreviewSong(song)}
+                  >
+                    {previewingSongId === song.id && isPlayingMusic ? <Volume2 size={14} /> : <Play size={14} />}
+                    <span>{previewingSongId === song.id && isPlayingMusic ? "Đang phát" : "Nghe thử"}</span>
+                  </button>
+                  <button
+                    type="button"
                     className="btn-select-song"
                     aria-label={`Áp dụng bài ${song.title}`}
                     onClick={() => handleSelectMusicTrack(song)}
@@ -2868,12 +2983,12 @@ function LiveTemplateDocument({
   };
 
   return (
-    <div className={`live-invitation-doc ${isPremium ? "theme-khvt-premium" : "theme-standard-minimal"}`}>
+    <div className={`live-invitation-doc ${isPremium ? "theme-khvt-premium" : "theme-standard-minimal"} theme-${data.invitationStyle}`}>
       {/* Top Floating Bar */}
       <div className="live-top-bar">
         <span className="live-monogram">{monogram}</span>
         <span className="live-date-pill">{formattedDate}</span>
-        <button type="button" className="live-music-toggle" onClick={toggleMusic}>
+        <button type="button" className="live-music-toggle" onClick={toggleMusic} aria-label={isPlayingMusic ? "Tắt nhạc nền" : `Phát nhạc nền${data.musicTrackTitle ? `: ${data.musicTrackTitle}` : ""}`} title={isPlayingMusic ? "Tắt nhạc nền" : "Phát nhạc nền"}>
           {isPlayingMusic ? <Volume2 size={13} /> : <VolumeX size={13} />}
         </button>
       </div>

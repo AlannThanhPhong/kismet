@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 740" fill="none">
+  <defs>
+    <pattern id="grain" width="12" height="12" patternUnits="userSpaceOnUse"><circle cx="2" cy="3" r=".45" fill="#b7aaa1" opacity=".26"/><circle cx="9" cy="8" r=".5" fill="#b7aaa1" opacity=".2"/></pattern>
+    <filter id="shadow" x="-20%" y="-10%" width="140%" height="130%"><feDropShadow dx="0" dy="9" stdDeviation="11" flood-color="#39312b" flood-opacity=".18"/></filter>
+    <clipPath id="photo"><rect x="75" y="233" width="102" height="136"/></clipPath>
+  </defs>
+  <rect width="440" height="740" fill="#ddd8d2"/><rect width="440" height="740" fill="url(#grain)"/>
+  <path d="M0 82c90 15 104 94 176 74s111-80 264-48M0 650c95-25 129-91 225-56s139 58 215 31" stroke="#b9afa8" stroke-width="1" opacity=".55"/>
+  <g filter="url(#shadow)">
+    <rect x="44" y="96" width="164" height="554" fill="#f9f6f2"/>
+    <rect x="218" y="96" width="164" height="554" fill="#f9f6f2"/>
+  </g>
+  <rect x="44" y="96" width="164" height="554" fill="url(#grain)" opacity=".42"/>
+  <rect x="218" y="96" width="164" height="554" fill="url(#grain)" opacity=".42"/>
+  <text x="126" y="129" text-anchor="middle" fill="#791b36" font-family="Georgia,serif" font-size="7" letter-spacing="2">THE WEDDING OF</text>
+  <text x="126" y="165" text-anchor="middle" fill="#282321" font-family="Georgia,serif" font-size="20" font-style="italic">Minh Anh</text>
+  <text x="126" y="188" text-anchor="middle" fill="#791b36" font-family="Georgia,serif" font-size="12">&amp;</text>
+  <text x="126" y="211" text-anchor="middle" fill="#282321" font-family="Georgia,serif" font-size="20" font-style="italic">Bảo Ngọc</text>
+  <rect x="75" y="233" width="102" height="136" fill="#d2cdc7"/>
+  <g clip-path="url(#photo)"><path d="M75 233h102v136H75z" fill="#cac3bc"/><path d="M75 342c34-40 45-38 66-18 15 14 25 20 36 14v31H75z" fill="#76716d"/><circle cx="126" cy="278" r="22" fill="#ede6dd"/><path d="M96 350c3-31 17-49 31-49s29 18 32 49" fill="#494643"/></g>
+  <rect x="75" y="233" width="102" height="136" stroke="#791b36" stroke-width="1"/>
+  <text x="126" y="398" text-anchor="middle" fill="#791b36" font-family="Georgia,serif" font-size="7" letter-spacing="1.8">WITH JOY IN OUR HEARTS</text>
+  <text x="126" y="421" text-anchor="middle" fill="#282321" font-family="Georgia,serif" font-size="12">19 . 09 . 2026</text>
+  <g transform="translate(73 438) scale(.56)"><path d="M87 169c-5-26 5-44 3-66-1-13-8-26-3-43 3-11 11-19 14-31m-13 92c-17-17-28-21-40-20-8 1-12 8-8 13 5 7 18 2 28 10 7 5 12 12 18 21m3-32c15-19 29-29 45-31 7-1 12 5 8 11-5 8-16 5-26 14-8 7-15 17-24 26m-6-41c-14-12-19-22-17-32 2-7 9-8 12-2 3 7 0 15 6 24m0 85c13 4 24 6 40 4" stroke="#791b36" stroke-width="2.2" stroke-linecap="round"/></g>
+  <text x="126" y="574" text-anchor="middle" fill="#791b36" font-family="Georgia,serif" font-size="7" letter-spacing="1.4">SAVE THE DATE</text>
+  <text x="126" y="591" text-anchor="middle" fill="#282321" font-family="Georgia,serif" font-size="9">A LITTLE ART, A LOT OF LOVE</text>
+  <text x="300" y="143" text-anchor="middle" fill="#791b36" font-family="Georgia,serif" font-size="8" letter-spacing="2">CELEBRATE WITH US</text>
+  <text x="300" y="177" text-anchor="middle" fill="#282321" font-family="Georgia,serif" font-size="18" font-style="italic">The celebration</text>
+  <path d="M251 194h98" stroke="#b78287"/>
+  <text x="300" y="220" text-anchor="middle" fill="#4c4540" font-family="Arial,sans-serif" font-size="8">THE GARDEN ROOM · 16:30</text>
+  <g transform="translate(239 243) scale(.73)"><path d="M28 44c18-19 40-19 58 0m-83 8h108m-98 0-8 28h106l-8-28m-89 0v29m88-29v29M42 50l2 6m13-6 2 6m13-6 2 6m13-6 2 6" stroke="#791b36" stroke-width="1.7" stroke-linecap="round"/><path d="M35 42c-2-9 5-13 11-9 3-11 16-10 18 0 8-5 15 2 12 9" stroke="#791b36" stroke-width="1.7"/></g>
+  <text x="300" y="344" text-anchor="middle" fill="#791b36" font-family="Georgia,serif" font-size="16" font-style="italic">Our day, in moments</text>
+  <rect x="247" y="360" width="48" height="66" fill="#cfc9c3"/><rect x="302" y="360" width="48" height="66" fill="#bdb8b2"/>
+  <rect x="247" y="360" width="48" height="66" stroke="#f9f6f2"/><rect x="302" y="360" width="48" height="66" stroke="#f9f6f2"/>
+  <text x="300" y="461" text-anchor="middle" fill="#791b36" font-family="Georgia,serif" font-size="8" letter-spacing="1.6">DRESS CODE</text>
+  <text x="300" y="481" text-anchor="middle" fill="#4c4540" font-family="Georgia,serif" font-size="10">Warm neutrals · soft rose</text>
+  <circle cx="271" cy="505" r="7" fill="#efe8df" stroke="#b78287"/><circle cx="292" cy="505" r="7" fill="#b78287"/><circle cx="313" cy="505" r="7" fill="#7b756d"/><circle cx="334" cy="505" r="7" fill="#d3c4b0"/>
+  <path d="M249 545h102" stroke="#b78287"/><text x="300" y="570" text-anchor="middle" fill="#282321" font-family="Georgia,serif" font-size="9">WE CAN'T WAIT TO SEE YOU</text>
+  <text x="300" y="590" text-anchor="middle" fill="#791b36" font-family="Georgia,serif" font-size="7" letter-spacing="1.4">WITH LOVE, MINH ANH &amp; BẢO NGỌC</text>
+  <rect x="217.5" y="95.5" width="165" height="555" stroke="#fff" opacity=".6"/><rect x="43.5" y="95.5" width="165" height="555" stroke="#fff" opacity=".6"/>
+</svg>

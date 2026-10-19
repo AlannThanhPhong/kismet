@@ -9,7 +9,7 @@ export const PACKAGES = [
   { id: "self-customized", name: "Self-Customized", note: "Tự tay viết lời thương", features: "Editor trực tiếp · Font & màu · Kéo thả · Lưu trên thiết bị", description: "Chọn một thiết kế, thay tên, màu sắc và từng dòng chữ ngay trong trình duyệt" },
 ] as const;
 export type PackageId = typeof PACKAGES[number]["id"];
-export const STYLES = ["Minimalist", "Floral", "Luxury", "Vintage", "Modern", "Boho", "Classic", "Rustic"] as const;
+export const STYLES = ["Minimalist", "Red Artline", "B&W", "Muted Color", "Mid Century", "Floral", "Luxury", "Vintage", "Modern", "Boho", "Classic", "Rustic"] as const;
 export const TYPES = ["Invitation", "Save the Date", "Invitation Suite (3-Piece)", "Invitation Suite (5-Piece)", "Menu", "Sign"] as const;
 export const FEATURES = [{ id: "music", label: "Nhạc nền" }, { id: "rsvp", label: "RSVP" }, { id: "gallery", label: "Album ảnh" }, { id: "qr", label: "VietQR" }, { id: "video", label: "Video" }] as const;
 export type CatalogItem = {
@@ -28,7 +28,7 @@ const designs: Omit<CatalogItem, "price" | "amount">[] = [
 ];
 export function getCatalog(currency: PricingCurrency): CatalogItem[] {
   return [...templatesForCurrency(currency).map((template, index): CatalogItem => ({
-    id: template.id, name: template.name, style: template.id === "love-at-first-sight" ? "Floral" : template.category === "vintage" ? "Vintage" : index === 0 ? "Minimalist" : "Modern", type: "Invitation",
+    id: template.id, name: template.name, style: template.id === "red-artline" ? "Red Artline" : template.id === "love-at-first-sight" ? "Floral" : template.category === "vintage" ? "Vintage" : index === 0 ? "Minimalist" : "Modern", type: "Invitation",
     packageId: template.packageTier === "custom" ? "customized" : template.packageTier === "bespoke" ? "premium" : template.packageTier === "premium" ? "standard" : "basic",
     features: [template.hasMusic && "music", template.hasRsvp && "rsvp", template.hasGallery && "gallery", template.hasQr && "qr"].filter((x): x is string => !!x),
     color: template.colors[0], background: "#FBF6F3", motif: "frame", tag: "Studio selection", amount: template.packageTier === "custom" ? Number.MAX_SAFE_INTEGER : PACKAGE_PRICES[currency][template.packageTier ?? "standard"], price: template.packageLabel?.split(" · ")[1] ?? "Liên hệ", template, created: 4 - index,
