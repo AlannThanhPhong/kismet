@@ -37,7 +37,11 @@ h2 { margin: 0 0 30px; font-size: clamp(30px, 5vw, 45px); line-height: 1.25; fon
 .dress-code-colors { display: flex; justify-content: center; gap: clamp(14px, 3vw, 28px); }
 .dress-code-swatch { display: block; width: clamp(56px, 12vw, 84px); aspect-ratio: 1; border: 1px solid var(--paper); border-radius: 50%; box-shadow: 0 0 0 1px rgb(250 235 215 / .12); }
 .dress-code-swatch-blush { background: #D4A88F; }
-.dress-code-swatch-champagne { background: #C9BDAE; }
+.dress-code-swatch-champagne {
+  background: linear-gradient(115deg, #8f806d 0%, #e7dccb 16%, #b9a88f 30%, #f6eddf 43%, #a89985 57%, #eee3d3 72%, #b5a48d 86%, #8c7d6b 100%);
+  border-color: #e7d9c7;
+  box-shadow: inset 0 1px 3px rgb(255 255 255 / .7), inset 0 -3px 6px rgb(55 42 26 / .3), 0 0 0 1px rgb(250 235 215 / .12), 0 2px 6px rgb(0 0 0 / .25);
+}
 .dress-code-swatch-black { background: #252323; }
 .dress-code-swatch-pink { background: #DCA7AC; }
 time { display: block; margin: 32px 0; }
@@ -78,7 +82,7 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--paper); outlin
   #our-story { padding-bottom: 36px; }
   .story[aria-labelledby="walking-title"] { padding-top: 40px; }
   .story[aria-labelledby="walking-title"] .story-intro { margin-top: 20px; }
-  #walking-title { font-size: clamp(22px, 5.3vw, 30px); }
+  #story-title, #walking-title { font-size: clamp(22px, 5.3vw, 30px); }
 }
 blockquote { margin: 36px 0 0; padding: 28px 0; border-top: 1px solid rgb(250 235 215 / .2); font: italic clamp(23px, 4vw, 31px)/1.5 Georgia, serif; }
 .companions-gallery, .portraits-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 40px; }

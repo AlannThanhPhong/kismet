@@ -27,6 +27,25 @@
   background: #FBF6F3;
 }
 
+/* Shareable sample preview: retain the opening section and mark the rest as locked. */
+.trial-preview-bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px clamp(16px,4vw,48px);background:#f7f4f0;border-bottom:1px solid #ded6ce;color:#514840;font-size:11px;letter-spacing:.12em}
+.is-trial .live-music-toggle{width:36px;height:36px}
+.trial-preview-bar a{color:#514840;text-decoration:none;letter-spacing:0;font-size:13px}
+.trial-preview-bar span{font-weight:600}.trial-preview-bar em{font-family:Georgia,serif;font-weight:400}
+.is-trial .live-invitation-doc>*:not(.live-top-bar):not(.live-hero-section){display:none!important}
+.trial-preview-lock{max-width:680px;margin:0 auto 48px;padding:34px 28px;text-align:center;background:#f8f3f0;border:1px solid #e8dcd5;color:#342c29}
+.trial-preview-lock>span{color:#8a173e;font-size:10px;letter-spacing:.18em}
+.trial-preview-lock h2{margin:12px 0;font:normal clamp(24px,4vw,36px)/1.2 Georgia,serif}
+.trial-preview-lock p{max-width:470px;margin:0 auto 20px;color:#766e68;line-height:1.7;font-size:14px}
+.trial-preview-lock a{display:inline-flex;padding:12px 20px;background:#741638;color:white;text-decoration:none;font-size:12px;letter-spacing:.04em}
+.trial-loading{min-height:100vh;display:grid;place-items:center;color:#71675e}
+.invitation-style-picker{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;gap:8px;overflow-x:auto;padding:10px 16px;background:#f5f1ed;border-bottom:1px solid #e5ddd6}
+.invitation-style-picker>span{margin-right:8px;color:#857b72;font-size:9px;letter-spacing:.15em;white-space:nowrap}
+.style-choice{display:inline-flex;align-items:center;gap:7px;padding:6px 10px;border:1px solid transparent;background:transparent;color:#514840;font:inherit;font-size:11px;white-space:nowrap;cursor:pointer}
+.style-choice.is-selected{border-color:#b7a99c;background:#fffdfa}
+.style-choice i{width:14px;height:14px;border:2px solid;border-radius:50%;box-shadow:inset 0 0 0 3px #fff}
+@media(max-width:680px){.invitation-style-picker{justify-content:flex-start}.invitation-style-picker>span{position:sticky;left:0;padding:5px 4px;background:#f5f1ed}}
+
 .standalone-invitation-preview .live-invitation-doc {
   width: 100%;
   min-height: 100dvh;
@@ -2254,11 +2273,21 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 8px;
   padding: 10px 12px;
   background: #FBF6F3;
   border: 1px solid #D1C4B8;
   border-radius: 8px;
 }
+
+.song-info{flex:1;min-width:0}
+.song-info strong,.song-info span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.btn-preview-song,.btn-select-song{display:inline-flex;align-items:center;justify-content:center;gap:5px;flex-shrink:0;min-height:32px;padding:6px 10px;border:1px solid #c9bdb1;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;transition:background .18s ease,color .18s ease,border-color .18s ease}
+.btn-preview-song{background:#fffdfa;color:#554c44}
+.btn-preview-song:hover,.btn-preview-song.is-playing{background:#eadfd5;border-color:#a99889;color:#3e332d}
+.btn-select-song{background:#791b36;border-color:#791b36;color:#fff}
+.btn-select-song:hover{background:#5e1229;border-color:#5e1229}
+@media(max-width:460px){.song-select-row{flex-wrap:wrap}.song-info{flex-basis:100%}.btn-preview-song,.btn-select-song{flex:1}}
 
 .song-info strong {
   font-size: 12.5px;
@@ -2268,17 +2297,6 @@
 .song-info span {
   font-size: 11px;
   color: #746d63;
-}
-
-.btn-select-song {
-  padding: 6px 12px;
-  background: #EFC7C2;
-  color: #746d63;
-  font-size: 11.5px;
-  font-weight: 600;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
 }
 
 .modal-form-body {
@@ -2406,6 +2424,41 @@
   align-items: center;
   gap: 4px;
 }
+
+/* Art direction presets for the editable invitation themes. */
+.theme-minimalist{--invite-paper:#faf8f4;--invite-ink:#393633;--invite-accent:#867767;--invite-rule:#ded8d0;--invite-soft:#f0ece6;background:var(--invite-paper);color:var(--invite-ink);font-family:Georgia,'Times New Roman',serif}
+.theme-red-artline{--invite-paper:#f8f5f1;--invite-ink:#282321;--invite-accent:#791b36;--invite-rule:#b78287;--invite-soft:#f2e9e6;background:var(--invite-paper);color:var(--invite-ink);font-family:Georgia,'Times New Roman',serif}
+.theme-bnw{--invite-paper:#fff;--invite-ink:#111;--invite-accent:#111;--invite-rule:#999;--invite-soft:#f1f1ef;background:var(--invite-paper);color:var(--invite-ink);font-family:Arial,sans-serif}
+.theme-muted-color{--invite-paper:#f4f1e9;--invite-ink:#4c5049;--invite-accent:#788879;--invite-rule:#c5c6b8;--invite-soft:#e8e9df;background:var(--invite-paper);color:var(--invite-ink);font-family:Georgia,'Times New Roman',serif}
+.theme-mid-century{--invite-paper:#f4ead8;--invite-ink:#333c32;--invite-accent:#b65338;--invite-rule:#c28a49;--invite-soft:#e9d4b4;background:var(--invite-paper);color:var(--invite-ink);font-family:Georgia,'Times New Roman',serif}
+.theme-minimalist .live-top-bar,.theme-red-artline .live-top-bar,.theme-bnw .live-top-bar,.theme-muted-color .live-top-bar,.theme-mid-century .live-top-bar{background:var(--invite-paper);border-color:var(--invite-rule);color:var(--invite-ink)}
+.live-invitation-doc.theme-minimalist,.live-invitation-doc.theme-red-artline,.live-invitation-doc.theme-bnw,.live-invitation-doc.theme-muted-color,.live-invitation-doc.theme-mid-century{color:var(--invite-ink)}
+.theme-minimalist .live-monogram,.theme-red-artline .live-monogram,.theme-bnw .live-monogram,.theme-muted-color .live-monogram,.theme-mid-century .live-monogram,.theme-minimalist .live-date-pill,.theme-red-artline .live-date-pill,.theme-bnw .live-date-pill,.theme-muted-color .live-date-pill,.theme-mid-century .live-date-pill{color:var(--invite-ink)}
+.theme-minimalist .live-music-toggle,.theme-red-artline .live-music-toggle,.theme-bnw .live-music-toggle,.theme-muted-color .live-music-toggle,.theme-mid-century .live-music-toggle{color:var(--invite-accent);background:var(--invite-paper);border-color:var(--invite-rule)}
+.theme-minimalist .live-hero-section,.theme-red-artline .live-hero-section,.theme-bnw .live-hero-section,.theme-muted-color .live-hero-section,.theme-mid-century .live-hero-section{position:relative;padding:44px 22px 34px;background:var(--invite-paper);color:var(--invite-ink)}
+.theme-minimalist .live-intro-eyebrow,.theme-red-artline .live-intro-eyebrow,.theme-bnw .live-intro-eyebrow,.theme-muted-color .live-intro-eyebrow,.theme-mid-century .live-intro-eyebrow,.theme-minimalist .live-roles-sub,.theme-red-artline .live-roles-sub,.theme-bnw .live-roles-sub,.theme-muted-color .live-roles-sub,.theme-mid-century .live-roles-sub{color:var(--invite-accent)}
+.theme-minimalist .live-couple-title,.theme-red-artline .live-couple-title,.theme-bnw .live-couple-title,.theme-muted-color .live-couple-title,.theme-mid-century .live-couple-title{color:var(--invite-ink);font-size:clamp(28px,7vw,42px);font-weight:400;letter-spacing:.02em}
+.theme-minimalist .live-amp,.theme-red-artline .live-amp,.theme-bnw .live-amp,.theme-muted-color .live-amp,.theme-mid-century .live-amp{color:var(--invite-accent)}
+.theme-minimalist .live-arch-frame,.theme-red-artline .live-arch-frame,.theme-bnw .live-arch-frame,.theme-muted-color .live-arch-frame,.theme-mid-century .live-arch-frame{width:min(72vw,320px);height:min(92vw,390px);border:1px solid var(--invite-accent);border-radius:2px;box-shadow:none}
+.theme-minimalist .live-arch-frame img,.theme-red-artline .live-arch-frame img,.theme-bnw .live-arch-frame img,.theme-muted-color .live-arch-frame img,.theme-mid-century .live-arch-frame img{filter:grayscale(.9) sepia(.12) contrast(.94)}
+.theme-red-artline .live-hero-section:after{content:"";width:118px;height:126px;position:absolute;right:8px;bottom:0;background:url('/wedding-invitations/red-artline/line-art.svg') center/contain no-repeat;opacity:.9;pointer-events:none}
+.theme-red-artline .live-arch-frame{border:2px solid var(--invite-accent)}
+.theme-red-artline .live-save-date-ribbon{border-block:1px solid var(--invite-rule);padding:11px 18px;color:var(--invite-accent);letter-spacing:.16em}
+.theme-bnw .live-arch-frame{border-color:#111}
+.theme-muted-color .live-arch-frame{border-color:var(--invite-accent)}
+.theme-mid-century .live-arch-frame{border:8px solid var(--invite-soft);outline:1px solid var(--invite-accent);outline-offset:-2px}
+.theme-minimalist .live-save-date-ribbon,.theme-bnw .live-save-date-ribbon,.theme-muted-color .live-save-date-ribbon,.theme-mid-century .live-save-date-ribbon{color:var(--invite-accent)}
+.theme-minimalist .live-announcement-section,.theme-red-artline .live-announcement-section,.theme-bnw .live-announcement-section,.theme-muted-color .live-announcement-section,.theme-mid-century .live-announcement-section{padding:30px 22px;background:var(--invite-soft);color:var(--invite-ink)}
+.theme-minimalist .announcement-text,.theme-red-artline .announcement-text,.theme-bnw .announcement-text,.theme-muted-color .announcement-text,.theme-mid-century .announcement-text{color:var(--invite-ink);font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:15px}
+.theme-minimalist .gold-flourish,.theme-red-artline .gold-flourish,.theme-bnw .gold-flourish,.theme-muted-color .gold-flourish,.theme-mid-century .gold-flourish{color:var(--invite-accent)}
+.theme-minimalist .live-family-section,.theme-red-artline .live-family-section,.theme-bnw .live-family-section,.theme-muted-color .live-family-section,.theme-mid-century .live-family-section,.theme-minimalist .live-ceremonies-section,.theme-red-artline .live-ceremonies-section,.theme-bnw .live-ceremonies-section,.theme-muted-color .live-ceremonies-section,.theme-mid-century .live-ceremonies-section,.theme-minimalist .live-party-section,.theme-red-artline .live-party-section,.theme-bnw .live-party-section,.theme-muted-color .live-party-section,.theme-mid-century .live-party-section,.theme-minimalist .live-gallery-section,.theme-red-artline .live-gallery-section,.theme-bnw .live-gallery-section,.theme-muted-color .live-gallery-section,.theme-mid-century .live-gallery-section,.theme-minimalist .live-gift-section,.theme-red-artline .live-gift-section,.theme-bnw .live-gift-section,.theme-muted-color .live-gift-section,.theme-mid-century .live-gift-section{border-color:var(--invite-rule);background:var(--invite-paper);color:var(--invite-ink)}
+.theme-minimalist .live-family-section h2,.theme-red-artline .live-family-section h2,.theme-bnw .live-family-section h2,.theme-muted-color .live-family-section h2,.theme-mid-century .live-family-section h2,.theme-minimalist .live-ceremonies-section h2,.theme-red-artline .live-ceremonies-section h2,.theme-bnw .live-ceremonies-section h2,.theme-muted-color .live-ceremonies-section h2,.theme-mid-century .live-ceremonies-section h2,.theme-minimalist .live-party-section h2,.theme-red-artline .live-party-section h2,.theme-bnw .live-party-section h2,.theme-muted-color .live-party-section h2,.theme-mid-century .live-party-section h2,.theme-minimalist .live-gallery-section h2,.theme-red-artline .live-gallery-section h2,.theme-bnw .live-gallery-section h2,.theme-muted-color .live-gallery-section h2,.theme-mid-century .live-gallery-section h2,.theme-minimalist .live-gift-section h2,.theme-red-artline .live-gift-section h2,.theme-bnw .live-gift-section h2,.theme-muted-color .live-gift-section h2,.theme-mid-century .live-gift-section h2{color:var(--invite-ink);font-weight:400}
+.theme-minimalist .live-sec-eyebrow,.theme-red-artline .live-sec-eyebrow,.theme-bnw .live-sec-eyebrow,.theme-muted-color .live-sec-eyebrow,.theme-mid-century .live-sec-eyebrow{color:var(--invite-accent)}
+.theme-red-artline .live-family-section,.theme-red-artline .live-ceremonies-section,.theme-red-artline .live-party-section,.theme-red-artline .live-gallery-section{border-top-style:dashed}
+.theme-red-artline .live-family-section h2,.theme-red-artline .live-ceremonies-section h2,.theme-red-artline .live-party-section h2,.theme-red-artline .live-gallery-section h2{font-style:italic}
+.theme-mid-century .live-announcement-section{position:relative;background:var(--invite-soft)}
+.theme-mid-century .live-announcement-section:before,.theme-mid-century .live-announcement-section:after{content:"";position:absolute;width:35px;height:35px;border-radius:50%;background:var(--invite-accent);opacity:.16;top:10px}
+.theme-mid-century .live-announcement-section:before{left:12px}.theme-mid-century .live-announcement-section:after{right:12px;background:#c28a49}
 .palette-color-ball {
   width: 28px;
   height: 28px;
