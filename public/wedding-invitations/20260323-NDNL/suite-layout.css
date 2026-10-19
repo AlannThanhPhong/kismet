@@ -1,0 +1,211 @@
+.suite-main {
+  width: min(1180px, calc(100% - 36px));
+  margin: 0 auto;
+  padding: 48px 0 24px;
+}
+
+.suite-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 18px;
+}
+
+.suite-column { display: grid; gap: 18px; min-width: 0; }
+.stationery-card { position: relative; overflow: hidden; background: #fbf8f0; color: #41412a; box-shadow: 0 16px 42px #38101524; }
+.invitation-paper { padding: 0 30px 32px; text-align: center; }
+.paper-ribbon { margin: 0 -30px 25px; padding: 10px 12px; background: #70702e; color: #fffaf0; font-size: 9px; letter-spacing: .16em; }
+.paper-ribbon span { padding: 0 7px; color: #e8c7c5; }
+.suite-kicker { margin: 0 0 10px; color: #70702e; font-size: 9px; font-weight: 600; letter-spacing: .2em; }
+.invitation-paper h1 { display: grid; margin: 0; color: #5e0b15; font-family: 'Great Vibes', cursive; font-size: clamp(48px, 6.2vw, 76px); font-weight: 400; line-height: .82; }
+.invitation-paper h1 i { margin: 5px 0; color: #d3a6a3; font-family: 'Playfair Display', serif; font-size: .34em; }
+.couple-caption { margin: 17px 0 20px; color: #70702e; font-family: 'Playfair Display', serif; font-size: 15px; letter-spacing: .22em; }
+.invitation-photo { margin: 0 auto 22px; padding: 9px 9px 13px; width: 88%; background: #fff; box-shadow: 0 5px 18px #40371b20; transform: rotate(-1deg); }
+.invitation-photo img { display: block; width: 100%; aspect-ratio: 1.38; object-fit: cover; object-position: center 48%; }
+.love-title { margin: 0 0 8px; color: #5e0b15; font-family: 'Playfair Display', serif; font-size: 22px; font-style: italic; }
+.invitation-copy { max-width: 390px; margin: 0 auto 20px; color: #68654f; font-size: 13px; line-height: 1.8; }
+.music-toggle { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; width: 82px; height: 82px; border: 0; border-radius: 50%; background: #b8797d; color: #fffaf0; cursor: pointer; }
+.music-toggle span { font-size: 20px; }.music-toggle b { font-size: 8px; font-weight: 500; letter-spacing: .12em; }
+.paper-flower { position: absolute; right: 21px; bottom: 17px; color: #d3a6a3; font-size: 29px; }
+
+.family-card { position: relative; overflow: hidden; padding: 36px 32px 32px; background: #5e0b15; color: #fff8ed; text-align: center; }
+.family-card::before, .family-card::after { position: absolute; width: 200px; height: 200px; border: 1px solid #d3a6a355; border-radius: 50%; content: ''; }
+.family-card::before { top: -135px; left: -118px; }.family-card::after { right: -126px; bottom: -142px; }
+.family-ornament { display: block; margin-bottom: 8px; color: #d3a6a3; font-size: 24px; }
+.family-card .suite-kicker { color: #e5c3bd; }
+.family-card h2 { margin: 5px 0 12px; font-family: 'Playfair Display', serif; font-size: clamp(32px, 4vw, 46px); font-weight: 400; line-height: 1.06; }
+.family-card h2 em { color: #e0b3ac; font-family: 'Great Vibes', cursive; font-size: 1.28em; font-weight: 400; }
+.family-copy { color: #f0deda; font-size: 12px; line-height: 1.75; }
+.family-date { display: flex; align-items: center; justify-content: center; gap: 18px; margin: 24px 0; padding: 16px 0; border-top: 1px solid #d3a6a355; border-bottom: 1px solid #d3a6a355; }
+.family-date strong { font-family: 'Playfair Display', serif; font-size: 35px; font-weight: 400; }.family-date span { font-size: 9px; letter-spacing: .14em; line-height: 1.7; }
+.family-venue > span { color: #e0b3ac; font-size: 9px; letter-spacing: .2em; }
+.family-venue h3 { margin: 5px 0; font-family: 'Playfair Display', serif; font-size: 23px; font-weight: 400; }
+.family-venue p { color: #f0deda; font-size: 12px; line-height: 1.8; }
+.family-venue a { display: inline-block; margin-top: 6px; padding: 11px 18px; border-radius: 99px; background: #f2d8d2; color: #5e0b15; font-size: 9px; letter-spacing: .12em; text-decoration: none; }
+
+.timeline-card { padding: 31px 30px 25px; }
+.timeline-card > .suite-kicker, .timeline-card > h2, .timeline-intro { text-align: center; }
+.timeline-card h2, .dress-card h2 { margin: 0; color: #70702e; font-family: 'Playfair Display', serif; font-size: clamp(29px, 4vw, 40px); font-weight: 400; text-transform: uppercase; }
+.timeline-card h2 em, .dress-card h2 em { color: #b8797d; font-family: 'Great Vibes', cursive; font-size: 1.15em; text-transform: none; }
+.timeline-intro { margin: 9px 0 20px; color: #77735c; font-size: 11px; }
+.timeline-item { position: relative; display: grid; grid-template-columns: 37px 1fr; gap: 13px; padding: 15px 0; border-top: 1px solid #d3a6a366; }
+.timeline-mark { display: grid; place-items: center; width: 32px; height: 32px; border: 1px solid #b8797d; border-radius: 50%; color: #5e0b15; font-family: 'Playfair Display', serif; font-size: 11px; }
+.timeline-item time { color: #b8797d; font-family: 'Playfair Display', serif; font-size: 22px; }
+.timeline-item h3 { margin: 1px 0 3px; color: #70702e; font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 500; }
+.timeline-item p { margin: 0; color: #79745e; font-size: 10px; line-height: 1.5; }
+.timeline-line { position: absolute; top: 49px; bottom: -15px; left: 15px; border-left: 1px solid #d3a6a3; }
+.timeline-flower { position: absolute; top: 20px; right: 23px; color: #d3a6a3; font-size: 18px; }
+.suite-couple-photo { position: relative; margin: 0; padding: 10px; background: #fbf8f0; box-shadow: 0 16px 42px #38101524; }
+.suite-couple-photo img { display: block; width: 100%; max-height: 650px; aspect-ratio: .79; object-fit: cover; object-position: center 42%; }
+.suite-couple-photo figcaption { padding: 12px 6px 3px; color: #70702e; font-family: 'Playfair Display', serif; font-size: 10px; letter-spacing: .24em; text-align: center; }
+.dress-card { padding: 28px 25px 30px; text-align: center; }
+.dress-card h2 { font-size: 34px; }.dress-note { color: #77735c; font-size: 11px; line-height: 1.7; }
+.palette { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 20px auto 0; max-width: 400px; }
+.palette > div { display: grid; justify-items: center; gap: 6px; color: #68654f; font-size: 8px; letter-spacing: .08em; }
+.swatch { display: block; width: 48px; height: 48px; border-radius: 50%; }.olive-swatch { background: #70702e; }.rose-swatch { background: #d3a6a3; }.burgundy-swatch { background: #5e0b15; }
+.palette small { font-size: 9px; letter-spacing: .06em; }.dress-flower { position: absolute; right: 19px; bottom: 12px; color: #d3a6a3; }
+
+.suite-main { width: min(1000px, calc(100% - 40px)); padding-top: 34px; }
+.suite-columns { gap: 8px; }
+.suite-column { gap: 8px; }
+.stationery-card { box-shadow: 0 12px 35px #38101518; }
+.invitation-paper { padding: 0 24px 27px; }
+.paper-ribbon { margin-right: -24px; margin-left: -24px; }
+.invitation-paper h1 { font-size: clamp(48px, 5.6vw, 67px); }
+.invitation-photo { width: 72%; margin-bottom: 18px; }
+.invitation-photo img { aspect-ratio: 1.48; }
+.family-card { padding: 30px 27px 28px; }
+.timeline-card { padding: 27px 25px 12px; }
+.timeline-item { padding: 12px 0; }
+.suite-couple-photo { padding: 0; background: #fbf8f0; }
+.suite-couple-photo img { width: 100%; max-height: none; aspect-ratio: 1.55; object-position: center 45%; }
+.suite-couple-photo figcaption { padding: 8px 6px 9px; background: #70702e; color: #fffaf0; font-size: 8px; }
+.dress-card { padding: 23px 20px 24px; }
+.swatch { width: 42px; height: 42px; }
+.gallery { max-width: 1000px; margin: 24px auto 0; padding: 55px 28px; background: #fbf8f0; }
+body { background: radial-gradient(ellipse at 10% 0%, #e4bdbc 0, transparent 52%), #d3a6a3; }
+.footer { margin-top: 25px; }
+.music-fab { position: fixed; z-index: 19; right: max(18px, env(safe-area-inset-right)); bottom: max(18px, env(safe-area-inset-bottom)); display: grid; place-items: center; width: 56px; height: 56px; padding: 0; border: 1px solid #f3d7cf; border-radius: 50%; background: #5e0b15; box-shadow: 0 6px 20px #32101455; color: #fff8ed; font: 25px/1 'DM Sans', sans-serif; cursor: pointer; transition: transform .2s, background .2s, box-shadow .2s; }
+.music-fab:hover { transform: translateY(-2px) scale(1.04); background: #70702e; }
+.music-fab::after { position: absolute; inset: -5px; border: 1px solid #5e0b154d; border-radius: 50%; content: ''; }
+.music-playing .music-fab { box-shadow: 0 0 0 5px #d3a6a344, 0 6px 20px #32101455; }
+
+/* Printed stationery collage, echoing the supplied flat-lay reference. */
+.suite-main { width: min(1120px, calc(100% - 32px)); padding-top: 34px; }
+.stationery-composition { display: grid; gap: 22px; }
+.collage-stage { position: relative; min-height: 990px; overflow: visible; isolation: isolate; }
+.shape-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+.photo-mount { position: absolute; z-index: 2; top: 4%; left: 19%; width: 55%; filter: drop-shadow(0 18px 22px #4f26302b); transform: rotate(-4deg); }
+.invitation-paper { padding: 0 25px 22px; background: #fffdf8; text-align: center; }
+.paper-ribbon { margin: 0 -25px 16px; padding: 9px 10px; font-size: 8px; }
+.suite-kicker { margin-bottom: 7px; font-size: 8px; }
+.invitation-paper h1 { display: flex; justify-content: center; align-items: baseline; gap: 7px; font-size: clamp(36px, 5vw, 58px); line-height: 1; }
+.invitation-paper h1 i { margin: 0; }
+.couple-caption { margin: 8px 0 14px; font-size: 12px; }
+.invitation-photo { width: 100%; margin: 0 auto 12px; padding: 7px 7px 10px; transform: none; }
+.invitation-photo { margin-bottom: 0; }
+.invitation-photo img { aspect-ratio: .78; object-position: center 38%; }
+.love-title, .invitation-copy { display: none; }
+.invitation-paper .music-toggle { position: relative; width: 44px; height: 44px; margin: 0 auto 10px; }
+.music-toggle { width: 56px; height: 56px; }
+.music-toggle span { font-size: 16px; }.music-toggle b { font-size: 6px; }
+.paper-flower { right: 15px; bottom: 12px; font-size: 20px; }
+.seal-badge { position: absolute; z-index: 5; top: 8%; right: 12%; display: flex; align-items: center; justify-content: center; gap: 3px; width: clamp(112px, 17vw, 190px); aspect-ratio: 1; border-radius: 50%; background: #70702e; box-shadow: 0 10px 25px #3d391f40; color: #fbf8ed; font-family: 'Great Vibes', cursive; font-size: clamp(32px, 5vw, 58px); }
+.seal-badge i { font-family: 'Playfair Display', serif; font-size: .35em; font-weight: 400; }.seal-badge small { position: absolute; bottom: 22%; font-family: 'DM Sans', sans-serif; font-size: 7px; letter-spacing: .14em; }
+.photo-strip { position: absolute; z-index: 4; top: 35%; right: 3%; width: 27%; padding: 8px; background: #fffdf8; box-shadow: 0 15px 28px #4f26302b; transform: rotate(6deg); }
+.suite-couple-photo { display: grid; gap: 7px; margin: 0; padding: 0; background: transparent; box-shadow: none; }
+.suite-couple-photo img { width: 100%; aspect-ratio: 1.02; object-fit: cover; }
+.suite-couple-photo img:first-child { object-position: center 45%; }
+.suite-couple-photo img:nth-child(2) { object-position: center 50%; }
+.suite-couple-photo figcaption { padding: 7px 2px 2px; background: none; color: #70702e; font-size: 6px; letter-spacing: .17em; }
+.family-card { position: absolute; z-index: 6; left: 3%; bottom: 2%; width: 51%; min-height: 43%; padding: 33px 38px 30px; clip-path: url(#scallop-tag); background: #fbf8f0; color: #514c3b; text-align: center; filter: drop-shadow(0 13px 16px #412b262e); }
+.family-card::before, .family-card::after { display: none; }
+.family-ornament { margin-bottom: 3px; color: #70702e; font-size: 18px; }
+.family-card .suite-kicker { color: #70702e; font-size: 7px; }
+.tag-couple { display: flex; align-items: baseline; justify-content: center; gap: 5px; color: #5e0b15; font-family: 'Great Vibes', cursive; font-size: clamp(24px, 3vw, 36px); line-height: 1; }
+.tag-couple i { color: #b8797d; font-family: 'Playfair Display', serif; font-size: .42em; }
+.tag-date { margin: 4px 0 8px; color: #70702e; font-family: 'Playfair Display', serif; font-size: 9px; letter-spacing: .18em; }
+.family-card h2 { margin: 2px 0 7px; color: #5e0b15; font-size: clamp(28px, 3.1vw, 39px); }
+.family-card h2 em { color: #b8797d; }
+.family-copy { margin: 5px auto 9px; max-width: 280px; color: #736c5b; font-size: 9px; line-height: 1.5; }
+.family-date { gap: 12px; margin: 10px 0; padding: 8px 0; border-color: #70702e55; color: #5e0b15; }
+.family-date strong { font-size: 25px; }.family-date span { font-size: 7px; }
+.family-venue > span { color: #70702e; font-size: 7px; }
+.family-venue h3 { margin: 3px 0; font-size: 17px; }
+.family-venue p { margin: 5px 0; color: #736c5b; font-size: 8px; line-height: 1.5; }
+.family-venue a { margin-top: 3px; padding: 8px 13px; background: #70702e; color: #fffaf0; font-size: 7px; }
+.collage-ribbon { position: absolute; z-index: 5; inset: 0; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 3px 2px #433a1950); }
+.suite-details { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; gap: 18px; }
+.venue-card { display: grid; justify-items: center; padding: 24px 18px; background: #fbf8f0; color: #514c3b; text-align: center; box-shadow: 0 10px 28px #4f263020; }
+.venue-card .family-venue > span { color: #70702e; font-size: 8px; letter-spacing: .2em; }
+.venue-card .family-venue h3 { margin: 5px 0; color: #5e0b15; font-family: 'Playfair Display', serif; font-size: 25px; font-weight: 400; }
+.venue-card .family-venue p { margin: 4px 0 8px; color: #736c5b; font-size: 10px; line-height: 1.7; }
+.venue-card .family-venue a { padding: 9px 16px; background: #70702e; color: #fffaf0; font-size: 8px; }
+.suite-details .timeline-card, .suite-details .dress-card { height: 100%; }
+.suite-details .timeline-card { padding: 32px 30px 24px; }
+.suite-details .dress-card { display: flex; flex-direction: column; justify-content: center; padding: 30px; }
+.suite-details .swatch { width: 55px; height: 55px; }
+.gallery { border: 10px solid #fbf8f0; }
+
+@media (max-width: 700px) {
+  .suite-main { width: calc(100% - 18px); padding-top: 16px; }
+  .music-fab { right: max(14px, env(safe-area-inset-right)); bottom: max(14px, env(safe-area-inset-bottom)); width: 50px; height: 50px; font-size: 22px; }
+  .stationery-composition { gap: 12px; }
+.collage-stage { min-height: max(590px, 150vw); }
+  .photo-mount { top: 3%; left: 17%; width: 62%; }
+  .invitation-paper { padding: 0 12px 14px; }
+  .paper-ribbon { margin: 0 -12px 10px; padding: 8px 5px; font-size: 6px; letter-spacing: .1em; }
+  .invitation-paper h1 { gap: 4px; font-size: clamp(29px, 8.8vw, 43px); }
+  .invitation-paper h1 i { font-size: .3em; }
+  .invitation-paper h1 { flex-direction: column; align-items: center; gap: 0; width: 100%; padding-inline: 4px; font-size: clamp(21px, 6.8vw, 27px); line-height: .9; }
+  .invitation-paper h1 span { display: block; max-width: 100%; white-space: nowrap; font-size: 1em; }
+  .invitation-paper h1 i { margin: -1px 0; font-size: .28em; line-height: 1; }
+  .couple-caption { margin: 6px 0 9px; font-size: 9px; }
+  .invitation-photo { padding: 5px 5px 7px; margin-bottom: 8px; }
+  .invitation-photo img { aspect-ratio: .76; }
+  .invitation-paper .music-toggle { width: 36px; height: 36px; margin-bottom: 8px; }
+  .music-toggle b { font-size: 5px; }
+  .seal-badge { top: 7%; right: -1%; width: 23%; font-size: clamp(25px, 7vw, 35px); }
+  .seal-badge small { font-size: 5px; }
+  .photo-strip { top: 37%; right: 1%; width: 32%; padding: 5px; }
+  .suite-couple-photo { gap: 4px; }
+  .suite-couple-photo img { aspect-ratio: .93; }
+  .suite-couple-photo figcaption { font-size: 4px; letter-spacing: .1em; }
+  .family-card { left: 1%; bottom: 1%; width: 58%; min-height: 42%; padding: 27px 23px 25px; }
+  .family-card .suite-kicker { font-size: 6px; }
+  .tag-couple { display: grid; gap: 0; font-size: clamp(17px, 5vw, 20px); line-height: .9; }
+  .tag-couple i { font-size: .32em; }
+  .tag-date { margin: 3px 0 6px; font-size: 6px; }
+  .family-card h2 { font-size: clamp(24px, 7vw, 33px); }
+  .family-copy { font-size: 7px; }
+  .family-date { gap: 7px; margin: 7px 0; padding: 6px 0; }
+  .family-date strong { font-size: 19px; }.family-date span { font-size: 6px; }
+  .family-venue > span, .family-venue p { font-size: 6px; }
+  .family-venue h3 { font-size: 13px; }
+  .family-venue a { padding: 6px 8px; font-size: 6px; }
+  .collage-ribbon { transform: scale(.78); transform-origin: bottom left; }
+  .suite-details { grid-template-columns: 1fr; gap: 10px; }
+  .venue-card { padding: 20px 14px; }
+  .venue-card .family-venue h3 { font-size: 22px; }
+  .suite-details .timeline-card, .suite-details .dress-card { padding: 24px 20px; }
+  .suite-details .swatch { width: 46px; height: 46px; }
+  .gallery { width: calc(100% - 18px); padding: 38px 10px; border-width: 6px; }
+}
+
+@media (max-width: 700px) {
+  .suite-main { width: min(100% - 22px, 500px); padding-top: 22px; }
+  .suite-columns { grid-template-columns: 1fr; gap: 14px; }
+  .suite-column { gap: 8px; }
+  .invitation-paper { padding-right: 20px; padding-left: 20px; }
+  .paper-ribbon { margin-right: -20px; margin-left: -20px; font-size: 8px; }
+  .invitation-paper h1 { font-size: clamp(58px, 16vw, 76px); }
+  .family-card { padding: 30px 22px; }
+  .timeline-card { padding: 27px 22px 22px; }
+  .suite-couple-photo img { max-height: none; aspect-ratio: 1.35; object-position: center 42%; }
+  .dress-card { padding: 25px 18px 28px; }
+  .gallery { width: min(100% - 22px, 500px); padding: 42px 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .suite-main *, .suite-main *::before, .suite-main *::after { scroll-behavior: auto !important; }
+}

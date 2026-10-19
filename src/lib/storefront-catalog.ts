@@ -28,7 +28,7 @@ const designs: Omit<CatalogItem, "price" | "amount">[] = [
 ];
 export function getCatalog(currency: PricingCurrency): CatalogItem[] {
   return [...templatesForCurrency(currency).map((template, index): CatalogItem => ({
-    id: template.id, name: template.name, style: template.category === "vintage" ? "Vintage" : index === 0 ? "Minimalist" : "Modern", type: "Invitation",
+    id: template.id, name: template.name, style: template.id === "love-at-first-sight" ? "Floral" : template.category === "vintage" ? "Vintage" : index === 0 ? "Minimalist" : "Modern", type: "Invitation",
     packageId: template.packageTier === "custom" ? "customized" : template.packageTier === "bespoke" ? "premium" : template.packageTier === "premium" ? "standard" : "basic",
     features: [template.hasMusic && "music", template.hasRsvp && "rsvp", template.hasGallery && "gallery", template.hasQr && "qr"].filter((x): x is string => !!x),
     color: template.colors[0], background: "#FBF6F3", motif: "frame", tag: "Studio selection", amount: template.packageTier === "custom" ? Number.MAX_SAFE_INTEGER : PACKAGE_PRICES[currency][template.packageTier ?? "standard"], price: template.packageLabel?.split(" · ")[1] ?? "Liên hệ", template, created: 4 - index,
