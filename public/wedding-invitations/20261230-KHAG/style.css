@@ -32,6 +32,14 @@ h1[tabindex="-1"]:focus { outline: none; }
 h2 { margin: 0 0 30px; font-size: clamp(30px, 5vw, 45px); line-height: 1.25; font-weight: 400; }
 .celebration { border-top: 1px solid rgb(250 235 215 / .2); }
 #celebration-title { font-family: "Libre Caslon Display", Georgia, serif; }
+.dress-code { margin: 38px 0 8px; }
+.dress-code h3 { margin: 0 0 20px; font: clamp(30px, 5vw, 45px)/1.25 "Libre Caslon Display", Georgia, serif; font-weight: 400; }
+.dress-code-colors { display: flex; justify-content: center; gap: clamp(14px, 3vw, 28px); }
+.dress-code-swatch { display: block; width: clamp(56px, 12vw, 84px); aspect-ratio: 1; border: 1px solid var(--paper); border-radius: 50%; box-shadow: 0 0 0 1px rgb(250 235 215 / .12); }
+.dress-code-swatch-blush { background: #D4A88F; }
+.dress-code-swatch-champagne { background: #C9BDAE; }
+.dress-code-swatch-black { background: #252323; }
+.dress-code-swatch-pink { background: #DCA7AC; }
 time { display: block; margin: 32px 0; }
 .date { display: block; font-size: 32px; letter-spacing: 3px; }
 .hour { display: block; margin-top: 12px; font: 14px/1.5 "Courier New", monospace; letter-spacing: 3px; }
@@ -97,8 +105,9 @@ blockquote { margin: 36px 0 0; padding: 28px 0; border-top: 1px solid rgb(250 23
 .album-more { grid-column: 1 / -1; }
 .album-more summary { width: fit-content; cursor: pointer; margin: 28px auto 38px; padding: 14px 22px; border: 1px solid var(--paper); font: 11px/1.8 "Courier New", monospace; letter-spacing: 1px; }
 .album-fallback { width: 100%; }
-.invitation-footer { padding-bottom: 110px; }
+.invitation-footer { padding-bottom: 110px; background: var(--ink); color: var(--paper); }
 .footer-signature { display: block; width: 100%; max-width: 600px; height: auto; margin: 24px auto 30px; }
+.invitation-footer > p:not(.eyebrow):not(.footer-date) { max-width: 460px; margin-inline: auto; }
 .invitation-footer .footer-date { margin-top: 36px; font: 10px/1.8 "Courier New", monospace; letter-spacing: 2px; }
 @media (max-width: 480px) {
   .invitation-hero { padding: 34px 12px; }
