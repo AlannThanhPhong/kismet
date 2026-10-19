@@ -1,6 +1,15 @@
 // Information transcribed from each couple's supplied paper invitation.
 export const designedInvitations = [
   {
+    code: "20260323-NDNL",
+    slug: "20260323-NDNL",
+    displayTitle: "LOVE AT FIRST SIGHT · YÊU TỪ CÁI NHÌN ĐẦU TIÊN",
+    couple: { partnerOne: "Ngọc Dũng", partnerTwo: "Ngọc Lan" },
+    event: { date: "2026-03-23T09:30:00.000Z", venue: "Victory Palace (Sảnh Hera)", address: "12–12B Mai Hắc Đế, Phường Tân Thành, TP. Buôn Ma Thuột" },
+    template: "love-at-first-sight",
+    coverImage: "/wedding-invitations/20260323-NDNL/images/photo_2026-10-19_13-24-27.webp",
+  },
+  {
     code: "20261230-KHAG",
     slug: "20261230-KHAG",
     displayTitle: "FOUND YOU, KEPT YOU",

@@ -31,6 +31,28 @@ export type WeddingTemplateItem = {
 
 export const WEDDING_TEMPLATES: WeddingTemplateItem[] = [
   {
+    id: "love-at-first-sight",
+    code: "20260323-NDNL",
+    name: "LOVE AT FIRST SIGHT",
+    coupleName: "Ngọc Dũng & Ngọc Lan",
+    category: "modern",
+    categoryLabel: "Garden / Romantic",
+    badge: "THIỆP THỰC TẾ",
+    badgeType: "signature",
+    frameShape: "rect-soft",
+    description: "Thiệp cưới Ngọc Dũng & Ngọc Lan với album ảnh vườn cưới, lịch trình buổi tiệc và bản đồ đến Victory Palace.",
+    tone: "Olive Grove, Rose Dust & Burgundy",
+    colors: ["#70702e", "#d3a6a3", "#5e0b15"],
+    coverImage: "/wedding-invitations/20260323-NDNL/images/photo_2026-10-19_13-24-27.webp",
+    liveDemoUrl: "/thiep/20260323-NDNL",
+    hasMusic: false,
+    hasRsvp: false,
+    hasMap: true,
+    hasGallery: true,
+    hasQr: false,
+    packageTier: "standard",
+  },
+  {
     id: "mau-tieu-chuan-500k",
     code: "mau-500k",
     name: "MINIMAL IVORY",
