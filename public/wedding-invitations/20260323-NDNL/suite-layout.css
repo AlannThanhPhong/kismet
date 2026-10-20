@@ -135,13 +135,26 @@ body { background: radial-gradient(ellipse at 10% 0%, #e4bdbc 0, transparent 52%
 .family-venue h3 { margin: 3px 0; font-size: 17px; }
 .family-venue p { margin: 5px 0; color: #736c5b; font-size: 8px; line-height: 1.5; }
 .family-venue a { margin-top: 3px; padding: 8px 13px; background: #70702e; color: #fffaf0; font-size: 7px; }
-.collage-ribbon { position: absolute; z-index: 5; inset: 0; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 3px 2px #433a1950); }
+.collage-ribbon { position: absolute; z-index: 5; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; filter: drop-shadow(0 3px 2px #433a1950); }
 .suite-details { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; gap: 18px; }
 .venue-card { display: grid; justify-items: center; padding: 24px 18px; background: #fbf8f0; color: #514c3b; text-align: center; box-shadow: 0 10px 28px #4f263020; }
 .venue-card .family-venue > span { color: #70702e; font-size: 8px; letter-spacing: .2em; }
 .venue-card .family-venue h3 { margin: 5px 0; color: #5e0b15; font-family: 'Playfair Display', serif; font-size: 25px; font-weight: 400; }
 .venue-card .family-venue p { margin: 4px 0 8px; color: #736c5b; font-size: 10px; line-height: 1.7; }
 .venue-card .family-venue a { padding: 9px 16px; background: #70702e; color: #fffaf0; font-size: 8px; }
+.rsvp-card { padding: 28px clamp(18px, 5vw, 54px); text-align: center; }
+.rsvp-card h2 { margin: 4px 0 18px; color: #5e0b15; font-family: 'Playfair Display', serif; font-size: clamp(24px, 3vw, 34px); font-weight: 400; }
+.rsvp-card form { max-width: 560px; margin: 0 auto; }
+.rsvp-card label { display: block; margin-bottom: 7px; color: #70702e; font-size: 11px; letter-spacing: .08em; text-align: left; }
+.rsvp-card input { width: 100%; min-height: 44px; padding: 10px 12px; border: 1px solid #d3a6a3; border-radius: 2px; background: #fffdf8; color: #332b27; font: inherit; }
+.rsvp-card input:focus-visible, .rsvp-actions button:focus-visible { outline: 2px solid #70702e; outline-offset: 3px; }
+.rsvp-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.rsvp-actions button { min-height: 42px; padding: 10px 19px; border: 1px solid #70702e; border-radius: 99px; background: #70702e; color: #fffaf0; font: 500 10px 'DM Sans', Arial, sans-serif; letter-spacing: .08em; cursor: pointer; }
+.rsvp-actions button + button { background: transparent; color: #5e0b15; border-color: #d3a6a3; }
+.rsvp-actions button:hover:not(:disabled) { filter: brightness(.92); }
+.rsvp-actions button:disabled { opacity: .6; cursor: wait; }
+#rsvp-status { min-height: 1.4em; margin: 12px 0 0; color: #70702e; font-size: 12px; }
+#rsvp-status[data-error="true"] { color: #a21c2b; }
 .suite-details .timeline-card, .suite-details .dress-card { height: 100%; }
 .suite-details .timeline-card { padding: 32px 30px 24px; }
 .suite-details .dress-card { display: flex; flex-direction: column; justify-content: center; padding: 30px; }
@@ -184,7 +197,7 @@ body { background: radial-gradient(ellipse at 10% 0%, #e4bdbc 0, transparent 52%
   .family-venue > span, .family-venue p { font-size: 6px; }
   .family-venue h3 { font-size: 13px; }
   .family-venue a { padding: 6px 8px; font-size: 6px; }
-  .collage-ribbon { transform: scale(.78); transform-origin: bottom left; }
+  .collage-ribbon { z-index: 7; transform: scale(.78); transform-origin: bottom left; }
   .suite-details { grid-template-columns: 1fr; gap: 10px; }
   .venue-card { padding: 20px 14px; }
   .venue-card .family-venue h3 { font-size: 22px; }

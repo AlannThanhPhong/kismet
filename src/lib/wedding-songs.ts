@@ -12,6 +12,10 @@ export const WEDDING_SONGS = [
   { id: "ido", title: "IDO", artist: "Nhạc bạn cung cấp", src: "/music/wedding/ido.mp3" },
   { id: "cuoi-di", title: "Cưới Đi", artist: "Nhạc bạn cung cấp", src: "/music/wedding/cuoi-di.mp3" },
   { id: "hong-kong-1999", title: "Nhạc nền Hong Kong 1999", artist: "Nhạc nền thiệp mẫu", src: "/wedding-invitations/20260110-NHVVAM/audio/nhac-nen.m4a" },
+  { id: "beo-dat-may-troi", title: "Bèo Dạt Mây Trôi", artist: "Nhạc bạn cung cấp", src: "/music/wedding/beo-dat-may-troi.mp3" },
+  { id: "giao-huong-tan-co", title: "Giao Hưởng Tân Cổ", artist: "Nhạc bạn cung cấp", src: "/music/wedding/giao-huong-tan-co.mp3" },
+  { id: "young-and-beautiful", title: "Young and Beautiful", artist: "Nhạc bạn cung cấp", src: "/music/wedding/young-and-beautiful.mp3" },
+  { id: "young-and-beautiful-khong-loi", title: "Young and Beautiful (Không lời)", artist: "Nhạc bạn cung cấp", src: "/music/wedding/young-and-beautiful-khong-loi.mp3" },
 ];
 
 export const DEFAULT_WEDDING_SONG = WEDDING_SONGS.find((song) => song.id === "mot-doi")!;
