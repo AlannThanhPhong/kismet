@@ -11,6 +11,7 @@ body:not(.invitation-opened){overflow:hidden}
 .open-invitation:hover{background:#70702e}
 .open-invitation span{font-size:15px}
 .invitation-opened .open-invitation{opacity:0}
+@media(min-width:721px){.open-invitation{left:50%;right:auto;bottom:clamp(110px,19vh,190px);transform:translateX(-50%)}}
 .dress-code{position:relative;max-width:900px;margin:25px auto 5px;background:#f1ede1;text-align:center;overflow:hidden;padding:76px 24px 73px}
 .dress-code h2{font:400 clamp(44px,7vw,68px) var(--serif);color:var(--olive);margin:18px 0}
 .dress-note{font:14px/1.8 var(--serif);color:#756b60}

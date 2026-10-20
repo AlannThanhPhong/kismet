@@ -42,6 +42,7 @@
 .family-venue h3 { margin: 5px 0; font-family: 'Playfair Display', serif; font-size: 23px; font-weight: 400; }
 .family-venue p { color: #f0deda; font-size: 12px; line-height: 1.8; }
 .family-venue a { display: inline-block; margin-top: 6px; padding: 11px 18px; border-radius: 99px; background: #f2d8d2; color: #5e0b15; font-size: 9px; letter-spacing: .12em; text-decoration: none; }
+.family-venue a svg { width: 12px; height: 12px; margin-left: 3px; vertical-align: -2px; }
 
 .timeline-card { padding: 31px 30px 25px; }
 .timeline-card > .suite-kicker, .timeline-card > h2, .timeline-intro { text-align: center; }
