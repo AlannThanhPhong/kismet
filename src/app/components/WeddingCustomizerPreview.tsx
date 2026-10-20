@@ -977,7 +977,7 @@ export default function WeddingCustomizerPreview({
       <main className="standalone-invitation-preview is-trial" aria-label={`Thiệp cưới ${firstPerson} và ${secondPerson}`}>
         <header className="trial-preview-bar">
           <a href="/tao-thiep">← Quay lại chỉnh sửa</a>
-          <span>kIsmet <em>love</em> · BẢN XEM THỬ</span>
+          <span>kIsmet <em>love</em> · BẢN XEM ĐẦY ĐỦ</span>
         </header>
         <audio
           ref={audioRef}
@@ -999,12 +999,6 @@ export default function WeddingCustomizerPreview({
           toggleMusic={toggleMusic}
           onAddWish={handleAddLiveWish}
         />
-        <section className="trial-preview-lock">
-          <span>✦ BẢN XEM THỬ</span>
-          <h2>Một phần lời mời của {firstPerson} & {secondPerson}</h2>
-          <p>Bạn đang xem phần mở đầu của mẫu. Các phần lịch trình, địa điểm, album ảnh và RSVP sẽ được hoàn thiện trong thiệp chính thức.</p>
-          <a href="/tao-thiep">Tiếp tục chỉnh sửa mẫu</a>
-        </section>
       </main>
     );
   }
@@ -1080,7 +1074,7 @@ export default function WeddingCustomizerPreview({
             onClick={exportTrialPreview}
           >
             <Sparkles size={14} />
-            <span>Xuất bản xem thử</span>
+            <span>Xem thiệp hoàn chỉnh</span>
           </button>
         </div>
       </header>

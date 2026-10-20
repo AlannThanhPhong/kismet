@@ -29,6 +29,44 @@ document.querySelector('.open-invitation')?.addEventListener('click', () => {
   window.setTimeout(() => opening?.setAttribute('hidden', ''), 2050);
 });
 
+const rsvpForm = document.querySelector('#rsvp-form');
+const rsvpStatus = document.querySelector('#rsvp-status');
+rsvpForm?.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  if (!(event.submitter instanceof HTMLButtonElement) || !(rsvpStatus instanceof HTMLElement)) return;
+  const guestName = String(new FormData(rsvpForm).get('guestName') || '').trim();
+  if (!guestName) {
+    document.querySelector('#rsvp-guest-name')?.focus();
+    rsvpStatus.textContent = 'Bạn nhập tên giúp chúng mình nhé.';
+    rsvpStatus.dataset.error = 'true';
+    return;
+  }
+
+  const buttons = rsvpForm.querySelectorAll('button[type="submit"]');
+  buttons.forEach((button) => { button.disabled = true; });
+  rsvpStatus.textContent = 'Đang gửi phản hồi…';
+  delete rsvpStatus.dataset.error;
+  try {
+    const response = await fetch('/api/invitations/20260323-NDNL/rsvps', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      signal: AbortSignal.timeout(20000),
+      body: JSON.stringify({ guestName, attending: event.submitter.value === 'true', guestCount: 1 }),
+    });
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.error || 'Chưa gửi được phản hồi. Bạn thử lại nhé.');
+    rsvpStatus.textContent = 'Cảm ơn bạn đã gửi lời hồi âm!';
+    rsvpForm.reset();
+  } catch (error) {
+    rsvpStatus.textContent = error instanceof Error && error.name === 'TimeoutError'
+      ? 'Kết nối hơi lâu, bạn thử gửi lại nhé.'
+      : error instanceof Error ? error.message : 'Chưa gửi được phản hồi. Bạn thử lại nhé.';
+    rsvpStatus.dataset.error = 'true';
+  } finally {
+    buttons.forEach((button) => { button.disabled = false; });
+  }
+});
+
 musicToggles.forEach((musicToggle) => musicToggle.addEventListener('click', () => {
   if (!(weddingSong instanceof HTMLAudioElement)) return;
   if (weddingSong.paused) {

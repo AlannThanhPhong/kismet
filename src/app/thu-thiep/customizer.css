@@ -27,17 +27,11 @@
   background: #FBF6F3;
 }
 
-/* Shareable sample preview: retain the opening section and mark the rest as locked. */
+/* Shareable sample preview with all invitation sections visible. */
 .trial-preview-bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px clamp(16px,4vw,48px);background:#f7f4f0;border-bottom:1px solid #ded6ce;color:#514840;font-size:11px;letter-spacing:.12em}
 .is-trial .live-music-toggle{width:36px;height:36px}
 .trial-preview-bar a{color:#514840;text-decoration:none;letter-spacing:0;font-size:13px}
 .trial-preview-bar span{font-weight:600}.trial-preview-bar em{font-family:Georgia,serif;font-weight:400}
-.is-trial .live-invitation-doc>*:not(.live-top-bar):not(.live-hero-section){display:none!important}
-.trial-preview-lock{max-width:680px;margin:0 auto 48px;padding:34px 28px;text-align:center;background:#f8f3f0;border:1px solid #e8dcd5;color:#342c29}
-.trial-preview-lock>span{color:#8a173e;font-size:10px;letter-spacing:.18em}
-.trial-preview-lock h2{margin:12px 0;font:normal clamp(24px,4vw,36px)/1.2 Georgia,serif}
-.trial-preview-lock p{max-width:470px;margin:0 auto 20px;color:#766e68;line-height:1.7;font-size:14px}
-.trial-preview-lock a{display:inline-flex;padding:12px 20px;background:#741638;color:white;text-decoration:none;font-size:12px;letter-spacing:.04em}
 .trial-loading{min-height:100vh;display:grid;place-items:center;color:#71675e}
 .invitation-style-picker{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;gap:8px;overflow-x:auto;padding:10px 16px;background:#f5f1ed;border-bottom:1px solid #e5ddd6}
 .invitation-style-picker>span{margin-right:8px;color:#857b72;font-size:9px;letter-spacing:.15em;white-space:nowrap}
