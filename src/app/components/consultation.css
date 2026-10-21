@@ -151,6 +151,25 @@
   background: #0057d8;
 }
 
+.consultation-email {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  margin-top: 16px;
+  padding: 12px;
+  border: 1px solid #e4d9d1;
+  border-radius: 12px;
+  color: #443f36;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.consultation-email:hover {
+  background: #fbf6f3;
+}
+
 .consultation-note {
   margin: 16px 0 0;
   color: #786e66;
