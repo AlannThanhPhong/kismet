@@ -2,8 +2,8 @@
 
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
-import { MessageCircle, Phone, X } from "lucide-react";
-import { CONTACT_PHONES } from "@/lib/contact";
+import { Mail, MessageCircle, Phone, X } from "lucide-react";
+import { CONTACT_EMAIL, CONTACT_PHONES } from "@/lib/contact";
 import "./consultation.css";
 
 interface ConsultationContext {
@@ -108,6 +108,9 @@ export function ConsultationDialog({ onClose, templateName, packageName }: Consu
           <MessageCircle size={20} aria-hidden="true" /> Nhắn Zalo: {phone.label}
         </a>
       ))}
+      <a className="consultation-email" href={`mailto:${CONTACT_EMAIL}`}>
+        <Mail size={20} aria-hidden="true" /> Email: {CONTACT_EMAIL}
+      </a>
       <p className="consultation-note">Tư vấn miễn phí, cùng bạn chọn mẫu phù hợp</p>
     </dialog>,
     document.body,

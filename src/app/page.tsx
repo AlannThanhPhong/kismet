@@ -2,6 +2,7 @@
 import { getVisitorCountry } from "@/lib/visitor-country";
 import type { Metadata } from "next";
 import { BRAND_LOGO, SITE_URL } from "@/lib/seo";
+import { CONTACT_EMAIL } from "@/lib/contact";
 import WhiteStorefront from "./components/WhiteStorefront";
 import "./white-storefront.css";
 import "./pricing-white.css";
@@ -47,6 +48,7 @@ export default async function Home() {
     name: "kIsmet love",
     alternateName: "KISMET LOVE",
     url: SITE_URL,
+    email: CONTACT_EMAIL,
     logo: {
       "@type": "ImageObject",
       url: new URL(BRAND_LOGO.url, SITE_URL).href,
