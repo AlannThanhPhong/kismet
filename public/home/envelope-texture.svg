@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="520" viewBox="0 0 400 520" preserveAspectRatio="none" fill="none">
+  <defs>
+    <linearGradient id="flap-top" x1="200" y1="0" x2="200" y2="235" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.32"/>
+      <stop offset="72%" stop-color="#ffffff" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#3c372e" stop-opacity="0.12"/>
+    </linearGradient>
+    <linearGradient id="flap-bottom" x1="200" y1="520" x2="200" y2="245" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#3c372e" stop-opacity="0.10"/>
+      <stop offset="85%" stop-color="#ffffff" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.28"/>
+    </linearGradient>
+    <linearGradient id="flap-left" x1="0" y1="260" x2="215" y2="260" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#3c372e" stop-opacity="0.08"/>
+    </linearGradient>
+    <linearGradient id="flap-right" x1="400" y1="260" x2="185" y2="260" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#3c372e" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.14"/>
+    </linearGradient>
+    <filter id="flap-shadow" x="-10%" y="-10%" width="120%" height="125%">
+      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#332e26" flood-opacity="0.18"/>
+    </filter>
+    <filter id="pocket-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="-3" stdDeviation="4" flood-color="#332e26" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Outer debossed border rule on envelope -->
+  <rect x="10" y="10" width="380" height="500" stroke="#ffffff" stroke-opacity="0.38" stroke-width="1"/>
+  <rect x="11" y="11" width="378" height="498" stroke="#443f36" stroke-opacity="0.10" stroke-width="1"/>
+
+  <!-- Left & Right side flaps -->
+  <path d="M0 0L208 265L0 520Z" fill="url(#flap-left)"/>
+  <path d="M400 0L192 265L400 520Z" fill="url(#flap-right)"/>
+  <path d="M0 0L208 265L0 520" stroke="#443f36" stroke-opacity="0.12" stroke-width="1.2"/>
+  <path d="M400 0L192 265L400 520" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1.2"/>
+
+  <!-- Bottom pocket flap -->
+  <g filter="url(#pocket-shadow)">
+    <path d="M0 520L184 266Q200 250 216 266L400 520Z" fill="url(#flap-bottom)"/>
+    <path d="M0 520L184 266Q200 250 216 266L400 520" stroke="#ffffff" stroke-opacity="0.45" stroke-width="1.2"/>
+  </g>
+
+  <!-- Top pointed European V-flap with realistic drop shadow -->
+  <g filter="url(#flap-shadow)">
+    <path d="M0 0H400L218 222Q200 242 182 222L0 0Z" fill="url(#flap-top)"/>
+    <path d="M0 0L182 222Q200 242 218 222L400 0" stroke="#ffffff" stroke-opacity="0.52" stroke-width="1.3"/>
+    <path d="M14 8L186 214Q200 230 214 214L386 8" stroke="#443f36" stroke-opacity="0.12" stroke-width="0.9" stroke-dasharray="3 3"/>
+  </g>
+</svg>

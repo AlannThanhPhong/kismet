@@ -140,47 +140,97 @@ body.is-locked .french-parchment-sheet {
   color: var(--espresso-soft);
 }
 
-/* Milk-Brown Envelope & Rising Ivory Card */
+/* Milk-Brown Linen Envelope & Rising 300gsm Ivory Cotton Card */
 .french-envelope-assembly {
   position: relative;
   width: 100%;
-  padding-top: 24px;
+  padding-top: 22px;
   cursor: pointer;
 }
 
-/* Back inside flap of the open envelope */
+/* Back Open Flap & Damask-Lined Envelope Interior */
 .envelope-back-flap {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  height: 76%;
-  background: linear-gradient(180deg, #ab9279 0%, #8f755c 100%);
-  clip-path: polygon(0 24%, 50% 0, 100% 24%, 100% 100%, 0 100%);
-  border-radius: 6px;
-  box-shadow: 0 24px 52px rgba(58, 43, 30, 0.24);
+  height: 82%;
   z-index: 1;
+  pointer-events: none;
+  filter:
+    drop-shadow(0 28px 48px rgba(46, 32, 19, 0.28))
+    drop-shadow(0 6px 14px rgba(46, 32, 19, 0.18));
 }
 
-/* Ivory Letter Card rising out of the envelope */
+.envelope-back-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Heavy 300gsm Ivory Cotton Card rising out of the envelope */
 .envelope-letter-card {
   position: relative;
   z-index: 2;
-  width: 84%;
+  width: 82%;
   margin: 0 auto;
-  padding: 26px 20px 145px;
-  background: var(--ivory-card);
-  border: 1px solid rgba(182, 157, 132, 0.42);
+  padding: 12px 12px 142px;
+  background-color: #fbf8f1;
+  background-image:
+    radial-gradient(rgba(128, 102, 76, 0.04) 1px, transparent 0),
+    radial-gradient(rgba(255, 255, 255, 0.85) 1px, transparent 0),
+    linear-gradient(165deg, #fffdf9 0%, #faf5eb 54%, #f1e8da 100%);
+  background-size: 14px 14px, 20px 20px, 100% 100%;
+  background-position: 0 0, 7px 7px, 0 0;
+  border-radius: 3px;
+  border-top: 1.5px solid #ffffff;
+  border-left: 1px solid #f5ede0;
+  border-right: 1px solid #dccbb7;
+  border-bottom: 1px solid #d5c2ac;
   box-shadow:
-    0 10px 28px rgba(58, 43, 30, 0.14),
-    inset 0 0 0 6px #fdfbf7,
-    inset 0 0 0 7px rgba(182, 157, 132, 0.28);
-  transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    -8px 4px 18px rgba(45, 31, 18, 0.18),
+    8px 4px 18px rgba(45, 31, 18, 0.18),
+    0 -2px 10px rgba(58, 43, 30, 0.08),
+    inset 0 1px 0 #ffffff;
+  transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.75s ease;
+}
+
+/* Blind-Debossed Letterpress Plate Border on the Rising Card */
+.letter-card-inner {
+  position: relative;
+  padding: 18px 14px 16px;
+  border-radius: 2px;
+  border: 1px solid rgba(182, 157, 132, 0.38);
+  box-shadow:
+    inset 1.5px 1.5px 3px rgba(122, 98, 74, 0.22),
+    inset -1.5px -1.5px 2px rgba(255, 255, 255, 0.92),
+    0 1px 0 rgba(255, 255, 255, 0.88);
+}
+
+.letter-deboss-corner {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: rgba(168, 141, 114, 0.45);
+  border-style: solid;
+  pointer-events: none;
+}
+
+.letter-deboss-corner.corner-tl {
+  top: 5px;
+  left: 5px;
+  border-width: 1px 0 0 1px;
+}
+
+.letter-deboss-corner.corner-tr {
+  top: 5px;
+  right: 5px;
+  border-width: 1px 1px 0 0;
 }
 
 .french-envelope-assembly:hover .envelope-letter-card,
 .french-cover-gate.is-opening .envelope-letter-card {
-  transform: translateY(-16px);
+  transform: translateY(-18px);
 }
 
 .letter-card-kicker {
@@ -190,6 +240,7 @@ body.is-locked .french-parchment-sheet {
   letter-spacing: 0.26em;
   text-transform: uppercase;
   color: var(--taupe-muted);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
 .letter-card-names {
@@ -199,6 +250,7 @@ body.is-locked .french-parchment-sheet {
   font-weight: 400;
   line-height: 1.06;
   color: var(--espresso);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85);
 }
 
 .letter-card-names span {
@@ -213,9 +265,11 @@ body.is-locked .french-parchment-sheet {
   height: 92px;
   margin: 0 auto 12px;
   border-radius: 50%;
-  padding: 3px;
-  background: linear-gradient(135deg, #dfcfb9 0%, #b3997e 100%);
-  box-shadow: 0 6px 16px rgba(70, 54, 40, 0.14);
+  padding: 3.5px;
+  background: linear-gradient(135deg, #efe3d2 0%, #c4ab90 50%, #9b8064 100%);
+  box-shadow:
+    0 6px 16px rgba(70, 54, 40, 0.16),
+    inset 0 1px 1px rgba(255, 255, 255, 0.8);
 }
 
 .letter-card-cameo img {
@@ -249,10 +303,10 @@ body.is-locked .french-parchment-sheet {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 62%;
+  height: 64%;
   z-index: 3;
   pointer-events: none;
-  filter: drop-shadow(0 -3px 10px rgba(62, 46, 32, 0.12));
+  filter: drop-shadow(0 -2px 6px rgba(45, 31, 18, 0.12));
 }
 
 .envelope-pocket-svg {
@@ -262,27 +316,31 @@ body.is-locked .french-parchment-sheet {
   border-radius: 0 0 6px 6px;
 }
 
-/* Pearl-Latte Wax Seal Button on Envelope Flap */
+/* 3D Hand-Poured Pearl-Latte Wax Seal Button on Envelope Flap */
 .envelope-wax-seal-btn {
   position: absolute;
   left: 50%;
-  bottom: 18%;
+  bottom: 15.5%;
   transform: translateX(-50%);
   z-index: 4;
-  width: 82px;
-  height: 82px;
+  width: 92px;
+  height: 92px;
   padding: 0;
   border: 0;
   border-radius: 50%;
   background: transparent;
   cursor: pointer;
-  filter: drop-shadow(0 8px 16px rgba(55, 40, 26, 0.32));
-  transition: transform 0.3s ease, filter 0.3s ease;
+  filter:
+    drop-shadow(0 11px 18px rgba(42, 28, 15, 0.38))
+    drop-shadow(0 3px 5px rgba(34, 21, 10, 0.34));
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), filter 0.32s ease;
 }
 
 .envelope-wax-seal-btn:hover {
-  transform: translateX(-50%) scale(1.07);
-  filter: drop-shadow(0 12px 22px rgba(55, 40, 26, 0.4));
+  transform: translateX(-50%) scale(1.06) translateY(-2px);
+  filter:
+    drop-shadow(0 15px 24px rgba(42, 28, 15, 0.44))
+    drop-shadow(0 4px 7px rgba(34, 21, 10, 0.36));
 }
 
 .wax-seal-svg {
@@ -888,25 +946,37 @@ body.is-locked .french-parchment-sheet {
 .embossed-cotton-card {
   position: relative;
   padding: clamp(38px, 6.5vw, 64px) clamp(24px, 5vw, 52px);
-  background: #ece6dc;
+  background-color: #ede6db;
   background-image:
-    radial-gradient(rgba(70, 54, 40, 0.03) 1px, transparent 0);
-  background-size: 18px 18px;
+    radial-gradient(rgba(82, 63, 44, 0.045) 1px, transparent 0),
+    radial-gradient(rgba(255, 255, 255, 0.72) 1px, transparent 0),
+    linear-gradient(155deg, #f5efe6 0%, #ebe3d6 52%, #e1d6c5 100%);
+  background-size: 14px 14px, 22px 22px, 100% 100%;
+  background-position: 0 0, 7px 7px, 0 0;
+  border-radius: 3px;
+  border-top: 1.5px solid #fbf8f2;
+  border-left: 1px solid #f6efe4;
+  border-right: 1px solid #cfc0ac;
+  border-bottom: 1.5px solid #c6b59f;
   box-shadow:
-    0 24px 56px rgba(25, 20, 15, 0.32),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    0 26px 58px rgba(22, 16, 11, 0.38),
+    0 6px 16px rgba(22, 16, 11, 0.22),
+    inset 0 0 0 10px #ede6db,
+    inset 0 0 0 11.5px rgba(162, 140, 116, 0.34),
+    inset 2px 2px 5px rgba(255, 255, 255, 0.85),
+    inset -2px -2px 5px rgba(120, 98, 76, 0.22);
   text-align: center;
 }
 
-/* 3D Blind-Embossed Corner Reliefs (White highlight + warm taupe drop-shadow) */
+/* 3D Blind-Embossed Corner Reliefs (Raised ivory highlight + warm taupe cast shadow) */
 .emboss-corner {
   position: absolute;
-  width: clamp(54px, 11vw, 82px);
-  height: clamp(54px, 11vw, 82px);
-  color: #f8f4ed;
+  width: clamp(56px, 11.5vw, 84px);
+  height: clamp(56px, 11.5vw, 84px);
+  color: #f9f5ee;
   filter:
-    drop-shadow(1.5px 1.5px 1px rgba(120, 102, 84, 0.45))
-    drop-shadow(-1px -1px 0.5px rgba(255, 255, 255, 0.9));
+    drop-shadow(1.8px 2px 1.1px rgba(112, 93, 73, 0.54))
+    drop-shadow(-1.2px -1.2px 0.6px rgba(255, 255, 255, 0.96));
   pointer-events: none;
 }
 
@@ -938,6 +1008,7 @@ body.is-locked .french-parchment-sheet {
   height: 44px;
   margin: 0 auto 10px;
   color: #463628;
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.85));
 }
 
 .embossed-crest svg {
@@ -956,6 +1027,7 @@ body.is-locked .french-parchment-sheet {
   font-weight: 400;
   letter-spacing: 0.22em;
   color: #3b2e22;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85);
 }
 
 .embossed-title-arch {
@@ -965,6 +1037,7 @@ body.is-locked .french-parchment-sheet {
   font-weight: 400;
   letter-spacing: 0.16em;
   color: #3b2e22;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85);
 }
 
 .embossed-est-row {
@@ -992,13 +1065,14 @@ body.is-locked .french-parchment-sheet {
   width: clamp(220px, 60vw, 340px);
   aspect-ratio: 1.54 / 1;
   margin: 0 auto clamp(22px, 4vw, 34px);
-  padding: 5px;
+  padding: 6px;
   border-radius: 50%;
-  background: #faf7f2;
+  background: linear-gradient(145deg, #d8cbb8 0%, #fcf9f4 55%, #ffffff 100%);
   box-shadow:
-    inset 0 3px 8px rgba(60, 46, 32, 0.25),
-    0 2px 0 rgba(255, 255, 255, 0.85),
-    0 12px 28px rgba(60, 46, 32, 0.12);
+    inset 2px 3px 7px rgba(58, 43, 29, 0.32),
+    inset -1px -2px 4px rgba(255, 255, 255, 0.9),
+    0 2px 0 rgba(255, 255, 255, 0.9),
+    0 12px 28px rgba(60, 46, 32, 0.14);
   cursor: pointer;
   overflow: hidden;
 }
@@ -1009,6 +1083,7 @@ body.is-locked .french-parchment-sheet {
   border-radius: 50%;
   object-fit: cover;
   object-position: 50% 42%;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
 .embossed-story-wrap {
@@ -1022,6 +1097,7 @@ body.is-locked .french-parchment-sheet {
   font-size: clamp(12.5px, 2.2vw, 14.5px);
   line-height: 1.65;
   color: #4a3b2e;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.72);
 }
 
 .embossed-story-sign {
@@ -1037,7 +1113,10 @@ body.is-locked .french-parchment-sheet {
   font-family: var(--font-script);
   font-size: clamp(32px, 5.5vw, 42px);
   color: #463628;
-  opacity: 0.88;
+  opacity: 0.9;
+  text-shadow:
+    0 1.5px 0 rgba(255, 255, 255, 0.9),
+    0 -1px 0 rgba(70, 54, 40, 0.25);
 }
 
 /* ==========================================================================
@@ -1542,27 +1621,36 @@ body.is-locked .french-parchment-sheet {
 
 /* Intricate Rectangular French Lace Doily Menu Card */
 .lace-menu-card-wrap {
-  max-width: 340px;
+  position: relative;
+  max-width: 348px;
   margin: 0 auto clamp(42px, 7vw, 64px);
-  padding: 14px;
-  background:
-    radial-gradient(circle at 0 0, transparent 6px, #f8f2e8 6.5px),
-    radial-gradient(circle at 100% 0, transparent 6px, #f8f2e8 6.5px),
-    radial-gradient(circle at 0 100%, transparent 6px, #f8f2e8 6.5px),
-    radial-gradient(circle at 100% 100%, transparent 6px, #f8f2e8 6.5px);
-  background-color: #f8f2e8;
-  border: 6px dotted #d9c6b0;
-  border-radius: 16px;
-  box-shadow:
-    0 20px 44px rgba(28, 19, 12, 0.38),
-    inset 0 0 0 3px #6b533e,
-    inset 0 0 0 7px #e5d5c1;
+  padding: 28px 26px;
+  isolation: isolate;
+}
+
+.lace-menu-svg-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
 }
 
 .lace-menu-card {
-  padding: clamp(24px, 4.5vw, 36px) clamp(16px, 3.5vw, 26px);
-  background: #fbf8f2;
-  border: 1.5px dashed #bfa78d;
+  position: relative;
+  padding: clamp(22px, 4.2vw, 32px) clamp(16px, 3.5vw, 24px);
+  background-color: #fbf7ef;
+  background-image:
+    radial-gradient(rgba(110, 86, 62, 0.04) 1px, transparent 0),
+    linear-gradient(165deg, #fffdf9 0%, #f9f3e8 60%, #efe5d5 100%);
+  background-size: 14px 14px, 100% 100%;
+  border: 1px solid #d5c1aa;
+  box-shadow:
+    0 6px 18px rgba(34, 23, 14, 0.16),
+    inset 0 0 0 4px #fbf7ef,
+    inset 0 0 0 5px rgba(186, 161, 134, 0.42),
+    inset 1.5px 1.5px 3px rgba(124, 98, 72, 0.18);
   color: var(--espresso);
 }
 
@@ -1856,14 +1944,16 @@ body.is-locked .french-parchment-sheet {
 
 .lace-rsvp-envelope-card {
   position: relative;
-  width: min(86%, 350px);
-  aspect-ratio: 420 / 310;
+  width: min(88%, 364px);
+  aspect-ratio: 440 / 320;
   padding: 20px 18px 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 22px 48px rgba(32, 22, 14, 0.36);
+  filter:
+    drop-shadow(0 24px 44px rgba(24, 16, 9, 0.42))
+    drop-shadow(0 5px 12px rgba(24, 16, 9, 0.24));
   text-align: center;
 }
 
@@ -1877,27 +1967,30 @@ body.is-locked .french-parchment-sheet {
 
 .lace-envelope-top-title {
   font-family: var(--font-script);
-  font-size: clamp(32px, 6vw, 42px);
+  font-size: clamp(34px, 6.2vw, 44px);
   line-height: 1;
   color: var(--espresso);
-  margin-top: 4px;
+  margin-top: 2px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
+/* 3D Sculpted Pearl-Ivory Swan Wax Seal */
 .lace-envelope-seal {
-  width: 54px;
-  height: 54px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #fdfbf7 0%, #e5d8c5 55%, #bfa88e 100%);
-  border: 1.5px solid #d5c2ab;
-  box-shadow:
-    0 6px 14px rgba(60, 45, 30, 0.22),
-    inset 0 0 0 3px #faf5ec;
+  width: 66px;
+  height: 66px;
+  margin-top: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-script);
-  font-size: 22px;
-  color: #6b543e;
+  filter:
+    drop-shadow(0 8px 14px rgba(52, 37, 22, 0.34))
+    drop-shadow(0 2px 4px rgba(42, 28, 16, 0.28));
+}
+
+.lace-wax-seal-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .lace-envelope-bottom-note {
@@ -1908,19 +2001,108 @@ body.is-locked .french-parchment-sheet {
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--espresso-soft);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85);
 }
 
+/* Tilted "Kindly Respond" Envelope (Ref Image 6 Top) + Cotton RSVP Reply Sheet */
 .french-rsvp-box {
-  max-width: 460px;
-  margin: clamp(28px, 5vw, 44px) auto;
-  padding: clamp(26px, 4.5vw, 40px) clamp(20px, 4vw, 36px);
-  background: var(--ivory-card);
-  border: 1px solid rgba(182, 157, 132, 0.45);
-  box-shadow:
-    0 14px 34px rgba(70, 54, 40, 0.08),
-    inset 0 0 0 4px var(--ivory-card),
-    inset 0 0 0 5px rgba(182, 157, 132, 0.25);
+  max-width: 470px;
+  margin: clamp(28px, 5vw, 46px) auto;
+  padding: 0 clamp(12px, 3vw, 20px);
   text-align: center;
+}
+
+.kindly-respond-envelope-wrap {
+  position: relative;
+  z-index: 2;
+  margin: 0 auto -18px;
+  width: min(92%, 356px);
+  padding-top: 6px;
+}
+
+.kindly-respond-envelope {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 460 / 290;
+  padding: 18px 18px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  transform: rotate(-2.4deg);
+  filter:
+    drop-shadow(0 20px 36px rgba(38, 26, 15, 0.26))
+    drop-shadow(0 4px 10px rgba(38, 26, 15, 0.16));
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.kindly-respond-envelope:hover {
+  transform: rotate(-1.2deg) translateY(-3px);
+}
+
+.kindly-envelope-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.kindly-envelope-script {
+  font-family: var(--font-script);
+  font-size: clamp(28px, 5.4vw, 38px);
+  line-height: 1.05;
+  color: #463525;
+  margin-top: 2px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.88);
+}
+
+.kindly-gold-wax-seal {
+  width: 58px;
+  height: 58px;
+  margin-top: 4px;
+  filter:
+    drop-shadow(0 7px 13px rgba(45, 29, 10, 0.38))
+    drop-shadow(0 2px 4px rgba(35, 22, 6, 0.32));
+}
+
+.kindly-gold-wax-seal svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.kindly-envelope-sub {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(7.5px, 1.4vw, 9px);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  line-height: 1.45;
+  text-transform: uppercase;
+  color: #5c4734;
+}
+
+.rsvp-letter-sheet {
+  position: relative;
+  z-index: 1;
+  padding: clamp(34px, 5.5vw, 46px) clamp(20px, 4vw, 34px) clamp(26px, 4.5vw, 38px);
+  background-color: #fbf8f1;
+  background-image:
+    radial-gradient(rgba(115, 90, 65, 0.04) 1px, transparent 0),
+    linear-gradient(165deg, #fffdf9 0%, #faf4ea 58%, #f0e6d6 100%);
+  background-size: 14px 14px, 100% 100%;
+  border-radius: 3px;
+  border-top: 1.5px solid #ffffff;
+  border-left: 1px solid #f4ebde;
+  border-right: 1px solid #d9c7b2;
+  border-bottom: 1.5px solid #cfbda6;
+  box-shadow:
+    0 18px 42px rgba(58, 43, 28, 0.14),
+    0 4px 10px rgba(58, 43, 28, 0.08),
+    inset 0 0 0 7px #fbf8f1,
+    inset 0 0 0 8px rgba(182, 157, 132, 0.34),
+    inset 2px 2px 4px rgba(124, 98, 72, 0.16);
 }
 
 .rsvp-kicker {

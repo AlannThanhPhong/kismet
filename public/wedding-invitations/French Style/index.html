@@ -14,14 +14,14 @@
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&amp;family=EB+Garamond:ital,wght@0,400;0,500;1,400&amp;family=Great+Vibes&amp;family=Imperial+Script&amp;family=Pinyon+Script&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600&amp;display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="style.css?v=20261022-french-v3" />
+  <link rel="stylesheet" href="style.css?v=20261022-french-v5" />
 </head>
 <body class="is-locked">
-  <!-- Background Music (Can be customized; default classical/instrumental placeholder) -->
+  <!-- Background music for Template 02 — French Style -->
   <audio
     id="diary-bgm"
-    src="/music/wedding/city-of-stars-may-finally-come-true.mp3"
-    data-song-title="French Salon Instrumental"
+    src="/music/wedding/qui-se-souvient-de-cette-ruelle.mp3"
+    data-song-title="Qui se souvient de cette ruelle"
     loop
     preload="auto"
   ></audio>
@@ -63,14 +63,69 @@
         </svg>
       </div>
 
-      <!-- The French Milk-Brown Envelope & Rising Ivory Invitation Card -->
+      <!-- The French Milk-Brown Linen Envelope & Rising Ivory Cotton Invitation Card -->
       <div class="french-envelope-assembly" id="french-open-trigger">
-        <!-- Back inside of the open envelope -->
-        <div class="envelope-back-flap" aria-hidden="true"></div>
+        <!-- Back Open Flap & Damask-Lined Envelope Interior -->
+        <div class="envelope-back-flap" aria-hidden="true">
+          <svg class="envelope-back-svg" viewBox="0 0 500 440" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="envBackBodyGrad" x1="50%" y1="0%" x2="50%" y2="100%">
+                <stop offset="0%" stop-color="#C8B39D" />
+                <stop offset="26%" stop-color="#B59C82" />
+                <stop offset="65%" stop-color="#9B8066" />
+                <stop offset="100%" stop-color="#836950" />
+              </linearGradient>
+              <linearGradient id="envBackLinerGrad" x1="50%" y1="0%" x2="50%" y2="100%">
+                <stop offset="0%" stop-color="#EFE6D9" stop-opacity="0.55" />
+                <stop offset="55%" stop-color="#D7C4AF" stop-opacity="0.32" />
+                <stop offset="100%" stop-color="#755B43" stop-opacity="0.72" />
+              </linearGradient>
+              <radialGradient id="envThroatShadow" cx="50%" cy="48%" r="54%">
+                <stop offset="0%" stop-color="#3B2A1C" stop-opacity="0.52" />
+                <stop offset="65%" stop-color="#5A432F" stop-opacity="0.28" />
+                <stop offset="100%" stop-color="#8A7057" stop-opacity="0" />
+              </radialGradient>
+              <pattern id="frenchLinenWeave" width="6" height="6" patternUnits="userSpaceOnUse">
+                <path d="M0 1.5H6M0 4.5H6" stroke="#FFFFFF" stroke-width="0.35" stroke-opacity="0.16" />
+                <path d="M1.5 0V6M4.5 0V6" stroke="#4A3523" stroke-width="0.35" stroke-opacity="0.1" />
+              </pattern>
+            </defs>
 
-        <!-- Ivory Cotton Card rising out of the envelope -->
+            <!-- Outer Open Top Flap with Soft Curved French Shoulders -->
+            <path
+              d="M2,136 C2,102 24,72 64,48 L206,9 C235,1 265,1 294,9 L436,48 C476,72 498,102 498,136 L498,436 C498,438 496,440 494,440 L6,440 C4,440 2,438 2,436 Z"
+              fill="url(#envBackBodyGrad)"
+              stroke="#DFCDBA"
+              stroke-width="1.2"
+            />
+            <!-- Woven Linen Texture Overlay -->
+            <path
+              d="M2,136 C2,102 24,72 64,48 L206,9 C235,1 265,1 294,9 L436,48 C476,72 498,102 498,136 L498,436 L2,436 Z"
+              fill="url(#frenchLinenWeave)"
+            />
+            <!-- Inner Chamfered Parchment Liner inside the Open Flap -->
+            <path
+              d="M18,134 C18,106 38,80 74,58 L210,20 C236,13 264,13 290,20 L426,58 C462,80 482,106 482,134 L482,250 L18,250 Z"
+              fill="url(#envBackLinerGrad)"
+              stroke="#E6D8C7"
+              stroke-width="0.9"
+              stroke-dasharray="3 2"
+              opacity="0.85"
+            />
+            <!-- Horizontal Crease Line where Top Flap Bends Open -->
+            <line x1="6" y1="135" x2="494" y2="135" stroke="#7E644C" stroke-width="1.4" opacity="0.55" />
+            <line x1="6" y1="136.5" x2="494" y2="136.5" stroke="#EDE0D1" stroke-width="1" opacity="0.5" />
+            <!-- Deep Envelope Throat Shadow Behind Rising Card -->
+            <ellipse cx="250" cy="195" rx="225" ry="95" fill="url(#envThroatShadow)" />
+          </svg>
+        </div>
+
+        <!-- Heavy 300gsm Ivory Cotton Rag Card Rising out of the Envelope -->
         <div class="envelope-letter-card">
           <div class="letter-card-inner">
+            <!-- Subtle Blind-Embossed Corner Ornaments on the Letter Card -->
+            <span class="letter-deboss-corner corner-tl" aria-hidden="true"></span>
+            <span class="letter-deboss-corner corner-tr" aria-hidden="true"></span>
             <p class="letter-card-kicker">YOU ARE CORDIALLY INVITED</p>
             <h1 class="letter-card-names">
               Élise Beaumont
@@ -88,75 +143,319 @@
           </div>
         </div>
 
-        <!-- Front Milk-Brown Linen Envelope Pocket (Left, Right & Bottom Flaps) -->
+        <!-- Front Milk-Brown Linen Envelope Pocket (Realistic Left, Right & Overlapping Bottom Flaps) -->
         <div class="envelope-front-pocket" aria-hidden="true">
           <svg class="envelope-pocket-svg" viewBox="0 0 500 340" preserveAspectRatio="none">
             <defs>
-              <linearGradient id="milkBrownLeft" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#C6B19B" />
-                <stop offset="100%" stop-color="#A78E75" />
+              <!-- Soft Cast Shadow for Overlapping Paper Flaps -->
+              <filter id="envFlapShadow" x="-12%" y="-15%" width="124%" height="130%">
+                <feDropShadow dx="0" dy="-4" stdDeviation="6" flood-color="#2E1F13" flood-opacity="0.34" />
+              </filter>
+              <filter id="envBottomFlapShadow" x="-12%" y="-18%" width="124%" height="132%">
+                <feDropShadow dx="0" dy="-7" stdDeviation="7.5" flood-color="#2A1C11" flood-opacity="0.42" />
+              </filter>
+
+              <!-- Tactile Paper Fiber Noise Filter -->
+              <filter id="linenPaperGrain" x="0%" y="0%" width="100%" height="100%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" seed="11" result="noise" />
+                <feColorMatrix
+                  type="matrix"
+                  values="0 0 0 0 0.96
+                          0 0 0 0 0.91
+                          0 0 0 0 0.85
+                          0 0 0 0.065 0"
+                  in="noise"
+                  result="warmGrain"
+                />
+                <feComposite operator="in" in="warmGrain" in2="SourceGraphic" />
+              </filter>
+
+              <!-- Directional Gradients for Left, Right, and Bottom Linen Flaps -->
+              <linearGradient id="milkBrownLeft" x1="0%" y1="15%" x2="95%" y2="85%">
+                <stop offset="0%" stop-color="#D1BEAA" />
+                <stop offset="48%" stop-color="#BEA68E" />
+                <stop offset="100%" stop-color="#9F856B" />
               </linearGradient>
-              <linearGradient id="milkBrownRight" x1="100%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#BFA890" />
-                <stop offset="100%" stop-color="#9E846B" />
+              <linearGradient id="milkBrownRight" x1="100%" y1="15%" x2="5%" y2="85%">
+                <stop offset="0%" stop-color="#CBB6A0" />
+                <stop offset="50%" stop-color="#B69D84" />
+                <stop offset="100%" stop-color="#967B61" />
               </linearGradient>
               <linearGradient id="milkBrownBottom" x1="50%" y1="0%" x2="50%" y2="100%">
-                <stop offset="0%" stop-color="#CEB9A4" />
-                <stop offset="45%" stop-color="#B89F86" />
-                <stop offset="100%" stop-color="#9B8168" />
+                <stop offset="0%" stop-color="#D7C5B2" />
+                <stop offset="22%" stop-color="#C6B099" />
+                <stop offset="68%" stop-color="#B0967C" />
+                <stop offset="100%" stop-color="#957A60" />
+              </linearGradient>
+              <linearGradient id="flapEdgeSpec" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#EFE4D6" stop-opacity="0.65" />
+                <stop offset="50%" stop-color="#FFFDF9" stop-opacity="0.95" />
+                <stop offset="100%" stop-color="#E6D7C6" stop-opacity="0.6" />
               </linearGradient>
             </defs>
-            <!-- Left side fold -->
-            <polygon points="0,35 215,210 0,340" fill="url(#milkBrownLeft)" stroke="#DECBB8" stroke-width="1" />
-            <!-- Right side fold -->
-            <polygon points="500,35 285,210 500,340" fill="url(#milkBrownRight)" stroke="#DECBB8" stroke-width="1" />
-            <!-- Bottom rounded trapezoid flap -->
-            <path
-              d="M0,340 L175,180 Q250,145 325,180 L500,340 Z"
-              fill="url(#milkBrownBottom)"
-              stroke="#E5D5C5"
-              stroke-width="1.4"
-            />
+
+            <!-- Left Side Folded Flap with Curved Upper Shoulder & Cast Shadow -->
+            <g filter="url(#envFlapShadow)">
+              <path
+                d="M0,18 C20,20 38,32 58,50 L242,226 L0,340 Z"
+                fill="url(#milkBrownLeft)"
+              />
+              <path
+                d="M0,18 C20,20 38,32 58,50 L242,226 L0,340 Z"
+                fill="url(#frenchLinenWeave)"
+              />
+              <!-- Specular Paper Edge Highlight & Inner Crease on Left Flap -->
+              <path
+                d="M0,18 C20,20 38,32 58,50 L242,226"
+                fill="none"
+                stroke="#F3E9DC"
+                stroke-width="1.5"
+                opacity="0.88"
+              />
+              <path
+                d="M0,23 C18,25 35,36 54,54 L235,227"
+                fill="none"
+                stroke="#8D735A"
+                stroke-width="0.8"
+                opacity="0.48"
+              />
+            </g>
+
+            <!-- Right Side Folded Flap with Curved Upper Shoulder & Cast Shadow -->
+            <g filter="url(#envFlapShadow)">
+              <path
+                d="M500,18 C480,20 462,32 442,50 L258,226 L500,340 Z"
+                fill="url(#milkBrownRight)"
+              />
+              <path
+                d="M500,18 C480,20 462,32 442,50 L258,226 L500,340 Z"
+                fill="url(#frenchLinenWeave)"
+              />
+              <!-- Specular Paper Edge Highlight & Inner Crease on Right Flap -->
+              <path
+                d="M500,18 C480,20 462,32 442,50 L258,226"
+                fill="none"
+                stroke="#EFE3D4"
+                stroke-width="1.4"
+                opacity="0.82"
+              />
+              <path
+                d="M500,23 C482,25 465,36 446,54 L265,227"
+                fill="none"
+                stroke="#866C53"
+                stroke-width="0.8"
+                opacity="0.48"
+              />
+            </g>
+
+            <!-- Bottom Rounded Trapezoid Pocket Flap Overlapping Both Side Flaps -->
+            <g filter="url(#envBottomFlapShadow)">
+              <path
+                d="M0,340 L162,184 C190,157 215,148 250,148 C285,148 310,157 338,184 L500,340 Z"
+                fill="url(#milkBrownBottom)"
+              />
+              <path
+                d="M0,340 L162,184 C190,157 215,148 250,148 C285,148 310,157 338,184 L500,340 Z"
+                fill="url(#frenchLinenWeave)"
+              />
+              <path
+                d="M0,340 L162,184 C190,157 215,148 250,148 C285,148 310,157 338,184 L500,340 Z"
+                filter="url(#linenPaperGrain)"
+              />
+              <!-- Outer Paper Thickness Highlight along Top Arch & Diagonal Seams -->
+              <path
+                d="M2,339 L162,184 C190,157 215,148 250,148 C285,148 310,157 338,184 L498,339"
+                fill="none"
+                stroke="url(#flapEdgeSpec)"
+                stroke-width="1.8"
+              />
+              <!-- Subtle Debossed Seam Line 4px Inside the Bottom Flap Edge (Ref 4 Detail) -->
+              <path
+                d="M10,339 L166,188 C193,162 217,154 250,154 C283,154 307,162 334,188 L490,339"
+                fill="none"
+                stroke="#8C7158"
+                stroke-width="0.85"
+                opacity="0.52"
+              />
+              <path
+                d="M11,339 L167,189 C194,163 218,155 250,155 C282,155 306,163 333,189 L489,339"
+                fill="none"
+                stroke="#F4E9DC"
+                stroke-width="0.7"
+                opacity="0.45"
+              />
+            </g>
           </svg>
         </div>
 
-        <!-- Center Pearl-Latte Wax Seal Button (Monogram E) -->
+        <!-- Realistic 3D Hand-Poured Pearl-Latte Wax Seal Button (Monogram E + Botanical Intaglio) -->
         <button
           type="button"
           class="envelope-wax-seal-btn"
           id="french-open-btn"
           aria-label="Open invitation"
         >
-          <svg class="wax-seal-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <svg class="wax-seal-svg" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
             <defs>
-              <radialGradient id="latteWaxGrad" cx="35%" cy="28%" r="72%">
-                <stop offset="0%" stop-color="#FAF3EB" />
-                <stop offset="35%" stop-color="#DFCBB5" />
-                <stop offset="72%" stop-color="#B29579" />
-                <stop offset="100%" stop-color="#7B6148" />
+              <!-- 3D Wax Surface Micro-Relief & Specular Sheen Filter -->
+              <filter id="wax3DSculpt" x="-15%" y="-15%" width="130%" height="130%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.065" numOctaves="3" seed="7" result="waxTex" />
+                <feDiffuseLighting in="waxTex" lighting-color="#FFF8F0" surfaceScale="1.6" diffuseConstant="1.05" result="diffLight">
+                  <feDistantLight azimuth="225" elevation="52" />
+                </feDiffuseLighting>
+                <feComposite operator="in" in="diffLight" in2="SourceGraphic" result="texturedWax" />
+                <feBlend mode="multiply" in="texturedWax" in2="SourceGraphic" result="blendedWax" />
+                <feSpecularLighting in="waxTex" surfaceScale="2.2" specularConstant="0.55" specularExponent="28" lighting-color="#FFFDF9" result="specLight">
+                  <fePointLight x="42" y="36" z="95" />
+                </feSpecularLighting>
+                <feComposite operator="in" in="specLight" in2="SourceGraphic" result="clippedSpec" />
+                <feBlend mode="screen" in="blendedWax" in2="clippedSpec" />
+              </filter>
+
+              <!-- Drop Shadow for Embossed Monogram & Rim Inside the Seal -->
+              <filter id="waxReliefShadow" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="1.4" dy="1.8" stdDeviation="1.1" flood-color="#4A331F" flood-opacity="0.68" />
+                <feDropShadow dx="-0.8" dy="-0.8" stdDeviation="0.6" flood-color="#FFF9F1" flood-opacity="0.82" />
+              </filter>
+
+              <!-- Outer Molten Wax Lip Gradient (Top-Left Pearl Highlight -> Warm Latte -> Deep Cocoa Bronze) -->
+              <radialGradient id="latteWaxOuterRim" cx="32%" cy="28%" r="72%" fx="28%" fy="24%">
+                <stop offset="0%" stop-color="#FFFDFB" />
+                <stop offset="18%" stop-color="#F2E4D4" />
+                <stop offset="45%" stop-color="#D2B89D" />
+                <stop offset="74%" stop-color="#A68769" />
+                <stop offset="92%" stop-color="#6F533B" />
+                <stop offset="100%" stop-color="#8E7157" />
               </radialGradient>
-              <radialGradient id="latteWaxInner" cx="38%" cy="32%" r="68%">
-                <stop offset="0%" stop-color="#EFE4D6" />
-                <stop offset="55%" stop-color="#C8AF96" />
-                <stop offset="100%" stop-color="#8C7057" />
+
+              <!-- Second Rolled Wax Ridge Gradient -->
+              <linearGradient id="latteWaxRidge" x1="18%" y1="14%" x2="84%" y2="86%">
+                <stop offset="0%" stop-color="#FCF5EC" />
+                <stop offset="38%" stop-color="#DBC3AA" />
+                <stop offset="76%" stop-color="#9A7B5E" />
+                <stop offset="100%" stop-color="#694E36" />
+              </linearGradient>
+
+              <!-- Recessed Stamped Inner Well (Inverted Lighting: Darker Top-Left Shadow, Lighter Bottom-Right Wall) -->
+              <radialGradient id="latteWaxIntaglioWell" cx="66%" cy="68%" r="68%" fx="68%" fy="70%">
+                <stop offset="0%" stop-color="#EADAC8" />
+                <stop offset="42%" stop-color="#C6AB90" />
+                <stop offset="78%" stop-color="#9B7E62" />
+                <stop offset="100%" stop-color="#6B5038" />
               </radialGradient>
+
+              <!-- Raised Monogram Relief Gradient -->
+              <linearGradient id="latteWaxReliefGrad" x1="20%" y1="15%" x2="80%" y2="85%">
+                <stop offset="0%" stop-color="#FFF9F0" />
+                <stop offset="48%" stop-color="#E4CEB7" />
+                <stop offset="100%" stop-color="#A8896C" />
+              </linearGradient>
             </defs>
+
+            <!-- 1. Outer Organic Hand-Poured Molten Wax Blob -->
             <path
-              d="M60 5C73 4 82 10 92 17C102 24 112 33 114 46C116 59 112 72 106 83C100 94 92 106 80 111C68 116 54 115 41 111C28 107 15 100 9 88C3 76 5 61 7 48C9 35 15 22 26 14C37 6 47 6 60 5Z"
-              fill="url(#latteWaxGrad)"
+              filter="url(#wax3DSculpt)"
+              d="M70 6 C84 5, 98 10, 109 19 C120 28, 130 40, 133 55 C136 70, 133 86, 125 99 C117 112, 106 124, 92 130 C78 136, 61 135, 46 131 C31 127, 17 118, 10 104 C3 90, 5 73, 7 58 C9 43, 16 27, 28 17 C40 7, 56 7, 70 6 Z"
+              fill="url(#latteWaxOuterRim)"
+              stroke="#6A4F37"
+              stroke-width="0.9"
             />
-            <circle cx="60" cy="60" r="39" fill="url(#latteWaxInner)" stroke="#7D6249" stroke-width="1.8" opacity="0.85" />
-            <circle cx="60" cy="60" r="34.5" fill="none" stroke="#FBF5EE" stroke-width="1.1" opacity="0.75" />
-            <text
-              x="59"
-              y="72"
-              text-anchor="middle"
-              font-family="'Pinyon Script', 'Great Vibes', cursive"
-              font-size="44"
-              fill="#5D4632"
+
+            <!-- 2. Glossy Specular Highlight Arcs on the Bulging Outer Wax Lip -->
+            <path
+              d="M24 44 C30 25, 48 14, 70 13 C84 12, 97 17, 106 25"
+              fill="none"
+              stroke="#FFFDF9"
+              stroke-width="2.6"
+              stroke-linecap="round"
+              opacity="0.62"
+            />
+            <path
+              d="M118 96 C110 112, 94 123, 74 125 C56 127, 38 121, 26 110"
+              fill="none"
+              stroke="#4E3824"
+              stroke-width="2.4"
+              stroke-linecap="round"
+              opacity="0.48"
+            />
+
+            <!-- 3. Second Inner Rolled Wax Rim (Created by Brass Stamp Shoulder) -->
+            <path
+              d="M70 16 C100 15, 123 39, 124 69 C125 99, 101 123, 70 124 C40 125, 16 100, 16 70 C16 40, 40 17, 70 16 Z"
+              fill="none"
+              stroke="url(#latteWaxRidge)"
+              stroke-width="4.5"
+              opacity="0.92"
+            />
+
+            <!-- 4. Deeply Pressed Circular Intaglio Basin -->
+            <circle
+              cx="70"
+              cy="70"
+              r="46"
+              fill="url(#latteWaxIntaglioWell)"
+              stroke="#5E452F"
+              stroke-width="1.6"
+            />
+            <!-- Inner Shadow Arc (Top-Left of Pressed Well) & Rim Highlight (Bottom-Right of Well) -->
+            <path
+              d="M30 92 A46 46 0 0 1 96 32"
+              fill="none"
+              stroke="#4B3522"
+              stroke-width="3.2"
+              stroke-linecap="round"
+              opacity="0.58"
+            />
+            <path
+              d="M110 48 A46 46 0 0 1 42 108"
+              fill="none"
+              stroke="#FBF2E6"
+              stroke-width="2"
+              stroke-linecap="round"
+              opacity="0.65"
+            />
+
+            <!-- 5. Raised Beaded Inner Ring & Subtle Botanical Filigree Inside the Basin -->
+            <circle
+              cx="70"
+              cy="70"
+              r="40"
+              fill="none"
+              stroke="url(#latteWaxReliefGrad)"
+              stroke-width="1.5"
+              stroke-dasharray="2.2 3.2"
+              filter="url(#waxReliefShadow)"
+            />
+            <g
+              stroke="url(#latteWaxReliefGrad)"
+              stroke-width="1.2"
+              fill="none"
+              stroke-linecap="round"
+               opacity="0.65"
+              filter="url(#waxReliefShadow)"
             >
-              E
-            </text>
+              <!-- Delicate Engraved French Botanical Sprigs Left & Right -->
+              <path d="M42 84 C36 72, 38 56, 48 46 M39 70 L34 65 M41 58 L37 52 M46 49 L44 43" />
+              <path d="M98 84 C104 72, 102 56, 92 46 M101 70 L106 65 M99 58 L103 52 M94 49 L96 43" />
+              <path d="M56 41 Q70 35 84 41" />
+              <path d="M54 98 Q70 104 86 98" />
+            </g>
+
+            <!-- 6. 3D Embossed Calligraphic Monogram 'E' (Matches Ref Image 4 Sculpted Seal) -->
+            <g filter="url(#waxReliefShadow)">
+              <text
+                x="69"
+                y="86"
+                text-anchor="middle"
+                font-family="'Pinyon Script', 'Great Vibes', cursive"
+                font-size="54"
+                fill="url(#latteWaxReliefGrad)"
+                stroke="#FBF3E8"
+                stroke-width="0.6"
+              >
+                E
+              </text>
+            </g>
           </svg>
         </button>
       </div>
@@ -171,7 +470,7 @@
     class="diary-audio-fab"
     id="diary-audio-btn"
     aria-label="Toggle background melody"
-    title="French Salon Instrumental"
+    title="Qui se souvient de cette ruelle"
   >
     <span class="diary-audio-ring" aria-hidden="true"></span>
     <svg class="diary-audio-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -196,7 +495,7 @@
         stroke-linecap="round"
       />
     </svg>
-    <span id="diary-audio-label" class="diary-audio-sr-only">♪ French Salon Instrumental · Off</span>
+    <span id="diary-audio-label" class="diary-audio-sr-only">♪ Qui se souvient de cette ruelle · Off</span>
   </button>
 
   <!-- ========================================================================
@@ -472,48 +771,105 @@
         </div>
 
         <div class="scalloped-doily-medallion">
-          <!-- Scalloped French Eyelet Doily SVG Border -->
+          <!-- Scalloped French Eyelet Doily SVG Border (Ref Image 5 Top) -->
           <svg class="doily-svg-bg" viewBox="0 0 420 330" preserveAspectRatio="none" aria-hidden="true">
             <defs>
-              <filter id="doilyShadow" x="-10%" y="-10%" width="120%" height="120%">
-                <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#2c2016" flood-opacity="0.28" />
+              <filter id="doilyShadow" x="-12%" y="-12%" width="124%" height="128%">
+                <feDropShadow dx="0" dy="12" stdDeviation="11" flood-color="#23180F" flood-opacity="0.36" />
+                <feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#2C1E13" flood-opacity="0.22" />
               </filter>
+              <linearGradient id="doilyCottonGrad" x1="15%" y1="10%" x2="85%" y2="90%">
+                <stop offset="0%" stop-color="#FDFBF7" />
+                <stop offset="52%" stop-color="#F7F1E6" />
+                <stop offset="100%" stop-color="#EBE0CE" />
+              </linearGradient>
+              <linearGradient id="doilyDebossWell" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#E6DAC7" />
+                <stop offset="35%" stop-color="#F9F4EB" />
+                <stop offset="100%" stop-color="#FFFDF9" />
+              </linearGradient>
             </defs>
-            <!-- Outer Scalloped Oval Petal Edge -->
+
+            <!-- Outer Scalloped Oval Petal Edge with Cast Shadow -->
             <path
               filter="url(#doilyShadow)"
-              d="M210 10 C225 4, 240 14, 254 13 C268 12, 282 6, 296 15 C310 24, 318 18, 332 29 C346 40, 356 36, 368 50 C380 64, 388 64, 396 80 C404 96, 410 102, 412 120 C414 138, 418 148, 414 165 C410 182, 414 192, 408 210 C402 228, 404 236, 392 252 C380 268, 380 274, 364 286 C348 298, 344 302, 326 310 C308 318, 300 318, 282 322 C264 326, 252 320, 234 322 C216 324, 204 324, 186 322 C168 320, 156 326, 138 322 C120 318, 112 318, 94 310 C76 302, 72 298, 56 286 C40 274, 40 268, 28 252 C16 236, 18 228, 12 210 C6 192, 10 182, 6 165 C2 148, 6 138, 8 120 C10 102, 16 96, 24 80 C32 64, 40 64, 52 50 C64 36, 74 40, 88 29 C102 18, 110 24, 124 15 C138 6, 152 12, 166 13 C180 14, 195 4, 210 10 Z"
-              fill="#FAF6EE"
-              stroke="#D9C8B4"
-              stroke-width="1.5"
+              d="M210 10 C225 3, 240 14, 254 13 C268 12, 282 5, 296 15 C310 24, 318 17, 332 29 C346 40, 356 35, 368 50 C380 64, 388 63, 396 80 C404 96, 410 101, 412 120 C414 138, 419 148, 414 165 C410 182, 415 192, 408 210 C402 228, 405 236, 392 252 C380 268, 381 274, 364 286 C348 298, 344 303, 326 310 C308 318, 300 319, 282 322 C264 326, 252 320, 234 322 C216 325, 204 325, 186 322 C168 320, 156 326, 138 322 C120 319, 112 318, 94 310 C76 303, 72 298, 56 286 C40 274, 40 268, 28 252 C16 236, 18 228, 12 210 C6 192, 10 182, 6 165 C2 148, 6 138, 8 120 C10 101, 16 96, 24 80 C32 63, 40 64, 52 50 C64 35, 74 40, 88 29 C102 17, 110 24, 124 15 C138 5, 152 12, 166 13 C180 14, 195 3, 210 10 Z"
+              fill="url(#doilyCottonGrad)"
+              stroke="#DFCDBA"
+              stroke-width="1.3"
             />
-            <!-- Inner Eyelet Dotted Ring -->
+
+            <!-- Outer Scallop Pin-Hole Broderie Anglaise Ring -->
             <ellipse
               cx="210"
               cy="166"
-              rx="178"
-              ry="134"
+              rx="186"
+              ry="140"
               fill="none"
-              stroke="#9E846B"
-              stroke-width="2.4"
-              stroke-dasharray="1.5 9"
+              stroke="#B2997E"
+              stroke-width="2.2"
+              stroke-dasharray="1 11"
               stroke-linecap="round"
+              opacity="0.72"
             />
-            <!-- Delicate Botanical Leaf Sprigs Top & Bottom -->
-            <path
-              d="M155 48 Q210 34 265 48 M175 44 L166 36 M195 41 L188 33 M225 41 L232 33 M245 44 L254 36"
-              stroke="#B59E86"
+
+            <!-- Inner Die-Cut Eyelet Dotted Ring (Broderie Perforations) -->
+            <ellipse
+              cx="210"
+              cy="166"
+              rx="174"
+              ry="129"
+              fill="none"
+              stroke="#7A6048"
+              stroke-width="3.2"
+              stroke-dasharray="2.2 10.5"
+              stroke-linecap="round"
+              opacity="0.78"
+            />
+
+            <!-- 4-Point Diamond Eyelet Clusters around the Doily Perimeter (Matches Ref Image 5) -->
+            <g fill="#7A6048" opacity="0.82">
+              <!-- Top Diamond Cluster -->
+              <circle cx="210" cy="22" r="2" /><circle cx="210" cy="30" r="2" /><circle cx="205" cy="26" r="2" /><circle cx="215" cy="26" r="2" />
+              <!-- Bottom Diamond Cluster -->
+              <circle cx="210" cy="302" r="2" /><circle cx="210" cy="310" r="2" /><circle cx="205" cy="306" r="2" /><circle cx="215" cy="306" r="2" />
+              <!-- Left Diamond Cluster -->
+              <circle cx="22" cy="162" r="2" /><circle cx="22" cy="170" r="2" /><circle cx="17" cy="166" r="2" /><circle cx="27" cy="166" r="2" />
+              <!-- Right Diamond Cluster -->
+              <circle cx="398" cy="162" r="2" /><circle cx="398" cy="170" r="2" /><circle cx="393" cy="166" r="2" /><circle cx="403" cy="166" r="2" />
+              <!-- Diagonal Diamond Clusters -->
+              <circle cx="74" cy="68" r="1.8" /><circle cx="74" cy="75" r="1.8" /><circle cx="70" cy="71.5" r="1.8" /><circle cx="78" cy="71.5" r="1.8" />
+              <circle cx="346" cy="68" r="1.8" /><circle cx="346" cy="75" r="1.8" /><circle cx="342" cy="71.5" r="1.8" /><circle cx="350" cy="71.5" r="1.8" />
+              <circle cx="74" cy="257" r="1.8" /><circle cx="74" cy="264" r="1.8" /><circle cx="70" cy="260.5" r="1.8" /><circle cx="78" cy="260.5" r="1.8" />
+              <circle cx="346" cy="257" r="1.8" /><circle cx="346" cy="264" r="1.8" /><circle cx="342" cy="260.5" r="1.8" /><circle cx="350" cy="260.5" r="1.8" />
+            </g>
+
+            <!-- Blind-Debossed Inner Oval Plate Medallion -->
+            <ellipse
+              cx="210"
+              cy="166"
+              rx="162"
+              ry="118"
+              fill="url(#doilyDebossWell)"
+              stroke="#DFCDBA"
+              stroke-width="1.1"
+            />
+            <ellipse
+              cx="211"
+              cy="167"
+              rx="161"
+              ry="117"
+              fill="none"
+              stroke="#FFFFFF"
               stroke-width="1.2"
-              fill="none"
-              stroke-linecap="round"
+              opacity="0.85"
             />
-            <path
-              d="M155 284 Q210 298 265 284 M175 288 L166 296 M195 291 L188 299 M225 291 L232 299 M245 288 L254 296"
-              stroke="#B59E86"
-              stroke-width="1.2"
-              fill="none"
-              stroke-linecap="round"
-            />
+
+            <!-- Blind-Embossed Botanical Olive Leaf Wreaths Top, Bottom & Sides -->
+            <g stroke="#C6B19A" stroke-width="1.35" fill="none" stroke-linecap="round">
+              <path d="M138 56 Q210 36 282 56 M160 51 L150 42 M180 47 L172 38 M200 45 L194 36 M220 45 L226 36 M240 47 L248 38 M260 51 L270 42" />
+              <path d="M138 276 Q210 296 282 276 M160 281 L150 290 M180 285 L172 294 M200 287 L194 296 M220 287 L226 296 M240 285 L248 294 M260 281 L270 290" />
+            </g>
           </svg>
 
           <div class="doily-medallion-copy">
@@ -848,8 +1204,66 @@
            (Ref Image 6 Fourth Section & Ref Image 5 Fourth Section)
            ==================================================================== -->
       <section class="spread-menu-and-details" id="menu-details" aria-label="Wedding Menu and Details">
-        <!-- Intricate Rectangular French Lace Doily Menu Card -->
+        <!-- Intricate Rectangular French Lace Doily Menu Card (Ref Image 6 Fourth Section) -->
         <div class="lace-menu-card-wrap">
+          <svg class="lace-menu-svg-frame" viewBox="0 0 360 440" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <filter id="menuLaceShadow" x="-10%" y="-10%" width="120%" height="122%">
+                <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#1E140B" flood-opacity="0.42" />
+              </filter>
+              <pattern id="menuLaceMesh" width="10" height="10" patternUnits="userSpaceOnUse">
+                <path d="M0 5 L5 0 L10 5 L5 10 Z" fill="none" stroke="#FFFDF9" stroke-width="0.7" opacity="0.78" />
+                <circle cx="5" cy="5" r="1.2" fill="#FFFDF9" opacity="0.85" />
+              </pattern>
+            </defs>
+
+            <!-- Outer Scalloped French Doily Lace Silhouette -->
+            <path
+              filter="url(#menuLaceShadow)"
+              d="M36 14
+                 Q48 2 60 14 Q72 2 84 14 Q96 2 108 14 Q120 2 132 14 Q144 2 156 14 Q168 2 180 14 Q192 2 204 14 Q216 2 228 14 Q240 2 252 14 Q264 2 276 14 Q288 2 300 14 Q312 2 324 14
+                 Q348 4 346 36
+                 Q358 48 346 60 Q358 72 346 84 Q358 96 346 108 Q358 120 346 132 Q358 144 346 156 Q358 168 346 180 Q358 192 346 204 Q358 216 346 228 Q358 240 346 252 Q358 264 346 276 Q358 288 346 300 Q358 312 346 324 Q358 336 346 348 Q358 360 346 372 Q358 384 346 396 Q358 408 346 416
+                 Q348 436 324 426
+                 Q312 438 300 426 Q288 438 276 426 Q264 438 252 426 Q240 438 228 426 Q216 438 204 426 Q192 438 180 426 Q168 438 156 426 Q144 438 132 426 Q120 438 108 426 Q96 438 84 426 Q72 438 60 426 Q48 438 36 426
+                 Q12 436 14 416
+                 Q2 404 14 392 Q2 380 14 368 Q2 356 14 344 Q2 332 14 320 Q2 308 14 296 Q2 284 14 272 Q2 260 14 248 Q2 236 14 224 Q2 212 14 200 Q2 188 14 176 Q2 164 14 152 Q2 140 14 128 Q2 116 14 104 Q2 92 14 80 Q2 68 14 56 Q2 44 14 36
+                 Q12 4 36 14 Z"
+              fill="#F7F0E4"
+              stroke="#E5D6C3"
+              stroke-width="1.2"
+            />
+            <!-- Fine Lace Mesh Overlay inside the Border -->
+            <rect x="14" y="14" width="332" height="412" rx="18" fill="url(#menuLaceMesh)" />
+            <!-- Openwork Eyelet Cutouts around the Lace Collar -->
+            <rect
+              x="21"
+              y="21"
+              width="318"
+              height="398"
+              rx="14"
+              fill="none"
+              stroke="#5E4734"
+              stroke-width="4.2"
+              stroke-dasharray="3.2 8.8"
+              stroke-linecap="round"
+              opacity="0.72"
+            />
+            <rect
+              x="28"
+              y="28"
+              width="304"
+              height="384"
+              rx="10"
+              fill="none"
+              stroke="#5E4734"
+              stroke-width="2.2"
+              stroke-dasharray="1.6 6.4"
+              stroke-linecap="round"
+              opacity="0.65"
+            />
+          </svg>
+
           <div class="lace-menu-card">
             <h2 class="menu-script-title">The Menu</h2>
 
@@ -1032,10 +1446,11 @@
 
       <!-- ====================================================================
            SECTION 11 — LACE-TRIMMED FRENCH ENVELOPE OVER ARCHITECTURAL PORTRAIT
-           & INTERACTIVE RSVP FORM (Ref Image 5 Third & Ref Image 6 Top)
+           & TILTING "KINDLY RESPOND" WAX-SEALED ENVELOPE + RSVP LETTER CARD
+           (Ref Image 5 Third & Ref Image 6 Top)
            ==================================================================== -->
       <section class="spread-lace-rsvp-scene" id="rsvp" aria-label="Kindly Respond RSVP">
-        <!-- Full-Bleed Architectural Portrait with Square French Lace Envelope -->
+        <!-- Full-Bleed Architectural Portrait with Realistic Chantilly Lace French Envelope -->
         <div class="lace-envelope-hero">
           <div class="lace-envelope-backdrop" aria-hidden="true">
             <img
@@ -1047,89 +1462,508 @@
           </div>
 
           <div class="lace-rsvp-envelope-card">
-            <svg class="lace-envelope-svg" viewBox="0 0 420 310" preserveAspectRatio="none" aria-hidden="true">
-              <!-- Cream Linen Envelope Body -->
-              <rect x="2" y="2" width="416" height="306" rx="4" fill="#F8F3EA" stroke="#D9C9B5" stroke-width="1.5" />
-              <!-- Lower Envelope Pocket Folds -->
-              <path d="M2 308 L210 155 L418 308" fill="#F3ECE0" stroke="#DFD0BE" stroke-width="1.2" />
-              <!-- Upper V-Flap -->
-              <path d="M2 2 L210 176 L418 2 Z" fill="#FBF8F2" stroke="#D8C7B2" stroke-width="1.4" />
-              <!-- Scalloped French Chantilly Lace Trim along the V-Flap Edges -->
-              <path
-                d="M14 2 L210 166 L406 2"
-                fill="none"
-                stroke="#FFFFFF"
-                stroke-width="12"
-                stroke-dasharray="8 6"
-                stroke-linecap="round"
-                opacity="0.92"
-              />
-              <path
-                d="M8 2 L210 171 L412 2"
-                fill="none"
-                stroke="#D7C5B0"
-                stroke-width="1.6"
-                stroke-dasharray="4 4"
-              />
+            <svg class="lace-envelope-svg" viewBox="0 0 440 320" preserveAspectRatio="none" aria-hidden="true">
+              <defs>
+                <!-- Soft Cast Shadows for Envelope Flaps & Chantilly Lace -->
+                <filter id="rsvpFlapDropDown" x="-12%" y="-10%" width="124%" height="128%">
+                  <feDropShadow dx="0" dy="6" stdDeviation="6.5" flood-color="#3B2A1A" flood-opacity="0.24" />
+                  <feDropShadow dx="0" dy="1.5" stdDeviation="1.5" flood-color="#2E1F12" flood-opacity="0.18" />
+                </filter>
+                <filter id="rsvpFlapDropUp" x="-12%" y="-16%" width="124%" height="130%">
+                  <feDropShadow dx="0" dy="-5" stdDeviation="6" flood-color="#3B2A1A" flood-opacity="0.18" />
+                </filter>
+                <filter id="chantillyLaceShadow" x="-10%" y="-10%" width="120%" height="130%">
+                  <feDropShadow dx="0" dy="2.5" stdDeviation="2.2" flood-color="#4A3623" flood-opacity="0.28" />
+                </filter>
+
+                <!-- Handmade Cotton Rag Paper Texture -->
+                <pattern id="cottonFiberPattern" width="8" height="8" patternUnits="userSpaceOnUse">
+                  <path d="M0 2 Q4 1 8 2 M0 6 Q4 7 8 6" stroke="#D9C8B4" stroke-width="0.35" fill="none" opacity="0.38" />
+                  <path d="M2 0 Q1 4 2 8 M6 0 Q7 4 6 8" stroke="#FFFFFF" stroke-width="0.4" fill="none" opacity="0.45" />
+                </pattern>
+
+                <!-- Fine French Chantilly Lace Mesh Pattern -->
+                <pattern id="chantillyMesh" width="6" height="6" patternUnits="userSpaceOnUse">
+                  <path d="M0 3 L3 0 L6 3 L3 6 Z" fill="none" stroke="#FFFFFF" stroke-width="0.55" opacity="0.9" />
+                  <circle cx="3" cy="3" r="0.75" fill="#FFFFFF" opacity="0.95" />
+                </pattern>
+
+                <!-- Directional Cotton Paper Gradients -->
+                <linearGradient id="rsvpLeftCotton" x1="0%" y1="20%" x2="100%" y2="80%">
+                  <stop offset="0%" stop-color="#FAF6EE" />
+                  <stop offset="55%" stop-color="#F2EAE0" />
+                  <stop offset="100%" stop-color="#E5D9C8" />
+                </linearGradient>
+                <linearGradient id="rsvpRightCotton" x1="100%" y1="20%" x2="0%" y2="80%">
+                  <stop offset="0%" stop-color="#F8F3EA" />
+                  <stop offset="55%" stop-color="#EFE6DA" />
+                  <stop offset="100%" stop-color="#E2D5C3" />
+                </linearGradient>
+                <linearGradient id="rsvpBottomCotton" x1="50%" y1="0%" x2="50%" y2="100%">
+                  <stop offset="0%" stop-color="#FDFBF6" />
+                  <stop offset="38%" stop-color="#F5EFE4" />
+                  <stop offset="100%" stop-color="#E7DBCA" />
+                </linearGradient>
+                <linearGradient id="rsvpTopFlapCotton" x1="50%" y1="0%" x2="50%" y2="100%">
+                  <stop offset="0%" stop-color="#FFFDF9" />
+                  <stop offset="62%" stop-color="#F7F1E7" />
+                  <stop offset="100%" stop-color="#EDE2D2" />
+                </linearGradient>
+              </defs>
+
+              <!-- 1. Base Cream Cotton Envelope Body -->
+              <rect x="2" y="2" width="436" height="316" rx="4" fill="#F4EDE2" stroke="#D8C7B3" stroke-width="1.2" />
+
+              <!-- 2. Left & Right Folded Side Flaps -->
+              <polygon points="2,4 235,168 2,318" fill="url(#rsvpLeftCotton)" stroke="#E5D8C7" stroke-width="1" />
+              <polygon points="438,4 205,168 438,318" fill="url(#rsvpRightCotton)" stroke="#E3D5C3" stroke-width="1" />
+              <rect x="2" y="2" width="436" height="316" rx="4" fill="url(#cottonFiberPattern)" />
+
+              <!-- 3. Overlapping Lower Trapezoid/Triangle Pocket Flap with Upward Cast Shadow -->
+              <g filter="url(#rsvpFlapDropUp)">
+                <path
+                  d="M2,318 L194,158 Q220,138 246,158 L438,318 Z"
+                  fill="url(#rsvpBottomCotton)"
+                />
+                <path
+                  d="M2,318 L194,158 Q220,138 246,158 L438,318 Z"
+                  fill="url(#cottonFiberPattern)"
+                />
+                <!-- Crisp Specular Highlight & Debossed Seam Line on Lower Flap -->
+                <path
+                  d="M3,317 L194,158 Q220,138 246,158 L437,317"
+                  fill="none"
+                  stroke="#FFFDF9"
+                  stroke-width="1.5"
+                  opacity="0.9"
+                />
+                <path
+                  d="M10,317 L197,162 Q220,144 243,162 L430,317"
+                  fill="none"
+                  stroke="#CBB8A1"
+                  stroke-width="0.75"
+                  opacity="0.6"
+                />
+              </g>
+
+              <!-- 4. Upper V-Flap with Downward Cast Shadow & Scalloped French Chantilly Lace Trim -->
+              <g filter="url(#rsvpFlapDropDown)">
+                <!-- Scalloped French Chantilly Lace Frill Along Left V-Edge (0,2 -> 220,180) -->
+                <g transform="translate(4, 2) rotate(39.1)" filter="url(#chantillyLaceShadow)">
+                  <!-- Translucent Lace Mesh Base -->
+                  <path
+                    d="M0,0
+                       Q10,24 20,0 Q30,24 40,0 Q50,24 60,0 Q70,24 80,0 Q90,24 100,0 Q110,24 120,0 Q130,24 140,0 Q150,24 160,0 Q170,24 180,0 Q190,24 200,0 Q210,24 220,0 Q230,24 240,0 Q250,24 260,0 Q270,24 280,0 Z"
+                    fill="url(#chantillyMesh)"
+                    stroke="#FFFDF9"
+                    stroke-width="1.2"
+                  />
+                  <!-- Embroidered White-Ivory Floral Scallop Edge & Eyelet Cutouts -->
+                  <path
+                    d="M0,0
+                       Q10,24 20,0 Q30,24 40,0 Q50,24 60,0 Q70,24 80,0 Q90,24 100,0 Q110,24 120,0 Q130,24 140,0 Q150,24 160,0 Q170,24 180,0 Q190,24 200,0 Q210,24 220,0 Q230,24 240,0 Q250,24 260,0 Q270,24 280,0"
+                    fill="#FCF9F2"
+                    fill-opacity="0.72"
+                    stroke="#FFFFFF"
+                    stroke-width="1.6"
+                  />
+                  <!-- Delicate Floral Rosettes & Eyelet Perforations Inside Every Scallop -->
+                  <path
+                    d="M10,8 H270"
+                    stroke="#C5B097"
+                    stroke-width="3.4"
+                    stroke-dasharray="0.1 20"
+                    stroke-linecap="round"
+                  />
+                  <path
+                    d="M10,8 H270"
+                    stroke="#FFFFFF"
+                    stroke-width="6"
+                    stroke-dasharray="0.1 20"
+                    stroke-linecap="round"
+                    fill="none"
+                    opacity="0.65"
+                  />
+                  <!-- Picot Loops along Outer Lace Edge -->
+                  <path
+                    d="M5,11 H275"
+                    stroke="#FFFFFF"
+                    stroke-width="2.4"
+                    stroke-dasharray="1.2 4.8"
+                    stroke-linecap="round"
+                  />
+                </g>
+
+                <!-- Scalloped French Chantilly Lace Frill Along Right V-Edge (436,2 -> 220,180) -->
+                <g transform="translate(436, 2) scale(-1, 1) rotate(39.1)" filter="url(#chantillyLaceShadow)">
+                  <path
+                    d="M0,0
+                       Q10,24 20,0 Q30,24 40,0 Q50,24 60,0 Q70,24 80,0 Q90,24 100,0 Q110,24 120,0 Q130,24 140,0 Q150,24 160,0 Q170,24 180,0 Q190,24 200,0 Q210,24 220,0 Q230,24 240,0 Q250,24 260,0 Q270,24 280,0 Z"
+                    fill="url(#chantillyMesh)"
+                    stroke="#FFFDF9"
+                    stroke-width="1.2"
+                  />
+                  <path
+                    d="M0,0
+                       Q10,24 20,0 Q30,24 40,0 Q50,24 60,0 Q70,24 80,0 Q90,24 100,0 Q110,24 120,0 Q130,24 140,0 Q150,24 160,0 Q170,24 180,0 Q190,24 200,0 Q210,24 220,0 Q230,24 240,0 Q250,24 260,0 Q270,24 280,0"
+                    fill="#FCF9F2"
+                    fill-opacity="0.72"
+                    stroke="#FFFFFF"
+                    stroke-width="1.6"
+                  />
+                  <path
+                    d="M10,8 H270"
+                    stroke="#C5B097"
+                    stroke-width="3.4"
+                    stroke-dasharray="0.1 20"
+                    stroke-linecap="round"
+                  />
+                  <path
+                    d="M5,11 H275"
+                    stroke="#FFFFFF"
+                    stroke-width="2.4"
+                    stroke-dasharray="1.2 4.8"
+                    stroke-linecap="round"
+                  />
+                </g>
+
+                <!-- Top Cream Cotton V-Flap Body -->
+                <path
+                  d="M2,2 L206,172 Q220,183 234,172 L438,2 Z"
+                  fill="url(#rsvpTopFlapCotton)"
+                  stroke="#E2D3C1"
+                  stroke-width="1.2"
+                />
+                <path
+                  d="M2,2 L206,172 Q220,183 234,172 L438,2 Z"
+                  fill="url(#cottonFiberPattern)"
+                />
+                <!-- Stitched Lace Seam & Specular Edge Along V-Flap -->
+                <path
+                  d="M10,2 L208,166 Q220,175 232,166 L430,2"
+                  fill="none"
+                  stroke="#FFFFFF"
+                  stroke-width="2"
+                  opacity="0.92"
+                />
+                <path
+                  d="M14,2 L210,163 Q220,171 230,163 L426,2"
+                  fill="none"
+                  stroke="#CBB79F"
+                  stroke-width="0.9"
+                  stroke-dasharray="3 2.5"
+                  opacity="0.75"
+                />
+              </g>
             </svg>
 
             <div class="lace-envelope-top-title">Rsvp</div>
 
-            <!-- Pearl-Ivory Swan/Monogram Wax Seal in Center -->
+            <!-- Realistic 3D Sculpted Pearl-Ivory Swan & Monogram Wax Seal (Ref Image 5 Center) -->
             <div class="lace-envelope-seal" aria-hidden="true">
-              <span>EJ</span>
+              <svg class="lace-wax-seal-svg" viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <radialGradient id="pearlWaxOuter" cx="32%" cy="28%" r="72%" fx="28%" fy="24%">
+                    <stop offset="0%" stop-color="#FFFFFF" />
+                    <stop offset="24%" stop-color="#FBF7F0" />
+                    <stop offset="56%" stop-color="#E6DAC9" />
+                    <stop offset="84%" stop-color="#C2B099" />
+                    <stop offset="95%" stop-color="#9A856D" />
+                    <stop offset="100%" stop-color="#B8A48C" />
+                  </radialGradient>
+                  <radialGradient id="pearlWaxWell" cx="68%" cy="70%" r="68%">
+                    <stop offset="0%" stop-color="#F8F2E8" />
+                    <stop offset="48%" stop-color="#DFD2BF" />
+                    <stop offset="85%" stop-color="#B9A58D" />
+                    <stop offset="100%" stop-color="#8F7A63" />
+                  </radialGradient>
+                  <linearGradient id="pearlSwanRelief" x1="20%" y1="15%" x2="85%" y2="85%">
+                    <stop offset="0%" stop-color="#FFFFFF" />
+                    <stop offset="52%" stop-color="#EFE6D8" />
+                    <stop offset="100%" stop-color="#B5A088" />
+                  </linearGradient>
+                  <filter id="pearlReliefShadow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="1.1" dy="1.4" stdDeviation="0.9" flood-color="#6E5A44" flood-opacity="0.55" />
+                    <feDropShadow dx="-0.7" dy="-0.7" stdDeviation="0.5" flood-color="#FFFFFF" flood-opacity="0.9" />
+                  </filter>
+                </defs>
+
+                <!-- 1. Organic Poured Pearl-Cream Wax Outer Rim -->
+                <path
+                  d="M55 5 C67 4, 79 8, 88 16 C97 24, 104 34, 105 46 C106 58, 103 71, 96 81 C89 91, 80 100, 68 104 C56 108, 43 106, 31 102 C19 98, 10 89, 6 77 C2 65, 4 51, 7 39 C10 27, 17 16, 28 10 C39 4, 46 6, 55 5 Z"
+                  fill="url(#pearlWaxOuter)"
+                  stroke="#A8937B"
+                  stroke-width="0.8"
+                />
+                <!-- Specular Pearl Sheen on Outer Lip -->
+                <path
+                  d="M18 36 C24 20, 38 11, 55 10 C67 9, 78 13, 86 20"
+                  fill="none"
+                  stroke="#FFFFFF"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  opacity="0.85"
+                />
+                <path
+                  d="M92 76 C85 90, 72 98, 56 99 C41 100, 27 95, 18 85"
+                  fill="none"
+                  stroke="#86715A"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  opacity="0.45"
+                />
+
+                <!-- 2. Recessed Stamped Inner Well -->
+                <circle cx="55" cy="55" r="35" fill="url(#pearlWaxWell)" stroke="#9B866E" stroke-width="1.2" />
+                <path
+                  d="M25 72 A35 35 0 0 1 76 27"
+                  fill="none"
+                  stroke="#7D6852"
+                  stroke-width="2.4"
+                  stroke-linecap="round"
+                  opacity="0.48"
+                />
+                <path
+                  d="M85 38 A35 35 0 0 1 34 83"
+                  fill="none"
+                  stroke="#FFFFFF"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  opacity="0.75"
+                />
+
+                <!-- 3. Raised Beaded Ring & 3D Embossed French Swan Relief (Matches Ref Image 5) -->
+                <circle
+                  cx="55"
+                  cy="55"
+                  r="30.5"
+                  fill="none"
+                  stroke="url(#pearlSwanRelief)"
+                  stroke-width="1.2"
+                  stroke-dasharray="1.8 2.8"
+                  filter="url(#pearlReliefShadow)"
+                />
+                <g filter="url(#pearlReliefShadow)">
+                  <!-- Sculpted Swan Body, Wing & Graceful Neck -->
+                  <path
+                    d="M44 66 C37 66, 33 61, 35 55 C37 50, 44 47, 53 48 C60 49, 66 53, 69 59 C71 63, 67 66, 61 66 Z"
+                    fill="url(#pearlSwanRelief)"
+                  />
+                  <path
+                    d="M42 57 C45 50, 54 47, 63 52 C59 57, 51 59, 42 57 Z"
+                    fill="#FDF9F2"
+                  />
+                  <path
+                    d="M65 58 C70 50, 72 41, 68 35 C65 31, 59 31, 57 35 C56 37, 57 40, 55 41"
+                    fill="none"
+                    stroke="url(#pearlSwanRelief)"
+                    stroke-width="3.2"
+                    stroke-linecap="round"
+                  />
+                  <!-- Subtle Water Ripple Below Swan -->
+                  <path
+                    d="M36 72 Q55 75 74 72"
+                    fill="none"
+                    stroke="url(#pearlSwanRelief)"
+                    stroke-width="1.4"
+                    stroke-linecap="round"
+                  />
+                </g>
+              </svg>
             </div>
 
             <p class="lace-envelope-bottom-note">YOUR REPLY REQUESTED · BEFORE OCTOBER 1, 2026</p>
           </div>
         </div>
 
-        <!-- Interactive French RSVP Card -->
+        <!-- Tilted French Linen "Kindly Respond" Envelope with 3D Antique Gold Wax Seal (Ref Image 6 Top) + Interactive RSVP Card -->
         <div class="french-rsvp-box">
-          <p class="rsvp-kicker">RÉPONDEZ S’IL VOUS PLAÎT</p>
-          <h2 class="rsvp-script-title">Kindly Respond</h2>
-          <p class="rsvp-subnote">Please confirm your attendance by October 1, 2026</p>
+          <!-- Realistic Tilted Envelope Header (Matches Ref Image 6 Top) -->
+          <div class="kindly-respond-envelope-wrap" aria-hidden="true">
+            <div class="kindly-respond-envelope">
+              <svg class="kindly-envelope-svg" viewBox="0 0 460 290" preserveAspectRatio="none">
+                <defs>
+                  <filter id="kindlyTopFlapShadow" x="-10%" y="-10%" width="120%" height="130%">
+                    <feDropShadow dx="0" dy="5" stdDeviation="5.5" flood-color="#2B1D11" flood-opacity="0.26" />
+                  </filter>
+                  <filter id="kindlyBottomShadow" x="-10%" y="-15%" width="120%" height="130%">
+                    <feDropShadow dx="0" dy="-4" stdDeviation="5" flood-color="#2B1D11" flood-opacity="0.16" />
+                  </filter>
+                  <linearGradient id="kindlyPaperBody" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#F6EFE4" />
+                    <stop offset="52%" stop-color="#EDE3D3" />
+                    <stop offset="100%" stop-color="#DECDB8" />
+                  </linearGradient>
+                  <linearGradient id="kindlyPaperBottom" x1="50%" y1="0%" x2="50%" y2="100%">
+                    <stop offset="0%" stop-color="#FAF5EC" />
+                    <stop offset="45%" stop-color="#EFE6D7" />
+                    <stop offset="100%" stop-color="#E1D2BE" />
+                  </linearGradient>
+                  <linearGradient id="kindlyPaperTop" x1="50%" y1="0%" x2="50%" y2="100%">
+                    <stop offset="0%" stop-color="#FDFaf4" />
+                    <stop offset="58%" stop-color="#F4ECE0" />
+                    <stop offset="100%" stop-color="#E6D8C5" />
+                  </linearGradient>
+                </defs>
 
-          <form class="french-rsvp-form" id="french-rsvp-form">
-            <div class="french-field">
-              <label for="frenchGuestName">Full Name</label>
-              <input
-                type="text"
-                id="frenchGuestName"
-                name="guestName"
-                placeholder="e.g. Camille &amp; Henri Moreau"
-                required
-              />
+                <!-- Envelope Base & Side Flaps -->
+                <rect x="2" y="2" width="456" height="286" rx="4" fill="url(#kindlyPaperBody)" stroke="#D4C2AC" stroke-width="1.2" />
+                <polygon points="2,4 230,156 2,288" fill="#EFE5D6" stroke="#DFD0BC" stroke-width="1" />
+                <polygon points="458,4 230,156 458,288" fill="#EAE0CF" stroke="#DCCBB6" stroke-width="1" />
+                <rect x="2" y="2" width="456" height="286" rx="4" fill="url(#cottonFiberPattern)" />
+
+                <!-- Lower Pocket Flap -->
+                <g filter="url(#kindlyBottomShadow)">
+                  <path d="M2,288 L202,142 Q230,122 258,142 L458,288 Z" fill="url(#kindlyPaperBottom)" />
+                  <path d="M2,288 L202,142 Q230,122 258,142 L458,288 Z" fill="url(#cottonFiberPattern)" />
+                  <path d="M4,287 L202,142 Q230,122 258,142 L456,287" fill="none" stroke="#FFFDF9" stroke-width="1.4" opacity="0.88" />
+                </g>
+
+                <!-- Upper V-Flap with Cast Shadow -->
+                <g filter="url(#kindlyTopFlapShadow)">
+                  <path d="M2,2 L212,158 Q230,170 248,158 L458,2 Z" fill="url(#kindlyPaperTop)" stroke="#DECDB8" stroke-width="1.1" />
+                  <path d="M2,2 L212,158 Q230,170 248,158 L458,2 Z" fill="url(#cottonFiberPattern)" />
+                  <path d="M8,2 L214,154 Q230,165 246,154 L452,2" fill="none" stroke="#FFFFFF" stroke-width="1.3" opacity="0.85" />
+                </g>
+              </svg>
+
+              <div class="kindly-envelope-script">Kindly Respond</div>
+
+              <!-- 3D Antique Gold / Bronze Poured Wax Seal (Matches Ref Image 6 Top) -->
+              <div class="kindly-gold-wax-seal">
+                <svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <radialGradient id="antiqueGoldWaxRim" cx="32%" cy="26%" r="72%" fx="28%" fy="22%">
+                      <stop offset="0%" stop-color="#FFF6D6" />
+                      <stop offset="22%" stop-color="#E5C67E" />
+                      <stop offset="52%" stop-color="#B88E3E" />
+                      <stop offset="80%" stop-color="#7E5B1E" />
+                      <stop offset="94%" stop-color="#4F360D" />
+                      <stop offset="100%" stop-color="#8A6626" />
+                    </radialGradient>
+                    <radialGradient id="antiqueGoldWaxWell" cx="68%" cy="70%" r="68%">
+                      <stop offset="0%" stop-color="#E8CA84" />
+                      <stop offset="45%" stop-color="#B58B3B" />
+                      <stop offset="82%" stop-color="#7A571C" />
+                      <stop offset="100%" stop-color="#4A320B" />
+                    </radialGradient>
+                    <linearGradient id="antiqueGoldRelief" x1="18%" y1="15%" x2="84%" y2="85%">
+                      <stop offset="0%" stop-color="#FFF8DF" />
+                      <stop offset="48%" stop-color="#DFBC70" />
+                      <stop offset="100%" stop-color="#8B6523" />
+                    </linearGradient>
+                    <filter id="goldWaxReliefShadow" x="-20%" y="-20%" width="140%" height="140%">
+                      <feDropShadow dx="1.2" dy="1.5" stdDeviation="0.9" flood-color="#382406" flood-opacity="0.72" />
+                      <feDropShadow dx="-0.7" dy="-0.7" stdDeviation="0.5" flood-color="#FFF7DC" flood-opacity="0.8" />
+                    </filter>
+                  </defs>
+
+                  <!-- Organic Molten Gold-Bronze Wax Outer Rim -->
+                  <path
+                    d="M55 5 C69 4, 81 9, 90 18 C99 27, 105 38, 106 51 C107 64, 102 77, 94 87 C86 97, 75 104, 62 106 C49 108, 35 105, 24 98 C13 91, 6 80, 5 67 C4 54, 7 40, 14 28 C21 16, 31 8, 43 6 C49 5, 52 5, 55 5 Z"
+                    fill="url(#antiqueGoldWaxRim)"
+                    stroke="#5A3E12"
+                    stroke-width="0.9"
+                  />
+                  <!-- Metallic Gold Specular Highlight on Rim -->
+                  <path
+                    d="M18 35 C25 19, 39 11, 56 10 C68 9, 79 14, 87 22"
+                    fill="none"
+                    stroke="#FFF9E2"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    opacity="0.78"
+                  />
+                  <!-- Recessed Intaglio Well -->
+                  <circle cx="55" cy="55" r="35" fill="url(#antiqueGoldWaxWell)" stroke="#52380F" stroke-width="1.4" />
+                  <path d="M25 72 A35 35 0 0 1 76 27" fill="none" stroke="#3D2808" stroke-width="2.6" stroke-linecap="round" opacity="0.6" />
+                  <path d="M85 38 A35 35 0 0 1 34 83" fill="none" stroke="#FCE7B2" stroke-width="1.6" stroke-linecap="round" opacity="0.7" />
+                  <!-- Embossed Botanical Wreath & EJ Monogram Inside Gold Seal -->
+                  <circle
+                    cx="55"
+                    cy="55"
+                    r="30"
+                    fill="none"
+                    stroke="url(#antiqueGoldRelief)"
+                    stroke-width="1.2"
+                    stroke-dasharray="2 2.8"
+                    filter="url(#goldWaxReliefShadow)"
+                  />
+                  <g filter="url(#goldWaxReliefShadow)">
+                    <path
+                      d="M36 64 C32 54, 35 42, 44 36 M74 64 C78 54, 75 42, 66 36"
+                      fill="none"
+                      stroke="url(#antiqueGoldRelief)"
+                      stroke-width="1.4"
+                      stroke-linecap="round"
+                    />
+                    <text
+                      x="54"
+                      y="64"
+                      text-anchor="middle"
+                      font-family="'Pinyon Script', 'Great Vibes', cursive"
+                      font-size="30"
+                      fill="url(#antiqueGoldRelief)"
+                    >
+                      EJ
+                    </text>
+                  </g>
+                </svg>
+              </div>
+
+              <p class="kindly-envelope-sub">
+                PLEASE RESPOND BY OCTOBER 1, 2026<br />
+                USING THE RSVP FORM BELOW
+              </p>
             </div>
+          </div>
 
-            <div class="french-field-row">
+          <div class="rsvp-letter-sheet">
+            <p class="rsvp-kicker">RÉPONDEZ S’IL VOUS PLAÎT</p>
+            <h2 class="rsvp-script-title">Kindly Respond</h2>
+            <p class="rsvp-subnote">Please confirm your attendance by October 1, 2026</p>
+
+            <form class="french-rsvp-form" id="french-rsvp-form">
               <div class="french-field">
-                <label for="frenchAttendance">Attendance</label>
-                <select id="frenchAttendance" name="attendance">
-                  <option value="accepts">Joyfully Accepts</option>
-                  <option value="declines">Regretfully Declines</option>
-                </select>
+                <label for="frenchGuestName">Full Name</label>
+                <input
+                  type="text"
+                  id="frenchGuestName"
+                  name="guestName"
+                  placeholder="e.g. Camille &amp; Henri Moreau"
+                  required
+                />
+              </div>
+
+              <div class="french-field-row">
+                <div class="french-field">
+                  <label for="frenchAttendance">Attendance</label>
+                  <select id="frenchAttendance" name="attendance">
+                    <option value="accepts">Joyfully Accepts</option>
+                    <option value="declines">Regretfully Declines</option>
+                  </select>
+                </div>
+
+                <div class="french-field">
+                  <label for="frenchGuests">Guests</label>
+                  <input type="number" id="frenchGuests" name="guestsCount" min="1" max="6" value="1" />
+                </div>
               </div>
 
               <div class="french-field">
-                <label for="frenchGuests">Guests</label>
-                <input type="number" id="frenchGuests" name="guestsCount" min="1" max="6" value="1" />
+                <label for="frenchNote">Dietary Notes or Wishes</label>
+                <textarea
+                  id="frenchNote"
+                  name="message"
+                  rows="2"
+                  placeholder="Leave a note for Élise &amp; Julien..."
+                ></textarea>
               </div>
-            </div>
 
-            <div class="french-field">
-              <label for="frenchNote">Dietary Notes or Wishes</label>
-              <textarea
-                id="frenchNote"
-                name="message"
-                rows="2"
-                placeholder="Leave a note for Élise &amp; Julien..."
-              ></textarea>
-            </div>
-
-            <button type="submit" class="french-submit-btn">Send RSVP</button>
-            <p class="french-rsvp-status" id="french-rsvp-status" aria-live="polite"></p>
-          </form>
+              <button type="submit" class="french-submit-btn">Send RSVP</button>
+              <p class="french-rsvp-status" id="french-rsvp-status" aria-live="polite"></p>
+            </form>
+          </div>
         </div>
       </section>
 
@@ -1162,6 +1996,6 @@
     </div>
   </dialog>
 
-  <script src="french.js"></script>
+  <script src="french.js?v=20261022-french-v5"></script>
 </body>
 </html>
