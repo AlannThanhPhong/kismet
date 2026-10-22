@@ -10,7 +10,7 @@ import InvitationArtwork, { initialLayers, type InvitationLayer } from "../compo
 
 export default function DesignEditor() {
   const params = useSearchParams();
-  const item = useMemo(() => { const items = getCatalog("VND").filter(item => !item.template); return items.find(item => item.id === params.get("template")) ?? items[0]; }, [params]);
+  const item = useMemo(() => { const items = getCatalog("VND").filter(item => !item.template && !item.previewOnly); return items.find(item => item.id === params.get("template")) ?? items[0]; }, [params]);
   // Remount when switching templates so one design never overwrites another.
   return <Editor key={item.id} item={item} />;
 }

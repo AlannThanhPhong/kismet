@@ -4,11 +4,25 @@ import { notFound } from "next/navigation";
 import { getDatabase } from "@/lib/mongodb";
 import type { Invitation } from "@/lib/models";
 import { designedInvitations } from "@/lib/designed-invitations";
+import CustomizedInvitationFrame from "./CustomizedInvitationFrame";
 import "./invitation.css";
 
 type Props = { params: Promise<{ code: string }> };
 
-async function findInvitation(code: string) {
+function normalizeInvitationCode(rawCode: string) {
+  const decoded = decodeURIComponent(rawCode);
+  if (
+    decoded === "lovers-diary" ||
+    decoded === "Lover’s Diary" ||
+    decoded === "Lover's Diary"
+  ) {
+    return "lovers-diary";
+  }
+  return decoded;
+}
+
+async function findInvitation(rawCode: string) {
+  const code = normalizeInvitationCode(rawCode);
   const designed = designedInvitations.find((item) => item.code === code);
   if (designed) return designed;
   try {
@@ -20,7 +34,8 @@ async function findInvitation(code: string) {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { code } = await params;
+  const { code: rawCode } = await params;
+  const code = normalizeInvitationCode(rawCode);
   const invitation = await findInvitation(code);
   if (!invitation) return { title: "Không tìm thấy thiệp cưới" };
   const title = `${invitation.couple.partnerOne} & ${invitation.couple.partnerTwo} | Thiệp cưới`;
@@ -40,18 +55,29 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function InvitationPage({ params }: Props) {
-  const { code } = await params;
+  const { code: rawCode } = await params;
+  const code = normalizeInvitationCode(rawCode);
   const invitation = await findInvitation(code);
   if (!invitation) notFound();
 
   if (designedInvitations.some((item) => item.code === code)) {
+    const folder =
+      code === "lovers-diary" ? "Lover%E2%80%99s%20Diary" : code;
     const revision =
       code === "20260823-NDTD"
         ? "?v=20261012-natural-smiley-directions"
         : code === "20261230-KHAG"
           ? "?v=20261013-chronicles-spacing"
-          : "";
-    return <iframe className="full-invitation" src={`/wedding-invitations/${code}/index.html${revision}`} allow="autoplay" title={`Thiệp cưới ${invitation.couple.partnerOne} và ${invitation.couple.partnerTwo}`} />;
+          : code === "lovers-diary"
+            ? "?v=20261022-lovers-diary-circle-audio"
+            : "";
+    return (
+      <CustomizedInvitationFrame
+        code={code}
+        src={`/wedding-invitations/${folder}/index.html${revision}`}
+        title={`Thiệp cưới ${invitation.couple.partnerOne} và ${invitation.couple.partnerTwo}`}
+      />
+    );
   }
 
   const date = new Date(invitation.event.date);

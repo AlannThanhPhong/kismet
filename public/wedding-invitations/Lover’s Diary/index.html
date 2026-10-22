@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lover’s Diary — Élodie Laurent &amp; Gabriel Moreau | Paris</title>
+  <meta
+    name="description"
+    content="Lover’s Diary — Wedding invitation of Élodie Laurent &amp; Gabriel Moreau at Église Saint-Sulpice, Paris, France."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&amp;family=Courier+Prime:ital,wght@0,400;0,700;1,400&amp;family=Homemade+Apple&amp;family=Imperial+Script&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css?v=20261022-circle-audio" />
+</head>
+<body class="is-locked">
+  <div class="paper-texture" aria-hidden="true"></div>
+
+  <!-- Background Music: City Of Stars — May Finally Come True (From La La Land Score) -->
+  <audio id="diary-bgm" src="/music/wedding/city-of-stars-may-finally-come-true.mp3" data-song-title="City Of Stars — May Finally Come True" loop preload="auto"></audio>
+
+  <!-- ========================================================================
+       OPENING GATE — LOVER’S DIARY COVER (Scrapbook, Polaroid, Wax Seal & Clip)
+       ======================================================================== -->
+  <div class="diary-cover-gate" id="diary-cover-gate" role="dialog" aria-modal="true" aria-label="Open Lover’s Diary Wedding Invitation">
+    <div class="cover-gate-backdrop" aria-hidden="true"></div>
+
+    <div class="cover-book-stage">
+      <!-- Lined spiral-notebook sheet peeking behind the burgundy cover -->
+      <div class="cover-lined-sheet" aria-hidden="true">
+        <div class="cover-spiral-holes">
+          <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <p class="cover-marginalia-note">“A Parisian love story written by hand...”</p>
+      </div>
+
+      <!-- Main Burgundy Diary Cover -->
+      <div class="cover-burgundy-board">
+        <!-- Stitched bookbinding spine on left -->
+        <div class="cover-spine-stitch" aria-hidden="true"></div>
+
+        <!-- Black Metal Binder Clip clamping the left edge -->
+        <svg class="cover-binder-clip" viewBox="0 0 140 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path
+            d="M52 28L108 10C115 8 122 12 124 19C126 26 121 33 114 35L56 50"
+            stroke="#C7CBD1"
+            stroke-width="3.6"
+            stroke-linecap="round"
+          />
+          <path
+            d="M46 42L102 24C109 22 116 26 118 33C120 40 115 47 108 49L50 64"
+            stroke="#9499A1"
+            stroke-width="3.4"
+            stroke-linecap="round"
+          />
+          <polygon points="8,14 64,22 52,78 2,68" fill="#18191B" />
+          <polygon points="12,18 60,25 50,73 6,64" fill="#282A2E" />
+          <rect x="55" y="22" width="7" height="48" rx="3" transform="rotate(11 55 22)" fill="#3F4246" />
+          <circle cx="52" cy="36" r="4" fill="#DCE0E5" />
+          <circle cx="48" cy="54" r="4" fill="#DCE0E5" />
+        </svg>
+
+        <!-- Inner gold-embossed frame -->
+        <div class="cover-gold-frame">
+          <p class="cover-kicker">CARNET D’AMOUR · N° 01 · PARIS</p>
+          <h1 class="cover-diary-title">Lover’s Diary</h1>
+
+          <!-- Center Tilted Polaroid with Crimson Tape, Brass Pin & Mini Postage Stamp -->
+          <div class="cover-polaroid-cluster">
+            <figure class="cover-polaroid-card">
+              <span class="cover-crimson-tape" aria-hidden="true"></span>
+              <span class="cover-brass-pin" aria-hidden="true"></span>
+              <div class="cover-polaroid-img-wrap">
+                <img
+                  src="images/photo_2026-10-21_18-13-28.jpg"
+                  alt="Élodie Laurent &amp; Gabriel Moreau"
+                />
+              </div>
+              <figcaption class="cover-polaroid-caption">Élodie Laurent &amp; Gabriel Moreau</figcaption>
+            </figure>
+
+            <!-- Overlapping Perforated Mini Postage Stamp -->
+            <div class="cover-mini-stamp" aria-hidden="true">
+              <div class="cover-mini-stamp-inner">
+                <img src="images/photo_2026-10-21_18-13-28 (2).jpg" alt="" />
+                <span>24.10.26</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Typewriter Date & Venue Strip -->
+          <div class="cover-typewriter-strip">
+            <p class="cover-venue-line">Église Saint-Sulpice · Paris, France</p>
+            <p class="cover-date-line">SATURDAY · 24 OCTOBER 2026</p>
+          </div>
+
+          <!-- Interactive Wax Seal & Open Invitation Button -->
+          <button type="button" class="cover-open-btn" id="diary-open-btn">
+            <span class="cover-wax-seal-wrap" aria-hidden="true">
+              <svg class="cover-wax-seal-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <radialGradient id="coverWaxGold" cx="35%" cy="30%" r="70%">
+                    <stop offset="0%" stop-color="#FFF3C4" />
+                    <stop offset="42%" stop-color="#DFB453" />
+                    <stop offset="80%" stop-color="#9B6E1B" />
+                    <stop offset="100%" stop-color="#654308" />
+                  </radialGradient>
+                </defs>
+                <path
+                  d="M50 4C61 3 68 9 77 14C86 19 94 27 95 38C97 49 93 59 89 69C85 79 78 89 68 93C58 97 46 96 35 93C24 90 13 84 8 74C3 64 4 52 6 41C8 30 13 19 22 12C31 5 39 5 50 4Z"
+                  fill="url(#coverWaxGold)"
+                />
+                <circle cx="50" cy="50" r="33" fill="none" stroke="#6E4A0C" stroke-width="2.2" opacity="0.78" />
+                <circle cx="50" cy="50" r="29.5" fill="none" stroke="#FCE8A6" stroke-width="1" opacity="0.7" />
+                <path
+                  d="M48 70C49 56 52 42 56 30M51 58C44 54 41 49 43 44C48 46 51 51 51 58ZM53 48C59 44 63 39 61 34C56 36 53 41 53 48ZM49 63C56 60 60 56 59 51C54 52 50 57 49 63Z"
+                  stroke="#644209"
+                  stroke-width="2.2"
+                  fill="#E8C468"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </span>
+            <span class="cover-open-text">
+              <strong>Open Lover’s Diary</strong>
+              <small>♪ City Of Stars — May Finally Come True</small>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Navigation Bar -->
+  <header class="diary-topbar">
+    <a href="#trio" class="diary-topbar-brand">Élodie &amp; Gabriel</a>
+    <span class="diary-topbar-center">Template N° 01 · Lover’s Diary · Paris</span>
+    <nav class="diary-topbar-links" aria-label="Diary navigation">
+      <a href="#diary-pages">Diary</a>
+      <a href="#postage-spread">Stamps</a>
+      <a href="#love-note">Vow</a>
+      <a href="#ceremony-rsvp">RSVP</a>
+    </nav>
+  </header>
+
+  <!-- Floating Ambient Melody Toggle (Delicate Vintage Circle Medallion) -->
+  <button
+    type="button"
+    class="diary-audio-fab"
+    id="diary-audio-btn"
+    aria-label="Toggle background melody"
+    title="City Of Stars — May Finally Come True"
+  >
+    <span class="diary-audio-ring" aria-hidden="true"></span>
+    <svg class="diary-audio-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="12" cy="12" r="9.2" stroke="currentColor" stroke-width="0.9" stroke-dasharray="2 2" opacity="0.55" />
+      <path
+        d="M9.5 16.2V7.8L16.5 6.4V14.8"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <circle cx="7.9" cy="16.3" r="1.9" fill="currentColor" />
+      <circle cx="14.9" cy="14.9" r="1.9" fill="currentColor" />
+      <line
+        class="diary-audio-mute-slash"
+        x1="5.2"
+        y1="18.8"
+        x2="18.8"
+        y2="5.2"
+        stroke="currentColor"
+        stroke-width="1.6"
+        stroke-linecap="round"
+      />
+    </svg>
+    <span id="diary-audio-label" class="diary-audio-sr-only">♪ City Of Stars — May Finally Come True · Off</span>
+  </button>
+
+  <main class="diary-main" id="diary-main-content">
+    <!-- ======================================================================
+         SPREAD 1 — THE "WHO / WHERE / WHEN" POLAROID TRIO (Reference Image 3)
+         ====================================================================== -->
+    <section class="spread-polaroid-trio" id="trio" aria-label="Who, Where and When Polaroid Trio">
+      <h1 class="trio-brand-header">L O V E R ’ S &nbsp; D I A R Y</h1>
+
+      <div class="trio-stage">
+        <!-- Polaroid 1: Top-Left ("Who : Élodie Laurent & Gabriel Moreau") -->
+        <figure
+          class="polaroid-white trio-polaroid-who"
+          data-lightbox-src="images/photo_2026-10-21_18-13-28 (3).jpg"
+          data-lightbox-caption="Who : Élodie Laurent &amp; Gabriel Moreau"
+        >
+          <div class="polaroid-photo-wrap">
+            <img
+              src="images/photo_2026-10-21_18-13-28 (3).jpg"
+              alt="Élodie Laurent and Gabriel Moreau by the sunlit window with white calla lilies"
+            />
+          </div>
+          <figcaption class="polaroid-caption">Who : Élodie &amp; Gabriel</figcaption>
+        </figure>
+
+        <!-- Top-Right Editorial Quote Block -->
+        <div class="trio-editorial-note">
+          <h2 class="trio-note-script">Lover’s Diary</h2>
+          <p class="trio-note-quote">
+            “When it comes to love in Paris, we knew we didn’t want a scripted fairytale. We wanted the quiet mornings
+            by the window, the stolen kisses between library shelves, and the handwritten pages of our own diary.”
+          </p>
+          <p class="trio-note-author">ÉLODIE LAURENT &amp; GABRIEL MOREAU</p>
+        </div>
+
+        <!-- Polaroid 2: Bottom-Left B&W ("Where : Église Saint-Sulpice, Paris") -->
+        <figure
+          class="polaroid-white trio-polaroid-where"
+          data-lightbox-src="images/photo_2026-10-21_18-13-28 (2).jpg"
+          data-lightbox-caption="Where : Église Saint-Sulpice, Paris, France"
+        >
+          <div class="polaroid-photo-wrap">
+            <img
+              src="images/photo_2026-10-21_18-13-28 (2).jpg"
+              alt="Black and white kiss on Parisian stairs"
+            />
+          </div>
+          <figcaption class="polaroid-caption">Where : Église Saint-Sulpice, Paris</figcaption>
+        </figure>
+
+        <!-- Polaroid 3: Right Tilted ("When : 24th October 2026") -->
+        <figure
+          class="polaroid-white trio-polaroid-when"
+          data-lightbox-src="images/photo_2026-10-21_18-13-29.jpg"
+          data-lightbox-caption="When : 24th October 2026 · Paris, France"
+        >
+          <div class="polaroid-photo-wrap">
+            <img
+              src="images/photo_2026-10-21_18-13-29.jpg"
+              alt="Élodie and Gabriel embracing on warm golden stairs"
+            />
+          </div>
+          <figcaption class="polaroid-caption">When : 24th October 2026</figcaption>
+        </figure>
+      </div>
+
+      <div class="trio-footer-cta">
+        <p class="trio-footer-script">Want to read our Parisian pages?</p>
+        <a href="#diary-pages" class="trio-outline-btn">Open Our Diary</a>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SPREAD 2 — BURGUNDY POLAROIDS, BINDER CLIP & WAX SEAL (Reference Image 1)
+         ====================================================================== -->
+    <section class="spread-burgundy-diary" id="diary-pages" aria-label="Scrapbook Diary Collage">
+      <div class="burgundy-diary-sheet">
+        <div class="burgundy-lined-backing" aria-hidden="true"></div>
+
+        <div class="burgundy-collage-grid">
+          <!-- 1. Top-Left Burgundy Frame -->
+          <figure
+            class="polaroid-burgundy diary-item-tl"
+            data-lightbox-src="images/photo_2026-10-22_14-58-17.jpg"
+            data-lightbox-caption="Between the library shelves · Paris"
+          >
+            <img
+              src="images/photo_2026-10-22_14-58-17.jpg"
+              alt="Élodie and Gabriel touching noses between library bookshelves"
+              loading="lazy"
+            />
+          </figure>
+
+          <!-- 2. Top-Right Burgundy Polaroid with Brass Pin & Handwritten Caption -->
+          <figure
+            class="polaroid-burgundy has-chin diary-item-tr"
+            data-lightbox-src="images/photo_2026-10-21_18-13-28.jpg"
+            data-lightbox-caption="Together is my favorite place to be — always &amp; forever."
+          >
+            <span class="brass-pin" aria-hidden="true"></span>
+            <img
+              src="images/photo_2026-10-21_18-13-28.jpg"
+              alt="Élodie holding red roses with Gabriel on the escalator"
+              loading="lazy"
+            />
+            <figcaption class="burgundy-chin-caption">
+              Together is my favorite place to be —<br />always &amp; forever.
+            </figcaption>
+          </figure>
+
+          <!-- 3. Middle-Left Burgundy B&W Frame with Black Metal Binder Clip -->
+          <figure
+            class="polaroid-burgundy diary-item-ml"
+            data-lightbox-src="images/photo_2026-10-22_14-57-23.jpg"
+            data-lightbox-caption="Looking up at our future together"
+          >
+            <!-- Realistic Black Binder Clip with Silver Wire Handles -->
+            <svg class="binder-clip-svg" viewBox="0 0 140 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path
+                d="M52 28L108 10C115 8 122 12 124 19C126 26 121 33 114 35L56 50"
+                stroke="#B9BDC2"
+                stroke-width="3.6"
+                stroke-linecap="round"
+              />
+              <path
+                d="M46 42L102 24C109 22 116 26 118 33C120 40 115 47 108 49L50 64"
+                stroke="#8D9298"
+                stroke-width="3.4"
+                stroke-linecap="round"
+              />
+              <polygon points="8,14 64,22 52,78 2,68" fill="#1D1E20" />
+              <polygon points="12,18 60,25 50,73 6,64" fill="#2A2C2F" />
+              <rect x="55" y="22" width="7" height="48" rx="3" transform="rotate(11 55 22)" fill="#3F4246" />
+              <circle cx="52" cy="36" r="4" fill="#D5D8DC" />
+              <circle cx="48" cy="54" r="4" fill="#D5D8DC" />
+            </svg>
+            <img
+              src="images/photo_2026-10-22_14-57-23.jpg"
+              alt="Élodie and Gabriel looking through the stairwell"
+              loading="lazy"
+            />
+          </figure>
+
+          <!-- 4. Center Overlapping White B&W Polaroid -->
+          <figure
+            class="diary-item-center"
+            data-lightbox-src="images/photo_2026-10-21_18-13-29 (2).jpg"
+            data-lightbox-caption="Morning pages by the window"
+          >
+            <img
+              src="images/photo_2026-10-21_18-13-29 (2).jpg"
+              alt="Black and white cheek kiss by the window with open notebook"
+              loading="lazy"
+            />
+          </figure>
+
+          <!-- 5. Bottom-Left Typewriter Story Block with Burgundy Calligraphy Heading -->
+          <div class="diary-typewriter-block">
+            <h2 class="diary-calligraphy-heading">our Parisian story</h2>
+            <p class="diary-typewriter-text">
+              We met on a rainy afternoon near Saint-Germain-des-Prés, sharing the last table by the window and a
+              single umbrella. Since that first page, every walk past Église Saint-Sulpice and every note tucked into a
+              coat pocket has led us here — to the day we promise forever.
+            </p>
+          </div>
+
+          <!-- 6. Bottom-Right Burgundy B&W Frame with Gold Wax Seal & Masking Tape -->
+          <figure
+            class="polaroid-burgundy diary-item-br"
+            data-lightbox-src="images/photo_2026-10-22_14-58-30.jpg"
+            data-lightbox-caption="Overlooking the rooftops of Paris"
+          >
+            <span class="washi-tape-strip" aria-hidden="true"></span>
+            <!-- Embossed Gold Botanical Wax Seal SVG -->
+            <svg class="gold-wax-seal" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <defs>
+                <radialGradient id="waxGold" cx="35%" cy="30%" r="70%">
+                  <stop offset="0%" stop-color="#FFF0B8" />
+                  <stop offset="40%" stop-color="#D9AE4E" />
+                  <stop offset="78%" stop-color="#9B6E1B" />
+                  <stop offset="100%" stop-color="#69460A" />
+                </radialGradient>
+              </defs>
+              <path
+                d="M50 4C61 3 68 9 77 14C86 19 94 27 95 38C97 49 93 59 89 69C85 79 78 89 68 93C58 97 46 96 35 93C24 90 13 84 8 74C3 64 4 52 6 41C8 30 13 19 22 12C31 5 39 5 50 4Z"
+                fill="url(#waxGold)"
+              />
+              <circle cx="50" cy="50" r="33" fill="none" stroke="#6E4A0C" stroke-width="2.2" opacity="0.75" />
+              <circle cx="50" cy="50" r="30" fill="none" stroke="#FCE8A6" stroke-width="1" opacity="0.65" />
+              <!-- Botanical sprig relief -->
+              <path
+                d="M48 70C49 56 52 42 56 30M51 58C44 54 41 49 43 44C48 46 51 51 51 58ZM53 48C59 44 63 39 61 34C56 36 53 41 53 48ZM49 63C56 60 60 56 59 51C54 52 50 57 49 63Z"
+                stroke="#644209"
+                stroke-width="2.2"
+                fill="#E8C468"
+                stroke-linecap="round"
+              />
+            </svg>
+            <img
+              src="images/photo_2026-10-22_14-58-30.jpg"
+              alt="Élodie and Gabriel leaning over a white Parisian balcony with flowers"
+              loading="lazy"
+            />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SPREAD 3 — POSTAGE STAMPS & HANDWRITTEN MARGINALIA (Reference Image 2)
+         ====================================================================== -->
+    <section class="spread-stamp-marginalia" id="postage-spread" aria-label="Postage Stamps and Handwritten Marginalia">
+      <div class="stamp-stage">
+        <!-- Top-Left Tilted Handwritten Marginalia -->
+        <p class="marginalia-top-left">
+          Thank you for walking beside us and being part of the most cherished chapter of our lives.
+        </p>
+
+        <!-- Top-Right Perforated Postage Stamp ("Mon amour.") -->
+        <div
+          class="postage-stamp-frame stamp-top-right"
+          data-lightbox-src="images/photo_2026-10-21_18-13-28 (2).jpg"
+          data-lightbox-caption="Mon amour · Élodie &amp; Gabriel"
+        >
+          <div class="postage-stamp-card">
+            <div class="postage-stamp-inner">
+              <img
+                src="images/photo_2026-10-21_18-13-28 (2).jpg"
+                alt="Postage stamp of Élodie and Gabriel kissing"
+                loading="lazy"
+              />
+              <p class="stamp-label">Mon amour.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Center Feature Photo -->
+        <figure
+          class="stamp-center-photo"
+          data-lightbox-src="images/photo_2026-10-22_14-58-36.jpg"
+          data-lightbox-caption="Our wedding rings, Instax camera &amp; Polaroid memories"
+        >
+          <img
+            src="images/photo_2026-10-22_14-58-36.jpg"
+            alt="Hands with wedding rings surrounded by mini Polaroids, Instax camera and sunflowers on the grass"
+            loading="lazy"
+          />
+        </figure>
+
+        <!-- Bottom-Left Perforated Postage Stamp ("Our forever begins!") -->
+        <div
+          class="postage-stamp-frame stamp-bottom-left"
+          data-lightbox-src="images/photo_2026-10-21_18-13-29 (2).jpg"
+          data-lightbox-caption="Our forever begins! · 24.10.2026"
+        >
+          <div class="postage-stamp-card">
+            <div class="postage-stamp-inner">
+              <img
+                src="images/photo_2026-10-21_18-13-29 (2).jpg"
+                alt="Postage stamp of Élodie and Gabriel by the window"
+                loading="lazy"
+              />
+              <p class="stamp-label">Our forever begins!</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom-Right Tilted Handwritten Marginalia -->
+        <p class="marginalia-bottom-right">
+          We cannot wait to celebrate with you beneath the bells of Saint-Sulpice!
+          <small>Élodie &amp; Gabriel</small>
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SPREAD 4 — TORN SPIRAL NOTEBOOK CARD & RED TAPE (Reference Image 4)
+         ====================================================================== -->
+    <section class="spread-red-tape-note" id="love-note" aria-label="Handwritten Red Ink Love Note">
+      <div class="red-tape-backdrop" aria-hidden="true"></div>
+
+      <!-- Top Tilted Square White Polaroid with Crimson Red Tape -->
+      <figure
+        class="red-tape-polaroid"
+        data-lightbox-src="images/photo_2026-10-22_14-58-17.jpg"
+        data-lightbox-caption="Every poem I never knew how to write"
+      >
+        <span class="crimson-tape" aria-hidden="true"></span>
+        <img
+          src="images/photo_2026-10-22_14-58-17.jpg"
+          alt="Élodie and Gabriel intimate portrait"
+          loading="lazy"
+        />
+      </figure>
+
+      <!-- Torn Spiral-Notebook Lined Card with Red Fountain-Pen Calligraphy -->
+      <div class="spiral-notebook-card">
+        <div class="spiral-holes" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <p class="red-cursive-message">
+          You are every quiet prayer I ever whispered, every poem I never knew how to write, and the only home my heart
+          will ever know. Je t’aime, today and for all of our tomorrows.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SPREAD 5 — CEREMONY INVITATION & RSVP POSTCARD (No Parents' Names)
+         ====================================================================== -->
+    <section class="spread-invitation-rsvp" id="ceremony-rsvp" aria-label="Wedding Ceremony Details and RSVP">
+      <!-- Left Card: Formal Parisian Ceremony Details (Bride, Groom, Venue only) -->
+      <article class="paris-invitation-card">
+        <p class="invitation-kicker">Mariage à Paris · Invitation</p>
+        <h2 class="invitation-couple-names">
+          Élodie Laurent
+          <span>&amp;</span>
+          Gabriel Moreau
+        </h2>
+
+        <p class="invitation-invite-line">
+          Joyfully invite you to share in the celebration of their marriage and the beginning of their new chapter
+          together.
+        </p>
+
+        <div class="invitation-date-box">
+          <p class="invitation-date-main">SATURDAY · 24 OCTOBER 2026</p>
+          <p class="invitation-schedule">15:30 Nuptial Mass &nbsp;·&nbsp; 18:30 Candlelit Soirée</p>
+        </div>
+
+        <div class="invitation-venue-box">
+          <h3>Église Saint-Sulpice</h3>
+          <p>2 Rue Palatine, Place Saint-Sulpice · 75006 Paris, France</p>
+          <a
+            class="paris-map-btn"
+            href="https://www.google.com/maps/search/?api=1&amp;query=%C3%89glise+Saint-Sulpice+Paris+France"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View on Google Maps ↗
+          </a>
+        </div>
+      </article>
+
+      <!-- Right Card: RSVP Diary Postcard -->
+      <aside class="paris-rsvp-card">
+        <p class="invitation-kicker">Répondez S’il Vous Plaît</p>
+        <h2>Write Back to Us</h2>
+        <p class="paris-rsvp-sub">Kindly reply before 01 October 2026 so we may save your place at our table.</p>
+
+        <form class="diary-rsvp-form" id="diary-rsvp-form">
+          <div class="diary-field">
+            <label for="guestName">Your Name</label>
+            <input
+              type="text"
+              id="guestName"
+              name="guestName"
+              placeholder="e.g. Camille Chevalier"
+              required
+            />
+          </div>
+
+          <fieldset class="diary-field diary-radio-group">
+            <legend>Will you join us in Paris?</legend>
+            <label class="diary-radio-label">
+              <input type="radio" name="attendance" value="yes" checked />
+              <span>Avec plaisir — I will attend</span>
+            </label>
+            <label class="diary-radio-label">
+              <input type="radio" name="attendance" value="no" />
+              <span>Sending love from afar</span>
+            </label>
+          </fieldset>
+
+          <div class="diary-field">
+            <label for="guestsCount">Number of Guests</label>
+            <input type="number" id="guestsCount" name="guestsCount" min="1" max="6" value="1" />
+          </div>
+
+          <div class="diary-field">
+            <label for="message">A Note for Our Diary</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="3"
+              placeholder="Leave a wish or memory for Élodie &amp; Gabriel..."
+            ></textarea>
+          </div>
+
+          <button type="submit" class="diary-submit-btn">Send Postcard</button>
+          <p class="diary-rsvp-status" id="diary-rsvp-status" aria-live="polite"></p>
+        </form>
+      </aside>
+    </section>
+
+    <footer class="diary-footer">
+      <strong>ÉLODIE LAURENT &amp; GABRIEL MOREAU</strong>
+      <span>Église Saint-Sulpice · Paris, France · 24.10.2026</span>
+      <div id="kismet-end-of-invitation-cta" style="margin-top: 22px;">
+        <a
+          id="kismet-end-of-invitation-link"
+          href="/tao-thiep?template=lovers-diary"
+          target="_top"
+          style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 11px 22px; border-radius: 999px; background: #7b231f; color: #fbf9f4; border: 1px solid rgba(240, 215, 140, 0.5); font-family: var(--font-sans); font-size: 12.5px; font-weight: 600; letter-spacing: 0.04em; text-decoration: none; box-shadow: 0 8px 24px rgba(123, 35, 31, 0.22);"
+        >
+          ✦ Thử mẫu này
+        </a>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Lightbox Modal for Inspecting Any Polaroid or Stamp -->
+  <dialog class="diary-lightbox" id="diary-lightbox" aria-label="Photo preview">
+    <div class="diary-lightbox-frame">
+      <button type="button" class="diary-lightbox-close" id="diary-lightbox-close" aria-label="Close preview">
+        ×
+      </button>
+      <img id="diary-lightbox-img" src="images/photo_2026-10-21_18-13-28 (3).jpg" alt="Preview" />
+      <p class="diary-lightbox-caption" id="diary-lightbox-caption"></p>
+    </div>
+  </dialog>
+
+  <script src="diary.js"></script>
+</body>
+</html>
