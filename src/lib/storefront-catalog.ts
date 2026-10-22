@@ -9,35 +9,43 @@ export const PACKAGES = [
   { id: "self-customized", name: "Self-Customized", note: "Tự tay viết lời thương", features: "Editor trực tiếp · Font & màu · Kéo thả · Lưu trên thiết bị", description: "Chọn một thiết kế, thay tên, màu sắc và từng dòng chữ ngay trong trình duyệt" },
 ] as const;
 export type PackageId = typeof PACKAGES[number]["id"];
-export const STYLES = ["Minimalist", "Red Artline", "B&W", "Muted Color", "Mid Century", "Floral", "Luxury", "Vintage", "Modern", "Boho", "Classic", "Rustic"] as const;
+export const STYLES = ["Minimalist", "B&W", "Muted Color", "Mid Century", "Floral", "Luxury", "Vintage", "Modern", "Boho", "Classic", "Rustic"] as const;
 export const TYPES = ["Invitation", "Save the Date", "Invitation Suite (3-Piece)", "Invitation Suite (5-Piece)", "Menu", "Sign"] as const;
 export const FEATURES = [{ id: "music", label: "Nhạc nền" }, { id: "rsvp", label: "RSVP" }, { id: "gallery", label: "Album ảnh" }, { id: "qr", label: "VietQR" }, { id: "video", label: "Video" }] as const;
+export const TEMPLATE_TAG_GROUPS = [
+  { id: "styles", label: "Styles & trends", tags: ["Romantic", "Korean Style", "Minimalist", "Cinematic", "Vintage", "Luxury", "Doodle Art", "Photobooth", "Scrapbook", "Cartoon Couple", "Y2K", "Watercolor"] },
+  { id: "mood", label: "Wedding mood", tags: ["Dreamy", "Elegant", "Playful", "Fairytale", "Coquette", "Old Money", "Modern"] },
+  { id: "culture", label: "Nature & culture", tags: ["Garden", "Boho", "Coastal", "Asian Traditional", "Korean Style", "Destination Wedding"] },
+  { id: "digital", label: "Digital experience", tags: ["Interactive", "Animated", "Video Invitation", "3D Experience", "Digital Love Letter", "RSVP Interactive"] },
+] as const;
 export type CatalogItem = {
   id: string; name: string; style: string; type: string; packageId: PackageId;
   features: string[]; color: string; background: string; motif: "arch" | "botanical" | "frame";
-  tag: "Studio selection" | "New" | "Editable"; amount: number; price: string;
+  tag: "Studio selection" | "New" | "Editable"; amount: number; price: string; tags: string[];
+  coverImage?: string; description?: string; coupleName?: string; venue?: string; templateNumber?: number; previewOnly?: boolean; showInStorefront?: boolean;
   template?: WeddingTemplateItem; created: number;
 };
 const designs: Omit<CatalogItem, "price" | "amount">[] = [
-  { id: "sage-vows", name: "Sage Vows", style: "Floral", type: "Invitation Suite (3-Piece)", packageId: "self-customized", features: [], color: "#59644f", background: "#D1D9C8", motif: "botanical", tag: "Studio selection", created: 8 },
-  { id: "ivory-arch", name: "Ivory Arch", style: "Minimalist", type: "Invitation", packageId: "basic", features: [], color: "#7c6954", background: "#FBF6F3", motif: "arch", tag: "Editable", created: 6 },
-  { id: "blush-letter", name: "Blush Letter", style: "Classic", type: "Save the Date", packageId: "self-customized", features: [], color: "#936c64", background: "#EFC7C2", motif: "frame", tag: "New", created: 9 },
-  { id: "wildflower-menu", name: "Wildflower Menu", style: "Rustic", type: "Menu", packageId: "self-customized", features: [], color: "#776a50", background: "#FBF6F3", motif: "botanical", tag: "Editable", created: 7 },
-  { id: "quiet-luxury", name: "Quiet Luxury", style: "Luxury", type: "Invitation Suite (5-Piece)", packageId: "self-customized", features: [], color: "#6f6252", background: "#D1C4B8", motif: "frame", tag: "New", created: 10 },
-  { id: "forever-sign", name: "Forever Together", style: "Boho", type: "Sign", packageId: "basic", features: [], color: "#806c5f", background: "#EFC7C2", motif: "arch", tag: "Editable", created: 5 },
+  { id: "sage-vows", name: "Sage Vows", style: "Floral", type: "Invitation Suite (3-Piece)", packageId: "self-customized", features: [], color: "#59644f", background: "#D1D9C8", motif: "botanical", tag: "Studio selection", tags: ["Garden", "Romantic", "Modern"], showInStorefront: false, created: 8 },
+  { id: "ivory-arch", name: "Ivory Arch", style: "Minimalist", type: "Invitation", packageId: "basic", features: [], color: "#7c6954", background: "#FBF6F3", motif: "arch", tag: "Editable", tags: ["Minimalist", "Modern", "Elegant"], showInStorefront: false, created: 6 },
+  { id: "blush-letter", name: "Blush Letter", style: "Classic", type: "Save the Date", packageId: "self-customized", features: [], color: "#936c64", background: "#EFC7C2", motif: "frame", tag: "New", tags: ["Romantic", "Vintage", "Modern"], showInStorefront: false, created: 9 },
+  { id: "wildflower-menu", name: "Wildflower Menu", style: "Rustic", type: "Menu", packageId: "self-customized", features: [], color: "#776a50", background: "#FBF6F3", motif: "botanical", tag: "Editable", tags: ["Garden", "Boho", "Romantic"], showInStorefront: false, created: 7 },
+  { id: "quiet-luxury", name: "Quiet Luxury", style: "Luxury", type: "Invitation Suite (5-Piece)", packageId: "self-customized", features: [], color: "#6f6252", background: "#D1C4B8", motif: "frame", tag: "New", tags: ["Luxury", "Old Money", "Modern"], showInStorefront: false, created: 10 },
+  { id: "forever-sign", name: "Forever Together", style: "Boho", type: "Sign", packageId: "basic", features: [], color: "#806c5f", background: "#EFC7C2", motif: "arch", tag: "Editable", tags: ["Boho", "Playful", "Modern"], showInStorefront: false, created: 5 },
 ];
 export function getCatalog(currency: PricingCurrency): CatalogItem[] {
-  return [...templatesForCurrency(currency).map((template, index): CatalogItem => ({
-    id: template.id, name: template.name, style: template.id === "red-artline" ? "Red Artline" : template.id === "love-at-first-sight" ? "Floral" : template.category === "vintage" ? "Vintage" : index === 0 ? "Minimalist" : "Modern", type: "Invitation",
+  return [...designs.map(item => ({ ...item, amount: item.previewOnly ? Number.MAX_SAFE_INTEGER : 0, price: item.previewOnly ? "Đang cập nhật" : "Editor miễn phí" })), ...templatesForCurrency(currency).map((template, index): CatalogItem => ({
+    id: template.id, name: template.name, style: template.id === "lovers-diary" ? "Modern" : template.id === "love-at-first-sight" ? "Floral" : template.category === "vintage" ? "Vintage" : index === 0 ? "Minimalist" : "Modern", type: "Invitation",
     packageId: template.packageTier === "custom" ? "customized" : template.packageTier === "bespoke" ? "premium" : template.packageTier === "premium" ? "standard" : "basic",
     features: [template.hasMusic && "music", template.hasRsvp && "rsvp", template.hasGallery && "gallery", template.hasQr && "qr"].filter((x): x is string => !!x),
-    color: template.colors[0], background: "#FBF6F3", motif: "frame", tag: "Studio selection", amount: template.packageTier === "custom" ? Number.MAX_SAFE_INTEGER : PACKAGE_PRICES[currency][template.packageTier ?? "standard"], price: template.packageLabel?.split(" · ")[1] ?? "Liên hệ", template, created: 4 - index,
-  })), ...designs.map(item => ({ ...item, amount: 0, price: "Editor miễn phí" }))];
+    color: template.colors[0], background: "#FBF6F3", motif: "frame", tag: "Studio selection", tags: template.tags ?? (template.category === "vintage" ? ["Vintage"] : ["Modern"]), amount: template.packageTier === "custom" ? Number.MAX_SAFE_INTEGER : PACKAGE_PRICES[currency][template.packageTier ?? "standard"], price: template.packageLabel?.split(" · ")[1] ?? "Liên hệ", templateNumber: template.templateNumber, coupleName: template.coupleName, venue: template.venue, template, created: 4 - index,
+  }))];
 }
 export function filterCatalog(items: CatalogItem[], params: URLSearchParams) {
   const query = (params.get("q") ?? "").trim().toLocaleLowerCase("vi");
   const features = params.getAll("feature");
-  const filtered = items.filter(item => (!params.get("package") || item.packageId === params.get("package")) && (!params.get("style") || item.style === params.get("style")) && (!params.get("type") || item.type === params.get("type")) && (!query || `${item.name} ${item.style} ${item.type} ${item.template?.coupleName ?? ""} ${item.template?.categoryLabel ?? ""}`.toLocaleLowerCase("vi").includes(query)) && features.every(feature => item.features.includes(feature)) && (params.get("collection") !== "new" || item.tag === "New") && (params.get("collection") !== "selected" || item.tag === "Studio selection"));
+  const tags = params.getAll("tag");
+  const filtered = items.filter(item => (!params.get("package") || item.packageId === params.get("package")) && (!params.get("style") || item.style === params.get("style")) && (!params.get("type") || item.type === params.get("type")) && (!query || `${item.name} ${item.style} ${item.type} ${item.coupleName ?? ""} ${item.venue ?? ""} ${item.tags.join(" ")} ${item.template?.coupleName ?? ""} ${item.template?.categoryLabel ?? ""}`.toLocaleLowerCase("vi").includes(query)) && (!tags.length || tags.some(tag => item.tags.includes(tag))) && features.every(feature => item.features.includes(feature)) && (params.get("collection") !== "new" || item.tag === "New") && (params.get("collection") !== "selected" || item.tag === "Studio selection"));
   if (params.get("sort") === "price") filtered.sort((a, b) => a.amount - b.amount);
   if (params.get("sort") === "new") filtered.sort((a, b) => b.created - a.created);
   return filtered;

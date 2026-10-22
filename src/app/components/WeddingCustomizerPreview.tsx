@@ -1035,7 +1035,7 @@ export default function WeddingCustomizerPreview({
             <span>
               {data.packageType === "premium"
                 ? "Mẫu 800k · Ngày Mình Chung Đôi (KHVT)"
-                : "Mẫu 500k · Minimal Ivory (Tiêu Chuẩn)"}
+                : "Mẫu 500k · Tiêu Chuẩn"}
             </span>
             <ChevronDown size={13} />
           </div>
@@ -2443,7 +2443,7 @@ export default function WeddingCustomizerPreview({
               <div className="viewport-title-tag">
                 <span>Trực quan thời gian thực</span>
                 <strong>
-                  {data.packageType === "premium" ? "Gói 800k" : "Gói 500k (Minimal Ivory)"}
+                  {data.packageType === "premium" ? "Gói 800k" : "Gói 500k (Tiêu Chuẩn)"}
                 </strong>
               </div>
 

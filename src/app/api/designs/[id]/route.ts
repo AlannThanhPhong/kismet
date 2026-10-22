@@ -7,7 +7,7 @@ import { validDraft, type DesignDraft } from "@/lib/design-draft";
 type Context = { params: Promise<{ id: string }> };
 const COOKIE = "kismet-design-session";
 const validOwner = (value: string | undefined) => value && /^[a-f0-9]{64}$/.test(value) ? value : null;
-const validId = (id: string) => getCatalog("VND").some(item => item.id === id && !item.template);
+const validId = (id: string) => getCatalog("VND").some(item => item.id === id && !item.template && !item.previewOnly);
 const fail = (error: string, status: number) => NextResponse.json({ error }, { status, headers: { "Cache-Control": "private, no-store" } });
 
 export async function GET(request: NextRequest, context: Context) {

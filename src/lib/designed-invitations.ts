@@ -1,6 +1,15 @@
 // Information transcribed from each couple's supplied paper invitation.
 export const designedInvitations = [
   {
+    code: "lovers-diary",
+    slug: "lovers-diary",
+    displayTitle: "LOVER’S DIARY · PARIS",
+    couple: { partnerOne: "Élodie Laurent", partnerTwo: "Gabriel Moreau" },
+    event: { date: "2026-10-24T15:30:00.000Z", venue: "Église Saint-Sulpice", address: "Paris, France" },
+    template: "lovers-diary",
+    coverImage: "/wedding-invitations/Lover%E2%80%99s%20Diary/images/photo_2026-10-21_18-13-28.jpg",
+  },
+  {
     code: "20260323-NDNL",
     slug: "20260323-NDNL",
     displayTitle: "LOVE AT FIRST SIGHT · YÊU TỪ CÁI NHÌN ĐẦU TIÊN",
