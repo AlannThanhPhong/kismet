@@ -13,7 +13,7 @@ export const STYLES = ["Minimalist", "B&W", "Muted Color", "Mid Century", "Flora
 export const TYPES = ["Invitation", "Save the Date", "Invitation Suite (3-Piece)", "Invitation Suite (5-Piece)", "Menu", "Sign"] as const;
 export const FEATURES = [{ id: "music", label: "Nhạc nền" }, { id: "rsvp", label: "RSVP" }, { id: "gallery", label: "Album ảnh" }, { id: "qr", label: "VietQR" }, { id: "video", label: "Video" }] as const;
 export const TEMPLATE_TAG_GROUPS = [
-  { id: "styles", label: "Styles & trends", tags: ["Romantic", "Korean Style", "Minimalist", "Cinematic", "Vintage", "Luxury", "Doodle Art", "Photobooth", "Scrapbook", "Cartoon Couple", "Y2K", "Watercolor"] },
+  { id: "styles", label: "Styles & trends", tags: ["Romantic", "French Style", "Korean Style", "Minimalist", "Cinematic", "Vintage", "Luxury", "Doodle Art", "Photobooth", "Scrapbook", "Cartoon Couple", "Y2K", "Watercolor"] },
   { id: "mood", label: "Wedding mood", tags: ["Dreamy", "Elegant", "Playful", "Fairytale", "Coquette", "Old Money", "Modern"] },
   { id: "culture", label: "Nature & culture", tags: ["Garden", "Boho", "Coastal", "Asian Traditional", "Korean Style", "Destination Wedding"] },
   { id: "digital", label: "Digital experience", tags: ["Interactive", "Animated", "Video Invitation", "3D Experience", "Digital Love Letter", "RSVP Interactive"] },
@@ -35,7 +35,7 @@ const designs: Omit<CatalogItem, "price" | "amount">[] = [
 ];
 export function getCatalog(currency: PricingCurrency): CatalogItem[] {
   return [...designs.map(item => ({ ...item, amount: item.previewOnly ? Number.MAX_SAFE_INTEGER : 0, price: item.previewOnly ? "Đang cập nhật" : "Editor miễn phí" })), ...templatesForCurrency(currency).map((template, index): CatalogItem => ({
-    id: template.id, name: template.name, style: template.id === "lovers-diary" ? "Modern" : template.id === "love-at-first-sight" ? "Floral" : template.category === "vintage" ? "Vintage" : index === 0 ? "Minimalist" : "Modern", type: "Invitation",
+    id: template.id, name: template.name, style: template.id === "lovers-diary" ? "Modern" : template.id === "french-style" ? "French Style" : template.id === "love-at-first-sight" ? "Floral" : template.category === "vintage" ? "Vintage" : index === 0 ? "Minimalist" : "Modern", type: "Invitation",
     packageId: template.packageTier === "custom" ? "customized" : template.packageTier === "bespoke" ? "premium" : template.packageTier === "premium" ? "standard" : "basic",
     features: [template.hasMusic && "music", template.hasRsvp && "rsvp", template.hasGallery && "gallery", template.hasQr && "qr"].filter((x): x is string => !!x),
     color: template.colors[0], background: "#FBF6F3", motif: "frame", tag: "Studio selection", tags: template.tags ?? (template.category === "vintage" ? ["Vintage"] : ["Modern"]), amount: template.packageTier === "custom" ? Number.MAX_SAFE_INTEGER : PACKAGE_PRICES[currency][template.packageTier ?? "standard"], price: template.packageLabel?.split(" · ")[1] ?? "Liên hệ", templateNumber: template.templateNumber, coupleName: template.coupleName, venue: template.venue, template, created: 4 - index,

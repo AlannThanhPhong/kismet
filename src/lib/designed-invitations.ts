@@ -10,6 +10,15 @@ export const designedInvitations = [
     coverImage: "/wedding-invitations/Lover%E2%80%99s%20Diary/images/photo_2026-10-21_18-13-28.jpg",
   },
   {
+    code: "french-style",
+    slug: "french-style",
+    displayTitle: "FRENCH STYLE · PARIS",
+    couple: { partnerOne: "Élise Beaumont", partnerTwo: "Julien Laurent" },
+    event: { date: "2026-10-22T16:46:00.000Z", venue: "Église Saint-Sulpice", address: "Place Saint-Sulpice, 75006 Paris, France" },
+    template: "french-style",
+    coverImage: "/wedding-invitations/French%20Style/images/photo_2026-10-22_16-41-16.jpg",
+  },
+  {
     code: "20260323-NDNL",
     slug: "20260323-NDNL",
     displayTitle: "LOVE AT FIRST SIGHT · YÊU TỪ CÁI NHÌN ĐẦU TIÊN",
