@@ -12,11 +12,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="opening.css">
-  <link rel="stylesheet" href="album.css">
-  <link rel="stylesheet" href="suite-layout.css">
-  <script src="invitation.js" defer></script>
+  <link rel="stylesheet" href="style.css?v=20261022-collage-v2">
+  <link rel="stylesheet" href="opening.css?v=20261022-collage-v2">
+  <link rel="stylesheet" href="album.css?v=20261022-collage-v2">
+  <link rel="stylesheet" href="suite-layout.css?v=20261022-collage-v3">
+  <script src="invitation.js?v=20261022-collage-v2" defer></script>
 </head>
 <body>
   <audio id="wedding-song" src="audio/wedding-song.mp3" preload="none" loop></audio>
@@ -27,18 +27,20 @@
   </section>
   <main class="suite-main">
     <div class="stationery-composition">
-      <div class="collage-stage">
-        <svg class="shape-defs" aria-hidden="true" focusable="false"><defs><clipPath id="scallop-tag" clipPathUnits="objectBoundingBox"><path d="M.24 .035 C.30 .035 .31 .005 .39 .018 C.47 .035 .53 .035 .61 .018 C.69 .002 .73 .065 .80 .075 C.94 .08 .98 .16 .95 .23 C.99 .30 .99 .36 .96 .43 C1 .50 .99 .57 .96 .64 C.99 .72 .97 .79 .91 .82 C.94 .90 .89 .97 .80 .965 C.72 1 .67 .99 .60 .97 C.53 1 .46 .99 .39 .97 C.31 1 .26 .98 .19 .97 C.08 .98 .04 .91 .08 .83 C.01 .78 .01 .70 .04 .64 C0 .57 .01 .50 .04 .43 C0 .36 .01 .29 .04 .23 C0 .15 .07 .08 .15 .075 C.16 .05 .19 .035 .24 .035 Z"/></clipPath></defs></svg>
-        <svg class="collage-ribbon" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true"><path d="M135 605 C78 544 155 474 208 538 C277 620 280 775 367 850 C444 916 566 894 700 992" fill="none" stroke="#70702e" stroke-width="29"/><path d="M135 605 C78 544 155 474 208 538 C277 620 280 775 367 850 C444 916 566 894 700 992" fill="none" stroke="#b6b77d" stroke-width="3" opacity=".72"/></svg>
-        <div class="photo-mount"><section class="stationery-card invitation-paper" id="invitation">
-          <div class="paper-ribbon">LOVE AT FIRST SIGHT <span>&#10047;</span> Y&#202;U T&#7914; C&#193;I NH&#204;N &#272;&#7846;U TI&#202;N</div>
-          <figure class="invitation-photo"><img src="images/photo_2026-10-19_13-18-37.webp" alt="Ngoc Dung and Ngoc Lan together in a rose garden" fetchpriority="high"></figure>
-          <p class="love-title">Y&#234;u t&#7915; c&#225;i nh&#236;n &#273;&#7847;u ti&#234;n</p>
-          <p class="invitation-copy">T&#7915; kho&#7843;nh kh&#7855;c &#273;&#7847;u ti&#234;n, ch&#250;ng m&#236;nh &#273;&#227; bi&#7871;t mu&#7889;n c&#249;ng nhau &#273;i h&#7871;t h&#224;nh tr&#236;nh n&#224;y. H&#226;n hoan &#273;&#243;n b&#7841;n &#273;&#7871;n chung vui trong ng&#224;y h&#7841;nh ph&#250;c.</p>
-          <span class="paper-flower" aria-hidden="true">&#10047;</span>
-        </section></div>
-        <div class="seal-badge" aria-label="Dung and Lan"><span>D</span><i>&amp;</i><span>L</span><small>LOVE ALWAYS</small></div>
-        <div class="photo-strip"><figure class="suite-couple-photo"><img src="images/photo_2026-10-19_13-18-34.webp" alt="Ngoc Dung and Ngoc Lan together beside a vintage scooter" loading="lazy"><img src="images/photo_2026-10-19_13-18-43.webp" alt="Ngoc Dung and Ngoc Lan in the rose garden" loading="lazy"><figcaption>ONE LOVE &#183; ONE LIFETIME</figcaption></figure></div>
+      <div class="collage-stage" id="invitation">
+        <img class="collage-backdrop" src="images/stationery-collage-bg.webp?v=20261022-v3" width="1080" height="1350" alt="Bộ thiệp cưới Ngọc Dũng và Ngọc Lan" fetchpriority="high">
+        <figure class="collage-original-main">
+          <img src="images/photo_2026-10-19_13-18-37.webp" width="1200" height="1800" alt="Ngọc Dũng và Ngọc Lan trong vườn cưới" fetchpriority="high">
+        </figure>
+        <div class="collage-original-strip" aria-label="Ảnh cưới của Ngọc Dũng và Ngọc Lan">
+          <figure><img src="images/photo_2026-10-19_13-18-34.webp" width="1800" height="1200" alt="Ngọc Dũng và Ngọc Lan bên chiếc xe scooter cổ" loading="lazy"></figure>
+          <figure><img src="images/photo_2026-10-19_13-18-43.webp" width="1800" height="1200" alt="Ngọc Dũng và Ngọc Lan trong vườn hoa" loading="lazy"></figure>
+        </div>
+        <div class="seal-badge" aria-label="Dũng và Lan">
+          <span class="seal-initial seal-initial-first">D</span>
+          <i class="seal-amp">&amp;</i>
+          <span class="seal-initial seal-initial-second">L</span>
+        </div>
         <section class="family-card">
           <p class="suite-kicker">THE WEDDING OF</p>
           <div class="tag-couple"><span>Ng&#7885;c D&#361;ng</span><i>&amp;</i><span>Ng&#7885;c Lan</span></div>
@@ -48,23 +50,10 @@
           <h2>Tr&#226;n tr&#7885;ng<br><em>k&#237;nh m&#7901;i</em></h2>
           <p class="family-copy">S&#7921; hi&#7879;n di&#7879;n v&#224; l&#7901;i ch&#250;c ph&#250;c c&#7911;a b&#7841;n<br>l&#224; ni&#7873;m vui qu&#253; gi&#225; d&#224;nh cho ch&#250;ng m&#236;nh.</p>
           <div class="family-date"><strong>23</strong><span>TH&#193;NG 03<br>TH&#7912; HAI</span><strong>2026</strong></div>
-          </section>
+        </section>
       </div>
       <section class="venue-card stationery-card" aria-label="Wedding venue">
 <div class="family-venue"><span>TI&#7878;C C&#431;&#7898;I T&#7840;I</span><h3>Victory Palace</h3><p>S&#7843;nh Hera<br>12&#8211;12B Mai H&#7855;c &#272;&#7871;, Ph&#432;&#7901;ng T&#226;n Th&#224;nh<br>TP. Bu&#244;n Ma Thu&#7897;t</p><a href="https://maps.google.com/?q=Victory+Palace+Mai+Hac+De+Buon+Ma+Thuot" target="_blank" rel="noreferrer">M&#7902; B&#7842;N &#272;&#7890; <svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 11 5M5 5h6v6"/></svg></a></div>
-      </section>
-      <section class="rsvp-card stationery-card" aria-labelledby="rsvp-title">
-        <p class="suite-kicker">G&#7916;I L&#7900;I H&#7890;I &#194;M</p>
-        <h2 id="rsvp-title">Bạn sẽ đến chung vui?</h2>
-        <form id="rsvp-form">
-          <label for="rsvp-guest-name">Tên của bạn</label>
-          <input id="rsvp-guest-name" name="guestName" type="text" autocomplete="name" maxlength="120" placeholder="Nhập tên để cô dâu chú rể biết nhé" required>
-          <div class="rsvp-actions">
-            <button type="submit" name="attending" value="true">Có, mình sẽ đến</button>
-            <button type="submit" name="attending" value="false">Không thể đến</button>
-          </div>
-          <p id="rsvp-status" role="status" aria-live="polite"></p>
-        </form>
       </section>
       <div class="suite-details">
         <section class="stationery-card timeline-card">
@@ -81,9 +70,9 @@
           <h2 id="dress-code-title">Dress <em>code</em></h2>
           <p class="dress-note">C&#249;ng ch&#250;ng m&#236;nh &#273;i&#7875;m t&#244; ng&#224;y vui<br>b&#7857;ng nh&#7919;ng s&#7855;c m&#224;u d&#7883;u d&#224;ng nh&#233;.</p>
           <div class="palette" aria-label="Dress code color palette">
-            <div><i class="swatch olive-swatch"></i><span>OLIVE GROVE</span><small>#70702E</small></div>
-            <div><i class="swatch rose-swatch"></i><span>ROSE DUST</span><small>#D3A6A3</small></div>
-            <div><i class="swatch burgundy-swatch"></i><span>BURGUNDY</span><small>#5E0B15</small></div>
+            <div><i class="swatch olive-swatch"></i><span>OLIVE GROVE</span></div>
+            <div><i class="swatch rose-swatch"></i><span>ROSE DUST</span></div>
+            <div><i class="swatch burgundy-swatch"></i><span>BURGUNDY</span></div>
           </div>
           <span class="dress-flower" aria-hidden="true">&#10047;</span>
         </section>
@@ -111,6 +100,20 @@
         <figure class="portrait"><img src="images/photo_2026-10-19_13-18-10.webp" alt="Showing their wedding rings in red outfits" loading="lazy"></figure>
         <figure class="portrait"><img src="images/photo_2026-10-19_13-18-07.webp" alt="The bride in a red ao dai" loading="lazy"></figure>
       </div>
+    </section>
+
+    <section class="rsvp-card stationery-card" aria-labelledby="rsvp-title">
+      <p class="suite-kicker">G&#7916;I L&#7900;I H&#7890;I &#194;M</p>
+      <h2 id="rsvp-title">Bạn sẽ đến chung vui?</h2>
+      <form id="rsvp-form">
+        <label for="rsvp-guest-name">Tên của bạn</label>
+        <input id="rsvp-guest-name" name="guestName" type="text" autocomplete="name" maxlength="120" placeholder="Nhập tên để cô dâu chú rể biết nhé" required>
+        <div class="rsvp-actions">
+          <button type="submit" name="attending" value="true">Có, mình sẽ đến</button>
+          <button type="submit" name="attending" value="false">Không thể đến</button>
+        </div>
+        <p id="rsvp-status" role="status" aria-live="polite"></p>
+      </form>
     </section>
 
     <footer class="footer"><span class="footer-flower">&#10047;</span><p class="eyebrow">WITH LOVE</p><h2>Ng&#7885;c D&#361;ng <i>&amp;</i> Ng&#7885;c Lan</h2><p>23 &#183; 03 &#183; 2026</p><span class="footer-note">MONG &#272;&#431;&#7906;C &#272;&#211;N TI&#7870;P B&#7840;N</span></footer>

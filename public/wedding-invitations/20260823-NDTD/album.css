@@ -16,15 +16,18 @@
 
 /* White studio: a quiet magazine spread with two landscape interludes. */
 .chapter-studio { background: #fffefa; border: 1px solid #e3e2d7; }
-.gallery-studio { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-areas: 'a a b c' 'a a d e' 'f f g g' 'h h g g'; }
+.gallery-studio { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-areas: 'a a b c' 'a a d e' 'f f g g' 'h h g g'; align-items: stretch; }
+.gallery-studio .gallery-item { align-self: stretch; height: 100%; overflow: hidden; }
+.gallery-studio .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
 .gallery-studio .shot-1 { grid-area: a; }
-.gallery-studio .shot-2 { grid-area: b; }
-.gallery-studio .shot-3 { grid-area: c; }
-.gallery-studio .shot-4 { grid-area: d; }
-.gallery-studio .shot-5 { grid-area: e; }
-.gallery-studio .shot-6 { grid-area: f; }
+.gallery-studio .shot-2 { grid-area: b; aspect-ratio: 2 / 3; }
+.gallery-studio .shot-3 { grid-area: c; aspect-ratio: 2 / 3; }
+.gallery-studio .shot-4 { grid-area: d; aspect-ratio: 2 / 3; }
+.gallery-studio .shot-5 { grid-area: e; aspect-ratio: 2 / 3; }
+.gallery-studio .shot-6 { grid-area: f; aspect-ratio: 3 / 2; }
 .gallery-studio .shot-7 { grid-area: g; }
-.gallery-studio .shot-8 { grid-area: h; }
+.gallery-studio .shot-7 img { object-position: center bottom; }
+.gallery-studio .shot-8 { grid-area: h; aspect-ratio: 3 / 2; }
 
 /* Garden vows: a large opening portrait and a staggered gallery. */
 .chapter-garden { background: #e9eedf; }
@@ -58,6 +61,78 @@
 .photo-handwritten-caption.caption-left { text-align: left; }
 .photo-handwritten-caption.caption-right { text-align: right; }
 
+/* Centered B&W editorial interlude inspired by the reference poster. */
+.love-vow-interlude {
+  position: relative;
+  max-width: 680px;
+  margin: 18px auto 88px;
+  padding: 12px 16px;
+  text-align: center;
+  isolation: isolate;
+}
+.love-vow-top {
+  position: relative;
+  z-index: 3;
+  margin: 0 auto clamp(14px, 2vw, 22px);
+  color: #183825;
+  font: 400 clamp(38px, 5.4vw, 52px)/1.2 'Imperial Script', Script, cursive;
+  -webkit-text-stroke: 0.3px #183825;
+}
+.love-vow-heading {
+  position: relative;
+  z-index: 2;
+  margin: 0 auto -0.37em;
+  color: var(--ink);
+  font: 400 clamp(54px, 10.2vw, 96px)/0.92 Serif, Georgia, serif;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-shadow: 0 1px 10px rgba(246, 248, 242, 0.88), 0 0 3px rgba(246, 248, 242, 0.95);
+  pointer-events: none;
+}
+.love-vow-photo {
+  display: block;
+  position: relative;
+  z-index: 1;
+  width: min(70%, 370px);
+  margin: 0 auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: 0 14px 34px rgba(36, 75, 53, 0.11);
+  cursor: pointer;
+}
+.love-vow-photo::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 22%;
+  background: linear-gradient(to bottom, transparent, rgba(246, 248, 242, 0.86));
+  pointer-events: none;
+}
+.love-vow-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1706 / 2560;
+  object-fit: cover;
+  filter: grayscale(100%) contrast(1.03);
+}
+.love-vow-bottom {
+  position: relative;
+  z-index: 2;
+  margin: -0.42em auto 0;
+  color: #183825;
+  font: 400 clamp(42px, 6vw, 58px)/1.2 'Imperial Script', Script, cursive;
+  -webkit-text-stroke: 0.4px #183825;
+  text-shadow:
+    0 0 2px #f6f8f2,
+    0 0 5px #f6f8f2,
+    0 1px 9px #f6f8f2,
+    0 2px 14px rgba(246, 248, 242, 0.98);
+  pointer-events: none;
+}
+
 @media (max-width: 700px) {
   .album { padding: 0 12px; }
   .album-heading { margin-bottom: 36px; }
@@ -68,9 +143,8 @@
   .chapter-heading h3 { font-size: 30px; }
   .chapter-number { margin-bottom: 14px; font-size: 21px; }
   .album .gallery { gap: 10px; }
-  .gallery-studio { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-areas: 'e e' 'b c' 'f f' 'd a' 'h h' 'g g'; }
-  .gallery-studio .shot-5, .gallery-studio .shot-7 { width: 82%; justify-self: center; }
-  .gallery-studio .shot-3, .gallery-studio .shot-1 { margin-top: 22px; }
+  .gallery-studio { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-areas: 'a a' 'b c' 'f f' 'd e' 'h h' 'g g'; }
+  .gallery-studio .shot-1, .gallery-studio .shot-7 { aspect-ratio: 2 / 3; }
   .gallery-garden { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
   .gallery-garden .shot-1 { grid-column: 1 / -1; grid-row: auto; padding: 5px; }
   .gallery-garden .shot-2, .gallery-garden .shot-3, .gallery-garden .shot-4, .gallery-garden .shot-5 { grid-column: span 1; margin: 0; }
@@ -84,4 +158,9 @@
   .gallery-days .shot-6 { grid-area: f; }
   .gallery-days .shot-7 { grid-area: g; }
   .chapter-caption { font-size: 26px; margin-top: 24px; }
+  .love-vow-interlude { margin: 14px auto 56px; padding: 8px 12px; }
+  .love-vow-top { margin-bottom: 14px; font-size: clamp(32px, 8.8vw, 40px); }
+  .love-vow-heading { font-size: clamp(46px, 14.2vw, 68px); letter-spacing: 0.08em; }
+  .love-vow-photo { width: min(72vw, 268px); }
+  .love-vow-bottom { font-size: clamp(35px, 9.6vw, 45px); }
 }
