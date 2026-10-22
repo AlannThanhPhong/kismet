@@ -19,6 +19,15 @@ export const designedInvitations = [
     coverImage: "/wedding-invitations/French%20Style/images/photo_2026-10-22_16-41-16.jpg",
   },
   {
+    code: "coquette",
+    slug: "coquette",
+    displayTitle: "COQUETTE · LONDON",
+    couple: { partnerOne: "Amélie Laurent", partnerTwo: "Theodore Whitmore" },
+    event: { date: "2027-09-24T15:00:00.000Z", venue: "St Mary’s Church, West Kensington", address: "Hammersmith Road, London W14 0QL, United Kingdom" },
+    template: "coquette",
+    coverImage: "/wedding-invitations/Coquette/images/photo_2026-10-22_19-23-17.jpg",
+  },
+  {
     code: "20260323-NDNL",
     slug: "20260323-NDNL",
     displayTitle: "LOVE AT FIRST SIGHT · YÊU TỪ CÁI NHÌN ĐẦU TIÊN",

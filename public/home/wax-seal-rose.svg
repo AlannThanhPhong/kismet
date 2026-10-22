@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" fill="none">
+  <defs>
+    <!-- Drop shadow under molten wax -->
+    <filter id="wax-drop" x="-15%" y="-15%" width="135%" height="135%">
+      <feDropShadow dx="2" dy="5" stdDeviation="4" flood-color="#3c2b26" flood-opacity="0.34"/>
+      <feDropShadow dx="0" dy="1.5" stdDeviation="1.2" flood-color="#2c1d19" flood-opacity="0.22"/>
+    </filter>
+    <!-- Subtle wax surface grain -->
+    <filter id="wax-grain" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" seed="8"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.52  0 0 0 0 0.31  0 0 0 0 0.29  0.09 0 0 0 0"/>
+      <feComposite in2="SourceGraphic" operator="in"/>
+    </filter>
+    <!-- Outer molten rim gradient -->
+    <radialGradient id="wax-rim-grad" cx="34%" cy="28%" r="72%">
+      <stop offset="0%" stop-color="#f9e2de"/>
+      <stop offset="36%" stop-color="#efc7c2"/>
+      <stop offset="74%" stop-color="#d8a29b"/>
+      <stop offset="93%" stop-color="#b97d76"/>
+      <stop offset="100%" stop-color="#cb948d"/>
+    </radialGradient>
+    <!-- Raised inner lip gradient -->
+    <linearGradient id="wax-lip-grad" x1="18" y1="18" x2="102" y2="102" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#b87e77"/>
+      <stop offset="48%" stop-color="#e5b6b0"/>
+      <stop offset="100%" stop-color="#fae5e1"/>
+    </linearGradient>
+    <!-- Recessed center well gradient -->
+    <radialGradient id="wax-well-grad" cx="62%" cy="66%" r="65%">
+      <stop offset="0%" stop-color="#f3d0cb"/>
+      <stop offset="58%" stop-color="#e5b5ae"/>
+      <stop offset="100%" stop-color="#c68d85"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Organic hand-poured molten wax outer shape -->
+  <g filter="url(#wax-drop)">
+    <path d="M60 5.5C72.5 4.8 83.2 9.4 93.4 16.2C103.5 23 111.8 31.8 114.2 44.2C116.7 56.6 113.8 68.5 109.6 80.1C105.4 91.6 99.9 102.9 89.2 109.3C78.5 115.7 65.4 115.2 52.8 114.2C40.3 113.2 27.6 111.9 18.5 103.1C9.4 94.3 6.9 81.1 5.8 68.4C4.7 55.7 5.2 42.8 11.4 31.6C17.6 20.4 28.4 13.4 40.2 8.8C46.7 6.3 53.4 5.9 60 5.5Z" fill="url(#wax-rim-grad)"/>
+    <!-- Specular highlight along top-left molten ridge -->
+    <path d="M22 33C30 19 46 11 65 11C79 11 92 17 100 26" stroke="#fff7f5" stroke-width="2.5" stroke-linecap="round" opacity="0.55"/>
+    <!-- Shade along bottom-right molten ridge -->
+    <path d="M26 99C39 109 61 112 81 107C96 103 106 90 110 74" stroke="#9e645d" stroke-width="2.2" stroke-linecap="round" opacity="0.45"/>
+  </g>
+
+  <!-- Inner brass stamp impression lip -->
+  <circle cx="60" cy="60" r="41" fill="url(#wax-lip-grad)"/>
+  <!-- Recessed center stamp well -->
+  <circle cx="60" cy="60" r="37.5" fill="url(#wax-well-grad)"/>
+  <!-- Inner shadow & highlight of the stamp ring -->
+  <circle cx="60" cy="60" r="37.5" stroke="#9e655e" stroke-width="1.2" opacity="0.55"/>
+  <circle cx="60.6" cy="60.6" r="36.2" stroke="#fff5f3" stroke-width="0.8" opacity="0.5"/>
+  <!-- Delicate beaded botanical inner border -->
+  <circle cx="60" cy="60" r="33.5" stroke="#fae4e0" stroke-width="0.9" stroke-dasharray="2 3.2" opacity="0.75"/>
+
+  <!-- Subtle wax texture -->
+  <circle cx="60" cy="60" r="52" filter="url(#wax-grain)"/>
+</svg>

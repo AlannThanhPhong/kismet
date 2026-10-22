@@ -24,8 +24,17 @@ export const EXACT_TEMPLATES: ExactTemplateConfig[] = [
     coupleName: "Élise Beaumont & Julien Laurent",
     badge: "TEMPLATE N° 02 · CHÂTEAU PARIS",
     iframeSrc: "/wedding-invitations/French%20Style/index.html",
-    defaultMusicSrc: "/music/wedding/city-of-stars-may-finally-come-true.mp3",
-    defaultMusicTitle: "French Salon Instrumental",
+    defaultMusicSrc: "/music/wedding/qui-se-souvient-de-cette-ruelle.mp3",
+    defaultMusicTitle: "Qui se souvient de cette ruelle",
+  },
+  {
+    code: "coquette",
+    name: "COQUETTE",
+    coupleName: "Amélie Laurent & Theodore Whitmore",
+    badge: "TEMPLATE N° 03 · LONDON GARDEN",
+    iframeSrc: "/wedding-invitations/Coquette/index.html",
+    defaultMusicSrc: "/music/wedding/young-and-beautiful.mp3",
+    defaultMusicTitle: "Young and Beautiful",
   },
 ];
 
@@ -37,7 +46,9 @@ export function getExactTemplateByCode(rawCode?: string | null): ExactTemplateCo
       ? "lovers-diary"
       : decoded === "French Style" || decoded === "french-style"
         ? "french-style"
-        : decoded;
+        : decoded === "Coquette" || decoded === "coquette"
+          ? "coquette"
+          : decoded;
   return EXACT_TEMPLATES.find((t) => t.code === normalized) || EXACT_TEMPLATES[0];
 }
 

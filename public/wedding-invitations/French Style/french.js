@@ -9,7 +9,7 @@
 
   function updateAudioUi(playing) {
     if (!audioBtn) return;
-    const title = (bgm && bgm.getAttribute('data-song-title')) || 'French Salon Instrumental';
+    const title = (bgm && bgm.getAttribute('data-song-title')) || 'Qui se souvient de cette ruelle';
     if (playing) {
       audioBtn.classList.add('is-playing');
       audioBtn.setAttribute('title', `Đang phát: ${title} (Chạm để tắt nhạc)`);
@@ -61,6 +61,14 @@
         coverGate.classList.add('is-opened');
       }
     }, 880);
+  }
+
+  if (window.location.search.includes('open=1')) {
+    isGateOpened = true;
+    if (coverGate) {
+      coverGate.classList.add('is-opening', 'is-opened');
+    }
+    document.body.classList.remove('is-locked');
   }
 
   if (openBtn) {

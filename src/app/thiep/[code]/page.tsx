@@ -18,6 +18,9 @@ function normalizeInvitationCode(rawCode: string) {
   ) {
     return "lovers-diary";
   }
+  if (decoded === "Coquette" || decoded === "coquette") {
+    return "coquette";
+  }
   return decoded;
 }
 
@@ -66,7 +69,9 @@ export default async function InvitationPage({ params }: Props) {
         ? "Lover%E2%80%99s%20Diary"
         : code === "french-style"
           ? "French%20Style"
-          : code;
+          : code === "coquette"
+            ? "Coquette"
+            : code;
     const revision =
       code === "20260823-NDTD"
         ? "?v=20261012-natural-smiley-directions"
@@ -75,8 +80,10 @@ export default async function InvitationPage({ params }: Props) {
           : code === "lovers-diary"
             ? "?v=20261022-lovers-diary-circle-audio"
             : code === "french-style"
-              ? "?v=20261022-french-style-v3"
-              : "";
+              ? "?v=20261022-french-style-v5"
+              : code === "coquette"
+                ? "?v=20261022-coquette-v4"
+                : "";
     return (
       <CustomizedInvitationFrame
         code={code}

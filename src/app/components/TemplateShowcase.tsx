@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Camera, Eye, Heart, Monitor, Smartphone, Sparkles } from "lucide-react";
 import { templatesForCurrency, type TemplateCategory, type WeddingTemplateItem } from "@/lib/templates-data";
-import { packagePrice, type PricingCurrency } from "@/lib/pricing";
+import type { PricingCurrency } from "@/lib/pricing";
 import LivePreviewModal from "./LivePreviewModal";
 import ConsultationButton, { ConsultationDialog } from "./ConsultationButton";
 
@@ -36,7 +36,7 @@ export default function TemplateShowcase({ currency }: { currency: PricingCurren
           <em>cho câu chuyện của hai bạn</em>
         </h2>
         <p className="section-subheading">
-          Khám phá các mẫu thiệp cưới trực quan: Basic {packagePrice("standard", currency)}, Standard {packagePrice("premium", currency)} (Kim Hiên & Văn Tài), Premium {packagePrice("bespoke", currency)} (Thanh Điền & Ngọc Dung) và Customized (Huyền Vy & Anh Minh) báo giá theo yêu cầu
+          Khám phá các mẫu thiệp cưới trực quan với nhiều phong cách và mức độ tùy chỉnh khác nhau.
           Bạn có thể thử thay ảnh của chính mình vào mẫu Tiêu Chuẩn và Nâng Cao để xem trước diện mạo thiệp
         </p>
 

@@ -1,4 +1,4 @@
-import { packagePrice, type PricingCurrency } from "./pricing";
+import type { PricingCurrency } from "./pricing";
 
 export type TemplateCategory = "all" | "vintage" | "modern";
 
@@ -87,6 +87,33 @@ export const WEDDING_TEMPLATES: WeddingTemplateItem[] = [
     hasGallery: true,
     hasQr: false,
     packageTier: "bespoke",
+  },
+  {
+    id: "coquette",
+    code: "coquette",
+    name: "COQUETTE",
+    coupleName: "Amélie Laurent & Theodore Whitmore",
+    category: "modern",
+    categoryLabel: "Coquette / Dreamy / Garden",
+    tags: ["Coquette", "Dreamy", "Garden"],
+    templateNumber: 3,
+    venue: "St Mary’s Church, West Kensington, London",
+    isRealProject: false,
+    badge: "TEMPLATE N° 03 · COQUETTE",
+    badgeType: "new",
+    frameShape: "rect-soft",
+    description: "Amélie Laurent & Theodore Whitmore mời bạn đến chung vui tại St Mary’s Church, West Kensington, London vào ngày 24 tháng 9 năm 2027. Mẫu Coquette dịu dàng với sắc ivory, xanh lá và ảnh film lãng mạn.",
+    tone: "Ivory, Garden Green & Soft Film",
+    colors: ["#f3eee8", "#496442", "#b89b83"],
+    coverImage: "/wedding-invitations/Coquette/images/photo_2026-10-22_19-23-17.jpg",
+    liveDemoUrl: "/thiep/coquette",
+    tryUrl: "/tao-thiep?template=coquette",
+    hasMusic: true,
+    hasRsvp: true,
+    hasMap: true,
+    hasGallery: true,
+    hasQr: false,
+    packageTier: "standard",
   },
   {
     id: "love-at-first-sight",
@@ -210,17 +237,17 @@ export const WEDDING_TEMPLATES: WeddingTemplateItem[] = [
   },
 ];
 
-export function templatesForCurrency(currency: PricingCurrency = "VND"): (WeddingTemplateItem & { packageLabel?: string })[] {
+export function templatesForCurrency(_currency: PricingCurrency = "VND"): (WeddingTemplateItem & { packageLabel?: string })[] {
   return WEDDING_TEMPLATES.map((item) => {
-    let packageLabel = "";
+    let packageLabel: string;
     if (item.packageTier === "standard") {
-      packageLabel = `Basic · ${packagePrice("standard", currency)}`;
+      packageLabel = "Basic";
     } else if (item.packageTier === "premium") {
-      packageLabel = `Standard · ${packagePrice("premium", currency)}`;
+      packageLabel = "Standard";
     } else if (item.packageTier === "custom") {
-      packageLabel = "Customized · Liên hệ";
+      packageLabel = "Customized";
     } else {
-      packageLabel = `Premium · ${packagePrice("bespoke", currency)}`;
+      packageLabel = "Premium";
     }
     return {
       ...item,
