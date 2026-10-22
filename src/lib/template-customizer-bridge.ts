@@ -18,6 +18,15 @@ export const EXACT_TEMPLATES: ExactTemplateConfig[] = [
     defaultMusicSrc: "/music/wedding/city-of-stars-may-finally-come-true.mp3",
     defaultMusicTitle: "City Of Stars — May Finally Come True (From La La Land Score)",
   },
+  {
+    code: "french-style",
+    name: "FRENCH STYLE",
+    coupleName: "Élise Beaumont & Julien Laurent",
+    badge: "TEMPLATE N° 02 · CHÂTEAU PARIS",
+    iframeSrc: "/wedding-invitations/French%20Style/index.html",
+    defaultMusicSrc: "/music/wedding/city-of-stars-may-finally-come-true.mp3",
+    defaultMusicTitle: "French Salon Instrumental",
+  },
 ];
 
 export function getExactTemplateByCode(rawCode?: string | null): ExactTemplateConfig {
@@ -26,7 +35,9 @@ export function getExactTemplateByCode(rawCode?: string | null): ExactTemplateCo
   const normalized =
     decoded === "Lover’s Diary" || decoded === "Lover's Diary" || decoded === "lovers-diary"
       ? "lovers-diary"
-      : decoded;
+      : decoded === "French Style" || decoded === "french-style"
+        ? "french-style"
+        : decoded;
   return EXACT_TEMPLATES.find((t) => t.code === normalized) || EXACT_TEMPLATES[0];
 }
 
@@ -87,8 +98,15 @@ export function inspectTemplateDom(doc: Document): {
   // 1. Index Images (grouped by unique original image source so duplicates like cover + collage or lightbox stay in sync,
   //    while still allowing individual slot replacement)
   const imgElements = Array.from(doc.querySelectorAll<HTMLImageElement>("img")).filter((img) => {
-    // Skip lightbox preview placeholder image
-    if (img.id === "diary-lightbox-img" || img.closest("dialog")) return false;
+    // Skip lightbox preview placeholder image and decorative background art (e.g. French curtain)
+    if (
+      img.id === "diary-lightbox-img" ||
+      img.closest("dialog") ||
+      img.classList.contains("curtain-real-img") ||
+      img.hasAttribute("data-kismet-skip")
+    ) {
+      return false;
+    }
     const src = img.getAttribute("src") || "";
     if (src.startsWith("data:image/svg")) return false;
     return true;
@@ -347,6 +365,7 @@ export function setTemplateCoverGateVisibility(doc: Document, showCoverGate: boo
         height: auto !important;
       }
       body.is-locked .diary-main,
+      body.is-locked .french-parchment-sheet,
       .invitation-shell.is-hidden {
         opacity: 1 !important;
         transform: none !important;
@@ -354,6 +373,7 @@ export function setTemplateCoverGateVisibility(doc: Document, showCoverGate: boo
         display: block !important;
       }
       #diary-cover-gate,
+      #french-cover-gate,
       .typewriter-intro-overlay,
       #typewriter-intro {
         display: none !important;
@@ -361,7 +381,7 @@ export function setTemplateCoverGateVisibility(doc: Document, showCoverGate: boo
     `;
   } else {
     helperStyle.textContent = "";
-    const diaryGate = doc.getElementById("diary-cover-gate");
+    const diaryGate = doc.getElementById("diary-cover-gate") || doc.getElementById("french-cover-gate");
     if (diaryGate) {
       diaryGate.classList.remove("is-opening", "is-opened");
       doc.body.classList.add("is-locked");

@@ -62,7 +62,11 @@ export default async function InvitationPage({ params }: Props) {
 
   if (designedInvitations.some((item) => item.code === code)) {
     const folder =
-      code === "lovers-diary" ? "Lover%E2%80%99s%20Diary" : code;
+      code === "lovers-diary"
+        ? "Lover%E2%80%99s%20Diary"
+        : code === "french-style"
+          ? "French%20Style"
+          : code;
     const revision =
       code === "20260823-NDTD"
         ? "?v=20261012-natural-smiley-directions"
@@ -70,7 +74,9 @@ export default async function InvitationPage({ params }: Props) {
           ? "?v=20261013-chronicles-spacing"
           : code === "lovers-diary"
             ? "?v=20261022-lovers-diary-circle-audio"
-            : "";
+            : code === "french-style"
+              ? "?v=20261022-french-style-v3"
+              : "";
     return (
       <CustomizedInvitationFrame
         code={code}
