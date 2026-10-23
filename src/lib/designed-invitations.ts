@@ -28,6 +28,15 @@ export const designedInvitations = [
     coverImage: "/wedding-invitations/Coquette/images/photo_2026-10-22_19-23-17.jpg",
   },
   {
+    code: "korea-style",
+    slug: "korea-style",
+    displayTitle: "KOREA STYLE · SEOUL",
+    couple: { partnerOne: "김서연 (Kim Seo-yeon)", partnerTwo: "이도윤 (Lee Do-yoon)" },
+    event: { date: "2026-10-24T07:00:00.000Z", venue: "서울 신라호텔 · 다이너스티 홀 (The Shilla Seoul · Dynasty Hall)", address: "Seoul, Hàn Quốc" },
+    template: "korea-style",
+    coverImage: "/wedding-invitations/korea%20style/images/photo_2026-10-23_11-47-51.jpg",
+  },
+  {
     code: "20260323-NDNL",
     slug: "20260323-NDNL",
     displayTitle: "LOVE AT FIRST SIGHT · YÊU TỪ CÁI NHÌN ĐẦU TIÊN",

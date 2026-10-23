@@ -2,8 +2,8 @@
 
 import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { applyCustomizationsToDoc } from "@/lib/template-customizer-bridge";
-import type { PublishedTrialPayload } from "@/app/api/published-trials/route";
+import { applyCustomizationsToDoc, loadTrialFromIndexedDb } from "@/lib/template-customizer-bridge";
+import type { PublishedTrialPayload } from "@/lib/published-trials-store";
 
 interface Props {
   code: string;
@@ -16,11 +16,17 @@ function CustomizedInvitationFrameInner({ code, src, title }: Props) {
   const customId = searchParams.get("custom");
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
   const [trialData, setTrialData] = useState<PublishedTrialPayload | null>(null);
+  const trialDataRef = useRef<PublishedTrialPayload | null>(null);
   const [loadingTrial, setLoadingTrial] = useState<boolean>(Boolean(customId));
+
+  const updateTrialData = useCallback((next: PublishedTrialPayload | null) => {
+    trialDataRef.current = next;
+    setTrialData(next);
+  }, []);
 
   useEffect(() => {
     if (!customId) {
-      setTrialData(null);
+      updateTrialData(null);
       setLoadingTrial(false);
       return;
     }
@@ -29,19 +35,40 @@ function CustomizedInvitationFrameInner({ code, src, title }: Props) {
     setLoadingTrial(true);
 
     async function loadTrial() {
+      let resolved: PublishedTrialPayload | null = null;
+
+      // 1. Check IndexedDB first (handles large multi-photo trials that exceed 5MB localStorage)
       try {
-        const cached = localStorage.getItem(`kismet-published-trial-${customId}`);
-        if (cached) {
-          const parsed = JSON.parse(cached) as PublishedTrialPayload;
-          if (!cancelled && parsed) {
-            setTrialData(parsed);
-            setLoadingTrial(false);
-          }
+        const idbRecord = await loadTrialFromIndexedDb<PublishedTrialPayload>(
+          `kismet-published-trial-${customId}`,
+        );
+        if (idbRecord && !cancelled) {
+          resolved = idbRecord;
+          updateTrialData(idbRecord);
+          setLoadingTrial(false);
         }
       } catch {
-        // Ignore storage error
+        // Ignore IDB errors
       }
 
+      // 2. Check localStorage cache
+      if (!resolved) {
+        try {
+          const cached = localStorage.getItem(`kismet-published-trial-${customId}`);
+          if (cached) {
+            const parsed = JSON.parse(cached) as PublishedTrialPayload;
+            if (!cancelled && parsed) {
+              resolved = parsed;
+              updateTrialData(parsed);
+              setLoadingTrial(false);
+            }
+          }
+        } catch {
+          // Ignore storage error
+        }
+      }
+
+      // 3. Fetch from server API (/api/published-trials/[id])
       try {
         const res = await fetch(`/api/published-trials/${encodeURIComponent(customId!)}`, {
           cache: "no-store",
@@ -49,23 +76,48 @@ function CustomizedInvitationFrameInner({ code, src, title }: Props) {
         if (res.ok) {
           const json = (await res.json()) as { record?: PublishedTrialPayload };
           if (!cancelled && json.record) {
-            setTrialData(json.record);
+            resolved = json.record;
+            updateTrialData(json.record);
           }
         }
       } catch {
         // Keep local cache if offline
-      } finally {
-        if (!cancelled) {
-          setLoadingTrial(false);
+      }
+
+      // 4. Fallback to current template draft on the same device if trial ID wasn't found remotely
+      if (!resolved && !cancelled) {
+        try {
+          const draftIdb = await loadTrialFromIndexedDb<PublishedTrialPayload>(
+            `kismet-exact-draft-${code}`,
+          );
+          if (draftIdb) {
+            resolved = draftIdb;
+            updateTrialData(draftIdb);
+          } else {
+            const draftLocal = localStorage.getItem(`kismet-exact-draft-${code}`);
+            if (draftLocal) {
+              const parsedDraft = JSON.parse(draftLocal) as PublishedTrialPayload;
+              if (parsedDraft) {
+                resolved = parsedDraft;
+                updateTrialData(parsedDraft);
+              }
+            }
+          }
+        } catch {
+          // Ignore fallback errors
         }
+      }
+
+      if (!cancelled) {
+        setLoadingTrial(false);
       }
     }
 
-    loadTrial();
+    void loadTrial();
     return () => {
       cancelled = true;
     };
-  }, [customId]);
+  }, [customId, code, updateTrialData]);
 
   const REAL_PROJECT_CODES = new Set([
     "20260323-NDNL",
@@ -146,12 +198,13 @@ function CustomizedInvitationFrameInner({ code, src, title }: Props) {
     const doc = iframe.contentDocument;
     if (!doc || !doc.body) return;
 
-    if (trialData) {
+    const activeTrial = trialDataRef.current || trialData;
+    if (activeTrial) {
       applyCustomizationsToDoc(doc, {
-        imageMap: trialData.imageMap,
-        textMap: trialData.textMap,
-        musicSrc: trialData.musicSrc,
-        musicTitle: trialData.musicTitle,
+        imageMap: activeTrial.imageMap,
+        textMap: activeTrial.textMap,
+        musicSrc: activeTrial.musicSrc,
+        musicTitle: activeTrial.musicTitle,
       });
     }
 
@@ -181,7 +234,7 @@ function CustomizedInvitationFrameInner({ code, src, title }: Props) {
   }, [syncIframeContent]);
 
   return (
-    <div style={{ position: "relative", width: "100%", height: "100vh", overflow: "hidden" }}>
+    <div style={{ position: "relative", width: "100%", height: "100dvh", overflow: "hidden" }}>
       {loadingTrial && (
         <div
           style={{
@@ -212,6 +265,7 @@ function CustomizedInvitationFrameInner({ code, src, title }: Props) {
           syncIframeContent();
           window.setTimeout(syncIframeContent, 180);
           window.setTimeout(syncIframeContent, 600);
+          window.setTimeout(syncIframeContent, 1200);
         }}
       />
     </div>

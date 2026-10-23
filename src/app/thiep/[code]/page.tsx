@@ -21,6 +21,14 @@ function normalizeInvitationCode(rawCode: string) {
   if (decoded === "Coquette" || decoded === "coquette") {
     return "coquette";
   }
+  if (
+    decoded === "korea-style" ||
+    decoded === "korea style" ||
+    decoded === "Korea Style" ||
+    decoded === "KOREA STYLE"
+  ) {
+    return "korea-style";
+  }
   return decoded;
 }
 
@@ -71,19 +79,25 @@ export default async function InvitationPage({ params }: Props) {
           ? "French%20Style"
           : code === "coquette"
             ? "Coquette"
-            : code;
+            : code === "korea-style"
+              ? "korea%20style"
+              : code;
     const revision =
-      code === "20260823-NDTD"
-        ? "?v=20261012-natural-smiley-directions"
-        : code === "20261230-KHAG"
-          ? "?v=20261013-chronicles-spacing"
-          : code === "lovers-diary"
-            ? "?v=20261022-lovers-diary-circle-audio"
-            : code === "french-style"
-              ? "?v=20261022-french-style-v5"
-              : code === "coquette"
-                ? "?v=20261022-coquette-v4"
-                : "";
+      code === "20260323-NDNL"
+        ? "?v=20261023-collage-fix"
+        : code === "20260823-NDTD"
+          ? "?v=20261012-natural-smiley-directions"
+          : code === "20261230-KHAG"
+            ? "?v=20261013-chronicles-spacing"
+            : code === "lovers-diary"
+              ? "?v=20261022-lovers-diary-circle-audio"
+              : code === "french-style"
+                ? "?v=20261022-french-style-v5"
+                : code === "coquette"
+                  ? "?v=20261022-coquette-v4"
+                  : code === "korea-style"
+                    ? "?v=20261023-korea-v2"
+                    : "";
     return (
       <CustomizedInvitationFrame
         code={code}

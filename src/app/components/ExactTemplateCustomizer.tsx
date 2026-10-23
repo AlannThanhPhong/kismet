@@ -14,7 +14,6 @@ import {
   Mail,
   Monitor,
   Music,
-  Play,
   RefreshCw,
   Search,
   Smartphone,
@@ -33,12 +32,14 @@ import {
   getExactTemplateByCode,
   installInteractiveHighlightBridge,
   inspectTemplateDom,
+  loadTrialFromIndexedDb,
   readAudioFileAsDataUrl,
+  saveTrialToIndexedDb,
   setTemplateCoverGateVisibility,
   type TemplateImageSlot,
   type TemplateTextSlot,
 } from "@/lib/template-customizer-bridge";
-import type { PublishedTrialPayload } from "@/app/api/published-trials/route";
+import type { PublishedTrialPayload } from "@/lib/published-trials-store";
 
 interface ExactTemplateCustomizerProps {
   initialTemplateCode?: string | null;
@@ -63,6 +64,7 @@ export default function ExactTemplateCustomizer({
   );
 
   const [sidebarTab, setSidebarTab] = useState<"images" | "texts" | "music">("images");
+  const [mobilePane, setMobilePane] = useState<"editor" | "preview">("editor");
   const [deviceMode, setDeviceMode] = useState<"desktop" | "mobile">("desktop");
   const [showCoverGate, setShowCoverGate] = useState<boolean>(false);
 
@@ -101,11 +103,12 @@ export default function ExactTemplateCustomizer({
     setStatusToast(msg);
     window.setTimeout(() => {
       setStatusToast((prev) => (prev === msg ? null : prev));
-    }, 3200);
+    }, 3400);
   }, []);
 
-  // Load saved draft from localStorage or server when switching template
+  // Load saved draft from IndexedDB / localStorage or server when switching template
   useEffect(() => {
+    let cancelled = false;
     const tpl = getExactTemplateByCode(selectedCode);
     setMusicSrc(tpl.defaultMusicSrc);
     setMusicTitle(tpl.defaultMusicTitle);
@@ -114,52 +117,101 @@ export default function ExactTemplateCustomizer({
     setPublishedUrl(null);
 
     const draftKey = `kismet-exact-draft-${tpl.code}`;
-    try {
-      const saved = localStorage.getItem(draftKey);
-      if (saved) {
-        const parsed = JSON.parse(saved) as Partial<PublishedTrialPayload>;
-        if (parsed.imageMap) setImageMap(parsed.imageMap);
-        if (parsed.textMap) setTextMap(parsed.textMap);
-        if (parsed.musicSrc) setMusicSrc(parsed.musicSrc);
-        if (parsed.musicTitle) setMusicTitle(parsed.musicTitle);
+
+    async function hydrateDraft() {
+      // 1. Try IndexedDB first (holds full multi-image drafts that exceed localStorage 5MB)
+      const idbDraft = await loadTrialFromIndexedDb<Partial<PublishedTrialPayload>>(draftKey);
+      if (!cancelled && idbDraft) {
+        if (idbDraft.imageMap) setImageMap(idbDraft.imageMap);
+        if (idbDraft.textMap) setTextMap(idbDraft.textMap);
+        if (idbDraft.musicSrc) setMusicSrc(idbDraft.musicSrc);
+        if (idbDraft.musicTitle) setMusicTitle(idbDraft.musicTitle);
+      } else {
+        // 2. Fallback to localStorage
+        try {
+          const saved = localStorage.getItem(draftKey);
+          if (!cancelled && saved) {
+            const parsed = JSON.parse(saved) as Partial<PublishedTrialPayload>;
+            if (parsed.imageMap) setImageMap(parsed.imageMap);
+            if (parsed.textMap) setTextMap(parsed.textMap);
+            if (parsed.musicSrc) setMusicSrc(parsed.musicSrc);
+            if (parsed.musicTitle) setMusicTitle(parsed.musicTitle);
+          }
+        } catch {
+          // Ignore storage error
+        }
       }
-    } catch {
-      // Ignore storage error
+
+      // 3. If opened with ?custom=ID, load that published trial
+      if (initialCustomId && tpl.code === initialTemplate.code) {
+        const idbCustom = await loadTrialFromIndexedDb<PublishedTrialPayload>(
+          `kismet-published-trial-${initialCustomId}`,
+        );
+        if (!cancelled && idbCustom && idbCustom.templateCode === tpl.code) {
+          setImageMap(idbCustom.imageMap || {});
+          setTextMap(idbCustom.textMap || {});
+          if (idbCustom.musicSrc) setMusicSrc(idbCustom.musicSrc);
+          if (idbCustom.musicTitle) setMusicTitle(idbCustom.musicTitle);
+        }
+
+        try {
+          const r = await fetch(`/api/published-trials/${encodeURIComponent(initialCustomId)}`, {
+            cache: "no-store",
+          });
+          if (r.ok) {
+            const json = (await r.json()) as { record?: PublishedTrialPayload } | null;
+            if (!cancelled && json?.record && json.record.templateCode === tpl.code) {
+              setImageMap(json.record.imageMap || {});
+              setTextMap(json.record.textMap || {});
+              if (json.record.musicSrc) setMusicSrc(json.record.musicSrc);
+              if (json.record.musicTitle) setMusicTitle(json.record.musicTitle);
+            }
+          }
+        } catch {
+          // Ignore offline fetch
+        }
+      }
     }
 
-    if (initialCustomId && tpl.code === initialTemplate.code) {
-      fetch(`/api/published-trials/${encodeURIComponent(initialCustomId)}`, { cache: "no-store" })
-        .then((r) => (r.ok ? r.json() : null))
-        .then((json: { record?: PublishedTrialPayload } | null) => {
-          if (json?.record && json.record.templateCode === tpl.code) {
-            setImageMap(json.record.imageMap || {});
-            setTextMap(json.record.textMap || {});
-            if (json.record.musicSrc) setMusicSrc(json.record.musicSrc);
-            if (json.record.musicTitle) setMusicTitle(json.record.musicTitle);
-          }
-        })
-        .catch(() => {});
-    }
+    void hydrateDraft();
+    return () => {
+      cancelled = true;
+    };
   }, [selectedCode, initialCustomId, initialTemplate.code]);
 
-  // Save draft to localStorage automatically whenever edits change
+  // Save draft to IndexedDB & localStorage automatically whenever edits change
   useEffect(() => {
     const draftKey = `kismet-exact-draft-${currentTemplate.code}`;
+    const draftPayload = {
+      templateCode: currentTemplate.code,
+      imageMap,
+      textMap,
+      musicSrc,
+      musicTitle,
+    };
+
+    void saveTrialToIndexedDb(draftKey, draftPayload);
+
     try {
-      localStorage.setItem(
-        draftKey,
-        JSON.stringify({
-          templateCode: currentTemplate.code,
-          imageMap,
-          textMap,
-          musicSrc,
-          musicTitle,
-        }),
-      );
+      localStorage.setItem(draftKey, JSON.stringify(draftPayload));
     } catch {
-      // Ignore quota errors
+      // If localStorage hits 5MB quota due to many photos, save lightweight text+music draft
+      try {
+        localStorage.setItem(
+          draftKey,
+          JSON.stringify({
+            templateCode: currentTemplate.code,
+            imageMap: {},
+            textMap,
+            musicSrc: musicSrc.startsWith("data:") ? currentTemplate.defaultMusicSrc : musicSrc,
+            musicTitle,
+          }),
+        );
+      } catch {
+        // Ignore quota errors
+      }
     }
-  }, [currentTemplate.code, imageMap, textMap, musicSrc, musicTitle]);
+  }, [currentTemplate.code, currentTemplate.defaultMusicSrc, imageMap, textMap, musicSrc, musicTitle]);
 
   // Sync customizations and inspect slots on the live iframe
   const syncIframeDom = useCallback(() => {
@@ -189,6 +241,7 @@ export default function ExactTemplateCustomizer({
       },
       onSelectText: (slotId) => {
         setSidebarTab("texts");
+        setMobilePane("editor");
         setActiveTextSlotId(slotId);
         window.setTimeout(() => {
           const el = document.getElementById(`editor-txt-field-${slotId}`);
@@ -198,7 +251,7 @@ export default function ExactTemplateCustomizer({
               el.focus();
             }
           }
-        }, 60);
+        }, 80);
       },
     });
   }, [imageMap, textMap, musicSrc, musicTitle, showCoverGate]);
@@ -211,8 +264,8 @@ export default function ExactTemplateCustomizer({
   const handleReplaceImageFile = async (slotId: string, file?: File | null) => {
     if (!file) return;
     try {
-      showToast("Đang xử lý & thay ảnh vào thiệp…");
-      const compressedDataUrl = await compressImageFile(file, 1400, 0.84);
+      showToast("Đang nén & thay ảnh vào thiệp…");
+      const compressedDataUrl = await compressImageFile(file, 1080, 0.76);
       setImageMap((prev) => ({
         ...prev,
         [slotId]: compressedDataUrl,
@@ -251,8 +304,10 @@ export default function ExactTemplateCustomizer({
     setTextMap({});
     setMusicSrc(currentTemplate.defaultMusicSrc);
     setMusicTitle(currentTemplate.defaultMusicTitle);
+    const draftKey = `kismet-exact-draft-${currentTemplate.code}`;
+    void saveTrialToIndexedDb(draftKey, null);
     try {
-      localStorage.removeItem(`kismet-exact-draft-${currentTemplate.code}`);
+      localStorage.removeItem(draftKey);
     } catch {
       // Ignore
     }
@@ -279,43 +334,77 @@ export default function ExactTemplateCustomizer({
   const handlePublishTrial = async () => {
     setIsPublishing(true);
     try {
-      const payload = {
-        id: publishedId || undefined,
+      const clientTrialId =
+        publishedId && /^[a-zA-Z0-9_-]{4,40}$/.test(publishedId)
+          ? publishedId
+          : `trial-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+
+      const record: PublishedTrialPayload = {
+        id: clientTrialId,
         templateCode: currentTemplate.code,
         title: `${currentTemplate.name} — Bản thiết kế xem thử`,
         imageMap,
         textMap,
         musicSrc,
         musicTitle,
+        createdAt: new Date().toISOString(),
       };
 
-      const res = await fetch("/api/published-trials", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      if (!res.ok) {
-        throw new Error("Publish failed");
-      }
-
-      const json = (await res.json()) as {
-        id: string;
-        shareUrl: string;
-        record: PublishedTrialPayload;
-      };
-
-      setPublishedId(json.id);
-      setPublishedUrl(json.shareUrl);
-
+      // 1. Always persist immediately to IndexedDB (unlimited quota) & localStorage (if fits)
+      await saveTrialToIndexedDb(`kismet-published-trial-${clientTrialId}`, record);
       try {
-        localStorage.setItem(`kismet-published-trial-${json.id}`, JSON.stringify(json.record));
+        localStorage.setItem(`kismet-published-trial-${clientTrialId}`, JSON.stringify(record));
       } catch {
-        // Ignore localStorage quota
+        // Ignore 5MB localStorage quota error since IndexedDB + server API store it
       }
 
-      // Open the newly published invitation in a new tab immediately
-      window.open(json.shareUrl, "_blank");
+      let finalId = clientTrialId;
+      let finalShareUrl = `/thiep/${encodeURIComponent(currentTemplate.code)}?custom=${encodeURIComponent(clientTrialId)}`;
+
+      // 2. Sync to server API (/api/published-trials)
+      try {
+        let res = await fetch("/api/published-trials", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(record),
+        });
+
+        // If custom uploaded audio made the payload too large, retry with preset music URL
+        if (!res.ok && musicSrc.startsWith("data:")) {
+          res = await fetch("/api/published-trials", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              ...record,
+              musicSrc: currentTemplate.defaultMusicSrc,
+            }),
+          });
+        }
+
+        if (res.ok) {
+          const json = (await res.json()) as {
+            id?: string;
+            shareUrl?: string;
+          };
+          if (json.id) finalId = json.id;
+          if (json.shareUrl) finalShareUrl = json.shareUrl;
+        }
+      } catch {
+        // Even if server API is unreachable, IndexedDB + localStorage have the record ready for this device
+      }
+
+      setPublishedId(finalId);
+      setPublishedUrl(finalShareUrl);
+      await saveTrialToIndexedDb(`kismet-published-trial-${finalId}`, { ...record, id: finalId });
+
+      // Try opening in a new tab; on mobile browsers where popup blockers block async window.open,
+      // show a clear toast and banner with a direct tap link
+      const popup = window.open(finalShareUrl, "_blank");
+      if (!popup) {
+        showToast("Đã xuất bản thành công! Bấm nút 'Mở xem thiệp vừa xuất bản ↗' bên dưới.");
+      } else {
+        showToast("Đã xuất bản thiệp xem thử thành công!");
+      }
     } catch {
       showToast("Có lỗi khi xuất bản, vui lòng thử lại.");
     } finally {
@@ -347,18 +436,167 @@ export default function ExactTemplateCustomizer({
   const modifiedTextCount = Object.keys(textMap).length;
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        height: "100vh",
-        width: "100%",
-        background: "#f4f1ea",
-        color: "#1e1b18",
-        fontFamily: "'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif",
-        overflow: "hidden",
-      }}
-    >
+    <div className="kismet-studio-shell">
+      <style>{`
+        .kismet-studio-shell {
+          display: flex;
+          flex-direction: column;
+          height: 100dvh;
+          width: 100%;
+          max-width: 100vw;
+          background: #f4f1ea;
+          color: #1e1b18;
+          font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+          overflow: hidden;
+          box-sizing: border-box;
+        }
+        .kismet-studio-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 10px;
+          padding: 10px 16px;
+          background: #1c1917;
+          color: #fbf9f4;
+          border-bottom: 1px solid rgba(240, 215, 140, 0.22);
+          flex-wrap: wrap;
+          z-index: 30;
+          box-sizing: border-box;
+          max-width: 100vw;
+        }
+        .kismet-studio-header-left,
+        .kismet-studio-header-center,
+        .kismet-studio-header-right {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          flex-wrap: wrap;
+          min-width: 0;
+        }
+        .kismet-template-select-wrap {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          min-width: 0;
+          max-width: 100%;
+        }
+        .kismet-template-select {
+          padding: 7px 10px;
+          border-radius: 8px;
+          border: 1px solid rgba(240, 215, 140, 0.45);
+          background: #2b2522;
+          color: #f8e7be;
+          font-size: 13px;
+          font-weight: 600;
+          cursor: pointer;
+          max-width: min(320px, calc(100vw - 110px));
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+        .kismet-studio-workspace {
+          display: grid;
+          grid-template-columns: minmax(340px, 415px) 1fr;
+          flex: 1;
+          min-height: 0;
+          overflow: hidden;
+          position: relative;
+        }
+        .kismet-studio-aside {
+          display: flex;
+          flex-direction: column;
+          background: #fbf9f4;
+          border-right: 1px solid rgba(30, 27, 24, 0.12);
+          min-height: 0;
+          overflow: hidden;
+        }
+        .kismet-studio-main {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          background: #e5dfd3;
+          overflow: hidden;
+          min-height: 0;
+        }
+        .kismet-mobile-mode-switcher {
+          display: none;
+        }
+        .kismet-mobile-floating-toggle {
+          display: none;
+        }
+
+        @media (max-width: 900px) {
+          .kismet-studio-header {
+            padding: 8px 10px;
+            gap: 6px;
+          }
+          .kismet-hide-on-mobile {
+            display: none !important;
+          }
+          .kismet-template-select {
+            font-size: 12px;
+            padding: 6px 8px;
+            max-width: calc(100vw - 135px);
+          }
+          .kismet-studio-workspace {
+            display: flex;
+            flex-direction: column;
+          }
+          .kismet-studio-aside {
+            width: 100%;
+            flex: 1;
+            border-right: 0;
+          }
+          .kismet-studio-aside.is-mobile-hidden {
+            display: none !important;
+          }
+          .kismet-studio-main {
+            width: 100%;
+            flex: 1;
+            padding: 0 !important;
+          }
+          .kismet-studio-main.is-mobile-hidden {
+            display: none !important;
+          }
+          .kismet-studio-main-frame {
+            width: 100% !important;
+            height: 100% !important;
+            border-radius: 0 !important;
+            border: 0 !important;
+            box-shadow: none !important;
+          }
+          .kismet-mobile-mode-switcher {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            padding: 6px 10px;
+            background: #27221f;
+            border-bottom: 1px solid rgba(240, 215, 140, 0.2);
+          }
+          .kismet-mobile-floating-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            position: fixed;
+            bottom: 16px;
+            right: 16px;
+            z-index: 75;
+            padding: 11px 18px;
+            border-radius: 999px;
+            border: 1px solid #f0d78c;
+            background: #1c1917;
+            color: #f8e7be;
+            font-size: 13px;
+            font-weight: 700;
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+            cursor: pointer;
+          }
+        }
+      `}</style>
+
       {/* Hidden file input triggered when clicking any image directly inside the live iframe */}
       <input
         ref={quickFileInputRef}
@@ -387,57 +625,45 @@ export default function ExactTemplateCustomizer({
       {/* =====================================================================
           TOP STUDIO HEADER
           ===================================================================== */}
-      <header
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: "12px",
-          padding: "10px 18px",
-          background: "#1c1917",
-          color: "#fbf9f4",
-          borderBottom: "1px solid rgba(240, 215, 140, 0.22)",
-          flexWrap: "wrap",
-          zIndex: 30,
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
+      <header className="kismet-studio-header">
+        <div className="kismet-studio-header-left">
           <Link
             href="/#kho-mau-thiep"
             style={{
               display: "inline-flex",
               alignItems: "center",
-              gap: "6px",
-              padding: "7px 12px",
+              gap: "5px",
+              padding: "6px 11px",
               borderRadius: "999px",
               background: "rgba(255,255,255,0.1)",
               color: "#fbf9f4",
-              fontSize: "12.5px",
+              fontSize: "12px",
               textDecoration: "none",
+              flexShrink: 0,
             }}
           >
-            <ArrowLeft size={14} />
-            <span>Kho mẫu thiệp</span>
+            <ArrowLeft size={13} />
+            <span>Kho mẫu</span>
           </Link>
 
           {/* Template Picker */}
-          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            <span style={{ fontSize: "11px", letterSpacing: "0.1em", color: "#d6c7b2", textTransform: "uppercase" }}>
+          <div className="kismet-template-select-wrap">
+            <span
+              className="kismet-hide-on-mobile"
+              style={{
+                fontSize: "11px",
+                letterSpacing: "0.08em",
+                color: "#d6c7b2",
+                textTransform: "uppercase",
+                flexShrink: 0,
+              }}
+            >
               Mẫu gốc:
             </span>
             <select
+              className="kismet-template-select"
               value={selectedCode}
               onChange={(e) => setSelectedCode(e.target.value)}
-              style={{
-                padding: "7px 12px",
-                borderRadius: "8px",
-                border: "1px solid rgba(240, 215, 140, 0.45)",
-                background: "#2b2522",
-                color: "#f8e7be",
-                fontSize: "13px",
-                fontWeight: 600,
-                cursor: "pointer",
-              }}
             >
               {EXACT_TEMPLATES.map((tpl) => (
                 <option key={tpl.code} value={tpl.code}>
@@ -451,46 +677,48 @@ export default function ExactTemplateCustomizer({
             <button
               type="button"
               onClick={onSwitchToClassicBuilder}
+              className="kismet-hide-on-mobile"
               style={{
-                padding: "6px 11px",
+                padding: "6px 10px",
                 borderRadius: "8px",
                 border: "1px solid rgba(255,255,255,0.2)",
                 background: "transparent",
                 color: "#d6c7b2",
-                fontSize: "12px",
+                fontSize: "11.5px",
                 cursor: "pointer",
               }}
             >
-              Chuyển sang Form Gói 500k/800k
+              Form Gói 500k/800k
             </button>
           )}
         </div>
 
         {/* Center Controls: Cover Gate Toggle + Device Mode */}
-        <div style={{ display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap" }}>
+        <div className="kismet-studio-header-center">
           <button
             type="button"
             onClick={() => setShowCoverGate((prev) => !prev)}
             style={{
               display: "inline-flex",
               alignItems: "center",
-              gap: "6px",
-              padding: "7px 13px",
+              gap: "5px",
+              padding: "6px 11px",
               borderRadius: "999px",
               border: "1px solid rgba(240, 215, 140, 0.45)",
               background: showCoverGate ? "#7b231f" : "rgba(255,255,255,0.1)",
               color: "#fbf9f4",
-              fontSize: "12px",
+              fontSize: "11.5px",
               fontWeight: 500,
               cursor: "pointer",
             }}
             title="Chuyển đổi giữa màn hình Mở Thiệp (Bìa ngoài) và Nội dung bên trong để tiện chỉnh sửa"
           >
-            {showCoverGate ? <Mail size={14} /> : <LockOpen size={14} />}
-            <span>{showCoverGate ? "Đang hiện Bìa Mở Thiệp" : "Đang mở sẵn bên trong thiệp"}</span>
+            {showCoverGate ? <Mail size={13} /> : <LockOpen size={13} />}
+            <span>{showCoverGate ? "Hiện Bìa Mở Thiệp" : "Mở sẵn bên trong"}</span>
           </button>
 
           <div
+            className="kismet-hide-on-mobile"
             style={{
               display: "inline-flex",
               background: "rgba(255,255,255,0.08)",
@@ -542,7 +770,7 @@ export default function ExactTemplateCustomizer({
         </div>
 
         {/* Right Actions: Reset & Publish Trial */}
-        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+        <div className="kismet-studio-header-right">
           {(modifiedImageCount > 0 || modifiedTextCount > 0) && (
             <button
               type="button"
@@ -550,19 +778,19 @@ export default function ExactTemplateCustomizer({
               style={{
                 display: "inline-flex",
                 alignItems: "center",
-                gap: "5px",
-                padding: "7px 12px",
+                gap: "4px",
+                padding: "6px 10px",
                 borderRadius: "999px",
                 border: "1px solid rgba(255,255,255,0.22)",
                 background: "transparent",
                 color: "#e6dcd2",
-                fontSize: "12px",
+                fontSize: "11.5px",
                 cursor: "pointer",
               }}
               title="Khôi phục toàn bộ ảnh và chữ về mặc định"
             >
-              <RefreshCw size={13} />
-              <span>Khôi phục gốc</span>
+              <RefreshCw size={12} />
+              <span>Gốc</span>
             </button>
           )}
 
@@ -573,23 +801,69 @@ export default function ExactTemplateCustomizer({
             style={{
               display: "inline-flex",
               alignItems: "center",
-              gap: "8px",
-              padding: "9px 18px",
+              gap: "6px",
+              padding: "7px 14px",
               borderRadius: "999px",
               border: "1px solid #f0d78c",
               background: "linear-gradient(135deg, #8b2622 0%, #681815 100%)",
               color: "#fff8e7",
-              fontSize: "13px",
+              fontSize: "12.5px",
               fontWeight: 700,
               cursor: isPublishing ? "wait" : "pointer",
-              boxShadow: "0 6px 20px rgba(123, 35, 31, 0.45)",
+              boxShadow: "0 4px 16px rgba(123, 35, 31, 0.45)",
             }}
           >
-            <Sparkles size={15} />
+            <Sparkles size={14} />
             <span>{isPublishing ? "Đang xuất bản…" : "Xuất bản xem thử & Lấy link"}</span>
           </button>
         </div>
       </header>
+
+      {/* MOBILE MODE SWITCHER BAR (Only visible on <= 900px) */}
+      <div className="kismet-mobile-mode-switcher">
+        <button
+          type="button"
+          onClick={() => setMobilePane("editor")}
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "6px",
+            padding: "8px 10px",
+            borderRadius: "8px",
+            border: mobilePane === "editor" ? "1px solid #f0d78c" : "1px solid rgba(255,255,255,0.14)",
+            background: mobilePane === "editor" ? "#7b231f" : "rgba(255,255,255,0.06)",
+            color: "#fbf9f4",
+            fontSize: "12.5px",
+            fontWeight: 700,
+            cursor: "pointer",
+          }}
+        >
+          <Camera size={14} />
+          <span>1. Thay Ảnh / Chữ / Nhạc</span>
+        </button>
+        <button
+          type="button"
+          onClick={() => setMobilePane("preview")}
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "6px",
+            padding: "8px 10px",
+            borderRadius: "8px",
+            border: mobilePane === "preview" ? "1px solid #f0d78c" : "1px solid rgba(255,255,255,0.14)",
+            background: mobilePane === "preview" ? "#7b231f" : "rgba(255,255,255,0.06)",
+            color: "#fbf9f4",
+            fontSize: "12.5px",
+            fontWeight: 700,
+            cursor: "pointer",
+          }}
+        >
+          <Eye size={14} />
+          <span>2. Xem trực tiếp thiệp</span>
+        </button>
+      </div>
 
       {/* Toast message */}
       {statusToast && (
@@ -597,15 +871,18 @@ export default function ExactTemplateCustomizer({
           style={{
             position: "fixed",
             top: "68px",
-            right: "24px",
+            right: "16px",
+            left: "16px",
+            maxWidth: "420px",
+            marginLeft: "auto",
             zIndex: 80,
-            padding: "10px 18px",
+            padding: "10px 16px",
             borderRadius: "10px",
             background: "#1c1917",
             color: "#f8e7be",
             border: "1px solid rgba(240, 215, 140, 0.45)",
             boxShadow: "0 12px 30px rgba(0,0,0,0.28)",
-            fontSize: "13px",
+            fontSize: "12.5px",
             fontWeight: 500,
           }}
         >
@@ -620,19 +897,19 @@ export default function ExactTemplateCustomizer({
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            gap: "12px",
-            padding: "10px 20px",
+            gap: "10px",
+            padding: "10px 14px",
             background: "#eef7f0",
             borderBottom: "1px solid #86c797",
             color: "#164e27",
-            fontSize: "13px",
+            fontSize: "12.5px",
             flexWrap: "wrap",
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
-            <Check size={16} />
-            <strong>Đã xuất bản bản xem thử giống y mẫu gốc!</strong>
-            <span>Bất kỳ ai có link này đều xem được thiệp do bạn vừa thiết kế (gồm mở thiệp + nhạc + ảnh + chữ mới):</span>
+          <div style={{ display: "flex", alignItems: "center", gap: "6px", flexWrap: "wrap" }}>
+            <Check size={15} />
+            <strong>Đã xuất bản bản xem thử!</strong>
+            <span>Gồm mở thiệp + nhạc + ảnh + nội dung bạn vừa chỉnh:</span>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
             <button
@@ -641,19 +918,19 @@ export default function ExactTemplateCustomizer({
               style={{
                 display: "inline-flex",
                 alignItems: "center",
-                gap: "6px",
-                padding: "6px 13px",
+                gap: "5px",
+                padding: "6px 12px",
                 borderRadius: "8px",
                 border: "1px solid #1e6b36",
                 background: "#ffffff",
                 color: "#164e27",
                 fontWeight: 600,
-                fontSize: "12.5px",
+                fontSize: "12px",
                 cursor: "pointer",
               }}
             >
               <Copy size={13} />
-              <span>{copiedLink ? "Đã sao chép link!" : "Sao chép link chia sẻ"}</span>
+              <span>{copiedLink ? "Đã sao chép link!" : "Sao chép link"}</span>
             </button>
             <a
               href={publishedUrl}
@@ -662,13 +939,13 @@ export default function ExactTemplateCustomizer({
               style={{
                 display: "inline-flex",
                 alignItems: "center",
-                gap: "6px",
-                padding: "6px 14px",
+                gap: "5px",
+                padding: "6px 12px",
                 borderRadius: "8px",
                 background: "#164e27",
                 color: "#ffffff",
                 fontWeight: 600,
-                fontSize: "12.5px",
+                fontSize: "12px",
                 textDecoration: "none",
               }}
             >
@@ -696,25 +973,10 @@ export default function ExactTemplateCustomizer({
       {/* =====================================================================
           MAIN WORKSPACE: LEFT SIDEBAR + RIGHT EXACT TEMPLATE IFRAME
           ===================================================================== */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "minmax(340px, 410px) 1fr",
-          flex: 1,
-          minHeight: 0,
-          overflow: "hidden",
-        }}
-      >
+      <div className="kismet-studio-workspace">
         {/* LEFT SIDEBAR: IMAGES / TEXTS / MUSIC */}
         <aside
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            background: "#fbf9f4",
-            borderRight: "1px solid rgba(30, 27, 24, 0.12)",
-            minHeight: 0,
-            overflow: "hidden",
-          }}
+          className={`kismet-studio-aside ${mobilePane === "preview" ? "is-mobile-hidden" : ""}`}
         >
           {/* 3 Sidebar Tabs */}
           <div
@@ -732,18 +994,18 @@ export default function ExactTemplateCustomizer({
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                gap: "6px",
-                padding: "13px 8px",
+                gap: "5px",
+                padding: "12px 6px",
                 border: 0,
                 borderBottom: sidebarTab === "images" ? "3px solid #7b231f" : "3px solid transparent",
                 background: sidebarTab === "images" ? "#fbf9f4" : "transparent",
                 color: sidebarTab === "images" ? "#7b231f" : "#5c534a",
                 fontWeight: 700,
-                fontSize: "12.5px",
+                fontSize: "12px",
                 cursor: "pointer",
               }}
             >
-              <ImageIcon size={15} />
+              <ImageIcon size={14} />
               <span>Thay ảnh ({imageSlots.length})</span>
             </button>
 
@@ -754,18 +1016,18 @@ export default function ExactTemplateCustomizer({
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                gap: "6px",
-                padding: "13px 8px",
+                gap: "5px",
+                padding: "12px 6px",
                 border: 0,
                 borderBottom: sidebarTab === "texts" ? "3px solid #7b231f" : "3px solid transparent",
                 background: sidebarTab === "texts" ? "#fbf9f4" : "transparent",
                 color: sidebarTab === "texts" ? "#7b231f" : "#5c534a",
                 fontWeight: 700,
-                fontSize: "12.5px",
+                fontSize: "12px",
                 cursor: "pointer",
               }}
             >
-              <Type size={15} />
+              <Type size={14} />
               <span>Nội dung ({textSlots.length})</span>
             </button>
 
@@ -776,44 +1038,44 @@ export default function ExactTemplateCustomizer({
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                gap: "6px",
-                padding: "13px 8px",
+                gap: "5px",
+                padding: "12px 6px",
                 border: 0,
                 borderBottom: sidebarTab === "music" ? "3px solid #7b231f" : "3px solid transparent",
                 background: sidebarTab === "music" ? "#fbf9f4" : "transparent",
                 color: sidebarTab === "music" ? "#7b231f" : "#5c534a",
                 fontWeight: 700,
-                fontSize: "12.5px",
+                fontSize: "12px",
                 cursor: "pointer",
               }}
             >
-              <Music size={15} />
+              <Music size={14} />
               <span>Nhạc nền</span>
             </button>
           </div>
 
           {/* Sidebar Scroll Body */}
-          <div style={{ flex: 1, overflowY: "auto", padding: "16px" }}>
+          <div style={{ flex: 1, overflowY: "auto", padding: "14px 14px 74px" }}>
             {/* TAB 1: REPLACE PHOTOS */}
             {sidebarTab === "images" && (
               <div>
                 <div
                   style={{
-                    padding: "11px 13px",
-                    marginBottom: "14px",
+                    padding: "10px 12px",
+                    marginBottom: "12px",
                     borderRadius: "10px",
                     background: "#f4ece1",
                     border: "1px solid rgba(123, 35, 31, 0.18)",
-                    fontSize: "12.5px",
+                    fontSize: "12px",
                     lineHeight: 1.5,
                     color: "#4a3f37",
                   }}
                 >
-                  💡 <strong>Mẹo nhanh:</strong> Bạn có thể bấm trực tiếp vào bất kỳ bức ảnh nào trên thiệp bên phải để
-                  đổi ảnh đó ngay lập tức, hoặc chọn từng khung ảnh dưới đây.
+                  💡 <strong>Mẹo nhanh:</strong> Chọn <strong>Đổi ảnh</strong> ở từng khung bên dưới, hoặc chuyển sang{" "}
+                  <strong>Xem trực tiếp thiệp</strong> và chạm trực tiếp vào bức ảnh trên thiệp để thay.
                 </div>
 
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: "12px" }}>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: "10px" }}>
                   {imageSlots.map((slot) => {
                     const isCustom = Boolean(imageMap[slot.id]);
                     const isSelected = activeImageSlotId === slot.id;
@@ -831,7 +1093,8 @@ export default function ExactTemplateCustomizer({
                           background: "#ffffff",
                           display: "flex",
                           flexDirection: "column",
-                          gap: "8px",
+                          gap: "7px",
+                          minWidth: 0,
                         }}
                       >
                         <div
@@ -871,7 +1134,7 @@ export default function ExactTemplateCustomizer({
 
                         <div
                           style={{
-                            fontSize: "11.5px",
+                            fontSize: "11px",
                             fontWeight: 600,
                             color: "#2c2622",
                             whiteSpace: "nowrap",
@@ -883,19 +1146,19 @@ export default function ExactTemplateCustomizer({
                           {slot.label}
                         </div>
 
-                        <div style={{ display: "flex", gap: "6px" }}>
+                        <div style={{ display: "flex", gap: "5px" }}>
                           <label
                             style={{
                               flex: 1,
                               display: "inline-flex",
                               alignItems: "center",
                               justifyContent: "center",
-                              gap: "5px",
-                              padding: "6px 8px",
+                              gap: "4px",
+                              padding: "6px 6px",
                               borderRadius: "6px",
                               background: "#7b231f",
                               color: "#ffffff",
-                              fontSize: "11.5px",
+                              fontSize: "11px",
                               fontWeight: 600,
                               cursor: "pointer",
                               textAlign: "center",
@@ -920,7 +1183,7 @@ export default function ExactTemplateCustomizer({
                               type="button"
                               onClick={() => handleResetSingleImage(slot.id)}
                               style={{
-                                padding: "6px 8px",
+                                padding: "6px 7px",
                                 borderRadius: "6px",
                                 border: "1px solid rgba(30,27,24,0.2)",
                                 background: "#f5f2eb",
@@ -1063,6 +1326,7 @@ export default function ExactTemplateCustomizer({
                               fontSize: "13px",
                               lineHeight: 1.45,
                               resize: "vertical",
+                              boxSizing: "border-box",
                             }}
                           />
                         ) : (
@@ -1078,6 +1342,7 @@ export default function ExactTemplateCustomizer({
                               borderRadius: "6px",
                               border: "1px solid rgba(30,27,24,0.18)",
                               fontSize: "13px",
+                              boxSizing: "border-box",
                             }}
                           />
                         )}
@@ -1171,9 +1436,9 @@ export default function ExactTemplateCustomizer({
                 <div style={{ display: "grid", gap: "8px" }}>
                   {[...WEDDING_SONGS]
                     .sort((a, b) =>
-                      a.id === "young-and-beautiful-khong-loi"
+                      a.id === "leehi-only" || a.id === "young-and-beautiful-khong-loi"
                         ? -1
-                        : b.id === "young-and-beautiful-khong-loi"
+                        : b.id === "leehi-only" || b.id === "young-and-beautiful-khong-loi"
                           ? 1
                           : 0,
                     )
@@ -1241,18 +1506,13 @@ export default function ExactTemplateCustomizer({
 
         {/* RIGHT PANE: LIVE EXACT TEMPLATE IFRAME */}
         <main
+          className={`kismet-studio-main ${mobilePane === "editor" ? "is-mobile-hidden" : ""}`}
           style={{
-            position: "relative",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            background: "#e5dfd3",
             padding: deviceMode === "mobile" ? "20px" : "0",
-            overflow: "hidden",
           }}
         >
           <div
+            className="kismet-studio-main-frame"
             style={{
               width: deviceMode === "mobile" ? "395px" : "100%",
               height: deviceMode === "mobile" ? "min(840px, 92%)" : "100%",
@@ -1285,6 +1545,25 @@ export default function ExactTemplateCustomizer({
           </div>
         </main>
       </div>
+
+      {/* Floating bottom quick-switch button on mobile viewports */}
+      <button
+        type="button"
+        className="kismet-mobile-floating-toggle"
+        onClick={() => setMobilePane((prev) => (prev === "editor" ? "preview" : "editor"))}
+      >
+        {mobilePane === "editor" ? (
+          <>
+            <Eye size={16} />
+            <span>Xem thiệp trực tiếp</span>
+          </>
+        ) : (
+          <>
+            <Camera size={16} />
+            <span>Quay lại sửa Ảnh / Chữ</span>
+          </>
+        )}
+      </button>
     </div>
   );
 }

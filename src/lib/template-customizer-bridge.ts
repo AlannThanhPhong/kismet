@@ -36,6 +36,15 @@ export const EXACT_TEMPLATES: ExactTemplateConfig[] = [
     defaultMusicSrc: "/music/wedding/young-and-beautiful.mp3",
     defaultMusicTitle: "Young and Beautiful",
   },
+  {
+    code: "korea-style",
+    name: "KOREA STYLE",
+    coupleName: "김서연 (Kim Seo-yeon) & 이도윤 (Lee Do-yoon)",
+    badge: "TEMPLATE N° 04 · SEOUL",
+    iframeSrc: "/wedding-invitations/korea%20style/index.html",
+    defaultMusicSrc: "/music/wedding/leehi-only.mp3",
+    defaultMusicTitle: "ONLY — LeeHi",
+  },
 ];
 
 export function getExactTemplateByCode(rawCode?: string | null): ExactTemplateConfig {
@@ -48,7 +57,12 @@ export function getExactTemplateByCode(rawCode?: string | null): ExactTemplateCo
         ? "french-style"
         : decoded === "Coquette" || decoded === "coquette"
           ? "coquette"
-          : decoded;
+          : decoded === "korea-style" ||
+              decoded === "korea style" ||
+              decoded === "Korea Style" ||
+              decoded === "KOREA STYLE"
+            ? "korea-style"
+            : decoded;
   return EXACT_TEMPLATES.find((t) => t.code === normalized) || EXACT_TEMPLATES[0];
 }
 
@@ -106,10 +120,8 @@ export function inspectTemplateDom(doc: Document): {
 } {
   const kDoc = doc as KismetAugmentedDocument;
 
-  // 1. Index Images (grouped by unique original image source so duplicates like cover + collage or lightbox stay in sync,
-  //    while still allowing individual slot replacement)
+  // 1. Index Images (excluding decorative SVGs, lightbox placeholders, and explicitly skipped elements)
   const imgElements = Array.from(doc.querySelectorAll<HTMLImageElement>("img")).filter((img) => {
-    // Skip lightbox preview placeholder image and decorative background art (e.g. French curtain)
     if (
       img.id === "diary-lightbox-img" ||
       img.closest("dialog") ||
@@ -119,7 +131,7 @@ export function inspectTemplateDom(doc: Document): {
       return false;
     }
     const src = img.getAttribute("src") || "";
-    if (src.startsWith("data:image/svg")) return false;
+    if (src.startsWith("data:image/svg") || /\.svg(\?|$)/i.test(src)) return false;
     return true;
   });
 
@@ -170,7 +182,7 @@ export function inspectTemplateDom(doc: Document): {
         const trimmed = text.trim();
         if (!trimmed) return NodeFilter.FILTER_REJECT;
         // Skip single-character decorative symbols like × or •
-        if (trimmed.length <= 1 && /^[^a-zA-Z0-9À-ỹ]+$/.test(trimmed)) {
+        if (trimmed.length <= 1 && /^[^a-zA-Z0-9À-ỹ가-힣]+$/.test(trimmed)) {
           return NodeFilter.FILTER_REJECT;
         }
         return NodeFilter.FILTER_ACCEPT;
@@ -253,23 +265,34 @@ export function applyCustomizationsToDoc(
   const imageMap = overrides.imageMap || {};
   const textMap = overrides.textMap || {};
 
-  // Build a lookup from normalized original relative path -> new image URL
-  // so lightbox attributes and CSS background images using the same photo also update
+  // Pass 1: Build a lookup from normalized original relative path -> new image URL
+  // so duplicate slots sharing the same photo (e.g. cover gate + inside hero), lightbox attributes,
+  // and CSS background images using the same photo all stay in sync automatically.
   const relPathOverrides = new Map<string, string>();
-
   images.forEach((slot) => {
-    const newSrc = imageMap[slot.id] || imageMap[slot.origSrc] || slot.origSrc;
-    const elems = kDoc.__kismetImageElements?.get(slot.id) || [];
-    if (imageMap[slot.id] || imageMap[slot.origSrc]) {
-      relPathOverrides.set(normalizeRelSrc(slot.origSrc), newSrc);
-      relPathOverrides.set(slot.origSrc, newSrc);
+    const directOverride = imageMap[slot.id] || imageMap[slot.origSrc];
+    if (directOverride) {
+      relPathOverrides.set(normalizeRelSrc(slot.origSrc), directOverride);
+      relPathOverrides.set(slot.origSrc, directOverride);
     }
+  });
+
+  // Pass 2: Apply resolved image URL to each slot's DOM element(s)
+  images.forEach((slot) => {
+    const newSrc =
+      imageMap[slot.id] ||
+      imageMap[slot.origSrc] ||
+      relPathOverrides.get(normalizeRelSrc(slot.origSrc)) ||
+      relPathOverrides.get(slot.origSrc) ||
+      slot.origSrc;
+    const isOverridden = newSrc !== slot.origSrc;
+    const elems = kDoc.__kismetImageElements?.get(slot.id) || [];
 
     elems.forEach((img) => {
       if (img.getAttribute("src") !== newSrc) {
         img.src = newSrc;
       }
-      if (imageMap[slot.id] || imageMap[slot.origSrc]) {
+      if (isOverridden) {
         img.removeAttribute("srcset");
         const picture = img.parentElement;
         if (picture && picture.tagName === "PICTURE") {
@@ -318,7 +341,7 @@ export function applyCustomizationsToDoc(
   // Apply Music Override
   if (overrides.musicSrc) {
     let audio = doc.querySelector<HTMLAudioElement>(
-      "#diary-bgm, #wedding-audio, #wedding-song, #wedding-music, audio",
+      "#diary-bgm, #korea-bgm, #coq-bgm, #french-bgm, #wedding-audio, #wedding-song, #wedding-music, audio",
     );
     if (!audio) {
       audio = doc.createElement("audio");
@@ -352,12 +375,16 @@ export function applyCustomizationsToDoc(
         const isPlaying = !audio.paused;
         diaryAudioLabel.textContent = `♪ ${overrides.musicTitle} · ${isPlaying ? "On" : "Off"}`;
       }
+      const koreaAudioLabel = doc.getElementById("korea-audio-label");
+      if (koreaAudioLabel) {
+        koreaAudioLabel.textContent = `♪ ${overrides.musicTitle}`;
+      }
     }
   }
 }
 
 /**
- * Allows the Studio Editor to toggle the opening cover gate (Envelope / Diary Cover / Typewriter)
+ * Allows the Studio Editor to toggle the opening cover gate (Envelope / Diary Cover / Korea Gate / Typewriter)
  * on or off so the user can easily inspect & edit both the opening cover and the main content inside.
  */
 export function setTemplateCoverGateVisibility(doc: Document, showCoverGate: boolean) {
@@ -371,12 +398,14 @@ export function setTemplateCoverGateVisibility(doc: Document, showCoverGate: boo
   if (!showCoverGate) {
     // Bypass cover gate so inside content is immediately visible and scrollable
     helperStyle.textContent = `
-      body.is-locked, body.is-sealed, body.intro-locked {
+      body.is-locked, body.is-sealed, body.intro-locked, body.invitation-closed {
         overflow: auto !important;
         height: auto !important;
       }
       body.is-locked .diary-main,
       body.is-locked .french-parchment-sheet,
+      body.is-locked .coq-main,
+      body.invitation-closed .korea-main,
       .invitation-shell.is-hidden {
         opacity: 1 !important;
         transform: none !important;
@@ -385,6 +414,8 @@ export function setTemplateCoverGateVisibility(doc: Document, showCoverGate: boo
       }
       #diary-cover-gate,
       #french-cover-gate,
+      #coquette-cover-gate,
+      #korea-cover-gate,
       .typewriter-intro-overlay,
       #typewriter-intro {
         display: none !important;
@@ -392,10 +423,18 @@ export function setTemplateCoverGateVisibility(doc: Document, showCoverGate: boo
     `;
   } else {
     helperStyle.textContent = "";
-    const diaryGate = doc.getElementById("diary-cover-gate") || doc.getElementById("french-cover-gate");
+    const diaryGate =
+      doc.getElementById("diary-cover-gate") ||
+      doc.getElementById("french-cover-gate") ||
+      doc.getElementById("coquette-cover-gate");
     if (diaryGate) {
       diaryGate.classList.remove("is-opening", "is-opened");
       doc.body.classList.add("is-locked");
+    }
+    const koreaGate = doc.getElementById("korea-cover-gate");
+    if (koreaGate) {
+      koreaGate.classList.remove("is-opening", "is-opened");
+      doc.body.classList.add("invitation-closed");
     }
   }
 }
@@ -470,9 +509,9 @@ export function installInteractiveHighlightBridge(
 
 /**
  * Compresses an uploaded image file on the client using an HTMLCanvasElement so it can be
- * stored and shared via the published trial API without hitting payload limits.
+ * stored and shared via the published trial API without hitting payload or storage limits.
  */
-export function compressImageFile(file: File, maxDim = 1400, quality = 0.82): Promise<string> {
+export function compressImageFile(file: File, maxDim = 1080, quality = 0.76): Promise<string> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onerror = () => reject(new Error("Không thể đọc file ảnh"));
@@ -515,4 +554,71 @@ export function readAudioFileAsDataUrl(file: File): Promise<string> {
     reader.onload = () => resolve(String(reader.result));
     reader.readAsDataURL(file);
   });
+}
+
+const IDB_NAME = "kismet-studio-db";
+const IDB_STORE = "trials";
+
+function openTrialIdb(): Promise<IDBDatabase> {
+  return new Promise((resolve, reject) => {
+    if (typeof window === "undefined" || !("indexedDB" in window)) {
+      reject(new Error("IndexedDB unavailable"));
+      return;
+    }
+    const req = window.indexedDB.open(IDB_NAME, 1);
+    req.onupgradeneeded = () => {
+      const db = req.result;
+      if (!db.objectStoreNames.contains(IDB_STORE)) {
+        db.createObjectStore(IDB_STORE);
+      }
+    };
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error || new Error("IndexedDB open error"));
+  });
+}
+
+/**
+ * Saves a draft or published trial record to IndexedDB (supporting large multi-image payloads
+ * that would exceed the 5MB localStorage limit on phones/browsers).
+ */
+export async function saveTrialToIndexedDb(key: string, payload: unknown): Promise<void> {
+  try {
+    const db = await openTrialIdb();
+    await new Promise<void>((resolve, reject) => {
+      const tx = db.transaction(IDB_STORE, "readwrite");
+      const store = tx.objectStore(IDB_STORE);
+      store.put(payload, key);
+      tx.oncomplete = () => {
+        db.close();
+        resolve();
+      };
+      tx.onerror = () => {
+        db.close();
+        reject(tx.error);
+      };
+    });
+  } catch {
+    // Ignore IDB errors and fall back to localStorage / API
+  }
+}
+
+export async function loadTrialFromIndexedDb<T = unknown>(key: string): Promise<T | null> {
+  try {
+    const db = await openTrialIdb();
+    return await new Promise<T | null>((resolve) => {
+      const tx = db.transaction(IDB_STORE, "readonly");
+      const store = tx.objectStore(IDB_STORE);
+      const getReq = store.get(key);
+      getReq.onsuccess = () => {
+        db.close();
+        resolve((getReq.result as T) ?? null);
+      };
+      getReq.onerror = () => {
+        db.close();
+        resolve(null);
+      };
+    });
+  } catch {
+    return null;
+  }
 }

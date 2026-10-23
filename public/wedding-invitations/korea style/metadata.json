@@ -1,0 +1,19 @@
+{
+  "templateNumber": 4,
+  "name": "KOREA STYLE",
+  "tags": ["Korean Style", "Garden", "Modern", "Minimalist"],
+  "couple": {
+    "bride": "김서연 (Kim Seo-yeon)",
+    "groom": "이도윤 (Lee Do-yoon)"
+  },
+  "venue": {
+    "name": "서울 신라호텔 · 다이너스티 홀 (The Shilla Seoul · Dynasty Hall)",
+    "address": "202 Jangchung-dong 2(i)-ga, Jung-gu, Seoul 04605, South Korea",
+    "country": "대한민국 (South Korea)"
+  },
+  "date": "2026-10-24",
+  "music": {
+    "title": "ONLY — LeeHi (이하이)",
+    "src": "music/leehi-only.mp3"
+  }
+}
