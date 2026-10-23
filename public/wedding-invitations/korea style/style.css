@@ -1,0 +1,2006 @@
+/* ==========================================================================
+   Template #4 — KOREA STYLE (김서연 Kim Seo-yeon & 이도윤 Lee Do-yoon)
+   Venue: 서울 신라호텔 · 다이너스티 홀 (The Shilla Seoul · Dynasty Hall)
+   ========================================================================== */
+
+:root {
+  --paper: #f6f4ef;
+  --paper-warm: #efece3;
+  --paper-pure: #fbfaf7;
+  --ink: #22201e;
+  --ink-soft: #4e4943;
+  --muted: #7a736b;
+  --line: rgba(34, 32, 30, 0.14);
+  --line-strong: rgba(34, 32, 30, 0.24);
+  --korea-green: #244b35;
+  --korea-green-deep: #182b1f;
+  --korea-sage: #dce4d2;
+  --korea-butter: #fff3bd;
+  --espresso: #2e2a28;
+  --espresso-deep: #221f1d;
+  --font-serif: 'Cormorant Garamond', 'Gowun Batang', Georgia, serif;
+  --font-kr: 'Gowun Batang', 'Cormorant Garamond', Georgia, serif;
+  --font-script: 'Imperial Script', cursive;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 56px;
+}
+
+body {
+  margin: 0;
+  background-color: #d7d2c8;
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(255, 255, 255, 0.35), transparent 55%),
+    url('assets/paper-grain.svg');
+  color: var(--ink);
+  font-family: var(--font-sans);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+figure,
+p,
+h1,
+h2,
+h3,
+blockquote {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+/* Subtle paper grain & celebratory petal spark layer */
+.korea-film-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 45;
+  background: url('assets/paper-grain.svg');
+  opacity: 0.05;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+.korea-petal-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.korea-petal-spark {
+  position: absolute;
+  width: 8px;
+  height: 12px;
+  border-radius: 70% 30% 70% 30%;
+  background: var(--petal-color, #fff6d6);
+  left: var(--petal-x, 50%);
+  top: var(--petal-y, 20%);
+  box-shadow: 0 2px 8px rgba(36, 75, 53, 0.18);
+  animation: korea-petal-fall 2.1s cubic-bezier(0.22, 1, 0.36, 1) var(--petal-delay, 0s) both;
+}
+
+@keyframes korea-petal-fall {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -20px, 0) rotate(0deg) scale(0.5);
+  }
+  20% {
+    opacity: 0.95;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--petal-dx, 40px), var(--petal-dy, 180px), 0) rotate(220deg) scale(0.9);
+  }
+}
+
+/* ==========================================================================
+   OPENING SCREEN — KOREAN GARDEN POLAROID & MUSIC PLAYER (ONLY — LeeHi)
+   ========================================================================== */
+body.invitation-closed {
+  overflow: hidden;
+  height: 100vh;
+}
+
+body.invitation-closed .invitation-content {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+body.invitation-closed .music-toggle {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   OPENING SCREEN — KOREAN ROYAL BRASS PADLOCK & FLOATING GOLDEN KEY
+   Dark celestial atmospheric background with bokeh, ornate brass lock,
+   hanging red silk tassel, floating golden key, and unlock animations.
+   ========================================================================== */
+.opening-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: max(16px, env(safe-area-inset-top)) 16px max(16px, env(safe-area-inset-bottom));
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 46%, #3a2711 0%, #201509 38%, #100b05 70%, #060402 100%);
+  color: #fff9e6;
+  user-select: none;
+  -webkit-user-select: none;
+  transition:
+    opacity 0.9s cubic-bezier(0.2, 0.9, 0.3, 1),
+    transform 0.9s cubic-bezier(0.2, 0.9, 0.3, 1),
+    visibility 0.9s;
+}
+
+.opening-screen[hidden],
+.opening-screen.is-opened {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: scale(1.05);
+}
+
+/* Atmospheric Backdrop: Ambient Glowing Bokeh & Drifting Blurred Keys */
+.gate-backdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.gate-aura {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(85vw, 680px);
+  height: min(85vw, 680px);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 222, 133, 0.28) 0%, rgba(207, 155, 51, 0.12) 42%, transparent 72%);
+  filter: blur(28px);
+  animation: gate-aura-pulse 5.5s ease-in-out infinite alternate;
+}
+
+@keyframes gate-aura-pulse {
+  0% { transform: translate(-50%, -50%) scale(0.92); opacity: 0.75; }
+  100% { transform: translate(-50%, -50%) scale(1.12); opacity: 1; }
+}
+
+/* Blurred drifting ambient keys in the background */
+.gate-floating-key {
+  position: absolute;
+  pointer-events: none;
+  filter: drop-shadow(0 0 16px rgba(246, 213, 127, 0.45));
+  animation: gate-ambient-drift 18s ease-in-out infinite alternate;
+}
+
+.fk1 { top: 8%; left: 8%; width: 140px; opacity: 0.22; filter: blur(3.5px); --rot: -35deg; animation-duration: 22s; }
+.fk2 { bottom: 12%; left: 6%; width: 170px; opacity: 0.18; filter: blur(4.5px); --rot: 25deg; animation-duration: 26s; animation-delay: -4s; }
+.fk3 { top: 12%; right: 9%; width: 155px; opacity: 0.24; filter: blur(3px); --rot: 65deg; animation-duration: 20s; animation-delay: -7s; }
+.fk4 { bottom: 20%; right: 12%; width: 190px; opacity: 0.16; filter: blur(5px); --rot: -75deg; animation-duration: 24s; animation-delay: -11s; }
+.fk5 { top: 52%; left: -30px; width: 120px; opacity: 0.15; filter: blur(4px); --rot: 15deg; animation-duration: 19s; animation-delay: -2s; }
+.fk6 { top: 38%; right: -20px; width: 130px; opacity: 0.2; filter: blur(3px); --rot: -45deg; animation-duration: 21s; animation-delay: -9s; }
+
+@media (max-width: 680px) {
+  .fk2, .fk4, .fk5, .fk6 {
+    display: none;
+  }
+}
+
+@keyframes gate-ambient-drift {
+  0% { transform: translateY(0) rotate(var(--rot, 0deg)); }
+  50% { transform: translateY(-18px) rotate(calc(var(--rot, 0deg) + 6deg)); }
+  100% { transform: translateY(14px) rotate(calc(var(--rot, 0deg) - 4deg)); }
+}
+
+/* Stardust twinkling layer */
+.gate-dust {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.gate-dust-spark {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fffdf2 0%, #f7d788 60%, transparent 100%);
+  box-shadow: 0 0 10px rgba(255, 235, 168, 0.85);
+  animation: dust-twinkle var(--dust-dur, 4s) ease-in-out infinite alternate;
+  animation-delay: var(--dust-delay, 0s);
+  opacity: var(--dust-alpha, 0.5);
+}
+
+@keyframes dust-twinkle {
+  0% { transform: translateY(0) scale(0.65); opacity: calc(var(--dust-alpha, 0.5) * 0.4); }
+  50% { transform: translateY(-12px) scale(1.15); opacity: var(--dust-alpha, 0.9); }
+  100% { transform: translateY(-24px) scale(0.7); opacity: calc(var(--dust-alpha, 0.5) * 0.3); }
+}
+
+/* Central Gate Stage */
+.gate-stage {
+  position: relative;
+  z-index: 4;
+  width: min(520px, 94vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.gate-head {
+  margin-bottom: clamp(10px, 2.5vh, 22px);
+}
+
+.gate-kicker {
+  font-family: var(--font-sans);
+  font-size: clamp(9.5px, 2vw, 11px);
+  letter-spacing: 0.28em;
+  font-weight: 500;
+  color: #dfba6e;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+.gate-title-kr {
+  font-family: var(--font-kr);
+  font-size: clamp(23px, 6vw, 34px);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #fff9e8;
+  margin: 0;
+  text-shadow: 0 2px 18px rgba(246, 213, 127, 0.38), 0 4px 10px rgba(0, 0, 0, 0.8);
+}
+
+.gate-title-kr i {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  color: #e5b658;
+  margin: 0 4px;
+}
+
+.gate-title-en {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(13.5px, 3.4vw, 17px);
+  color: #e8c682;
+  margin-top: 3px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.gate-date {
+  font-family: var(--font-kr);
+  font-size: clamp(9.5px, 2.4vw, 12px);
+  letter-spacing: 0.04em;
+  color: rgba(255, 246, 220, 0.78);
+  margin-top: 5px;
+  max-width: 90vw;
+  white-space: normal;
+  line-height: 1.45;
+}
+
+/* Padlock Housing */
+.gate-lock {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lock-inner {
+  position: relative;
+  width: clamp(180px, 46vw, 240px);
+  height: clamp(290px, 74vw, 385px);
+  filter: drop-shadow(0 26px 48px rgba(0, 0, 0, 0.78)) drop-shadow(0 0 32px rgba(207, 155, 51, 0.3));
+}
+
+.lock-shackle {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: 185px 158px;
+  transition: transform 0.48s cubic-bezier(0.18, 1.3, 0.35, 1);
+  will-change: transform;
+}
+
+.gate-lock.is-unlocked .lock-shackle {
+  transform: translateY(-30px) rotate(-2deg);
+}
+
+.lock-body {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.kh-core {
+  fill: #140d04;
+}
+
+.lock-tassel {
+  transform-origin: 130px 305px;
+  animation: lock-tassel-sway 6s ease-in-out infinite alternate;
+}
+
+@keyframes lock-tassel-sway {
+  0% { transform: rotate(-2.5deg); }
+  100% { transform: rotate(2.5deg); }
+}
+
+.lock-glow {
+  position: absolute;
+  top: 47.7%;
+  left: 50%;
+  width: 72px;
+  height: 72px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 248, 220, 0.95) 0%, rgba(246, 213, 127, 0.7) 40%, rgba(207, 155, 51, 0.2) 70%, transparent 100%);
+  opacity: 0.35;
+  filter: blur(6px);
+  pointer-events: none;
+  transition: opacity 0.35s, transform 0.35s;
+  animation: keyhole-glow-pulse 3.2s ease-in-out infinite alternate;
+}
+
+@keyframes keyhole-glow-pulse {
+  0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.3; }
+  100% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.6; }
+}
+
+.lock-glow.is-active {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.6);
+  filter: blur(8px);
+}
+
+/* Floating Golden Key Button (Mobile First) */
+.gate-keyclip {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 6;
+}
+
+.gate-key-pos {
+  position: absolute;
+  width: 115px;
+  aspect-ratio: 375 / 210;
+  right: 28px;
+  bottom: 100px;
+  pointer-events: auto;
+  transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+
+@media (min-width: 681px) {
+  .gate-key-pos {
+    width: clamp(140px, 18vw, 185px);
+    right: clamp(30px, 11vw, 140px);
+    top: 52%;
+    bottom: auto;
+    transform: translateY(-50%);
+  }
+}
+
+.gate-key {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+  overflow: visible;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.gate-key-bob {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-origin: center center;
+  animation: key-bob-drift 4.2s ease-in-out infinite alternate;
+}
+
+@keyframes key-bob-drift {
+  0% { transform: translateY(0) rotate(-16deg); }
+  50% { transform: translateY(-12px) rotate(-12deg); }
+  100% { transform: translateY(4px) rotate(-18deg); }
+}
+
+.gate-key-turn {
+  display: block;
+  width: 100%;
+  height: 100%;
+  perspective: 700px;
+  transform-style: preserve-3d;
+  transition: transform 0.42s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+.gate-key svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+  filter:
+    drop-shadow(0 14px 28px rgba(0, 0, 0, 0.7))
+    drop-shadow(0 0 22px rgba(246, 213, 127, 0.65));
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.gate-key:hover svg,
+.gate-key:focus-visible svg {
+  filter:
+    drop-shadow(0 18px 34px rgba(0, 0, 0, 0.8))
+    drop-shadow(0 0 35px rgba(255, 236, 171, 0.95));
+  transform: scale(1.06);
+}
+
+.gate-key:focus-visible {
+  outline: 2px solid rgba(255, 236, 171, 0.85);
+  outline-offset: 4px;
+  border-radius: 999px;
+}
+
+/* Key Movement Animation Stages */
+.gate-key-pos.is-flying {
+  animation: none;
+  transform: translate(var(--fly-dx, -160px), var(--fly-dy, -60px)) rotate(0deg) scale(0.92);
+  transition: transform 0.62s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.gate-key-pos.is-flying .gate-key-bob {
+  animation: none;
+  transform: none;
+}
+
+.gate-key-pos.is-inserting {
+  transform: translate(calc(var(--fly-dx, -160px) - 28px), var(--fly-dy, -60px)) scale(0.82);
+  transition: transform 0.32s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.gate-key-pos.is-turning .gate-key-turn {
+  transform: rotateY(70deg) rotateZ(90deg) scale(0.78);
+  transition: transform 0.42s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+.gate-key-pos.is-unlocked {
+  opacity: 0.85;
+}
+
+/* Hint text */
+.gate-hint {
+  position: absolute;
+  bottom: max(16px, env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  text-align: center;
+  z-index: 5;
+  pointer-events: none;
+  width: 92%;
+  max-width: 440px;
+}
+
+.gate-hint span {
+  font-family: var(--font-kr);
+  font-size: clamp(12px, 3.2vw, 14.5px);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #fff9e6;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85), 0 0 14px rgba(246, 213, 127, 0.5);
+}
+
+.gate-hint small {
+  font-family: var(--font-sans);
+  font-size: clamp(8.5px, 2.2vw, 10.5px);
+  letter-spacing: 0.12em;
+  color: #e5b964;
+  text-transform: uppercase;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* Gate Flash & Particle Burst */
+.gate-burst {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 7;
+}
+
+.gate-burst-particle {
+  position: absolute;
+  width: var(--p-sz, 3px);
+  height: var(--p-sz, 3px);
+  border-radius: 50%;
+  background: var(--p-col, #fff3bf);
+  box-shadow: 0 0 8px var(--p-col, #fff3bf);
+  top: 0;
+  left: 0;
+  animation: burst-flight var(--p-dur, 0.8s) cubic-bezier(0.12, 0.8, 0.32, 1) forwards;
+}
+
+@keyframes burst-flight {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  80% { opacity: 0.9; }
+  100% { transform: translate(var(--p-dx), var(--p-dy)) scale(0); opacity: 0; }
+}
+
+.gate-flash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 248, 224, 0.95) 0%, rgba(246, 213, 127, 0.7) 35%, transparent 75%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 8;
+  transition: opacity 0.15s ease-out;
+}
+
+.gate-flash.is-flashing {
+  animation: gate-flash-pulse 0.9s cubic-bezier(0.15, 0.85, 0.35, 1) forwards;
+}
+
+@keyframes gate-flash-pulse {
+  0% { opacity: 0; }
+  25% { opacity: 0.9; }
+  100% { opacity: 0; }
+}
+
+/* Floating Music Button */
+.music-toggle {
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: max(16px, env(safe-area-inset-bottom));
+  z-index: 48;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 15px;
+  border: 1px solid rgba(36, 75, 53, 0.28);
+  border-radius: 999px;
+  background: rgba(251, 250, 247, 0.94);
+  backdrop-filter: blur(8px);
+  color: var(--korea-green);
+  box-shadow: 0 8px 24px rgba(24, 43, 31, 0.16);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.music-toggle[aria-pressed="true"] {
+  background: var(--korea-green);
+  color: #fff9de;
+  border-color: var(--korea-green);
+}
+
+.music-toggle-note {
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* ==========================================================================
+   MAIN EDITORIAL SHEET CONTAINER
+   ========================================================================== */
+.invitation-content {
+  transition: opacity 0.9s ease;
+}
+
+.korea-editorial-frame {
+  max-width: 1040px;
+  margin: 0 auto;
+  background: var(--paper);
+  box-shadow: 0 28px 80px rgba(20, 18, 16, 0.18);
+  border-left: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+}
+
+/* ==========================================================================
+   1. TOP MINIMALIST EDITORIAL GRID BAR (Reference Image 1 Top)
+   ========================================================================== */
+.korea-grid-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 35;
+  display: grid;
+  grid-template-columns: minmax(220px, 1.2fr) 2fr;
+  background: rgba(246, 244, 239, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.korea-brand-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 20px;
+  border-right: 1px solid var(--line-strong);
+}
+
+.korea-crest-mini {
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--ink);
+  font-family: var(--font-serif);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.korea-brand-text {
+  font-family: var(--font-serif);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.korea-nav-cells {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.korea-nav-cells a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 8px;
+  border-right: 1px solid var(--line-strong);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  transition: background 0.2s, color 0.2s;
+}
+
+.korea-nav-cells a:last-child {
+  border-right: 0;
+}
+
+.korea-nav-cells a:hover {
+  background: var(--paper-warm);
+  color: var(--korea-green);
+}
+
+/* ==========================================================================
+   SECTION 1 — FULL-BLEED KOREAN GARDEN HERO (Reference Image 2 Top)
+   ========================================================================== */
+.korea-garden-hero {
+  position: relative;
+  width: 100%;
+  height: clamp(500px, 74vh, 720px);
+  overflow: hidden;
+  background: var(--korea-green-deep);
+}
+
+.korea-garden-hero-media {
+  position: absolute;
+  inset: 0;
+}
+
+.korea-garden-hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 62%;
+  filter: brightness(0.84) contrast(1.04);
+  transform: scale(1.01);
+}
+
+.korea-garden-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 44%, rgba(16, 30, 20, 0.24) 0%, rgba(12, 24, 16, 0.56) 100%),
+    linear-gradient(180deg, rgba(15, 28, 19, 0.35) 0%, rgba(15, 28, 19, 0.12) 45%, rgba(15, 28, 19, 0.58) 100%);
+  pointer-events: none;
+}
+
+.korea-garden-hero-overlay {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 32px 20px;
+  color: #fbfaf6;
+}
+
+.korea-hero-kicker {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(15px, 2vw, 20px);
+  letter-spacing: 0.08em;
+  color: rgba(251, 250, 246, 0.92);
+  margin-bottom: 10px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+}
+
+.korea-hero-names {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 7.2vw, 82px);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: 0.02em;
+  text-shadow: 0 4px 22px rgba(0, 0, 0, 0.42);
+}
+
+.korea-hero-names span {
+  white-space: nowrap;
+}
+
+.korea-hero-names i {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  margin: 0 0.18em;
+  color: #f3e7c4;
+}
+
+.korea-hero-kr-names {
+  margin-top: 12px;
+  font-family: var(--font-kr);
+  font-size: clamp(16px, 2.2vw, 21px);
+  letter-spacing: 0.28em;
+  color: rgba(255, 249, 232, 0.95);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.korea-hero-date {
+  margin-top: 16px;
+  font-family: var(--font-serif);
+  font-size: clamp(14px, 1.8vw, 18px);
+  letter-spacing: 0.24em;
+  color: rgba(251, 250, 246, 0.9);
+}
+
+.korea-hero-venue {
+  margin-top: 8px;
+  font-family: var(--font-kr);
+  font-size: clamp(12px, 1.4vw, 14px);
+  letter-spacing: 0.08em;
+  color: rgba(243, 231, 196, 0.88);
+}
+
+/* ==========================================================================
+   SECTION 2 — OFF-WHITE EDITORIAL INVITATION SPREAD (Reference Image 2 Middle)
+   ========================================================================== */
+.korea-celebrate-spread {
+  padding: clamp(56px, 8vw, 96px) clamp(24px, 7vw, 88px);
+  background: var(--paper-pure);
+  border-bottom: 1px solid var(--line);
+}
+
+.celebrate-headline-wrap {
+  max-width: 780px;
+  margin-left: auto;
+  text-align: right;
+  margin-bottom: clamp(36px, 5vw, 56px);
+}
+
+.celebrate-eyebrow {
+  font-size: 10.5px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--korea-green);
+  margin-bottom: 10px;
+}
+
+.celebrate-italic-title {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(32px, 4.6vw, 52px);
+  line-height: 1.08;
+  color: var(--ink);
+}
+
+.celebrate-asymmetric-grid {
+  display: grid;
+  grid-template-columns: minmax(220px, 38%) 1fr;
+  gap: clamp(28px, 6vw, 72px);
+  align-items: center;
+}
+
+.celebrate-left-photo {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto;
+  padding: 10px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  box-shadow: 0 16px 38px rgba(30, 28, 24, 0.08);
+  cursor: zoom-in;
+}
+
+.celebrate-left-photo img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.celebrate-right-copy {
+  color: var(--ink);
+}
+
+.celebrate-en-lead {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(18px, 2.2vw, 23px);
+  line-height: 1.52;
+  color: var(--ink-soft);
+  margin-bottom: 22px;
+}
+
+.celebrate-en-lead strong {
+  font-weight: 600;
+  font-style: normal;
+  color: var(--ink);
+}
+
+.celebrate-kr-poem {
+  font-family: var(--font-kr);
+  font-size: clamp(13.5px, 1.5vw, 15.5px);
+  line-height: 1.95;
+  color: var(--ink-soft);
+  margin-bottom: 26px;
+  padding-left: 14px;
+  border-left: 2px solid var(--korea-green);
+}
+
+.celebrate-couple-roles {
+  display: grid;
+  gap: 8px;
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 22px;
+}
+
+.role-row {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.role-label {
+  width: 108px;
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+}
+
+.role-name {
+  font-family: var(--font-kr);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.celebrate-date-block {
+  font-family: var(--font-serif);
+  font-size: clamp(16px, 1.8vw, 19px);
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.celebrate-day {
+  font-weight: 600;
+  color: var(--korea-green);
+}
+
+.celebrate-venue-line {
+  margin-top: 8px;
+  font-family: var(--font-kr);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.celebrate-venue-line span {
+  display: block;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 15px;
+  color: var(--muted);
+}
+
+/* ==========================================================================
+   SECTION 3 — EDITORIAL ASYMMETRIC SPLIT ("CAPTURING THE Moments" — Ref 1 Top)
+   ========================================================================== */
+.korea-capturing-split {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.05fr 1.25fr;
+  min-height: 540px;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.capturing-left-col {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(40px, 6vw, 76px) clamp(28px, 5vw, 64px) clamp(40px, 6vw, 76px) clamp(36px, 6vw, 76px);
+}
+
+.capturing-left-col::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 22px;
+  width: 1px;
+  background: var(--line-strong);
+}
+
+.capturing-kicker {
+  font-size: 10px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.capturing-display {
+  font-family: var(--font-serif);
+  font-size: clamp(38px, 5.4vw, 62px);
+  font-weight: 400;
+  line-height: 0.96;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+
+.capturing-display em {
+  font-family: var(--font-script);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.18em;
+  margin-left: 6px;
+  color: var(--korea-green);
+}
+
+.capturing-subtext {
+  margin-top: 20px;
+  max-width: 380px;
+  font-size: 13.5px;
+  line-height: 1.8;
+  color: var(--ink-soft);
+}
+
+.capturing-subtext-en {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 13.5px;
+  color: #556c4d;
+}
+
+.capturing-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  margin-top: 28px;
+}
+
+.capturing-links a {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--ink);
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.capturing-links a:hover {
+  color: var(--korea-green);
+  border-color: var(--korea-green);
+}
+
+.capturing-right-overlap {
+  position: relative;
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  align-items: center;
+  padding: 0;
+}
+
+.capturing-main-photo {
+  grid-column: 2 / 3;
+  grid-row: 1;
+  width: 100%;
+  height: 100%;
+  min-height: 520px;
+  overflow: hidden;
+  cursor: zoom-in;
+}
+
+.capturing-main-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+}
+
+.capturing-inset-photo {
+  grid-column: 1 / 3;
+  grid-row: 1;
+  z-index: 3;
+  width: clamp(150px, 21vw, 220px);
+  margin-left: 12px;
+  margin-top: 48px;
+  border: 5px solid var(--paper);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+  cursor: zoom-in;
+}
+
+.capturing-inset-photo img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+}
+
+/* ==========================================================================
+   SECTION 4 — DEEP ESPRESSO BAND ("A PROMISE ROOTED in FEELING" — Ref 1)
+   ========================================================================== */
+.korea-dark-feeling {
+  position: relative;
+  background: var(--espresso);
+  color: #f4efe6;
+  overflow: hidden;
+}
+
+.feeling-ghost-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.feeling-ghost {
+  position: absolute;
+  width: 210px;
+  opacity: 0.14;
+  filter: grayscale(40%) contrast(1.05);
+}
+
+.feeling-ghost-left {
+  top: 28px;
+  left: 20%;
+}
+
+.feeling-ghost-right {
+  top: 42px;
+  right: 17%;
+}
+
+.feeling-content-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.05fr 1.15fr auto;
+  gap: clamp(24px, 4vw, 48px);
+  align-items: center;
+  padding: clamp(56px, 8vw, 96px) clamp(24px, 5vw, 64px);
+}
+
+.feeling-foreground-photo {
+  border: 1px solid rgba(244, 239, 230, 0.2);
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.42);
+  overflow: hidden;
+  cursor: zoom-in;
+}
+
+.feeling-foreground-photo img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  transition: transform 0.55s ease;
+}
+
+.feeling-foreground-photo:hover img {
+  transform: scale(1.03);
+}
+
+.feeling-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 4.4vw, 50px);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: 0.04em;
+  color: #fbf7f0;
+  margin-bottom: 18px;
+}
+
+.feeling-heading em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  color: #dfd3be;
+}
+
+.feeling-body-kr {
+  font-family: var(--font-kr);
+  font-size: 13.5px;
+  line-height: 1.85;
+  color: rgba(244, 239, 230, 0.84);
+  margin-bottom: 12px;
+}
+
+.feeling-body-vi,
+.feeling-body-en {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.85;
+  color: rgba(244, 239, 230, 0.78);
+  margin-bottom: 22px;
+}
+
+.feeling-more-link {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(244, 239, 230, 0.5);
+  color: #f4efe6;
+}
+
+.feeling-crest-box {
+  align-self: end;
+  color: rgba(244, 239, 230, 0.78);
+}
+
+.octagonal-crest-svg {
+  width: 96px;
+  height: 96px;
+  display: block;
+}
+
+.crest-monogram-letters {
+  font-family: var(--font-script);
+  font-size: 40px;
+  fill: currentColor;
+}
+
+/* Marquee Ticker Strip */
+.korea-ticker-bar {
+  position: relative;
+  z-index: 2;
+  padding: 11px 0;
+  border-top: 1px solid rgba(244, 239, 230, 0.22);
+  border-bottom: 1px solid rgba(244, 239, 230, 0.22);
+  background: var(--espresso-deep);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.korea-ticker-track {
+  display: inline-flex;
+  gap: 42px;
+  font-size: 9.5px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(244, 239, 230, 0.78);
+  animation: korea-marquee 28s linear infinite;
+}
+
+@keyframes korea-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ==========================================================================
+   SECTION 5 — DARK FOREST-GREEN "WEDDING DAY SCHEDULE" TIMELINE
+   (Matching Reference Image 2 Bottom)
+   ========================================================================== */
+.korea-schedule-section {
+  position: relative;
+  padding: clamp(64px, 9vw, 110px) clamp(18px, 5vw, 56px);
+  background: #1b281e;
+  color: #f7f5ef;
+  overflow: hidden;
+}
+
+.schedule-backdrop-media {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.schedule-backdrop-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 48%;
+  filter: brightness(0.38) contrast(0.96) saturate(0.85);
+}
+
+.korea-schedule-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(24, 42, 28, 0.35) 0%, rgba(16, 28, 19, 0.76) 100%);
+  pointer-events: none;
+}
+
+.schedule-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.schedule-kicker {
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(243, 231, 196, 0.82);
+  margin-bottom: 10px;
+}
+
+.schedule-heading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(34px, 5vw, 52px);
+  color: #fbfaf5;
+  margin-bottom: clamp(36px, 5vw, 54px);
+}
+
+/* Vertical Timeline Spine with Alternating Horizontal Ticks */
+.schedule-axis {
+  position: relative;
+  display: grid;
+  gap: 6px;
+}
+
+.schedule-axis::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 50%;
+  width: 1px;
+  background: rgba(251, 250, 245, 0.68);
+  transform: translateX(-50%);
+}
+
+.schedule-row {
+  display: grid;
+  grid-template-columns: 1fr 48px 1fr;
+  align-items: center;
+  min-height: 78px;
+}
+
+.schedule-spine-node {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.schedule-tick {
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: rgba(251, 250, 245, 0.75);
+}
+
+.schedule-row.is-right .schedule-tick {
+  transform: translateX(12px);
+}
+
+.schedule-row.is-left .schedule-tick {
+  transform: translateX(-12px);
+}
+
+.schedule-row.is-right .schedule-card {
+  text-align: left;
+  padding-left: 8px;
+}
+
+.schedule-row.is-left .schedule-card {
+  text-align: right;
+  padding-right: 8px;
+}
+
+.schedule-card time {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: clamp(16px, 2vw, 20px);
+  letter-spacing: 0.06em;
+  color: #f3e7c4;
+}
+
+.schedule-card h3 {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(18px, 2.2vw, 23px);
+  color: #ffffff;
+  margin: 2px 0;
+}
+
+.schedule-card p {
+  font-size: 11.5px;
+  color: rgba(251, 250, 245, 0.72);
+  letter-spacing: 0.04em;
+}
+
+/* ==========================================================================
+   SECTION 6 — FULL-WIDTH GARDEN QUOTE BANNER ("WORDS from our PROMISE" — Ref 1)
+   ========================================================================== */
+.korea-vow-banner {
+  padding: clamp(24px, 4vw, 44px);
+  background: var(--espresso);
+}
+
+.vow-banner-frame {
+  position: relative;
+  height: clamp(320px, 48vw, 460px);
+  overflow: hidden;
+}
+
+.vow-banner-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+  filter: brightness(0.55) contrast(1.04);
+}
+
+.vow-banner-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  color: #fbfaf5;
+}
+
+.vow-banner-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(30px, 4.6vw, 50px);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
+
+.vow-banner-heading em {
+  font-family: var(--font-script);
+  font-style: normal;
+  font-size: 1.18em;
+  color: #f5e7c4;
+}
+
+.vow-banner-quote {
+  max-width: 580px;
+  font-family: var(--font-kr);
+  font-size: clamp(13px, 1.5vw, 15.5px);
+  line-height: 1.85;
+  color: rgba(251, 250, 245, 0.92);
+  margin-bottom: 14px;
+}
+
+.vow-banner-quote-en {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(13.5px, 2.5vw, 16px);
+  color: #f5e7c4;
+}
+
+.vow-banner-author {
+  font-size: 10px;
+  letter-spacing: 0.26em;
+  color: rgba(245, 231, 196, 0.85);
+}
+
+/* ==========================================================================
+   SECTION 7 — VERTICAL PINSTRIPE GALLERY ("RECENT MOMENTS" — Ref 1 Bottom)
+   ========================================================================== */
+.korea-pinstripe-gallery {
+  padding: clamp(56px, 8vw, 96px) clamp(20px, 5vw, 56px);
+  background-color: var(--paper);
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    transparent 39px,
+    rgba(34, 32, 30, 0.065) 40px
+  );
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.moments-header-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: clamp(32px, 5vw, 52px);
+}
+
+.moments-kr-tag {
+  display: block;
+  font-family: var(--font-kr);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--korea-green);
+}
+
+.moments-subnote {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.moments-header-right {
+  text-align: right;
+}
+
+.moments-title {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 5.2vw, 58px);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: 0.03em;
+  color: var(--ink);
+}
+
+.moments-sub-link {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 9.5px;
+  letter-spacing: 0.24em;
+  padding-bottom: 3px;
+  border-bottom: 1px solid var(--ink);
+}
+
+.moments-staggered-strip {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr 1fr 1.15fr 0.85fr;
+  gap: clamp(12px, 2vw, 22px);
+  align-items: end;
+}
+
+.moment-card {
+  position: relative;
+  overflow: hidden;
+  background: #ffffff;
+  padding: 6px;
+  border: 1px solid var(--line);
+  box-shadow: 0 12px 30px rgba(25, 23, 20, 0.08);
+  cursor: zoom-in;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.moment-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 38px rgba(25, 23, 20, 0.14);
+}
+
+.moment-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.moment-card-sm img {
+  aspect-ratio: 3 / 4;
+}
+
+.moment-card-tall img {
+  aspect-ratio: 2 / 3;
+}
+
+.moment-card-mid img {
+  aspect-ratio: 4 / 3.2;
+}
+
+/* ==========================================================================
+   SECTION 8 — VENUE & DIRECTIONS (서울 신라호텔 · 다이너스티 홀)
+   ========================================================================== */
+.korea-venue-section {
+  padding: clamp(52px, 7vw, 84px) clamp(20px, 5vw, 64px);
+  background: var(--paper-pure);
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.venue-stationery-box {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: clamp(36px, 5vw, 56px) clamp(24px, 5vw, 52px);
+  border: 2px solid var(--korea-green);
+  background: #fffef9;
+  text-align: center;
+  overflow: hidden;
+}
+
+.venue-stationery-box::after {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(36, 75, 53, 0.25);
+  pointer-events: none;
+}
+
+.venue-sprig {
+  position: absolute;
+  width: 110px;
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+.venue-sprig-left {
+  top: -54px;
+  left: -34px;
+  transform: rotate(150deg);
+}
+
+.venue-sprig-right {
+  bottom: -58px;
+  right: -30px;
+  transform: rotate(-30deg);
+}
+
+.venue-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  color: var(--korea-green);
+  margin-bottom: 12px;
+}
+
+.venue-main-name {
+  font-family: var(--font-kr);
+  font-size: clamp(24px, 3.8vw, 34px);
+  font-weight: 700;
+  color: var(--korea-green);
+  margin-bottom: 6px;
+}
+
+.venue-en-name {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(19px, 2.5vw, 24px);
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+
+.venue-address-line {
+  font-size: 13.5px;
+  line-height: 1.85;
+  color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+
+.venue-transit-note {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+.venue-map-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 26px;
+  border: 1px solid var(--korea-green);
+  background: var(--korea-green);
+  color: #fffef8;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.venue-map-btn:hover {
+  background: #183625;
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   SECTION 9 — 3-COLUMN BORDERED FOOTER & "The GUEST LIST" RSVP (Ref 1 Bottom)
+   ========================================================================== */
+.korea-footer-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.1fr 1.25fr;
+  border-bottom: 1px solid var(--line-strong);
+  background: var(--paper);
+}
+
+.footer-col {
+  padding: clamp(32px, 4.5vw, 48px) clamp(20px, 3.5vw, 36px);
+  border-right: 1px solid var(--line-strong);
+}
+
+.footer-col:last-child {
+  border-right: 0;
+}
+
+.footer-col-links {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.footer-col-kicker {
+  font-size: 9.5px;
+  letter-spacing: 0.24em;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.footer-col-links a {
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  color: var(--ink-soft);
+  transition: color 0.2s;
+}
+
+.footer-col-links a:hover {
+  color: var(--korea-green);
+}
+
+.footer-col-crest {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.footer-crest-wrap {
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+
+.footer-crest-tagline {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  letter-spacing: 0.12em;
+  color: var(--ink);
+}
+
+.footer-crest-tagline em {
+  font-family: var(--font-script);
+  font-style: normal;
+  font-size: 1.35em;
+}
+
+.footer-crest-couple {
+  margin-top: 8px;
+  font-family: var(--font-kr);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--korea-green);
+}
+
+.footer-crest-date {
+  margin-top: 4px;
+  font-size: 10.5px;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+}
+
+/* Column 3: The GUEST LIST RSVP */
+.guestlist-title {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+}
+
+.guestlist-title em {
+  font-family: var(--font-script);
+  font-style: normal;
+  font-size: 1.25em;
+  margin-right: 4px;
+}
+
+.guestlist-desc {
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.guestlist-form {
+  display: grid;
+  gap: 8px;
+}
+
+.guestlist-form input,
+.guestlist-form select,
+.guestlist-form textarea {
+  width: 100%;
+  padding: 9px 11px;
+  border: 1px solid var(--line-strong);
+  background: #ffffff;
+  font-size: 12.5px;
+  color: var(--ink);
+}
+
+.guestlist-row {
+  display: grid;
+  grid-template-columns: 1fr 78px;
+  gap: 8px;
+}
+
+.guestlist-submit-btn {
+  padding: 10px 16px;
+  border: 1px solid var(--korea-green);
+  background: var(--korea-green);
+  color: #fffef8;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.guestlist-submit-btn:hover {
+  background: #173322;
+}
+
+.guestlist-status {
+  font-size: 12px;
+  color: var(--korea-green);
+  min-height: 1.3em;
+}
+
+.korea-bottom-legal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 14px 24px;
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  background: var(--paper-pure);
+}
+
+/* Lightbox Modal */
+.korea-lightbox {
+  border: 0;
+  background: transparent;
+  padding: 36px 18px 20px;
+  width: 100vw;
+  max-width: 100vw;
+  height: 100dvh;
+  max-height: 100dvh;
+  color: #ffffff;
+  margin: 0;
+  text-align: center;
+}
+
+.korea-lightbox::backdrop {
+  background: rgba(16, 24, 18, 0.94);
+}
+
+.korea-lightbox img {
+  height: calc(100dvh - 110px);
+  width: 100%;
+  object-fit: contain;
+}
+
+.lightbox-caption {
+  font-family: var(--font-kr);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  padding-top: 14px;
+}
+
+.lightbox-close {
+  position: absolute;
+  right: 16px;
+  top: 12px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: var(--korea-green);
+  color: #ffffff;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: var(--korea-green);
+  color: #ffffff;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.lightbox-prev { left: 14px; }
+.lightbox-next { right: 14px; }
+
+/* ==========================================================================
+   RESPONSIVE MOBILE BREAKPOINTS
+   ========================================================================== */
+@media (max-width: 820px) {
+  .korea-grid-topbar {
+    grid-template-columns: 1fr;
+  }
+  .korea-brand-cell {
+    justify-content: center;
+    border-right: 0;
+    border-bottom: 1px solid var(--line-strong);
+    padding: 10px 14px;
+  }
+  .korea-nav-cells {
+    overflow-x: auto;
+  }
+  .korea-nav-cells a {
+    padding: 10px 6px;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    white-space: nowrap;
+  }
+
+  .celebrate-headline-wrap {
+    text-align: center;
+    margin-inline: auto;
+  }
+  .celebrate-asymmetric-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .korea-capturing-split {
+    grid-template-columns: 1fr;
+  }
+  .capturing-right-overlap {
+    grid-template-columns: 90px 1fr;
+    padding: 0 16px 32px;
+  }
+  .capturing-main-photo {
+    min-height: 360px;
+  }
+
+  .feeling-content-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .feeling-crest-box {
+    justify-self: center;
+  }
+
+  .moments-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .moments-header-right {
+    text-align: left;
+  }
+  .moments-staggered-strip {
+    grid-template-columns: repeat(2, 1fr);
+    align-items: stretch;
+  }
+  .moment-card:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .korea-footer-grid {
+    grid-template-columns: 1fr;
+  }
+  .footer-col {
+    border-right: 0;
+    border-bottom: 1px solid var(--line-strong);
+  }
+}
+
+@media (max-width: 520px) {
+  .opening-decoration {
+    inset: 10px;
+    border-radius: 60px 60px 8px 8px;
+  }
+  .opening-doodle {
+    width: 56px;
+    opacity: 0.55;
+  }
+  .opening-polaroid {
+    padding: 13px 14px;
+  }
+  .opening-photo {
+    height: clamp(190px, 36vh, 330px);
+  }
+  .schedule-row {
+    grid-template-columns: 1fr 28px 1fr;
+  }
+  .schedule-tick {
+    width: 14px;
+  }
+  .schedule-row.is-right .schedule-tick {
+    transform: translateX(7px);
+  }
+  .schedule-row.is-left .schedule-tick {
+    transform: translateX(-7px);
+  }
+  .schedule-card h3 {
+    font-size: 16px;
+  }
+  .schedule-card p {
+    font-size: 10.5px;
+  }
+}

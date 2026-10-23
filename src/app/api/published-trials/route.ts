@@ -1,30 +1,24 @@
 import { randomBytes } from "node:crypto";
 import { mkdir, writeFile } from "node:fs/promises";
+import os from "node:os";
 import path from "node:path";
 import { NextResponse } from "next/server";
 import { getDatabase } from "@/lib/mongodb";
+import { getMemoryTrialStore, type PublishedTrialPayload } from "@/lib/published-trials-store";
 
 export const runtime = "nodejs";
-
-export interface PublishedTrialPayload {
-  id: string;
-  templateCode: string;
-  title?: string;
-  imageMap: Record<string, string>;
-  textMap: Record<string, string>;
-  musicSrc?: string;
-  musicTitle?: string;
-  createdAt: string;
-}
+export const maxDuration = 30;
 
 const DATA_DIR = path.join(process.cwd(), ".data", "published-trials");
+const TMP_DATA_DIR = path.join(os.tmpdir(), "kismet-published-trials");
 
 export async function POST(request: Request) {
   let body: unknown;
   try {
-    body = await request.json();
+    const rawText = await request.text();
+    body = rawText ? JSON.parse(rawText) : null;
   } catch {
-    return NextResponse.json({ error: "Dữ liệu JSON không hợp lệ" }, { status: 400 });
+    return NextResponse.json({ error: "Dữ liệu JSON không hợp lệ hoặc quá lớn" }, { status: 400 });
   }
 
   if (!body || typeof body !== "object") {
@@ -70,27 +64,45 @@ export async function POST(request: Request) {
     createdAt: new Date().toISOString(),
   };
 
-  // 1. Always persist to local server disk (.data/published-trials) so it works even without MongoDB
+  // 1. Save in process memory cache immediately (cap at 60 entries)
+  const memStore = getMemoryTrialStore();
+  if (memStore.size >= 60) {
+    const oldestKey = memStore.keys().next().value;
+    if (oldestKey) memStore.delete(oldestKey);
+  }
+  memStore.set(id, record);
+
+  // 2. Persist to local server disk (.data/published-trials or os.tmpdir fallback)
+  const serialized = JSON.stringify(record);
   try {
     await mkdir(DATA_DIR, { recursive: true });
-    const filePath = path.join(DATA_DIR, `${id}.json`);
-    await writeFile(filePath, JSON.stringify(record), "utf8");
-  } catch (err) {
-    console.warn("Could not write published trial to local disk:", err);
+    await writeFile(path.join(DATA_DIR, `${id}.json`), serialized, "utf8");
+  } catch {
+    try {
+      await mkdir(TMP_DATA_DIR, { recursive: true });
+      await writeFile(path.join(TMP_DATA_DIR, `${id}.json`), serialized, "utf8");
+    } catch (err) {
+      console.warn("Could not write published trial to disk:", err);
+    }
   }
 
-  // 2. Also persist to MongoDB if configured
+  // 3. Persist to MongoDB if configured (bounded by 2.5s timeout, without mutating _id inside $set)
   if (process.env.MONGODB_URI) {
     try {
-      const db = await getDatabase();
-      await db
-        .collection<PublishedTrialPayload & { _id: string }>("published_trials")
-        .updateOne({ _id: id }, { $set: { ...record, _id: id } }, { upsert: true });
+      await Promise.race([
+        (async () => {
+          const db = await getDatabase();
+          await db
+            .collection<PublishedTrialPayload & { _id: string }>("published_trials")
+            .updateOne({ _id: id }, { $set: record }, { upsert: true });
+        })(),
+        new Promise((_, reject) => setTimeout(() => reject(new Error("MongoDB timeout")), 2500)),
+      ]);
     } catch (err) {
       console.warn("Could not save published trial to MongoDB:", err);
     }
   }
 
   const shareUrl = `/thiep/${encodeURIComponent(templateCode)}?custom=${encodeURIComponent(id)}`;
-  return NextResponse.json({ ok: true, id, shareUrl, record }, { status: 201 });
+  return NextResponse.json({ ok: true, id, shareUrl }, { status: 201 });
 }

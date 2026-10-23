@@ -16,6 +16,7 @@ export const WEDDING_SONGS = [
   { id: "giao-huong-tan-co", title: "Giao Hưởng Tân Cổ", artist: "Nhạc bạn cung cấp", src: "/music/wedding/giao-huong-tan-co.mp3" },
   { id: "young-and-beautiful", title: "Young and Beautiful", artist: "Nhạc bạn cung cấp", src: "/music/wedding/young-and-beautiful.mp3" },
   { id: "young-and-beautiful-khong-loi", title: "Young and Beautiful (Không lời)", artist: "Nhạc bạn cung cấp", src: "/music/wedding/young-and-beautiful-khong-loi.mp3" },
+  { id: "leehi-only", title: "ONLY — LeeHi (Korea Style)", artist: "LeeHi", src: "/music/wedding/leehi-only.mp3" },
 ];
 
 export const DEFAULT_WEDDING_SONG = WEDDING_SONGS.find((song) => song.id === "mot-doi")!;

@@ -114,47 +114,10 @@ body { background: radial-gradient(ellipse at 10% 0%, #e4bdbc 0, transparent 52%
   pointer-events: none;
   user-select: none;
 }
-.collage-original-main {
-  position: absolute;
-  z-index: 1;
-  top: 11.7%;
-  left: 21%;
-  width: 54%;
-  aspect-ratio: .735;
-  margin: 0;
-  overflow: hidden;
-  transform: rotate(-3deg);
-  transform-origin: top left;
-}
-.collage-original-main img,
-.collage-original-strip img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.collage-original-main img { object-position: center 43%; }
+.collage-original-main,
 .collage-original-strip {
-  position: absolute;
-  z-index: 2;
-  top: 35.8%;
-  left: 68.2%;
-  display: grid;
-  width: 24%;
-  aspect-ratio: .51;
-  grid-template-rows: 1fr 1fr;
-  gap: 1.2%;
-  overflow: hidden;
-  transform: rotate(8deg);
-  transform-origin: top left;
+  display: none !important;
 }
-.collage-original-strip figure {
-  min-height: 0;
-  margin: 0;
-  overflow: hidden;
-}
-.collage-original-strip figure:first-child img { object-position: center 54%; }
-.collage-original-strip figure:last-child img { object-position: center 48%; }
 .seal-badge {
   position: absolute;
   z-index: 5;
@@ -198,10 +161,10 @@ body { background: radial-gradient(ellipse at 10% 0%, #e4bdbc 0, transparent 52%
 .family-card {
   position: absolute;
   z-index: 6;
-  left: 15.8%;
-  top: 55.4%;
-  width: 31.3%;
-  height: 32.4%;
+  left: 15.2%;
+  top: 56.2%;
+  width: 32.2%;
+  height: 31.8%;
   padding: 0;
   background: transparent;
   clip-path: none;
@@ -212,22 +175,25 @@ body { background: radial-gradient(ellipse at 10% 0%, #e4bdbc 0, transparent 52%
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 .family-card::before, .family-card::after { display: none; }
 .family-card .suite-kicker {
-  margin: 0 0 0.45cqw;
+  margin: 0 0 0.35cqw;
   color: #70702e;
-  font-size: 0.92cqw;
+  font-size: 0.85cqw;
   font-weight: 600;
-  letter-spacing: .18em;
+  letter-spacing: .16em;
+  line-height: 1.15;
 }
 .tag-couple {
   display: grid;
   gap: 0;
   color: #5e0b15;
   font-family: 'Great Vibes', cursive;
-  font-size: 3.45cqw;
-  line-height: .9;
+  font-size: 3.15cqw;
+  line-height: .88;
 }
 .tag-couple i {
   color: #b8797d;
@@ -236,62 +202,63 @@ body { background: radial-gradient(ellipse at 10% 0%, #e4bdbc 0, transparent 52%
   line-height: 1;
 }
 .tag-date {
-  margin: 0.45cqw 0 0.65cqw;
+  margin: 0.35cqw 0 0.45cqw;
   color: #70702e;
   font-family: 'Playfair Display', serif;
-  font-size: 0.96cqw;
-  letter-spacing: .18em;
+  font-size: 0.88cqw;
+  letter-spacing: .16em;
+  line-height: 1.15;
 }
 .family-ornament {
   display: block;
-  margin: 0 0 0.55cqw;
+  margin: 0 0 0.4cqw;
   color: #70702e;
-  font-size: 2.0cqw;
+  font-size: 1.75cqw;
   line-height: 1;
 }
 .family-card h2 {
-  margin: 0.25cqw 0 0.7cqw;
+  margin: 0.2cqw 0 0.55cqw;
   color: #5e0b15;
   font-family: 'Playfair Display', serif;
-  font-size: 4.05cqw;
+  font-size: 3.65cqw;
   font-weight: 400;
-  line-height: 1.02;
+  line-height: 1.0;
 }
 .family-card h2 em {
   color: #b8797d;
   font-family: 'Great Vibes', cursive;
-  font-size: 1.24em;
+  font-size: 1.22em;
   font-weight: 400;
 }
 .family-copy {
-  margin: 0 auto 0.85cqw;
+  margin: 0 auto 0.65cqw;
   max-width: 96%;
   color: #736c5b;
-  font-size: 1.05cqw;
-  line-height: 1.48;
+  font-size: 0.96cqw;
+  line-height: 1.38;
 }
 .family-date {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.15cqw;
-  width: 92%;
-  margin: 0.3cqw auto 0;
-  padding: 0.75cqw 0;
+  gap: 1.05cqw;
+  width: 90%;
+  margin: 0.2cqw auto 0;
+  padding: 0.6cqw 0;
   border-top: 1px solid #70702e44;
   border-bottom: 1px solid #70702e44;
   color: #5e0b15;
 }
 .family-date strong {
   font-family: 'Playfair Display', serif;
-  font-size: 2.65cqw;
+  font-size: 2.4cqw;
   font-weight: 400;
   line-height: 1;
 }
 .family-date span {
-  font-size: 0.82cqw;
-  letter-spacing: .13em;
-  line-height: 1.42;
+  font-size: 0.76cqw;
+  letter-spacing: .12em;
+  line-height: 1.35;
 }
 .suite-details { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; gap: 18px; }
 .venue-card { display: grid; justify-items: center; padding: 24px 18px; background: #fbf8f0; color: #514c3b; text-align: center; box-shadow: 0 10px 28px #4f263020; }
