@@ -1,0 +1,23 @@
+{
+  "templateNumber": 6,
+  "name": "Tuscany Editorial",
+  "tags": ["Modern", "Minimalist", "Elegant", "Tuscany", "Editorial"],
+  "couple": {
+    "bride": "Amelia",
+    "groom": "Thomas",
+    "fullNameBride": "Amelia Vance",
+    "fullNameGroom": "Thomas Sterling",
+    "monogram": "A | T"
+  },
+  "date": "2025-09-13",
+  "venue": {
+    "name": "Villa La Fiora",
+    "address": "Tuscany, Italy",
+    "coordinates": "43.7696° N, 11.2558° E",
+    "country": "Italy"
+  },
+  "music": {
+    "title": "City of Stars (Acoustic)",
+    "src": "music/city-of-stars.mp3"
+  }
+}

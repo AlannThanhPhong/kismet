@@ -435,6 +435,16 @@
   margin: 0 0 10px;
 }
 
+.ws-project-story-body > p.ws-project-theme-name {
+  font-size: 11.5px;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--ws-muted);
+  margin: 0 0 10px;
+}
+
 .white-store .ws-card-tags {
   display: flex;
   flex-wrap: wrap;
@@ -588,6 +598,13 @@
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+
+  .ws-project-story-body > p.ws-project-theme-name {
+    font-size: 9.5px;
+    line-height: 1.35;
+    letter-spacing: 0.06em;
+    -webkit-line-clamp: 1;
   }
 
   .white-store .ws-project-tags {

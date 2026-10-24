@@ -1,0 +1,19 @@
+{
+  "templateNumber": 5,
+  "name": "Doodle Art",
+  "tags": ["Doodle Art", "Cartoon Couple", "Hand-drawn", "RSVP Interactive"],
+  "couple": {
+    "bride": "Amélie Laurent",
+    "groom": "Gabriel Moreau"
+  },
+  "date": "2027-06-12",
+  "venue": {
+    "name": "Château Belle Étoile",
+    "address": "Aix-en-Provence, Provence-Alpes-Côte d’Azur, France",
+    "country": "France"
+  },
+  "music": {
+    "title": "Young and Beautiful (Instrumental)",
+    "src": "music/young-and-beautiful-khong-loi.mp3"
+  }
+}

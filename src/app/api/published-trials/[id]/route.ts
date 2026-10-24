@@ -6,6 +6,7 @@ import { getDatabase } from "@/lib/mongodb";
 import { getMemoryTrialStore, type PublishedTrialPayload } from "@/lib/published-trials-store";
 
 export const runtime = "nodejs";
+export const maxDuration = 30;
 
 const DATA_DIR = path.join(process.cwd(), ".data", "published-trials");
 const TMP_DATA_DIR = path.join(os.tmpdir(), "kismet-published-trials");
@@ -18,13 +19,28 @@ export async function GET(_request: Request, context: Context) {
     return NextResponse.json({ error: "Mã bản xem thử không hợp lệ" }, { status: 400 });
   }
 
-  // 1. Check in-memory store first
+  // MongoDB is the source of truth for published invitations and their Cloudinary URLs.
+  if (process.env.MONGODB_URI) {
+    try {
+      const db = await getDatabase();
+      const record = await db
+        .collection<PublishedTrialPayload & { _id: string }>("published_trials")
+        .findOne({ _id: id });
+      if (record) {
+        getMemoryTrialStore().set(id, record);
+        return NextResponse.json({ record }, { headers: { "Cache-Control": "no-store" } });
+      }
+    } catch {
+      // Ignore DB error
+    }
+  }
+
+  // Fall back to process memory and disk if MongoDB is unavailable (for local drafts).
   const memRecord = getMemoryTrialStore().get(id);
   if (memRecord) {
     return NextResponse.json({ record: memRecord }, { headers: { "Cache-Control": "no-store" } });
   }
 
-  // 2. Try reading from local server disk (.data or tmpdir)
   for (const dir of [DATA_DIR, TMP_DATA_DIR]) {
     try {
       const filePath = path.join(dir, `${id}.json`);
@@ -34,27 +50,6 @@ export async function GET(_request: Request, context: Context) {
       return NextResponse.json({ record }, { headers: { "Cache-Control": "no-store" } });
     } catch {
       // Try next fallback
-    }
-  }
-
-  // 3. Try reading from MongoDB if configured (bounded by 2.5s timeout)
-  if (process.env.MONGODB_URI) {
-    try {
-      const record = await Promise.race([
-        (async () => {
-          const db = await getDatabase();
-          return db
-            .collection<PublishedTrialPayload & { _id: string }>("published_trials")
-            .findOne({ _id: id });
-        })(),
-        new Promise<null>((resolve) => setTimeout(() => resolve(null), 2500)),
-      ]);
-      if (record) {
-        getMemoryTrialStore().set(id, record);
-        return NextResponse.json({ record }, { headers: { "Cache-Control": "no-store" } });
-      }
-    } catch {
-      // Ignore DB error
     }
   }
 

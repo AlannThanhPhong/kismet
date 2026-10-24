@@ -28,7 +28,6 @@ import { WEDDING_SONGS } from "@/lib/wedding-songs";
 import {
   EXACT_TEMPLATES,
   applyCustomizationsToDoc,
-  compressImageFile,
   getExactTemplateByCode,
   installInteractiveHighlightBridge,
   inspectTemplateDom,
@@ -40,6 +39,10 @@ import {
   type TemplateTextSlot,
 } from "@/lib/template-customizer-bridge";
 import type { PublishedTrialPayload } from "@/lib/published-trials-store";
+import {
+  persistImageUrlToCloudinary,
+  uploadImageToCloudinary,
+} from "@/lib/cloudinary-upload-client";
 
 interface ExactTemplateCustomizerProps {
   initialTemplateCode?: string | null;
@@ -264,15 +267,15 @@ export default function ExactTemplateCustomizer({
   const handleReplaceImageFile = async (slotId: string, file?: File | null) => {
     if (!file) return;
     try {
-      showToast("Đang nén & thay ảnh vào thiệp…");
-      const compressedDataUrl = await compressImageFile(file, 1080, 0.76);
+      showToast("Đang tối ưu và lưu ảnh lên Cloudinary…");
+      const cloudinaryUrl = await uploadImageToCloudinary(file);
       setImageMap((prev) => ({
         ...prev,
-        [slotId]: compressedDataUrl,
+        [slotId]: cloudinaryUrl,
       }));
       showToast("Đã thay ảnh thành công!");
-    } catch {
-      showToast("Không thể đọc file ảnh này, vui lòng thử ảnh khác.");
+    } catch (error) {
+      showToast(error instanceof Error ? error.message : "Không thể lưu ảnh lên Cloudinary.");
     }
   };
 
@@ -334,6 +337,20 @@ export default function ExactTemplateCustomizer({
   const handlePublishTrial = async () => {
     setIsPublishing(true);
     try {
+      let persistentImageMap = imageMap;
+      if (Object.values(imageMap).some((imageUrl) => imageUrl.startsWith("data:image/"))) {
+        showToast("Đang chuyển ảnh đã lưu cũ lên Cloudinary để bản xuất dùng ổn định…");
+        persistentImageMap = Object.fromEntries(
+          await Promise.all(
+            Object.entries(imageMap).map(async ([slotId, imageUrl]) => [
+              slotId,
+              await persistImageUrlToCloudinary(imageUrl),
+            ] as const),
+          ),
+        );
+        setImageMap(persistentImageMap);
+      }
+
       const clientTrialId =
         publishedId && /^[a-zA-Z0-9_-]{4,40}$/.test(publishedId)
           ? publishedId
@@ -343,7 +360,7 @@ export default function ExactTemplateCustomizer({
         id: clientTrialId,
         templateCode: currentTemplate.code,
         title: `${currentTemplate.name} — Bản thiết kế xem thử`,
-        imageMap,
+        imageMap: persistentImageMap,
         textMap,
         musicSrc,
         musicTitle,
@@ -360,6 +377,9 @@ export default function ExactTemplateCustomizer({
 
       let finalId = clientTrialId;
       let finalShareUrl = `/thiep/${encodeURIComponent(currentTemplate.code)}?custom=${encodeURIComponent(clientTrialId)}`;
+      const hasCloudinaryImages = Object.values(persistentImageMap).some((url) =>
+        /^https:\/\/res\.cloudinary\.com\//i.test(url),
+      );
 
       // 2. Sync to server API (/api/published-trials)
       try {
@@ -381,6 +401,11 @@ export default function ExactTemplateCustomizer({
           });
         }
 
+        if (!res.ok && hasCloudinaryImages) {
+          const errorBody = (await res.json().catch(() => null)) as { error?: string } | null;
+          throw new Error(errorBody?.error || "Không thể lưu thiệp có ảnh lên MongoDB. Vui lòng thử xuất bản lại.");
+        }
+
         if (res.ok) {
           const json = (await res.json()) as {
             id?: string;
@@ -389,7 +414,8 @@ export default function ExactTemplateCustomizer({
           if (json.id) finalId = json.id;
           if (json.shareUrl) finalShareUrl = json.shareUrl;
         }
-      } catch {
+      } catch (error) {
+        if (hasCloudinaryImages) throw error;
         // Even if server API is unreachable, IndexedDB + localStorage have the record ready for this device
       }
 
@@ -405,8 +431,8 @@ export default function ExactTemplateCustomizer({
       } else {
         showToast("Đã xuất bản thiệp xem thử thành công!");
       }
-    } catch {
-      showToast("Có lỗi khi xuất bản, vui lòng thử lại.");
+    } catch (error) {
+      showToast(error instanceof Error ? error.message : "Có lỗi khi xuất bản, vui lòng thử lại.");
     } finally {
       setIsPublishing(false);
     }
