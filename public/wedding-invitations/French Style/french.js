@@ -44,31 +44,51 @@
     }
   }
 
-  let isGateOpened = false;
+  let isFlapOpened = false;
+  let isInvitationEntered = false;
+
   function openFrenchEnvelope() {
-    if (isGateOpened) return;
-    isGateOpened = true;
+    if (isFlapOpened) return;
+    isFlapOpened = true;
 
     startMusicWithFadeIn();
 
     if (coverGate) {
       coverGate.classList.add('is-opening');
     }
-    document.body.classList.remove('is-locked');
 
+    // After 3D flap flip & card rise, reveal the enter button
     window.setTimeout(() => {
       if (coverGate) {
-        coverGate.classList.add('is-opened');
+        coverGate.classList.add('is-revealed');
       }
-    }, 880);
+    }, 700);
+  }
+
+  function enterInvitation() {
+    if (isInvitationEntered) return;
+    isInvitationEntered = true;
+
+    if (coverGate) {
+      coverGate.classList.add('is-opened');
+    }
+    document.body.classList.remove('is-locked');
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   if (window.location.search.includes('open=1')) {
-    isGateOpened = true;
+    isFlapOpened = true;
+    isInvitationEntered = true;
     if (coverGate) {
-      coverGate.classList.add('is-opening', 'is-opened');
+      coverGate.classList.add('is-opening', 'is-revealed', 'is-opened');
     }
     document.body.classList.remove('is-locked');
+  } else if (window.location.search.includes('reveal=1')) {
+    isFlapOpened = true;
+    if (coverGate) {
+      coverGate.classList.add('is-opening', 'is-revealed');
+    }
   }
 
   if (openBtn) {
@@ -80,7 +100,29 @@
 
   if (openTrigger) {
     openTrigger.addEventListener('click', () => {
-      openFrenchEnvelope();
+      if (!isFlapOpened) {
+        openFrenchEnvelope();
+      } else if (coverGate && coverGate.classList.contains('is-revealed')) {
+        enterInvitation();
+      }
+    });
+  }
+
+  const enterBtn = document.getElementById('french-enter-btn');
+  if (enterBtn) {
+    enterBtn.addEventListener('click', (event) => {
+      event.stopPropagation();
+      enterInvitation();
+    });
+  }
+
+  const letterCard = document.getElementById('french-letter-card');
+  if (letterCard) {
+    letterCard.addEventListener('click', (event) => {
+      if (isFlapOpened) {
+        event.stopPropagation();
+        enterInvitation();
+      }
     });
   }
 

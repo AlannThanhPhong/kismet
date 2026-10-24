@@ -9,3 +9,4 @@
 
 /* Brand palette: ivory, beige, taupe, sage and blush; dark neutral text for readability. */
 .white-store .ws-primary,.design-studio .ws-primary{background:var(--ws-sage)!important;color:var(--ws-ink)!important}.white-store .ws-primary:hover,.design-studio .ws-primary:hover{background:var(--ws-beige)!important}.ws-step-number{color:var(--ws-muted)}
+.ws-account-link{font-size:10px;text-decoration:none;color:inherit;white-space:nowrap;padding:4px 8px;border:1px solid #D1C4B8}
