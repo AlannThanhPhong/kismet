@@ -7,6 +7,16 @@
   const audioBtn = document.getElementById('diary-audio-btn');
   const audioLabel = document.getElementById('diary-audio-label');
 
+  if (coverGate) {
+    console.log('DEBUG_VIEW:', {
+      winW: window.innerWidth,
+      bodyScrollW: document.body.scrollWidth,
+      gateOffsetW: coverGate.offsetWidth,
+      gateScrollW: coverGate.scrollWidth,
+      stageOffsetW: document.getElementById('french-envelope-stage')?.offsetWidth
+    });
+  }
+
   function updateAudioUi(playing) {
     if (!audioBtn) return;
     const title = (bgm && bgm.getAttribute('data-song-title')) || 'Qui se souvient de cette ruelle';

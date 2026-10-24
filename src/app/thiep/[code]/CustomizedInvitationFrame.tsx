@@ -84,6 +84,42 @@ function CustomizedInvitationFrameInner({ code, src, title }: Props) {
   }, [customId, code, updateTrialData]);
 
   useEffect(() => {
+    if (!customId) return;
+
+    let stopped = false;
+    let timer = 0;
+    const checkAvailability = async () => {
+      if (stopped) return;
+      try {
+        const response = await fetch(`/api/published-trials/${encodeURIComponent(customId)}`, { cache: "no-store" });
+        if (response.status !== 410) return;
+        const result = await response.json().catch(() => null) as { error?: string; expiresAt?: string | null } | null;
+        stopped = true;
+        window.clearInterval(timer);
+        updateTrialData(null);
+        setTrialCanEdit(false);
+        setTrialError({
+          message: result?.error || "Thiệp này hiện không khả dụng.",
+          expiresAt: result?.expiresAt,
+        });
+      } catch {
+        // Keep the already loaded invitation visible during a temporary network failure.
+      }
+    };
+    const onVisibilityChange = () => {
+      if (!document.hidden) void checkAvailability();
+    };
+
+    timer = window.setInterval(() => void checkAvailability(), 30_000);
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    return () => {
+      stopped = true;
+      window.clearInterval(timer);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+    };
+  }, [customId, updateTrialData]);
+
+  useEffect(() => {
     if (!customId || !trialData?.expiresAt) return;
     const remaining = new Date(trialData.expiresAt).getTime() - Date.now();
     if (remaining <= 0) {
@@ -266,7 +302,7 @@ function CustomizedInvitationFrameInner({ code, src, title }: Props) {
             <p style={{ color: "#9b755d", fontSize: 11, letterSpacing: ".16em", fontWeight: 700 }}>KISMET LOVE</p>
             <h1 style={{ fontFamily: "Georgia, serif", fontWeight: 400, fontSize: 30 }}>{trialError.message}</h1>
             {trialError.expiresAt && <p>Hết hạn lúc {new Date(trialError.expiresAt).toLocaleString("vi-VN", { dateStyle: "medium", timeStyle: "short" })}.</p>}
-            <p>Chủ tài khoản có thể xem trạng thái thiệp trong trang tài khoản. Liên hệ quản trị viên nếu cần gia hạn.</p>
+            <p>Chủ tài khoản có thể xem trạng thái thiệp trong trang tài khoản. Liên hệ quản trị viên để hỏi về việc mở lại hoặc gia hạn thiệp.</p>
             <a href="/tai-khoan" style={{ display: "inline-block", marginTop: 10, padding: "11px 18px", borderRadius: 999, background: "#762c29", color: "#fff9ee", textDecoration: "none", fontSize: 13 }}>Đến trang tài khoản</a>
           </div>
         </div>

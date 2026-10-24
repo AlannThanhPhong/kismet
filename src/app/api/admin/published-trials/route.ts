@@ -24,6 +24,7 @@ export async function GET(request: Request) {
       const expiry = getPublishedTrialExpiry(record);
       const expiresAt = expiry?.toISOString() ?? null;
       const remaining = expiry ? expiry.getTime() - now : 0;
+      const disabled = Boolean(record.disabledAt);
       return {
         id: record.id || record._id,
         templateCode: record.templateCode,
@@ -31,8 +32,9 @@ export async function GET(request: Request) {
         createdAt: record.createdAt,
         ownerEmail: record.ownerEmail || null,
         expiresAt,
+        disabledAt: record.disabledAt || null,
         renewalCount: record.renewalCount || 0,
-        status: remaining > 0 ? "active" as const : "expired" as const,
+        status: disabled ? "disabled" as const : remaining > 0 ? "active" as const : "expired" as const,
         daysRemaining: remaining > 0 ? Math.ceil(remaining / (24 * 60 * 60 * 1000)) : 0,
       };
     });

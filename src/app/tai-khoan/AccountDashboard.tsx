@@ -11,7 +11,7 @@ type Trial = {
   ownerEmail?: string | null;
   createdAt: string;
   expiresAt: string | null;
-  status: "active" | "expired";
+  status: "active" | "expired" | "disabled";
   daysRemaining: number;
   renewalCount?: number;
 };
@@ -26,7 +26,6 @@ export default function AccountDashboard() {
   const [adminTrials, setAdminTrials] = useState<Trial[]>([]);
   const [loading, setLoading] = useState(true);
   const [formError, setFormError] = useState("");
-  const [busyRenewal, setBusyRenewal] = useState<string | null>(null);
   const [notice, setNotice] = useState("");
   const [refreshTick, setRefreshTick] = useState(0);
 
@@ -103,26 +102,6 @@ export default function AccountDashboard() {
     setNotice("Bạn đã đăng xuất.");
   };
 
-  const renewTrial = async (trialId: string) => {
-    setBusyRenewal(trialId);
-    setFormError("");
-    try {
-      const response = await fetch(`/api/admin/published-trials/${encodeURIComponent(trialId)}/renew`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: "{}",
-      });
-      const result = await response.json() as { error?: string };
-      if (!response.ok) throw new Error(result.error || "Gia hạn chưa thành công.");
-      setNotice("Đã gia hạn thêm 7 ngày.");
-      await loadAccount();
-    } catch (error) {
-      setFormError(error instanceof Error ? error.message : "Gia hạn chưa thành công.");
-    } finally {
-      setBusyRenewal(null);
-    }
-  };
-
   const sharePath = (trial: Trial) => `/thiep/${encodeURIComponent(trial.templateCode)}?custom=${encodeURIComponent(trial.id)}`;
   const currentDays = (trial: Trial) => {
     if (!trial.expiresAt) return 0;
@@ -164,10 +143,11 @@ export default function AccountDashboard() {
               {myTrials.length ? <div className="account-trial-grid">
                 {myTrials.map((trial) => {
                   const days = currentDays(trial);
-                  const active = trial.expiresAt !== null && new Date(trial.expiresAt).getTime() > Date.now();
-                  return <article className={`account-trial-card ${active ? "" : "is-expired"}`} key={trial.id}>
+                  const active = trial.status === "active";
+                  const disabled = trial.status === "disabled";
+                  return <article className={`account-trial-card ${active ? "" : disabled ? "is-disabled" : "is-expired"}`} key={trial.id}>
                     <div className="account-trial-card-top">
-                      <span className={`account-status ${active ? "is-active" : "is-expired"}`}>{active ? `Còn ${days} ngày` : "Đã hết hạn"}</span>
+                      <span className={`account-status ${active ? "is-active" : disabled ? "is-disabled" : "is-expired"}`}>{active ? `Còn ${days} ngày` : disabled ? "Đang vô hiệu hóa" : "Đã hết hạn"}</span>
                       <span className="account-trial-code">{trial.templateCode}</span>
                     </div>
                     <h3>{trial.title || trial.templateCode}</h3>
@@ -179,7 +159,7 @@ export default function AccountDashboard() {
                     <div className="account-card-actions">
                       {active
                         ? <Link className="account-primary-button" href={sharePath(trial)} target="_blank" rel="noopener noreferrer">Mở thiệp</Link>
-                        : <span className="account-disabled-button">Thiệp đã khóa</span>}
+                        : <span className="account-disabled-button">{disabled ? "Thiệp đang tạm khóa" : "Thiệp đã hết hạn"}</span>}
                     </div>
                   </article>;
                 })}
@@ -194,7 +174,8 @@ export default function AccountDashboard() {
               {adminTrials.length ? <div className="account-admin-list">
                 {adminTrials.map((trial) => {
                   const days = currentDays(trial);
-                  const active = trial.expiresAt !== null && new Date(trial.expiresAt).getTime() > Date.now();
+                  const active = trial.status === "active";
+                  const disabled = trial.status === "disabled";
                   return <article className="account-admin-row" key={trial.id}>
                     <div className="account-admin-row-main">
                       <strong>{trial.title || trial.templateCode}</strong>
@@ -202,10 +183,8 @@ export default function AccountDashboard() {
                       <small>Tạo {dateText(trial.createdAt)} · Hết hạn {dateText(trial.expiresAt)}</small>
                     </div>
                     <div className="account-admin-row-actions">
-                      <span className={`account-status ${active ? "is-active" : "is-expired"}`}>{active ? `Còn ${days} ngày` : "Đã hết hạn"}</span>
-                      <button type="button" className="account-primary-button" disabled={busyRenewal === trial.id} onClick={() => void renewTrial(trial.id)}>
-                        {busyRenewal === trial.id ? "Đang gia hạn…" : "Gia hạn 7 ngày"}
-                      </button>
+                      <span className={`account-status ${active ? "is-active" : disabled ? "is-disabled" : "is-expired"}`}>{active ? `Còn ${days} ngày` : disabled ? "Đang vô hiệu hóa" : "Đã hết hạn"}</span>
+                      {active && <Link className="account-primary-button admin-trial-view" href={sharePath(trial)} target="_blank" rel="noopener noreferrer">Mở xem thiệp</Link>}
                     </div>
                   </article>;
                 })}
@@ -226,7 +205,7 @@ export default function AccountDashboard() {
               </Link>
               <p className="account-form-hint">Lần đầu đăng nhập, tài khoản sẽ được tạo tự động bằng Google.</p>
             </div>
-            <p className="account-expiry-note">Mỗi thiệp đã xuất bản có hiệu lực 7 ngày. Quản trị viên có thể gia hạn thêm 7 ngày.</p>
+            <p className="account-expiry-note">Mỗi thiệp đã xuất bản có thời hạn. Quản trị viên có thể chọn số ngày gia hạn hoặc tạm vô hiệu hóa thiệp.</p>
           </section>
         )}
       </div>

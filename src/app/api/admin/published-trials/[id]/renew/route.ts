@@ -3,7 +3,6 @@ import { getDatabase } from "@/lib/mongodb";
 import { getAuthUser, isSameOriginRequest } from "@/lib/user-auth";
 import {
   getPublishedTrialExpiry,
-  PUBLISHED_TRIAL_LIFETIME_MS,
   type PublishedTrialPayload,
 } from "@/lib/published-trials-store";
 
@@ -27,6 +26,17 @@ export async function POST(request: Request, context: Context) {
       return NextResponse.json({ error: "Mã thiệp không hợp lệ." }, { status: 400 });
     }
 
+    let body: { days?: unknown };
+    try {
+      body = await request.json() as { days?: unknown };
+    } catch {
+      return NextResponse.json({ error: "Vui lòng chọn số ngày gia hạn." }, { status: 400 });
+    }
+    const days = body?.days;
+    if (typeof days !== "number" || !Number.isInteger(days) || days < 1 || days > 365) {
+      return NextResponse.json({ error: "Số ngày gia hạn phải từ 1 đến 365." }, { status: 400 });
+    }
+
     const db = await getDatabase();
     const trials = db.collection<StoredTrial>("published_trials");
     const record = await trials.findOne({ _id: id });
@@ -35,12 +45,12 @@ export async function POST(request: Request, context: Context) {
     const now = new Date();
     const currentExpiry = getPublishedTrialExpiry(record);
     const base = currentExpiry && currentExpiry.getTime() > now.getTime() ? currentExpiry : now;
-    const expiresAt = new Date(base.getTime() + PUBLISHED_TRIAL_LIFETIME_MS).toISOString();
+    const expiresAt = new Date(base.getTime() + days * 24 * 60 * 60 * 1000).toISOString();
     const renewedAt = now.toISOString();
     const renewalCount = (record.renewalCount || 0) + 1;
     await trials.updateOne({ _id: id }, { $set: { expiresAt, renewedAt, renewalCount } });
 
-    return NextResponse.json({ ok: true, expiresAt, renewedAt, renewalCount }, {
+    return NextResponse.json({ ok: true, days, expiresAt, renewedAt, renewalCount }, {
       headers: { "Cache-Control": "private, no-store" },
     });
   } catch (error) {

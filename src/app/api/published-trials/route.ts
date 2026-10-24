@@ -83,6 +83,9 @@ export async function POST(request: Request) {
       if (!existing.ownerId || existing.ownerId !== user.id) {
         return NextResponse.json({ error: "Thiệp này thuộc một tài khoản khác." }, { status: 403 });
       }
+      if (existing.disabledAt) {
+        return NextResponse.json({ error: "Thiệp này hiện không khả dụng. Vui lòng liên hệ quản trị viên." }, { status: 410 });
+      }
       const existingExpiry = getPublishedTrialExpiry(existing);
       if (!existingExpiry || existingExpiry.getTime() <= now.getTime()) {
         return NextResponse.json({ error: "Thiệp đã hết hạn. Chỉ quản trị viên mới có thể gia hạn." }, { status: 410 });

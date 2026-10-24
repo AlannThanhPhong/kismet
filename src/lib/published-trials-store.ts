@@ -12,6 +12,7 @@ export interface PublishedTrialPayload {
   ownerEmail?: string;
   renewedAt?: string;
   renewalCount?: number;
+  disabledAt?: string;
 }
 
 export const PUBLISHED_TRIAL_LIFETIME_MS = 7 * 24 * 60 * 60 * 1000;
