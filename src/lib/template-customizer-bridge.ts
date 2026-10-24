@@ -45,6 +45,15 @@ export const EXACT_TEMPLATES: ExactTemplateConfig[] = [
     defaultMusicSrc: "/music/wedding/leehi-only.mp3",
     defaultMusicTitle: "ONLY — LeeHi",
   },
+  {
+    code: "doodle-art",
+    name: "DOODLE ART",
+    coupleName: "Amélie Laurent & Gabriel Moreau",
+    badge: "TEMPLATE N° 05 · AIX-EN-PROVENCE",
+    iframeSrc: "/wedding-invitations/Doodle%20Art/index.html",
+    defaultMusicSrc: "/music/wedding/young-and-beautiful-khong-loi.mp3",
+    defaultMusicTitle: "Young and Beautiful (Instrumental)",
+  },
 ];
 
 export function getExactTemplateByCode(rawCode?: string | null): ExactTemplateConfig {
@@ -62,7 +71,12 @@ export function getExactTemplateByCode(rawCode?: string | null): ExactTemplateCo
               decoded === "Korea Style" ||
               decoded === "KOREA STYLE"
             ? "korea-style"
-            : decoded;
+            : decoded === "doodle-art" ||
+                decoded === "Doodle Art" ||
+                decoded === "doodle art" ||
+                decoded === "DOODLE ART"
+              ? "doodle-art"
+              : decoded;
   return EXACT_TEMPLATES.find((t) => t.code === normalized) || EXACT_TEMPLATES[0];
 }
 

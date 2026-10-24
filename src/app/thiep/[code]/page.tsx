@@ -29,6 +29,14 @@ function normalizeInvitationCode(rawCode: string) {
   ) {
     return "korea-style";
   }
+  if (
+    decoded === "doodle-art" ||
+    decoded === "Doodle Art" ||
+    decoded === "doodle art" ||
+    decoded === "DOODLE ART"
+  ) {
+    return "doodle-art";
+  }
   return decoded;
 }
 
@@ -81,7 +89,9 @@ export default async function InvitationPage({ params }: Props) {
             ? "Coquette"
             : code === "korea-style"
               ? "korea%20style"
-              : code;
+              : code === "doodle-art"
+                ? "Doodle%20Art"
+                : code;
     const revision =
       code === "20260323-NDNL"
         ? "?v=20261023-collage-fix"
@@ -96,7 +106,7 @@ export default async function InvitationPage({ params }: Props) {
                 : code === "coquette"
                   ? "?v=20261022-coquette-v4"
                   : code === "korea-style"
-                    ? "?v=20261023-korea-v2"
+                    ? "?v=20261023-korea-v3"
                     : "";
     return (
       <CustomizedInvitationFrame

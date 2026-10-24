@@ -37,6 +37,15 @@ export const designedInvitations = [
     coverImage: "/wedding-invitations/korea%20style/images/photo_2026-10-23_11-47-51.jpg",
   },
   {
+    code: "doodle-art",
+    slug: "doodle-art",
+    displayTitle: "DOODLE ART · AIX-EN-PROVENCE",
+    couple: { partnerOne: "Amélie Laurent", partnerTwo: "Gabriel Moreau" },
+    event: { date: "2027-06-12T14:00:00.000Z", venue: "Château Belle Étoile", address: "Aix-en-Provence, Provence-Alpes-Côte d’Azur, France" },
+    template: "doodle-art",
+    coverImage: "/wedding-invitations/Doodle%20Art/images/doodle-cover.png",
+  },
+  {
     code: "20260323-NDNL",
     slug: "20260323-NDNL",
     displayTitle: "LOVE AT FIRST SIGHT · YÊU TỪ CÁI NHÌN ĐẦU TIÊN",

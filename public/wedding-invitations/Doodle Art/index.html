@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#2d4a36" />
+  <title>DOODLE ART — Gabriel Moreau &amp; Amélie Laurent · Wedding Invitation</title>
+  <meta
+    name="description"
+    content="Wedding celebration of Amélie Laurent &amp; Gabriel Moreau · June 12, 2027 · Château Belle Étoile, Aix-en-Provence, France"
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Alex+Brush&amp;family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&amp;family=Gaegu:wght@300;400;700&amp;family=Gowun+Batang:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css" />
+  <script src="doodle.js" defer></script>
+</head>
+<body class="invitation-closed">
+  <!-- Background Music: Young and Beautiful (Instrumental) -->
+  <audio
+    id="wedding-music"
+    src="music/young-and-beautiful-khong-loi.mp3"
+    data-song-title="Young and Beautiful (Instrumental)"
+    preload="auto"
+    loop
+  ></audio>
+
+  <!-- Paper grain texture overlay -->
+  <div class="paper-grain" aria-hidden="true"></div>
+
+  <!-- ========================================================================
+       OPENING GATE / COVER SCREEN
+       Whimsical hand-drawn vintage car with leaf garland & trailing tin cans!
+       Tap "Open Invitation" -> Music plays -> Car rolls forward -> Gate unfolds!
+       ======================================================================== -->
+  <section class="gate-cover" id="gate-cover" role="dialog" aria-modal="true" aria-label="Wedding Invitation Cover">
+    <div class="gate-wrapper">
+      <!-- Decorative corner doodles -->
+      <div class="gate-corner-leaf gate-corner-tl" aria-hidden="true">
+        <svg viewBox="0 0 50 50" fill="none" stroke="#2d4a36" stroke-width="2" stroke-linecap="round">
+          <path d="M5 45 Q20 30, 45 10 M20 30 Q10 20, 22 15 M32 18 Q25 8, 38 7" />
+        </svg>
+      </div>
+      <div class="gate-corner-leaf gate-corner-tr" aria-hidden="true">
+        <svg viewBox="0 0 50 50" fill="none" stroke="#2d4a36" stroke-width="2" stroke-linecap="round">
+          <path d="M45 45 Q30 30, 5 10 M30 30 Q40 20, 28 15 M18 18 Q25 8, 12 7" />
+        </svg>
+      </div>
+
+      <!-- Header invitation phrase -->
+      <div class="gate-header">
+        <span class="gate-eyebrow">YOU’RE INVITED TO CELEBRATE WITH US</span>
+        <h1 class="gate-couple-script">Gabriel &amp; Amélie</h1>
+        <p class="gate-korean-names">Gabriel Moreau &amp; Amélie Laurent</p>
+      </div>
+
+      <!-- Vintage Car Illustration Doodle -->
+      <div class="gate-car-stage" id="gate-car-stage">
+        <svg viewBox="0 0 400 240" class="doodle-car-svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Garland leaves on roof -->
+          <path d="M110 65 C140 45, 180 40, 220 42 C260 45, 290 65, 310 75" stroke="#2d4a36" stroke-width="3.5" />
+          <path d="M125 55 C120 42, 135 38, 140 48" fill="#4d7c57" stroke="#2d4a36" stroke-width="2"/>
+          <path d="M165 44 C160 32, 175 30, 180 40" fill="#4d7c57" stroke="#2d4a36" stroke-width="2"/>
+          <path d="M205 38 C200 26, 215 24, 220 34" fill="#4d7c57" stroke="#2d4a36" stroke-width="2"/>
+          <path d="M245 42 C240 30, 255 28, 260 38" fill="#4d7c57" stroke="#2d4a36" stroke-width="2"/>
+          <path d="M285 52 C280 40, 295 38, 300 48" fill="#4d7c57" stroke="#2d4a36" stroke-width="2"/>
+          <!-- Little ribbon bow on top garland -->
+          <path d="M210 32 C195 20, 185 35, 210 36 C235 35, 225 20, 210 32 Z" fill="#d1a868" stroke="#8d5d14" stroke-width="2"/>
+
+          <!-- Car Roof & Windows -->
+          <path d="M120 115 C130 72, 160 55, 210 55 C260 55, 285 72, 295 115 Z" stroke="#222" stroke-width="3" fill="#ffffff"/>
+          <path d="M208 57 L208 115" stroke="#222" stroke-width="2.5" />
+          <path d="M165 98 C160 85, 175 85, 172 98" stroke="#666" stroke-width="2"/>
+
+          <!-- Car Body Profile -->
+          <path d="M85 150 C70 150, 58 140, 58 128 C58 118, 70 115, 95 115 C115 115, 120 115, 125 115 C135 72, 160 55, 210 55 C260 55, 285 72, 295 115 C305 115, 325 115, 335 125 C345 135, 345 145, 330 150 Z" stroke="#222" stroke-width="3" fill="#faf7f0"/>
+
+          <!-- Bumpers -->
+          <path d="M48 148 C55 142, 70 145, 80 148" stroke="#222" stroke-width="3.5"/>
+          <path d="M335 148 C345 145, 360 142, 368 148" stroke="#222" stroke-width="3.5"/>
+          <!-- Headlights -->
+          <circle cx="75" cy="128" r="8" stroke="#222" stroke-width="2.5" fill="#fff9db"/>
+          <circle cx="340" cy="128" r="8" stroke="#222" stroke-width="2.5" fill="#fff9db"/>
+
+          <!-- Wheels -->
+          <path d="M95 152 C95 128, 140 128, 140 152" stroke="#222" stroke-width="3" fill="#222"/>
+          <circle cx="117" cy="155" r="22" stroke="#222" stroke-width="3.5" fill="#2b2b2b"/>
+          <circle cx="117" cy="155" r="12" stroke="#222" stroke-width="2" fill="#ffffff"/>
+          <circle cx="117" cy="155" r="4" fill="#222"/>
+
+          <path d="M275 152 C275 128, 320 128, 320 152" stroke="#222" stroke-width="3" fill="#222"/>
+          <circle cx="297" cy="155" r="22" stroke="#222" stroke-width="3.5" fill="#2b2b2b"/>
+          <circle cx="297" cy="155" r="12" stroke="#222" stroke-width="2" fill="#ffffff"/>
+          <circle cx="297" cy="155" r="4" fill="#222"/>
+
+          <!-- "JUST MARRIED" License Sign -->
+          <rect x="172" y="123" width="72" height="30" rx="6" stroke="#222" stroke-width="2" fill="#ffffff" />
+          <text x="208" y="141" font-family="'Gaegu', sans-serif" font-size="12" font-weight="700" fill="#2d4a36" text-anchor="middle">JUST MARRIED</text>
+          <path d="M208 146 C205 143, 201 146, 208 152 C215 146, 211 143, 208 146 Z" fill="#e74c3c"/>
+
+          <!-- Trailing Strings with Tin Cans -->
+          <path d="M345 152 Q370 170, 355 195 Q345 210, 360 220" stroke="#777" stroke-dasharray="3,3" stroke-width="1.8"/>
+          <path d="M350 152 Q385 165, 380 185 Q375 205, 390 215" stroke="#777" stroke-dasharray="3,3" stroke-width="1.8"/>
+          <path d="M340 152 Q345 180, 335 195 Q330 210, 340 222" stroke="#777" stroke-dasharray="3,3" stroke-width="1.8"/>
+          <!-- Tin Cans & Little Hearts -->
+          <rect x="352" y="212" width="14" height="9" rx="2" stroke="#222" stroke-width="1.8" fill="#e0e0e0" transform="rotate(15 352 212)"/>
+          <rect x="382" y="208" width="14" height="9" rx="2" stroke="#222" stroke-width="1.8" fill="#e0e0e0" transform="rotate(-25 382 208)"/>
+          <rect x="332" y="215" width="14" height="9" rx="2" stroke="#222" stroke-width="1.8" fill="#e0e0e0" transform="rotate(35 332 215)"/>
+          <!-- Floating love hearts -->
+          <path d="M96 78 C91 70, 81 74, 91 86 C101 74, 91 70, 96 78 Z" fill="#e74c3c" opacity="0.85"/>
+          <path d="M322 68 C317 60, 307 64, 317 76 C327 64, 317 60, 322 68 Z" fill="#e74c3c" opacity="0.85"/>
+        </svg>
+
+        <!-- Exhaust smoke doodle puffs on unlock -->
+        <div class="smoke-puffs" id="smoke-puffs" aria-hidden="true">
+          <span class="smoke-puff p1">💨</span>
+          <span class="smoke-puff p2">✨</span>
+          <span class="smoke-puff p3">💖</span>
+        </div>
+      </div>
+
+      <!-- Wedding Date -->
+      <div class="gate-meta">
+        <p class="gate-date-main">Saturday, June 12th, 2027</p>
+        <p class="gate-date-sub">Château Belle Étoile · Aix-en-Provence, France</p>
+      </div>
+
+      <!-- Interactive Open Button -->
+      <div class="gate-actions">
+        <button type="button" class="btn-open-invitation" id="btn-open-invitation">
+          <span class="btn-open-text">Open Invitation</span>
+          <span class="btn-open-sub">Ouvrir le faire-part</span>
+          <span class="btn-open-sparkle">✦</span>
+        </button>
+        <p class="gate-hint">♪ Tap to open &amp; play <em>Young and Beautiful</em></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       MAIN WEDDING INVITATION WEBSITE
+       ======================================================================== -->
+  <main class="invitation-main" id="invitation-main">
+    <div class="site-container">
+
+      <!-- SECTION 1: HERO GREEN CARD -->
+      <section class="card-hero-green" aria-label="Couple Intro">
+        <div class="card-green-inner">
+          <!-- Walking Bride & Groom Doodle Illustration -->
+          <div class="doodle-couple-box" aria-hidden="true">
+            <svg viewBox="0 0 240 250" class="doodle-couple-svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Groom -->
+              <path d="M85 45 C80 30, 105 25, 110 40 C110 50, 85 52, 85 45 Z" fill="#1a1a1a"/>
+              <circle cx="95" cy="50" r="12" stroke="#ffffff" stroke-width="2" fill="#faf7f0"/>
+              <circle cx="98" cy="48" r="1.5" fill="#222"/>
+              <path d="M95 54 Q98 57, 101 54" stroke="#222" stroke-width="1.5"/>
+              <path d="M85 64 L108 64 L114 135 L80 135 Z" stroke="#ffffff" stroke-width="2" fill="#1a1a1a"/>
+              <path d="M94 64 L101 64 L98 80 Z" fill="#ffffff"/>
+              <path d="M95 68 C92 65, 92 72, 95 70 C98 72, 98 65, 95 68 Z" fill="#ffffff" stroke="#222" stroke-width="1"/>
+              <path d="M108 72 Q120 90, 128 105" stroke="#ffffff" stroke-width="2"/>
+              <path d="M86 135 L80 205 L72 208" stroke="#ffffff" stroke-width="2.5"/>
+              <path d="M104 135 L112 202 L120 205" stroke="#ffffff" stroke-width="2.5"/>
+              <path d="M68 208 C75 206, 85 208, 85 212 Z" fill="#ffffff"/>
+              <path d="M115 205 C122 203, 132 205, 132 209 Z" fill="#ffffff"/>
+
+              <!-- Bride -->
+              <path d="M140 40 Q180 60, 185 140 Q170 170, 160 175" stroke="#ffffff" stroke-width="1.8" stroke-dasharray="3,3" fill="rgba(255,255,255,0.18)"/>
+              <circle cx="140" cy="48" r="11" stroke="#ffffff" stroke-width="2" fill="#faf7f0"/>
+              <path d="M135 38 C130 32, 148 30, 146 42" stroke="#1a1a1a" stroke-width="2.5" fill="#1a1a1a"/>
+              <circle cx="132" cy="38" r="6" fill="#1a1a1a"/>
+              <circle cx="133" cy="36" r="2.5" fill="#d1a868"/>
+              <circle cx="138" cy="47" r="1.5" fill="#222"/>
+              <path d="M136 53 Q139 56, 142 53" stroke="#222" stroke-width="1.5"/>
+              <path d="M132 62 Q140 60, 148 62 L152 95 L128 95 Z" stroke="#ffffff" stroke-width="2" fill="#ffffff"/>
+              <path d="M128 95 Q115 150, 110 200 Q150 210, 175 200 Q165 150, 152 95 Z" stroke="#ffffff" stroke-width="2.2" fill="#ffffff"/>
+              <path d="M138 120 Q142 160, 145 202" stroke="#d5d0c5" stroke-width="1.5"/>
+              <path d="M150 82 Q160 92, 168 90" stroke="#ffffff" stroke-width="2"/>
+              <circle cx="170" cy="88" r="6" fill="#f4c2c2" stroke="#ffffff" stroke-width="1.5"/>
+              <circle cx="165" cy="83" r="5" fill="#a8d5ba" stroke="#ffffff" stroke-width="1.5"/>
+              <circle cx="175" cy="84" r="5" fill="#ffffff" stroke="#ffffff" stroke-width="1.5"/>
+              <!-- Hand in hand -->
+              <circle cx="126" cy="104" r="4" fill="#faf7f0" stroke="#ffffff" stroke-width="1.5"/>
+            </svg>
+          </div>
+
+          <p class="hero-caps-tag">THE WEDDING OF</p>
+          <h2 class="hero-script-names">Gabriel &amp; Amélie</h2>
+          <p class="hero-subtext-ko">Together with our families, we invite you to celebrate our love in Provence</p>
+          <div class="hero-little-hearts" aria-hidden="true">♡ ♡ ♡</div>
+        </div>
+      </section>
+
+      <!-- SECTION 2: COUNTDOWN & WAVY CALENDAR -->
+      <section class="section-calendar-block" aria-label="Wedding Countdown &amp; Calendar">
+        <h3 class="doodle-section-title">HAPPILY EVER AFTER BEGINS IN</h3>
+
+        <!-- Realtime Countdown Boxes -->
+        <div class="countdown-doodle-grid" id="countdown-grid">
+          <div class="countdown-box">
+            <span class="count-val" id="cd-days">00</span>
+            <span class="count-lbl">DAYS</span>
+          </div>
+          <span class="count-colon">:</span>
+          <div class="countdown-box">
+            <span class="count-val" id="cd-hours">00</span>
+            <span class="count-lbl">HOURS</span>
+          </div>
+          <span class="count-colon">:</span>
+          <div class="countdown-box">
+            <span class="count-val" id="cd-minutes">00</span>
+            <span class="count-lbl">MINUTES</span>
+          </div>
+          <span class="count-colon">:</span>
+          <div class="countdown-box">
+            <span class="count-val" id="cd-seconds">00</span>
+            <span class="count-lbl">SECONDS</span>
+          </div>
+        </div>
+
+        <!-- Hand-drawn Wavy Calendar Frame -->
+        <div class="calendar-wavy-frame">
+          <div class="calendar-frame-header">
+            <span class="cal-ribbon-left">✿</span>
+            <h4 class="calendar-month-title">June, 2027</h4>
+            <span class="cal-ribbon-right">✿</span>
+          </div>
+
+          <div class="calendar-table" role="table" aria-label="June 2027 Calendar">
+            <div class="cal-row cal-days-head">
+              <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+            </div>
+            <!-- Calendar Days (June 2027 starts Tuesday Jun 1) -->
+            <div class="cal-row">
+              <span class="cal-empty"></span><span class="cal-empty"></span>
+              <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+            </div>
+            <div class="cal-row">
+              <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span>
+              <!-- Circled Wedding Date 12 -->
+              <span class="cal-wedding-day" aria-label="Our Wedding Day, June 12th">
+                12
+                <svg class="doodle-heart-circle" viewBox="0 0 40 40" aria-hidden="true">
+                  <path d="M20 7 C14 0, 0 8, 8 22 C14 30, 20 37, 20 37 C20 37, 26 30, 32 22 C40 8, 26 0, 20 7 Z" fill="none" stroke="#2d4a36" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
+              </span>
+            </div>
+            <div class="cal-row">
+              <span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span>
+            </div>
+            <div class="cal-row">
+              <span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span>
+            </div>
+            <div class="cal-row">
+              <span>27</span><span>28</span><span>29</span><span>30</span>
+              <span class="cal-empty"></span><span class="cal-empty"></span><span class="cal-empty"></span>
+            </div>
+          </div>
+
+          <p class="cal-day-caption">Saturday, June 12, 2027 · Ceremony at 4:00 PM</p>
+        </div>
+      </section>
+
+      <!-- SECTION 3: WEDDING INVITATION & RING EXCHANGE -->
+      <section class="section-invitation-message" aria-label="Invitation Letter">
+        <!-- Ring Exchange Hand-drawn Illustration -->
+        <div class="doodle-rings-box" aria-hidden="true">
+          <svg viewBox="0 0 220 120" class="doodle-rings-svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Left Hand -->
+            <path d="M25 70 Q60 65, 85 58 Q95 55, 105 56" stroke="#222" stroke-width="2.5"/>
+            <path d="M25 85 Q55 80, 80 72 L100 68" stroke="#222" stroke-width="2.5"/>
+            <!-- Right Hand -->
+            <path d="M195 70 Q160 65, 135 58 Q125 55, 115 56" stroke="#222" stroke-width="2.5"/>
+            <path d="M195 85 Q165 80, 140 72 L120 68" stroke="#222" stroke-width="2.5"/>
+            <!-- The Ring -->
+            <ellipse cx="110" cy="56" rx="9" ry="14" stroke="#d1a868" stroke-width="3.2" fill="none"/>
+            <!-- Diamond Solitaire & Glints -->
+            <polygon points="110,38 114,43 110,48 106,43" fill="#ffffff" stroke="#d1a868" stroke-width="1.8"/>
+            <path d="M110 32 L110 26 M118 36 L124 33 M102 36 L96 33" stroke="#d1a868" stroke-width="2"/>
+            <!-- Cute Little Love Heart -->
+            <path d="M110 20 C106 15, 99 18, 110 27 C121 18, 114 15, 110 20 Z" fill="#e74c3c"/>
+          </svg>
+        </div>
+
+        <h3 class="doodle-section-title">WEDDING INVITATION</h3>
+
+        <div class="invitation-text-card">
+          <p class="invite-ko-headline">Chers Parents et Amis</p>
+          <p class="invite-ko-body">
+            Under the golden sunshine of Provence, surrounded by olive groves and fragrant lavender,<br />
+            we joyfully take our vows to walk hand in hand through all seasons of life.<br />
+            Your love and friendship have shaped our journey, and your presence will complete our happiness.
+          </p>
+          <div class="invite-divider-wave" aria-hidden="true">~ ~ ~ ❦ ~ ~ ~</div>
+          <p class="invite-en-body">
+            <em>"Two souls with but a single thought, two hearts that beat as one."</em><br />
+            Together with our families, we warmly invite you to share this unforgettable weekend.
+          </p>
+          <div class="invite-family-names">
+            <p>Son of <strong>M. Henri Moreau</strong> &amp; <strong>Mme Claire Moreau</strong></p>
+            <p>Daughter of <strong>M. Jean-Pierre Laurent</strong> &amp; <strong>Mme Sophie Laurent</strong></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4: LOCATION & VENUE LINE SKETCH -->
+      <section class="section-location" aria-label="Wedding Venue &amp; Location">
+        <h3 class="doodle-section-title">LOCATION</h3>
+
+        <!-- Architectural Sketch of Château Belle Étoile / Orangery -->
+        <div class="venue-sketch-box" aria-hidden="true">
+          <svg viewBox="0 0 320 200" class="doodle-venue-svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Ground line & grass -->
+            <path d="M20 175 L300 175" stroke="#222" stroke-width="2.5"/>
+            <path d="M40 175 L45 168 M47 175 L50 166 M270 175 L273 166 M278 175 L282 168" stroke="#4d7c57" stroke-width="2"/>
+            <!-- Left Tree -->
+            <path d="M50 175 L50 120" stroke="#5c4033" stroke-width="3"/>
+            <path d="M50 125 C30 120, 25 90, 45 80 C40 60, 65 55, 75 70 C90 65, 95 95, 80 115 C90 125, 70 135, 50 125 Z" fill="#eaf2ea" stroke="#2d4a36" stroke-width="2"/>
+            <!-- Right Tree -->
+            <path d="M270 175 L270 120" stroke="#5c4033" stroke-width="3"/>
+            <path d="M270 125 C250 120, 245 90, 265 80 C260 60, 285 55, 295 70 C310 65, 315 95, 300 115 C310 125, 290 135, 270 125 Z" fill="#eaf2ea" stroke="#2d4a36" stroke-width="2"/>
+            <!-- Central Spire -->
+            <path d="M160 30 L160 45" stroke="#222" stroke-width="2.5"/>
+            <circle cx="160" cy="27" r="3" fill="#d1a868"/>
+            <path d="M140 75 L160 45 L180 75 Z" stroke="#222" stroke-width="2.5" fill="#faf7f0"/>
+            <path d="M153 72 C153 62, 167 62, 167 72 Z" stroke="#222" stroke-width="1.8" fill="#ffffff"/>
+            <circle cx="160" cy="68" r="2" fill="#d1a868"/>
+            <!-- Main Roof -->
+            <path d="M100 110 L160 75 L220 110 Z" stroke="#222" stroke-width="2.5" fill="#faf7f0"/>
+            <!-- Main Facade -->
+            <rect x="110" y="110" width="100" height="65" stroke="#222" stroke-width="2.5" fill="#ffffff"/>
+            <!-- Grand Entrance Arch -->
+            <path d="M145 175 L145 140 C145 130, 175 130, 175 140 L175 175 Z" stroke="#222" stroke-width="2.5" fill="#faf7f0"/>
+            <path d="M160 135 L160 175" stroke="#222" stroke-width="1.8"/>
+            <circle cx="157" cy="155" r="1.5" fill="#222"/>
+            <circle cx="163" cy="155" r="1.5" fill="#222"/>
+            <!-- Rose Window -->
+            <circle cx="160" cy="100" r="12" stroke="#222" stroke-width="2" fill="#ffffff"/>
+            <path d="M160 88 L160 112 M148 100 L172 100" stroke="#222" stroke-width="1.5"/>
+            <!-- Wings -->
+            <rect x="80" y="125" width="30" height="50" stroke="#222" stroke-width="2" fill="#faf7f0"/>
+            <path d="M75 125 L110 110" stroke="#222" stroke-width="2"/>
+            <path d="M90 155 C90 145, 100 145, 100 155 L100 165 L90 165 Z" stroke="#222" stroke-width="1.5" fill="#ffffff"/>
+            <rect x="210" y="125" width="30" height="50" stroke="#222" stroke-width="2" fill="#faf7f0"/>
+            <path d="M210 110 L245 125" stroke="#222" stroke-width="2"/>
+            <path d="M220 155 C220 145, 230 145, 230 155 L230 165 L220 165 Z" stroke="#222" stroke-width="1.5" fill="#ffffff"/>
+            <!-- Garland Flags -->
+            <path d="M110 115 Q160 125, 210 115" stroke="#222" stroke-width="1.5" stroke-dasharray="2,3"/>
+            <polygon points="125,120 132,120 128.5,127" fill="#d1a868"/>
+            <polygon points="145,122 152,122 148.5,129" fill="#2d4a36"/>
+            <polygon points="168,122 175,122 171.5,129" fill="#d1a868"/>
+            <polygon points="188,120 195,120 191.5,127" fill="#2d4a36"/>
+          </svg>
+        </div>
+
+        <div class="venue-info-box">
+          <h4 class="venue-name-ko">Château Belle Étoile</h4>
+          <p class="venue-name-en">Grand Orangery &amp; Gardens</p>
+          <p class="venue-address">Aix-en-Provence, Provence-Alpes-Côte d’Azur, France</p>
+          <p class="venue-sub-details">13100 Aix-en-Provence, South of France</p>
+
+          <a
+            href="https://maps.google.com/?q=Aix-en-Provence+France"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-doodle-map"
+          >
+            <span class="btn-map-pin">📍</span>
+            <span>View on Google Maps</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- SECTION 5: WEDDING TIMELINE / PROGRAM -->
+      <section class="section-program" aria-label="Wedding Program Timeline">
+        <div class="card-timeline-green">
+          <h3 class="timeline-headline">WEDDING PROGRAM</h3>
+          <p class="timeline-subheadline">Order of the Day · Déroulement de la Journée</p>
+
+          <div class="timeline-doodle-list">
+            <!-- 15:30 Welcome Drinks -->
+            <div class="timeline-item">
+              <div class="timeline-icon-box" aria-hidden="true">
+                <svg viewBox="0 0 60 60" class="tl-icon-svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <path d="M15 15 L30 35 L45 15 Z" fill="rgba(255,255,255,0.2)"/>
+                  <path d="M30 35 L30 50 M20 50 L40 50" />
+                  <circle cx="30" cy="22" r="3" fill="#f4c2c2" stroke="none"/>
+                  <path d="M38 12 Q44 8, 48 14" stroke="#d1a868" stroke-width="2.5"/>
+                </svg>
+              </div>
+              <div class="timeline-details">
+                <span class="tl-time">15:30</span>
+                <h4 class="tl-title">Welcome Drinks &amp; Cocktails</h4>
+                <p class="tl-desc">Champagne reception &amp; garden welcoming</p>
+              </div>
+            </div>
+
+            <!-- 16:30 Photos -->
+            <div class="timeline-item">
+              <div class="timeline-icon-box" aria-hidden="true">
+                <svg viewBox="0 0 60 60" class="tl-icon-svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <rect x="12" y="20" width="36" height="26" rx="4" fill="rgba(255,255,255,0.2)"/>
+                  <circle cx="30" cy="33" r="8" fill="#ffffff" fill-opacity="0.3"/>
+                  <circle cx="30" cy="33" r="4" fill="#ffffff"/>
+                  <path d="M22 20 L26 14 L34 14 L38 20" />
+                  <polygon points="45,15 47,19 45,23 43,19" fill="#d1a868" stroke="none"/>
+                </svg>
+              </div>
+              <div class="timeline-details">
+                <span class="tl-time">16:30</span>
+                <h4 class="tl-title">Photo Session &amp; Meet the Couple</h4>
+                <p class="tl-desc">Portraits amidst the olive trees &amp; fountains</p>
+              </div>
+            </div>
+
+            <!-- 17:00 Ceremony -->
+            <div class="timeline-item highlight">
+              <div class="timeline-icon-box" aria-hidden="true">
+                <svg viewBox="0 0 60 60" class="tl-icon-svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <path d="M12 50 L12 25 Q30 10, 48 25 L48 50" stroke-width="2.5"/>
+                  <circle cx="26" cy="30" r="6" stroke="#d1a868" stroke-width="2"/>
+                  <circle cx="34" cy="30" r="6" stroke="#d1a868" stroke-width="2"/>
+                  <path d="M30 18 Q25 15, 30 12 Q35 15, 30 18 Z" fill="#e74c3c" stroke="none"/>
+                </svg>
+              </div>
+              <div class="timeline-details">
+                <span class="tl-time">17:00</span>
+                <h4 class="tl-title">Wedding Ceremony</h4>
+                <p class="tl-desc">Vows exchange at the Grand Orangery</p>
+              </div>
+            </div>
+
+            <!-- 18:30 Dinner -->
+            <div class="timeline-item">
+              <div class="timeline-icon-box" aria-hidden="true">
+                <svg viewBox="0 0 60 60" class="tl-icon-svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <circle cx="30" cy="32" r="18" fill="rgba(255,255,255,0.2)"/>
+                  <circle cx="30" cy="32" r="12" stroke-dasharray="2,3"/>
+                  <path d="M8 20 L8 44 M12 20 L12 32 M5 20 L5 32" />
+                  <path d="M52 20 L52 44 M48 20 Q54 26, 48 32 L48 44" />
+                </svg>
+              </div>
+              <div class="timeline-details">
+                <span class="tl-time">18:30</span>
+                <h4 class="tl-title">Dinner Banquet</h4>
+                <p class="tl-desc">Four-course Provençal dinner &amp; fine wine pairing</p>
+              </div>
+            </div>
+
+            <!-- 19:30 Cake Cutting -->
+            <div class="timeline-item">
+              <div class="timeline-icon-box" aria-hidden="true">
+                <svg viewBox="0 0 60 60" class="tl-icon-svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <rect x="14" y="38" width="32" height="14" rx="2" fill="rgba(255,255,255,0.2)"/>
+                  <rect x="19" y="27" width="22" height="11" rx="2" fill="rgba(255,255,255,0.2)"/>
+                  <rect x="24" y="18" width="12" height="9" rx="2" fill="rgba(255,255,255,0.2)"/>
+                  <circle cx="30" cy="13" r="3" fill="#e74c3c" stroke="none"/>
+                  <path d="M14 44 Q22 41, 30 44 Q38 41, 46 44" />
+                </svg>
+              </div>
+              <div class="timeline-details">
+                <span class="tl-time">19:30</span>
+                <h4 class="tl-title">Cake Cutting &amp; Speeches</h4>
+                <p class="tl-desc">Pièce montée, champagne toasts &amp; stories</p>
+              </div>
+            </div>
+
+            <!-- 20:30 Party & First Dance -->
+            <div class="timeline-item">
+              <div class="timeline-icon-box" aria-hidden="true">
+                <svg viewBox="0 0 60 60" class="tl-icon-svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <path d="M30 6 L30 16" />
+                  <circle cx="30" cy="30" r="14" fill="rgba(255,255,255,0.2)"/>
+                  <path d="M18 30 L42 30 M30 18 L30 42" stroke-dasharray="2,2"/>
+                  <path d="M48 18 Q52 14, 52 24 L52 32 M52 24 L56 22" />
+                  <polygon points="12,14 15,18 12,22 9,18" fill="#d1a868" stroke="none"/>
+                </svg>
+              </div>
+              <div class="timeline-details">
+                <span class="tl-time">20:30</span>
+                <h4 class="tl-title">First Dance &amp; Party</h4>
+                <p class="tl-desc">Under the stars dance floor &amp; late night bar</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 6: WEDDING DETAILS & GIFT -->
+      <section class="section-details" aria-label="Wedding Details &amp; Gifts">
+        <h3 class="doodle-section-title">THE DETAILS</h3>
+
+        <!-- Dining table doodle -->
+        <div class="doodle-table-box" aria-hidden="true">
+          <svg viewBox="0 0 160 80" class="doodle-table-svg" fill="none" stroke="#222" stroke-width="2" stroke-linecap="round">
+            <!-- Left Chair -->
+            <path d="M30 65 L30 30 C30 20, 42 20, 42 30 L42 65" />
+            <path d="M26 48 L46 48" />
+            <!-- Right Chair -->
+            <path d="M118 65 L118 30 C118 20, 130 20, 130 30 L130 65" />
+            <path d="M114 48 L134 48" />
+            <!-- Table -->
+            <path d="M48 42 L112 42" stroke-width="3"/>
+            <path d="M55 42 L55 68 M105 42 L105 68" stroke-width="2.5"/>
+            <!-- Vase on Table with Flower -->
+            <path d="M78 42 L78 32 C78 28, 82 28, 82 32 L82 42 Z" fill="#faf7f0"/>
+            <circle cx="80" cy="24" r="3" fill="#e74c3c" stroke="none"/>
+            <path d="M80 32 L80 24" stroke="#4d7c57"/>
+          </svg>
+        </div>
+
+        <div class="details-cards-grid">
+          <!-- Accommodation Card -->
+          <div class="detail-box">
+            <h4 class="detail-box-title">Where to Stay</h4>
+            <p class="detail-box-text">
+              For our traveling guests, rooms have been reserved at Château Belle Étoile and nearby boutique hotels in Aix-en-Provence. Mention <strong>‘Amélie &amp; Gabriel Wedding’</strong> for preferred rates.
+            </p>
+          </div>
+
+          <!-- Transportation Card -->
+          <div class="detail-box">
+            <h4 class="detail-box-title">Travel &amp; Shuttles</h4>
+            <p class="detail-box-text">
+              Marseille Provence Airport (MRS) is 25 minutes away. Complimentary private shuttles will run between downtown Aix-en-Provence and the estate throughout the celebration.
+            </p>
+          </div>
+        </div>
+
+        <!-- Wedding Gift Card with Squiggly Doodle Border -->
+        <div class="wedding-gift-card">
+          <div class="gift-icon-box" aria-hidden="true">
+            <svg viewBox="0 0 80 80" class="doodle-gift-svg" fill="none" stroke="#2d4a36" stroke-width="2.5" stroke-linecap="round">
+              <rect x="18" y="32" width="44" height="34" rx="3" fill="#ffffff"/>
+              <rect x="14" y="24" width="52" height="10" rx="2" fill="#ffffff"/>
+              <!-- Ribbons -->
+              <path d="M40 24 L40 66" stroke="#d1a868" stroke-width="3"/>
+              <path d="M18 48 L62 48" stroke="#d1a868" stroke-width="2.5"/>
+              <!-- Bow -->
+              <path d="M40 24 C30 12, 20 18, 38 23 Z" fill="#d1a868" stroke="#8d5d14" stroke-width="2"/>
+              <path d="M40 24 C50 12, 60 18, 42 23 Z" fill="#d1a868" stroke="#8d5d14" stroke-width="2"/>
+            </svg>
+          </div>
+
+          <h4 class="gift-title">Wedding Registry · Liste de Mariage</h4>
+          <p class="gift-desc">
+            Your love and presence on our special day are the greatest gifts of all.<br />
+            For guests wishing to honor us with a gift toward our future together and honeymoon, account details are shared below with heartfelt appreciation.
+          </p>
+
+          <!-- European Bank / IBAN details -->
+          <div class="gift-accounts-list">
+            <div class="bank-item">
+              <div class="bank-info">
+                <span class="bank-tag">Honeymoon Fund (EUR)</span>
+                <span class="bank-num">IBAN: FR76 3000 4001 2300 0123 4567 890</span>
+                <span class="bank-holder">BIC: BNPAFRPP · Amélie &amp; Gabriel</span>
+              </div>
+              <button type="button" class="btn-copy-account" data-copy="FR7630004001230001234567890">
+                Copy IBAN
+              </button>
+            </div>
+
+            <div class="bank-item">
+              <div class="bank-info">
+                <span class="bank-tag">Online Registry</span>
+                <span class="bank-num">Cagnotte de Mariage · MilleMercis</span>
+                <span class="bank-holder">Amélie Laurent &amp; Gabriel Moreau</span>
+              </div>
+              <button type="button" class="btn-copy-account" data-copy="https://cagnotte.amelie-gabriel-wedding.com">
+                Copy Link
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 7: DRESS CODE -->
+      <section class="section-dress-code" aria-label="Wedding Dress Code">
+        <!-- Cute Ribbon Doodle Header -->
+        <div class="doodle-bow-header" aria-hidden="true">
+          <svg viewBox="0 0 100 50" class="doodle-bow-svg" fill="none" stroke="#2d4a36" stroke-width="2.5" stroke-linecap="round">
+            <path d="M50 25 C32 10, 15 18, 45 27 Z" fill="#d1a868" stroke="#8d5d14"/>
+            <path d="M50 25 C68 10, 85 18, 55 27 Z" fill="#d1a868" stroke="#8d5d14"/>
+            <circle cx="50" cy="25" r="4" fill="#8d5d14"/>
+            <path d="M47 28 Q40 44, 30 46 M53 28 Q60 44, 70 46" stroke="#8d5d14" stroke-width="2"/>
+          </svg>
+        </div>
+
+        <h3 class="doodle-section-title">DRESS CODE</h3>
+        <p class="dress-code-subtitle">Garden Chic &amp; Semi-Formal · Earth &amp; Soft Tones</p>
+
+        <!-- Color Palette Circles -->
+        <div class="dress-palette-circles" role="list" aria-label="Recommended Colors">
+          <div class="palette-item" role="listitem">
+            <span class="circle-swatch" style="background:#2d4a36;" aria-hidden="true"></span>
+            <span class="circle-label">Forest</span>
+          </div>
+          <div class="palette-item" role="listitem">
+            <span class="circle-swatch" style="background:#607d6a;" aria-hidden="true"></span>
+            <span class="circle-label">Sage</span>
+          </div>
+          <div class="palette-item" role="listitem">
+            <span class="circle-swatch" style="background:#d9ccb9;" aria-hidden="true"></span>
+            <span class="circle-label">Sand</span>
+          </div>
+          <div class="palette-item" role="listitem">
+            <span class="circle-swatch" style="background:#f4ece1;" aria-hidden="true"></span>
+            <span class="circle-label">Ivory</span>
+          </div>
+          <div class="palette-item" role="listitem">
+            <span class="circle-swatch" style="background:#c5a880;" aria-hidden="true"></span>
+            <span class="circle-label">Champagne</span>
+          </div>
+        </div>
+
+        <p class="dress-code-note">
+          We warmly invite you to dress in elegant garden cocktail attire.<br />
+          Soft natural tones and lawn-friendly footwear are suggested for enjoying the chateau gardens.
+        </p>
+      </section>
+
+      <!-- SECTION 8: A JOURNEY OF LOVE (Polaroid Cards) -->
+      <section class="section-journey" aria-label="Our Love Story">
+        <div class="card-journey-green">
+          <h3 class="journey-headline">A JOURNEY OF LOVE</h3>
+          <p class="journey-subheadline">The precious chapters that led us to forever</p>
+
+          <div class="polaroid-row">
+            <!-- Polaroid 1 -->
+            <div class="polaroid-card pol-left">
+              <div class="washi-tape" aria-hidden="true"></div>
+              <div class="pol-img-wrap">
+                <img src="images/photo_2026-10-23_21-22-26.jpg" alt="Pure Joy &amp; Warm Sunlight" loading="lazy" />
+              </div>
+              <div class="pol-caption">
+                <p class="pol-title">The First Day</p>
+                <p class="pol-sub">Where our story began</p>
+              </div>
+            </div>
+
+            <!-- Polaroid 2 -->
+            <div class="polaroid-card pol-center">
+              <div class="washi-tape" aria-hidden="true"></div>
+              <div class="pol-img-wrap">
+                <img src="images/photo_2026-10-23_21-22-39.jpg" alt="Laughter and Sweet Moments" loading="lazy" />
+              </div>
+              <div class="pol-caption">
+                <p class="pol-title">Sweet Moments</p>
+                <p class="pol-sub">Sunlit laughter together</p>
+              </div>
+            </div>
+
+            <!-- Polaroid 3 -->
+            <div class="polaroid-card pol-right">
+              <div class="washi-tape" aria-hidden="true"></div>
+              <div class="pol-img-wrap">
+                <img src="images/photo_2026-10-23_21-22-43.jpg" alt="She said yes in the garden" loading="lazy" />
+              </div>
+              <div class="pol-caption">
+                <p class="pol-title">She Said Yes!</p>
+                <p class="pol-sub">A promise for a lifetime</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hand-drawn "love, you!" script -->
+          <div class="journey-love-script">
+            <span>love, you!</span>
+            <svg viewBox="0 0 120 20" class="squiggle-underline" aria-hidden="true">
+              <path d="M5 10 Q30 2, 60 12 T115 8" fill="none" stroke="#d1a868" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 9: WEDDING PHOTOS GALLERY -->
+      <section class="section-gallery" aria-label="Wedding Photo Gallery">
+        <!-- Kissing couple doodle inside scalloped frame -->
+        <div class="doodle-kiss-frame" aria-hidden="true">
+          <svg viewBox="0 0 140 140" class="kiss-frame-svg" fill="none" stroke="currentColor">
+            <!-- Scalloped baroque frame border -->
+            <path
+              d="M70 15 C85 8, 105 12, 115 25 C128 35, 132 55, 125 70 C132 85, 128 105, 115 115 C105 128, 85 132, 70 125 C55 132, 35 128, 25 115 C12 105, 8 85, 15 70 C8 55, 12 35, 25 25 C35 12, 55 8, 70 15 Z"
+              stroke="#2d4a36"
+              stroke-width="2.5"
+              fill="#faf7f0"
+            />
+            <!-- Cute Kissing Couple Silhouette -->
+            <path d="M48 55 C45 48, 55 45, 58 52 C58 58, 48 58, 48 55 Z" fill="#222"/>
+            <circle cx="53" cy="56" r="6" fill="#222"/>
+            <path d="M46 64 L60 64 L63 92 L42 92 Z" fill="#222"/>
+            <circle cx="82" cy="57" r="6" fill="#222"/>
+            <path d="M80 50 C86 46, 92 52, 86 56" fill="#222"/>
+            <circle cx="88" cy="52" r="3" fill="#222"/>
+            <path d="M75 64 Q84 62, 90 64 L95 95 L70 95 Z" fill="#ffffff" stroke="#222" stroke-width="1.5"/>
+            <!-- Little Heart between them -->
+            <path d="M68 45 C65 41, 60 43, 68 50 C76 43, 71 41, 68 45 Z" fill="#e74c3c"/>
+          </svg>
+        </div>
+
+        <h3 class="doodle-section-title">WEDDING PHOTOS</h3>
+        <p class="gallery-subtitle">Our Most Cherished Moments · Château Gallery</p>
+
+        <!-- 4-Photo Masonry Grid -->
+        <div class="gallery-grid" id="gallery-grid">
+          <div class="gallery-item" data-index="0">
+            <img src="images/photo_2026-10-23_21-22-47.jpg" alt="Wedding Garden Romance" loading="lazy" />
+            <div class="photo-tape" aria-hidden="true"></div>
+          </div>
+          <div class="gallery-item" data-index="1">
+            <img src="images/photo_2026-10-23_21-22-26.jpg" alt="Golden Hour Smiles" loading="lazy" />
+            <div class="photo-tape" aria-hidden="true"></div>
+          </div>
+          <div class="gallery-item" data-index="2">
+            <img src="images/photo_2026-10-23_21-22-39.jpg" alt="Sweetest Cheek Kiss" loading="lazy" />
+            <div class="photo-tape" aria-hidden="true"></div>
+          </div>
+          <div class="gallery-item" data-index="3">
+            <img src="images/photo_2026-10-23_21-22-43.jpg" alt="Together in the Chateau Garden" loading="lazy" />
+            <div class="photo-tape" aria-hidden="true"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 10: RSVP FORM -->
+      <section class="section-rsvp" aria-label="RSVP Response Form">
+        <div class="card-rsvp-green">
+          <!-- Large Hand-drawn Ribbon Doodle Header -->
+          <div class="doodle-rsvp-bow" aria-hidden="true">
+            <svg viewBox="0 0 120 70" class="rsvp-bow-svg" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round">
+              <!-- Left Loop -->
+              <path d="M60 30 C38 12, 16 22, 50 34 Z" fill="rgba(255,255,255,0.2)"/>
+              <!-- Right Loop -->
+              <path d="M60 30 C82 12, 104 22, 70 34 Z" fill="rgba(255,255,255,0.2)"/>
+              <!-- Knot -->
+              <ellipse cx="60" cy="31" rx="5" ry="4" fill="#ffffff"/>
+              <!-- Tails -->
+              <path d="M56 34 Q45 58, 30 62 M64 34 Q75 58, 90 62" stroke="#ffffff" stroke-width="2.2"/>
+            </svg>
+          </div>
+
+          <h3 class="rsvp-headline">PLEASE RSVP</h3>
+          <p class="rsvp-subheadline">
+            Kindly RSVP by May 10th, 2027<br />
+            Please let us know your attendance to help us prepare our celebration.
+          </p>
+
+          <form class="rsvp-form" id="rsvp-form" novalidate>
+            <!-- Guest Name -->
+            <div class="form-group">
+              <label for="rsvp-name">Full Name(s) <span class="req">*</span></label>
+              <input type="text" id="rsvp-name" name="name" required placeholder="e.g. Charlotte &amp; Thomas" />
+            </div>
+
+            <!-- Phone / Email -->
+            <div class="form-group">
+              <label for="rsvp-phone">Email or Phone <span class="req">*</span></label>
+              <input type="text" id="rsvp-phone" name="phone" required placeholder="contact@example.com" />
+            </div>
+
+            <!-- Attendance Choice -->
+            <div class="form-group">
+              <label>Will you attend? <span class="req">*</span></label>
+              <div class="radio-options">
+                <label class="radio-card">
+                  <input type="radio" name="attendance" value="attending" checked />
+                  <span class="radio-custom"></span>
+                  <span class="radio-text">
+                    <strong>Joyfully Accept</strong>
+                    <small>With pleasure</small>
+                  </span>
+                </label>
+                <label class="radio-card">
+                  <input type="radio" name="attendance" value="declining" />
+                  <span class="radio-custom"></span>
+                  <span class="radio-text">
+                    <strong>Regretfully Decline</strong>
+                    <small>Celebrating in spirit</small>
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Number of Guests -->
+            <div class="form-group">
+              <label for="rsvp-guests">Number of Guests (including yourself)</label>
+              <select id="rsvp-guests" name="guests">
+                <option value="1">1 Guest</option>
+                <option value="2">2 Guests</option>
+                <option value="3">3 Guests</option>
+                <option value="4">4+ Guests</option>
+              </select>
+            </div>
+
+            <!-- Warm Wishes Message -->
+            <div class="form-group">
+              <label for="rsvp-message">Message for the Couple &amp; Dietary Notes</label>
+              <textarea id="rsvp-message" name="message" rows="3" placeholder="Leave a sweet note or dietary requirements..."></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn-rsvp-submit" id="btn-rsvp-submit">
+              <span>Send RSVP Confirmation</span>
+            </button>
+          </form>
+
+          <!-- RSVP Success Message Card -->
+          <div class="rsvp-success-box" id="rsvp-success-box" hidden>
+            <div class="success-icon">💌</div>
+            <h4>Thank You! Your RSVP Has Been Received.</h4>
+            <p>We are delighted and can't wait to celebrate this wonderful day with you in Provence!</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 11: CLOSING & SIGNATURE -->
+      <footer class="section-footer" aria-label="Closing &amp; Thanks">
+        <!-- Toasting Cheers Wine Glasses Doodle -->
+        <div class="doodle-cheers-box" aria-hidden="true">
+          <svg viewBox="0 0 160 100" class="doodle-cheers-svg" fill="none" stroke="#222" stroke-width="2.2" stroke-linecap="round">
+            <!-- Left Hand holding wine glass -->
+            <path d="M15 85 Q40 82, 55 68 L62 60" />
+            <path d="M52 64 L50 48 M56 64 L58 50" />
+            <!-- Left Wine Glass tilted right -->
+            <path d="M42 22 Q40 38, 56 42 Q72 38, 70 22 Z" fill="#faf7f0" transform="rotate(18 56 32)"/>
+            <path d="M56 42 L58 58 M48 58 L68 58" transform="rotate(18 56 32)"/>
+
+            <!-- Right Hand holding wine glass -->
+            <path d="M145 85 Q120 82, 105 68 L98 60" />
+            <path d="M108 64 L110 48 M104 64 L102 50" />
+            <!-- Right Wine Glass tilted left -->
+            <path d="M90 22 Q88 38, 104 42 Q120 38, 118 22 Z" fill="#faf7f0" transform="rotate(-18 104 32)"/>
+            <path d="M104 42 L102 58 M94 58 L114 58" transform="rotate(-18 104 32)"/>
+
+            <!-- Clinking sparkles & stars -->
+            <polygon points="80,18 82,23 87,24 83,28 84,33 80,30 76,33 77,28 73,24 78,23" fill="#d1a868" stroke="none"/>
+            <circle cx="72" cy="14" r="2" fill="#d1a868" stroke="none"/>
+            <circle cx="88" cy="14" r="2" fill="#d1a868" stroke="none"/>
+            <path d="M78 8 Q80 4, 82 8" stroke="#d1a868" stroke-width="1.8"/>
+          </svg>
+        </div>
+
+        <div class="footer-thanks-card">
+          <p class="footer-text-en">
+            We are deeply grateful for the love and encouragement of our families and dearest friends.<br />
+            Your presence will make our celebration complete, and we cannot wait to share these precious moments with you.
+          </p>
+          <p class="footer-text-ko">
+            <em>"Avec tout notre amour et notre infinie gratitude."</em>
+          </p>
+
+          <div class="footer-signatures">
+            <span class="sig-script">Gabriel &amp; Amélie</span>
+            <span class="sig-korean">Gabriel Moreau &amp; Amélie Laurent</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </main>
+
+  <!-- ========================================================================
+       FLOATING AUDIO WIDGET
+       Spinning vinyl record doodle + Song title indicator
+       ======================================================================== -->
+  <aside class="floating-audio-dock" id="audio-dock" aria-label="Music Player Controls">
+    <button type="button" class="btn-audio-toggle" id="btn-audio-toggle" aria-label="Play or pause music">
+      <div class="vinyl-record" id="vinyl-record">
+        <div class="vinyl-groove g1"></div>
+        <div class="vinyl-groove g2"></div>
+        <div class="vinyl-center">♪</div>
+      </div>
+      <div class="audio-track-info">
+        <span class="track-title">Young and Beautiful</span>
+        <span class="track-artist">Instrumental</span>
+      </div>
+      <div class="audio-soundwaves" id="audio-soundwaves" aria-hidden="true">
+        <span class="bar b1"></span>
+        <span class="bar b2"></span>
+        <span class="bar b3"></span>
+      </div>
+    </button>
+  </aside>
+
+  <!-- ========================================================================
+       LIGHTBOX MODAL FOR PHOTO GALLERY
+       ======================================================================== -->
+  <div class="lightbox-modal" id="lightbox-modal" role="dialog" aria-modal="true" aria-label="Photo Preview" hidden>
+    <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
+    <div class="lightbox-content">
+      <button type="button" class="btn-lightbox-close" id="btn-lightbox-close" aria-label="Close photo preview">✕</button>
+      <div class="lightbox-frame">
+        <img id="lightbox-img" src="" alt="Enlarged wedding photo" />
+      </div>
+      <div class="lightbox-nav">
+        <button type="button" class="btn-lb-prev" id="btn-lb-prev" aria-label="Previous photo">‹</button>
+        <span class="lightbox-counter" id="lightbox-counter">1 / 4</span>
+        <button type="button" class="btn-lb-next" id="btn-lb-next" aria-label="Next photo">›</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast notification -->
+  <div class="toast-message" id="toast-message" role="status" aria-live="polite"></div>
+</body>
+</html>
