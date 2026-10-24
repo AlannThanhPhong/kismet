@@ -23,7 +23,7 @@ Development dùng `.next-dev`, còn `npm run build` và `npm run start` dùng `.
 
 ## Cloudinary và ảnh trong thiệp xuất bản
 
-Ảnh người dùng thay trong mẫu được tối ưu ở trình duyệt, tải lên Cloudinary qua API server và lưu URL CDN cùng dữ liệu thiệp trong collection `published_trials` của MongoDB `mo_wedding`. Khi bản thiệp có ảnh Cloudinary, hệ thống chỉ xác nhận xuất bản sau khi MongoDB lưu thành công; trang thiệp đọc lại bản ghi từ MongoDB để giữ đúng ảnh trên link chia sẻ. Để bật tính năng, thêm `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY` và `CLOUDINARY_API_SECRET` từ Cloudinary Console vào `.env.local` khi chạy local và vào biến môi trường của hosting khi deploy. Đây là biến server-only; không thêm tiền tố `NEXT_PUBLIC_` và không commit giá trị thật. Chỉ nhận ảnh JPEG, PNG hoặc WebP; ảnh được giới hạn 4 MB sau khi tối ưu để giữ request tải lên gọn và ổn định.
+Ảnh người dùng thay trong mẫu được tối ưu ở trình duyệt, tải lên Cloudinary qua API server và lưu URL CDN cùng dữ liệu thiệp trong collection `published_trials` của MongoDB `mo_wedding`. Thiệp chỉ xuất bản thành công sau khi tài khoản đăng nhập và MongoDB lưu bản ghi; link chia sẻ đọc lại từ MongoDB. Để bật tải ảnh, thêm `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY` và `CLOUDINARY_API_SECRET` từ Cloudinary Console vào `.env.local` khi chạy local và vào biến môi trường của hosting khi deploy. Đây là biến server-only; không thêm tiền tố `NEXT_PUBLIC_` và không commit giá trị thật. Chỉ nhận ảnh JPEG, PNG hoặc WebP; ảnh được giới hạn 4 MB sau khi tối ưu để giữ request tải lên gọn và ổn định.
 
 ## Giá theo quốc gia IP
 
@@ -44,7 +44,13 @@ Giá được cấu hình trong `src/lib/pricing.ts`, dùng chung cho bảng gi�
 
 ## MongoDB và danh sách thiệp
 
-Tạo file `.env.local` từ `.env.example`, điền MongoDB connection string (MongoDB Atlas hoặc MongoDB local). Không commit `.env.local` lên Git. Database mặc định là `mo_wedding`, gồm collection `invitations`, `rsvps` và `published_trials` cho các thiệp xem thử đã xuất bản.
+Tạo file `.env.local` từ `.env.example`, điền MongoDB connection string (MongoDB Atlas hoặc MongoDB local). Không commit `.env.local` lên Git. Database mặc định là `mo_wedding`, gồm collection `invitations`, `rsvps`, `users`, `user_sessions` và `published_trials` cho các thiệp xem thử đã xuất bản.
+
+## Tài khoản và hạn sử dụng thiệp xem thử
+
+Đăng nhập và đăng ký chỉ dùng Google tại `/tai-khoan`; lần đầu đăng nhập Google sẽ tự tạo tài khoản. Tạo OAuth Client ID loại Web application trong Google Cloud Console, khai báo callback URI `https://<tên-miền>/api/auth/google/callback` (và `http://localhost:3000/api/auth/google/callback` khi chạy local), rồi điền `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` và `GOOGLE_REDIRECT_URI` vào `.env.local` cùng biến môi trường hosting. `GOOGLE_REDIRECT_URI` phải khớp chính xác với URI đã khai báo trong Google Cloud Console; nếu để trống, ứng dụng tự dùng callback của miền đang mở.
+
+Chỉ tài khoản Google đã xác minh email `kismetlove.invitation@gmail.com` được cấp quyền quản trị; không cần mã kích hoạt riêng. Cần đăng nhập để xuất bản; mỗi bản thiệp được gắn với tài khoản tạo và lưu trong `published_trials`. Bản thiệp có hiệu lực 7 ngày từ lúc xuất bản. Khi hết hạn, link chia sẻ sẽ khóa nhưng tài khoản vẫn thấy ngày tạo, ngày hết hạn và trạng thái; quản trị viên có thể gia hạn từng bản thêm 7 ngày. Trang quản trị nằm cùng `/tai-khoan`.
 
 Danh sách thiệp hiển thị trên trang chính. Mỗi thiệp có trang riêng `/thiep/:code`. Mã được tạo theo định dạng `YYYYMMDD-<viết tắt cô dâu><viết tắt chú rể>`, lấy ngày cưới và chữ cái đầu của từng phần tên. Ví dụ Kim Hiên và Văn Tài cưới ngày 27/10/2026 có mã `20261027-KHVT`. Thiệp đầu tiên được thêm vào MongoDB tự động khi danh sách được tải.
 
@@ -56,4 +62,4 @@ API hiện có:
 - `POST /api/invitations` — tạo thiệp bằng `couple` (`partnerOne`, `partnerTwo`) và `event` (`date` theo `YYYY-MM-DD`, `venue`, tùy chọn `address`). API tự tạo `code` và `slug`.
 - `POST /api/invitations/:slug/rsvps` — lưu phản hồi khách gồm `guestName`, `attending`, tùy chọn `guestCount` và `message`.
 
-Để thêm thiệp có thiết kế riêng, thêm source và build giao diện vào `public/wedding-invitations/<code>/`, sau đó ánh xạ trang `/thiep/[code]` tới giao diện đó. API hiện chưa có xác thực; cần bổ sung đăng nhập và phân quyền trước khi cho tạo thiệp công khai.
+Để thêm thiệp có thiết kế riêng, thêm source và build giao diện vào `public/wedding-invitations/<code>/`, sau đó ánh xạ trang `/thiep/[code]` tới giao diện đó. Thiệp xem thử do người dùng xuất bản được bảo vệ bằng đăng nhập Google và hạn 7 ngày như phần trên; API `invitations` và RSVP được liệt kê riêng cho chức năng thiệp cưới thông thường.

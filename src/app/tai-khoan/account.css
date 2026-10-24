@@ -1,0 +1,51 @@
+.account-page{min-height:100vh;background:#f5f1e9;color:#2b2926;padding:24px 20px 72px;font-family:Arial,Helvetica,sans-serif}
+.account-shell{width:min(1040px,100%);margin:0 auto}
+.account-topbar{display:flex;align-items:center;justify-content:space-between;margin:4px 0 28px}
+.account-brand{font-family:Georgia,serif;font-size:22px;font-weight:700;color:#4a211e;text-decoration:none;letter-spacing:-.04em}
+.account-brand span{font-style:italic;font-weight:400;color:#9f704f}
+.account-back{color:#6f5a4d;font-size:13px;text-decoration:none}.account-topbar-links{display:flex;align-items:center;gap:18px}
+.account-panel,.account-section{background:#fffdfa;border:1px solid #e7ded2;border-radius:20px;box-shadow:0 16px 45px rgba(50,37,25,.06)}
+.account-loading{padding:36px;color:#76695d}
+.account-welcome{padding:28px 32px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.account-eyebrow{font-size:10px;font-weight:700;letter-spacing:.16em;color:#9d785f;margin:0 0 10px}
+.account-welcome h1,.account-auth-intro h1{font-family:Georgia,serif;font-size:clamp(28px,4vw,40px);font-weight:400;letter-spacing:-.035em;margin:0 0 8px;color:#3a2821}
+.account-welcome p:not(.account-eyebrow){margin:0;color:#7a6d63;font-size:14px}
+.account-admin-badge{display:inline-block;margin-left:10px;padding:5px 8px;border-radius:20px;background:#f4e8d3;color:#7a4b21;font-size:11px;font-weight:700}
+.account-admin-open{display:inline-flex;margin-top:10px;color:#78312b;font-size:12px;font-weight:700;text-decoration:none}.account-admin-open:hover,.account-back:hover{text-decoration:underline}
+.account-quiet-button{border:1px solid #d9cbbd;border-radius:999px;background:transparent;padding:10px 15px;color:#654c40;font-size:12px;cursor:pointer}
+.account-notice,.account-error{margin:16px 0 0;padding:12px 15px;border-radius:12px;font-size:13px}
+.account-notice{background:#eaf3e9;color:#3b6945}.account-error{background:#fbebea;color:#8c312b}
+.account-section{margin-top:22px;padding:26px 28px}
+.account-section-heading{display:flex;justify-content:space-between;align-items:end;margin-bottom:18px;gap:12px}
+.account-section-heading h2{font-family:Georgia,serif;font-size:28px;font-weight:400;margin:0;color:#3b2c25}
+.account-section-heading>span{font-size:12px;color:#84766b}
+.account-trial-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.account-trial-card{border:1px solid #e9dfd3;border-radius:16px;padding:18px;background:#fff}
+.account-trial-card.is-expired{background:#faf8f5}
+.account-trial-card-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.account-status{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;font-size:11px;font-weight:700;white-space:nowrap}
+.account-status.is-active{background:#e9f2e8;color:#41754a}.account-status.is-expired{background:#f3e7e5;color:#98514a}
+.account-trial-code{font-size:10px;color:#9a8d81;letter-spacing:.06em}
+.account-trial-card h3{margin:15px 0 13px;font-family:Georgia,serif;font-size:20px;font-weight:400;color:#48372f}
+.account-trial-card dl{margin:0;display:grid;gap:8px}
+.account-trial-card dl div{display:flex;justify-content:space-between;gap:10px;font-size:12px}
+.account-trial-card dt{color:#95877c}.account-trial-card dd{margin:0;text-align:right;color:#594d45}
+.account-card-actions{margin-top:17px;display:flex;justify-content:flex-end}
+.account-primary-button,.account-disabled-button{display:inline-flex;justify-content:center;align-items:center;border:0;border-radius:999px;background:#762c29;color:#fff9ee;text-decoration:none;padding:10px 15px;font-size:12px;font-weight:700;cursor:pointer}
+.account-primary-button:disabled{opacity:.55;cursor:wait}.account-disabled-button{background:#e7e1d9;color:#91877d;cursor:not-allowed}
+.account-empty{padding:26px;border:1px dashed #ddd0c1;border-radius:15px;text-align:center;color:#83766c;font-size:13px}
+.account-empty p{margin:0 0 10px}.account-empty a{color:#78312b;font-weight:700;text-decoration:none}
+.account-admin-section{border-color:#dbcbb4}.account-admin-list{display:grid;gap:10px}
+.account-admin-row{display:flex;justify-content:space-between;align-items:center;gap:18px;border:1px solid #e9dfd3;border-radius:14px;padding:14px 16px;background:white}
+.account-admin-row-main{display:grid;gap:5px;min-width:0}.account-admin-row-main strong{font-family:Georgia,serif;font-size:17px;font-weight:400;color:#48372f}.account-admin-row-main span,.account-admin-row-main small{font-size:11px;color:#887a6e;overflow-wrap:anywhere}
+.account-admin-row-actions{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.account-auth-panel{max-width:540px;margin:0 auto;padding:36px 40px}
+.account-auth-intro{text-align:center;margin-bottom:24px}.account-auth-intro>p:last-child{margin:12px auto 0;max-width:390px;color:#7b6d62;font-size:13px;line-height:1.6}
+.account-form{display:grid;gap:15px}.account-form>label,.account-admin-token label{display:grid;gap:7px;color:#57473d;font-size:12px;font-weight:700}
+.account-form input{width:100%;height:44px;border:1px solid #ddd2c6;border-radius:10px;background:white;padding:0 12px;font:inherit;color:#332b27;outline:none}.account-form input:focus{border-color:#94614a;box-shadow:0 0 0 3px rgba(148,97,74,.11)}
+.account-form-hint,.account-expiry-note{margin:-5px 0 0;color:#95867a;font-size:11px;line-height:1.5}
+.account-admin-token{border-top:1px solid #eee5db;padding-top:12px;color:#806b5b;font-size:12px}.account-admin-token summary{cursor:pointer}.account-admin-token label{margin-top:12px}
+.account-submit{width:100%;min-height:46px;margin-top:3px}.account-switch-mode{text-align:center;font-size:12px;color:#83766b;margin:20px 0 0}.account-switch-mode button{border:0;padding:0;background:transparent;color:#7b302c;font:inherit;font-weight:700;cursor:pointer}
+.account-google-button{gap:10px}.account-google-button span{display:inline-grid;place-items:center;width:21px;height:21px;border-radius:50%;background:#fff;color:#4285f4;font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:700}
+.account-expiry-note{text-align:center;margin:22px 0 0}
+@media(max-width:680px){.account-page{padding:16px 12px 40px}.account-topbar{margin-bottom:18px}.account-topbar-links{gap:12px}.account-welcome{padding:22px;align-items:flex-start}.account-section{padding:21px 16px}.account-section-heading h2{font-size:24px}.account-trial-grid{grid-template-columns:1fr}.account-auth-panel{padding:29px 20px}.account-admin-row{align-items:flex-start;flex-direction:column}.account-admin-row-actions{width:100%;justify-content:space-between}.account-trial-card dl div{font-size:11px}}

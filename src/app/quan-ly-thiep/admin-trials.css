@@ -1,0 +1,18 @@
+.admin-management-page .admin-management-intro{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:30px 34px}
+.admin-management-intro h1{margin:0;color:#3a2821;font-family:Georgia,serif;font-size:clamp(28px,4vw,40px);font-weight:400;letter-spacing:-.035em}
+.admin-management-intro p:last-child{max-width:650px;margin:11px 0 0;color:#7a6d63;font-size:13px;line-height:1.65}
+.admin-trial-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:20px}
+.admin-trial-stats article{display:grid;gap:8px;padding:18px 20px;border:1px solid #e7ded2;border-radius:16px;background:#fffdfa;box-shadow:0 12px 30px rgba(50,37,25,.04)}
+.admin-trial-stats span{color:#84766b;font-size:12px}.admin-trial-stats strong{color:#4a211e;font-family:Georgia,serif;font-size:30px;font-weight:400}
+.admin-trials-section{margin-top:16px}
+.admin-trials-toolbar{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:14px;margin-bottom:18px}
+.admin-trials-toolbar label{display:grid;gap:7px;color:#57473d;font-size:11px;font-weight:700}
+.admin-trials-toolbar input,.admin-trials-toolbar select{width:100%;height:42px;border:1px solid #ddd2c6;border-radius:10px;background:#fff;padding:0 12px;color:#332b27;font:inherit;outline:none}
+.admin-trials-toolbar input:focus,.admin-trials-toolbar select:focus{border-color:#94614a;box-shadow:0 0 0 3px rgba(148,97,74,.11)}
+.admin-trials-count{margin:0 0 12px;color:#84766b;font-size:12px}
+.admin-trial-row{align-items:flex-start}.admin-trial-actions{flex-wrap:wrap;justify-content:flex-end}
+.admin-trial-view{background:#f0e8dd;color:#654c40}
+.admin-access-panel{display:grid;justify-items:start;gap:12px;margin-top:22px;padding:28px 32px}
+.admin-access-panel h2{margin:0;color:#3b2c25;font-family:Georgia,serif;font-size:25px;font-weight:400}
+.admin-access-panel p{margin:0 0 4px;color:#7a6d63;font-size:13px;line-height:1.6}
+@media(max-width:680px){.admin-management-page .admin-management-intro{align-items:flex-start;flex-direction:column;padding:23px 22px}.admin-trial-stats{gap:8px}.admin-trial-stats article{padding:14px 12px}.admin-trial-stats span{font-size:10px}.admin-trial-stats strong{font-size:25px}.admin-trials-toolbar{grid-template-columns:1fr}.admin-trial-actions{width:100%;justify-content:space-between}.account-admin-open{font-size:11px}}

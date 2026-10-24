@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowDown, ArrowRight, Check, ChevronDown, ChevronLeft, ChevronRight, Heart, Menu, Paintbrush, Search, Sparkles, X, Mail, MousePointer2, Leaf, ExternalLink, BookOpen } from "lucide-react";
+import { ArrowDown, ArrowRight, Check, ChevronDown, Heart, Menu, Paintbrush, Search, Sparkles, X, Mail, MousePointer2, Leaf, ExternalLink, BookOpen } from "lucide-react";
 import { filterCatalog, getCatalog, PACKAGES, TEMPLATE_TAG_GROUPS, type CatalogItem, type PackageId } from "@/lib/storefront-catalog";
 import { packagePrice, type PricingCurrency } from "@/lib/pricing";
 import { CONTACT_EMAIL, CONTACT_PHONES } from "@/lib/contact";
@@ -86,9 +86,6 @@ export default function WhiteStorefront({ currency }: { currency: PricingCurrenc
   const [newsletterMessage, setNewsletterMessage] = useState("");
   const [info, setInfo] = useState<"privacy" | "terms" | "drafts" | null>(null);
   const [drafts, setDrafts] = useState<{ id: string; name: string }[]>([]);
-  const [templateSlideIndex, setTemplateSlideIndex] = useState(0);
-  const [templatePaused, setTemplatePaused] = useState(false);
-  const swipeStartX = useRef<number | null>(null);
   const hoverTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const quickDialog = useRef<HTMLDialogElement>(null);
   const infoDialog = useRef<HTMLDialogElement>(null);
@@ -141,34 +138,6 @@ export default function WhiteStorefront({ currency }: { currency: PricingCurrenc
     return () => { clearTimeout(timer); controller.abort(); };
   }, [filterParams, currency]);
   const filtered = useMemo(() => (remoteItems ?? filterCatalog(storefrontItems, new URLSearchParams(filterParams))).filter(item => item.showInStorefront !== false && !realProjectIds.has(item.id) && (!savedOnly || saved.includes(item.id))), [remoteItems, storefrontItems, filterParams, realProjectIds, savedOnly, saved]);
-  const templateSlides = useMemo(() => {
-    if (!filtered.length) return [];
-    if (filtered.length === 1) return [0, 1, 2, 3].map(copy => ({ item: filtered[0], key: `${filtered[0].id}-c${copy}`, realIndex: 0 }));
-    if (filtered.length < 4) {
-      return [...filtered, ...filtered].map((item, idx) => ({
-        item,
-        key: `${item.id}-v${idx}`,
-        realIndex: idx % filtered.length,
-      }));
-    }
-    return filtered.map((item, idx) => ({ item, key: item.id, realIndex: idx }));
-  }, [filtered]);
-  const totalTemplateSlides = templateSlides.length;
-  const activeTemplateSlideIndex = totalTemplateSlides ? ((templateSlideIndex % totalTemplateSlides) + totalTemplateSlides) % totalTemplateSlides : 0;
-  const activeTemplateSlide = templateSlides[activeTemplateSlideIndex] ?? null;
-  const activeTemplate = activeTemplateSlide?.item ?? null;
-
-  useEffect(() => {
-    setTemplateSlideIndex(0);
-  }, [filterParams, savedOnly]);
-
-  useEffect(() => {
-    if (templatePaused || totalTemplateSlides < 2) return;
-    const timer = setTimeout(() => {
-      setTemplateSlideIndex(current => (current + 1) % totalTemplateSlides);
-    }, 1950);
-    return () => clearTimeout(timer);
-  }, [activeTemplateSlideIndex, templatePaused, totalTemplateSlides]);
 
   function reset() { setPkg(""); setSelectedTags([]); setSavedOnly(false); }
   function choosePackage(id: PackageId) { setPkg(id); setSavedOnly(false); setHoverMenu(null); setMobileOpen(false); document.getElementById("kho-mau-thiep")?.scrollIntoView({ behavior: "smooth" }); }
@@ -213,7 +182,7 @@ export default function WhiteStorefront({ currency }: { currency: PricingCurrenc
           {hoverMenu === pack.id && <div className="ws-mega" id={`menu-${pack.id}`}><div><span className="ws-kicker">{pack.name}</span><h3>{pack.note}</h3><p>{pack.description}</p><small>{pack.features}</small><button className="ws-text-link" onClick={() => choosePackage(pack.id)}>Khám phá bộ sưu tập <ArrowRight size={14} /></button></div><div className="ws-mega-samples">{!storefrontItems.some(item => item.packageId === pack.id) && <p className="ws-menu-empty">Liên hệ studio để xem mẫu phù hợp với gói {pack.name}</p>}{storefrontItems.filter(item => item.packageId === pack.id).slice(0, 2).map(item => <button key={item.id} onClick={() => { setHoverMenu(null); openQuick(item); }}><ProjectArtwork item={item} /><span>{item.name}</span></button>)}</div></div>}
         </div>)}
       </nav>
-      <div className="ws-header-tools"><a className="ws-price-link" href="#bang-gia">Các gói & bảng giá</a><button aria-label="Đến kho mẫu thiệp" onClick={() => document.getElementById("kho-mau-thiep")?.scrollIntoView({ behavior: "smooth" })}><Search size={19} /></button><button aria-label="Bản thiết kế của bạn trên thiết bị" onClick={openDrafts}><BookOpen size={19} /></button><button aria-label={`Xem ${saved.length} thiệp đã lưu`} className="ws-saved-button" aria-pressed={savedOnly} onClick={() => { setSavedOnly(!savedOnly); document.getElementById("kho-mau-thiep")?.scrollIntoView(); }}><Heart size={19} /><span>{saved.length}</span></button><button className="ws-mobile-toggle" aria-label="Mở danh mục" aria-expanded={mobileOpen} onClick={() => setMobileOpen(!mobileOpen)}>{mobileOpen ? <X size={22} /> : <Menu size={22} />}</button></div>
+      <div className="ws-header-tools"><Link className="ws-account-link" href="/tai-khoan">Tài khoản</Link><a className="ws-price-link" href="#bang-gia">Các gói & bảng giá</a><button aria-label="Đến kho mẫu thiệp" onClick={() => document.getElementById("kho-mau-thiep")?.scrollIntoView({ behavior: "smooth" })}><Search size={19} /></button><button aria-label="Bản thiết kế của bạn trên thiết bị" onClick={openDrafts}><BookOpen size={19} /></button><button aria-label={`Xem ${saved.length} thiệp đã lưu`} className="ws-saved-button" aria-pressed={savedOnly} onClick={() => { setSavedOnly(!savedOnly); document.getElementById("kho-mau-thiep")?.scrollIntoView(); }}><Heart size={19} /><span>{saved.length}</span></button><button className="ws-mobile-toggle" aria-label="Mở danh mục" aria-expanded={mobileOpen} onClick={() => setMobileOpen(!mobileOpen)}>{mobileOpen ? <X size={22} /> : <Menu size={22} />}</button></div>
       {mobileOpen && <nav className="ws-mobile-nav" aria-label="Danh mục trên điện thoại">{PACKAGES.map(pack => <button key={pack.id} onClick={() => choosePackage(pack.id)}>{pack.name}<small>{pack.note}</small><ArrowRight size={16} /></button>)}<Link href="/design"><Paintbrush size={16} /> Tự thiết kế</Link></nav>}
     </header>
 
@@ -269,221 +238,128 @@ export default function WhiteStorefront({ currency }: { currency: PricingCurrenc
       <p className="ws-results-count" role="status">{catalogLoading ? "Đang cập nhật · " : ""}{filtered.length} mẫu thiệp{savedOnly ? " đã lưu" : ""}</p>
       {catalogError && <p className="ws-notice" role="status">{catalogError}</p>}
       {storageError && <p className="ws-notice" role="status">{storageError}</p>}
-      {activeTemplate && <div
-        className="ws-artframe-showcase"
-        onMouseEnter={() => setTemplatePaused(true)}
-        onMouseLeave={() => setTemplatePaused(false)}
-      >
-        <div
-          className="ws-artframe-stage"
-          onTouchStart={event => {
-            swipeStartX.current = event.touches[0]?.clientX ?? null;
-            setTemplatePaused(true);
-          }}
-          onTouchEnd={event => {
-            if (swipeStartX.current !== null && event.changedTouches[0]) {
-              const deltaX = event.changedTouches[0].clientX - swipeStartX.current;
-              if (Math.abs(deltaX) > 32) {
-                setTemplateSlideIndex(current => (current + (deltaX < 0 ? 1 : -1) + totalTemplateSlides) % totalTemplateSlides);
-              }
-            }
-            swipeStartX.current = null;
-            setTemplatePaused(false);
-          }}
-          onPointerDown={event => {
-            if (event.pointerType === "mouse") swipeStartX.current = event.clientX;
-          }}
-          onPointerUp={event => {
-            if (event.pointerType === "mouse" && swipeStartX.current !== null) {
-              const deltaX = event.clientX - swipeStartX.current;
-              if (Math.abs(deltaX) > 45) {
-                setTemplateSlideIndex(current => (current + (deltaX < 0 ? 1 : -1) + totalTemplateSlides) % totalTemplateSlides);
-              }
-              swipeStartX.current = null;
-            }
-          }}
-        >
-          <button
-            type="button"
-            className="ws-phone-nav is-prev"
-            aria-label="Mẫu thiệp trước"
-            onClick={() => setTemplateSlideIndex(current => (current - 1 + totalTemplateSlides) % totalTemplateSlides)}
-          >
-            <ChevronLeft size={22} strokeWidth={1.5} />
-          </button>
-
-          <div className="ws-artframe-track">
-            {templateSlides.map((slide, index) => {
-              const { item } = slide;
-              const diff = (index - activeTemplateSlideIndex + totalTemplateSlides) % totalTemplateSlides;
-              const slot =
-                diff === 0
-                  ? "center"
-                  : diff === 1
-                  ? "right"
-                  : diff === totalTemplateSlides - 1
-                  ? "left"
-                  : diff <= Math.floor(totalTemplateSlides / 2)
-                  ? "far-right"
-                  : "far-left";
-              const isCenter = slot === "center";
-              return (
-                <article
-                  key={slide.key}
-                  className="ws-artframe-slide"
-                  data-slot={slot}
-                  aria-hidden={!isCenter && slot !== "left" && slot !== "right"}
-                >
-                  <div className="ws-artframe-device">
-                    <div className="ws-artframe-mat">
-                      <div className="ws-artframe-canvas">
-                        <span className={`ws-card-badge ${item.templateNumber || item.tag !== "New" ? "" : "is-new"}`}>
-                          {item.templateNumber ? `TEMPLATE ${String(item.templateNumber).padStart(2, "0")}` : item.tag}
-                        </span>
-                        <button
-                          type="button"
-                          className="ws-card-save"
-                          aria-label={`${saved.includes(item.id) ? "Bỏ lưu" : "Lưu"} ${item.name}`}
-                          aria-pressed={saved.includes(item.id)}
-                          tabIndex={isCenter ? 0 : -1}
-                          onClick={event => {
-                            event.stopPropagation();
-                            setSaved(prev => prev.includes(item.id) ? prev.filter(id => id !== item.id) : [...prev, item.id]);
-                          }}
-                        >
-                          <Heart size={16} fill={saved.includes(item.id) ? "currentColor" : "none"} />
-                        </button>
-                        <button
-                          type="button"
-                          className="ws-art-button"
-                          aria-label={isCenter ? `Xem nhanh ${item.name}` : `Chuyển đến ${item.name}`}
-                          tabIndex={isCenter || slot === "left" || slot === "right" ? 0 : -1}
-                          onClick={() => {
-                            if (isCenter) openQuick(item);
-                            else setTemplateSlideIndex(index);
-                          }}
-                        >
-                          {item.template || item.coverImage ? (
-                            <div className="ws-live-cover">
-                              <Image
-                                src={item.template?.coverImage ?? item.coverImage!}
-                                fill
-                                sizes="(max-width: 600px) 85vw, 420px"
-                                quality={95}
-                                unoptimized={Boolean(item.coverImage)}
-                                alt={`Mẫu thiệp ${item.name}`}
-                              />
-                              <div>
-                                <small>{item.template || item.templateNumber ? "THE WEDDING OF" : "KISMET LOVE"}</small>
-                                <span>{item.template?.coupleName ?? item.coupleName ?? item.name}</span>
-                                <small>{item.name}</small>
-                              </div>
-                            </div>
-                          ) : (
-                            <div className={`ws-flatlay ws-flatlay-${item.motif}`}>
-                              <span className="ws-flatlay-envelope" />
-                              <span className="ws-flatlay-extra"><SuiteArtwork part={1} item={item} /></span>
-                              <span className="ws-flatlay-main"><InvitationArtwork item={item} /></span>
-                              <Leaf className="ws-flatlay-leaf" size={70} strokeWidth={0.7} />
-                            </div>
-                          )}
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-
-          <button
-            type="button"
-            className="ws-phone-nav is-next"
-            aria-label="Mẫu thiệp tiếp theo"
-            onClick={() => setTemplateSlideIndex(current => (current + 1) % totalTemplateSlides)}
-          >
-            <ChevronRight size={22} strokeWidth={1.5} />
-          </button>
-        </div>
-
-        <div className="ws-template-active-info" key={activeTemplate.id} aria-live="polite">
-          <div className="ws-template-active-meta">
-            <span>
-              {activeTemplate.templateNumber
-                ? `TEMPLATE ${String(activeTemplate.templateNumber).padStart(2, "0")} · ${activeTemplate.style} · ${PACKAGES.find(pack => pack.id === activeTemplate.packageId)?.name}`
-                : `${activeTemplate.style} · ${PACKAGES.find(pack => pack.id === activeTemplate.packageId)?.name}`}
-            </span>
-            {!activeTemplate.template && <strong className="ws-project-price">{activeTemplate.price}</strong>}
-            {!activeTemplate.previewOnly && (
-              <div className="ws-swatches">
-                {(activeTemplate.template?.colors ?? [activeTemplate.background, activeTemplate.color, "#D1C4B8"]).map(color => (
-                  <i key={color} style={{ background: color }} />
-                ))}
-              </div>
-            )}
-          </div>
-          <h3>
-            <button type="button" onClick={() => openQuick(activeTemplate)}>{activeTemplate.name}</button>
-          </h3>
-          {(activeTemplate.template?.coupleName ?? activeTemplate.coupleName) && (
-            <p className="ws-template-active-couple">
-              {activeTemplate.template?.coupleName ?? activeTemplate.coupleName}
-              {activeTemplate.venue ? ` · ${activeTemplate.venue}` : ""}
-            </p>
-          )}
-          <p className="ws-template-active-desc">
-            {activeTemplate.description ?? activeTemplate.template?.description ?? "Một thiết kế nhẹ nhàng, có thể tùy chỉnh nội dung, hình ảnh và nhạc nền theo câu chuyện của hai bạn."}
-          </p>
-          <div className="ws-card-tags ws-template-active-tags">
-            {activeTemplate.tags.map(tag => <span key={tag}>{tag}</span>)}
-          </div>
-          <div className="ws-template-active-actions">
-            {activeTemplate.previewOnly ? (
-              <span>Phần phong cách đang cập nhật</span>
-            ) : activeTemplate.template ? (
-              <>
-                {activeTemplate.template.liveDemoUrl && (
-                  <a className="ws-text-link" href={activeTemplate.template.liveDemoUrl} target="_blank" rel="noopener noreferrer">
-                    Xem bản xem trước <ExternalLink size={13} />
-                  </a>
-                )}
-                {!activeTemplate.template.isRealProject && activeTemplate.template.tryUrl ? (
-                  <Link className="ws-primary" href={activeTemplate.template.tryUrl}>
-                    Thử mẫu này <ArrowRight size={14} />
-                  </Link>
-                ) : (
-                  <button type="button" className="ws-primary" onClick={() => setConsultation(activeTemplate)}>
-                    Tư vấn riêng <ArrowRight size={14} />
+      {filtered.length > 0 && (
+        <div className="ws-template-grid">
+          {filtered.map((item) => {
+            const packageName = PACKAGES.find((pack) => pack.id === item.packageId)?.name;
+            return (
+              <article className="ws-template-card" key={item.id}>
+                <div className="ws-card-preview">
+                  <span className={`ws-card-badge ${item.templateNumber || item.tag !== "New" ? "" : "is-new"}`}>
+                    {item.templateNumber ? `TEMPLATE ${String(item.templateNumber).padStart(2, "0")}` : item.tag}
+                  </span>
+                  <button
+                    type="button"
+                    className="ws-card-save"
+                    aria-label={`${saved.includes(item.id) ? "Bỏ lưu" : "Lưu"} ${item.name}`}
+                    aria-pressed={saved.includes(item.id)}
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      setSaved((prev) => (prev.includes(item.id) ? prev.filter((id) => id !== item.id) : [...prev, item.id]));
+                    }}
+                  >
+                    <Heart size={16} fill={saved.includes(item.id) ? "currentColor" : "none"} />
                   </button>
-                )}
-                <button type="button" className="ws-text-link" onClick={() => openQuick(activeTemplate)}>
-                  Xem nhanh <ArrowRight size={13} />
-                </button>
-              </>
-            ) : (
-              <>
-                <Link className="ws-primary" href={`/design?template=${activeTemplate.id}`}>
-                  Tự chỉnh sửa <ArrowRight size={14} />
-                </Link>
-                <span>SVG · 2 mặt</span>
-              </>
-            )}
-          </div>
-          <div className="ws-phone-dots" role="tablist" aria-label="Chọn mẫu thiệp">
-            {filtered.map((item, idx) => (
-              <button
-                key={item.id}
-                type="button"
-                role="tab"
-                aria-selected={activeTemplateSlide?.realIndex === idx}
-                aria-label={`Mẫu ${item.name}`}
-                className={activeTemplateSlide?.realIndex === idx ? "is-active" : undefined}
-                onClick={() => setTemplateSlideIndex(idx)}
-              />
-            ))}
-          </div>
+                  <button type="button" className="ws-art-button" aria-label={`Xem nhanh ${item.name}`} onClick={() => openQuick(item)}>
+                    {item.template || item.coverImage ? (
+                      <div className="ws-live-cover">
+                        <Image
+                          src={item.template?.coverImage ?? item.coverImage!}
+                          fill
+                          sizes="(max-width: 640px) 95vw, (max-width: 1024px) 48vw, 380px"
+                          quality={95}
+                          unoptimized={Boolean(item.coverImage)}
+                          alt={`Mẫu thiệp ${item.name}`}
+                        />
+                        <div>
+                          <small>{item.template || item.templateNumber ? "THE WEDDING OF" : "KISMET LOVE"}</small>
+                          <span>{item.template?.coupleName ?? item.coupleName ?? item.name}</span>
+                          <small>{item.name}</small>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className={`ws-flatlay ws-flatlay-${item.motif}`}>
+                        <span className="ws-flatlay-envelope" />
+                        <span className="ws-flatlay-extra"><SuiteArtwork part={1} item={item} /></span>
+                        <span className="ws-flatlay-main"><InvitationArtwork item={item} /></span>
+                        <Leaf className="ws-flatlay-leaf" size={70} strokeWidth={0.7} />
+                      </div>
+                    )}
+                  </button>
+                  <button type="button" className="ws-quick-button" onClick={() => openQuick(item)}>
+                    Xem nhanh <ArrowRight size={13} />
+                  </button>
+                </div>
+
+                <div className="ws-card-info">
+                  <div className="ws-card-meta-row">
+                    <span>
+                      {item.templateNumber
+                        ? `TEMPLATE ${String(item.templateNumber).padStart(2, "0")} · ${item.style}${packageName ? ` · ${packageName}` : ""}`
+                        : `${item.style}${packageName ? ` · ${packageName}` : ""}`}
+                    </span>
+                    {!item.previewOnly && (
+                      <div className="ws-swatches">
+                        {(item.template?.colors ?? [item.background, item.color, "#D1C4B8"]).map((color) => (
+                          <i key={color} style={{ background: color }} />
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  <h3 className="ws-card-title">
+                    <button type="button" onClick={() => openQuick(item)}>{item.name}</button>
+                  </h3>
+
+                  {(item.template?.coupleName ?? item.coupleName) && (
+                    <p className="ws-card-couple">
+                      {item.template?.coupleName ?? item.coupleName}
+                      {item.venue ? ` · ${item.venue}` : ""}
+                    </p>
+                  )}
+
+                  <div className="ws-card-tags">
+                    {item.tags.map((tag) => <span key={tag}>{tag}</span>)}
+                  </div>
+
+                  <div className="ws-card-actions">
+                    {item.previewOnly ? (
+                      <span>Phần phong cách đang cập nhật</span>
+                    ) : item.template ? (
+                      <>
+                        {item.template.liveDemoUrl && (
+                          <a className="ws-card-demo-link" href={item.template.liveDemoUrl} target="_blank" rel="noopener noreferrer">
+                            Xem trước <ExternalLink size={12} />
+                          </a>
+                        )}
+                        {!item.template.isRealProject && item.template.tryUrl ? (
+                          <Link className="ws-primary ws-card-try-btn" href={item.template.tryUrl}>
+                            Thử mẫu này <ArrowRight size={12} />
+                          </Link>
+                        ) : (
+                          <button type="button" className="ws-primary ws-card-try-btn" onClick={() => setConsultation(item)}>
+                            Tư vấn riêng <ArrowRight size={12} />
+                          </button>
+                        )}
+                        <button type="button" className="ws-text-link ws-card-quick-btn" onClick={() => openQuick(item)}>
+                          Xem nhanh <ArrowRight size={12} />
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <Link className="ws-primary ws-card-try-btn" href={`/design?template=${item.id}`}>
+                          Tự chỉnh sửa <ArrowRight size={12} />
+                        </Link>
+                        <span>SVG · 2 mặt</span>
+                      </>
+                    )}
+                  </div>
+                </div>
+              </article>
+            );
+          })}
         </div>
-      </div>}
+      )}
       {!filtered.length && <div className="ws-empty"><Search size={28} strokeWidth={1} /><h3>Chưa có mẫu phù hợp</h3><p>{savedOnly ? "Lưu những mẫu bạn yêu thích bằng nút trái tim để xem lại ở đây" : "Thử chọn một chủ đề khác hoặc bỏ bớt thẻ đang chọn nhé"}</p><button className="ws-primary" onClick={reset}>Xem tất cả mẫu <ArrowRight size={14} /></button></div>}
       <div className="ws-catalog-note"><span><Check size={14} /> Các mẫu thiệp có thể chỉnh sửa mở trong editor miễn phí</span><span>Website RSVP & VietQR được cung cấp theo gói dịch vụ</span></div>
     </section>

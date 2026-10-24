@@ -122,41 +122,33 @@ export default function ExactTemplateCustomizer({
     const draftKey = `kismet-exact-draft-${tpl.code}`;
 
     async function hydrateDraft() {
-      // 1. Try IndexedDB first (holds full multi-image drafts that exceed localStorage 5MB)
-      const idbDraft = await loadTrialFromIndexedDb<Partial<PublishedTrialPayload>>(draftKey);
-      if (!cancelled && idbDraft) {
-        if (idbDraft.imageMap) setImageMap(idbDraft.imageMap);
-        if (idbDraft.textMap) setTextMap(idbDraft.textMap);
-        if (idbDraft.musicSrc) setMusicSrc(idbDraft.musicSrc);
-        if (idbDraft.musicTitle) setMusicTitle(idbDraft.musicTitle);
-      } else {
-        // 2. Fallback to localStorage
-        try {
-          const saved = localStorage.getItem(draftKey);
-          if (!cancelled && saved) {
-            const parsed = JSON.parse(saved) as Partial<PublishedTrialPayload>;
-            if (parsed.imageMap) setImageMap(parsed.imageMap);
-            if (parsed.textMap) setTextMap(parsed.textMap);
-            if (parsed.musicSrc) setMusicSrc(parsed.musicSrc);
-            if (parsed.musicTitle) setMusicTitle(parsed.musicTitle);
+      // A public share ID must be loaded from the server so local caches cannot
+      // bypass its owner or expiry checks.
+      if (!initialCustomId || tpl.code !== initialTemplate.code) {
+        const idbDraft = await loadTrialFromIndexedDb<Partial<PublishedTrialPayload>>(draftKey);
+        if (!cancelled && idbDraft) {
+          if (idbDraft.imageMap) setImageMap(idbDraft.imageMap);
+          if (idbDraft.textMap) setTextMap(idbDraft.textMap);
+          if (idbDraft.musicSrc) setMusicSrc(idbDraft.musicSrc);
+          if (idbDraft.musicTitle) setMusicTitle(idbDraft.musicTitle);
+        } else {
+          try {
+            const saved = localStorage.getItem(draftKey);
+            if (!cancelled && saved) {
+              const parsed = JSON.parse(saved) as Partial<PublishedTrialPayload>;
+              if (parsed.imageMap) setImageMap(parsed.imageMap);
+              if (parsed.textMap) setTextMap(parsed.textMap);
+              if (parsed.musicSrc) setMusicSrc(parsed.musicSrc);
+              if (parsed.musicTitle) setMusicTitle(parsed.musicTitle);
+            }
+          } catch {
+            // Ignore storage error
           }
-        } catch {
-          // Ignore storage error
         }
       }
 
       // 3. If opened with ?custom=ID, load that published trial
       if (initialCustomId && tpl.code === initialTemplate.code) {
-        const idbCustom = await loadTrialFromIndexedDb<PublishedTrialPayload>(
-          `kismet-published-trial-${initialCustomId}`,
-        );
-        if (!cancelled && idbCustom && idbCustom.templateCode === tpl.code) {
-          setImageMap(idbCustom.imageMap || {});
-          setTextMap(idbCustom.textMap || {});
-          if (idbCustom.musicSrc) setMusicSrc(idbCustom.musicSrc);
-          if (idbCustom.musicTitle) setMusicTitle(idbCustom.musicTitle);
-        }
-
         try {
           const r = await fetch(`/api/published-trials/${encodeURIComponent(initialCustomId)}`, {
             cache: "no-store",
@@ -369,6 +361,13 @@ export default function ExactTemplateCustomizer({
 
       // 1. Always persist immediately to IndexedDB (unlimited quota) & localStorage (if fits)
       await saveTrialToIndexedDb(`kismet-published-trial-${clientTrialId}`, record);
+      await saveTrialToIndexedDb(`kismet-exact-draft-${currentTemplate.code}`, {
+        templateCode: currentTemplate.code,
+        imageMap: persistentImageMap,
+        textMap,
+        musicSrc,
+        musicTitle,
+      });
       try {
         localStorage.setItem(`kismet-published-trial-${clientTrialId}`, JSON.stringify(record));
       } catch {
@@ -377,47 +376,47 @@ export default function ExactTemplateCustomizer({
 
       let finalId = clientTrialId;
       let finalShareUrl = `/thiep/${encodeURIComponent(currentTemplate.code)}?custom=${encodeURIComponent(clientTrialId)}`;
-      const hasCloudinaryImages = Object.values(persistentImageMap).some((url) =>
-        /^https:\/\/res\.cloudinary\.com\//i.test(url),
-      );
-
       // 2. Sync to server API (/api/published-trials)
-      try {
-        let res = await fetch("/api/published-trials", {
+      let res = await fetch("/api/published-trials", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(record),
+      });
+
+      if (res.status === 401) {
+        const next = `${window.location.pathname}${window.location.search}`;
+        window.location.assign(`/tai-khoan?next=${encodeURIComponent(next)}`);
+        return;
+      }
+
+      // If custom uploaded audio made the payload too large, retry with preset music URL
+      if (!res.ok && musicSrc.startsWith("data:")) {
+        res = await fetch("/api/published-trials", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(record),
+          body: JSON.stringify({
+            ...record,
+            musicSrc: currentTemplate.defaultMusicSrc,
+          }),
         });
-
-        // If custom uploaded audio made the payload too large, retry with preset music URL
-        if (!res.ok && musicSrc.startsWith("data:")) {
-          res = await fetch("/api/published-trials", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              ...record,
-              musicSrc: currentTemplate.defaultMusicSrc,
-            }),
-          });
+        if (res.status === 401) {
+          const next = `${window.location.pathname}${window.location.search}`;
+          window.location.assign(`/tai-khoan?next=${encodeURIComponent(next)}`);
+          return;
         }
-
-        if (!res.ok && hasCloudinaryImages) {
-          const errorBody = (await res.json().catch(() => null)) as { error?: string } | null;
-          throw new Error(errorBody?.error || "Không thể lưu thiệp có ảnh lên MongoDB. Vui lòng thử xuất bản lại.");
-        }
-
-        if (res.ok) {
-          const json = (await res.json()) as {
-            id?: string;
-            shareUrl?: string;
-          };
-          if (json.id) finalId = json.id;
-          if (json.shareUrl) finalShareUrl = json.shareUrl;
-        }
-      } catch (error) {
-        if (hasCloudinaryImages) throw error;
-        // Even if server API is unreachable, IndexedDB + localStorage have the record ready for this device
       }
+
+      if (!res.ok) {
+        const errorBody = (await res.json().catch(() => null)) as { error?: string } | null;
+        throw new Error(errorBody?.error || "Không thể lưu thiệp. Vui lòng thử xuất bản lại.");
+      }
+
+      const json = (await res.json()) as {
+        id?: string;
+        shareUrl?: string;
+      };
+      if (json.id) finalId = json.id;
+      if (json.shareUrl) finalShareUrl = json.shareUrl;
 
       setPublishedId(finalId);
       setPublishedUrl(finalShareUrl);
@@ -689,7 +688,11 @@ export default function ExactTemplateCustomizer({
             <select
               className="kismet-template-select"
               value={selectedCode}
-              onChange={(e) => setSelectedCode(e.target.value)}
+              onChange={(e) => {
+                const nextCode = e.target.value;
+                setSelectedCode(nextCode);
+                if (nextCode !== selectedCode) setPublishedId(null);
+              }}
             >
               {EXACT_TEMPLATES.map((tpl) => (
                 <option key={tpl.code} value={tpl.code}>
@@ -819,6 +822,26 @@ export default function ExactTemplateCustomizer({
               <span>Gốc</span>
             </button>
           )}
+
+          <Link
+            href="/tai-khoan"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+              padding: "7px 11px",
+              borderRadius: "999px",
+              border: "1px solid rgba(255,255,255,0.25)",
+              background: "rgba(255,255,255,0.06)",
+              color: "#f5eadb",
+              fontSize: "11.5px",
+              textDecoration: "none",
+              whiteSpace: "nowrap",
+            }}
+          >
+            Tài khoản
+          </Link>
 
           <button
             type="button"

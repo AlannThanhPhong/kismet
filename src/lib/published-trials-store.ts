@@ -7,16 +7,22 @@ export interface PublishedTrialPayload {
   musicSrc?: string;
   musicTitle?: string;
   createdAt: string;
+  expiresAt?: string;
+  ownerId?: string;
+  ownerEmail?: string;
+  renewedAt?: string;
+  renewalCount?: number;
 }
 
-declare global {
-  // eslint-disable-next-line no-var
-  var __kismetPublishedTrials: Map<string, PublishedTrialPayload> | undefined;
-}
+export const PUBLISHED_TRIAL_LIFETIME_MS = 7 * 24 * 60 * 60 * 1000;
 
-export function getMemoryTrialStore(): Map<string, PublishedTrialPayload> {
-  if (!globalThis.__kismetPublishedTrials) {
-    globalThis.__kismetPublishedTrials = new Map<string, PublishedTrialPayload>();
+export function getPublishedTrialExpiry(record: Pick<PublishedTrialPayload, "createdAt" | "expiresAt">) {
+  if (record.expiresAt) {
+    const expiry = new Date(record.expiresAt);
+    if (Number.isFinite(expiry.getTime())) return expiry;
   }
-  return globalThis.__kismetPublishedTrials;
+
+  const createdAt = new Date(record.createdAt);
+  if (!Number.isFinite(createdAt.getTime())) return null;
+  return new Date(createdAt.getTime() + PUBLISHED_TRIAL_LIFETIME_MS);
 }

@@ -2,7 +2,7 @@
 
 import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { applyCustomizationsToDoc, loadTrialFromIndexedDb } from "@/lib/template-customizer-bridge";
+import { applyCustomizationsToDoc } from "@/lib/template-customizer-bridge";
 import type { PublishedTrialPayload } from "@/lib/published-trials-store";
 
 interface Props {
@@ -16,6 +16,8 @@ function CustomizedInvitationFrameInner({ code, src, title }: Props) {
   const customId = searchParams.get("custom");
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
   const [trialData, setTrialData] = useState<PublishedTrialPayload | null>(null);
+  const [trialCanEdit, setTrialCanEdit] = useState(false);
+  const [trialError, setTrialError] = useState<{ message: string; expiresAt?: string | null } | null>(null);
   const trialDataRef = useRef<PublishedTrialPayload | null>(null);
   const [loadingTrial, setLoadingTrial] = useState<boolean>(Boolean(customId));
 
@@ -27,89 +29,51 @@ function CustomizedInvitationFrameInner({ code, src, title }: Props) {
   useEffect(() => {
     if (!customId) {
       updateTrialData(null);
+      setTrialCanEdit(false);
+      setTrialError(null);
       setLoadingTrial(false);
       return;
     }
 
     let cancelled = false;
+    updateTrialData(null);
+    setTrialCanEdit(false);
+    setTrialError(null);
     setLoadingTrial(true);
 
     async function loadTrial() {
-      let resolved: PublishedTrialPayload | null = null;
-
-      // 1. Check IndexedDB first (handles large multi-photo trials that exceed 5MB localStorage)
-      try {
-        const idbRecord = await loadTrialFromIndexedDb<PublishedTrialPayload>(
-          `kismet-published-trial-${customId}`,
-        );
-        if (idbRecord && !cancelled) {
-          resolved = idbRecord;
-          updateTrialData(idbRecord);
-          setLoadingTrial(false);
-        }
-      } catch {
-        // Ignore IDB errors
-      }
-
-      // 2. Check localStorage cache
-      if (!resolved) {
-        try {
-          const cached = localStorage.getItem(`kismet-published-trial-${customId}`);
-          if (cached) {
-            const parsed = JSON.parse(cached) as PublishedTrialPayload;
-            if (!cancelled && parsed) {
-              resolved = parsed;
-              updateTrialData(parsed);
-              setLoadingTrial(false);
-            }
-          }
-        } catch {
-          // Ignore storage error
-        }
-      }
-
-      // 3. Fetch from server API (/api/published-trials/[id])
       try {
         const res = await fetch(`/api/published-trials/${encodeURIComponent(customId!)}`, {
           cache: "no-store",
         });
-        if (res.ok) {
-          const json = (await res.json()) as { record?: PublishedTrialPayload };
-          if (!cancelled && json.record) {
-            resolved = json.record;
-            updateTrialData(json.record);
-          }
+        const json = await res.json().catch(() => null) as {
+          record?: PublishedTrialPayload;
+          error?: string;
+          expiresAt?: string | null;
+          canEdit?: boolean;
+        } | null;
+        if (res.status === 410) {
+          if (!cancelled) setTrialError({
+            message: json?.error || "Thiệp này đã hết hạn.",
+            expiresAt: json?.expiresAt,
+          });
+          return;
         }
-      } catch {
-        // Keep local cache if offline
+        if (!res.ok) throw new Error(json?.error || "Chưa thể tải thiệp này.");
+        if (json?.record && !cancelled && json.record.templateCode === code) {
+          updateTrialData(json.record);
+          setTrialCanEdit(Boolean(json.canEdit));
+        } else if (!cancelled) {
+          throw new Error("Không tìm thấy nội dung thiệp này.");
+        }
+      } catch (error) {
+        if (!cancelled) setTrialError({
+          message: error instanceof Error ? error.message : "Chưa thể tải thiệp. Vui lòng thử lại sau.",
+        });
       }
 
-      // 4. Fallback to current template draft on the same device if trial ID wasn't found remotely
-      if (!resolved && !cancelled) {
-        try {
-          const draftIdb = await loadTrialFromIndexedDb<PublishedTrialPayload>(
-            `kismet-exact-draft-${code}`,
-          );
-          if (draftIdb) {
-            resolved = draftIdb;
-            updateTrialData(draftIdb);
-          } else {
-            const draftLocal = localStorage.getItem(`kismet-exact-draft-${code}`);
-            if (draftLocal) {
-              const parsedDraft = JSON.parse(draftLocal) as PublishedTrialPayload;
-              if (parsedDraft) {
-                resolved = parsedDraft;
-                updateTrialData(parsedDraft);
-              }
-            }
-          }
-        } catch {
-          // Ignore fallback errors
-        }
-      }
-
-      if (!cancelled) {
-        setLoadingTrial(false);
+      finally {
+        if (!cancelled) setLoadingTrial(false);
       }
     }
 
@@ -118,6 +82,43 @@ function CustomizedInvitationFrameInner({ code, src, title }: Props) {
       cancelled = true;
     };
   }, [customId, code, updateTrialData]);
+
+  useEffect(() => {
+    if (!customId || !trialData?.expiresAt) return;
+    const remaining = new Date(trialData.expiresAt).getTime() - Date.now();
+    if (remaining <= 0) {
+      updateTrialData(null);
+      setTrialError({ message: "Thiệp này đã hết hạn.", expiresAt: trialData.expiresAt });
+      return;
+    }
+    const timer = window.setTimeout(() => {
+      void (async () => {
+        try {
+          const response = await fetch(`/api/published-trials/${encodeURIComponent(customId)}`, { cache: "no-store" });
+          const result = await response.json().catch(() => null) as {
+            record?: PublishedTrialPayload;
+            error?: string;
+            expiresAt?: string | null;
+            canEdit?: boolean;
+          } | null;
+          if (response.ok && result?.record) {
+            updateTrialData(result.record);
+            setTrialCanEdit(Boolean(result.canEdit));
+            return;
+          }
+          updateTrialData(null);
+          setTrialError({
+            message: result?.error || "Thiệp này đã hết hạn.",
+            expiresAt: result?.expiresAt || trialData.expiresAt,
+          });
+        } catch {
+          updateTrialData(null);
+          setTrialError({ message: "Không thể kiểm tra hạn thiệp. Vui lòng tải lại trang." });
+        }
+      })();
+    }, remaining);
+    return () => window.clearTimeout(timer);
+  }, [customId, trialData?.expiresAt, updateTrialData]);
 
   const REAL_PROJECT_CODES = new Set([
     "20260323-NDNL",
@@ -137,7 +138,7 @@ function CustomizedInvitationFrameInner({ code, src, title }: Props) {
         return;
       }
 
-      const targetHref = customId
+      const targetHref = customId && trialCanEdit
         ? `/tao-thiep?template=${encodeURIComponent(code)}&custom=${encodeURIComponent(customId)}`
         : `/tao-thiep?template=${encodeURIComponent(code)}`;
 
@@ -184,12 +185,12 @@ function CustomizedInvitationFrameInner({ code, src, title }: Props) {
       const linkEl = doc.getElementById("kismet-end-of-invitation-link") as HTMLAnchorElement | null;
       if (linkEl) {
         linkEl.href = targetHref;
-        linkEl.textContent = customId
+        linkEl.textContent = customId && trialCanEdit
           ? "✦ Thử mẫu này (Chỉnh sửa tiếp)"
           : "✦ Thử mẫu này";
       }
     },
-    [code, customId],
+    [code, customId, trialCanEdit],
   );
 
   const syncIframeContent = useCallback(() => {
@@ -255,7 +256,23 @@ function CustomizedInvitationFrameInner({ code, src, title }: Props) {
         </div>
       )}
 
-      <iframe
+      {trialError && (
+        <div style={{
+          position: "fixed", inset: 0, zIndex: 10000, display: "flex", alignItems: "center",
+          justifyContent: "center", padding: 24, background: "#f3f0e8", color: "#514139",
+          fontFamily: "Arial, sans-serif", textAlign: "center",
+        }}>
+          <div style={{ maxWidth: 440 }}>
+            <p style={{ color: "#9b755d", fontSize: 11, letterSpacing: ".16em", fontWeight: 700 }}>KISMET LOVE</p>
+            <h1 style={{ fontFamily: "Georgia, serif", fontWeight: 400, fontSize: 30 }}>{trialError.message}</h1>
+            {trialError.expiresAt && <p>Hết hạn lúc {new Date(trialError.expiresAt).toLocaleString("vi-VN", { dateStyle: "medium", timeStyle: "short" })}.</p>}
+            <p>Chủ tài khoản có thể xem trạng thái thiệp trong trang tài khoản. Liên hệ quản trị viên nếu cần gia hạn.</p>
+            <a href="/tai-khoan" style={{ display: "inline-block", marginTop: 10, padding: "11px 18px", borderRadius: 999, background: "#762c29", color: "#fff9ee", textDecoration: "none", fontSize: 13 }}>Đến trang tài khoản</a>
+          </div>
+        </div>
+      )}
+
+      {(!customId || Boolean(trialData)) && <iframe
         ref={iframeRef}
         className="full-invitation"
         src={src}
@@ -267,7 +284,7 @@ function CustomizedInvitationFrameInner({ code, src, title }: Props) {
           window.setTimeout(syncIframeContent, 600);
           window.setTimeout(syncIframeContent, 1200);
         }}
-      />
+      />}
     </div>
   );
 }

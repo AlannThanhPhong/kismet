@@ -72,7 +72,8 @@ body.is-locked .french-parchment-sheet {
 }
 
 /* ==========================================================================
-   OPENING GATE — FRENCH TOILE DE JOUY & MILK-BROWN ENVELOPE (Ref Image 4)
+   OPENING GATE — REALISTIC CHOCOLATE BROWN ENVELOPE & FRENCH FLORAL LINER
+   (Inspired by Pinterest ref: https://pin.it/6MkHTCisO)
    ========================================================================== */
 .french-cover-gate {
   position: fixed;
@@ -81,9 +82,10 @@ body.is-locked .french-parchment-sheet {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(14px, 3vw, 28px);
+  padding: clamp(14px, 3vw, 24px);
   overflow-y: auto;
-  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.9s;
+  overflow-x: hidden;
+  transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.85s;
 }
 
 .french-cover-gate.is-opened {
@@ -92,184 +94,235 @@ body.is-locked .french-parchment-sheet {
   pointer-events: none;
 }
 
-/* Toile de Jouy Milk-Brown Pastoral Wallpaper Backdrop */
+.french-cover-gate.is-static-revealed *,
+.french-cover-gate.is-static-revealed *::before,
+.french-cover-gate.is-static-revealed *::after {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Authentic French Toile de Jouy Floral Linen Wallpaper Backdrop */
 .toile-gate-backdrop {
   position: fixed;
   inset: 0;
   z-index: -1;
-  background-color: #faf6ef;
+  background-color: #f7f2ea;
   background-image:
-    radial-gradient(circle at 20% 25%, rgba(182, 157, 132, 0.16) 0%, transparent 45%),
-    radial-gradient(circle at 80% 70%, rgba(166, 141, 116, 0.18) 0%, transparent 48%),
-    url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23b59c82' stroke-width='0.8' opacity='0.42'%3E%3Cpath d='M35 140 C35 105 55 85 60 55 M60 95 C42 82 30 88 24 98 M60 80 C78 68 88 74 95 84'/%3E%3Ccircle cx='60' cy='52' r='14' stroke-dasharray='2 2'/%3E%3Ccircle cx='46' cy='68' r='10' stroke-dasharray='2 2'/%3E%3Ccircle cx='74' cy='66' r='11' stroke-dasharray='2 2'/%3E%3Cpath d='M130 42 C118 28 102 28 98 38 C94 48 112 52 128 44 M130 42 C142 28 158 28 162 38 C166 48 148 52 132 44 M126 45 L114 64 M134 45 L146 64'/%3E%3Cpath d='M115 150 Q140 132 168 148 M125 156 Q145 144 162 154'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: auto, auto, 210px 210px;
+    radial-gradient(circle at 50% 50%, rgba(255, 253, 248, 0.82) 0%, rgba(218, 204, 188, 0.65) 100%),
+    url("images/french-toile-floral.png");
+  background-size: auto, 360px auto;
+  background-repeat: no-repeat, repeat;
+  background-blend-mode: normal, multiply;
+  opacity: 0.92;
+}
+
+/* Editorial Flatlay Tabletop Styling */
+.flatlay-decorations {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.decor-babysbreath {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  background-image:
+    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.85) 1.5px, transparent 2px),
+    radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.75) 1.5px, transparent 2px),
+    radial-gradient(circle at 45% 80%, rgba(255, 255, 255, 0.8) 1.5px, transparent 2px);
+  background-size: 36px 36px;
+  opacity: 0.35;
+}
+
+.decor-tl {
+  top: -20px;
+  left: -20px;
+  transform: rotate(25deg);
+}
+
+.decor-br {
+  bottom: -20px;
+  right: -20px;
+  transform: rotate(-35deg);
 }
 
 .envelope-stage {
-  width: min(100%, 430px);
+  position: relative;
+  z-index: 1;
+  width: min(100%, 460px);
   margin: auto;
   text-align: center;
-  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.85s ease;
-}
-
-.french-cover-gate.is-opening .envelope-stage {
-  transform: translateY(-22px) scale(1.03);
-  opacity: 0;
-}
-
-.toile-ribbon-header {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 14px;
-  color: var(--milk-deep);
+  transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.toile-bow-svg {
-  width: 52px;
-  height: 30px;
-  opacity: 0.78;
+/* French Chic Editorial Header */
+.french-gate-header {
+  margin-bottom: 20px;
+  text-align: center;
 }
 
-.toile-gate-kicker {
+.gate-subheading {
+  display: block;
   font-family: var(--font-serif);
   font-size: 11px;
-  letter-spacing: 0.28em;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--espresso-soft);
+  color: #7d614b;
 }
 
-/* Milk-Brown Linen Envelope & Rising 300gsm Ivory Cotton Card */
-.french-envelope-assembly {
-  position: relative;
-  width: 100%;
-  padding-top: 22px;
-  cursor: pointer;
-}
-
-/* Back Open Flap & Damask-Lined Envelope Interior */
-.envelope-back-flap {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 82%;
-  z-index: 1;
-  pointer-events: none;
-  filter:
-    drop-shadow(0 28px 48px rgba(46, 32, 19, 0.28))
-    drop-shadow(0 6px 14px rgba(46, 32, 19, 0.18));
-}
-
-.envelope-back-svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-/* Heavy 300gsm Ivory Cotton Card rising out of the envelope */
-.envelope-letter-card {
-  position: relative;
-  z-index: 2;
-  width: 82%;
-  margin: 0 auto;
-  padding: 12px 12px 142px;
-  background-color: #fbf8f1;
-  background-image:
-    radial-gradient(rgba(128, 102, 76, 0.04) 1px, transparent 0),
-    radial-gradient(rgba(255, 255, 255, 0.85) 1px, transparent 0),
-    linear-gradient(165deg, #fffdf9 0%, #faf5eb 54%, #f1e8da 100%);
-  background-size: 14px 14px, 20px 20px, 100% 100%;
-  background-position: 0 0, 7px 7px, 0 0;
-  border-radius: 3px;
-  border-top: 1.5px solid #ffffff;
-  border-left: 1px solid #f5ede0;
-  border-right: 1px solid #dccbb7;
-  border-bottom: 1px solid #d5c2ac;
-  box-shadow:
-    -8px 4px 18px rgba(45, 31, 18, 0.18),
-    8px 4px 18px rgba(45, 31, 18, 0.18),
-    0 -2px 10px rgba(58, 43, 30, 0.08),
-    inset 0 1px 0 #ffffff;
-  transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.75s ease;
-}
-
-/* Blind-Debossed Letterpress Plate Border on the Rising Card */
-.letter-card-inner {
-  position: relative;
-  padding: 18px 14px 16px;
-  border-radius: 2px;
-  border: 1px solid rgba(182, 157, 132, 0.38);
-  box-shadow:
-    inset 1.5px 1.5px 3px rgba(122, 98, 74, 0.22),
-    inset -1.5px -1.5px 2px rgba(255, 255, 255, 0.92),
-    0 1px 0 rgba(255, 255, 255, 0.88);
-}
-
-.letter-deboss-corner {
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  border-color: rgba(168, 141, 114, 0.45);
-  border-style: solid;
-  pointer-events: none;
-}
-
-.letter-deboss-corner.corner-tl {
-  top: 5px;
-  left: 5px;
-  border-width: 1px 0 0 1px;
-}
-
-.letter-deboss-corner.corner-tr {
-  top: 5px;
-  right: 5px;
-  border-width: 1px 1px 0 0;
-}
-
-.french-envelope-assembly:hover .envelope-letter-card,
-.french-cover-gate.is-opening .envelope-letter-card {
-  transform: translateY(-18px);
-}
-
-.letter-card-kicker {
-  margin: 0 0 8px;
-  font-family: var(--font-serif);
-  font-size: 10px;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
-  color: var(--taupe-muted);
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
-}
-
-.letter-card-names {
-  margin: 0 0 12px;
+.gate-french-title {
   font-family: var(--font-script);
-  font-size: clamp(30px, 7vw, 38px);
+  font-size: clamp(34px, 6.8vw, 44px);
   font-weight: 400;
-  line-height: 1.06;
-  color: var(--espresso);
+  line-height: 1.08;
+  color: #3d2719;
+  margin: 4px 0 2px;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85);
 }
 
-.letter-card-names span {
+.gate-city-date {
   display: block;
-  font-size: 0.68em;
-  color: var(--milk-deep);
-  margin: 2px 0;
+  font-family: var(--font-serif);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #8e7359;
+}
+
+/* Realistic Chocolate Brown Baronial Envelope Wrapper */
+.real-envelope-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  perspective: 1200px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.real-envelope {
+  position: relative;
+  width: 100%;
+  height: 310px;
+  border-radius: 4px;
+  box-shadow:
+    0 24px 50px rgba(32, 19, 10, 0.38),
+    0 6px 16px rgba(32, 19, 10, 0.22);
+}
+
+/* Envelope Back & Authentic French Floral Liner */
+.real-env-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  background: #3c2618;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.real-env-liner {
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  right: 12px;
+  bottom: 16px;
+  background-image: url("images/french-toile-floral.png");
+  background-size: 280px auto;
+  background-position: center 25%;
+  background-repeat: repeat;
+  border-radius: 2px;
+  box-shadow: inset 0 0 16px rgba(45, 28, 16, 0.35);
+}
+
+.real-env-shadow-throat {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(18, 10, 5, 0.15) 0%, rgba(18, 10, 5, 0.65) 100%);
+  pointer-events: none;
+}
+
+/* 300gsm Heavy Ivory Cotton Invitation Card rising out of the envelope */
+.real-letter-card {
+  position: absolute;
+  left: 5%;
+  width: 90%;
+  top: 12px;
+  height: 285px;
+  z-index: 2;
+  border-radius: 3px;
+  background: #faf6ee;
+  background-image:
+    linear-gradient(165deg, #fffdfa 0%, #f7f1e4 55%, #ece2cf 100%);
+  box-shadow:
+    -3px 4px 14px rgba(25, 14, 7, 0.18),
+    3px 4px 14px rgba(25, 14, 7, 0.18),
+    0 0 0 1px rgba(255, 255, 255, 0.9);
+  transition: transform 0.88s cubic-bezier(0.22, 1, 0.36, 1) 0.22s, box-shadow 0.88s ease 0.22s;
+  transform: translateY(0);
+  pointer-events: none;
+}
+
+.french-cover-gate.is-opening .real-letter-card,
+.french-cover-gate.is-revealed .real-letter-card {
+  transform: translateY(-170px);
+  pointer-events: auto;
+  box-shadow:
+    0 24px 44px rgba(25, 14, 7, 0.38),
+    0 6px 14px rgba(25, 14, 7, 0.24),
+    0 0 0 1px rgba(255, 255, 255, 0.95);
+}
+
+.letter-card-inner {
+  position: relative;
+  padding: 16px 14px;
+  text-align: center;
+  border: 1px solid rgba(168, 141, 114, 0.35);
+  margin: 6px;
+  border-radius: 2px;
+  box-shadow:
+    inset 1px 1px 2px rgba(122, 98, 74, 0.15),
+    inset -1px -1px 2px rgba(255, 255, 255, 0.9);
+}
+
+.letter-card-kicker {
+  font-family: var(--font-serif);
+  font-size: 9.5px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: #8e7359;
+  margin: 0 0 6px;
+}
+
+.letter-card-names {
+  font-family: var(--font-script);
+  font-size: clamp(26px, 5.5vw, 32px);
+  color: #3b2619;
+  margin: 0 0 8px;
+  font-weight: 400;
+  line-height: 1.08;
+}
+
+.letter-card-names span {
+  display: inline-block;
+  font-size: 0.72em;
+  margin: 0 4px;
+  color: #7d614b;
 }
 
 .letter-card-cameo {
-  width: 138px;
-  height: 92px;
-  margin: 0 auto 12px;
+  width: 108px;
+  height: 72px;
+  margin: 0 auto 8px;
   border-radius: 50%;
-  padding: 3.5px;
-  background: linear-gradient(135deg, #efe3d2 0%, #c4ab90 50%, #9b8064 100%);
-  box-shadow:
-    0 6px 16px rgba(70, 54, 40, 0.16),
-    inset 0 1px 1px rgba(255, 255, 255, 0.8);
+  padding: 2.5px;
+  background: linear-gradient(135deg, #e5d7c5 0%, #a4876b 100%);
+  box-shadow: 0 4px 10px rgba(50, 32, 18, 0.2);
 }
 
 .letter-card-cameo img {
@@ -277,85 +330,307 @@ body.is-locked .french-parchment-sheet {
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
-  object-position: 50% 42%;
+  object-position: 50% 40%;
 }
 
 .letter-card-date {
-  margin: 0 0 3px;
   font-family: var(--font-serif);
-  font-size: 14px;
   font-style: italic;
-  color: var(--espresso);
+  font-size: 13px;
+  color: #4a3424;
+  margin: 0 0 2px;
 }
 
 .letter-card-venue {
-  margin: 0;
   font-family: var(--font-serif);
-  font-size: 11.5px;
-  letter-spacing: 0.1em;
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--taupe-muted);
+  color: #8e7359;
+  margin: 0;
 }
 
-/* Front Milk-Brown Linen Pocket */
-.envelope-front-pocket {
+/* Top Triangular Flap with 3D Folding Physics (Baronial V-Flap) */
+.real-env-flap-top {
   position: absolute;
+  top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  height: 64%;
-  z-index: 3;
-  pointer-events: none;
-  filter: drop-shadow(0 -2px 6px rgba(45, 31, 18, 0.12));
+  width: 100%;
+  height: 168px;
+  transform-origin: top center;
+  transform-style: preserve-3d;
+  transition: transform 0.85s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 5;
 }
 
-.envelope-pocket-svg {
+.french-cover-gate.is-opening .real-env-flap-top,
+.french-cover-gate.is-revealed .real-env-flap-top {
+  transform: rotateX(180deg);
+  z-index: 0;
+  transition: transform 0.85s cubic-bezier(0.25, 1, 0.5, 1), z-index 0s 0.38s;
+}
+
+.flap-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flap-outside {
+  z-index: 2;
+}
+
+.flap-outside .flap-svg {
   width: 100%;
   height: 100%;
   display: block;
-  border-radius: 0 0 6px 6px;
+  filter: drop-shadow(0 6px 14px rgba(20, 10, 4, 0.45));
 }
 
-/* 3D Hand-Poured Pearl-Latte Wax Seal Button on Envelope Flap */
-.envelope-wax-seal-btn {
+.flap-inside {
+  transform: rotateX(180deg);
+  z-index: 1;
+  overflow: hidden;
+}
+
+.flap-inside-liner {
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  background-image: url("images/french-toile-floral.png");
+  background-size: 280px auto;
+  background-position: center top;
+  box-shadow: inset 0 0 16px rgba(45, 28, 16, 0.45);
+}
+
+.flap-inside-mask {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Front Baronial Pocket: Overlapping Left, Right & Bottom Flaps */
+.real-env-pocket {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.pocket-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 3D Hand-Poured Antique Gold Wax Seal with Botanical Olive Branch */
+.real-wax-seal-btn {
   position: absolute;
   left: 50%;
-  bottom: 15.5%;
-  transform: translateX(-50%);
-  z-index: 4;
-  width: 92px;
-  height: 92px;
+  top: 168px;
+  transform: translate(-50%, -50%);
+  z-index: 6;
+  width: 96px;
+  height: 96px;
   padding: 0;
   border: 0;
-  border-radius: 50%;
   background: transparent;
   cursor: pointer;
   filter:
-    drop-shadow(0 11px 18px rgba(42, 28, 15, 0.38))
-    drop-shadow(0 3px 5px rgba(34, 21, 10, 0.34));
-  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), filter 0.32s ease;
+    drop-shadow(0 12px 22px rgba(35, 20, 8, 0.55))
+    drop-shadow(0 3px 6px rgba(25, 12, 5, 0.4));
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), filter 0.35s ease, opacity 0.35s ease;
+  animation: wax-seal-glow-breathe 2.8s ease-in-out infinite;
 }
 
-.envelope-wax-seal-btn:hover {
-  transform: translateX(-50%) scale(1.06) translateY(-2px);
+.real-wax-seal-btn:hover {
+  transform: translate(-50%, -50%) scale(1.08);
   filter:
-    drop-shadow(0 15px 24px rgba(42, 28, 15, 0.44))
-    drop-shadow(0 4px 7px rgba(34, 21, 10, 0.36));
+    drop-shadow(0 16px 28px rgba(35, 20, 8, 0.65))
+    drop-shadow(0 4px 8px rgba(25, 12, 5, 0.5));
 }
 
-.wax-seal-svg {
+@keyframes wax-seal-glow-breathe {
+  0%, 100% {
+    filter: drop-shadow(0 12px 22px rgba(35, 20, 8, 0.55)) drop-shadow(0 0 10px rgba(238, 213, 155, 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 14px 26px rgba(35, 20, 8, 0.6)) drop-shadow(0 0 22px rgba(238, 213, 155, 0.65));
+  }
+}
+
+/* When opened: the wax seal stays affixed to the front pocket apex (as in Pinterest ref video) */
+.french-cover-gate.is-opening .real-wax-seal-btn,
+.french-cover-gate.is-revealed .real-wax-seal-btn {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 10px 18px rgba(35, 20, 8, 0.52));
+  animation: none;
+}
+
+.gold-seal-svg {
   width: 100%;
   height: 100%;
   display: block;
 }
 
-.envelope-tap-hint {
-  margin: 16px 0 0;
+/* Call to Action Prompt / Enter Button */
+.french-gate-action {
+  position: relative;
+  z-index: 10;
+  margin-top: 24px;
+  min-height: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.french-open-prompt {
+  font-family: var(--font-serif);
+  font-size: 13.5px;
+  letter-spacing: 0.04em;
+  color: #5a3d2c;
+  margin: 0;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.french-cover-gate.is-opening .french-open-prompt,
+.french-cover-gate.is-revealed .french-open-prompt {
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+}
+
+.french-enter-btn {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: opacity 0.5s ease 0.85s, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.85s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 32px;
   font-family: var(--font-serif);
   font-size: 13px;
-  font-style: italic;
-  letter-spacing: 0.04em;
-  color: var(--espresso-soft);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fdfbf7;
+  background: linear-gradient(135deg, #7c583b 0%, #523824 100%);
+  border: 1px solid rgba(220, 195, 160, 0.5);
+  border-radius: 999px;
+  box-shadow: 0 10px 24px rgba(45, 28, 14, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+}
+
+.french-cover-gate.is-revealed .french-enter-btn {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  animation: french-btn-breathe 2.6s ease-in-out infinite;
+}
+
+.french-enter-btn:hover {
+  background: linear-gradient(135deg, #916847 0%, #61422b 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(45, 28, 14, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.french-enter-btn span {
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+.french-enter-btn:hover span {
+  transform: translateY(3px);
+}
+
+@keyframes french-btn-breathe {
+  0%, 100% {
+    box-shadow: 0 10px 24px rgba(45, 28, 14, 0.3), 0 0 0 0 rgba(196, 168, 134, 0.45);
+  }
+  50% {
+    box-shadow: 0 14px 30px rgba(45, 28, 14, 0.4), 0 0 0 8px rgba(196, 168, 134, 0);
+  }
+}
+
+/* Mobile Scaling for Gate & Envelope */
+@media (max-width: 600px) {
+  .envelope-stage {
+    width: min(100%, 330px);
+  }
+  .french-gate-header {
+    margin-bottom: 14px;
+  }
+  .gate-french-title {
+    font-size: 28px;
+  }
+  .gate-subheading,
+  .gate-city-date {
+    font-size: 9.5px;
+    letter-spacing: 0.18em;
+  }
+  .real-envelope {
+    height: 222px;
+  }
+  .real-env-flap-top {
+    height: 120px;
+  }
+  .real-wax-seal-btn {
+    width: 76px;
+    height: 76px;
+    top: 120px;
+  }
+  .real-letter-card {
+    height: 205px;
+    top: 8px;
+  }
+  .french-cover-gate.is-opening .real-letter-card,
+  .french-cover-gate.is-revealed .real-letter-card {
+    transform: translateY(-120px);
+  }
+  .letter-card-inner {
+    padding: 10px 8px;
+    margin: 4px;
+  }
+  .letter-card-kicker {
+    font-size: 8px;
+    letter-spacing: 0.18em;
+    margin-bottom: 3px;
+  }
+  .letter-card-names {
+    font-size: 20px;
+    margin-bottom: 4px;
+  }
+  .letter-card-cameo {
+    width: 78px;
+    height: 52px;
+    margin-bottom: 4px;
+    padding: 2px;
+  }
+  .letter-card-date {
+    font-size: 11px;
+  }
+  .letter-card-venue {
+    font-size: 9px;
+  }
+  .french-gate-action {
+    margin-top: 18px;
+  }
+  .french-open-prompt {
+    font-size: 12px;
+  }
+  .french-enter-btn {
+    padding: 11px 24px;
+    font-size: 11.5px;
+  }
 }
 
 /* ==========================================================================
@@ -456,11 +731,13 @@ body.is-locked .french-parchment-sheet {
 .damask-outer-frame {
   min-height: 100vh;
   padding: clamp(18px, 4vw, 48px) clamp(8px, 3vw, 32px);
-  background-color: #b4a28f;
+  background-color: #baa894;
   background-image:
-    radial-gradient(circle at 50% 20%, rgba(255, 250, 242, 0.12) 0%, rgba(70, 54, 40, 0.18) 100%),
-    url("data:image/svg+xml,%3Csvg width='160' height='160' viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23cbbba8' stroke-width='1.1' opacity='0.34'%3E%3Cpath d='M80 16 C96 36 122 44 122 72 C122 98 98 114 80 144 C62 114 38 98 38 72 C38 44 64 36 80 16 Z'/%3E%3Cpath d='M80 34 C90 48 104 56 104 72 C104 88 90 100 80 122 C70 100 56 88 56 72 C56 56 70 48 80 34 Z'/%3E%3Ccircle cx='80' cy='72' r='8'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: auto, 180px 180px;
+    radial-gradient(circle at 50% 15%, rgba(255, 252, 246, 0.16) 0%, rgba(55, 38, 24, 0.28) 100%),
+    url("images/french-toile-floral.png");
+  background-size: auto, 340px auto;
+  background-repeat: no-repeat, repeat;
+  background-blend-mode: normal, multiply;
 }
 
 .french-parchment-sheet {
@@ -493,33 +770,38 @@ body.is-locked .french-parchment-sheet {
   padding: clamp(28px, 5vw, 44px) clamp(18px, 4vw, 36px);
 }
 
+/* Authentic French Rococo Acanthus Corner Flourishes (from user ref media_1792827957579_b5feda40.png) */
 .corner-flourish {
   position: absolute;
-  width: clamp(68px, 14vw, 108px);
-  height: clamp(68px, 14vw, 108px);
-  color: #cab9a6;
+  width: clamp(54px, 11vw, 84px);
+  height: clamp(82px, 16vw, 126px);
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  opacity: 0.88;
+  filter: sepia(0.28) saturate(1.15);
   pointer-events: none;
-}
-
-.flourish-tl {
-  top: 0;
-  left: 0;
-}
-
-.flourish-tr {
-  top: 0;
-  right: 0;
-  transform: scaleX(-1);
 }
 
 .flourish-bl {
   bottom: 0;
   left: 0;
-  transform: scaleY(-1);
+  transform: none;
 }
 
 .flourish-br {
   bottom: 0;
+  right: 0;
+  transform: scaleX(-1);
+}
+
+.flourish-tl {
+  top: 0;
+  left: 0;
+  transform: scaleY(-1);
+}
+
+.flourish-tr {
+  top: 0;
   right: 0;
   transform: scale(-1, -1);
 }
@@ -589,16 +871,16 @@ body.is-locked .french-parchment-sheet {
   isolation: isolate;
 }
 
-/* Pastoral Château & Trees Toile de Jouy Etching Backdrop */
+/* Authentic French Classical Terrace & Colosseum Etching Backdrop (user ref media_1792827934665_d4c8e9be.jpg) */
 .toile-pastoral-scene {
   position: absolute;
   inset: 0;
   z-index: -1;
-  opacity: 0.52;
-  background-image:
-    url("data:image/svg+xml,%3Csvg width='700' height='360' viewBox='0 0 700 360' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%239e8872' stroke-width='1' stroke-linecap='round'%3E%3C!-- Left Pastoral Trees & Foliage --%3E%3Cpath d='M85 330 C88 250 72 190 95 110 M88 210 C55 185 35 190 18 205 M90 175 C125 145 148 155 165 170'/%3E%3Ccircle cx='95' cy='102' r='42' stroke-dasharray='3 4'/%3E%3Ccircle cx='52' cy='140' r='34' stroke-dasharray='2 4'/%3E%3Ccircle cx='138' cy='135' r='32' stroke-dasharray='3 3'/%3E%3Ccircle cx='28' cy='185' r='26' stroke-dasharray='2 3'/%3E%3Cpath d='M10 330 Q90 305 195 332 M30 342 Q110 322 210 345'/%3E%3C!-- Right Château Colonnade & Trees --%3E%3Crect x='515' y='85' width='18' height='165'/%3E%3Crect x='552' y='105' width='16' height='145'/%3E%3Cpath d='M505 85 L580 85 M500 250 L610 250 M490 262 L625 262'/%3E%3Cpath d='M625 325 C620 245 638 180 612 95'/%3E%3Ccircle cx='612' cy='92' r='40' stroke-dasharray='3 4'/%3E%3Ccircle cx='652' cy='135' r='32' stroke-dasharray='2 4'/%3E%3Ccircle cx='465' cy='148' r='28' stroke-dasharray='2 4'/%3E%3Cpath d='M480 332 Q585 304 690 335'/%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.58;
+  background-image: url("images/french-chateau-terrace.jpg");
   background-size: cover;
   background-position: center;
+  filter: sepia(0.2) contrast(0.96) brightness(1.02);
 }
 
 .rococo-cartouche-wrap {
