@@ -21,6 +21,10 @@ Development dùng `.next-dev`, còn `npm run build` và `npm run start` dùng `.
 
 `npm run dev` cố định cổng 3000. Nếu cổng đang được dùng, lệnh báo lỗi thay vì tự mở thêm server ở 3001; chỉ chạy một dev server cho dự án để tránh hai tiến trình cùng ghi vào `.next-dev`.
 
+## Cloudinary và ảnh trong thiệp xuất bản
+
+Ảnh người dùng thay trong mẫu được tối ưu ở trình duyệt, tải lên Cloudinary qua API server và lưu URL CDN cùng dữ liệu thiệp trong collection `published_trials` của MongoDB `mo_wedding`. Khi bản thiệp có ảnh Cloudinary, hệ thống chỉ xác nhận xuất bản sau khi MongoDB lưu thành công; trang thiệp đọc lại bản ghi từ MongoDB để giữ đúng ảnh trên link chia sẻ. Để bật tính năng, thêm `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY` và `CLOUDINARY_API_SECRET` từ Cloudinary Console vào `.env.local` khi chạy local và vào biến môi trường của hosting khi deploy. Đây là biến server-only; không thêm tiền tố `NEXT_PUBLIC_` và không commit giá trị thật. Chỉ nhận ảnh JPEG, PNG hoặc WebP; ảnh được giới hạn 4 MB sau khi tối ưu để giữ request tải lên gọn và ổn định.
+
 ## Giá theo quốc gia IP
 
 Trang chủ xác định quốc gia trên server cho từng lượt truy cập. Chỉ mã quốc gia `VN` dùng VNĐ; các nước khác hoặc không xác định được quốc gia đều dùng USD. Không sử dụng ngôn ngữ trình duyệt, múi giờ hoặc cookie để chọn giá.
@@ -40,7 +44,7 @@ Giá được cấu hình trong `src/lib/pricing.ts`, dùng chung cho bảng gi�
 
 ## MongoDB và danh sách thiệp
 
-Tạo file `.env.local` từ `.env.example`, điền MongoDB connection string (MongoDB Atlas hoặc MongoDB local). Không commit `.env.local` lên Git. Database mặc định là `mo_wedding`, gồm hai collection `invitations` và `rsvps`.
+Tạo file `.env.local` từ `.env.example`, điền MongoDB connection string (MongoDB Atlas hoặc MongoDB local). Không commit `.env.local` lên Git. Database mặc định là `mo_wedding`, gồm collection `invitations`, `rsvps` và `published_trials` cho các thiệp xem thử đã xuất bản.
 
 Danh sách thiệp hiển thị trên trang chính. Mỗi thiệp có trang riêng `/thiep/:code`. Mã được tạo theo định dạng `YYYYMMDD-<viết tắt cô dâu><viết tắt chú rể>`, lấy ngày cưới và chữ cái đầu của từng phần tên. Ví dụ Kim Hiên và Văn Tài cưới ngày 27/10/2026 có mã `20261027-KHVT`. Thiệp đầu tiên được thêm vào MongoDB tự động khi danh sách được tải.
 

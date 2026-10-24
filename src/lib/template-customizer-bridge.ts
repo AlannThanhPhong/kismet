@@ -538,8 +538,7 @@ export function installInteractiveHighlightBridge(
 }
 
 /**
- * Compresses an uploaded image file on the client using an HTMLCanvasElement so it can be
- * stored and shared via the published trial API without hitting payload or storage limits.
+ * Compresses an uploaded image file on the client before sending it to Cloudinary.
  */
 export function compressImageFile(file: File, maxDim = 1080, quality = 0.76): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -547,9 +546,13 @@ export function compressImageFile(file: File, maxDim = 1080, quality = 0.76): Pr
     reader.onerror = () => reject(new Error("Không thể đọc file ảnh"));
     reader.onload = () => {
       const img = new Image();
-      img.onerror = () => resolve(String(reader.result));
+      img.onerror = () => reject(new Error("Không thể giải mã ảnh này. Hãy thử ảnh JPEG, PNG hoặc WebP khác."));
       img.onload = () => {
         let { width, height } = img;
+        if (!width || !height) {
+          reject(new Error("Ảnh không có kích thước hợp lệ."));
+          return;
+        }
         if (width > maxDim || height > maxDim) {
           if (width >= height) {
             height = Math.round((height * maxDim) / width);
@@ -564,7 +567,7 @@ export function compressImageFile(file: File, maxDim = 1080, quality = 0.76): Pr
         canvas.height = height;
         const ctx = canvas.getContext("2d");
         if (!ctx) {
-          resolve(String(reader.result));
+          reject(new Error("Trình duyệt không thể tối ưu ảnh này."));
           return;
         }
         ctx.drawImage(img, 0, 0, width, height);

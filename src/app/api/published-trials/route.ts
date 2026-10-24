@@ -64,7 +64,37 @@ export async function POST(request: Request) {
     createdAt: new Date().toISOString(),
   };
 
-  // 1. Save in process memory cache immediately (cap at 60 entries)
+  const hasCloudinaryImages = Object.values(imageMap).some((url) =>
+    /^https:\/\/res\.cloudinary\.com\//i.test(url),
+  );
+
+  if (hasCloudinaryImages && !process.env.MONGODB_URI) {
+    return NextResponse.json(
+      { error: "Chưa kết nối MongoDB nên chưa thể lưu bản thiệp có ảnh Cloudinary để chia sẻ." },
+      { status: 503 },
+    );
+  }
+
+  // Cloudinary URLs must be saved with the invitation in the existing MongoDB database
+  // before the share link is reported as published.
+  if (process.env.MONGODB_URI) {
+    try {
+      const db = await getDatabase();
+      await db
+        .collection<PublishedTrialPayload & { _id: string }>("published_trials")
+        .updateOne({ _id: id }, { $set: record }, { upsert: true });
+    } catch (error) {
+      console.warn("Could not save published trial to MongoDB:", error);
+      if (hasCloudinaryImages) {
+        return NextResponse.json(
+          { error: "Không thể lưu bản thiệp và ảnh lên MongoDB. Vui lòng thử xuất bản lại." },
+          { status: 503 },
+        );
+      }
+    }
+  }
+
+  // Keep a small memory cache and a disk fallback for drafts without Cloudinary images.
   const memStore = getMemoryTrialStore();
   if (memStore.size >= 60) {
     const oldestKey = memStore.keys().next().value;
@@ -83,23 +113,6 @@ export async function POST(request: Request) {
       await writeFile(path.join(TMP_DATA_DIR, `${id}.json`), serialized, "utf8");
     } catch (err) {
       console.warn("Could not write published trial to disk:", err);
-    }
-  }
-
-  // 3. Persist to MongoDB if configured (bounded by 2.5s timeout, without mutating _id inside $set)
-  if (process.env.MONGODB_URI) {
-    try {
-      await Promise.race([
-        (async () => {
-          const db = await getDatabase();
-          await db
-            .collection<PublishedTrialPayload & { _id: string }>("published_trials")
-            .updateOne({ _id: id }, { $set: record }, { upsert: true });
-        })(),
-        new Promise((_, reject) => setTimeout(() => reject(new Error("MongoDB timeout")), 2500)),
-      ]);
-    } catch (err) {
-      console.warn("Could not save published trial to MongoDB:", err);
     }
   }
 

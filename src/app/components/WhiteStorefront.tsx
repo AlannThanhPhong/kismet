@@ -243,7 +243,7 @@ export default function WhiteStorefront({ currency }: { currency: PricingCurrenc
               <strong className="ws-project-price">{projectPrice(item, currency)}</strong>
             </div>
             <h3>{item.template!.coupleName}</h3>
-            <p>{item.template!.description}</p>
+            <p className="ws-project-theme-name">{item.template!.name}</p>
             <div className="ws-card-tags ws-project-tags">
               {item.tags.map(tag => <span key={tag}>{tag}</span>)}
             </div>
