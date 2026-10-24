@@ -37,6 +37,16 @@ function normalizeInvitationCode(rawCode: string) {
   ) {
     return "doodle-art";
   }
+  if (
+    decoded === "tuscany-editorial" ||
+    decoded === "tuscany" ||
+    decoded === "template-6" ||
+    decoded === "Template số 6" ||
+    decoded === "Template so 6" ||
+    decoded === "template-so-6"
+  ) {
+    return "tuscany-editorial";
+  }
   return decoded;
 }
 
@@ -91,7 +101,9 @@ export default async function InvitationPage({ params }: Props) {
               ? "korea%20style"
               : code === "doodle-art"
                 ? "Doodle%20Art"
-                : code;
+                : code === "tuscany-editorial"
+                  ? "Template%20s%E1%BB%91%206"
+                  : code;
     const revision =
       code === "20260323-NDNL"
         ? "?v=20261023-collage-fix"
@@ -107,7 +119,9 @@ export default async function InvitationPage({ params }: Props) {
                   ? "?v=20261022-coquette-v4"
                   : code === "korea-style"
                     ? "?v=20261023-korea-v3"
-                    : "";
+                    : code === "tuscany-editorial"
+                      ? "?v=20261024-tuscany-v1"
+                      : "";
     return (
       <CustomizedInvitationFrame
         code={code}

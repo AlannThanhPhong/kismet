@@ -54,6 +54,15 @@ export const EXACT_TEMPLATES: ExactTemplateConfig[] = [
     defaultMusicSrc: "/music/wedding/young-and-beautiful-khong-loi.mp3",
     defaultMusicTitle: "Young and Beautiful (Instrumental)",
   },
+  {
+    code: "tuscany-editorial",
+    name: "TUSCANY EDITORIAL",
+    coupleName: "Amelia & Thomas",
+    badge: "TEMPLATE N° 06 · TUSCANY",
+    iframeSrc: "/wedding-invitations/Template%20s%E1%BB%91%206/index.html",
+    defaultMusicSrc: "/wedding-invitations/Template%20s%E1%BB%91%206/music/city-of-stars.mp3",
+    defaultMusicTitle: "City of Stars (Acoustic)",
+  },
 ];
 
 export function getExactTemplateByCode(rawCode?: string | null): ExactTemplateConfig {
@@ -76,7 +85,14 @@ export function getExactTemplateByCode(rawCode?: string | null): ExactTemplateCo
                 decoded === "doodle art" ||
                 decoded === "DOODLE ART"
               ? "doodle-art"
-              : decoded;
+              : decoded === "tuscany-editorial" ||
+                  decoded === "tuscany" ||
+                  decoded === "template-6" ||
+                  decoded === "Template số 6" ||
+                  decoded === "Template so 6" ||
+                  decoded === "template-so-6"
+                ? "tuscany-editorial"
+                : decoded;
   return EXACT_TEMPLATES.find((t) => t.code === normalized) || EXACT_TEMPLATES[0];
 }
 

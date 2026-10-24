@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1a1918" />
+  <title>Amelia and Thomas — A Celebration in Tuscany · Wedding Invitation</title>
+  <meta
+    name="description"
+    content="Wedding celebration of Amelia and Thomas · September 13, 2025 · Villa La Fiora, Tuscany, Italy"
+  />
+
+  <!-- Google Fonts: Editorial Serif, Calligraphy Script, and Clean Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+  <script src="tuscany.js" defer></script>
+</head>
+<body class="invitation-closed">
+  <!-- Background Music: City of Stars (Acoustic / Romantic) -->
+  <audio
+    id="wedding-music"
+    src="music/city-of-stars.mp3"
+    data-song-title="City of Stars (Acoustic)"
+    preload="auto"
+    loop
+  ></audio>
+
+  <!-- Paper grain overlay texture -->
+  <div class="texture-overlay" aria-hidden="true"></div>
+
+  <!-- ========================================================================
+       OPENING GATE / COVER SCREEN ("PHẦN MỞ THIỆP")
+       Bespoke Wax-Sealed Deckle Envelope & Monogram Stamp
+       ======================================================================== -->
+  <section class="gate-overlay" id="gate-overlay" role="dialog" aria-modal="true" aria-label="Wedding Invitation Envelope">
+    <div class="gate-backdrop"></div>
+
+    <div class="wax-envelope-wrapper">
+      <!-- Deckle card envelope -->
+      <div class="envelope-card">
+        <!-- Botanical Olive Branch Top Accent -->
+        <div class="gate-botanical-top" aria-hidden="true">
+          <svg viewBox="0 0 160 50" class="olive-branch-svg" fill="none" stroke="#7a756b" stroke-width="1.4" stroke-linecap="round">
+            <!-- Olive branch stem -->
+            <path d="M10 25 Q80 20, 150 25" />
+            <!-- Leaves & Olives -->
+            <path d="M30 24 C26 14, 40 12, 42 23 Z" fill="#e2ded4"/>
+            <path d="M50 24 C54 13, 68 15, 64 24 Z" fill="#e2ded4"/>
+            <path d="M70 23 C66 34, 80 36, 82 24 Z" fill="#e2ded4"/>
+            <path d="M90 23 C94 12, 108 14, 104 23 Z" fill="#e2ded4"/>
+            <path d="M110 24 C106 35, 120 37, 122 24 Z" fill="#e2ded4"/>
+            <circle cx="58" cy="28" r="2.5" fill="#4a463d"/>
+            <circle cx="98" cy="28" r="2.5" fill="#4a463d"/>
+          </svg>
+        </div>
+
+        <p class="gate-kicker">INVITO A NOZZE · WEDDING INVITATION</p>
+        <h1 class="gate-script-names">Amelia &amp; Thomas</h1>
+        <p class="gate-monogram">A &nbsp;|&nbsp; T</p>
+        <p class="gate-subtext">A CELEBRATION IN TUSCANY</p>
+        <p class="gate-date-location">September 13, 2025 · Villa La Fiora, Italy</p>
+
+        <!-- Interactive 3D Wax Seal Button -->
+        <div class="wax-seal-container">
+          <button type="button" class="btn-wax-seal" id="btn-open-seal" aria-label="Break seal and open invitation">
+            <div class="wax-seal-outer">
+              <div class="wax-seal-inner">
+                <span class="wax-seal-letters">A | T</span>
+              </div>
+            </div>
+            <div class="wax-ripple" aria-hidden="true"></div>
+          </button>
+        </div>
+
+        <p class="gate-open-hint">
+          <span class="hint-text">Touch the wax seal to open invitation</span>
+          <span class="hint-sub">♪ Plays <em>City of Stars</em></span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       MAIN INVITATION EDITORIAL LAYOUT (Exact match to design)
+       ======================================================================== -->
+  <div class="editorial-page" id="editorial-page">
+
+    <!-- 1. TOP EDITORIAL NAVBAR -->
+    <header class="editorial-nav">
+      <nav class="nav-links" aria-label="Main Navigation">
+        <a href="#hero" class="nav-item active">HOME</a>
+        <a href="#story" class="nav-item">OUR STORY</a>
+        <a href="#weekend" class="nav-item">DETAILS</a>
+        <a href="#travel" class="nav-item">TRAVEL</a>
+        <a href="#rsvp" class="nav-item">RSVP</a>
+      </nav>
+      <div class="nav-monogram" aria-label="Couple Monogram">
+        <span>A</span><span class="sep">|</span><span>T</span>
+      </div>
+    </header>
+
+    <!-- 2. SECTION 1: HERO HEADER BANNER -->
+    <section class="section-hero" id="hero" aria-label="Amelia and Thomas Wedding Intro">
+      <div class="hero-split-grid">
+        <!-- Left Column: Typography & Details -->
+        <div class="hero-text-col">
+          <p class="hero-kicker">A BRIGHTER FOREVER</p>
+          <h1 class="hero-script-names">Amelia<br /><span class="and-word">and</span><br />Thomas</h1>
+          <div class="hero-hairline"></div>
+          <div class="hero-date-block">
+            <p class="hero-date">SEPTEMBER 13, 2025</p>
+            <p class="hero-venue">VILLA LA FIORA, TUSCANY, ITALY</p>
+          </div>
+          <a href="#story" class="hero-scroll-btn" aria-label="Scroll to story">
+            <span class="scroll-arrow">↓</span>
+            <span class="scroll-label">SCROLL</span>
+          </a>
+        </div>
+
+        <!-- Right Column: Romantic Portrait against Tuscan Pillars -->
+        <div class="hero-image-col">
+          <div class="hero-img-wrap">
+            <img
+              src="images/hero-couple-clean.jpg"
+              alt="Amelia and Thomas wedding couple embracing in Tuscany"
+              class="hero-img"
+              loading="eager"
+            />
+          </div>
+          <!-- Side stone pillar vertical notes -->
+          <div class="hero-side-stone" aria-hidden="true">
+            <p class="stone-mono">A &nbsp;|&nbsp; T</p>
+            <div class="stone-text-group">
+              <span>SAME</span>
+              <span>PEOPLE</span>
+              <span>BRIGHTER</span>
+              <span>DAYS</span>
+              <span class="stone-dash">—</span>
+              <span>TOGETHER</span>
+              <span>ALWAYS</span>
+              <span class="stone-dash">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. SECTION 2: OUR STORY -->
+    <section class="section-story" id="story" aria-label="Our Story">
+      <div class="story-triptych-grid">
+        <!-- Left: Black & White Stone Staircase Photo -->
+        <div class="story-col-left">
+          <div class="story-photo-frame">
+            <img
+              src="images/story-stairs.jpg"
+              alt="Bride and groom walking up Villa La Fiora stone stairs"
+              class="story-img-stairs"
+              loading="lazy"
+            />
+          </div>
+        </div>
+
+        <!-- Center: Editorial Story Statement & Signature -->
+        <div class="story-col-center">
+          <p class="story-kicker">OUR STORY</p>
+          <h2 class="story-headline">IT WAS<br />ALWAYS YOU</h2>
+          <div class="story-hairline"></div>
+          <div class="story-body">
+            <p>
+              From a chance meeting to a lifetime of adventures, our story has always been about finding home in each other.
+            </p>
+            <p>
+              We can't wait to celebrate this next chapter with the people who mean the most to us.
+            </p>
+          </div>
+          <p class="story-signature">Amelia + Thomas</p>
+        </div>
+
+        <!-- Right: Carnation Botanical & Deckle Card Note -->
+        <div class="story-col-right">
+          <div class="story-botanical-frame">
+            <img
+              src="images/story-flowers.jpg"
+              alt="White carnation flowers with handwritten note: A more beautiful tomorrow together"
+              class="story-img-flowers"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. SECTION 3: THE WEEKEND (Dark Charcoal Timeline Banner) -->
+    <section class="section-weekend" id="weekend" aria-label="Wedding Schedule">
+      <div class="weekend-container">
+        <div class="weekend-header">
+          <p class="weekend-kicker">THE WEEKEND</p>
+          <h2 class="weekend-title">A CELEBRATION IN TUSCANY</h2>
+        </div>
+
+        <!-- Horizontal Timeline -->
+        <div class="weekend-timeline-rail">
+          <!-- Timeline Track Line -->
+          <div class="timeline-line-track" aria-hidden="true"></div>
+
+          <!-- Event 01 -->
+          <div class="timeline-node">
+            <div class="node-marker">01</div>
+            <h3 class="node-title">WELCOME DINNER</h3>
+            <p class="node-date">Friday, Sept 12</p>
+            <p class="node-time">7:00 PM</p>
+            <p class="node-location">Villa La Fiora</p>
+            <p class="node-sub">Garden Terrace</p>
+          </div>
+
+          <!-- Event 02 -->
+          <div class="timeline-node highlight">
+            <div class="node-marker">02</div>
+            <h3 class="node-title">CEREMONY</h3>
+            <p class="node-date">Saturday, Sept 13</p>
+            <p class="node-time">4:00 PM</p>
+            <p class="node-location">Villa La Fiora</p>
+            <p class="node-sub">Olive Grove</p>
+          </div>
+
+          <!-- Event 03 -->
+          <div class="timeline-node">
+            <div class="node-marker">03</div>
+            <h3 class="node-title">COCKTAIL HOUR</h3>
+            <p class="node-date">Saturday, Sept 13</p>
+            <p class="node-time">5:30 PM</p>
+            <p class="node-location">The Loggia</p>
+            <p class="node-sub">Cocktails &amp; Canapés</p>
+          </div>
+
+          <!-- Event 04 -->
+          <div class="timeline-node">
+            <div class="node-marker">04</div>
+            <h3 class="node-title">RECEPTION</h3>
+            <p class="node-date">Saturday, Sept 13</p>
+            <p class="node-time">7:00 PM</p>
+            <p class="node-location">Villa La Fiora</p>
+            <p class="node-sub">Main Terrace</p>
+          </div>
+
+          <!-- Event 05 -->
+          <div class="timeline-node">
+            <div class="node-marker">05</div>
+            <h3 class="node-title">FAREWELL BRUNCH</h3>
+            <p class="node-date">Sunday, Sept 14</p>
+            <p class="node-time">11:00 AM</p>
+            <p class="node-location">Villa La Fiora</p>
+            <p class="node-sub">Poolside</p>
+          </div>
+        </div>
+
+        <div class="weekend-cta">
+          <button type="button" class="btn-weekend-details" id="btn-toggle-details">
+            <span>VIEW FULL DETAILS →</span>
+          </button>
+        </div>
+
+        <!-- Collapsible Detailed Schedule Modal / Panel -->
+        <div class="weekend-details-drawer" id="weekend-drawer" hidden>
+          <div class="drawer-content">
+            <div class="drawer-item">
+              <h4>Friday · Welcome Pizza &amp; Chianti Night</h4>
+              <p>Casual Italian attire. We invite everyone for wood-fired pizzas, local cheeses, and Tuscan wine to kick off our celebration.</p>
+            </div>
+            <div class="drawer-item">
+              <h4>Saturday · Ceremony &amp; Formal Banquet</h4>
+              <p>Formal attire. Join us in the Olive Grove for our vows, followed by aperitivo at The Loggia and an al fresco 4-course banquet.</p>
+            </div>
+            <div class="drawer-item">
+              <h4>Sunday · Recovery Gelato &amp; Poolside Brunch</h4>
+              <p>Resort casual. Swimsuits, fresh espresso, artisanal pastries, and sparkling Bellinis before we say goodbye.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. SECTION 4: TRAVEL & STAY -->
+    <section class="section-travel" id="travel" aria-label="Travel and Stay">
+      <div class="travel-triptych-grid">
+        <!-- Left: Travel Notes & Details Button -->
+        <div class="travel-col-info">
+          <p class="travel-kicker">TRAVEL &amp; STAY</p>
+          <h2 class="travel-headline">VILLA LA FIORA</h2>
+          <div class="travel-hairline"></div>
+          <p class="travel-desc">
+            Nestled in the heart of Tuscany, Villa La Fiora is a place of history, beauty, and quiet magic. We've gathered everything you need to plan your stay, from travel tips to hotel recommendations, so you can enjoy the weekend with ease.
+          </p>
+          <a
+            href="https://maps.google.com/?q=Tuscany+Italy"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-travel-action"
+          >
+            VIEW TRAVEL DETAILS
+          </a>
+        </div>
+
+        <!-- Middle: Tuscan Villa Panoramic Landscape -->
+        <div class="travel-col-photo">
+          <div class="travel-photo-frame">
+            <img
+              src="images/travel-villa.jpg"
+              alt="Tuscan stone villa nestled in hills and cypress trees"
+              class="travel-img-villa"
+              loading="lazy"
+            />
+          </div>
+        </div>
+
+        <!-- Right: Olive Branch Card & Geographic Coordinates -->
+        <div class="travel-col-quote">
+          <div class="travel-quote-frame">
+            <img
+              src="images/travel-quote.jpg"
+              alt="Deckle card: Good company goes everywhere with olive branch"
+              class="travel-img-quote"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. SECTION 5: RSVP -->
+    <section class="section-rsvp" id="rsvp" aria-label="RSVP Response Form">
+      <div class="rsvp-triptych-grid">
+        <!-- Left: Carnations & "Kindly Respond" Card -->
+        <div class="rsvp-col-flowers">
+          <div class="rsvp-photo-frame">
+            <img
+              src="images/rsvp-flowers.jpg"
+              alt="White carnation flowers with deckle-edge Kindly Respond card"
+              class="rsvp-img-flowers"
+              loading="lazy"
+            />
+          </div>
+        </div>
+
+        <!-- Center: Interactive RSVP Form -->
+        <div class="rsvp-col-form">
+          <p class="rsvp-kicker">RSVP</p>
+          <h2 class="rsvp-headline">WE HOPE YOU'LL JOIN US</h2>
+          <div class="rsvp-hairline"></div>
+          <p class="rsvp-deadline">Please respond by August 1, 2025</p>
+
+          <form class="editorial-rsvp-form" id="editorial-rsvp-form" novalidate>
+            <!-- Name Input Field -->
+            <div class="rsvp-input-group">
+              <label for="rsvp-guest-name">NAME(S)</label>
+              <input
+                type="text"
+                id="rsvp-guest-name"
+                name="guest_name"
+                required
+                placeholder="Your full name and guest name"
+              />
+            </div>
+
+            <!-- Joyfully Accepts / Regretfully Declines -->
+            <div class="rsvp-choices-group">
+              <label class="rsvp-radio-label">
+                <input type="radio" name="response_status" value="accepts" checked />
+                <span class="custom-circle"></span>
+                <span class="radio-text">JOYFULLY ACCEPTS</span>
+              </label>
+
+              <label class="rsvp-radio-label">
+                <input type="radio" name="response_status" value="declines" />
+                <span class="custom-circle"></span>
+                <span class="radio-text">REGRETFULLY DECLINES</span>
+              </label>
+            </div>
+
+            <!-- Optional Dietary Note -->
+            <div class="rsvp-input-group optional-note">
+              <label for="rsvp-notes">DIETARY PREFERENCES / NOTE (OPTIONAL)</label>
+              <input
+                type="text"
+                id="rsvp-notes"
+                name="guest_notes"
+                placeholder="Vegetarian, allergies, or a sweet note..."
+              />
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn-rsvp-submit" id="btn-submit-rsvp">
+              SUBMIT RESPONSE
+            </button>
+          </form>
+
+          <!-- RSVP Confirmation Card -->
+          <div class="rsvp-confirmation-card" id="rsvp-confirm-card" hidden>
+            <div class="confirm-icon">❦</div>
+            <h3>GRAZIE! YOUR RESPONSE IS RECORDED.</h3>
+            <p>We are overjoyed and cannot wait to celebrate with you under the Tuscan sky.</p>
+          </div>
+        </div>
+
+        <!-- Right: Monogram & Architectural Motto -->
+        <div class="rsvp-col-brand">
+          <div class="brand-inner">
+            <p class="brand-top-words">DIFFERENT<br />PLACES<br />SAME LOVE</p>
+            <div class="brand-hairline"></div>
+            <div class="brand-floral-emblem" aria-hidden="true">
+              <svg viewBox="0 0 30 40" class="botanical-emblem-svg" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M15 35 L15 12" />
+                <path d="M15 22 Q8 18, 10 14 Q16 16, 15 22" />
+                <path d="M15 28 Q22 24, 20 20 Q14 22, 15 28" />
+                <!-- Flower head -->
+                <circle cx="15" cy="10" r="4" fill="none" stroke="currentColor"/>
+                <circle cx="11" cy="7" r="2.5" fill="none" stroke="currentColor"/>
+                <circle cx="19" cy="7" r="2.5" fill="none" stroke="currentColor"/>
+                <circle cx="15" cy="5" r="2" fill="none" stroke="currentColor"/>
+              </svg>
+            </div>
+            <p class="brand-monogram">A &nbsp;|&nbsp; T</p>
+            <p class="brand-bottom-words">FOREVER BEGINS HERE</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. FOOTER -->
+    <footer class="editorial-footer">
+      <p>© 2025 AMELIA &amp; THOMAS &nbsp;|&nbsp; WITH LOVE, EVERYWHERE</p>
+    </footer>
+
+  </div>
+
+  <!-- ========================================================================
+       FLOATING AUDIO TOGGLE DOCK
+       ======================================================================== -->
+  <aside class="tuscany-audio-dock" id="audio-dock" aria-label="Music player">
+    <button type="button" class="btn-audio-disc" id="btn-audio-disc" aria-label="Toggle background music">
+      <div class="disc-icon">
+        <span class="disc-dot"></span>
+      </div>
+      <div class="track-meta">
+        <span class="track-name">City of Stars</span>
+        <span class="track-sub">Acoustic · Amelia &amp; Thomas</span>
+      </div>
+      <div class="sound-bars" aria-hidden="true">
+        <span class="sb b1"></span>
+        <span class="sb b2"></span>
+        <span class="sb b3"></span>
+      </div>
+    </button>
+  </aside>
+
+  <!-- Toast Notification -->
+  <div class="tuscany-toast" id="tuscany-toast" role="status" aria-live="polite"></div>
+</body>
+</html>

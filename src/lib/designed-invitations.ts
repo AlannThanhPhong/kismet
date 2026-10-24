@@ -46,6 +46,15 @@ export const designedInvitations = [
     coverImage: "/wedding-invitations/Doodle%20Art/images/doodle-cover.png",
   },
   {
+    code: "tuscany-editorial",
+    slug: "tuscany-editorial",
+    displayTitle: "TUSCANY EDITORIAL · VILLA LA FIORA",
+    couple: { partnerOne: "Amelia", partnerTwo: "Thomas" },
+    event: { date: "2025-09-13T14:00:00.000Z", venue: "Villa La Fiora", address: "Tuscany, Italy" },
+    template: "tuscany-editorial",
+    coverImage: "/wedding-invitations/Template%20s%E1%BB%91%206/images/template6-cover.jpg",
+  },
+  {
     code: "20260323-NDNL",
     slug: "20260323-NDNL",
     displayTitle: "LOVE AT FIRST SIGHT · YÊU TỪ CÁI NHÌN ĐẦU TIÊN",
