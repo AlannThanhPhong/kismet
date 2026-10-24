@@ -87,7 +87,7 @@
   } else if (window.location.search.includes('reveal=1')) {
     isFlapOpened = true;
     if (coverGate) {
-      coverGate.classList.add('is-opening', 'is-revealed');
+      coverGate.classList.add('is-opening', 'is-revealed', 'is-static-revealed');
     }
   }
 

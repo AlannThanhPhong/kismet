@@ -94,6 +94,13 @@ body.is-locked .french-parchment-sheet {
   pointer-events: none;
 }
 
+.french-cover-gate.is-static-revealed *,
+.french-cover-gate.is-static-revealed *::before,
+.french-cover-gate.is-static-revealed *::after {
+  transition: none !important;
+  animation: none !important;
+}
+
 /* Authentic French Toile de Jouy Floral Linen Wallpaper Backdrop */
 .toile-gate-backdrop {
   position: fixed;

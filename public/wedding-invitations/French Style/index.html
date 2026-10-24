@@ -88,23 +88,18 @@
           <!-- Top Triangular Flap (Folds open in 3D upwards!) -->
           <div class="real-env-flap-top" id="french-flap-top" aria-hidden="true">
             <div class="flap-face flap-outside">
-              <!-- Dark chocolate brown paper exterior with realistic paper texture & crease -->
+              <!-- Rich warm chocolate brown paper exterior with realistic bevel & crease -->
               <svg viewBox="0 0 460 168" preserveAspectRatio="none" class="flap-svg">
                 <defs>
                   <linearGradient id="flapBrownGrad" x1="50%" y1="0%" x2="50%" y2="100%">
-                    <stop offset="0%" stop-color="#694b39" />
-                    <stop offset="45%" stop-color="#593d2e" />
-                    <stop offset="100%" stop-color="#4a3123" />
+                    <stop offset="0%" stop-color="#72523f" />
+                    <stop offset="45%" stop-color="#604332" />
+                    <stop offset="100%" stop-color="#4e3425" />
                   </linearGradient>
-                  <filter id="flapGrain" x="0%" y="0%" width="100%" height="100%">
-                    <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" result="noise" />
-                    <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.12 0" />
-                    <feBlend in="SourceGraphic" in2="noise" mode="multiply" />
-                  </filter>
                 </defs>
-                <path d="M0,0 L460,0 L230,168 Z" fill="url(#flapBrownGrad)" filter="url(#flapGrain)" />
-                <line x1="0" y1="0" x2="460" y2="0" stroke="rgba(255,255,255,0.22)" stroke-width="1.5" />
-                <path d="M0,0 L230,168 L460,0" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1.2" />
+                <path d="M0,0 L460,0 L230,168 Z" fill="url(#flapBrownGrad)" />
+                <line x1="0" y1="0" x2="460" y2="0" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" />
+                <path d="M0,0 L230,168 L460,0" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.2" />
                 <path d="M2,1 L230,167 L458,1" fill="none" stroke="rgba(0,0,0,0.32)" stroke-width="0.8" />
               </svg>
             </div>
@@ -122,42 +117,42 @@
             <svg viewBox="0 0 460 310" preserveAspectRatio="none" class="pocket-svg">
               <defs>
                 <linearGradient id="pocketLeftGrad" x1="0%" y1="30%" x2="100%" y2="70%">
-                  <stop offset="0%" stop-color="#5a3d2e" />
-                  <stop offset="100%" stop-color="#462f22" />
+                  <stop offset="0%" stop-color="#5c4030" />
+                  <stop offset="100%" stop-color="#473022" />
                 </linearGradient>
                 <linearGradient id="pocketRightGrad" x1="100%" y1="30%" x2="0%" y2="70%">
-                  <stop offset="0%" stop-color="#5a3d2e" />
-                  <stop offset="100%" stop-color="#462f22" />
+                  <stop offset="0%" stop-color="#5c4030" />
+                  <stop offset="100%" stop-color="#473022" />
                 </linearGradient>
                 <linearGradient id="pocketBottomGrad" x1="50%" y1="100%" x2="50%" y2="0%">
-                  <stop offset="0%" stop-color="#462f22" />
-                  <stop offset="50%" stop-color="#553a2b" />
-                  <stop offset="100%" stop-color="#654736" />
+                  <stop offset="0%" stop-color="#452e20" />
+                  <stop offset="50%" stop-color="#553a29" />
+                  <stop offset="100%" stop-color="#644633" />
                 </linearGradient>
                 <filter id="pocketFlapShadow" x="-10%" y="-15%" width="120%" height="130%">
                   <feDropShadow dx="0" dy="-3" stdDeviation="4" flood-color="#180e08" flood-opacity="0.5" />
                 </filter>
-                <filter id="pocketGrain" x="0%" y="0%" width="100%" height="100%">
-                  <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" result="noise" />
-                  <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.12 0" />
-                  <feBlend in="SourceGraphic" in2="noise" mode="multiply" />
-                </filter>
               </defs>
 
               <!-- Base Pocket Backing -->
-              <rect width="460" height="310" fill="#462f22" />
+              <rect width="460" height="310" fill="#452e20" />
 
               <!-- Left Side Triangle Flap -->
-              <path d="M0,0 L230,168 L0,310 Z" fill="url(#pocketLeftGrad)" filter="url(#pocketGrain)" />
+              <path d="M0,0 L230,168 L0,310 Z" fill="url(#pocketLeftGrad)" />
               <path d="M0,0 L230,168" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
 
               <!-- Right Side Triangle Flap -->
-              <path d="M460,0 L230,168 L460,310 Z" fill="url(#pocketRightGrad)" filter="url(#pocketGrain)" />
+              <path d="M460,0 L230,168 L460,310 Z" fill="url(#pocketRightGrad)" />
               <path d="M460,0 L230,168" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
 
               <!-- Bottom Triangle Pocket Overlapping Side Flaps -->
               <g filter="url(#pocketFlapShadow)">
-                <path d="M0,310 L230,168 L460,310 Z" fill="url(#pocketBottomGrad)" filter="url(#pocketGrain)" />
+                <path d="M0,310 L230,168 L460,310 Z" fill="url(#pocketBottomGrad)" />
+                <path d="M0,310 L230,168 L460,310" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1.2" />
+                <path d="M2,310 L230,170 L458,310" fill="none" stroke="rgba(0,0,0,0.35)" stroke-width="0.8" />
+              </g>
+            </svg>
+          </div>
                 <path d="M0,310 L230,168 L460,310" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1.2" />
                 <path d="M2,310 L230,170 L458,310" fill="none" stroke="rgba(0,0,0,0.35)" stroke-width="0.8" />
               </g>
