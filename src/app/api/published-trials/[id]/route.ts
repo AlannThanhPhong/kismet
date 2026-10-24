@@ -30,6 +30,14 @@ export async function GET(request: Request, context: Context) {
 
     const expiry = getPublishedTrialExpiry(record);
     const expiresAt = expiry?.toISOString() ?? null;
+    if (record.disabledAt) {
+      return NextResponse.json({
+        error: "Thiệp này đã bị tạm vô hiệu hóa.",
+        status: "disabled",
+        createdAt: record.createdAt,
+        expiresAt,
+      }, { status: 410, headers: { "Cache-Control": "no-store" } });
+    }
     if (!expiry || expiry.getTime() <= Date.now()) {
       return NextResponse.json({
         error: "Thiệp này đã hết hạn.",
