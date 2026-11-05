@@ -7,26 +7,27 @@
    ========================================================================== */
 
 .white-store {
-  --tex-paper: url("/home/paper-grain.svg");
-  --tex-linen: url("/home/linen-weave.svg");
-  --tex-botanical: url("/home/botanical-embossed.svg");
+  --tex-paper: url("/home/floral-embossed-overlay.png");
+  --tex-linen: url("/home/floral-embossed-overlay.png");
+  --tex-botanical: url("/home/floral-embossed-paper.jpg");
   --tex-envelope: url("/home/envelope-texture.svg");
 
-  background-color: var(--ws-paper);
+  background-color: #fdfbf7;
   background-image:
-    var(--tex-paper),
-    var(--tex-linen),
-    var(--tex-botanical),
-    radial-gradient(ellipse 90% 55% at 50% 0%, rgba(255, 253, 250, 0.78), transparent 72%),
-    linear-gradient(180deg, #fdfaf7 0%, #fbf6f3 48%, #f5ede6 100%);
-  background-size: 220px 220px, 160px 160px, 1280px 1850px, 100% 100%, 100% 100%;
-  background-position: left top, left top, center top, center top, left top;
-  background-repeat: repeat, repeat, repeat-y, no-repeat, no-repeat;
+    linear-gradient(180deg, rgba(255, 254, 251, 0.52) 0%, rgba(253, 250, 245, 0.44) 52%, rgba(250, 245, 238, 0.56) 100%),
+    url("/home/floral-embossed-paper.jpg");
+  background-size: 100% 100%, 520px auto;
+  background-position: left top, center top;
+  background-repeat: no-repeat, repeat;
 }
 
 @media (max-width: 600px) {
   .white-store {
-    background-size: 200px 200px, 140px 140px, 780px 1130px, 100% 100%, 100% 100%;
+    background-color: #fffdf9;
+    background-image:
+      linear-gradient(180deg, rgba(255, 254, 251, 0.45) 0%, rgba(254, 251, 247, 0.38) 50%, rgba(252, 248, 242, 0.48) 100%),
+      url("/home/floral-embossed-paper.jpg");
+    background-size: 100% 100%, 340px auto;
   }
 }
 
@@ -268,38 +269,35 @@
 .ws-project-card-sheet {
   position: relative;
   padding: 20px 18px 22px;
-  background-color: var(--ws-paper);
+  background-color: #fffdf9;
   background-image:
     var(--tex-paper),
-    var(--tex-linen),
-    radial-gradient(ellipse at 20% 10%, rgba(255, 253, 250, 0.85), transparent 68%),
-    linear-gradient(160deg, #fffdf9 0%, #f8f1ea 56%, #ede2d6 100%);
-  background-size: 200px 200px, 150px 150px, 100% 100%, 100% 100%;
-  border: 1px solid rgba(176, 160, 140, 0.65);
+    linear-gradient(160deg, rgba(255, 254, 251, 0.72) 0%, rgba(253, 249, 243, 0.68) 56%, rgba(248, 242, 234, 0.75) 100%),
+    url("/home/floral-embossed-paper.jpg");
+  background-size: 360px 360px, 100% 100%, 420px auto;
+  border: 1px solid rgba(186, 170, 150, 0.55);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.92),
-    inset 0 0 0 6px rgba(251, 246, 243, 0.82),
-    inset 0 0 0 7px rgba(183, 168, 149, 0.35),
-    0 18px 36px rgba(58, 52, 43, 0.12),
-    0 4px 10px rgba(58, 52, 43, 0.06);
+    inset 0 1px 0 rgba(255, 255, 255, 0.96),
+    inset 0 0 0 6px rgba(254, 251, 247, 0.88),
+    inset 0 0 0 7px rgba(190, 175, 156, 0.3),
+    0 16px 32px rgba(58, 52, 43, 0.08),
+    0 3px 8px rgba(58, 52, 43, 0.04);
 }
 
 /* Alternating sage / blush / sand subtle paper tints on keepsake folios */
 .ws-project-entry[data-index="1"] .ws-project-card-sheet {
   background-image:
     var(--tex-paper),
-    var(--tex-linen),
-    radial-gradient(ellipse at 80% 0%, rgba(209, 217, 200, 0.42), transparent 68%),
-    linear-gradient(160deg, #fffdf9 0%, #f5f3ec 60%, #e7ece0 100%);
+    linear-gradient(160deg, rgba(255, 254, 251, 0.75) 0%, rgba(247, 249, 243, 0.72) 60%, rgba(239, 243, 234, 0.78) 100%),
+    url("/home/floral-embossed-paper.jpg");
 }
 
 .ws-project-entry[data-index="2"] .ws-project-card-sheet,
 .ws-project-entry[data-index="4"] .ws-project-card-sheet {
   background-image:
     var(--tex-paper),
-    var(--tex-linen),
-    radial-gradient(ellipse at 85% 0%, rgba(239, 199, 194, 0.36), transparent 68%),
-    linear-gradient(160deg, #fffdf9 0%, #f9f1ee 60%, #efe2dd 100%);
+    linear-gradient(160deg, rgba(255, 254, 251, 0.75) 0%, rgba(252, 246, 244, 0.72) 60%, rgba(247, 238, 235, 0.78) 100%),
+    url("/home/floral-embossed-paper.jpg");
 }
 
 /* Semi-translucent torn Japanese washi tape strip at top of each folio */
@@ -656,19 +654,19 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  background-color: var(--ws-paper);
+  background-color: #fffdf9;
   background-image:
     var(--tex-paper),
-    var(--tex-linen),
-    linear-gradient(175deg, #fffdfa 0%, #fbf6f3 55%, #f4ece3 100%);
-  background-size: 200px 200px, 150px 150px, 100% 100%;
-  border: 1px solid rgba(183, 168, 149, 0.58);
+    linear-gradient(175deg, rgba(255, 254, 251, 0.72) 0%, rgba(253, 249, 244, 0.68) 55%, rgba(249, 243, 236, 0.76) 100%),
+    url("/home/floral-embossed-paper.jpg");
+  background-size: 360px 360px, 100% 100%, 420px auto;
+  border: 1px solid rgba(183, 168, 149, 0.52);
   border-radius: 4px;
   padding: 15px;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.9),
-    0 12px 30px rgba(68, 63, 54, 0.08),
-    0 2px 6px rgba(68, 63, 54, 0.04);
+    inset 0 1px 0 rgba(255, 255, 255, 0.94),
+    0 12px 28px rgba(68, 63, 54, 0.06),
+    0 2px 6px rgba(68, 63, 54, 0.03);
   transition:
     transform 0.32s cubic-bezier(0.2, 0.8, 0.2, 1),
     box-shadow 0.32s ease,

@@ -157,6 +157,7 @@ function CustomizedInvitationFrameInner({ code, src, title }: Props) {
   }, [customId, trialData?.expiresAt, updateTrialData]);
 
   const REAL_PROJECT_CODES = new Set([
+    "20260612-QSMA",
     "20260323-NDNL",
     "20261027-KHVT",
     "20261230-KHAG",

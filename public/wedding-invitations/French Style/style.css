@@ -72,8 +72,8 @@ body.is-locked .french-parchment-sheet {
 }
 
 /* ==========================================================================
-   OPENING GATE — REALISTIC CHOCOLATE BROWN ENVELOPE & FRENCH FLORAL LINER
-   (Inspired by Pinterest ref: https://pin.it/6MkHTCisO)
+   OPENING GATE — ISOLATED PHOTOREALISTIC CHOCOLATE BROWN ENVELOPE & CARD
+   ON THE FRENCH TOILE DE JOUY BACKGROUND (No Tabletop Box!)
    ========================================================================== */
 .french-cover-gate {
   position: fixed;
@@ -101,7 +101,7 @@ body.is-locked .french-parchment-sheet {
   animation: none !important;
 }
 
-/* Authentic French Toile de Jouy Floral Linen Wallpaper Backdrop */
+/* Authentic Old French Toile de Jouy Floral Linen Wallpaper Backdrop */
 .toile-gate-backdrop {
   position: fixed;
   inset: 0;
@@ -116,43 +116,12 @@ body.is-locked .french-parchment-sheet {
   opacity: 0.92;
 }
 
-/* Editorial Flatlay Tabletop Styling */
-.flatlay-decorations {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 0;
-}
-
-.decor-babysbreath {
-  position: absolute;
-  width: 220px;
-  height: 220px;
-  background-image:
-    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.85) 1.5px, transparent 2px),
-    radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.75) 1.5px, transparent 2px),
-    radial-gradient(circle at 45% 80%, rgba(255, 255, 255, 0.8) 1.5px, transparent 2px);
-  background-size: 36px 36px;
-  opacity: 0.35;
-}
-
-.decor-tl {
-  top: -20px;
-  left: -20px;
-  transform: rotate(25deg);
-}
-
-.decor-br {
-  bottom: -20px;
-  right: -20px;
-  transform: rotate(-35deg);
-}
-
 .envelope-stage {
   position: relative;
   z-index: 1;
-  width: min(100%, 460px);
+  width: min(100%, 400px);
+  max-width: 100%;
+  min-width: 0;
   margin: auto;
   text-align: center;
   display: flex;
@@ -161,9 +130,9 @@ body.is-locked .french-parchment-sheet {
   transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* French Chic Editorial Header */
+/* French Chic Editorial Header (on old background) */
 .french-gate-header {
-  margin-bottom: 20px;
+  margin-bottom: 22px;
   text-align: center;
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
@@ -171,7 +140,7 @@ body.is-locked .french-parchment-sheet {
 .french-cover-gate.is-opening .french-gate-header,
 .french-cover-gate.is-revealed .french-gate-header {
   opacity: 0;
-  transform: translateY(-14px);
+  transform: translateY(-16px);
   pointer-events: none;
 }
 
@@ -203,11 +172,12 @@ body.is-locked .french-parchment-sheet {
   color: #8e7359;
 }
 
-/* Realistic Chocolate Brown Baronial Envelope Wrapper */
+/* Isolated Photorealistic Chocolate Brown Envelope Wrapper (No Tabletop Box) */
 .real-envelope-wrapper {
   position: relative;
   width: 100%;
-  max-width: 460px;
+  max-width: 390px;
+  min-width: 0;
   perspective: 1200px;
   cursor: pointer;
   user-select: none;
@@ -217,218 +187,189 @@ body.is-locked .french-parchment-sheet {
 .real-envelope {
   position: relative;
   width: 100%;
-  height: 310px;
-  border-radius: 4px;
-  box-shadow:
-    0 24px 50px rgba(32, 19, 10, 0.38),
-    0 6px 16px rgba(32, 19, 10, 0.22);
+  aspect-ratio: 337 / 240;
+  border-radius: 3px;
+  overflow: visible;
+  filter:
+    drop-shadow(0 22px 44px rgba(32, 19, 10, 0.36))
+    drop-shadow(0 6px 14px rgba(32, 19, 10, 0.22));
+  transition: transform 0.82s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Envelope Back & Authentic French Floral Liner */
+/* Gently shift the envelope pocket down when opened so the tall rising card is centered */
+.french-cover-gate.is-opening .real-envelope,
+.french-cover-gate.is-revealed .real-envelope {
+  transform: translateY(48px);
+}
+
+/* 1. Envelope Throat & Baby's Breath Liner Base (337 x 240) */
 .real-env-back {
   position: absolute;
   inset: 0;
-  border-radius: 4px;
-  background: #3c2618;
   z-index: 1;
+  border-radius: 3px;
   overflow: hidden;
 }
 
-.real-env-liner {
-  position: absolute;
-  top: 8px;
-  left: 12px;
-  right: 12px;
-  bottom: 16px;
-  background-image: url("images/french-toile-floral.png");
-  background-size: 280px auto;
-  background-position: center 25%;
-  background-repeat: repeat;
-  border-radius: 2px;
-  box-shadow: inset 0 0 16px rgba(45, 28, 16, 0.35);
+.env-throat-img {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
-.real-env-shadow-throat {
+/* 2. Open Upper Triangle Flap & Baby's Breath Liner Wings (Unfolds above envelope when opened) */
+.real-env-open-wings {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(18, 10, 5, 0.15) 0%, rgba(18, 10, 5, 0.65) 100%);
+  left: 0;
+  top: -83.33%;
+  width: 100%;
+  height: 100.83%;
+  z-index: 2;
+  opacity: 0;
+  transform-origin: 50% 82.64%;
+  transform: scaleY(0.15);
   pointer-events: none;
+  transition:
+    opacity 0.28s ease 0.22s,
+    transform 0.56s cubic-bezier(0.22, 1, 0.36, 1) 0.22s;
 }
 
-/* 300gsm Heavy Ivory Cotton Invitation Card rising out of the envelope */
+.french-cover-gate.is-opening .real-env-open-wings,
+.french-cover-gate.is-revealed .real-env-open-wings {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+.env-open-wings-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 3. Tall Vertical Sunlit Cream Cotton Invitation Card Rising Out of the Pocket */
 .real-letter-card {
   position: absolute;
-  left: 5%;
-  width: 90%;
-  top: 12px;
-  height: 285px;
-  z-index: 2;
-  border-radius: 3px;
-  background: #faf6ee;
-  background-image:
-    linear-gradient(165deg, #fffdfa 0%, #f7f1e4 55%, #ece2cf 100%);
+  left: 13.95%;
+  top: -77.92%;
+  width: 72.11%;
+  height: 132.92%;
+  z-index: 3;
+  border-radius: 2px;
+  overflow: hidden;
   box-shadow:
-    -3px 4px 14px rgba(25, 14, 7, 0.18),
-    3px 4px 14px rgba(25, 14, 7, 0.18),
-    0 0 0 1px rgba(255, 255, 255, 0.9);
-  transition: transform 0.88s cubic-bezier(0.22, 1, 0.36, 1) 0.22s, box-shadow 0.88s ease 0.22s;
-  transform: translateY(0);
+    -2px 4px 14px rgba(28, 16, 8, 0.2),
+    2px 4px 14px rgba(28, 16, 8, 0.16);
+  opacity: 0;
+  transform: translateY(58%) scale(0.92);
   pointer-events: none;
+  transition:
+    opacity 0.32s ease 0.22s,
+    transform 0.88s cubic-bezier(0.22, 1, 0.36, 1) 0.24s;
 }
 
 .french-cover-gate.is-opening .real-letter-card,
 .french-cover-gate.is-revealed .real-letter-card {
-  transform: translateY(-115px);
+  opacity: 1;
+  transform: translateY(0) scale(1);
   pointer-events: auto;
-  box-shadow:
-    0 22px 40px rgba(25, 14, 7, 0.35),
-    0 5px 12px rgba(25, 14, 7, 0.22),
-    0 0 0 1px rgba(255, 255, 255, 0.95);
+}
+
+.letter-card-bg-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
 }
 
 .letter-card-inner {
-  position: relative;
-  padding: 16px 14px;
-  text-align: center;
-  border: 1px solid rgba(168, 141, 114, 0.35);
-  margin: 6px;
-  border-radius: 2px;
-  box-shadow:
-    inset 1px 1px 2px rgba(122, 98, 74, 0.15),
-    inset -1px -1px 2px rgba(255, 255, 255, 0.9);
-}
-
-.letter-card-kicker {
-  font-family: var(--font-serif);
-  font-size: 9.5px;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
-  color: #8e7359;
-  margin: 0 0 6px;
-}
-
-.letter-card-names {
-  font-family: var(--font-script);
-  font-size: clamp(26px, 5.5vw, 32px);
-  color: #3b2619;
-  margin: 0 0 8px;
-  font-weight: 400;
-  line-height: 1.08;
-}
-
-.letter-card-names span {
-  display: inline-block;
-  font-size: 0.72em;
-  margin: 0 4px;
-  color: #7d614b;
-}
-
-.letter-card-cameo {
-  width: 108px;
-  height: 72px;
-  margin: 0 auto 8px;
-  border-radius: 50%;
-  padding: 2.5px;
-  background: linear-gradient(135deg, #e5d7c5 0%, #a4876b 100%);
-  box-shadow: 0 4px 10px rgba(50, 32, 18, 0.2);
-}
-
-.letter-card-cameo img {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  object-position: 50% 40%;
-}
-
-.letter-card-date {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 13px;
-  color: #4a3424;
-  margin: 0 0 2px;
-}
-
-.letter-card-venue {
-  font-family: var(--font-serif);
-  font-size: 10.5px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #8e7359;
-  margin: 0;
-}
-
-/* Top Triangular Flap with 3D Folding Physics (Baronial V-Flap) */
-.real-env-flap-top {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 168px;
-  transform-origin: top center;
-  transform-style: preserve-3d;
-  transition: transform 0.85s cubic-bezier(0.25, 1, 0.5, 1);
-  z-index: 5;
-}
-
-.french-cover-gate.is-opening .real-env-flap-top,
-.french-cover-gate.is-revealed .real-env-flap-top {
-  transform: rotateX(180deg);
-  z-index: 0;
-  transition: transform 0.85s cubic-bezier(0.25, 1, 0.5, 1), z-index 0s 0.38s;
-}
-
-.flap-face {
   position: absolute;
   inset: 0;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  transform-style: preserve-3d;
-}
-
-.flap-outside {
   z-index: 2;
-}
-
-.flap-outside .flap-svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-  filter: drop-shadow(0 6px 14px rgba(20, 10, 4, 0.45));
-}
-
-.flap-inside {
-  transform: rotateY(180deg);
-  z-index: 1;
-  background: #5c4030;
-  background-image: linear-gradient(180deg, #6e4e3b 0%, #483022 100%);
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-  filter: drop-shadow(0 -6px 14px rgba(20, 10, 4, 0.4));
-}
-
-.flap-inside-liner {
-  position: absolute;
-  top: 4px;
-  left: 14px;
-  right: 14px;
-  bottom: 14px;
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-  background-image: url("images/french-toile-floral.png");
-  background-size: 260px auto;
-  background-position: center top;
-  box-shadow: inset 0 0 14px rgba(45, 28, 16, 0.45);
-}
-
-.flap-inside-mask {
-  width: 100%;
-  height: 100%;
-  display: block;
-  position: absolute;
-  inset: 0;
+  text-align: center;
   pointer-events: none;
 }
 
-/* Front Baronial Pocket: Overlapping Left, Right & Bottom Flaps */
+/* "SAVE THE DATE" is already letterpress-printed on pinterest-card-bg.jpg */
+.letter-card-kicker {
+  position: absolute;
+  top: 6%;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  opacity: 0;
+}
+
+.letter-card-names {
+  margin: 0;
+  font-weight: 400;
+}
+
+.letter-bride-name {
+  position: absolute;
+  top: 44.5%;
+  left: 6%;
+  width: 88%;
+  font-family: var(--font-serif);
+  font-size: clamp(19px, 4.9vw, 24px);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: #5a3921;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+/* "— and —" with golden swashes is already printed on pinterest-card-bg.jpg at 55.5% */
+.letter-and-conjunction {
+  position: absolute;
+  top: 55.2%;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+}
+
+.letter-groom-name {
+  position: absolute;
+  top: 61.5%;
+  left: 6%;
+  width: 88%;
+  font-family: var(--font-serif);
+  font-size: clamp(19px, 4.9vw, 24px);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: #5a3921;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.letter-card-date {
+  position: absolute;
+  top: 74.2%;
+  left: 6%;
+  width: 88%;
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(9.5px, 2.5vw, 11.5px);
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #5e3d24;
+}
+
+.letter-card-venue {
+  position: absolute;
+  top: 80.2%;
+  left: 6%;
+  width: 88%;
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(8px, 2.1vw, 9.5px);
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #6d4b31;
+}
+
+/* 4. Photorealistic Truncated Lower Brown Paper Pocket (Occludes bottom of rising card) */
 .real-env-pocket {
   position: absolute;
   inset: 0;
@@ -436,58 +377,95 @@ body.is-locked .french-parchment-sheet {
   pointer-events: none;
 }
 
-.pocket-svg {
+.pocket-front-img {
   width: 100%;
   height: 100%;
   display: block;
 }
 
-/* 3D Hand-Poured Antique Gold Wax Seal with Botanical Olive Branch */
+/* 5. Photorealistic 3D Folding Top V-Flap (Reveals Baby's Breath Liner Throat as it lifts!) */
+.real-env-flap-top {
+  position: absolute;
+  inset: 0;
+  transform-origin: top center;
+  transform-style: preserve-3d;
+  transition:
+    transform 0.62s cubic-bezier(0.32, 0.94, 0.48, 1),
+    opacity 0.2s ease 0.34s;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.french-cover-gate.is-opening .real-env-flap-top,
+.french-cover-gate.is-revealed .real-env-flap-top {
+  transform: rotateX(180deg);
+  opacity: 0;
+}
+
+.flap-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flap-outside {
+  z-index: 2;
+}
+
+.flap-outside-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.flap-inside {
+  transform: rotateY(180deg);
+  z-index: 1;
+  height: 62%;
+  background: linear-gradient(180deg, #5d402f 0%, #3d2518 100%);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+/* 6. Photorealistic 3D Bronze-Gold Botanical Wax Seal Button */
 .real-wax-seal-btn {
   position: absolute;
   left: 50%;
-  top: 168px;
+  top: 55.6%;
   transform: translate(-50%, -50%);
   z-index: 6;
-  width: 96px;
-  height: 96px;
+  width: 20.6%;
+  aspect-ratio: 1 / 1;
   padding: 0;
   border: 0;
   background: transparent;
   cursor: pointer;
-  filter:
-    drop-shadow(0 12px 22px rgba(35, 20, 8, 0.55))
-    drop-shadow(0 3px 6px rgba(25, 12, 5, 0.4));
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), filter 0.35s ease, opacity 0.35s ease;
+  filter: drop-shadow(0 6px 14px rgba(28, 15, 6, 0.38));
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), filter 0.35s ease;
   animation: wax-seal-glow-breathe 2.8s ease-in-out infinite;
 }
 
 .real-wax-seal-btn:hover {
-  transform: translate(-50%, -50%) scale(1.08);
-  filter:
-    drop-shadow(0 16px 28px rgba(35, 20, 8, 0.65))
-    drop-shadow(0 4px 8px rgba(25, 12, 5, 0.5));
+  transform: translate(-50%, -50%) scale(1.07);
 }
 
 @keyframes wax-seal-glow-breathe {
   0%, 100% {
-    filter: drop-shadow(0 12px 22px rgba(35, 20, 8, 0.55)) drop-shadow(0 0 10px rgba(238, 213, 155, 0.3));
+    filter: drop-shadow(0 6px 14px rgba(28, 15, 6, 0.38)) drop-shadow(0 0 8px rgba(238, 213, 155, 0.28));
   }
   50% {
-    filter: drop-shadow(0 14px 26px rgba(35, 20, 8, 0.6)) drop-shadow(0 0 22px rgba(238, 213, 155, 0.65));
+    filter: drop-shadow(0 8px 18px rgba(28, 15, 6, 0.48)) drop-shadow(0 0 18px rgba(238, 213, 155, 0.62));
   }
 }
 
-/* When opened: the wax seal stays affixed to the front pocket apex (as in Pinterest ref video) */
 .french-cover-gate.is-opening .real-wax-seal-btn,
 .french-cover-gate.is-revealed .real-wax-seal-btn {
-  opacity: 1;
   transform: translate(-50%, -50%);
-  filter: drop-shadow(0 10px 18px rgba(35, 20, 8, 0.52));
+  filter: drop-shadow(0 6px 12px rgba(28, 15, 6, 0.35));
   animation: none;
 }
 
-.gold-seal-svg {
+.gold-seal-img {
   width: 100%;
   height: 100%;
   display: block;
@@ -503,13 +481,19 @@ body.is-locked .french-parchment-sheet {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  transition: transform 0.82s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.french-cover-gate.is-opening .french-gate-action,
+.french-cover-gate.is-revealed .french-gate-action {
+  transform: translateY(44px);
 }
 
 .french-open-prompt {
   font-family: var(--font-serif);
   font-size: 13.5px;
   letter-spacing: 0.04em;
-  color: #5a3d2c;
+  color: #543826;
   margin: 0;
   transition: opacity 0.35s ease, transform 0.35s ease;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
@@ -531,7 +515,7 @@ body.is-locked .french-parchment-sheet {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 13px 32px;
+  padding: 12px 30px;
   font-family: var(--font-serif);
   font-size: 13px;
   font-weight: 500;
@@ -579,62 +563,24 @@ body.is-locked .french-parchment-sheet {
 /* Mobile Scaling for Gate & Envelope */
 @media (max-width: 600px) {
   .envelope-stage {
-    width: min(100%, 330px);
+    width: min(100%, 340px);
+    max-width: 340px;
+    margin: 0 auto;
+  }
+  .real-envelope-wrapper {
+    width: 100%;
+    max-width: 340px;
   }
   .french-gate-header {
-    margin-bottom: 14px;
+    margin-bottom: 16px;
   }
   .gate-french-title {
-    font-size: 28px;
+    font-size: 30px;
   }
   .gate-subheading,
   .gate-city-date {
     font-size: 9.5px;
     letter-spacing: 0.18em;
-  }
-  .real-envelope {
-    height: 222px;
-  }
-  .real-env-flap-top {
-    height: 120px;
-  }
-  .real-wax-seal-btn {
-    width: 76px;
-    height: 76px;
-    top: 120px;
-  }
-  .real-letter-card {
-    height: 205px;
-    top: 8px;
-  }
-  .french-cover-gate.is-opening .real-letter-card,
-  .french-cover-gate.is-revealed .real-letter-card {
-    transform: translateY(-80px);
-  }
-  .letter-card-inner {
-    padding: 10px 8px;
-    margin: 4px;
-  }
-  .letter-card-kicker {
-    font-size: 8px;
-    letter-spacing: 0.18em;
-    margin-bottom: 3px;
-  }
-  .letter-card-names {
-    font-size: 20px;
-    margin-bottom: 4px;
-  }
-  .letter-card-cameo {
-    width: 78px;
-    height: 52px;
-    margin-bottom: 4px;
-    padding: 2px;
-  }
-  .letter-card-date {
-    font-size: 11px;
-  }
-  .letter-card-venue {
-    font-size: 9px;
   }
   .french-gate-action {
     margin-top: 18px;
@@ -758,7 +704,12 @@ body.is-locked .french-parchment-sheet {
 .french-parchment-sheet {
   max-width: 680px;
   margin: 0 auto;
-  background-color: var(--ivory);
+  background-color: #fdfbf7;
+  background-image:
+    linear-gradient(180deg, rgba(255, 253, 249, 0.72) 0%, rgba(249, 244, 236, 0.68) 100%),
+    url("images/floral-embossed-paper.jpg");
+  background-size: 100% 100%, 420px auto;
+  background-repeat: no-repeat, repeat;
   box-shadow:
     0 28px 70px rgba(42, 31, 21, 0.34),
     0 0 0 1px rgba(255, 252, 247, 0.65);
@@ -767,91 +718,70 @@ body.is-locked .french-parchment-sheet {
 }
 
 /* ==========================================================================
-   SECTION 1 — CAMEO OVAL MEDALLION & BOTANICAL CORNERS (Ref Image 1 Top)
+   SECTION 1 — CAMEO OVAL MEDALLION & 3D EMBOSSED BOTANICAL CORNERS
+   (100% exact artwork from media_1793864551330_0053ab27.jpg)
    ========================================================================== */
 .spread-hero-cameo {
   position: relative;
-  padding: clamp(34px, 6vw, 62px) clamp(20px, 5vw, 54px) clamp(30px, 5vw, 48px);
-  background:
-    radial-gradient(circle at 50% 45%, #fdfbf7 0%, #f6f1e7 100%);
+  padding: 0;
+  background: #efeae0;
   text-align: center;
-  border-bottom: 1px solid rgba(182, 157, 132, 0.22);
+  border-bottom: 1px solid rgba(182, 157, 132, 0.25);
+  overflow: hidden;
 }
 
 .cameo-ornament-box {
   position: relative;
-  max-width: 520px;
+  width: 100%;
+  aspect-ratio: 1024 / 829;
   margin: 0 auto;
-  padding: clamp(28px, 5vw, 44px) clamp(18px, 4vw, 36px);
+  background: url("images/french-hero-embossed-full.jpg") center / 100% 100% no-repeat;
 }
 
-/* Authentic French Rococo Acanthus Corner Flourishes (from user ref media_1792827957579_b5feda40.png) */
-.corner-flourish {
+.cameo-full-artwork {
   position: absolute;
-  width: clamp(54px, 11vw, 84px);
-  height: clamp(82px, 16vw, 126px);
-  object-fit: contain;
-  mix-blend-mode: multiply;
-  opacity: 0.88;
-  filter: sepia(0.28) saturate(1.15);
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  z-index: 1;
   pointer-events: none;
 }
 
-.flourish-bl {
-  bottom: 0;
-  left: 0;
-  transform: none;
-}
-
-.flourish-br {
-  bottom: 0;
-  right: 0;
-  transform: scaleX(-1);
-}
-
-.flourish-tl {
-  top: 0;
-  left: 0;
-  transform: scaleY(-1);
-}
-
-.flourish-tr {
-  top: 0;
-  right: 0;
-  transform: scale(-1, -1);
-}
-
+/* The luxury swash calligraphy "Élise & Julien" & "October 22, 2026" is already rendered in french-hero-embossed-full.jpg */
 .cameo-couple-script {
-  position: relative;
-  z-index: 2;
-  margin: 0 0 clamp(16px, 3vw, 24px);
+  position: absolute;
+  top: 13.5%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 64%;
+  z-index: 3;
+  margin: 0;
   font-family: var(--font-script);
-  font-size: clamp(38px, 7.2vw, 56px);
+  font-size: clamp(32px, 6.8vw, 52px);
   font-weight: 400;
-  line-height: 1.08;
-  color: #5b4939;
+  line-height: 1.05;
+  color: #554232;
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
 }
 
-/* Horizontal Oval Cameo Frame */
+/* Horizontal Oval Cameo Frame aligned with the 3D embossed oval border for Lightbox clickability */
 .cameo-oval-frame {
-  position: relative;
+  position: absolute;
+  top: 31.6%;
+  left: 22.3%;
+  width: 54.6%;
+  height: 40.5%;
   z-index: 2;
-  width: clamp(220px, 56vw, 310px);
-  aspect-ratio: 1.56 / 1;
-  margin: 0 auto clamp(16px, 3vw, 24px);
-  padding: 5px;
+  margin: 0;
+  padding: 0;
   border-radius: 50%;
-  background: linear-gradient(135deg, #e5d7c5 0%, #bda58d 50%, #dfd0bd 100%);
-  box-shadow:
-    0 12px 30px rgba(70, 54, 40, 0.16),
-    inset 0 0 0 1.5px rgba(255, 252, 247, 0.85);
   cursor: pointer;
   overflow: hidden;
   transition: transform 0.35s ease;
-}
-
-.cameo-oval-frame:hover {
-  transform: scale(1.02);
 }
 
 .cameo-oval-frame img {
@@ -860,18 +790,24 @@ body.is-locked .french-parchment-sheet {
   border-radius: 50%;
   object-fit: cover;
   object-position: 50% 38%;
+  opacity: 0;
 }
 
 .cameo-date-numeral {
-  position: relative;
-  z-index: 2;
+  position: absolute;
+  top: 75.2%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  z-index: 3;
   margin: 0;
-  font-family: var(--font-serif);
-  font-size: clamp(22px, 4.2vw, 30px);
-  font-style: italic;
+  font-family: var(--font-script);
+  font-size: clamp(22px, 4.5vw, 35px);
   font-weight: 400;
-  letter-spacing: 0.08em;
-  color: #6b5744;
+  letter-spacing: 0.02em;
+  color: #634d3a;
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* ==========================================================================
@@ -879,23 +815,22 @@ body.is-locked .french-parchment-sheet {
    ========================================================================== */
 .spread-toile-cartouche {
   position: relative;
-  padding: clamp(44px, 8vw, 76px) clamp(16px, 4vw, 44px);
-  background-color: #f7f3eb;
-  border-bottom: 1px solid rgba(182, 157, 132, 0.22);
+  padding: clamp(54px, 9vw, 88px) clamp(16px, 4vw, 44px);
+  background-color: #f3ede2;
+  border-bottom: 1px solid rgba(182, 157, 132, 0.25);
   overflow: hidden;
   isolation: isolate;
 }
 
-/* Authentic French Classical Terrace & Colosseum Etching Backdrop (user ref media_1792827934665_d4c8e9be.jpg) */
+/* Authentic French Classical Terrace & Colosseum Etching Backdrop */
 .toile-pastoral-scene {
   position: absolute;
   inset: 0;
   z-index: -1;
-  opacity: 0.58;
+  opacity: 0.88;
   background-image: url("images/french-chateau-terrace.jpg");
   background-size: cover;
   background-position: center;
-  filter: sepia(0.2) contrast(0.96) brightness(1.02);
 }
 
 .rococo-cartouche-wrap {
@@ -1242,62 +1177,21 @@ body.is-locked .french-parchment-sheet {
 
 .embossed-cotton-card {
   position: relative;
-  padding: clamp(38px, 6.5vw, 64px) clamp(24px, 5vw, 52px);
-  background-color: #ede6db;
-  background-image:
-    radial-gradient(rgba(82, 63, 44, 0.045) 1px, transparent 0),
-    radial-gradient(rgba(255, 255, 255, 0.72) 1px, transparent 0),
-    linear-gradient(155deg, #f5efe6 0%, #ebe3d6 52%, #e1d6c5 100%);
-  background-size: 14px 14px, 22px 22px, 100% 100%;
-  background-position: 0 0, 7px 7px, 0 0;
+  padding: clamp(54px, 9.5vw, 86px) clamp(38px, 7.5vw, 72px);
+  background-color: #f6f1e8;
+  background-image: url("images/french-embossed-corners-paper.jpg");
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
   border-radius: 3px;
-  border-top: 1.5px solid #fbf8f2;
-  border-left: 1px solid #f6efe4;
-  border-right: 1px solid #cfc0ac;
-  border-bottom: 1.5px solid #c6b59f;
+  border-top: 1.5px solid #fdfbf7;
+  border-left: 1px solid #f8f3ea;
+  border-right: 1px solid #d5c6b3;
+  border-bottom: 1.5px solid #cbb9a4;
   box-shadow:
     0 26px 58px rgba(22, 16, 11, 0.38),
-    0 6px 16px rgba(22, 16, 11, 0.22),
-    inset 0 0 0 10px #ede6db,
-    inset 0 0 0 11.5px rgba(162, 140, 116, 0.34),
-    inset 2px 2px 5px rgba(255, 255, 255, 0.85),
-    inset -2px -2px 5px rgba(120, 98, 76, 0.22);
+    0 6px 16px rgba(22, 16, 11, 0.22);
   text-align: center;
-}
-
-/* 3D Blind-Embossed Corner Reliefs (Raised ivory highlight + warm taupe cast shadow) */
-.emboss-corner {
-  position: absolute;
-  width: clamp(56px, 11.5vw, 84px);
-  height: clamp(56px, 11.5vw, 84px);
-  color: #f9f5ee;
-  filter:
-    drop-shadow(1.8px 2px 1.1px rgba(112, 93, 73, 0.54))
-    drop-shadow(-1.2px -1.2px 0.6px rgba(255, 255, 255, 0.96));
-  pointer-events: none;
-}
-
-.emboss-tl {
-  top: 14px;
-  left: 14px;
-}
-
-.emboss-tr {
-  top: 14px;
-  right: 14px;
-  transform: scaleX(-1);
-}
-
-.emboss-bl {
-  bottom: 14px;
-  left: 14px;
-  transform: scaleY(-1);
-}
-
-.emboss-br {
-  bottom: 14px;
-  right: 14px;
-  transform: scale(-1, -1);
 }
 
 .embossed-crest {
@@ -1417,13 +1311,13 @@ body.is-locked .french-parchment-sheet {
 }
 
 /* ==========================================================================
-   SECTION 5 — SCALLOPED FRENCH DOILY MEDALLION OVER BRIDAL GOWN BANNER
-   (Ref Image 5 Top — Warm Beige / Milk-Brown Palette)
+   SECTION 5 — HORIZONTAL VINTAGE SILVER TRAY WITH PAPER CARD OVER BANNER
+   (Item 10: Matches user ref media_1793864486558_bdd366d2.png)
    ========================================================================== */
 .spread-scalloped-doily {
   position: relative;
-  min-height: clamp(340px, 58vw, 440px);
-  padding: clamp(36px, 6vw, 60px) clamp(18px, 4vw, 42px);
+  min-height: clamp(320px, 56vw, 430px);
+  padding: clamp(24px, 4.5vw, 44px) clamp(10px, 2.5vw, 28px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1445,9 +1339,9 @@ body.is-locked .french-parchment-sheet {
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(94, 73, 53, 0.26) 0%,
-    rgba(122, 97, 73, 0.18) 50%,
-    rgba(94, 73, 53, 0.34) 100%
+    rgba(68, 50, 35, 0.34) 0%,
+    rgba(92, 70, 50, 0.24) 50%,
+    rgba(68, 50, 35, 0.4) 100%
   );
   pointer-events: none;
 }
@@ -1460,64 +1354,77 @@ body.is-locked .french-parchment-sheet {
   filter: sepia(22%) contrast(1.03);
 }
 
-.scalloped-doily-medallion {
+.silver-tray-medallion {
   position: relative;
-  width: min(88%, 350px);
-  aspect-ratio: 420 / 330;
+  width: min(98%, 560px);
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(28px, 5vw, 42px) clamp(26px, 5vw, 40px);
-  text-align: center;
+  filter: drop-shadow(0 18px 34px rgba(18, 11, 6, 0.48));
 }
 
-.doily-svg-bg {
-  position: absolute;
-  inset: 0;
+.silver-tray-img {
   width: 100%;
-  height: 100%;
-  z-index: -1;
+  height: auto;
+  display: block;
+  pointer-events: none;
 }
 
+/* Text positioned directly onto the cream paper card inside the horizontal silver tray */
 .doily-medallion-copy {
-  position: relative;
+  position: absolute;
+  left: 48.3%;
+  top: 48.2%;
+  transform: translate(-50%, -50%);
+  width: 41.5%;
   z-index: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .doily-kicker {
-  margin: 0 0 6px;
+  margin: 0 0 2px;
   font-family: var(--font-serif);
-  font-size: clamp(9.5px, 1.8vw, 11.5px);
-  letter-spacing: 0.2em;
+  font-size: clamp(6.5px, 1.25vw, 9px);
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--espresso-soft);
+  color: #6b5542;
+  line-height: 1.15;
 }
 
 .doily-couple-script {
-  margin: 0 0 8px;
+  margin: 0 0 2px;
   font-family: var(--font-script);
-  font-size: clamp(32px, 6.2vw, 44px);
+  font-size: clamp(19px, 3.9vw, 30px);
   font-weight: 400;
-  line-height: 1.08;
-  color: var(--espresso);
+  line-height: 1.02;
+  color: #3e2d1f;
 }
 
 .doily-date {
-  margin: 0 0 2px;
+  margin: 0;
   font-family: var(--font-serif);
-  font-size: clamp(10.5px, 1.9vw, 12.5px);
-  letter-spacing: 0.18em;
+  font-size: clamp(7px, 1.3vw, 9.5px);
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--espresso);
+  color: #4a3728;
+  line-height: 1.2;
 }
 
 .doily-place {
   margin: 0;
   font-family: var(--font-serif);
-  font-size: clamp(10px, 1.8vw, 12px);
-  letter-spacing: 0.18em;
+  font-size: clamp(6.5px, 1.2vw, 8.5px);
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--taupe-muted);
+  color: #7d6651;
+  line-height: 1.15;
 }
 
 /* ==========================================================================
@@ -1745,15 +1652,16 @@ body.is-locked .french-parchment-sheet {
 }
 
 .order-filigree-crest {
-  width: clamp(120px, 24vw, 165px);
-  margin: 0 auto 6px;
-  color: #a88f75;
+  width: clamp(190px, 42vw, 270px);
+  margin: 0 auto 10px;
 }
 
-.order-filigree-crest svg {
+.order-crest-img {
   width: 100%;
   height: auto;
   display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 2px 4px rgba(70, 54, 40, 0.14));
 }
 
 .order-condensed-title {
@@ -1905,9 +1813,9 @@ body.is-locked .french-parchment-sheet {
 }
 
 /* ==========================================================================
-   SECTION 10 — "THE MENU" FRENCH LACE DOILY CARD +
-   "PRESS FOR DETAILS" ORNATE OVAL MEDALLION, PEARL STRAND,
-   2-PHOTO B&W PHOTOBOOTH STRIP + CALLA LILY + COMPLETE SALON PORTFOLIO
+   SECTION 10 — "THE MENU" EMBOSSED FRENCH LACE DOILY CARD +
+   ANTIQUE KEY, LACE DOILY, WEDDING PORTRAIT & CALLA LILY COLLAGE
+   (Items 6 & 7)
    ========================================================================== */
 .spread-menu-and-details {
   padding: clamp(40px, 7vw, 68px) clamp(16px, 4vw, 44px);
@@ -1916,43 +1824,38 @@ body.is-locked .french-parchment-sheet {
   text-align: center;
 }
 
-/* Intricate Rectangular French Lace Doily Menu Card */
+/* Item 6: Authentic Embossed French Paper Lace Frame around The Menu */
 .lace-menu-card-wrap {
   position: relative;
-  max-width: 348px;
-  margin: 0 auto clamp(42px, 7vw, 64px);
-  padding: 28px 26px;
+  width: min(94%, 390px);
+  margin: 0 auto clamp(48px, 8vw, 72px);
+  padding: clamp(58px, 11vw, 82px) clamp(46px, 9vw, 68px);
   isolation: isolate;
 }
 
-.lace-menu-svg-frame {
+.lace-menu-real-frame {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
+  object-fit: fill;
   z-index: -1;
   pointer-events: none;
+  filter: drop-shadow(0 18px 34px rgba(24, 15, 8, 0.48));
 }
 
 .lace-menu-card {
   position: relative;
-  padding: clamp(22px, 4.2vw, 32px) clamp(16px, 3.5vw, 24px);
-  background-color: #fbf7ef;
-  background-image:
-    radial-gradient(rgba(110, 86, 62, 0.04) 1px, transparent 0),
-    linear-gradient(165deg, #fffdf9 0%, #f9f3e8 60%, #efe5d5 100%);
-  background-size: 14px 14px, 100% 100%;
-  border: 1px solid #d5c1aa;
-  box-shadow:
-    0 6px 18px rgba(34, 23, 14, 0.16),
-    inset 0 0 0 4px #fbf7ef,
-    inset 0 0 0 5px rgba(186, 161, 134, 0.42),
-    inset 1.5px 1.5px 3px rgba(124, 98, 72, 0.18);
+  z-index: 2;
+  padding: clamp(8px, 2vw, 14px) clamp(4px, 1vw, 8px);
+  background: transparent;
+  border: 0;
+  box-shadow: none;
   color: var(--espresso);
 }
 
 .menu-script-title {
-  margin: 0 0 16px;
+  margin: 0 0 14px;
   font-family: var(--font-script);
   font-size: clamp(32px, 6vw, 42px);
   font-weight: 400;
@@ -1960,7 +1863,7 @@ body.is-locked .french-parchment-sheet {
 }
 
 .menu-course {
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .menu-course:last-child {
@@ -1968,11 +1871,11 @@ body.is-locked .french-parchment-sheet {
 }
 
 .menu-course h3 {
-  margin: 0 0 4px;
+  margin: 0 0 3px;
   font-family: var(--font-serif);
-  font-size: 11.5px;
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--milk-deep);
 }
@@ -1980,162 +1883,175 @@ body.is-locked .french-parchment-sheet {
 .menu-course p {
   margin: 0;
   font-family: var(--font-serif);
-  font-size: clamp(11px, 2vw, 13px);
-  line-height: 1.55;
+  font-size: clamp(10.5px, 1.9vw, 12.5px);
+  line-height: 1.5;
   color: var(--espresso-soft);
 }
 
-/* "PRESS FOR Details" Ornate Oval + Pearl Strand + 2-Photo B&W Strip + Calla Lily */
-.press-details-collage {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(14px, 4vw, 34px);
-  max-width: 520px;
-  margin: 0 auto clamp(42px, 7vw, 60px);
-}
-
-.press-details-oval {
+/* Item 7: Circular French Lace Doily + Center Wedding Photo + Top-Left Polaroid + Top-Right Calla Lily + Bottom-Left Antique Bronze Key + Bottom-Right Taped Portrait */
+.key-doily-collage {
   position: relative;
-  width: clamp(142px, 32vw, 188px);
-  aspect-ratio: 1 / 1.32;
-  padding: 12px;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 35% 30%, #f0dfc5 0%, #c6a77d 45%, #8f6f48 85%, #6b5030 100%);
-  box-shadow:
-    0 18px 38px rgba(24, 16, 10, 0.45),
-    inset 0 0 0 3px #f6ead7,
-    inset 0 0 0 6px #8d6e48;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.3s ease;
+  width: min(100%, 460px);
+  aspect-ratio: 1 / 1.05;
+  margin: 0 auto clamp(46px, 7.5vw, 66px);
+  isolation: isolate;
 }
 
-.press-details-oval:hover {
-  transform: translateY(-3px) scale(1.02);
-}
-
-.press-oval-bow {
+.collage-doily-backdrop {
   position: absolute;
-  top: -18px;
   left: 50%;
-  transform: translateX(-50%);
-  width: 86px;
-  height: 32px;
-  filter: drop-shadow(0 4px 8px rgba(24, 16, 10, 0.35));
-}
-
-.press-oval-inner {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: radial-gradient(circle at 40% 35%, #fdfaf3 0%, #ebe0cf 72%, #d6c3aa 100%);
-  border: 2px solid #9b7c56;
-  box-shadow: inset 0 4px 12px rgba(70, 52, 34, 0.22);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 14px 10px;
-  color: var(--espresso);
-}
-
-.press-for-kicker {
-  font-family: var(--font-serif);
-  font-size: clamp(8.5px, 1.6vw, 10.5px);
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--espresso-soft);
-  margin-bottom: 8px;
-}
-
-.press-antique-button {
-  width: clamp(38px, 8.5vw, 50px);
-  height: clamp(38px, 8.5vw, 50px);
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #ebd6b4 0%, #b38f5d 55%, #755833 100%);
-  border: 2px solid #f7ebd8;
-  box-shadow:
-    0 6px 14px rgba(55, 40, 24, 0.35),
-    inset 0 2px 5px rgba(255, 250, 240, 0.75);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 6px;
-}
-
-.press-button-core {
-  width: 46%;
-  height: 46%;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #fff8eb 0%, #c29e6c 60%, #5e4425 100%);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
-}
-
-.press-details-script {
-  font-family: var(--font-script);
-  font-size: clamp(22px, 4.6vw, 30px);
-  line-height: 1;
-  color: var(--espresso);
-}
-
-.draped-pearl-strand {
-  position: absolute;
-  top: -6px;
-  right: -14px;
-  width: 38px;
-  height: 175px;
-  filter: drop-shadow(0 4px 8px rgba(28, 19, 12, 0.38));
+  top: 52%;
+  transform: translate(-50%, -50%);
+  width: 82%;
+  height: 82%;
+  z-index: 1;
   pointer-events: none;
 }
 
-/* Tilted 2-Photo B&W Photobooth Strip + Calla Lily */
-.photobooth-strip-wrap {
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-}
-
-.photobooth-strip-card {
-  width: clamp(135px, 30vw, 178px);
-  padding: 8px 8px 18px;
-  background: #fdfbf7;
-  box-shadow: 0 18px 38px rgba(22, 15, 9, 0.42);
-  transform: rotate(3.2deg);
-  display: grid;
-  gap: 8px;
-}
-
-.photobooth-frame {
-  overflow: hidden;
-  cursor: pointer;
-  background: #e9e1d6;
-}
-
-.photobooth-frame img {
+.collage-lace-doily-svg {
   width: 100%;
-  aspect-ratio: 4 / 3.2;
+  height: 100%;
+  display: block;
+}
+
+/* 1. Top-Left Tilted B&W Polaroid Frame */
+.collage-polaroid-tl {
+  position: absolute;
+  top: 2%;
+  left: 4%;
+  width: 39%;
+  padding: 7px 7px 22px;
+  background: #fdfbf7;
+  border: 1px solid #dfd3c3;
+  box-shadow: 0 16px 32px rgba(18, 11, 6, 0.45);
+  transform: rotate(-8.5deg);
+  z-index: 3;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.collage-polaroid-tl:hover {
+  transform: rotate(-6deg) scale(1.03);
+}
+
+.collage-polaroid-tl img {
+  width: 100%;
+  aspect-ratio: 4 / 3.4;
   object-fit: cover;
-  object-position: 48% 66%;
+  object-position: 48% 64%;
   filter: grayscale(100%) contrast(1.06);
   display: block;
 }
 
-.photobooth-frame-mirror img {
-  object-position: 50% 24%;
+/* 2. Top-Right Real White Calla Lily Stem */
+.collage-flower-tr {
+  position: absolute;
+  top: -2%;
+  right: 5%;
+  width: 30%;
+  max-height: 78%;
+  overflow: hidden;
+  z-index: 3;
+  transform: rotate(6deg);
+  pointer-events: none;
+  filter: drop-shadow(0 10px 18px rgba(20, 12, 6, 0.42));
 }
 
-.calla-lily-svg {
-  width: clamp(46px, 10vw, 66px);
+.collage-calla-lily-img {
+  width: 100%;
   height: auto;
-  margin-left: -10px;
-  margin-bottom: -8px;
-  transform: rotate(12deg);
-  filter: drop-shadow(0 6px 12px rgba(22, 15, 9, 0.35));
+  display: block;
+}
+
+/* 3. Center Main Wedding Portrait (Replacing the text letter) */
+.collage-center-wedding-photo {
+  position: absolute;
+  top: 25%;
+  left: 22.5%;
+  width: 53%;
+  padding: 9px;
+  background: #fbf7ef;
+  border: 1px solid #dccbb6;
+  box-shadow:
+    0 20px 42px rgba(18, 11, 6, 0.52),
+    inset 0 0 0 3px #fbf7ef,
+    inset 0 0 0 4px rgba(182, 157, 132, 0.45);
+  transform: rotate(-1.6deg);
+  z-index: 4;
+  cursor: pointer;
+  transition: transform 0.35s ease;
+}
+
+.collage-center-wedding-photo:hover {
+  transform: rotate(0deg) scale(1.03);
+}
+
+.collage-center-wedding-photo img {
+  width: 100%;
+  aspect-ratio: 3 / 3.65;
+  object-fit: cover;
+  object-position: 50% 54%;
+  display: block;
+}
+
+/* 4. Bottom-Left Ornate Antique French Bronze Skeleton Key */
+.collage-key-bl {
+  position: absolute;
+  bottom: 10%;
+  left: 2%;
+  width: 45%;
+  transform: rotate(-30deg);
+  z-index: 6;
   pointer-events: none;
+}
+
+.collage-antique-key-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 5. Bottom-Right Taped B&W Portrait */
+.collage-taped-br {
+  position: absolute;
+  bottom: 3%;
+  right: 4%;
+  width: 38%;
+  padding: 6px;
+  background: #fdfbf7;
+  border: 1px solid #dfd3c3;
+  box-shadow: 0 16px 34px rgba(18, 11, 6, 0.46);
+  transform: rotate(3.2deg);
+  z-index: 5;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.collage-taped-br:hover {
+  transform: rotate(1deg) scale(1.03);
+}
+
+.collage-washi-tape {
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-3deg);
+  width: 56px;
+  height: 18px;
+  background: rgba(242, 232, 214, 0.78);
+  border-left: 1.5px dashed rgba(255, 255, 255, 0.85);
+  border-right: 1.5px dashed rgba(255, 255, 255, 0.85);
+  box-shadow: 0 2px 6px rgba(24, 15, 8, 0.22);
+  pointer-events: none;
+}
+
+.collage-taped-br img {
+  width: 100%;
+  aspect-ratio: 3 / 3.6;
+  object-fit: cover;
+  object-position: 50% 24%;
+  filter: grayscale(100%) contrast(1.06);
+  display: block;
 }
 
 /* Complete Parisian Salon Portrait Showcase */
@@ -2195,255 +2111,117 @@ body.is-locked .french-parchment-sheet {
 }
 
 /* ==========================================================================
-   SECTION 11 — LACE-TRIMMED FRENCH ENVELOPE OVER ARCHITECTURAL PORTRAIT
-   & INTERACTIVE RSVP FORM (Ref Image 5 Third & Ref Image 6 Top)
+   SECTION 11 — UNOBSTRUCTED ARCHITECTURAL WEDDING PORTRAIT +
+   TORN DECKLE-EDGE "KINDLY RESPOND" NOTE PAPER WITH FLORAL WAX SEAL LOGO
+   (Items 8 & 9)
    ========================================================================== */
 .spread-lace-rsvp-scene {
-  background: var(--ivory);
+  background: transparent;
   border-top: 1px solid rgba(182, 157, 132, 0.28);
 }
 
+/* Item 8: Clean, full-bleed staircase portrait with zero overlapping envelopes */
 .lace-envelope-hero {
   position: relative;
-  padding: clamp(38px, 6.5vw, 64px) clamp(18px, 4vw, 44px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+  aspect-ratio: 16 / 10.5;
+  margin: 0;
   overflow: hidden;
-  isolation: isolate;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(182, 157, 132, 0.28);
 }
 
-.lace-envelope-backdrop {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-}
-
-.lace-envelope-backdrop::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(82, 63, 46, 0.35) 0%,
-    rgba(110, 86, 63, 0.25) 50%,
-    rgba(82, 63, 46, 0.42) 100%
-  );
-}
-
-.lace-envelope-backdrop img {
+.lace-envelope-hero img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 50% 68%;
-  filter: sepia(24%) contrast(1.02);
-}
-
-.lace-rsvp-envelope-card {
-  position: relative;
-  width: min(88%, 364px);
-  aspect-ratio: 440 / 320;
-  padding: 20px 18px 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  filter:
-    drop-shadow(0 24px 44px rgba(24, 16, 9, 0.42))
-    drop-shadow(0 5px 12px rgba(24, 16, 9, 0.24));
-  text-align: center;
-}
-
-.lace-envelope-svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-}
-
-.lace-envelope-top-title {
-  font-family: var(--font-script);
-  font-size: clamp(34px, 6.2vw, 44px);
-  line-height: 1;
-  color: var(--espresso);
-  margin-top: 2px;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
-}
-
-/* 3D Sculpted Pearl-Ivory Swan Wax Seal */
-.lace-envelope-seal {
-  width: 66px;
-  height: 66px;
-  margin-top: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  filter:
-    drop-shadow(0 8px 14px rgba(52, 37, 22, 0.34))
-    drop-shadow(0 2px 4px rgba(42, 28, 16, 0.28));
-}
-
-.lace-wax-seal-svg {
-  width: 100%;
-  height: 100%;
+  object-position: 50% 66%;
   display: block;
+  transition: transform 0.55s ease;
 }
 
-.lace-envelope-bottom-note {
-  margin: 0;
-  font-family: var(--font-serif);
-  font-size: clamp(8.5px, 1.6vw, 10px);
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--espresso-soft);
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85);
+.lace-envelope-hero:hover img {
+  transform: scale(1.02);
 }
 
-/* Tilted "Kindly Respond" Envelope (Ref Image 6 Top) + Cotton RSVP Reply Sheet */
+/* Item 9: Handmade Torn Deckle-Edge Note Paper with Top Floral Wax Seal Logo & Full Kindly Respond Form */
 .french-rsvp-box {
-  max-width: 470px;
-  margin: clamp(28px, 5vw, 46px) auto;
-  padding: 0 clamp(12px, 3vw, 20px);
+  max-width: 520px;
+  margin: clamp(28px, 5vw, 48px) auto;
+  padding: 0 clamp(10px, 2.5vw, 18px);
   text-align: center;
-}
-
-.kindly-respond-envelope-wrap {
-  position: relative;
-  z-index: 2;
-  margin: 0 auto -18px;
-  width: min(92%, 356px);
-  padding-top: 6px;
-}
-
-.kindly-respond-envelope {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 460 / 290;
-  padding: 18px 18px 14px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  transform: rotate(-2.4deg);
-  filter:
-    drop-shadow(0 20px 36px rgba(38, 26, 15, 0.26))
-    drop-shadow(0 4px 10px rgba(38, 26, 15, 0.16));
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.kindly-respond-envelope:hover {
-  transform: rotate(-1.2deg) translateY(-3px);
-}
-
-.kindly-envelope-svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-}
-
-.kindly-envelope-script {
-  font-family: var(--font-script);
-  font-size: clamp(28px, 5.4vw, 38px);
-  line-height: 1.05;
-  color: #463525;
-  margin-top: 2px;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.88);
-}
-
-.kindly-gold-wax-seal {
-  width: 58px;
-  height: 58px;
-  margin-top: 4px;
-  filter:
-    drop-shadow(0 7px 13px rgba(45, 29, 10, 0.38))
-    drop-shadow(0 2px 4px rgba(35, 22, 6, 0.32));
-}
-
-.kindly-gold-wax-seal svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-.kindly-envelope-sub {
-  margin: 0;
-  font-family: var(--font-serif);
-  font-size: clamp(7.5px, 1.4vw, 9px);
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  line-height: 1.45;
-  text-transform: uppercase;
-  color: #5c4734;
 }
 
 .rsvp-letter-sheet {
   position: relative;
   z-index: 1;
-  padding: clamp(34px, 5.5vw, 46px) clamp(20px, 4vw, 34px) clamp(26px, 4.5vw, 38px);
-  background-color: #fbf8f1;
-  background-image:
-    radial-gradient(rgba(115, 90, 65, 0.04) 1px, transparent 0),
-    linear-gradient(165deg, #fffdf9 0%, #faf4ea 58%, #f0e6d6 100%);
-  background-size: 14px 14px, 100% 100%;
-  border-radius: 3px;
-  border-top: 1.5px solid #ffffff;
-  border-left: 1px solid #f4ebde;
-  border-right: 1px solid #d9c7b2;
-  border-bottom: 1.5px solid #cfbda6;
-  box-shadow:
-    0 18px 42px rgba(58, 43, 28, 0.14),
-    0 4px 10px rgba(58, 43, 28, 0.08),
-    inset 0 0 0 7px #fbf8f1,
-    inset 0 0 0 8px rgba(182, 157, 132, 0.34),
-    inset 2px 2px 4px rgba(124, 98, 72, 0.16);
+  padding: clamp(148px, 26vw, 188px) clamp(42px, 8.5vw, 72px) clamp(64px, 11vw, 88px);
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  isolation: isolate;
+}
+
+.rsvp-note-paper-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  z-index: -1;
+  pointer-events: none;
+  filter:
+    drop-shadow(0 20px 38px rgba(42, 29, 17, 0.22))
+    drop-shadow(0 4px 10px rgba(42, 29, 17, 0.12));
+}
+
+.rsvp-note-paper-content {
+  position: relative;
+  z-index: 2;
 }
 
 .rsvp-kicker {
-  margin: 0 0 6px;
+  margin: 0 0 4px;
   font-family: var(--font-serif);
-  font-size: 10.5px;
-  letter-spacing: 0.26em;
+  font-size: 10px;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--taupe-muted);
 }
 
 .rsvp-script-title {
-  margin: 0 0 6px;
+  margin: 0 0 4px;
   font-family: var(--font-script);
-  font-size: clamp(34px, 6vw, 44px);
+  font-size: clamp(32px, 5.8vw, 42px);
   font-weight: 400;
   color: var(--espresso);
 }
 
 .rsvp-subnote {
-  margin: 0 0 20px;
+  margin: 0 0 18px;
   font-family: var(--font-serif);
-  font-size: 13.5px;
+  font-size: 13px;
   font-style: italic;
   color: var(--espresso-soft);
 }
 
 .french-rsvp-form {
   display: grid;
-  gap: 14px;
+  gap: 12px;
   text-align: left;
 }
 
 .french-field-row {
   display: grid;
   grid-template-columns: 1.4fr 0.6fr;
-  gap: 12px;
+  gap: 10px;
 }
 
 .french-field label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
   font-family: var(--font-serif);
-  font-size: 11.5px;
+  font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -2454,11 +2232,11 @@ body.is-locked .french-parchment-sheet {
 .french-field select,
 .french-field textarea {
   width: 100%;
-  padding: 9px 12px;
-  border: 1px solid rgba(182, 157, 132, 0.6);
-  background: #f8f4ec;
+  padding: 8px 11px;
+  border: 1px solid rgba(176, 150, 124, 0.55);
+  background: rgba(255, 253, 249, 0.72);
   font-family: var(--font-serif);
-  font-size: 14.5px;
+  font-size: 14px;
   color: var(--espresso);
 }
 
@@ -2591,17 +2369,17 @@ body.is-locked .french-parchment-sheet {
     bottom: 17%;
   }
 
-  /* Section 1: Cameo Medallion */
+  /* Section 1: Cameo Medallion (Full-bleed 3D embossed floral corners & oval frame) */
   .spread-hero-cameo {
-    padding: 26px 12px 24px;
+    padding: 0;
   }
 
   .cameo-ornament-box {
-    padding: 22px 12px;
+    padding: 0;
   }
 
   .cameo-oval-frame {
-    width: min(70vw, 250px);
+    width: 54.6%;
   }
 
   /* Section 2: Toile de Jouy & Rococo Cartouche */
@@ -2659,10 +2437,14 @@ body.is-locked .french-parchment-sheet {
     padding-top: 135px;
   }
 
-  /* Section 5: Scalloped Doily Banner */
+  /* Section 5: Horizontal Silver Tray Banner */
   .spread-scalloped-doily {
-    min-height: 310px;
-    padding: 28px 12px;
+    min-height: 250px;
+    padding: 20px 6px;
+  }
+
+  .silver-tray-medallion {
+    width: 100%;
   }
 
   /* Section 7: Embossed Cameo Card */
@@ -2671,11 +2453,11 @@ body.is-locked .french-parchment-sheet {
   }
 
   .embossed-cotton-card {
-    padding: 32px 16px;
+    padding: 44px 26px;
   }
 
   .embossed-oval-window {
-    width: min(70vw, 260px);
+    width: min(68vw, 250px);
   }
 
   /* Section 8: Keep 2-Column Our Story Side-by-Side on Mobile */
@@ -2695,9 +2477,10 @@ body.is-locked .french-parchment-sheet {
     gap: 10px;
   }
 
-  /* Section 10: Keep Press For Details + Photobooth Strip Side-by-Side & 3-Col Salon Grid */
-  .press-details-collage {
-    gap: 12px;
+  /* Section 10: Keep Menu Lace Frame & Key Doily Collage Proportional on Mobile */
+  .lace-menu-card-wrap {
+    width: 96%;
+    padding: 48px 38px;
   }
 
   .salon-portrait-grid {
@@ -2705,9 +2488,13 @@ body.is-locked .french-parchment-sheet {
     gap: 8px;
   }
 
-  /* Section 11: Lace RSVP Box */
+  /* Section 11: Torn Note Paper RSVP Box */
   .french-rsvp-box {
-    margin: 22px 10px 28px;
-    padding: 24px 16px;
+    margin: 20px 6px 26px;
+    padding: 0;
+  }
+
+  .rsvp-letter-sheet {
+    padding: 122px 30px 58px;
   }
 }
