@@ -6,6 +6,7 @@ const nextConfig = (phase: string): NextConfig => ({
   distDir: phase === PHASE_DEVELOPMENT_SERVER ? ".next-dev" : ".next",
   devIndicators: false,
   images: {
+    qualities: [75, 95],
     remotePatterns: [{ protocol: "https", hostname: "images.unsplash.com" }],
   },
 });
