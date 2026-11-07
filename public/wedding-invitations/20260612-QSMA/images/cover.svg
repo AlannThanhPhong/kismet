@@ -1,32 +1,46 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="720" height="960" viewBox="0 0 720 960" role="img" aria-labelledby="title desc">
-  <title id="title">Thiệp mời cưới Mai Anh và Quang Sơn</title>
-  <desc id="desc">Thiệp cưới nền giấy màu kem với hoa lá nét mảnh, mời dự lễ Vu Quy ngày 6 tháng 12 năm 2026.</desc>
-  <rect width="720" height="960" fill="#f4f2eb"/>
-  <rect x="28" y="28" width="664" height="904" rx="2" fill="none" stroke="#aeb49f" stroke-width="1.2"/>
-  <rect x="40" y="40" width="640" height="880" rx="2" fill="none" stroke="#c7b894" stroke-width=".7"/>
-  <g fill="none" stroke="#82917e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".88">
-    <path d="M93 298C154 267 167 215 174 163M100 289c-28-8-43-26-43-48 24 5 39 18 43 48Zm27-19c-5-27 5-49 27-62 5 25-4 47-27 62Zm24-45c-26-3-44-18-49-42 24 1 42 15 49 42Zm13-37c-2-26 11-44 35-53 1 24-11 42-35 53Z"/>
-    <path d="M627 298c-61-31-74-83-81-135m67 126c28-8 43-26 43-48-24 5-39 18-43 48Zm-27-19c5-27-5-49-27-62-5 25 4 47 27 62Zm-24-45c26-3 44-18 49-42-24 1-42 15-49 42Zm-13-37c2-26-11-44-35-53-1 24 11 42 35 53Z"/>
-    <path d="M95 667c55 19 77 60 83 116m-61-98c-23 9-33 26-31 47 20-7 31-21 31-47Zm27 35c-1 22 10 39 30 47 0-20-11-36-30-47Zm19 42c22-6 36-21 37-42-20 5-33 19-37 42Z"/>
-    <path d="M625 667c-55 19-77 60-83 116m61-98c23 9 33 26 31 47-20-7-31-21-31-47Zm-27 35c1 22-10 39-30 47 0-20 11-36 30-47Zm-19 42c-22-6-36-21-37-42 20 5 33 19 37 42Z"/>
+  <title id="title">Thiệp mời cưới Mai Anh và Quang Sơn · 06.12.2026</title>
+  <desc id="desc">Thiệp cưới nền xanh Dark Olive Green (#556B2F) với khung ren trắng cổ điển và hoa lá màu nước, mời dự tiệc cưới ngày 06 tháng 12 năm 2026 tại Diamond Place.</desc>
+  <defs>
+    <pattern id="laceMesh" width="12" height="12" patternUnits="userSpaceOnUse">
+      <circle cx="6" cy="6" r="4.2" fill="none" stroke="#f8f9f1" stroke-width="1.35" opacity="0.92"/>
+      <circle cx="0" cy="0" r="2.2" fill="#f8f9f1" opacity="0.85"/>
+      <circle cx="12" cy="0" r="2.2" fill="#f8f9f1" opacity="0.85"/>
+      <circle cx="0" cy="12" r="2.2" fill="#f8f9f1" opacity="0.85"/>
+      <circle cx="12" cy="12" r="2.2" fill="#f8f9f1" opacity="0.85"/>
+    </pattern>
+  </defs>
+  <rect width="720" height="960" fill="#556B2F"/>
+  <!-- Outer scalloped lace frame -->
+  <rect x="64" y="76" width="592" height="808" rx="18" fill="url(#laceMesh)" stroke="#f8f9f1" stroke-width="3"/>
+  <rect x="78" y="90" width="564" height="780" rx="10" fill="none" stroke="#f8f9f1" stroke-width="2" stroke-dasharray="3 7"/>
+  <!-- Inner warm ivory card -->
+  <rect x="116" y="132" width="488" height="696" rx="2" fill="#f8f9f1" stroke="#e3e5d5" stroke-width="1.5"/>
+  <rect x="128" y="144" width="464" height="672" fill="none" stroke="#556B2F" stroke-width="0.7" opacity="0.35"/>
+
+  <!-- Subtle botanical corner accents -->
+  <g fill="none" stroke="#6f8742" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.85">
+    <path d="M510 132c35-28 66-32 96-14-18 28-46 42-84 42"/>
+    <path d="M548 168c28-10 54-4 72 16-24 14-50 12-74-4"/>
+    <path d="M210 828c-35 28-66 32-96 14 18-28 46-42 84-42"/>
+    <path d="M172 792c-28 10-54 4-72-16 24-14 50-12 74 4"/>
   </g>
-  <g fill="#b58d7c" opacity=".88">
-    <circle cx="174" cy="151" r="5"/><circle cx="177" cy="139" r="3"/><circle cx="164" cy="143" r="3"/>
-    <circle cx="546" cy="151" r="5"/><circle cx="543" cy="139" r="3"/><circle cx="556" cy="143" r="3"/>
-    <circle cx="177" cy="783" r="4"/><circle cx="170" cy="773" r="2.5"/><circle cx="185" cy="773" r="2.5"/>
-    <circle cx="543" cy="783" r="4"/><circle cx="536" cy="773" r="2.5"/><circle cx="551" cy="773" r="2.5"/>
+
+  <g fill="#35451c" text-anchor="middle">
+    <text x="360" y="224" font-family="Georgia,serif" font-size="13" letter-spacing="5.5" fill="#556B2F">TRÂN TRỌNG KÍNH MỜI</text>
+    <text x="360" y="362" font-family="Georgia,serif" font-size="68" font-weight="400">Mai Anh</text>
+    <text x="360" y="424" fill="#6f8444" font-family="Georgia,serif" font-size="34" font-style="italic">&amp;</text>
+    <text x="360" y="500" font-family="Georgia,serif" font-size="66" font-weight="400">Quang Sơn</text>
+    <text x="360" y="556" font-family="Arial,sans-serif" font-size="10.5" letter-spacing="2.6" fill="#5d6e3e">TRẦN LÊ MAI ANH · TRẦN QUANG SƠN</text>
   </g>
-  <g fill="#596d5b" text-anchor="middle">
-    <text x="360" y="205" font-family="Georgia,serif" font-size="17" letter-spacing="6">THIỆP MỜI CƯỚI</text>
-    <text x="360" y="388" font-family="Georgia,serif" font-size="78" font-weight="400">Mai Anh</text>
-    <text x="360" y="455" fill="#b58d7c" font-family="Georgia,serif" font-size="38" font-style="italic">&amp;</text>
-    <text x="360" y="535" font-family="Georgia,serif" font-size="76" font-weight="400">Quang Sơn</text>
-    <text x="360" y="604" font-family="Arial,sans-serif" font-size="11" letter-spacing="2.6">TRẦN LÊ MAI ANH · TRẦN QUANG SƠN</text>
-  </g>
-  <path d="M270 666h74m32 0h74" stroke="#c7b894" stroke-width="1"/>
-  <path d="m360 660 6 6-6 6-6-6 6-6Z" fill="#b58d7c"/>
-  <g fill="#596d5b" text-anchor="middle">
-    <text x="360" y="724" font-family="Georgia,serif" font-size="18" letter-spacing="3">CHỦ NHẬT</text>
-    <text x="360" y="762" font-family="Georgia,serif" font-size="23" letter-spacing="3">06 · 12 · 2026</text>
+
+  <path d="M262 602h78m40 0h78" stroke="#9aa87d" stroke-width="1"/>
+  <circle cx="360" cy="602" r="3.5" fill="#556B2F"/>
+
+  <g fill="#35451c" text-anchor="middle">
+    <text x="360" y="648" font-family="Georgia,serif" font-size="24" font-weight="500">Diamond Place</text>
+    <text x="360" y="676" font-family="Arial,sans-serif" font-size="10.5" letter-spacing="2.2" fill="#5d6e3e">SẢNH SAPPHIRE · TẦNG TRỆT</text>
+    <text x="360" y="726" font-family="Georgia,serif" font-size="16" letter-spacing="2.8" fill="#556B2F">VÀO LÚC 11 GIỜ 00</text>
+    <text x="360" y="758" font-family="Georgia,serif" font-size="22" font-weight="600" letter-spacing="2.5">CHỦ NHẬT | 06.12.2026</text>
   </g>
 </svg>

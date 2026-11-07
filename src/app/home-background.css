@@ -230,35 +230,33 @@
 /* --- Real Wedding Projects: Poetic Studio Archive & Mounted Keepsakes --- */
 .white-store .ws-projects-editorial {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 44px 32px;
   align-items: start;
   margin-top: 18px;
 }
 
 .white-store .ws-projects-editorial > .ws-project-entry {
-  grid-column: span 2;
+  grid-column: auto;
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Balanced poetic 3 + 2 staggered arrangement on desktop */
+/* Keep six projects in two even rows on desktop. */
 @media (min-width: 901px) {
   .white-store .ws-projects-editorial > .ws-project-entry[data-index="0"] {
     transform: rotate(-1.15deg);
   }
   .white-store .ws-projects-editorial > .ws-project-entry[data-index="1"] {
-    transform: translateY(24px) rotate(0.65deg);
+    transform: rotate(0.65deg);
   }
   .white-store .ws-projects-editorial > .ws-project-entry[data-index="2"] {
     transform: rotate(1.1deg);
   }
   .white-store .ws-projects-editorial > .ws-project-entry[data-index="3"] {
-    grid-column: 2 / 4;
-    transform: translateY(10px) rotate(-0.9deg);
+    transform: rotate(-0.9deg);
   }
   .white-store .ws-projects-editorial > .ws-project-entry[data-index="4"] {
-    grid-column: 4 / 6;
-    transform: translateY(26px) rotate(1.05deg);
+    transform: rotate(1.05deg);
   }
   .white-store .ws-projects-editorial > .ws-project-entry:hover {
     transform: translateY(-6px) rotate(0deg);
