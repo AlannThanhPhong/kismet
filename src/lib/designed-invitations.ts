@@ -3,7 +3,7 @@ export const designedInvitations = [
   {
     code: "20260612-QSMA",
     slug: "20260612-QSMA",
-    displayTitle: "LỄ VU QUY · MAI ANH & QUANG SƠN",
+    displayTitle: "HERITAGE & HARMONY · MAI ANH & QUANG SƠN",
     displayCouple: "MAI ANH & QUANG SƠN",
     couple: { partnerOne: "Trần Lê Mai Anh", partnerTwo: "Trần Quang Sơn" },
     event: { date: "2026-12-06T04:00:00.000Z", venue: "Diamond Place · Sảnh Sapphire, tầng trệt", address: "15A Hồ Văn Huê, phường Đức Nhuận, TP. Hồ Chí Minh" },

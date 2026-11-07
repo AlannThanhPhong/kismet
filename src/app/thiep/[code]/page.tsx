@@ -67,7 +67,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const code = normalizeInvitationCode(rawCode);
   const invitation = await findInvitation(code);
   if (!invitation) return { title: "Không tìm thấy thiệp cưới" };
-  const title = `${invitation.couple.partnerOne} & ${invitation.couple.partnerTwo} | Thiệp cưới`;
+  const title = code === "20260612-QSMA"
+    ? "Heritage & Harmony · Mai Anh & Quang Sơn"
+    : `${invitation.couple.partnerOne} & ${invitation.couple.partnerTwo} | Thiệp cưới`;
   const canonical = `/thiep/${encodeURIComponent(code)}`;
   const design = designedInvitations.find((item) => item.code === code);
   return {
@@ -105,7 +107,9 @@ export default async function InvitationPage({ params }: Props) {
                   ? "Template%20s%E1%BB%91%206"
                   : code;
     const revision =
-      code === "20260323-NDNL"
+      code === "20260612-QSMA"
+        ? "?v=20261107-calla-hd-nokey"
+        : code === "20260323-NDNL"
         ? "?v=20261023-collage-fix"
         : code === "20260823-NDTD"
           ? "?v=20261012-natural-smiley-directions"
