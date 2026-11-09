@@ -1316,6 +1316,25 @@ img {
   text-decoration: underline;
 }
 
+.coquette-external-link-line {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35em;
+}
+
+.coquette-external-arrow {
+  display: inline-block;
+  width: 0.85em;
+  height: 0.85em;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 /* ==========================================================================
    8. SECTION 5 — "OUR LOVE STORY" BLIND-EMBOSSED LACE CAMEO CARD ON DEEP
       ESPRESSO-UMBER GROUND (Ref Image 2 Bottom — Photo #6) +
@@ -1778,6 +1797,10 @@ img {
 }
 
 .lily-venue-sublink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35em;
   font-family: var(--font-serif);
   font-size: clamp(0.42rem, 0.95vw, 0.54rem);
   letter-spacing: 0.12em;
@@ -2297,5 +2320,133 @@ img {
 
   .coq-field-row {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .spread-lily-garden-schedule {
+    padding: 36px 12px;
+  }
+
+  .lily-schedule-stage {
+    display: flex;
+    flex-direction: column;
+    width: min(100%, 430px);
+    max-width: 430px;
+    aspect-ratio: auto;
+    overflow: hidden;
+    border: 1px solid rgba(248, 244, 232, 0.72);
+    border-radius: 10px;
+    background: #f8f3e8;
+    box-shadow: 0 16px 42px rgba(8, 12, 5, 0.38);
+  }
+
+  .lily-schedule-bg-img {
+    display: none;
+  }
+
+  .lily-schedule-header {
+    position: static;
+    width: auto;
+    margin: 0;
+    padding: 26px 18px 18px;
+  }
+
+  .lily-schedule-script-title {
+    font-size: clamp(2rem, 8vw, 2.55rem);
+    line-height: 1.12;
+  }
+
+  .lily-timeline-events {
+    position: static;
+    top: auto;
+    bottom: auto;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 0 clamp(18px, 5vw, 26px);
+    pointer-events: auto;
+  }
+
+  .lily-event-slot {
+    position: static;
+    display: grid;
+    grid-template-columns: 72px minmax(0, 1fr);
+    column-gap: 12px;
+    align-items: start;
+    text-align: left;
+    padding: 14px 0;
+    border-top: 1px solid rgba(93, 103, 69, 0.2);
+  }
+
+  .lily-event-script {
+    grid-column: 2;
+    grid-row: 1;
+    min-width: 0;
+    margin: 0 0 4px;
+    font-size: clamp(1.15rem, 5vw, 1.45rem);
+    line-height: 1.12;
+    overflow-wrap: anywhere;
+  }
+
+  .lily-event-time {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    align-self: start;
+    margin: 2px 0 0;
+    font-size: 0.78rem;
+    line-height: 1.35;
+    letter-spacing: 0.02em;
+  }
+
+  .lily-event-desc {
+    grid-column: 2;
+    grid-row: 2;
+    min-width: 0;
+    font-size: 0.78rem;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+  }
+
+  .lily-venue-block {
+    position: static;
+    width: auto;
+    height: auto;
+    margin-top: 14px;
+    padding: 22px 18px 24px;
+    justify-content: flex-start;
+    gap: 11px;
+    background: #66714f;
+  }
+
+  .lily-venue-script {
+    font-size: clamp(2rem, 8vw, 2.5rem);
+    line-height: 1.12;
+  }
+
+  .lily-venue-address {
+    max-width: 100%;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+
+  .lily-venue-pill-btn {
+    max-width: 100%;
+    padding: 9px 14px;
+    font-size: 0.66rem;
+    line-height: 1.35;
+    letter-spacing: 0.08em;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .lily-venue-sublink {
+    max-width: 100%;
+    font-size: 0.65rem;
+    line-height: 1.4;
+    letter-spacing: 0.07em;
+    text-align: center;
+    overflow-wrap: anywhere;
   }
 }

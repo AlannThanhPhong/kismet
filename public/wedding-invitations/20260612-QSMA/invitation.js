@@ -4,7 +4,6 @@ const invitation = document.querySelector("#invitation");
 const openButton = document.querySelector("#open-invitation");
 const openingCardTrigger = document.querySelector("#opening-card-trigger");
 const introVideo = document.querySelector("#intro-video");
-const introSoundBtn = document.querySelector("#intro-sound-btn");
 const skipIntroBtn = document.querySelector("#skip-intro");
 const weddingBgm = document.querySelector("#wedding-bgm");
 const musicFab = document.querySelector("#music-fab");
@@ -76,35 +75,13 @@ function handleManualIntroStart() {
   if (fountainShown || invitationRevealed || !(introVideo instanceof HTMLVideoElement)) return;
   if (!introVideo.paused) return;
   introVideo.muted = true;
-  if (introSoundBtn instanceof HTMLButtonElement) {
-    introSoundBtn.setAttribute("aria-pressed", "false");
-    introSoundBtn.innerHTML = '<span aria-hidden="true">♫</span> Bật tiếng';
-  }
   introVideo.play().catch(() => {
     introVideo.muted = true;
-    if (introSoundBtn instanceof HTMLButtonElement) {
-      introSoundBtn.setAttribute("aria-pressed", "false");
-      introSoundBtn.innerHTML = '<span aria-hidden="true">♫</span> Bật tiếng';
-    }
     introVideo.play().catch(showFountainCover);
   });
 }
 
 introVideo?.addEventListener("click", handleManualIntroStart);
-
-introSoundBtn?.addEventListener("click", () => {
-  if (!(introVideo instanceof HTMLVideoElement) || !(introSoundBtn instanceof HTMLButtonElement)) return;
-  const nextUnmuted = introVideo.muted;
-  introVideo.muted = !nextUnmuted;
-  if (nextUnmuted) {
-    introVideo.volume = 1;
-    if (introVideo.paused) void introVideo.play().catch(() => {});
-  }
-  introSoundBtn.setAttribute("aria-pressed", String(nextUnmuted));
-  introSoundBtn.innerHTML = nextUnmuted
-    ? '<span aria-hidden="true">♫</span> Đang bật tiếng'
-    : '<span aria-hidden="true">♫</span> Bật tiếng';
-});
 
 skipIntroBtn?.addEventListener("click", showFountainCover);
 introVideo?.addEventListener("ended", showFountainCover);
