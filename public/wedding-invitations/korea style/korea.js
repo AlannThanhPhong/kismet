@@ -1,267 +1,232 @@
-(() => {
-  const music = document.getElementById("wedding-music");
-  const musicToggle = document.getElementById("korea-music-toggle");
-  const openingScreen = document.getElementById("korea-cover-gate");
-  const keyBtn = document.getElementById("gate-key");
-  const keyPos = document.getElementById("gate-key-pos");
-  const lock = document.getElementById("gate-lock");
-  const glow = document.getElementById("gate-glow");
-  const burst = document.getElementById("gate-burst");
-  const flash = document.getElementById("gate-flash");
-  const openingHint = document.getElementById("opening-hint");
-  const petalLayer = document.getElementById("korea-petal-layer");
-  const gateDust = document.getElementById("gate-dust");
+/* ==========================================================================
+   Template #4 — KOREA STYLE · BOTANICAL ELEGANCE EDITION
+   Couple: 김서연 (Kim Seo-yeon) & 이도윤 (Lee Do-yoon)
+   Song: ONLY — LeeHi (music/leehi-only.mp3)
+   ========================================================================== */
+
+(function () {
+  'use strict';
+
+  const body = document.body;
+  const coverGate = document.getElementById('korea-cover-gate');
+  const envelopeBtn = document.getElementById('korea-key-btn');
+  const envelopeCard = document.getElementById('korea-envelope-card');
+  const envelopeBody = document.getElementById('korea-padlock');
+  const envelopeFlap = document.getElementById('korea-key-pos');
+  const waxSeal = document.getElementById('korea-keyhole-glow');
+  const gateFlash = document.getElementById('korea-gate-flash');
+
+  const bgMusic = document.getElementById('bg-music');
+  const musicToggle = document.getElementById('music-toggle');
+  const musicToggleText = document.getElementById('music-toggle-text');
+  const vinylBtn = document.getElementById('vinyl-music-btn');
+  const petalLayer = document.getElementById('korea-petal-layer');
 
   let isOpened = false;
-  let isUnlocking = false;
-  let musicStarting = false;
+  let isOpening = false;
+  let isMusicPlaying = false;
 
-  if (music instanceof HTMLAudioElement) {
-    music.volume = 0.6;
-  }
-
-  // Populate floating golden dust in the gate background
-  if (gateDust) {
-    const fragment = document.createDocumentFragment();
-    for (let i = 0; i < 40; i += 1) {
-      const spark = document.createElement("span");
-      spark.className = "gate-dust-spark";
-      const left = (Math.random() * 100).toFixed(1);
-      const top = (Math.random() * 100).toFixed(1);
-      const size = (2 + Math.random() * 4.5).toFixed(1);
-      const dur = (3 + Math.random() * 5).toFixed(1);
-      const delay = (Math.random() * -6).toFixed(1);
-      const opacity = (0.25 + Math.random() * 0.7).toFixed(2);
-      spark.style.cssText = `left:${left}%;top:${top}%;width:${size}px;height:${size}px;--dust-dur:${dur}s;--dust-delay:${delay}s;--dust-alpha:${opacity}`;
-      fragment.appendChild(spark);
-    }
-    gateDust.appendChild(fragment);
-  }
-
-  function updateMusicUi() {
-    if (!(music instanceof HTMLAudioElement)) return;
-    const playing = !music.paused;
-    const songTitle = music.getAttribute("data-song-title") || "ONLY — LeeHi";
-
-    if (musicToggle) {
-      musicToggle.setAttribute("aria-pressed", String(playing));
-      musicToggle.setAttribute(
-        "aria-label",
-        playing ? `음악 일시정지 (${songTitle}) · Pause Music` : `음악 재생 (${songTitle}) · Play Music`
-      );
-      const label = musicToggle.querySelector(".music-label");
-      if (label) {
-        label.textContent = playing ? `${songTitle} · ON` : `${songTitle} · OFF`;
+  // Ensure all inline botanical GIF/video clips play smoothly
+  function playAllBotanicalVideos() {
+    document.querySelectorAll('video').forEach((v) => {
+      v.muted = true;
+      const p = v.play();
+      if (p && typeof p.catch === 'function') {
+        p.catch(() => {});
       }
-    }
+    });
   }
 
-  async function startMusic() {
-    if (!(music instanceof HTMLAudioElement) || musicStarting) return;
-    musicStarting = true;
-    try {
-      await music.play();
-      updateMusicUi();
-    } catch {
-      updateMusicUi();
-    } finally {
-      musicStarting = false;
-    }
-  }
+  playAllBotanicalVideos();
 
-  function launchCelebrationPetals() {
+  /* ------------------------------------------------------------------------
+     1. CELEBRATORY PETAL SPARKS
+     ------------------------------------------------------------------------ */
+  function spawnGardenPetals(count = 20) {
     if (!petalLayer) return;
-    petalLayer.replaceChildren();
-    const colors = ["#fff6cf", "#f6d57f", "#dce8d0", "#cf9b33", "#ffffff", "#f1aeb5"];
-    for (let i = 0; i < 32; i += 1) {
-      const petal = document.createElement("span");
-      petal.className = "korea-petal-spark";
-      const x = 5 + Math.random() * 90;
-      const y = 5 + Math.random() * 35;
-      const dx = (Math.random() - 0.5) * 220;
-      const dy = 140 + Math.random() * 260;
-      const delay = (Math.random() * 0.5).toFixed(2);
-      petal.style.cssText = `--petal-x:${x}%;--petal-y:${y}%;--petal-dx:${dx}px;--petal-dy:${dy}px;--petal-color:${
-        colors[i % colors.length]
-      };--petal-delay:${delay}s`;
-      petalLayer.appendChild(petal);
-    }
-    window.setTimeout(() => {
-      petalLayer.replaceChildren();
-    }, 2800);
-  }
-
-  function launchGateBurstParticles() {
-    if (!burst) return;
-    burst.replaceChildren();
-    const colors = ["#ffffff", "#fff3bf", "#ffd56b", "#e5aa32", "#ffe49e"];
-    for (let i = 0; i < 48; i += 1) {
-      const p = document.createElement("span");
-      p.className = "gate-burst-particle";
-      const angle = (i / 48) * 360 + (Math.random() - 0.5) * 15;
-      const dist = 70 + Math.random() * 210;
-      const rad = (angle * Math.PI) / 180;
-      const dx = Math.round(Math.cos(rad) * dist);
-      const dy = Math.round(Math.sin(rad) * dist);
-      const sz = (2.5 + Math.random() * 4.5).toFixed(1);
-      const col = colors[Math.floor(Math.random() * colors.length)];
-      const dur = (0.65 + Math.random() * 0.45).toFixed(2);
-      p.style.cssText = `--p-dx:${dx}px;--p-dy:${dy}px;--p-sz:${sz}px;--p-col:${col};--p-dur:${dur}s`;
-      burst.appendChild(p);
+    const colors = ['#f9f6ec', '#dce3c8', '#7c284c', '#e6ead8', '#d7a98c'];
+    for (let i = 0; i < count; i += 1) {
+      const p = document.createElement('span');
+      p.className = 'korea-petal-spark';
+      p.style.setProperty('--petal-color', colors[i % colors.length]);
+      p.style.setProperty('--petal-x', `${10 + Math.random() * 80}%`);
+      p.style.setProperty('--petal-y', `${5 + Math.random() * 35}%`);
+      p.style.setProperty('--petal-dx', `${(Math.random() - 0.5) * 140}px`);
+      p.style.setProperty('--petal-dy', `${120 + Math.random() * 200}px`);
+      p.style.setProperty('--petal-delay', `${(i * 0.04).toFixed(2)}s`);
+      petalLayer.appendChild(p);
+      setTimeout(() => p.remove(), 2500);
     }
   }
 
-  function unlockAndOpen() {
-    if (isUnlocking || isOpened) return;
-    isUnlocking = true;
-
-    // Start playback immediately on user gesture
-    void startMusic();
-
-    // Calculate dynamic offset from floating key to padlock keyhole
-    const keyhole = document.getElementById("gate-keyhole-core") || document.getElementById("gate-keyhole-svg");
-    if (keyBtn && keyhole && keyPos) {
-      const kRect = keyBtn.getBoundingClientRect();
-      const hRect = keyhole.getBoundingClientRect();
-      // Target keyhole center
-      const kCenterX = kRect.left + kRect.width / 2;
-      const kCenterY = kRect.top + kRect.height / 2;
-      const hCenterX = hRect.left + hRect.width / 2;
-      const hCenterY = hRect.top + hRect.height / 2;
-      // The key is 345x200 with its tip at the left (~40% of width left of key center).
-      // Placing the tip into the keyhole means the key center should be ~0.40 * width to the right of the hole.
-      const dx = Math.round((hCenterX - kCenterX) + (kRect.width * 0.40));
-      const dy = Math.round(hCenterY - kCenterY);
-      keyPos.style.setProperty("--fly-dx", `${dx}px`);
-      keyPos.style.setProperty("--fly-dy", `${dy}px`);
+  /* ------------------------------------------------------------------------
+     2. BACKGROUND MUSIC (LeeHi — ONLY) & SPINNING VINYL SYNC
+     ------------------------------------------------------------------------ */
+  function updateMusicUI(playing) {
+    isMusicPlaying = playing;
+    if (musicToggle) {
+      musicToggle.setAttribute('aria-pressed', playing ? 'true' : 'false');
     }
-
-    if (openingHint) {
-      openingHint.innerHTML = "<span>열쇠가 자물쇠를 향해 나아갑니다…</span><small>The golden key glides to the lock…</small>";
+    if (musicToggleText) {
+      musicToggleText.textContent = playing ? 'ONLY · 재생중' : 'ONLY · LeeHi';
     }
-
-    // Step 1: Key flies to the keyhole opening
-    keyPos?.classList.add("is-flying");
-
-    // Step 2: Key inserts into keyhole
-    window.setTimeout(() => {
-      keyPos?.classList.add("is-inserting");
-      glow?.classList.add("is-active");
-      if (openingHint) {
-        openingHint.innerHTML = "<span>열쇠가 자물쇠에 들어맞습니다…</span><small>Inserting into the keyhole…</small>";
-      }
-    }, 620);
-
-    // Step 3: Key turns 90 degrees
-    window.setTimeout(() => {
-      keyPos?.classList.add("is-turning");
-      if (openingHint) {
-        openingHint.innerHTML = "<span>황금 열쇠를 돌립니다…</span><small>Turning the golden key…</small>";
-      }
-    }, 1000);
-
-    // Step 4: Padlock shackle pops open with radiant burst
-    window.setTimeout(() => {
-      lock?.classList.add("is-unlocked");
-      flash?.classList.add("is-flashing");
-      launchGateBurstParticles();
-      if (openingHint) {
-        openingHint.innerHTML = "<span>자물쇠가 열렸습니다 · 환영합니다 ♥</span><small>Unlocked · Welcome to our wedding</small>";
-      }
-    }, 1450);
-
-    // Step 5: Smoothly reveal the invitation
-    window.setTimeout(() => {
-      isOpened = true;
-      if (openingScreen) {
-        openingScreen.classList.add("is-opened");
-        window.setTimeout(() => {
-          openingScreen.hidden = true;
-        }, 900);
-      }
-      document.body.classList.remove("invitation-closed");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      launchCelebrationPetals();
-    }, 2350);
+    if (vinylBtn) {
+      vinylBtn.classList.toggle('is-playing', playing);
+    }
   }
 
-  keyBtn?.addEventListener("click", unlockAndOpen);
-  keyBtn?.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      unlockAndOpen();
+  function startMusic() {
+    if (!bgMusic) return;
+    bgMusic.volume = 0.72;
+    const playPromise = bgMusic.play();
+    if (playPromise && typeof playPromise.then === 'function') {
+      playPromise
+        .then(() => updateMusicUI(true))
+        .catch(() => updateMusicUI(false));
     }
-  });
-
-  if (music instanceof HTMLAudioElement) {
-    music.addEventListener("play", updateMusicUi);
-    music.addEventListener("pause", updateMusicUi);
   }
 
-  musicToggle?.addEventListener("click", () => {
-    if (!(music instanceof HTMLAudioElement)) return;
-    if (music.paused) {
-      void startMusic();
+  function toggleMusic() {
+    if (!bgMusic) return;
+    if (bgMusic.paused) {
+      startMusic();
     } else {
-      music.pause();
-      updateMusicUi();
-    }
-  });
-
-  // Lightbox Gallery
-  const lightbox = document.getElementById("korea-lightbox");
-  const lightboxImg = document.getElementById("lightbox-img");
-  const lightboxCaption = document.getElementById("lightbox-caption");
-  const triggers = Array.from(document.querySelectorAll(".gallery-trigger"));
-  let currentIndex = 0;
-
-  function showSlide(index) {
-    if (!triggers.length || !(lightboxImg instanceof HTMLImageElement)) return;
-    currentIndex = (index + triggers.length) % triggers.length;
-    const fig = triggers[currentIndex];
-    const img = fig.querySelector("img");
-    if (!img) return;
-    lightboxImg.src = img.src;
-    lightboxImg.alt = img.alt;
-    if (lightboxCaption) {
-      lightboxCaption.textContent =
-        fig.getAttribute("data-caption") || `${currentIndex + 1} / ${triggers.length} · 김서연 & 이도윤`;
+      bgMusic.pause();
+      updateMusicUI(false);
     }
   }
 
-  triggers.forEach((fig, idx) => {
-    fig.addEventListener("click", () => {
-      if (!(lightbox instanceof HTMLDialogElement)) return;
-      showSlide(idx);
-      lightbox.showModal();
+  if (musicToggle) {
+    musicToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMusic();
+    });
+  }
+
+  if (vinylBtn) {
+    vinylBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMusic();
+    });
+  }
+
+  /* ------------------------------------------------------------------------
+     3. OLIVE ENVELOPE OPENING SEQUENCE
+     ------------------------------------------------------------------------ */
+  function openInvitation() {
+    if (isOpened || isOpening) return;
+    isOpening = true;
+
+    startMusic();
+    playAllBotanicalVideos();
+
+    if (waxSeal) waxSeal.classList.add('is-active');
+    if (envelopeFlap) envelopeFlap.classList.add('is-turning');
+    if (envelopeBody) envelopeBody.classList.add('is-unlocked');
+    if (gateFlash) gateFlash.classList.add('is-flashing');
+
+    setTimeout(() => {
+      isOpened = true;
+      body.classList.remove('invitation-closed');
+      if (coverGate) {
+        coverGate.classList.add('is-opened');
+        setTimeout(() => {
+          coverGate.hidden = true;
+        }, 850);
+      }
+      spawnGardenPetals(26);
+    }, 520);
+  }
+
+  if (envelopeBtn) {
+    envelopeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openInvitation();
+    });
+  }
+
+  if (envelopeCard) {
+    envelopeCard.addEventListener('click', () => {
+      openInvitation();
+    });
+  }
+
+  if (coverGate) {
+    coverGate.addEventListener('click', (e) => {
+      if (e.target === coverGate) {
+        openInvitation();
+      }
+    });
+  }
+
+  /* ------------------------------------------------------------------------
+     4. LIGHTBOX MODAL FOR GALLERY PHOTOS
+     ------------------------------------------------------------------------ */
+  const lightbox = document.getElementById('korea-lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  const lightboxClose = document.getElementById('lightbox-close');
+  const lightboxPrev = document.getElementById('lightbox-prev');
+  const lightboxNext = document.getElementById('lightbox-next');
+
+  const photoItems = Array.from(document.querySelectorAll('[data-full]'));
+  let currentPhotoIdx = 0;
+
+  function showPhotoAt(index) {
+    if (!photoItems.length || !lightboxImg) return;
+    currentPhotoIdx = (index + photoItems.length) % photoItems.length;
+    const item = photoItems[currentPhotoIdx];
+    const src = item.getAttribute('data-full');
+    const caption = item.getAttribute('data-caption') || '';
+    lightboxImg.src = src;
+    if (lightboxCaption) {
+      lightboxCaption.textContent = caption;
+    }
+  }
+
+  photoItems.forEach((item, index) => {
+    item.addEventListener('click', () => {
+      if (!lightbox) return;
+      showPhotoAt(index);
+      if (typeof lightbox.showModal === 'function') {
+        lightbox.showModal();
+      } else {
+        lightbox.setAttribute('open', '');
+      }
     });
   });
 
-  document.getElementById("lightbox-close")?.addEventListener("click", () => {
-    if (lightbox instanceof HTMLDialogElement) lightbox.close();
-  });
-  document.getElementById("lightbox-prev")?.addEventListener("click", () => showSlide(currentIndex - 1));
-  document.getElementById("lightbox-next")?.addEventListener("click", () => showSlide(currentIndex + 1));
+  if (lightboxClose && lightbox) {
+    lightboxClose.addEventListener('click', () => lightbox.close());
+  }
+  if (lightboxPrev) {
+    lightboxPrev.addEventListener('click', () => showPhotoAt(currentPhotoIdx - 1));
+  }
+  if (lightboxNext) {
+    lightboxNext.addEventListener('click', () => showPhotoAt(currentPhotoIdx + 1));
+  }
+  if (lightbox) {
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) lightbox.close();
+    });
+  }
 
-  lightbox?.addEventListener("click", (e) => {
-    if (e.target === lightbox && lightbox instanceof HTMLDialogElement) {
-      lightbox.close();
-    }
-  });
+  /* ------------------------------------------------------------------------
+     5. RSVP FORM SUBMISSION
+     ------------------------------------------------------------------------ */
+  const rsvpForm = document.getElementById('korea-rsvp-form');
+  const rsvpStatus = document.getElementById('rsvp-status');
 
-  // RSVP Form
-  const rsvpForm = document.getElementById("korea-rsvp-form");
-  const rsvpStatus = document.getElementById("korea-rsvp-status");
-  rsvpForm?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    if (!(rsvpForm instanceof HTMLFormElement) || !rsvpStatus) return;
-    const data = new FormData(rsvpForm);
-    const name = String(data.get("guestName") || "").trim();
-    if (!name) return;
-    rsvpStatus.textContent = `감사합니다, ${name}님! Seo-yeon & Do-yoon의 새로운 시작을 함께 축복해 주셔서 진심으로 감사드립니다 ♥ · Thank you for celebrating with us!`;
-    rsvpForm.reset();
-    launchCelebrationPetals();
-  });
-
-  updateMusicUi();
+  if (rsvpForm) {
+    rsvpForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(rsvpForm);
+      const guestName = (formData.get('name') || '').toString().trim() || '소중한 하객';
+      if (rsvpStatus) {
+        rsvpStatus.textContent = `${guestName}님, 따뜻한 축복과 참석 의사 전달에 깊이 감사드립니다.`;
+      }
+      spawnGardenPetals(18);
+      rsvpForm.reset();
+    });
+  }
 })();

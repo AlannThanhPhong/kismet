@@ -135,7 +135,12 @@ body:has(#opening-screen:not([hidden])) .music-fab {
   inset: 0;
   z-index: 100;
   overflow: hidden;
-  background: radial-gradient(circle at 50% 42%, #f6f6f0 0%, #e6e9df 60%, #d3dac8 100%);
+  background-color: #ecf6e8;
+  background-image:
+    radial-gradient(circle at 50% 46%, rgba(244, 251, 241, 0.32) 0%, rgba(223, 238, 216, 0.48) 100%),
+    url("images/pale-green-paper-bg.jpg");
+  background-size: cover;
+  background-position: center;
   display: grid;
   place-items: center;
   text-align: center;
@@ -180,8 +185,8 @@ body:has(#opening-screen:not([hidden])) .music-fab {
   object-fit: contain;
   display: block;
   border-radius: 6px;
-  background-color: #eef0e8;
-  box-shadow: 0 24px 64px rgba(20, 37, 29, 0.18);
+  background-color: #ecf6e8;
+  box-shadow: 0 22px 56px rgba(36, 57, 42, 0.16);
 }
 
 .opening-intro-actions {
@@ -429,7 +434,17 @@ body:has(#opening-screen:not([hidden])) .music-fab {
   transform: translateY(-2px);
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+  .opening-screen {
+    background-color: #edf7e9;
+    background-image:
+      radial-gradient(circle at 50% 50%, rgba(246, 252, 243, 0.25) 0%, rgba(220, 237, 213, 0.45) 100%),
+      url("images/pale-green-paper-bg.jpg");
+    background-size: 100% auto;
+    background-repeat: repeat-y;
+    background-position: center top;
+  }
+
   .opening-intro-layer {
     padding: 0;
   }
@@ -437,6 +452,10 @@ body:has(#opening-screen:not([hidden])) .music-fab {
   .opening-intro-video {
     max-height: 100svh;
     border-radius: 0;
+    box-shadow:
+      0 -1px 0 rgba(255, 255, 255, 0.72),
+      0 1px 0 rgba(255, 255, 255, 0.72),
+      0 18px 44px rgba(42, 68, 38, 0.14);
   }
 }
 
