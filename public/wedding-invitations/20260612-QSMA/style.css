@@ -231,29 +231,6 @@ body:has(#opening-screen:not([hidden])) .music-fab {
   border-color: var(--olive);
 }
 
-.opening-autoplay-fallback {
-  position: absolute;
-  left: 50%;
-  bottom: clamp(32px, 10svh, 72px);
-  transform: translateX(-50%);
-  z-index: 5;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  min-height: 46px;
-  padding: 0 28px;
-  border-radius: 999px;
-  border: 1px solid var(--olive);
-  background: var(--olive);
-  color: var(--ivory);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  cursor: pointer;
-  box-shadow: 0 14px 32px rgba(20, 37, 29, 0.28);
-}
-
 /* --- Phase 2: Fountain Arch + Green Calla Lily Frame + Open Button --- */
 .opening-fountain-layer {
   position: absolute;
