@@ -225,12 +225,6 @@ body:has(#opening-screen:not([hidden])) .music-fab {
   transform: translateY(-1px);
 }
 
-.opening-pill-ctrl[aria-pressed="true"] {
-  background: var(--olive);
-  color: var(--ivory);
-  border-color: var(--olive);
-}
-
 /* --- Phase 2: Fountain Arch + Green Calla Lily Frame + Open Button --- */
 .opening-fountain-layer {
   position: absolute;
