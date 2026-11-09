@@ -108,7 +108,7 @@ export default async function InvitationPage({ params }: Props) {
                   : code;
     const revision =
       code === "20260612-QSMA"
-        ? "?v=20261107-calla-hd-nokey"
+        ? "?v=20261109-qsma-crisp-v5"
         : code === "20260323-NDNL"
         ? "?v=20261023-collage-fix"
         : code === "20260823-NDTD"
@@ -120,9 +120,9 @@ export default async function InvitationPage({ params }: Props) {
               : code === "french-style"
                 ? "?v=20261105-french-style-v15"
                 : code === "coquette"
-                  ? "?v=20261105-coquette-v8"
+                  ? "?v=20261109-coquette-hd-lace"
                   : code === "korea-style"
-                    ? "?v=20261023-korea-v3"
+                    ? "?v=20261109-korea-v4"
                     : code === "tuscany-editorial"
                       ? "?v=20261024-tuscany-v1"
                       : "";

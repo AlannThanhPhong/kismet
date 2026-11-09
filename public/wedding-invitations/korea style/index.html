@@ -3,848 +3,1083 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#243c2c" />
-  <title>KOREA STYLE — 김서연 (Kim Seo-yeon) &amp; 이도윤 (Lee Do-yoon) · The Shilla Seoul</title>
+  <title>김서연 &amp; 이도윤 · Botanical Elegance Wedding Invitation</title>
   <meta
     name="description"
-    content="김서연 (Kim Seo-yeon) &amp; 이도윤 (Lee Do-yoon) 결혼식에 초대합니다 · 2026. 10. 24 · 서울 신라호텔 다이너스티 홀 (The Shilla Seoul · Dynasty Hall)"
+    content="김서연 (Kim Seo-yeon) &amp; 이도윤 (Lee Do-yoon) — 2026년 10월 24일 토요일 오후 5시, 서울 신라호텔 다이너스티 홀 (The Shilla Seoul · Dynasty Hall)."
   />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&amp;family=Gowun+Batang:wght@400;700&amp;family=Imperial+Script&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600&amp;display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Gowun+Batang:wght@400;700&family=Great+Vibes&family=Imperial+Script&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="style.css" />
-  <script src="korea.js" defer></script>
+  <link rel="stylesheet" href="style.css?v=20261109-korea-v4" />
 </head>
 <body class="invitation-closed">
-  <!-- Background Music: ONLY — LeeHi (이하이) -->
-  <audio
-    id="wedding-music"
-    src="music/leehi-only.mp3"
-    data-song-title="ONLY — LeeHi (이하이)"
-    preload="auto"
-    loop
-  ></audio>
-
-  <!-- Subtle Korean paper texture & celebratory petal-spark layer -->
+  <!-- Subtle paper grain & celebratory petal spark layer -->
   <div class="korea-film-grain" aria-hidden="true"></div>
   <div class="korea-petal-layer" id="korea-petal-layer" aria-hidden="true"></div>
 
-  <!-- ========================================================================
-       OPENING SCREEN — KOREAN ROYAL BRASS PADLOCK & FLOATING GOLDEN KEY
-       Interactive Gate: Floating golden key -> tap to glide into padlock ->
-       turns 90deg -> padlock pops open with light burst -> starts ONLY (LeeHi)
-       ======================================================================== -->
-  <section class="opening-screen" id="korea-cover-gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
-    <!-- Reusable metallic gradients + the golden key vector symbol -->
-    <svg width="0" height="0" style="position:absolute;visibility:hidden" aria-hidden="true" focusable="false">
-      <defs>
-        <linearGradient id="kg-gold" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#fff6cc" />
-          <stop offset="22%" stop-color="#f6d57f" />
-          <stop offset="50%" stop-color="#cf9b33" />
-          <stop offset="78%" stop-color="#8d5d14" />
-          <stop offset="100%" stop-color="#e6b84f" />
-        </linearGradient>
-        <linearGradient id="kg-shaft" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stop-color="#6f4609" />
-          <stop offset="20%" stop-color="#e9c262" />
-          <stop offset="40%" stop-color="#fff7d2" />
-          <stop offset="62%" stop-color="#d8a63a" />
-          <stop offset="85%" stop-color="#85570f" />
-          <stop offset="100%" stop-color="#5a3705" />
-        </linearGradient>
-        <linearGradient id="kl-body" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#ffecab" />
-          <stop offset="16%" stop-color="#f1c865" />
-          <stop offset="50%" stop-color="#c8942d" />
-          <stop offset="80%" stop-color="#8f5f15" />
-          <stop offset="100%" stop-color="#d9a845" />
-        </linearGradient>
-        <linearGradient id="kl-plate" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#e6bb5a" />
-          <stop offset="55%" stop-color="#b8841f" />
-          <stop offset="100%" stop-color="#8b5c13" />
-        </linearGradient>
-        <linearGradient id="kl-sheen" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#ffffff" stop-opacity="0.55" />
-          <stop offset="35%" stop-color="#ffffff" stop-opacity="0" />
-          <stop offset="75%" stop-color="#000000" stop-opacity="0" />
-          <stop offset="100%" stop-color="#000000" stop-opacity="0.28" />
-        </linearGradient>
-        <radialGradient id="kl-rim" cx="35%" cy="30%" r="90%">
-          <stop offset="0%" stop-color="#fff0b4" />
-          <stop offset="50%" stop-color="#c9952e" />
-          <stop offset="100%" stop-color="#6a430a" />
-        </radialGradient>
-
-        <!-- Ornate golden key (horizontal orientation: tip pointing left, bow on right) -->
-        <symbol id="kg-key" viewBox="0 0 375 210">
-          <g transform="matrix(0 1 -1 0 358 0) translate(0, 8)">
-            <!-- shaft -->
-            <rect x="90" y="130" width="20" height="196" rx="4" fill="url(#kg-shaft)" stroke="#5b3906" stroke-width="1" />
-            <path d="M90 322 Q100 340 110 322 Z" fill="url(#kg-shaft)" stroke="#5b3906" stroke-width="1" />
-            <rect x="87" y="172" width="26" height="8" rx="3" fill="url(#kg-shaft)" stroke="#5b3906" stroke-width="0.9" />
-            <rect x="88" y="232" width="24" height="5" rx="2" fill="url(#kg-shaft)" stroke="#5b3906" stroke-width="0.8" />
-            <path d="M94 190 V224 M106 190 V224" stroke="#6b470d" stroke-width="0.7" opacity="0.55" />
-            <!-- bit / teeth -->
-            <path d="M110 256 H150 V270 H136 V281 H150 V295 H132 V307 H150 V320 H110 Z" fill="url(#kg-gold)" stroke="#5b3906" stroke-width="1.1" stroke-linejoin="round" />
-            <path d="M113 259 H147" stroke="#fff3bf" stroke-width="1.2" opacity="0.7" />
-            <!-- neck collars + knob -->
-            <ellipse cx="100" cy="146" rx="15" ry="9" fill="url(#kg-gold)" stroke="#5b3906" stroke-width="1" />
-            <rect x="80" y="120" width="40" height="10" rx="3.5" fill="url(#kg-gold)" stroke="#5b3906" stroke-width="1" />
-            <rect x="72" y="108" width="56" height="13" rx="4.5" fill="url(#kg-gold)" stroke="#5b3906" stroke-width="1" />
-            <!-- ornate bow: heart / trefoil with scroll openings -->
-            <path d="M100 24 C90 16 91 2 100 -10 C109 2 110 16 100 24 Z" fill="url(#kg-gold)" stroke="#5b3906" stroke-width="1.2" />
-            <path fill-rule="evenodd" fill="url(#kg-gold)" stroke="#5b3906" stroke-width="1.6" stroke-linejoin="round"
-              d="M100 22 C82 -4 34 -2 28 38 C24 66 50 80 74 90 L74 112 L126 112 L126 90 C150 80 176 66 172 38 C166 -2 118 -4 100 22 Z
-                 M47 42 a15 15 0 1 0 30 0 a15 15 0 1 0 -30 0 Z
-                 M123 42 a15 15 0 1 0 30 0 a15 15 0 1 0 -30 0 Z
-                 M100 40 C114 54 114 72 100 84 C86 72 86 54 100 40 Z" />
-            <path d="M100 22 C82 -4 34 -2 28 38 C24 66 50 80 74 90 L74 112 L126 112 L126 90 C150 80 176 66 172 38 C166 -2 118 -4 100 22 Z"
-              fill="none" stroke="#fff5c6" stroke-width="1.3" opacity="0.8" transform="translate(100 52) scale(0.925) translate(-100 -52)" />
-            <path d="M47 42 a15 15 0 1 0 30 0 a15 15 0 1 0 -30 0 Z M123 42 a15 15 0 1 0 30 0 a15 15 0 1 0 -30 0 Z M100 40 C114 54 114 72 100 84 C86 72 86 54 100 40 Z"
-              fill="none" stroke="#5e3b08" stroke-width="1.2" opacity="0.85" />
-            <g fill="#fff1b0" opacity="0.9">
-              <circle cx="58" cy="12" r="2.1" /><circle cx="142" cy="12" r="2.1" />
-              <circle cx="36" cy="58" r="2" /><circle cx="164" cy="58" r="2" />
-              <circle cx="100" cy="100" r="2.2" />
-            </g>
-            <!-- Korean silk-knot (매듭) tied at the neck -->
-            <g fill="none" stroke-linecap="round">
-              <path d="M100 133 C70 118 64 150 100 138 C136 150 130 118 100 133 Z" stroke="#8f1226" stroke-width="3.6" />
-              <path d="M100 133 C74 122 70 144 100 137" stroke="#e5505f" stroke-width="1" opacity="0.75" />
-              <path d="M100 138 C95 154 105 166 98 190" stroke="#b01a30" stroke-width="2.6" />
-              <path d="M101 138 C106 152 96 164 103 186" stroke="#d62c44" stroke-width="2" />
-            </g>
-            <circle cx="100" cy="135.5" r="4.6" fill="#c8203a" stroke="#6f0b1a" stroke-width="1" />
-          </g>
-        </symbol>
-      </defs>
-    </svg>
-
-    <!-- Deep celestial atmosphere: floating blurred bokeh keys & golden dust -->
-    <div class="gate-backdrop" aria-hidden="true">
-      <div class="gate-aura"></div>
-      <svg class="gate-floating-key fk1" viewBox="0 0 375 210"><use href="#kg-key" /></svg>
-      <svg class="gate-floating-key fk2" viewBox="0 0 375 210"><use href="#kg-key" /></svg>
-      <svg class="gate-floating-key fk3" viewBox="0 0 375 210"><use href="#kg-key" /></svg>
-      <svg class="gate-floating-key fk4" viewBox="0 0 375 210"><use href="#kg-key" /></svg>
-      <svg class="gate-floating-key fk5" viewBox="0 0 375 210"><use href="#kg-key" /></svg>
-      <svg class="gate-floating-key fk6" viewBox="0 0 375 210"><use href="#kg-key" /></svg>
-      <div class="gate-dust" id="gate-dust"></div>
+  <!-- =========================================================================
+       OPENING SCREEN — BOTANICAL ELEGANCE OLIVE ENVELOPE & BURGUNDY WAX SEAL
+       (Replaces old padlock animation; matches Etsy Botanical Elegance cover)
+       ========================================================================= -->
+  <section
+    class="opening-screen"
+    id="korea-cover-gate"
+    aria-label="Opening Wedding Envelope — Kim Seo-yeon and Lee Do-yoon"
+  >
+    <!-- Ambient blurred botanical pond backdrop for wide desktop screens -->
+    <div class="opening-ambient-backdrop" aria-hidden="true">
+      <video
+        class="opening-ambient-video"
+        src="images/gif3.mp4"
+        poster="images/gif3-poster.jpg"
+        autoplay
+        loop
+        muted
+        playsinline
+      ></video>
+      <div class="opening-ambient-veil"></div>
     </div>
 
-    <!-- Center Stage: Korean Traditional Padlock (조선 놋쇠 자물쇠) -->
-    <div class="gate-stage" id="gate-stage">
-      <header class="gate-head">
-        <p class="gate-kicker">WEDDING INVITATION · 우리 결혼합니다</p>
-        <h2 class="gate-title-kr" id="gate-title">김서연 <i>&amp;</i> 이도윤</h2>
-        <p class="gate-title-en">Kim Seo-yeon &amp; Lee Do-yoon</p>
-        <p class="gate-date">
-          2026. 10. 24 SAT · THE SHILLA SEOUL<br />
-          <span>다이너스티 홀 · DYNASTY HALL</span>
-        </p>
-      </header>
+    <!-- Central Embossed White Floral Paper Card -->
+    <div class="opening-card-shell" id="korea-envelope-card">
+      <!-- White-on-white embossed botanical floral relief SVG background -->
+      <svg class="opening-embossed-bg" viewBox="0 0 600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs>
+          <filter id="emboss-relief" x="-10%" y="-10%" width="120%" height="120%">
+            <feDropShadow dx="2" dy="3" stdDeviation="2.5" flood-color="#d5cfc2" flood-opacity="0.62" />
+            <feDropShadow dx="-2" dy="-2" stdDeviation="2" flood-color="#ffffff" flood-opacity="0.95" />
+          </filter>
+          <linearGradient id="petal-sheen" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff" />
+            <stop offset="55%" stop-color="#f8f6f0" />
+            <stop offset="100%" stop-color="#ece8dd" />
+          </linearGradient>
+        </defs>
+        <!-- Top-left embossed lily & leaves -->
+        <g filter="url(#emboss-relief)" fill="url(#petal-sheen)" stroke="#e5dfd2" stroke-width="0.9">
+          <path d="M-20,40 C60,20 150,70 180,160 C110,180 30,140 -20,40 Z" />
+          <path d="M40,-20 C130,10 210,90 215,195 C140,175 65,100 40,-20 Z" />
+          <path d="M180,160 C230,95 310,45 390,30 C350,115 270,165 180,160 Z" />
+          <path d="M10,210 C85,175 165,180 230,225 C160,265 75,260 10,210 Z" />
+          <!-- Delicate petal veins -->
+          <path d="M10,60 Q100,105 172,156 M75,10 Q145,95 205,185 M200,152 Q285,100 370,42" fill="none" stroke="#dfd9cb" stroke-width="0.7" />
+        </g>
+        <!-- Top-right embossed orchid blossom -->
+        <g filter="url(#emboss-relief)" fill="url(#petal-sheen)" stroke="#e5dfd2" stroke-width="0.9">
+          <path d="M460,80 C520,20 600,30 630,105 C585,165 500,155 460,80 Z" />
+          <path d="M430,155 C485,105 575,115 615,185 C555,235 465,220 430,155 Z" />
+          <path d="M385,115 C425,55 495,55 520,125 C475,175 410,165 385,115 Z" />
+        </g>
+        <!-- Center behind envelope embossed petals -->
+        <g filter="url(#emboss-relief)" fill="url(#petal-sheen)" stroke="#e5dfd2" stroke-width="0.9">
+          <path d="M160,310 C215,230 315,230 360,315 C305,380 215,380 160,310 Z" />
+          <path d="M260,260 C340,210 435,245 450,335 C375,375 295,345 260,260 Z" />
+          <path d="M75,370 C145,310 245,330 275,410 C195,450 110,430 75,370 Z" />
+        </g>
+        <!-- Bottom embossed botanical leaves & petals -->
+        <g filter="url(#emboss-relief)" fill="url(#petal-sheen)" stroke="#e5dfd2" stroke-width="0.9">
+          <path d="M180,680 C235,620 325,635 355,715 C295,775 210,755 180,680 Z" />
+          <path d="M140,880 C165,775 235,705 315,690 C305,790 235,860 140,880 Z" />
+          <path d="M260,895 C305,795 390,745 475,755 C435,840 350,890 260,895 Z" />
+          <path d="M-15,720 C65,675 155,700 190,780 C115,820 30,795 -15,720 Z" />
+        </g>
+      </svg>
 
-      <!-- Korean brass padlock in the center -->
-      <div class="gate-lock" id="gate-lock">
-        <div class="lock-inner" id="gate-lock-inner">
-          <!-- Padlock shackle (slides up when unlocked) -->
-          <svg class="lock-shackle" id="gate-shackle" viewBox="0 0 260 430" aria-hidden="true">
-            <path class="sh" d="M75 158 V98 C75 40 185 40 185 98 V158" fill="none" stroke="#463d2c" stroke-width="28" />
-            <path class="sh" d="M75 158 V98 C75 40 185 40 185 98 V158" fill="none" stroke="#8b8167" stroke-width="23" />
-            <path class="sh" d="M75 158 V98 C75 40 185 40 185 98 V158" fill="none" stroke="#c7bc9a" stroke-width="17" />
-            <path class="sh" d="M75 158 V98 C75 40 185 40 185 98 V158" fill="none" stroke="#efe8cf" stroke-width="9" />
-            <path class="sh" d="M75 158 V98 C75 40 185 40 185 98 V158" fill="none" stroke="#fffdf3" stroke-width="3" opacity="0.85" />
-          </svg>
+      <div class="opening-card-content">
+        <!-- Script Header: You're Invited ! -->
+        <p class="opening-script-title">You’re Invited !</p>
 
-          <!-- Padlock brass body with Korean lotus, cloud engravings & silk tassel -->
-          <svg class="lock-body" viewBox="0 0 260 430" aria-hidden="true">
-            <!-- brass body rectangular block -->
-            <rect x="30" y="140" width="200" height="160" rx="32" fill="url(#kl-body)" stroke="#5a3607" stroke-width="2.2" />
-            <rect x="30" y="140" width="200" height="160" rx="32" fill="url(#kl-sheen)" />
-            <path d="M44 156 Q130 132 216 156" fill="none" stroke="#fff6cf" stroke-width="2" opacity="0.6" />
-            <!-- engraved brass plate -->
-            <rect x="42" y="152" width="176" height="136" rx="24" fill="url(#kl-plate)" stroke="#fff0b0" stroke-opacity="0.7" stroke-width="1.6" />
-            <rect x="50" y="160" width="160" height="120" rx="18" fill="none" stroke="#5e3b08" stroke-width="1.1" stroke-dasharray="1.4 5.2" stroke-linecap="round" opacity="0.8" />
-            <!-- royal lotus blossom medallion (연꽃문) -->
-            <g transform="translate(130, 205)" fill="none" stroke="#5e3b08" stroke-width="1.3" opacity="0.72">
-              <circle r="52" stroke-dasharray="2 4" />
-              <circle r="30" />
-              <g>
-                <ellipse cx="0" cy="-34" rx="8" ry="17" />
-                <ellipse cx="0" cy="-34" rx="8" ry="17" transform="rotate(45)" />
-                <ellipse cx="0" cy="-34" rx="8" ry="17" transform="rotate(90)" />
-                <ellipse cx="0" cy="-34" rx="8" ry="17" transform="rotate(135)" />
-                <ellipse cx="0" cy="-34" rx="8" ry="17" transform="rotate(180)" />
-                <ellipse cx="0" cy="-34" rx="8" ry="17" transform="rotate(225)" />
-                <ellipse cx="0" cy="-34" rx="8" ry="17" transform="rotate(270)" />
-                <ellipse cx="0" cy="-34" rx="8" ry="17" transform="rotate(315)" />
-              </g>
-            </g>
-            <g transform="translate(130, 205)" fill="none" stroke="#fff0b0" stroke-width="0.8" opacity="0.45">
-              <circle r="30.8" />
-            </g>
-            <!-- auspicious cloud corner motifs (구름문) -->
-            <g fill="none" stroke="#5e3b08" stroke-width="1.5" stroke-linecap="round" opacity="0.75">
-              <path d="M62 176 c6 -9 18 -5 15 4 c-2 6 -11 5 -10 -1" />
-              <path d="M198 176 c-6 -9 -18 -5 -15 4 c2 6 11 5 10 -1" />
-              <path d="M62 268 c6 9 18 5 15 -4 c-2 -6 -11 -5 -10 1" />
-              <path d="M198 268 c-6 9 -18 5 -15 -4 c2 -6 11 -5 10 1" />
-            </g>
-            <!-- engraved Korean & English bride/groom seal -->
-            <g font-family="'Gowun Batang','Cormorant Garamond',serif" text-anchor="middle">
-              <text x="130" y="172" font-size="8" letter-spacing="3" fill="#fff0b0" opacity="0.75" transform="translate(0, 0.8)">SEOUL · 2026</text>
-              <text x="130" y="171.2" font-size="8" letter-spacing="3" fill="#5a3607" opacity="0.85">SEOUL · 2026</text>
-              <text x="130" y="276.8" font-size="15" letter-spacing="2" fill="#fff0b0" opacity="0.7">서연 · 도윤</text>
-              <text x="130" y="276" font-size="15" letter-spacing="2" fill="#4f3006">서연 · 도윤</text>
-            </g>
-            <!-- keyhole receptacle -->
-            <g id="gate-keyhole-svg">
-              <circle cx="130" cy="205" r="24" fill="url(#kl-rim)" stroke="#4a2d05" stroke-width="1.3" />
-              <circle cx="130" cy="205" r="19" class="kh-core" id="gate-keyhole-core" />
-              <path class="kh-core" d="M121 210 L139 210 L143 246 Q130 251 117 246 Z" />
-              <circle cx="130" cy="205" r="19" fill="none" stroke="#ffd98a" stroke-opacity="0.28" stroke-width="1.2" />
-            </g>
-            <!-- bottom eyelet -->
-            <circle cx="130" cy="298" r="3.4" fill="#1c1105" />
-            <!-- Korean royal red silk knot tassel (홍색 매듭) -->
-            <g class="lock-tassel">
-              <circle cx="130" cy="305" r="7" fill="none" stroke="url(#kl-rim)" stroke-width="3.6" />
-              <path d="M130 312 V324" stroke="#a21429" stroke-width="3.2" stroke-linecap="round" />
-              <g transform="translate(130, 340)" fill="none">
-                <ellipse rx="16" ry="6.6" stroke="#8f1226" stroke-width="4.4" />
-                <ellipse rx="16" ry="6.6" stroke="#8f1226" stroke-width="4.4" transform="rotate(45)" />
-                <ellipse rx="16" ry="6.6" stroke="#8f1226" stroke-width="4.4" transform="rotate(90)" />
-                <ellipse rx="16" ry="6.6" stroke="#8f1226" stroke-width="4.4" transform="rotate(135)" />
-                <ellipse rx="16" ry="6.6" stroke="#e5505f" stroke-width="1.2" opacity="0.7" />
-                <ellipse rx="16" ry="6.6" stroke="#e5505f" stroke-width="1.2" opacity="0.7" transform="rotate(90)" />
-                <circle r="6.6" fill="#c8203a" stroke="#6f0b1a" stroke-width="1.2" />
-                <circle r="2.2" cx="-1.5" cy="-1.5" fill="#ff8a98" opacity="0.85" stroke="none" />
-                <path d="M0 22 V32" stroke="#a21429" stroke-width="3" stroke-linecap="round" />
-                <rect x="-6.5" y="32" width="13" height="11" rx="3.5" fill="url(#kl-body)" stroke="#5a3607" stroke-width="1" />
-                <g stroke-linecap="round" stroke-width="2.2">
-                  <path d="M-6 43 Q-9 58 -11 72" stroke="#b01a30" />
-                  <path d="M-3 43 Q-4 60 -5 75" stroke="#d62c44" />
-                  <path d="M0 43 Q0 60 0 77" stroke="#b01a30" />
-                  <path d="M3 43 Q4 60 5 75" stroke="#d62c44" />
-                  <path d="M6 43 Q9 58 11 72" stroke="#b01a30" />
+        <!-- Interactive Olive-Green Envelope Stage -->
+        <div class="opening-envelope-stage">
+          <button
+            type="button"
+            class="olive-envelope-btn"
+            id="korea-key-btn"
+            aria-label="Click to open wedding invitation of Kim Seo-yeon and Lee Do-yoon"
+          >
+            <!-- Olive Green Velvet Envelope Body -->
+            <span class="olive-envelope-body" id="korea-padlock">
+              <!-- Bottom/Side Pocket Creases -->
+              <span class="olive-envelope-pocket" aria-hidden="true"></span>
+
+              <!-- Top Triangular Flap with Couple Names -->
+              <span class="olive-envelope-flap" id="korea-key-pos">
+                <span class="envelope-flap-kicker">THE WEDDING OF</span>
+                <span class="envelope-flap-names">Seo-yeon <i>&amp;</i> Do-yoon</span>
+                <span class="envelope-flap-kr">김서연 · 이도윤</span>
+              </span>
+
+              <!-- Center Deep Burgundy / Plum Wax Seal with SD Monogram -->
+              <span class="burgundy-wax-seal" id="korea-keyhole-glow" aria-hidden="true">
+                <svg viewBox="0 0 120 120" class="wax-seal-svg">
+                  <defs>
+                    <radialGradient id="burgundy-wax-grad" cx="38%" cy="32%" r="68%">
+                      <stop offset="0%" stop-color="#8b3b5e" />
+                      <stop offset="45%" stop-color="#632341" />
+                      <stop offset="82%" stop-color="#47162d" />
+                      <stop offset="100%" stop-color="#310d1e" />
+                    </radialGradient>
+                    <filter id="wax-drop" x="-20%" y="-20%" width="140%" height="140%">
+                      <feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#190810" flood-opacity="0.55" />
+                    </filter>
+                  </defs>
+                  <path
+                    filter="url(#wax-drop)"
+                    fill="url(#burgundy-wax-grad)"
+                    d="M60,6 C74,5 85,11 96,19 C107,27 115,40 114,55 C113,69 116,83 106,95 C96,107 81,113 66,114 C50,115 34,113 22,102 C10,91 5,76 6,60 C7,44 12,29 24,18 C36,7 46,7 60,6 Z"
+                  />
+                  <circle cx="60" cy="60" r="39" fill="none" stroke="#9e5072" stroke-width="1.6" opacity="0.7" />
+                  <circle cx="60" cy="60" r="35" fill="none" stroke="#2d0b1b" stroke-width="1.2" opacity="0.65" />
+                  <text
+                    x="60"
+                    y="71"
+                    text-anchor="middle"
+                    fill="#d7a98c"
+                    font-family="'Great Vibes', 'Imperial Script', cursive"
+                    font-size="36"
+                  >SD</text>
+                </svg>
+              </span>
+            </span>
+
+            <!-- Top-Right Cascading Burgundy Calla Lilies, Amaranthus & White Hydrangea Cluster -->
+            <svg class="envelope-floral-tr" viewBox="0 0 240 290" aria-hidden="true">
+              <defs>
+                <linearGradient id="calla-burgundy" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#7c284c" />
+                  <stop offset="55%" stop-color="#4e132d" />
+                  <stop offset="100%" stop-color="#280716" />
+                </linearGradient>
+                <linearGradient id="amaranthus-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#6e2244" />
+                  <stop offset="100%" stop-color="#8b385c" />
+                </linearGradient>
+              </defs>
+              <!-- Soft green & white hydrangea base cushion -->
+              <g opacity="0.95">
+                <circle cx="145" cy="95" r="26" fill="#e6ead8" />
+                <circle cx="175" cy="115" r="28" fill="#eef1e4" />
+                <circle cx="185" cy="155" r="24" fill="#dce3c8" />
+                <circle cx="130" cy="78" r="18" fill="#f7f8f2" />
+                <!-- Hydrangea florets -->
+                <g fill="#fbfbf7" stroke="#cfd6bc" stroke-width="0.8">
+                  <circle cx="128" cy="72" r="7" /><circle cx="140" cy="68" r="6" /><circle cx="134" cy="82" r="7" />
+                  <circle cx="162" cy="88" r="8" /><circle cx="176" cy="94" r="7" /><circle cx="168" cy="104" r="8" />
+                  <circle cx="188" cy="118" r="7" /><circle cx="196" cy="132" r="6" /><circle cx="182" cy="136" r="7" />
+                  <circle cx="186" cy="162" r="7" /><circle cx="174" cy="172" r="6" />
                 </g>
               </g>
-            </g>
-          </svg>
-          <div class="lock-glow" id="gate-glow" aria-hidden="true"></div>
+              <!-- Hanging green & burgundy amaranthus tassels -->
+              <path d="M126,115 C122,165 118,210 116,248" fill="none" stroke="#6f7f38" stroke-width="5.5" stroke-linecap="round" stroke-dasharray="3 4" />
+              <path d="M138,118 C136,172 133,222 131,262" fill="none" stroke="#7c8b42" stroke-width="5" stroke-linecap="round" stroke-dasharray="3 4" />
+              <path d="M152,112 C152,175 150,235 147,278" fill="none" stroke="url(#amaranthus-grad)" stroke-width="7" stroke-linecap="round" stroke-dasharray="4 4" />
+              <path d="M168,116 C172,172 175,225 178,266" fill="none" stroke="url(#amaranthus-grad)" stroke-width="6.5" stroke-linecap="round" stroke-dasharray="4 4" />
+              <!-- Deep burgundy Calla Lily #1 (upper) -->
+              <path d="M150,72 C155,36 185,12 205,22 C215,28 195,62 172,84 C158,95 146,88 150,72 Z" fill="url(#calla-burgundy)" />
+              <path d="M174,56 L192,34" stroke="#e8c86b" stroke-width="3" stroke-linecap="round" />
+              <!-- Deep burgundy Calla Lily #2 (left-tilted) -->
+              <path d="M98,95 C102,65 135,58 152,78 C162,90 138,116 112,118 C98,118 95,106 98,95 Z" fill="url(#calla-burgundy)" />
+              <path d="M128,88 L146,72" stroke="#e8c86b" stroke-width="3.2" stroke-linecap="round" />
+              <!-- Deep burgundy Orchid / Blossom #3 (right) -->
+              <g transform="translate(168, 98)">
+                <ellipse cx="0" cy="-14" rx="10" ry="16" fill="url(#calla-burgundy)" transform="rotate(-18)" />
+                <ellipse cx="15" cy="-4" rx="10" ry="16" fill="url(#calla-burgundy)" transform="rotate(35)" />
+                <ellipse cx="10" cy="14" rx="10" ry="15" fill="url(#calla-burgundy)" transform="rotate(75)" />
+                <ellipse cx="-10" cy="10" rx="9" ry="15" fill="url(#calla-burgundy)" transform="rotate(-55)" />
+                <circle cx="2" cy="2" r="4" fill="#d9b45b" />
+              </g>
+            </svg>
+
+            <!-- Bottom-Left Resting Burgundy Calla Lily Stem -->
+            <svg class="envelope-floral-bl" viewBox="0 0 260 110" aria-hidden="true">
+              <!-- Curved olive stem -->
+              <path d="M85,54 C135,56 188,66 238,86" fill="none" stroke="#5b682c" stroke-width="3.2" stroke-linecap="round" />
+              <!-- Deep burgundy calla lily trumpet -->
+              <path
+                d="M12,78 C18,45 48,26 84,38 C108,46 116,56 92,66 C66,76 32,72 12,78 Z"
+                fill="url(#calla-burgundy)"
+              />
+              <path
+                d="M28,66 C48,54 76,50 102,56 C84,72 54,76 28,66 Z"
+                fill="#8e3158"
+                opacity="0.85"
+              />
+              <path d="M58,54 L82,48" stroke="#ddb85c" stroke-width="2.6" stroke-linecap="round" />
+            </svg>
+          </button>
         </div>
+
+        <!-- Bottom CTA Prompt -->
+        <p class="opening-click-prompt" id="korea-gate-burst">
+          <span>CLICK TO OPEN...</span>
+          <small>눌러서 청첩장 열기 · Bấm vào phong bì để mở thiệp</small>
+        </p>
       </div>
     </div>
 
-    <!-- Floating Golden Key (Positioned off-center, tap to unlock) -->
-    <div class="gate-keyclip" id="gate-keyclip">
-      <div class="gate-key-pos" id="gate-key-pos">
-        <button
-          class="gate-key"
-          id="gate-key"
-          type="button"
-          aria-label="황금 열쇠를 눌러 청첩장 열기 · Tap the golden key to unlock the wedding invitation"
-        >
-          <span class="gate-key-bob">
-            <span class="gate-key-turn" id="gate-key-turn">
-              <svg viewBox="0 0 375 210" aria-hidden="true" focusable="false"><use href="#kg-key" /></svg>
-            </span>
-          </span>
-        </button>
-      </div>
-    </div>
-
-    <p class="gate-hint" id="opening-hint" role="status">
-      <span>열쇠를 눌러 청첩장을 열어 주세요</span>
-      <small>Tap the golden key to unlock our invitation</small>
-    </p>
-
-    <!-- Radiant golden flashes upon unlocking -->
-    <div class="gate-burst" id="gate-burst" aria-hidden="true"></div>
-    <div class="gate-flash" id="gate-flash" aria-hidden="true"></div>
+    <div class="gate-flash" id="korea-gate-flash" aria-hidden="true"></div>
   </section>
 
-  <!-- Floating Music Toggle Button -->
+  <!-- Background Audio: LeeHi — ONLY -->
+  <audio id="bg-music" src="music/leehi-only.mp3" preload="auto" loop></audio>
+
   <button
-    class="music-toggle"
-    id="korea-music-toggle"
     type="button"
-    aria-label="배경 음악 켜기/끄기 · Toggle Music: ONLY — LeeHi"
+    class="music-toggle"
+    id="music-toggle"
+    aria-label="배경음악 켜기/끄기 (LeeHi - ONLY)"
     aria-pressed="false"
-    title="ONLY — LeeHi (이하이)"
   >
-    <span class="music-toggle-note" aria-hidden="true">♫</span>
-    <span class="music-label">ONLY — LeeHi</span>
+    <span class="music-toggle-note" aria-hidden="true">♪</span>
+    <span class="music-toggle-text" id="music-toggle-text">ONLY · LeeHi</span>
   </button>
 
-  <!-- ========================================================================
-       MAIN INVITATION CONTENT — TEMPLATE 04 · KOREA STYLE
-       ======================================================================== -->
+  <!-- =========================================================================
+       MAIN WEDDING WEBSITE CONTENT — BOTANICAL ELEGANCE COLLAGE & SECTIONS
+       ========================================================================= -->
   <div class="invitation-content" id="invitation-content">
     <div class="korea-editorial-frame">
-      <!-- 1. TOP MINIMALIST EDITORIAL GRID BAR (Reference Image 1 Top) -->
-      <header class="korea-grid-topbar">
-        <a href="#hero-garden" class="korea-brand-cell">
+
+      <!-- 1. TOP MINIMALIST EDITORIAL GRID BAR -->
+      <header class="korea-grid-topbar" aria-label="Wedding Navigation">
+        <div class="korea-brand-cell">
           <span class="korea-crest-mini" aria-hidden="true">SD</span>
           <span class="korea-brand-text">KIM SEO-YEON &amp; LEE DO-YOON</span>
-        </a>
-        <nav class="korea-nav-cells" aria-label="Wedding navigation">
-          <a href="#invitation-letter">INVITATION</a>
-          <a href="#story-feeling">OUR STORY</a>
-          <a href="#day-schedule">SCHEDULE</a>
-          <a href="#recent-moments">GALLERY</a>
-          <a href="#guest-list">RSVP</a>
+        </div>
+        <nav class="korea-nav-cells">
+          <a href="#invitation">INVITATION</a>
+          <a href="#story">OUR STORY</a>
+          <a href="#details">DETAILS</a>
+          <a href="#gallery">GALLERY</a>
+          <a href="#rsvp">RSVP</a>
         </nav>
       </header>
 
       <main>
-        <!-- ==================================================================
-             SECTION 1 — FULL-BLEED KOREAN GARDEN HERO (Reference Image 2 Top)
-             ================================================================== -->
-        <section class="korea-garden-hero" id="hero-garden" aria-labelledby="hero-couple-names">
-          <figure class="korea-garden-hero-media">
-            <img
-              src="images/photo_2026-10-23_11-47-51.jpg"
-              width="1200"
-              height="1800"
-              alt="이도윤 (Lee Do-yoon) kissing 김서연 (Kim Seo-yeon)'s hand under lush green trees"
-              fetchpriority="high"
-            />
-          </figure>
-          <div class="korea-garden-hero-overlay">
-            <p class="korea-hero-kicker">We’re getting married · 우리 결혼합니다</p>
-            <h1 id="hero-couple-names" class="korea-hero-names">
-              <span>Seo-yeon</span>
-              <i>&amp;</i>
-              <span>Do-yoon</span>
-            </h1>
-            <p class="korea-hero-kr-names">김서연 그리고 이도윤</p>
-            <p class="korea-hero-date">2026 . 10 . 24 · SAT 2:00 PM</p>
-            <p class="korea-hero-venue">서울 신라호텔 · 다이너스티 홀 (The Shilla Seoul · Dynasty Hall)</p>
+        <!-- ===================================================================
+             SECTION 1 — BOTANICAL ELEGANCE SCRAPBOOK COLLAGE HERO
+             (Exact layout from Etsy listing 4534889163 / myGlamCorner right phone
+              with GIF 1, GIF 2, GIF 3 embedded directly in the collage)
+             =================================================================== -->
+        <section class="botanical-collage-section" id="invitation" aria-label="Botanical Elegance Wedding Invitation">
+          <!-- Subtle background botanical line-art sketches -->
+          <svg class="collage-bg-sketch" viewBox="0 0 800 1350" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <g fill="none" stroke="#dbd5c7" stroke-width="1.1">
+              <!-- Upper right lily sketch -->
+              <path d="M520,170 C550,110 620,100 650,150 C610,195 550,195 520,170 Z" />
+              <path d="M520,170 C570,130 640,145 660,205 C600,225 545,205 520,170 Z" />
+              <path d="M480,150 C495,95 550,85 575,135 C540,175 495,175 480,150 Z" />
+              <!-- Center left floral sketch behind flower -->
+              <path d="M120,640 C165,595 235,605 260,665 C205,705 145,695 120,640 Z" />
+              <path d="M95,700 C150,665 225,680 245,740 C180,770 115,750 95,700 Z" />
+              <!-- Lower center orchid sketch behind details/polaroids -->
+              <path d="M350,860 C395,805 470,815 495,880 C435,925 375,915 350,860 Z" />
+              <path d="M330,920 C385,880 465,895 485,955 C415,990 350,970 330,920 Z" />
+              <path d="M140,1080 C185,1035 255,1045 280,1105 C220,1145 160,1135 140,1080 Z" />
+            </g>
+          </svg>
+
+          <div class="botanical-collage-canvas">
+
+            <!-- A. TOP OPEN OLIVE-GREEN ENVELOPE WITH LACE TRIM & GIF 3 INSIDE -->
+            <div class="collage-open-envelope-wrap">
+              <div class="collage-open-envelope">
+                <!-- Precision SVG White Scalloped Eyelet Lace Trim hugging top V-flap -->
+                <svg class="open-env-lace-svg" viewBox="0 0 320 280" aria-hidden="true">
+                  <defs>
+                    <pattern id="eyelet-lace-pat" width="18" height="18" patternUnits="userSpaceOnUse">
+                      <circle cx="9" cy="9" r="7.5" fill="#ffffff" stroke="#e5dfd2" stroke-width="0.8" />
+                      <circle cx="9" cy="9" r="2.6" fill="#45531c" />
+                    </pattern>
+                  </defs>
+                  <!-- Left & Right scalloped lace borders along V-flap -->
+                  <path
+                    d="M14,108 L160,6 L306,108"
+                    fill="none"
+                    stroke="#ffffff"
+                    stroke-width="16"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-dasharray="1 13"
+                  />
+                  <path
+                    d="M14,108 L160,6 L306,108"
+                    fill="none"
+                    stroke="#f7f4eb"
+                    stroke-width="9"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M14,108 L160,6 L306,108"
+                    fill="none"
+                    stroke="#45531c"
+                    stroke-width="3.5"
+                    stroke-linecap="round"
+                    stroke-dasharray="0 14"
+                  />
+                </svg>
+
+                <!-- Animated GIF 3 (Sparkling sunlit pond & meadow grass) inside envelope flap -->
+                <div class="open-env-liner-media">
+                  <video
+                    src="images/gif3.mp4"
+                    poster="images/gif3-poster.jpg"
+                    autoplay
+                    loop
+                    muted
+                    playsinline
+                  ></video>
+                </div>
+
+                <!-- Olive-green lower envelope pocket flaps -->
+                <div class="open-env-pocket" aria-hidden="true"></div>
+
+                <!-- Deep burgundy blossom at V-junction -->
+                <svg class="open-env-junction-flower" viewBox="0 0 60 60" aria-hidden="true">
+                  <g transform="translate(30,30)">
+                    <ellipse cx="0" cy="-12" rx="8" ry="13" fill="#5b1c36" />
+                    <ellipse cx="12" cy="-3" rx="8" ry="13" fill="#4b142b" transform="rotate(72)" />
+                    <ellipse cx="7" cy="11" rx="8" ry="13" fill="#682340" transform="rotate(144)" />
+                    <ellipse cx="-7" cy="11" rx="8" ry="13" fill="#4b142b" transform="rotate(216)" />
+                    <ellipse cx="-12" cy="-3" rx="8" ry="13" fill="#5b1c36" transform="rotate(288)" />
+                    <circle cx="0" cy="0" r="3.5" fill="#dfb962" />
+                  </g>
+                </svg>
+              </div>
+
+              <!-- Flying White Dove carrying a love letter (top-right of open envelope) -->
+              <div class="collage-flying-dove" aria-hidden="true">
+                <svg viewBox="0 0 160 120" class="dove-svg">
+                  <defs>
+                    <linearGradient id="dove-wing" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#ffffff" />
+                      <stop offset="65%" stop-color="#f2ede2" />
+                      <stop offset="100%" stop-color="#d8d0c0" />
+                    </linearGradient>
+                  </defs>
+                  <!-- Soft shadow -->
+                  <ellipse cx="82" cy="104" rx="38" ry="5" fill="rgba(60, 56, 48, 0.16)" />
+                  <!-- Back wing -->
+                  <path d="M68,58 C62,32 76,12 96,8 C94,28 88,46 78,58 Z" fill="#e5dfd1" stroke="#c5bba8" stroke-width="0.8" />
+                  <!-- Main raised wing -->
+                  <path d="M56,62 C48,30 64,8 88,4 C90,22 86,42 74,60 Z" fill="url(#dove-wing)" stroke="#c8bfb0" stroke-width="0.9" />
+                  <!-- Wing feather lines -->
+                  <path d="M84,12 C76,28 70,42 64,54 M78,18 C70,32 64,45 60,55" fill="none" stroke="#cdc4b4" stroke-width="0.8" />
+                  <!-- Dove body & fanned tail -->
+                  <path d="M36,68 C44,56 62,54 78,60 C98,64 118,56 138,46 C132,62 118,74 96,78 C74,82 50,82 36,68 Z" fill="url(#dove-wing)" stroke="#c8bfb0" stroke-width="0.9" />
+                  <!-- Head & beak -->
+                  <circle cx="40" cy="64" r="9" fill="#fbf9f4" stroke="#c8bfb0" stroke-width="0.8" />
+                  <circle cx="38" cy="63" r="1.6" fill="#2c2623" />
+                  <path d="M31,65 L24,68 L32,69 Z" fill="#b8965a" />
+                  <!-- Tiny love letter held in beak -->
+                  <g transform="translate(14, 67) rotate(-14)">
+                    <rect x="0" y="0" width="16" height="11" rx="1" fill="#fbf8ee" stroke="#9e8f75" stroke-width="0.8" />
+                    <path d="M0,0 L8,6 L16,0" fill="none" stroke="#9e8f75" stroke-width="0.8" />
+                    <circle cx="8" cy="5.5" r="1.8" fill="#632341" />
+                  </g>
+                </svg>
+              </div>
+            </div>
+
+            <!-- B. MIDDLE 2-COLUMN ASYMMETRIC SCRAPBOOK SPREAD -->
+            <div class="collage-main-columns">
+
+              <!-- LEFT COLUMN: Vinyl Record + Olive Shield Plaque + White SD Flower + Burgundy Details Medallion -->
+              <div class="collage-col-left">
+
+                <!-- 1. Interactive Spinning Vinyl Record ("CLICK TO LISTEN") -->
+                <div class="collage-vinyl-wrap">
+                  <button
+                    type="button"
+                    class="vinyl-record-btn"
+                    id="vinyl-music-btn"
+                    aria-label="Click to listen to wedding song ONLY by LeeHi"
+                  >
+                    <svg viewBox="0 0 220 220" class="vinyl-svg">
+                      <defs>
+                        <radialGradient id="vinyl-grooves" cx="50%" cy="50%" r="50%">
+                          <stop offset="0%" stop-color="#111111" />
+                          <stop offset="55%" stop-color="#1c1c1c" />
+                          <stop offset="72%" stop-color="#2a2a2a" />
+                          <stop offset="85%" stop-color="#151515" />
+                          <stop offset="100%" stop-color="#0a0a0a" />
+                        </radialGradient>
+                        <linearGradient id="vinyl-sheen" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stop-color="rgba(255,255,255,0)" />
+                          <stop offset="46%" stop-color="rgba(255,255,255,0.03)" />
+                          <stop offset="50%" stop-color="rgba(255,255,255,0.22)" />
+                          <stop offset="54%" stop-color="rgba(255,255,255,0.03)" />
+                          <stop offset="100%" stop-color="rgba(255,255,255,0)" />
+                        </linearGradient>
+                        <path id="vinyl-text-arc" d="M 34,110 A 76,76 0 1,1 186,110" />
+                      </defs>
+                      <!-- Outer vinyl disc -->
+                      <circle cx="110" cy="110" r="102" fill="url(#vinyl-grooves)" />
+                      <circle cx="110" cy="110" r="102" fill="url(#vinyl-sheen)" />
+                      <!-- Concentric groove rings -->
+                      <circle cx="110" cy="110" r="92" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.7" />
+                      <circle cx="110" cy="110" r="82" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.7" />
+                      <circle cx="110" cy="110" r="68" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.7" />
+                      <circle cx="110" cy="110" r="56" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="0.7" />
+                      <!-- Curved "CLICK TO LISTEN" text -->
+                      <text fill="#f4efe4" font-family="'Cormorant Garamond', Georgia, serif" font-size="14.5" letter-spacing="3.2">
+                        <textPath href="#vinyl-text-arc" startOffset="14%">CLICK TO LISTEN</textPath>
+                      </text>
+                      <!-- Center olive & botanical label -->
+                      <circle cx="110" cy="110" r="36" fill="#465320" stroke="#d5ceb8" stroke-width="2" />
+                      <circle cx="110" cy="110" r="26" fill="#6b7a3a" opacity="0.55" />
+                      <circle cx="110" cy="110" r="19" fill="none" stroke="#fbf8ee" stroke-width="1.5" />
+                      <!-- Play triangle icon -->
+                      <polygon class="vinyl-play-icon" points="105,101 105,119 120,110" fill="#fbf8ee" />
+                    </svg>
+                  </button>
+                </div>
+
+                <!-- 2. Ornate Olive-Green Scalloped Shield Plaque ("Seo-yeon & Do-yoon") -->
+                <div class="collage-olive-shield">
+                  <svg class="olive-shield-svg" viewBox="0 0 320 400" preserveAspectRatio="none" aria-hidden="true">
+                    <!-- Outer olive scalloped shield -->
+                    <path
+                      fill="#465320"
+                      d="M160,8
+                         C182,26 218,22 242,42
+                         C262,58 262,92 276,118
+                         C290,144 312,172 312,200
+                         C312,228 290,256 276,282
+                         C262,308 262,342 242,358
+                         C218,378 182,374 160,392
+                         C138,374 102,378 78,358
+                         C58,342 58,308 44,282
+                         C30,256 8,228 8,200
+                         C8,172 30,144 44,118
+                         C58,92 58,58 78,42
+                         C102,22 138,26 160,8 Z"
+                    />
+                    <!-- Inner cream contour line -->
+                    <path
+                      fill="none"
+                      stroke="#e8e2cf"
+                      stroke-width="1.8"
+                      d="M160,20
+                         C180,36 212,32 234,50
+                         C252,65 252,96 265,120
+                         C278,144 298,172 298,200
+                         C298,228 278,256 265,280
+                         C252,304 252,335 234,350
+                         C212,368 180,364 160,380
+                         C140,364 108,368 86,350
+                         C68,335 68,304 55,280
+                         C42,256 22,228 22,200
+                         C22,172 42,144 55,120
+                         C68,96 68,65 86,50
+                         C108,32 140,36 160,20 Z"
+                    />
+                  </svg>
+                  <div class="olive-shield-inner">
+                    <p class="shield-kicker">PLEASE JOIN US FOR<br />THE WEDDING OF</p>
+                    <h1 class="shield-couple-names">
+                      <span class="shield-name-top">Seo-yeon</span>
+                      <span class="shield-amp">&amp;</span>
+                      <span class="shield-name-bottom">Do-yoon</span>
+                    </h1>
+                    <p class="shield-kr-names">김서연 · 이도윤</p>
+                  </div>
+                </div>
+
+                <!-- 3. White & Sage 5-Petal Blossom with "SD" Monogram (overlapping bottom of shield) -->
+                <div class="collage-monogram-flower" aria-hidden="true">
+                  <svg viewBox="0 0 240 230" class="monogram-flower-svg">
+                    <defs>
+                      <radialGradient id="flower-petal-grad" cx="50%" cy="50%" r="55%">
+                        <stop offset="0%" stop-color="#f8f6ef" />
+                        <stop offset="72%" stop-color="#f0ede2" />
+                        <stop offset="100%" stop-color="#cdd5b5" />
+                      </radialGradient>
+                    </defs>
+                    <g stroke="#b6c196" stroke-width="2.2" fill="url(#flower-petal-grad)" stroke-linejoin="round">
+                      <!-- 5 broad, full hibiscus/peony petals -->
+                      <path d="M120,115 C74,78 72,18 120,14 C168,18 166,78 120,115 Z" />
+                      <path d="M120,115 C152,66 214,66 222,108 C214,152 156,144 120,115 Z" />
+                      <path d="M120,115 C168,128 206,184 168,210 C130,222 118,166 120,115 Z" />
+                      <path d="M120,115 C122,166 110,222 72,210 C34,184 72,128 120,115 Z" />
+                      <path d="M120,115 C84,144 26,152 18,108 C26,66 88,66 120,115 Z" />
+                    </g>
+                    <!-- Subtle stamen lines -->
+                    <path d="M120,115 L120,52 M120,115 L176,98 M120,115 L154,164 M120,115 L86,164 M120,115 L64,98" stroke="#c2cba4" stroke-width="1.1" />
+                    <!-- Center intertwined SD calligraphy monogram -->
+                    <text
+                      x="120"
+                      y="131"
+                      text-anchor="middle"
+                      fill="#3e4b19"
+                      font-family="'Great Vibes', 'Imperial Script', cursive"
+                      font-size="54"
+                    >SD</text>
+                  </svg>
+                </div>
+
+                <!-- 4. Deep Burgundy Scalloped Oval Medallion ("CLICK FOR THE DETAILS") + Hanging Silk Tassel -->
+                <div class="collage-details-medallion-wrap">
+                  <a href="#details" class="burgundy-details-medallion" aria-label="Click for wedding schedule and venue details">
+                    <div class="burgundy-oval-body">
+                      <span class="burgundy-oval-kicker">CLICK FOR THE</span>
+                      <span class="burgundy-oval-title">DETAILS</span>
+                      <span class="burgundy-oval-kr">예식 일정 및 오시는 길</span>
+                      <span class="burgundy-oval-eyelet" aria-hidden="true"></span>
+                    </div>
+                    <!-- Hanging Deep Burgundy Silk Tassel -->
+                    <svg class="burgundy-silk-tassel" viewBox="0 0 110 210" aria-hidden="true">
+                      <defs>
+                        <linearGradient id="tassel-silk" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stop-color="#682843" />
+                          <stop offset="45%" stop-color="#48172c" />
+                          <stop offset="100%" stop-color="#2b0b19" />
+                        </linearGradient>
+                      </defs>
+                      <!-- Top knot inside eyelet -->
+                      <ellipse cx="55" cy="18" rx="13" ry="11" fill="#3b1123" />
+                      <!-- Neck wrap -->
+                      <rect x="43" y="26" width="24" height="9" rx="4" fill="#5c213a" stroke="#7c3654" stroke-width="1" />
+                      <!-- Flowing silk fringe Skirt -->
+                      <path
+                        d="M44,34 C38,85 24,145 12,196 L98,196 C86,145 72,85 66,34 Z"
+                        fill="url(#tassel-silk)"
+                      />
+                      <!-- Silk thread texture lines -->
+                      <g stroke="#793350" stroke-width="0.9" opacity="0.65">
+                        <path d="M48,36 C44,90 34,145 24,196" fill="none" />
+                        <path d="M52,36 C50,90 45,145 40,196" fill="none" />
+                        <path d="M55,36 L55,196" fill="none" />
+                        <path d="M58,36 C60,90 65,145 70,196" fill="none" />
+                        <path d="M62,36 C66,90 76,145 86,196" fill="none" />
+                      </g>
+                    </svg>
+                  </a>
+                </div>
+
+              </div>
+
+              <!-- RIGHT COLUMN: Date & Venue Card (with GIF 2 Mat) + Closed Olive Envelope + RSVP Plaque + Polaroids (with GIF 1) + Our Story Arch -->
+              <div class="collage-col-right">
+
+                <!-- 1. Framed Date & Venue Card with Animated GIF 2 Mat ("24 October 2026") -->
+                <div class="collage-date-card-frame">
+                  <!-- Outer animated botanical mat: GIF 2 (Dreamy sunlit white spring blossoms) -->
+                  <div class="date-card-gif-mat" aria-hidden="true">
+                    <video
+                      src="images/gif2.mp4"
+                      poster="images/gif2-poster.jpg"
+                      autoplay
+                      loop
+                      muted
+                      playsinline
+                    ></video>
+                  </div>
+
+                  <!-- Inner Cream Plaque with Double Olive Notched-Corner Border -->
+                  <div class="date-card-inner-plaque">
+                    <div class="date-card-notched-border">
+                      <span class="date-card-day">24</span>
+                      <span class="date-card-month">October</span>
+                      <span class="date-card-year">2026</span>
+                      <p class="date-card-venue">
+                        AT 5:00 PM<br />
+                        THE SHILLA SEOUL<br />
+                        DYNASTY HALL · JANGCHUNG-DONG<br />
+                        SEOUL, KOREA
+                      </p>
+                      <p class="date-card-kr">서울 신라호텔 · 다이너스티 홀</p>
+                    </div>
+                  </div>
+
+                  <!-- Top-right hanging burgundy floral accent on date card -->
+                  <svg class="date-card-floral-tr" viewBox="0 0 110 150" aria-hidden="true">
+                    <circle cx="65" cy="42" r="20" fill="#e5ead6" />
+                    <path d="M54,55 C52,92 50,122 48,144" fill="none" stroke="#6c2242" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="3 3" />
+                    <path d="M66,52 C66,88 65,118 64,140" fill="none" stroke="#75843c" stroke-width="4" stroke-linecap="round" stroke-dasharray="3 3" />
+                    <path d="M45,42 C48,18 72,10 86,22 C92,28 76,50 58,56 Z" fill="#5c1b37" />
+                    <path d="M62,34 L76,22" stroke="#e2be62" stroke-width="2.2" stroke-linecap="round" />
+                  </svg>
+                </div>
+
+                <!-- 2. Mini Closed Olive-Green Envelope with Burgundy SD Wax Seal -->
+                <div class="collage-mini-envelope">
+                  <div class="mini-env-flap"></div>
+                  <div class="mini-env-seal" aria-hidden="true">
+                    <span>SD</span>
+                  </div>
+                  <!-- White & burgundy blossoms on top-right of mini envelope -->
+                  <svg class="mini-env-floral" viewBox="0 0 90 90" aria-hidden="true">
+                    <circle cx="52" cy="26" r="9" fill="#5b1c36" />
+                    <circle cx="64" cy="40" r="11" fill="#ffffff" stroke="#d8d4c8" stroke-width="0.8" />
+                    <circle cx="48" cy="46" r="10" fill="#f7f5ec" stroke="#d8d4c8" stroke-width="0.8" />
+                    <circle cx="62" cy="56" r="9" fill="#ffffff" stroke="#d8d4c8" stroke-width="0.8" />
+                    <circle cx="64" cy="40" r="2.5" fill="#d7b65b" />
+                    <circle cx="48" cy="46" r="2.2" fill="#d7b65b" />
+                  </svg>
+                </div>
+
+                <!-- 3. Ornate Scalloped Cream Plaque ("CLICK HERE TO RSVP") -->
+                <a href="#rsvp" class="collage-rsvp-plaque" aria-label="Click here to RSVP">
+                  <span class="rsvp-plaque-kicker">CLICK HERE TO</span>
+                  <span class="rsvp-plaque-title">RSVP</span>
+                </a>
+
+                <!-- 4. Two Tilted Polaroids Pinned with Burgundy SD Wax Seals (Photo + GIF 1 Snowdrops) -->
+                <div class="collage-polaroids-cluster">
+                  <!-- Upper-right tilted Polaroid: Couple in green meadow -->
+                  <figure
+                    class="collage-polaroid polaroid-tilt-right"
+                    data-full="images/photo_2026-10-23_11-47-59.jpg"
+                    data-caption="김서연 &amp; 이도윤 · 초록빛 정원에서의 약속"
+                  >
+                    <span class="polaroid-wax-pin pin-top-left" aria-hidden="true">SD</span>
+                    <div class="polaroid-media">
+                      <img
+                        src="images/photo_2026-10-23_11-47-59.jpg"
+                        alt="Kim Seo-yeon and Lee Do-yoon in the green meadow"
+                      />
+                    </div>
+                  </figure>
+
+                  <!-- Lower-left tilted Polaroid: Animated GIF 1 (Dew-covered white snowdrop bell flowers) -->
+                  <figure class="collage-polaroid polaroid-tilt-left">
+                    <span class="polaroid-wax-pin pin-top-right" aria-hidden="true">SD</span>
+                    <div class="polaroid-media">
+                      <video
+                        src="images/gif1.mp4"
+                        poster="images/gif1-poster.jpg"
+                        autoplay
+                        loop
+                        muted
+                        playsinline
+                      ></video>
+                    </div>
+                  </figure>
+                </div>
+
+                <!-- 5. Bottom-Right Olive-Green Arch Card ("Our Story") -->
+                <a href="#story" class="collage-story-arch">
+                  <span class="story-arch-floral" aria-hidden="true">
+                    <svg viewBox="0 0 80 80">
+                      <circle cx="44" cy="28" r="10" fill="#ffffff" />
+                      <circle cx="58" cy="40" r="9" fill="#f5f3ea" />
+                      <circle cx="36" cy="42" r="8" fill="#ffffff" />
+                      <circle cx="56" cy="24" r="7" fill="#581d36" />
+                    </svg>
+                  </span>
+                  <h2 class="story-arch-heading">
+                    <span>Our</span>
+                    <em>Story</em>
+                  </h2>
+                  <div class="story-arch-photo-box">
+                    <img
+                      src="images/photo_2026-10-23_11-47-51.jpg"
+                      alt="Our Story — Kim Seo-yeon and Lee Do-yoon under the garden trees"
+                    />
+                  </div>
+                </a>
+
+              </div>
+            </div>
           </div>
         </section>
 
-        <!-- ==================================================================
-             SECTION 2 — OFF-WHITE EDITORIAL INVITATION SPREAD
-             ("Let's celebrate love, laughter, and happily ever after!" — Ref 2)
-             ================================================================== -->
-        <section class="korea-celebrate-spread" id="invitation-letter" aria-labelledby="celebrate-heading">
+        <!-- ===================================================================
+             SECTION 2 — OUR STORY & 3-GIF BOTANICAL FILM INTERLUDE
+             =================================================================== -->
+        <section class="korea-celebrate-spread" id="story" aria-label="Our Story and Botanical Moving Portraits">
           <div class="celebrate-headline-wrap">
-            <p class="celebrate-eyebrow">INVITATION · 초대의 글</p>
-            <h2 id="celebrate-heading" class="celebrate-italic-title">
-              Let’s celebrate love,<br />
-              laughter,<br />
+            <p class="celebrate-eyebrow">OUR STORY · 두 사람의 이야기</p>
+            <h2 class="celebrate-italic-title">
+              Let’s celebrate love, laughter,<br />
               and happily ever after!
             </h2>
           </div>
 
+          <!-- 3-GIF Botanical Cinema Strip (Showcasing Gif 1, Gif 2, Gif 3 side by side) -->
+          <div class="botanical-gif-triptych" aria-label="Botanical Moving Portraits">
+            <article class="gif-triptych-card">
+              <div class="gif-triptych-frame">
+                <video
+                  src="images/gif1.mp4"
+                  poster="images/gif1-poster.jpg"
+                  autoplay
+                  loop
+                  muted
+                  playsinline
+                ></video>
+              </div>
+              <span class="gif-triptych-caption">I · MORNING DEW SNOWDROPS</span>
+            </article>
+
+            <article class="gif-triptych-card is-featured">
+              <div class="gif-triptych-frame">
+                <video
+                  src="images/gif2.mp4"
+                  poster="images/gif2-poster.jpg"
+                  autoplay
+                  loop
+                  muted
+                  playsinline
+                ></video>
+              </div>
+              <span class="gif-triptych-caption">II · SUNLIT GARDEN BLOSSOMS</span>
+            </article>
+
+            <article class="gif-triptych-card">
+              <div class="gif-triptych-frame">
+                <video
+                  src="images/gif3.mp4"
+                  poster="images/gif3-poster.jpg"
+                  autoplay
+                  loop
+                  muted
+                  playsinline
+                ></video>
+              </div>
+              <span class="gif-triptych-caption">III · SPARKLING MEADOW POND</span>
+            </article>
+          </div>
+
           <div class="celebrate-asymmetric-grid">
-            <!-- Left Framed Garden Photo -->
+            <!-- Left Framed Couple Portrait -->
             <figure
-              class="celebrate-left-photo gallery-trigger"
-              data-caption="김서연 &amp; 이도윤 · The Shilla Seoul Garden"
+              class="celebrate-left-photo"
+              data-full="images/photo_2026-10-23_11-47-47.jpg"
+              data-caption="김서연 &amp; 이도윤 · 베일 속의 미소"
             >
               <img
-                src="images/photo_2026-10-23_11-47-29.jpg"
-                width="512"
-                height="640"
-                alt="김서연 (Kim Seo-yeon) holding bridal bouquet beside 이도윤 (Lee Do-yoon)"
+                src="images/photo_2026-10-23_11-47-47.jpg"
+                alt="Kim Seo-yeon and Lee Do-yoon smiling beneath the wedding veil"
                 loading="lazy"
               />
             </figure>
 
-            <!-- Right Editorial Invitation Copy & Korean Honorific Details -->
+            <!-- Right Editorial Invitation Copy -->
             <div class="celebrate-right-copy">
               <p class="celebrate-en-lead">
-                Together with our families, we,<br />
-                <strong>Kim Seo-yeon</strong> and <strong>Lee Do-yoon</strong>,<br />
-                joyfully invite you to celebrate<br />
-                our union in marriage.
+                With joyful hearts, we invite you to share in our happiness as we,
+                <strong>Kim Seo-yeon</strong> and <strong>Lee Do-yoon</strong>,
+                unite in marriage. Join us for a day filled with love, laughter,
+                and unforgettable memories.
               </p>
 
               <p class="celebrate-kr-poem">
-                푸른 정원의 바람과 따스한 햇살 아래,<br />
-                서로의 가장 포근한 계절이 되어주기로 약속합니다.<br />
-                저희 두 사람이 함께 걸어갈 첫걸음에<br />
-                귀한 걸음 하시어 축복해 주시면 감사하겠습니다.
+                푸른 정원의 나무 그늘 아래에서<br />
+                서로의 가장 따뜻한 계절이 되기로 약속했습니다.<br />
+                귀한 걸음 하시어 저희 두 사람의 새로운 시작을<br />
+                축복해 주시면 더없는 기쁨으로 간직하겠습니다.
               </p>
 
-              <div class="celebrate-couple-roles">
-                <div class="role-row">
-                  <span class="role-label">신랑 · GROOM</span>
-                  <strong class="role-name">이도윤 (Lee Do-yoon)</strong>
-                </div>
+              <div class="celebrate-couple-roles" aria-label="Bride and Groom">
                 <div class="role-row">
                   <span class="role-label">신부 · BRIDE</span>
-                  <strong class="role-name">김서연 (Kim Seo-yeon)</strong>
+                  <strong class="role-name">김서연 · Kim Seo-yeon</strong>
+                </div>
+                <div class="role-row">
+                  <span class="role-label">신랑 · GROOM</span>
+                  <strong class="role-name">이도윤 · Lee Do-yoon</strong>
                 </div>
               </div>
 
               <div class="celebrate-date-block">
-                <p class="celebrate-day">Saturday · 2026년 10월 24일 토요일</p>
-                <p class="celebrate-date-line">24th of October 2026 · Ceremony starts at 2:00 PM</p>
+                <p class="celebrate-day">Saturday, October 24, 2026 · PM 5:00</p>
                 <p class="celebrate-venue-line">
-                  서울 신라호텔 · 다이너스티 홀<br />
-                  <span>The Shilla Seoul · Dynasty Hall, Seoul, South Korea</span>
+                  서울 신라호텔 · 다이너스티 홀
+                  <span>The Shilla Seoul · Dynasty Hall</span>
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        <!-- ==================================================================
-             SECTION 3 — EDITORIAL ASYMMETRIC SPLIT ("CAPTURING THE Moments" — Ref 1)
-             ================================================================== -->
-        <section class="korea-capturing-split" aria-labelledby="capturing-title">
-          <div class="capturing-left-col">
-            <p class="capturing-kicker">CHAPTER 01 · OUR BEGINNING</p>
-            <h2 id="capturing-title" class="capturing-display">
-              CAPTURING<br />
-              THE <em>Moments</em>
-            </h2>
-            <p class="capturing-subtext">
-              서울의 따사로운 햇살 아래 서로를 마주한 가장 다정한 순간 — 우리의 모든 계절이 사랑으로 물들어 갑니다.<br />
-              <span class="capturing-subtext-en">The tenderest moments under the Seoul sunshine — when our eyes met and every season turned into love.</span>
-            </p>
-            <div class="capturing-links">
-              <a href="#day-schedule">VIEW SCHEDULE</a>
-              <a href="#guest-list">CONFIRM ATTENDANCE</a>
-            </div>
-          </div>
-
-          <div class="capturing-right-overlap">
-            <!-- Smaller inset photo overlapping the left edge of the main portrait -->
-            <figure
-              class="capturing-inset-photo gallery-trigger"
-              data-caption="Save The Date · Bridal Bouquet &amp; Lace Veil"
-            >
-              <img
-                src="images/photo_2026-10-23_11-47-40.jpg"
-                width="600"
-                height="395"
-                alt="Close-up of white bridal bouquet under lace veil"
-                loading="lazy"
-              />
-            </figure>
-
-            <!-- Main right portrait -->
-            <figure
-              class="capturing-main-photo gallery-trigger"
-              data-caption="김서연 &amp; 이도윤 · Under the White Veil"
-            >
-              <img
-                src="images/photo_2026-10-23_11-47-47.jpg"
-                width="736"
-                height="850"
-                alt="김서연 (Kim Seo-yeon) and 이도윤 (Lee Do-yoon) smiling under white veil"
-                loading="lazy"
-              />
-            </figure>
-          </div>
-        </section>
-
-        <!-- ==================================================================
-             SECTION 4 — DEEP ESPRESSO BAND ("LOVE ROOTED in FEELING" — Ref 1)
-             ================================================================== -->
-        <section class="korea-dark-feeling" id="story-feeling" aria-labelledby="feeling-title">
-          <!-- Soft atmospheric ghosted background frames like Reference Image 1 -->
-          <div class="feeling-ghost-layer" aria-hidden="true">
-            <div class="feeling-ghost feeling-ghost-left">
-              <img src="images/photo_2026-10-23_11-47-29.jpg" alt="" data-kismet-skip="true" />
-            </div>
-            <div class="feeling-ghost feeling-ghost-right">
-              <img src="images/photo_2026-10-23_11-47-47.jpg" alt="" data-kismet-skip="true" />
-            </div>
-          </div>
-
-          <div class="feeling-content-grid">
-            <figure
-              class="feeling-foreground-photo gallery-trigger"
-              data-caption="Holding hands across the green meadow · 김서연 &amp; 이도윤"
-            >
-              <img
-                src="images/photo_2026-10-23_11-47-59.jpg"
-                width="981"
-                height="736"
-                alt="김서연 (Kim Seo-yeon) and 이도윤 (Lee Do-yoon) holding hands across the green lawn"
-                loading="lazy"
-              />
-            </figure>
-
-            <div class="feeling-text-col">
-              <h2 id="feeling-title" class="feeling-heading">
-                A PROMISE<br />
-                ROOTED <em>in</em><br />
-                FEELING
-              </h2>
-              <p class="feeling-body-kr">
-                함께 걷는 길마다 웃음이 피어나고, 평범한 하루조차 특별한 기억이 되었습니다. 가장 자연스러운 우리의 모습으로
-                평생을 함께하겠습니다.
-              </p>
-              <p class="feeling-body-en">
-                “I want to walk slowly through every ordinary day with you, knowing whenever we look back, we will still be
-                holding hands just like that first afternoon.”
-              </p>
-              <a href="#recent-moments" class="feeling-more-link">OUR GALLERY ↓</a>
-            </div>
-
-            <!-- Geometric Octagonal Monogram Crest (from Reference Image 1) -->
-            <div class="feeling-crest-box" aria-hidden="true">
-              <svg class="octagonal-crest-svg" viewBox="0 0 120 120" fill="none">
-                <path
-                  d="M34 10H86L100 24V36L110 46V74L100 84V96L86 110H34L20 96V84L10 74V46L20 36V24L34 10Z"
-                  stroke="currentColor"
-                  stroke-width="1.2"
-                  opacity="0.78"
-                />
-                <path
-                  d="M37 15H83L95 27V38L104 47V73L95 82V93L83 105H37L25 93V82L16 73V47L25 38V27L37 15Z"
-                  stroke="currentColor"
-                  stroke-width="0.7"
-                  opacity="0.45"
-                />
-                <text x="60" y="71" text-anchor="middle" class="crest-monogram-letters">SD</text>
-              </svg>
-            </div>
-          </div>
-
-          <!-- Fine Bordered Marquee Strip (Reference Image 1) -->
-          <div class="korea-ticker-bar" aria-hidden="true">
-            <div class="korea-ticker-track">
-              <span>TIMELESS KOREAN GARDEN WEDDING · KIM SEO-YEON &amp; LEE DO-YOON</span>
-              <span>THE SHILLA SEOUL · DYNASTY HALL · 24.10.2026</span>
-              <span>오직 너만 · FOREVER BEGINS HERE</span>
-              <span>TIMELESS KOREAN GARDEN WEDDING · KIM SEO-YEON &amp; LEE DO-YOON</span>
-              <span>THE SHILLA SEOUL · DYNASTY HALL · 24.10.2026</span>
-            </div>
-          </div>
-        </section>
-
-        <!-- ==================================================================
-             SECTION 5 — DARK FOREST-GREEN "WEDDING DAY SCHEDULE" TIMELINE
-             (Exact Vertical Spine & Alternating Ticks from Reference Image 2 Bottom)
-             ================================================================== -->
-        <section class="korea-schedule-section" id="day-schedule" aria-labelledby="schedule-title">
+        <!-- ===================================================================
+             SECTION 3 — DARK OLIVE-GREEN "WEDDING DAY SCHEDULE" & VENUE DETAILS
+             =================================================================== -->
+        <section class="korea-schedule-section" id="details" aria-label="Wedding Day Schedule and Venue Details">
+          <!-- Animated Pond / Garden Video Backdrop -->
           <div class="schedule-backdrop-media" aria-hidden="true">
-            <img
-              src="images/photo_2026-10-23_11-47-55.jpg"
-              width="736"
-              height="983"
-              alt=""
-              data-kismet-skip="true"
-            />
+            <video
+              src="images/gif3.mp4"
+              poster="images/gif3-poster.jpg"
+              autoplay
+              loop
+              muted
+              playsinline
+            ></video>
           </div>
 
-          <div class="schedule-inner">
-            <p class="schedule-kicker">THE DAY WE BECOME ONE · 예식 순서</p>
-            <h2 id="schedule-title" class="schedule-heading">Wedding Day Schedule</h2>
+          <div class="schedule-inner" id="schedule">
+            <p class="schedule-kicker">ORDER OF EVENTS · 예식 순서</p>
+            <h2 class="schedule-heading">Wedding Day Schedule</h2>
 
             <div class="schedule-axis">
-              <!-- Milestone 1 (Right) -->
-              <div class="schedule-row is-right">
-                <div class="schedule-empty"></div>
-                <div class="schedule-spine-node"><span class="schedule-tick"></span></div>
-                <div class="schedule-card">
-                  <time>2:00 PM</time>
-                  <h3>Wedding ceremony · 본식 예식</h3>
-                  <p>The Shilla Seoul · Dynasty Hall</p>
+              <!-- Event 1 (Right of spine) -->
+              <article class="schedule-row is-right">
+                <div class="schedule-spacer" aria-hidden="true"></div>
+                <div class="schedule-spine-node" aria-hidden="true">
+                  <span class="schedule-tick"></span>
                 </div>
-              </div>
+                <div class="schedule-card">
+                  <time datetime="16:30">16:30</time>
+                  <h3>Welcome &amp; Garden Reception</h3>
+                  <p>식전 포토존 및 웰컴 리셉션 · Đón khách</p>
+                </div>
+              </article>
 
-              <!-- Milestone 2 (Left) -->
-              <div class="schedule-row is-left">
+              <!-- Event 2 (Left of spine) -->
+              <article class="schedule-row is-left">
                 <div class="schedule-card">
-                  <time>3:00 PM</time>
-                  <h3>Photo session · 가든 포토타임</h3>
-                  <p>Yeongbin-gwan Sculpture Garden</p>
+                  <time datetime="17:00">17:00</time>
+                  <h3>Wedding Ceremony · 1부 예식</h3>
+                  <p>다이너스티 홀 본식 · Lễ thành hôn</p>
                 </div>
-                <div class="schedule-spine-node"><span class="schedule-tick"></span></div>
-                <div class="schedule-empty"></div>
-              </div>
+                <div class="schedule-spine-node" aria-hidden="true">
+                  <span class="schedule-tick"></span>
+                </div>
+                <div class="schedule-spacer" aria-hidden="true"></div>
+              </article>
 
-              <!-- Milestone 3 (Right) -->
-              <div class="schedule-row is-right">
-                <div class="schedule-empty"></div>
-                <div class="schedule-spine-node"><span class="schedule-tick"></span></div>
-                <div class="schedule-card">
-                  <time>4:30 PM</time>
-                  <h3>Cocktail hour · 리셉션 &amp; 축배</h3>
-                  <p>Dynasty Hall Foyer &amp; Garden Terrace</p>
+              <!-- Event 3 (Right of spine) -->
+              <article class="schedule-row is-right">
+                <div class="schedule-spacer" aria-hidden="true"></div>
+                <div class="schedule-spine-node" aria-hidden="true">
+                  <span class="schedule-tick"></span>
                 </div>
-              </div>
+                <div class="schedule-card">
+                  <time datetime="18:00">18:00</time>
+                  <h3>Fine Dining &amp; Toast · 2부 피로연</h3>
+                  <p>만찬 및 케이크 커팅 · Tiệc tối &amp; nâng ly</p>
+                </div>
+              </article>
 
-              <!-- Milestone 4 (Left) -->
-              <div class="schedule-row is-left">
+              <!-- Event 4 (Left of spine) -->
+              <article class="schedule-row is-left">
                 <div class="schedule-card">
-                  <time>6:30 PM</time>
-                  <h3>Dinner reception · 피로연 만찬</h3>
-                  <p>The Shilla Seoul · Dynasty Hall</p>
+                  <time datetime="19:30">19:30</time>
+                  <h3>After Party &amp; Sparkling Waltz</h3>
+                  <p>가든 나이트 &amp; 음악 · Khiêu vũ dưới ánh đèn</p>
                 </div>
-                <div class="schedule-spine-node"><span class="schedule-tick"></span></div>
-                <div class="schedule-empty"></div>
-              </div>
-
-              <!-- Milestone 5 (Right) -->
-              <div class="schedule-row is-right">
-                <div class="schedule-empty"></div>
-                <div class="schedule-spine-node"><span class="schedule-tick"></span></div>
-                <div class="schedule-card">
-                  <time>9:00 PM</time>
-                  <h3>After party · 애프터 파티</h3>
-                  <p>Namsan Starlight Courtyard</p>
+                <div class="schedule-spine-node" aria-hidden="true">
+                  <span class="schedule-tick"></span>
                 </div>
-              </div>
+                <div class="schedule-spacer" aria-hidden="true"></div>
+              </article>
             </div>
           </div>
         </section>
 
-        <!-- ==================================================================
-             SECTION 6 — FULL-WIDTH GARDEN QUOTE BANNER ("WORDS from our PROMISE" — Ref 1)
-             ================================================================== -->
-        <section class="korea-vow-banner" aria-labelledby="vow-banner-title">
-          <div class="vow-banner-frame">
-            <img
-              src="images/photo_2026-10-23_11-47-43.jpg"
-              width="1200"
-              height="1600"
-              alt="Garden wedding detail on lush green grass"
-              loading="lazy"
-            />
-            <div class="vow-banner-overlay">
-              <h2 id="vow-banner-title" class="vow-banner-heading">
-                WORDS <em>from</em><br />
-                <em>our</em> PROMISE
-              </h2>
-              <blockquote class="vow-banner-quote">
-                “나는 내 사랑하는 자에게 속하였고, 내 사랑하는 자는 내게 속하였도다.”<br />
-                <span class="vow-banner-quote-en">“I am my beloved’s, and my beloved is mine — Song of Solomon 6:3”</span>
-              </blockquote>
-              <p class="vow-banner-author">— KIM SEO-YEON &amp; LEE DO-YOON —</p>
-            </div>
-          </div>
-        </section>
-
-        <!-- ==================================================================
-             SECTION 7 — VERTICAL PINSTRIPE GALLERY ("RECENT MOMENTS" — Ref 1 Bottom)
-             ================================================================== -->
-        <section class="korea-pinstripe-gallery" id="recent-moments" aria-labelledby="moments-title">
-          <div class="moments-header-row">
-            <div class="moments-header-left">
-              <span class="moments-kr-tag">우리의 계절 · OUR LITTLE MOMENTS</span>
-              <p class="moments-subnote">사진을 클릭하시면 크게 보실 수 있습니다 · Click on photos to expand</p>
-            </div>
-            <div class="moments-header-right">
-              <h2 id="moments-title" class="moments-title">
-                RECENT<br />
-                MOMENTS
-              </h2>
-              <span class="moments-sub-link">SEOUL GARDEN ALBUM</span>
-            </div>
-          </div>
-
-          <div class="moments-staggered-strip">
-            <figure
-              class="moment-card moment-card-sm gallery-trigger"
-              data-caption="김서연 &amp; 이도윤 · Sunlit Garden Walk"
-            >
-              <img
-                src="images/photo_2026-10-23_11-47-29.jpg"
-                width="512"
-                height="640"
-                alt="Bride holding bouquet in sunlit garden"
-                loading="lazy"
-              />
-            </figure>
-
-            <figure
-              class="moment-card moment-card-tall gallery-trigger"
-              data-caption="김서연 &amp; 이도윤 · Cypress Alley Kiss"
-            >
-              <img
-                src="images/photo_2026-10-23_11-47-55.jpg"
-                width="736"
-                height="983"
-                alt="Couple kissing between tall cypress trees"
-                loading="lazy"
-              />
-            </figure>
-
-            <figure
-              class="moment-card moment-card-mid gallery-trigger"
-              data-caption="김서연 &amp; 이도윤 · Morning Meadow"
-            >
-              <img
-                src="images/photo_2026-10-23_11-47-59.jpg"
-                width="981"
-                height="736"
-                alt="Couple holding hands on the green lawn"
-                loading="lazy"
-              />
-            </figure>
-
-            <figure
-              class="moment-card moment-card-tall gallery-trigger"
-              data-caption="김서연 &amp; 이도윤 · Beneath the Green Canopy"
-            >
-              <img
-                src="images/photo_2026-10-23_11-47-51.jpg"
-                width="1200"
-                height="1800"
-                alt="Groom kissing bride's hand under green trees"
-                loading="lazy"
-              />
-            </figure>
-
-            <figure
-              class="moment-card moment-card-sm gallery-trigger"
-              data-caption="김서연 &amp; 이도윤 · Lace &amp; Garden Peonies"
-            >
-              <img
-                src="images/photo_2026-10-23_11-47-40.jpg"
-                width="600"
-                height="395"
-                alt="Bridal bouquet under lace veil"
-                loading="lazy"
-              />
-            </figure>
-          </div>
-        </section>
-
-        <!-- ==================================================================
-             SECTION 8 — VENUE & DIRECTIONS (서울 신라호텔 · 다이너스티 홀)
-             ================================================================== -->
-        <section class="korea-venue-section" id="venue-location" aria-labelledby="venue-heading">
+        <!-- ===================================================================
+             SECTION 4 — VENUE & DIRECTIONS (서울 신라호텔 · 다이너스티 홀)
+             =================================================================== -->
+        <section class="korea-venue-section" id="venue" aria-label="Venue and Directions">
           <div class="venue-stationery-box">
-            <img class="venue-sprig venue-sprig-left" src="assets/botanical-sprig.svg" alt="" aria-hidden="true" data-kismet-skip="true" />
-            <img class="venue-sprig venue-sprig-right" src="assets/botanical-sprig.svg" alt="" aria-hidden="true" data-kismet-skip="true" />
-
+            <img src="assets/ botanical-sprig.svg" class="venue-sprig venue-sprig-left" alt="" aria-hidden="true" onerror="this.style.display='none'" />
             <p class="venue-eyebrow">LOCATION · 오시는 길</p>
-            <h2 id="venue-heading" class="venue-main-name">서울 신라호텔 · 다이너스티 홀</h2>
+            <h2 class="venue-main-name">서울 신라호텔 · 다이너스티 홀</h2>
             <p class="venue-en-name">The Shilla Seoul · Dynasty Hall (2F)</p>
             <p class="venue-address-line">
               서울특별시 중구 동호로 249 (장충동2가 202)<br />
-              202 Jangchung-dong 2(i)-ga, Jung-gu, Seoul 04605, South Korea
+              <span>249 Dongho-ro, Jung-gu, Seoul, South Korea · Tel. +82-2-2233-3131</span>
             </p>
             <p class="venue-transit-note">
-              지하철 3호선 동대입구역 5번 출구 (신라호텔 셔틀버스 운행) · Subway Line 3 Dongguk Univ. Station Exit 5
+              지하철 3호선 동대입구역 5번 출구 (호텔 셔틀버스 상시 운행)
             </p>
-
-            <div class="venue-actions">
+            <div class="venue-action-row">
               <a
                 class="venue-map-btn"
-                href="https://www.google.com/maps/search/?api=1&amp;query=The+Shilla+Seoul+Dynasty+Hall+202+Jangchung-dong+2-ga+Jung-gu+Seoul"
+                href="https://www.google.com/maps/search/?api=1&query=The+Shilla+Seoul+Dynasty+Hall"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <span>GOOGLE MAPS · 오시는 길 안내 (Directions) ↗</span>
+                <span>GOOGLE MAPS · 지도 보기</span>
                 <span aria-hidden="true">↗</span>
               </a>
             </div>
           </div>
         </section>
 
-        <!-- ==================================================================
-             SECTION 9 — 3-COLUMN BORDERED FOOTER & "The GUEST LIST" RSVP
-             (Matching Reference Image 1 Bottom Grid)
-             ================================================================== -->
-        <footer class="korea-footer-grid" id="guest-list">
-          <!-- Column 1: Navigation & Venue Summary -->
-          <div class="footer-col footer-col-links">
-            <p class="footer-col-kicker">NAVIGATION</p>
-            <a href="#hero-garden">HOME · 처음으로</a>
-            <a href="#invitation-letter">INVITATION · 초대의 글</a>
-            <a href="#day-schedule">SCHEDULE · 예식 순서</a>
-            <a href="#recent-moments">GALLERY · 웨딩 갤러리</a>
-            <a href="#venue-location">THE SHILLA SEOUL · 오시는 길</a>
+        <!-- ===================================================================
+             SECTION 5 — VERTICAL PINSTRIPE GALLERY ("RECENT MOMENTS")
+             =================================================================== -->
+        <section class="korea-pinstripe-gallery" id="gallery" aria-label="Wedding Photo Gallery">
+          <div class="moments-header-row">
+            <div class="moments-header-left">
+              <span class="moments-kr-tag">웨딩 갤러리 · SEOUL GARDEN</span>
+              <p class="moments-subnote">사진을 클릭하시면 크게 보실 수 있습니다</p>
+            </div>
+            <div class="moments-header-right">
+              <h2 class="moments-title">RECENT MOMENTS</h2>
+              <a href="#rsvp" class="moments-sub-link">LEAVE YOUR BLESSING ↗</a>
+            </div>
           </div>
 
-          <!-- Column 2: Octagonal Crest & Couple Signature -->
+          <div class="moments-staggered-strip">
+            <figure
+              class="moment-card moment-card-sm"
+              data-full="images/photo_2026-10-23_11-47-29.jpg"
+              data-caption="김서연 &amp; 이도윤 · 화이트 부케와 걸음"
+            >
+              <img
+                src="images/photo_2026-10-23_11-47-29.jpg"
+                alt="Bride holding white bouquet walking with groom on green lawn"
+                loading="lazy"
+              />
+            </figure>
+
+            <figure
+              class="moment-card moment-card-tall"
+              data-full="images/photo_2026-10-23_11-47-51.jpg"
+              data-caption="김서연 &amp; 이도윤 · 정원 나무 아래에서"
+            >
+              <img
+                src="images/photo_2026-10-23_11-47-51.jpg"
+                alt="Groom kissing bride's hand beneath lush green garden trees"
+                loading="lazy"
+              />
+            </figure>
+
+            <figure
+              class="moment-card moment-card-mid"
+              data-full="images/photo_2026-10-23_11-47-40.jpg"
+              data-caption="김서연 &amp; 이도윤 · 베일 아래의 화이트 피오니"
+            >
+              <img
+                src="images/photo_2026-10-23_11-47-40.jpg"
+                alt="White peony bridal bouquet under soft lace veil"
+                loading="lazy"
+              />
+            </figure>
+
+            <figure
+              class="moment-card moment-card-tall"
+              data-full="images/photo_2026-10-23_11-47-55.jpg"
+              data-caption="김서연 &amp; 이도윤 · 사이프러스 나무 길에서"
+            >
+              <img
+                src="images/photo_2026-10-23_11-47-55.jpg"
+                alt="Couple embracing between tall green cypress trees"
+                loading="lazy"
+              />
+            </figure>
+
+            <figure
+              class="moment-card moment-card-sm"
+              data-full="images/photo_2026-10-23_11-47-43.jpg"
+              data-caption="김서연 &amp; 이도윤 · 레이스 웨딩 슈즈와 잔디"
+            >
+              <img
+                src="images/photo_2026-10-23_11-47-43.jpg"
+                alt="Bridal lace socks and pearl heels on green garden grass"
+                loading="lazy"
+              />
+            </figure>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             SECTION 6 — 3-COLUMN BORDERED FOOTER & "The GUEST LIST" RSVP
+             =================================================================== -->
+        <footer class="korea-footer-grid" id="rsvp" aria-label="RSVP and Footer">
+          <!-- Column 1: Navigation Links -->
+          <div class="footer-col footer-col-links">
+            <p class="footer-col-kicker">NAVIGATION</p>
+            <a href="#invitation">INVITATION</a>
+            <a href="#story">OUR STORY</a>
+            <a href="#details">SCHEDULE &amp; VENUE</a>
+            <a href="#gallery">GALLERY</a>
+            <a href="#rsvp">RSVP</a>
+          </div>
+
+          <!-- Column 2: Center Crest & Couple Signature -->
           <div class="footer-col footer-col-crest">
             <div class="footer-crest-wrap" aria-hidden="true">
-              <svg class="octagonal-crest-svg" viewBox="0 0 120 120" fill="none">
-                <path
-                  d="M34 10H86L100 24V36L110 46V74L100 84V96L86 110H34L20 96V84L10 74V46L20 36V24L34 10Z"
+              <svg viewBox="0 0 120 120" class="octagonal-crest-svg">
+                <polygon
+                  points="38,6 82,6 114,38 114,82 82,114 38,114 6,82 6,38"
+                  fill="none"
                   stroke="currentColor"
-                  stroke-width="1.2"
+                  stroke-width="1.3"
                 />
-                <path
-                  d="M37 15H83L95 27V38L104 47V73L95 82V93L83 105H37L25 93V82L16 73V47L25 38V27L37 15Z"
+                <polygon
+                  points="41,12 79,12 108,41 108,79 79,108 41,108 12,79 12,41"
+                  fill="none"
                   stroke="currentColor"
                   stroke-width="0.7"
-                  opacity="0.5"
                 />
                 <text x="60" y="71" text-anchor="middle" class="crest-monogram-letters">SD</text>
               </svg>
             </div>
-            <p class="footer-crest-tagline">CAPTURING <em>the</em> MOMENTS</p>
-            <p class="footer-crest-couple">김서연 (Kim Seo-yeon) &amp; 이도윤 (Lee Do-yoon)</p>
-            <p class="footer-crest-date">2026 . 10 . 24 · THE SHILLA SEOUL</p>
+            <p class="footer-crest-tagline">FOREVER <em>Begins</em> HERE</p>
+            <p class="footer-crest-couple">김서연 &amp; 이도윤</p>
+            <p class="footer-crest-date">2026. 10. 24 · THE SHILLA SEOUL</p>
           </div>
 
-          <!-- Column 3: "The GUEST LIST" Interactive RSVP Form -->
+          <!-- Column 3: "The GUEST LIST" RSVP Form -->
           <div class="footer-col footer-col-rsvp">
             <h2 class="guestlist-title"><em>The</em> GUEST LIST</h2>
             <p class="guestlist-desc">
-              참석 여부와 따뜻한 축하 메시지를 남겨주세요 · Please RSVP and share your warm blessings for Seo-yeon &amp; Do-yoon.
+              참석 여부와 축하 메시지를 남겨주시면 감사하겠습니다.<br />
+              Kindly confirm your attendance for Seo-yeon &amp; Do-yoon.
             </p>
-            <form id="korea-rsvp-form" class="guestlist-form">
+            <form class="guestlist-form" id="korea-rsvp-form">
               <input
                 type="text"
-                id="korea-guest-name"
-                name="guestName"
-                placeholder="성함 / Your Full Name…"
+                name="name"
                 required
-                maxlength="100"
+                placeholder="성함 · Guest Name"
+                aria-label="성함 · Guest Name"
               />
               <div class="guestlist-row">
-                <select id="korea-attending" name="attending" aria-label="참석 여부 / Attendance">
-                  <option value="yes">참석합니다 · Joyfully Attending</option>
-                  <option value="no">마음으로 축복합니다 · Celebrating in Spirit</option>
+                <select name="attendance" aria-label="참석 여부">
+                  <option value="attending">참석합니다 · Joyfully Attend</option>
+                  <option value="unable">마음으로 축복합니다 · Regretfully Decline</option>
                 </select>
-                <input
-                  type="number"
-                  id="korea-guest-count"
-                  name="guestCount"
-                  min="1"
-                  max="10"
-                  value="1"
-                  aria-label="참석 인원 / Number of Guests"
-                />
+                <select name="guests" aria-label="동반 인원">
+                  <option value="1">1명</option>
+                  <option value="2" selected>2명</option>
+                  <option value="3">3명</option>
+                  <option value="4">4명</option>
+                </select>
               </div>
               <textarea
-                id="korea-guest-message"
                 name="message"
                 rows="2"
-                maxlength="500"
-                placeholder="축하 메시지 / Your warm wishes &amp; blessings for the couple…"
+                placeholder="축하 메시지 · Leave a blessing for the couple..."
+                aria-label="축하 메시지"
               ></textarea>
-              <button type="submit" class="guestlist-submit-btn">SEND WISHES · 축하 메시지 보내기</button>
-              <p id="korea-rsvp-status" class="guestlist-status" role="status" aria-live="polite"></p>
+              <button type="submit" class="guestlist-submit-btn">SEND RSVP · 참석 의사 전달</button>
+              <p class="guestlist-status" id="rsvp-status" role="status" aria-live="polite"></p>
             </form>
           </div>
         </footer>
 
         <div class="korea-bottom-legal">
-          <span>TEMPLATE N° 04 · KOREA STYLE</span>
-          <span>김서연 &amp; 이도윤 · THE SHILLA SEOUL DYNASTY HALL</span>
-          <a href="/#kho-mau-thiep" target="_top">← KISMET LOVE SHOWROOM</a>
+          <span>KIM SEO-YEON &amp; LEE DO-YOON · 2026. 10. 24</span>
+          <span>THE SHILLA SEOUL · DYNASTY HALL</span>
+          <span>KISMET BESPOKE COLLECTION</span>
         </div>
       </main>
     </div>
   </div>
 
-  <!-- Lightbox Modal for Full-Screen Photo Viewing -->
-  <dialog class="korea-lightbox" id="korea-lightbox" aria-label="웨딩 갤러리 사진 보기">
-    <button type="button" class="lightbox-close" id="lightbox-close" aria-label="닫기 · Close">✕</button>
-    <button type="button" class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="이전 사진 · Previous">‹</button>
-    <img id="lightbox-img" src="images/photo_2026-10-23_11-47-51.jpg" alt="" data-kismet-skip="true" />
-    <button type="button" class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="다음 사진 · Next">›</button>
-    <p class="lightbox-caption" id="lightbox-caption">김서연 &amp; 이도윤 · THE SHILLA SEOUL</p>
+  <!-- Lightbox Dialog -->
+  <dialog class="korea-lightbox" id="korea-lightbox" aria-label="웨딩 사진 크게 보기">
+    <button type="button" class="lightbox-close" id="lightbox-close" aria-label="닫기">✕</button>
+    <button type="button" class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="이전 사진">‹</button>
+    <figure class="lightbox-stage">
+      <img id="lightbox-img" src="images/photo_2026-10-23_11-47-51.jpg" alt="" />
+      <figcaption class="lightbox-caption" id="lightbox-caption"></figcaption>
+    </figure>
+    <button type="button" class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="다음 사진">›</button>
   </dialog>
+
+  <script src="korea.js?v=20261109-korea-v4"></script>
 </body>
 </html>
