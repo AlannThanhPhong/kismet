@@ -6,7 +6,6 @@ const openingCardTrigger = document.querySelector("#opening-card-trigger");
 const introVideo = document.querySelector("#intro-video");
 const introSoundBtn = document.querySelector("#intro-sound-btn");
 const skipIntroBtn = document.querySelector("#skip-intro");
-const autoplayFallbackBtn = document.querySelector("#autoplay-fallback-btn");
 const weddingBgm = document.querySelector("#wedding-bgm");
 const musicFab = document.querySelector("#music-fab");
 
@@ -69,31 +68,17 @@ function tryAutoplayIntro() {
   introVideo.muted = true;
   const playPromise = introVideo.play();
   if (playPromise !== undefined) {
-    playPromise
-      .then(() => {
-        if (autoplayFallbackBtn instanceof HTMLButtonElement) {
-          autoplayFallbackBtn.hidden = true;
-        }
-      })
-      .catch(() => {
-        // Nếu chế độ tiết kiệm pin chặn autoplay, hiện nút chạm nhẹ để phát ngay
-        if (autoplayFallbackBtn instanceof HTMLButtonElement) {
-          autoplayFallbackBtn.hidden = false;
-        }
-      });
+    playPromise.catch(() => {});
   }
 }
 
 function handleManualIntroStart() {
   if (fountainShown || invitationRevealed || !(introVideo instanceof HTMLVideoElement)) return;
   if (!introVideo.paused) return;
-  if (autoplayFallbackBtn instanceof HTMLButtonElement) {
-    autoplayFallbackBtn.hidden = true;
-  }
-  introVideo.muted = false;
+  introVideo.muted = true;
   if (introSoundBtn instanceof HTMLButtonElement) {
-    introSoundBtn.setAttribute("aria-pressed", "true");
-    introSoundBtn.innerHTML = '<span aria-hidden="true">♫</span> Đang bật tiếng';
+    introSoundBtn.setAttribute("aria-pressed", "false");
+    introSoundBtn.innerHTML = '<span aria-hidden="true">♫</span> Bật tiếng';
   }
   introVideo.play().catch(() => {
     introVideo.muted = true;
@@ -105,7 +90,6 @@ function handleManualIntroStart() {
   });
 }
 
-autoplayFallbackBtn?.addEventListener("click", handleManualIntroStart);
 introVideo?.addEventListener("click", handleManualIntroStart);
 
 introSoundBtn?.addEventListener("click", () => {
