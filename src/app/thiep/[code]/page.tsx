@@ -108,7 +108,7 @@ export default async function InvitationPage({ params }: Props) {
                   : code;
     const revision =
       code === "20260612-QSMA"
-        ? "?v=20261109-qsma-intro-silent"
+        ? "?v=20261114-qsma-cut-song"
         : code === "20260323-NDNL"
         ? "?v=20261023-collage-fix"
         : code === "20260823-NDTD"
