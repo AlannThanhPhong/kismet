@@ -123,6 +123,8 @@ export default async function InvitationPage({ params }: Props) {
                   ? "?v=20261109-coquette-mobile-layout"
                   : code === "korea-style"
                     ? "?v=20261109-korea-v4"
+                    : code === "doodle-art"
+                      ? "?v=20261117-doodle-v11"
                     : code === "tuscany-editorial"
                       ? "?v=20261024-tuscany-v1"
                       : "";

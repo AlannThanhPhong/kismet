@@ -1,291 +1,224 @@
-/**
- * KOREA STYLE — WEDDING INVITATION INTERACTIVE SCRIPTS
- * Whimsical Hand-Drawn Doodle Style
- * Music: Young and Beautiful (Instrumental)
- */
+/* ==========================================================================
+   Template #5 — DOODLE ART · WHIMSICAL ILLUSTRATED WEDDING INVITATION
+   Couple: Gabriel Moreau & Amélie Laurent
+   Date: June 12, 2027 · 17:00 CEST (Château Belle Étoile, France)
+   ========================================================================== */
 
-document.addEventListener('DOMContentLoaded', () => {
-  // Elements
+(function () {
+  'use strict';
+
   const body = document.body;
-  const gateCover = document.getElementById('gate-cover');
-  const btnOpenInvitation = document.getElementById('btn-open-invitation');
-  const gateCarStage = document.getElementById('gate-car-stage');
-  const weddingMusic = document.getElementById('wedding-music');
-  const audioDock = document.getElementById('audio-dock');
-  const btnAudioToggle = document.getElementById('btn-audio-toggle');
-  const toastMessage = document.getElementById('toast-message');
+  const coverGate = document.getElementById('ks-opening-gate');
+  const openBtn = document.getElementById('ks-open-btn');
+  const gateFlash = document.getElementById('ks-gate-flash');
+  const bgMusic = document.getElementById('bg-music');
+  const musicToggle = document.getElementById('music-toggle');
+  const musicToggleText = document.getElementById('music-toggle-text');
+  const confettiLayer = document.getElementById('ks-confetti-layer');
+  const calGrid = document.getElementById('ks-calendar-grid');
+  const rsvpForm = document.getElementById('ks-rsvp-form');
+  const rsvpStatus = document.getElementById('rsvp-status');
 
-  // State
-  let isGateOpened = false;
+  let isOpened = false;
+  let isOpening = false;
+  let isMusicPlaying = false;
 
-  // -------------------------------------------------------------------------
-  // 1. OPENING GATE INTERACTION
-  // -------------------------------------------------------------------------
-  function openInvitation() {
-    if (isGateOpened) return;
-    isGateOpened = true;
-
-    // Start audio immediately within user gesture context
-    if (weddingMusic) {
-      weddingMusic.volume = 0.85;
-      weddingMusic.play().then(() => {
-        if (audioDock) audioDock.classList.add('is-playing');
-      }).catch((err) => {
-        console.warn('Audio playback deferred:', err);
-      });
+  /* ------------------------------------------------------------------------
+     1. CELEBRATORY CONFETTI / FLOWER PETALS (Palette Colors)
+     ------------------------------------------------------------------------ */
+  function spawnConfetti(count = 24) {
+    if (!confettiLayer) return;
+    const colors = ['#A3C6DF', '#A8BC7A', '#F3C4CE', '#C86D98', '#FAF6EF'];
+    for (let i = 0; i < count; i += 1) {
+      const p = document.createElement('span');
+      p.className = 'ks-confetti-particle';
+      p.style.backgroundColor = colors[i % colors.length];
+      p.style.left = `${10 + Math.random() * 80}%`;
+      p.style.top = `${10 + Math.random() * 40}%`;
+      p.style.setProperty('--cf-dx', `${(Math.random() - 0.5) * 160}px`);
+      p.style.setProperty('--cf-dy', `${140 + Math.random() * 220}px`);
+      confettiLayer.appendChild(p);
+      setTimeout(() => p.remove(), 2500);
     }
+  }
 
-    // Car drive & smoke animation
-    if (gateCarStage) {
-      gateCarStage.classList.add('car-rolling');
+  /* ------------------------------------------------------------------------
+     2. BACKGROUND MUSIC TOGGLE (Young and Beautiful)
+     ------------------------------------------------------------------------ */
+  function updateMusicUI(playing) {
+    isMusicPlaying = playing;
+    if (musicToggle) {
+      musicToggle.setAttribute('aria-pressed', playing ? 'true' : 'false');
     }
-
-    // Slide up and dissolve gate
-    setTimeout(() => {
-      body.classList.remove('invitation-closed');
-      body.classList.add('invitation-opened');
-
-      // Scroll smoothly to top of main content
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 650);
-
-    // Completely hide gate from accessibility tree after transition
-    setTimeout(() => {
-      if (gateCover) {
-        gateCover.style.display = 'none';
-      }
-    }, 1500);
+    if (musicToggleText) {
+      musicToggleText.textContent = playing ? 'Playing ♪' : 'Young & Beautiful';
+    }
   }
 
-  if (btnOpenInvitation) {
-    btnOpenInvitation.addEventListener('click', openInvitation);
-  }
-  if (gateCarStage) {
-    gateCarStage.addEventListener('click', openInvitation);
+  function startMusic() {
+    if (!bgMusic) return;
+    bgMusic.volume = 0.72;
+    const playPromise = bgMusic.play();
+    if (playPromise && typeof playPromise.then === 'function') {
+      playPromise
+        .then(() => updateMusicUI(true))
+        .catch(() => updateMusicUI(false));
+    }
   }
 
-  // -------------------------------------------------------------------------
-  // 2. AUDIO PLAY / PAUSE CONTROLS
-  // -------------------------------------------------------------------------
-  if (btnAudioToggle && weddingMusic) {
-    btnAudioToggle.addEventListener('click', (e) => {
+  function toggleMusic() {
+    if (!bgMusic) return;
+    if (bgMusic.paused) {
+      startMusic();
+    } else {
+      bgMusic.pause();
+      updateMusicUI(false);
+    }
+  }
+
+  if (musicToggle) {
+    musicToggle.addEventListener('click', (e) => {
       e.stopPropagation();
-      if (weddingMusic.paused) {
-        weddingMusic.play().then(() => {
-          if (audioDock) audioDock.classList.add('is-playing');
-          showToast('♪ Now Playing: Young and Beautiful');
-        }).catch(console.warn);
-      } else {
-        weddingMusic.pause();
-        if (audioDock) audioDock.classList.remove('is-playing');
-        showToast('Music Paused');
-      }
-    });
-
-    weddingMusic.addEventListener('play', () => {
-      if (audioDock) audioDock.classList.add('is-playing');
-    });
-
-    weddingMusic.addEventListener('pause', () => {
-      if (audioDock) audioDock.classList.remove('is-playing');
-    });
-
-    weddingMusic.addEventListener('ended', () => {
-      // Loop is handled by audio tag, but if it ends:
-      if (audioDock) audioDock.classList.remove('is-playing');
+      toggleMusic();
     });
   }
 
-  // -------------------------------------------------------------------------
-  // 3. REALTIME COUNTDOWN TIMER (Target: 2027-06-12 16:00:00 CEST)
-  // -------------------------------------------------------------------------
-  const cdDays = document.getElementById('cd-days');
-  const cdHours = document.getElementById('cd-hours');
-  const cdMinutes = document.getElementById('cd-minutes');
-  const cdSeconds = document.getElementById('cd-seconds');
+  /* ------------------------------------------------------------------------
+     3. OPEN INVITATION SEQUENCE
+     ------------------------------------------------------------------------ */
+  function openInvitation() {
+    if (isOpened || isOpening) return;
+    isOpening = true;
 
-  // June 12, 2027 16:00:00 CEST
-  const targetDate = new Date('2027-06-12T16:00:00+02:00').getTime();
+    startMusic();
+    if (gateFlash) gateFlash.classList.add('is-flashing');
+
+    setTimeout(() => {
+      isOpened = true;
+      body.classList.remove('invitation-closed');
+      if (coverGate) {
+        coverGate.classList.add('is-opened');
+        setTimeout(() => {
+          coverGate.hidden = true;
+        }, 750);
+      }
+      spawnConfetti(28);
+    }, 450);
+  }
+
+  if (openBtn) {
+    openBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openInvitation();
+    });
+  }
+
+  if (coverGate) {
+    coverGate.addEventListener('click', (e) => {
+      if (e.target === coverGate) {
+        openInvitation();
+      }
+    });
+  }
+
+  /* ------------------------------------------------------------------------
+     4. JUNE 2027 CALENDAR GENERATION (Highlight Day 12)
+     ------------------------------------------------------------------------ */
+  function buildCalendar() {
+    if (!calGrid) return;
+    calGrid.innerHTML = '';
+
+    // June 2027:
+    // June 1 is Tuesday.
+    // In Monday-first week (M, T, W, T, F, S, S):
+    // June 1 is index 1 (0=Mon, 1=Tue).
+    const startDayIndex = 1; // 1 empty cell before 1st
+    const totalDays = 30;
+    const weddingDay = 12; // Saturday, June 12
+
+    for (let i = 0; i < startDayIndex; i += 1) {
+      const cell = document.createElement('div');
+      cell.className = 'ks-cal-cell is-empty';
+      calGrid.appendChild(cell);
+    }
+
+    for (let day = 1; day <= totalDays; day += 1) {
+      const cell = document.createElement('div');
+      cell.className = 'ks-cal-cell';
+      cell.textContent = String(day);
+      if (day === weddingDay) {
+        cell.classList.add('is-wedding-date');
+        cell.setAttribute('aria-label', `Wedding day: June ${day}, 2027`);
+      }
+      calGrid.appendChild(cell);
+    }
+  }
+
+  buildCalendar();
+
+  /* ------------------------------------------------------------------------
+     5. LIVE WEDDING COUNTDOWN TIMER
+     Target: June 12, 2027 at 17:00:00 CEST (UTC+2)
+     ------------------------------------------------------------------------ */
+  const weddingDate = new Date('2027-06-12T17:00:00+02:00').getTime();
+  const elDays = document.getElementById('cd-days');
+  const elHours = document.getElementById('cd-hours');
+  const elMins = document.getElementById('cd-mins');
+  const elSecs = document.getElementById('cd-secs');
 
   function updateCountdown() {
-    const now = new Date().getTime();
-    const distance = targetDate - now;
+    const now = Date.now();
+    const distance = weddingDate - now;
 
     if (distance <= 0) {
-      if (cdDays) cdDays.textContent = '00';
-      if (cdHours) cdHours.textContent = '00';
-      if (cdMinutes) cdMinutes.textContent = '00';
-      if (cdSeconds) cdSeconds.textContent = '00';
+      if (elDays) elDays.textContent = '00';
+      if (elHours) elHours.textContent = '00';
+      if (elMins) elMins.textContent = '00';
+      if (elSecs) elSecs.textContent = '00';
       return;
     }
 
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const secs = Math.floor((distance % (1000 * 60)) / 1000);
 
-    if (cdDays) cdDays.textContent = String(days).padStart(2, '0');
-    if (cdHours) cdHours.textContent = String(hours).padStart(2, '0');
-    if (cdMinutes) cdMinutes.textContent = String(minutes).padStart(2, '0');
-    if (cdSeconds) cdSeconds.textContent = String(seconds).padStart(2, '0');
+    if (elDays) elDays.textContent = String(days).padStart(2, '0');
+    if (elHours) elHours.textContent = String(hours).padStart(2, '0');
+    if (elMins) elMins.textContent = String(mins).padStart(2, '0');
+    if (elSecs) elSecs.textContent = String(secs).padStart(2, '0');
   }
 
   updateCountdown();
   setInterval(updateCountdown, 1000);
 
-  // -------------------------------------------------------------------------
-  // 4. COPY BANK ACCOUNT NUMBERS
-  // -------------------------------------------------------------------------
-  const copyButtons = document.querySelectorAll('.btn-copy-account');
-  copyButtons.forEach((btn) => {
-    btn.addEventListener('click', async () => {
-      const textToCopy = btn.getAttribute('data-copy') || '';
-      try {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          await navigator.clipboard.writeText(textToCopy);
-        } else {
-          // Fallback
-          const tempInput = document.createElement('input');
-          tempInput.value = textToCopy;
-          document.body.appendChild(tempInput);
-          tempInput.select();
-          document.execCommand('copy');
-          document.body.removeChild(tempInput);
-        }
-        btn.textContent = 'Copied! ✓';
-        btn.style.background = '#4d7c57';
-        setTimeout(() => {
-          btn.textContent = 'Copy';
-          btn.style.background = '';
-        }, 2200);
-        showToast('Details copied to clipboard!');
-      } catch (err) {
-        showToast(textToCopy);
-      }
-    });
-  });
-
-  // -------------------------------------------------------------------------
-  // 5. WEDDING PHOTO GALLERY LIGHTBOX
-  // -------------------------------------------------------------------------
-  const galleryItems = document.querySelectorAll('#gallery-grid .gallery-item');
-  const lightboxModal = document.getElementById('lightbox-modal');
-  const lightboxBackdrop = document.getElementById('lightbox-backdrop');
-  const lightboxImg = document.getElementById('lightbox-img');
-  const lightboxCounter = document.getElementById('lightbox-counter');
-  const btnLbClose = document.getElementById('btn-lightbox-close');
-  const btnLbPrev = document.getElementById('btn-lb-prev');
-  const btnLbNext = document.getElementById('btn-lb-next');
-
-  let currentPhotoIndex = 0;
-  const photoSrcs = [];
-
-  galleryItems.forEach((item, index) => {
-    const img = item.querySelector('img');
-    if (img) {
-      photoSrcs.push(img.src);
-      item.addEventListener('click', () => {
-        openLightbox(index);
-      });
-    }
-  });
-
-  function openLightbox(index) {
-    if (!lightboxModal || !lightboxImg || photoSrcs.length === 0) return;
-    currentPhotoIndex = index;
-    lightboxImg.src = photoSrcs[currentPhotoIndex];
-    if (lightboxCounter) {
-      lightboxCounter.textContent = `${currentPhotoIndex + 1} / ${photoSrcs.length}`;
-    }
-    lightboxModal.removeAttribute('hidden');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeLightbox() {
-    if (!lightboxModal) return;
-    lightboxModal.setAttribute('hidden', '');
-    document.body.style.overflow = '';
-  }
-
-  function showNextPhoto() {
-    if (photoSrcs.length === 0) return;
-    currentPhotoIndex = (currentPhotoIndex + 1) % photoSrcs.length;
-    if (lightboxImg) lightboxImg.src = photoSrcs[currentPhotoIndex];
-    if (lightboxCounter) {
-      lightboxCounter.textContent = `${currentPhotoIndex + 1} / ${photoSrcs.length}`;
-    }
-  }
-
-  function showPrevPhoto() {
-    if (photoSrcs.length === 0) return;
-    currentPhotoIndex = (currentPhotoIndex - 1 + photoSrcs.length) % photoSrcs.length;
-    if (lightboxImg) lightboxImg.src = photoSrcs[currentPhotoIndex];
-    if (lightboxCounter) {
-      lightboxCounter.textContent = `${currentPhotoIndex + 1} / ${photoSrcs.length}`;
-    }
-  }
-
-  if (btnLbClose) btnLbClose.addEventListener('click', closeLightbox);
-  if (lightboxBackdrop) lightboxBackdrop.addEventListener('click', closeLightbox);
-  if (btnLbNext) btnLbNext.addEventListener('click', showNextPhoto);
-  if (btnLbPrev) btnLbPrev.addEventListener('click', showPrevPhoto);
-
-  window.addEventListener('keydown', (e) => {
-    if (!lightboxModal || lightboxModal.hasAttribute('hidden')) return;
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowRight') showNextPhoto();
-    if (e.key === 'ArrowLeft') showPrevPhoto();
-  });
-
-  // -------------------------------------------------------------------------
-  // 6. RSVP FORM SUBMISSION
-  // -------------------------------------------------------------------------
-  const rsvpForm = document.getElementById('rsvp-form');
-  const rsvpSuccessBox = document.getElementById('rsvp-success-box');
-
+  /* ------------------------------------------------------------------------
+     6. RSVP FORM SUBMISSION
+     ------------------------------------------------------------------------ */
   if (rsvpForm) {
     rsvpForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      const nameInput = document.getElementById('rsvp-name');
-      const phoneInput = document.getElementById('rsvp-phone');
+      const formData = new FormData(rsvpForm);
+      const name = (formData.get('name') || '').toString().trim() || 'Cher invité';
+      const attendance = formData.get('attendance');
 
-      if (!nameInput || !nameInput.value.trim()) {
-        showToast('Please enter your full name.');
-        if (nameInput) nameInput.focus();
-        return;
-      }
-
-      if (!phoneInput || !phoneInput.value.trim()) {
-        showToast('Please enter your contact information.');
-        if (phoneInput) phoneInput.focus();
-        return;
-      }
-
-      // Smooth transition to success
-      rsvpForm.style.opacity = '0.4';
-      rsvpForm.style.pointerEvents = 'none';
-
-      setTimeout(() => {
-        rsvpForm.hidden = true;
-        if (rsvpSuccessBox) {
-          rsvpSuccessBox.hidden = false;
+      if (rsvpStatus) {
+        if (attendance === 'attending') {
+          rsvpStatus.textContent = `Thank you, ${name}! Your warm presence means the world to us. (Merci beaucoup pour votre présence !)`;
+        } else {
+          rsvpStatus.textContent = `Thank you, ${name}! Your heartfelt blessings are deeply appreciated. (Merci de tout cœur pour vos vœux !)`;
         }
-        showToast('💌 Thank you! Your RSVP has been received.');
-      }, 400);
+      }
+
+      spawnConfetti(26);
+      rsvpForm.reset();
     });
   }
 
-  // -------------------------------------------------------------------------
-  // 7. TOAST NOTIFICATION HELPER
-  // -------------------------------------------------------------------------
-  let toastTimer = null;
-  function showToast(msg) {
-    if (!toastMessage) return;
-    toastMessage.textContent = msg;
-    toastMessage.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => {
-      toastMessage.classList.remove('show');
-    }, 2800);
+  // Auto open if URL has ?open=true for visual verification
+  if (window.location.search.includes('open=true')) {
+    body.classList.remove('invitation-closed');
+    if (coverGate) coverGate.hidden = true;
+    isOpened = true;
   }
-});
+})();
