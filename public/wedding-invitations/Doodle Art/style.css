@@ -1,1573 +1,1638 @@
 /* ==========================================================================
-   KOREA STYLE — DOODLE & HAND-DRAWN WEDDING INVITATION
-   Inspired by @lysfilter, @lovelab.invitations & Korean Drawing Taplink Style
-   Color Palette: Forest Green (#2d4a36), Warm Cream (#faf7f0), Honey Gold (#d1a868)
+   Template #5 — DOODLE ART · WHIMSICAL ILLUSTRATED WEDDING INVITATION
+   Couple: Gabriel Moreau & Amélie Laurent
+   Exact Specified Color Palette:
+     #A3C6DF (Pastel Sky Blue)
+     #A8BC7A (Soft Olive)
+     #F3C4CE (Blush / Pastel Pink)
+     #C86D98 (Mauve / Berry Pink)
    ========================================================================== */
 
-/* --- CSS Reset & Base Variables --- */
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+:root {
+  --ks-sky: #A3C6DF;
+  --ks-olive: #A8BC7A;
+  --ks-olive-dark: #647B36;
+  --ks-olive-light: #EBF1DF;
+  --ks-blush: #F3C4CE;
+  --ks-blush-light: #FDF1F4;
+  --ks-berry: #C86D98;
+  --ks-berry-deep: #9B3D6B;
+  --ks-cream: #FAF6EF;
+  --ks-cream-card: #FFFCF7;
+  --ks-cream-warm: #F6EFE3;
+  --ks-ink: #2C2824;
+  --ks-ink-soft: #5E5549;
+  --ks-muted: #8E8273;
+  --ks-border-light: rgba(168, 188, 122, 0.35);
+
+  --ks-font-hand: 'Caveat', 'Gaegu', cursive, sans-serif;
+  --ks-font-title: 'Gaegu', 'Caveat', cursive, sans-serif;
+  --ks-font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --ks-font-kr: 'Gowun Batang', Georgia, serif;
 }
 
-:root {
-  --color-bg: #faf7f0;
-  --color-card-bg: #ffffff;
-  --color-green-dark: #2d4a36;
-  --color-green-deep: #1e3626;
-  --color-green-sage: #52735d;
-  --color-green-light: #eaf2ea;
-  --color-ink: #222222;
-  --color-ink-muted: #555555;
-  --color-gold: #d1a868;
-  --color-gold-dark: #8d5d14;
-  --color-red-heart: #e74c3c;
-  --color-tape: rgba(246, 229, 182, 0.75);
-
-  --font-doodle: 'Gaegu', cursive, sans-serif;
-  --font-script: 'Alex Brush', cursive;
-  --font-serif: 'Gowun Batang', 'Cormorant Garamond', Georgia, serif;
-  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-
-  --max-content-width: 480px;
-  --border-doodle: 2px solid var(--color-ink);
-  --border-doodle-green: 2px solid var(--color-green-dark);
-  --radius-card: 22px;
-  --shadow-soft: 0 10px 30px rgba(45, 74, 54, 0.08);
-  --shadow-polaroid: 0 12px 28px rgba(0, 0, 0, 0.12);
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 html {
-  font-size: 16px;
   scroll-behavior: smooth;
-  background-color: #ede8dc;
-  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 24px;
 }
 
 body {
-  font-family: var(--font-sans);
-  color: var(--color-ink);
-  background-color: var(--color-bg);
+  margin: 0;
+  background-color: #E2DBD0;
+  color: var(--ks-ink);
+  font-family: var(--ks-font-sans);
   line-height: 1.6;
-  min-height: 100vh;
-  position: relative;
+  -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
 
-/* Paper grain texture overlay */
-.paper-grain {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 99;
-  opacity: 0.035;
-  background-image: radial-gradient(#222 1px, transparent 1px);
-  background-size: 4px 4px;
+img,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+figure,
+p,
+h1,
+h2,
+h3,
+h4,
+blockquote {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
 }
 
 /* ==========================================================================
-   OPENING GATE / COVER SCREEN
+   OPENING GATE SCREEN
    ========================================================================== */
-.gate-cover {
+body.invitation-closed {
+  overflow: hidden;
+  height: 100vh;
+}
+
+body.invitation-closed .ks-invitation-content,
+body.invitation-closed .ks-music-toggle {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+html.force-open body.invitation-closed {
+  overflow: auto !important;
+  height: auto !important;
+}
+
+html.force-open .ks-opening-gate {
+  display: none !important;
+}
+
+html.force-open .ks-invitation-content,
+html.force-open .ks-music-toggle {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+.ks-opening-gate {
   position: fixed;
   inset: 0;
-  z-index: 9999;
-  background: var(--color-bg);
+  z-index: 90;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px 20px;
-  transition: transform 0.85s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.75s ease;
+  padding: 16px;
   overflow-y: auto;
+  background: #E8E2D6;
+  transition: opacity 0.75s cubic-bezier(0.2, 0.9, 0.3, 1), visibility 0.75s;
 }
 
-body:not(.invitation-closed) .gate-cover {
-  transform: translateY(-100%);
+.ks-opening-gate.is-opened {
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
 }
 
-.gate-wrapper {
-  width: 100%;
-  max-width: var(--max-content-width);
-  background: #ffffff;
-  border: 2px solid var(--color-green-dark);
-  border-radius: 28px;
-  padding: 40px 24px 36px;
-  text-align: center;
-  position: relative;
-  box-shadow: 0 16px 40px rgba(45, 74, 54, 0.14);
-}
-
-.gate-corner-leaf {
+.ks-gate-ambient {
   position: absolute;
-  width: 44px;
-  height: 44px;
-}
-.gate-corner-tl {
-  top: 12px;
-  left: 12px;
-}
-.gate-corner-tr {
-  top: 12px;
-  right: 12px;
-}
-
-.gate-header {
-  margin-bottom: 18px;
-}
-.gate-eyebrow {
-  display: inline-block;
-  font-family: var(--font-doodle);
-  font-size: 1.15rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: var(--color-green-dark);
-  margin-bottom: 6px;
-}
-.gate-couple-script {
-  font-family: var(--font-script);
-  font-size: 3.2rem;
-  font-weight: 400;
-  color: var(--color-ink);
-  line-height: 1.1;
-  margin-bottom: 4px;
-}
-.gate-korean-names {
-  font-family: var(--font-serif);
-  font-size: 1.05rem;
-  color: var(--color-green-sage);
-  letter-spacing: 0.25em;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(163, 198, 223, 0.45) 0%, transparent 45%),
+    radial-gradient(circle at 85% 80%, rgba(243, 196, 206, 0.5) 0%, transparent 50%),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 24px,
+      rgba(168, 188, 122, 0.12) 24px,
+      rgba(168, 188, 122, 0.12) 36px
+    );
 }
 
-/* Car Stage & Animation */
-.gate-car-stage {
+.ks-gate-card {
   position: relative;
-  width: 100%;
-  max-width: 330px;
-  margin: 10px auto 16px;
-  transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 2;
+  width: min(440px, 94vw);
+  background: var(--ks-cream-card);
+  border-radius: 24px;
+  border: 4px solid var(--ks-olive);
+  box-shadow:
+    0 24px 60px rgba(44, 40, 36, 0.22),
+    0 4px 18px rgba(44, 40, 36, 0.1),
+    inset 0 0 0 4px #FAF6EF;
+  overflow: hidden;
+  margin: auto;
 }
 
-.doodle-car-svg {
+.ks-gate-inner {
+  padding: clamp(28px, 5.5vh, 46px) clamp(20px, 5vw, 36px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.ks-gate-script-lead {
+  font-family: var(--ks-font-hand);
+  font-size: clamp(22px, 5vw, 28px);
+  font-weight: 600;
+  color: var(--ks-berry);
+  margin-bottom: 2px;
+}
+
+.ks-gate-script-title {
+  font-family: var(--ks-font-hand);
+  font-size: clamp(34px, 8vw, 48px);
+  font-weight: 700;
+  color: var(--ks-ink);
+  line-height: 1.12;
+  margin-bottom: 12px;
+}
+
+.ks-gate-script-title em {
+  font-style: italic;
+  font-size: 0.85em;
+  color: var(--ks-berry);
+  margin: 0 6px;
+}
+
+.ks-gate-script-title small {
+  display: block;
+  font-family: var(--ks-font-title);
+  font-size: 19px;
+  font-weight: 400;
+  color: var(--ks-olive-dark);
+  letter-spacing: 0.04em;
+  margin-top: 4px;
+}
+
+.ks-gate-vinyl-art {
+  width: min(320px, 86vw);
+  margin: 6px auto 14px;
+}
+
+.ks-gate-vinyl-frame {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(44, 40, 36, 0.14);
+  background: #FAF7F2;
+  border: 2px dashed rgba(168, 188, 122, 0.6);
+  padding: 4px;
+}
+
+.ks-gate-vinyl-img {
+  display: block;
   width: 100%;
   height: auto;
-  display: block;
+  border-radius: 14px;
+  transition: transform 0.6s cubic-bezier(0.2, 0.9, 0.3, 1);
 }
 
-.gate-car-stage.car-rolling {
-  transform: translateX(110%) scale(0.95);
-  opacity: 0.2;
+.ks-gate-vinyl-frame:hover .ks-gate-vinyl-img {
+  transform: scale(1.02);
 }
 
-/* Smoke puffs */
-.smoke-puffs {
+.ks-vinyl-label-overlay {
   position: absolute;
-  left: 10px;
-  bottom: 20px;
-  display: flex;
-  gap: 6px;
-  opacity: 0;
+  top: 62.3%;
+  left: 52.3%;
+  transform: translate(-50%, -50%);
+  width: 28%;
+  height: 21%;
   pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-.gate-car-stage.car-rolling .smoke-puffs {
-  opacity: 1;
-}
-.smoke-puff {
-  font-size: 1.4rem;
-  animation: puffFloat 0.8s infinite ease-out;
-}
-.smoke-puff.p2 { animation-delay: 0.15s; }
-.smoke-puff.p3 { animation-delay: 0.3s; }
-
-@keyframes puffFloat {
-  0% { transform: translate(0, 0) scale(0.6); opacity: 0; }
-  50% { opacity: 1; }
-  100% { transform: translate(-30px, -20px) scale(1.4); opacity: 0; }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
-.gate-meta {
-  margin-bottom: 24px;
-}
-.gate-date-main {
-  font-family: var(--font-doodle);
-  font-size: 1.5rem;
+.ks-vinyl-couple {
+  font-family: var(--ks-font-hand);
+  font-size: clamp(10px, 2.7vw, 12.5px);
   font-weight: 700;
-  color: var(--color-ink);
-}
-.gate-date-sub {
-  font-family: var(--font-serif);
-  font-size: 0.95rem;
-  color: var(--color-ink-muted);
+  color: #FFFFFF;
+  line-height: 1.0;
+  margin-bottom: 6px;
+  text-shadow: 0 1px 3px rgba(10, 25, 60, 0.55);
+  letter-spacing: 0.02em;
 }
 
-/* Interactive Open Button */
-.btn-open-invitation {
+.ks-vinyl-date {
+  font-family: var(--ks-font-sans);
+  font-size: clamp(7px, 1.8vw, 8.5px);
+  font-weight: 700;
+  color: #FFFFFF;
+  opacity: 0.95;
+  letter-spacing: 0.1em;
+  margin-top: 4px;
+  text-shadow: 0 1px 3px rgba(10, 25, 60, 0.55);
+}
+
+.ks-vinyl-sub {
+  font-family: var(--ks-font-sans);
+  font-size: clamp(5px, 1.3vw, 6.5px);
+  font-weight: 800;
+  color: #FFFFFF;
+  opacity: 0.92;
+  letter-spacing: 0.14em;
+  margin-top: 1px;
+  text-shadow: 0 1px 2px rgba(10, 25, 60, 0.55);
+}
+
+.ks-disco-gleam {
+  position: absolute;
+  top: 5%;
+  left: 30%;
+  width: 29%;
+  height: 24%;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.85) 0%, rgba(255, 240, 220, 0.45) 40%, transparent 70%);
+  mix-blend-mode: overlay;
+  animation: discoGleam 2.8s ease-in-out infinite alternate;
+}
+
+.ks-disco-glint {
+  position: absolute;
+  font-size: 14px;
+  color: #FFFFFF;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.95), 0 0 14px rgba(243, 196, 206, 0.85);
+  pointer-events: none;
+  animation: discoTwinkle 1.8s ease-in-out infinite;
+}
+
+.ks-disco-glint.g1 {
+  top: 6%;
+  left: 28%;
+  animation-delay: 0.2s;
+}
+
+.ks-disco-glint.g2 {
+  top: 15%;
+  left: 56%;
+  font-size: 16px;
+  animation-delay: 0.9s;
+}
+
+.ks-disco-glint.g3 {
+  top: 24%;
+  left: 36%;
+  font-size: 12px;
+  animation-delay: 1.4s;
+}
+
+@keyframes discoGleam {
+  0% { opacity: 0.3; transform: scale(0.92) rotate(0deg); }
+  50% { opacity: 0.95; transform: scale(1.1) rotate(180deg); }
+  100% { opacity: 0.35; transform: scale(0.95) rotate(360deg); }
+}
+
+@keyframes discoTwinkle {
+  0%, 100% { opacity: 0.15; transform: scale(0.6) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.3) rotate(45deg); }
+}
+
+.ks-vinyl-float-note {
+  position: absolute;
+  font-size: 16px;
+  color: var(--ks-berry);
+  pointer-events: none;
+  opacity: 0.75;
+  animation: floatNote 3.2s ease-in-out infinite;
+}
+
+.ks-vinyl-float-note.n1 {
+  top: 18%;
+  left: 12%;
+  animation-delay: 0s;
+}
+
+.ks-vinyl-float-note.n2 {
+  top: 12%;
+  right: 14%;
+  color: var(--ks-sky);
+  font-size: 19px;
+  animation-delay: 1.1s;
+}
+
+.ks-vinyl-float-note.n3 {
+  top: 48%;
+  right: 8%;
+  color: var(--ks-olive-dark);
+  font-size: 15px;
+  animation-delay: 2.2s;
+}
+
+@keyframes floatNote {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-8px) rotate(12deg) scale(1.15);
+    opacity: 0.95;
+  }
+}
+
+.ks-gate-venue-line {
+  font-family: var(--ks-font-title);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ks-ink);
+  margin-bottom: 2px;
+}
+
+.ks-gate-date-line {
+  font-family: var(--ks-font-sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ks-berry);
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+
+.ks-gate-rsvp-deadline {
+  font-family: var(--ks-font-hand);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ks-muted);
+  margin-bottom: 22px;
+}
+
+.ks-gate-open-btn {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  background: var(--color-green-dark);
-  color: #ffffff;
-  border: 2px solid var(--color-green-deep);
+  gap: 3px;
+  padding: 13px 36px;
+  border: 2.5px dashed var(--ks-berry);
   border-radius: 999px;
-  padding: 12px 36px;
-  font-family: var(--font-doodle);
-  font-size: 1.5rem;
-  font-weight: 700;
+  background: var(--ks-blush-light);
   cursor: pointer;
-  position: relative;
-  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 8px 20px rgba(45, 74, 54, 0.25);
-  outline: none;
-}
-.btn-open-invitation:hover,
-.btn-open-invitation:focus-visible {
-  transform: translateY(-2px) scale(1.02);
-  background: var(--color-green-deep);
-  box-shadow: 0 12px 26px rgba(45, 74, 54, 0.35);
-}
-.btn-open-invitation:active {
-  transform: translateY(1px) scale(0.98);
-}
-.btn-open-sub {
-  font-family: var(--font-serif);
-  font-size: 0.8rem;
-  font-weight: 400;
-  opacity: 0.9;
-  letter-spacing: 0.15em;
-  margin-top: -2px;
-}
-.btn-open-sparkle {
-  position: absolute;
-  right: 18px;
-  top: 14px;
-  color: var(--color-gold);
-  font-size: 1.2rem;
-  animation: pulseSparkle 1.8s infinite ease-in-out;
-}
-@keyframes pulseSparkle {
-  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.8; }
-  50% { transform: scale(1.3) rotate(35deg); opacity: 1; }
+  transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(200, 109, 152, 0.2);
 }
 
-.gate-hint {
-  font-family: var(--font-sans);
-  font-size: 0.82rem;
-  color: var(--color-green-sage);
-  margin-top: 12px;
+.ks-gate-open-btn:hover {
+  background: var(--ks-berry);
+  border-color: var(--ks-berry);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.ks-gate-open-btn:hover .ks-btn-label,
+.ks-gate-open-btn:hover .ks-btn-sparkle,
+.ks-gate-open-btn:hover small {
+  color: #fff;
+}
+
+.ks-btn-label {
+  font-family: var(--ks-font-title);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--ks-berry);
+  transition: color 0.2s;
+}
+
+.ks-btn-sparkle {
+  color: var(--ks-olive-dark);
+  font-size: 14px;
+}
+
+.ks-gate-open-btn small {
+  font-family: var(--ks-font-kr);
+  font-size: 11px;
+  color: var(--ks-muted);
+  transition: color 0.2s;
+}
+
+.ks-gate-flash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.96) 0%, rgba(243, 196, 206, 0.5) 60%, transparent 90%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.ks-gate-flash.is-flashing {
+  animation: ks-gate-flash-anim 0.75s ease-out forwards;
+}
+
+@keyframes ks-gate-flash-anim {
+  0% { opacity: 0; }
+  35% { opacity: 0.95; }
+  100% { opacity: 0; }
 }
 
 /* ==========================================================================
-   MAIN INVITATION WRAPPER & SECTIONS
+   MUSIC TOGGLE
    ========================================================================== */
-.invitation-main {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  padding: 16px 12px 100px;
+.ks-music-toggle {
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: max(16px, env(safe-area-inset-bottom));
+  z-index: 85;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  border: 2px dashed var(--ks-olive-dark);
+  border-radius: 999px;
+  background: rgba(255, 252, 247, 0.96);
+  backdrop-filter: blur(8px);
+  color: var(--ks-olive-dark);
+  box-shadow: 0 6px 20px rgba(50, 40, 30, 0.16);
+  font-family: var(--ks-font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
 }
 
-.site-container {
-  width: 100%;
-  max-width: var(--max-content-width);
-  background: var(--color-bg);
+.ks-music-toggle[aria-pressed="true"] {
+  background: var(--ks-olive);
+  border-color: var(--ks-olive);
+  color: #fff;
+}
+
+.ks-music-icon {
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* ==========================================================================
+   CONFETTI / PETAL SPARKS
+   ========================================================================== */
+.ks-confetti-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 88;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.ks-confetti-particle {
+  position: absolute;
+  width: 9px;
+  height: 12px;
+  border-radius: 50% 50% 50% 10%;
+  animation: ks-confetti-drop 2.4s cubic-bezier(0.2, 0.8, 0.4, 1) forwards;
+}
+
+@keyframes ks-confetti-drop {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -20px, 0) rotate(0deg);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--cf-dx, 30px), var(--cf-dy, 180px), 0) rotate(320deg);
+  }
+}
+
+/* ==========================================================================
+   MAIN INVITATION CONTAINER & DESKTOP 2-COLUMN LAYOUT
+   ========================================================================== */
+.ks-invitation-content {
+  position: relative;
+  min-height: 100vh;
+  padding: clamp(16px, 3.5vw, 42px) 12px clamp(48px, 6vw, 84px);
+  transition: opacity 0.8s ease;
+}
+
+/* Desktop Ambient Backdrop (Tulip & Meadow mood from Image 2) */
+.ks-desktop-ambient-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 15% 15%, rgba(243, 196, 206, 0.45) 0%, transparent 45%),
+    radial-gradient(circle at 85% 25%, rgba(168, 188, 122, 0.4) 0%, transparent 45%),
+    radial-gradient(circle at 50% 90%, rgba(163, 198, 223, 0.35) 0%, transparent 55%),
+    radial-gradient(circle at 90% 85%, rgba(200, 109, 152, 0.3) 0%, transparent 40%),
+    #DFD7CB;
+}
+
+.ks-layout-container {
+  position: relative;
+  z-index: 2;
+  max-width: 500px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 }
 
-/* Common Section Titles */
-.doodle-section-title {
-  font-family: var(--font-doodle);
-  font-size: 1.85rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  color: var(--color-ink);
+/* Base Card Style (Whimsical Paper Ticket / Card) */
+.ks-card {
+  position: relative;
+  background: var(--ks-cream-card);
+  border-radius: 20px;
+  box-shadow: 0 16px 42px rgba(50, 42, 32, 0.14);
+  overflow: hidden;
+  border: 1px solid rgba(168, 188, 122, 0.28);
+}
+
+/* ==========================================================================
+   1. MAIN INVITATION CARD (Green-Striped Border + Pink Wavy Inner Frame)
+   (Exact replication of Reference Images 1 & 2)
+   ========================================================================== */
+.ks-main-invite-card {
+  padding: 0;
+}
+
+.ks-striped-outer-frame {
+  position: relative;
+  padding: 24px 16px;
+  background-color: var(--ks-cream-card);
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      var(--ks-olive) 0,
+      var(--ks-olive) 8px,
+      transparent 8px,
+      transparent 18px
+    );
+  background-size: 100% 100%;
+}
+
+.ks-wavy-inner-frame {
+  position: relative;
+  background: #FFFDF9;
+  border-radius: 14px;
+  border: 3.5px dashed var(--ks-berry);
+  padding: clamp(24px, 5vw, 36px) clamp(16px, 4vw, 24px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
+  box-shadow: 0 4px 18px rgba(200, 109, 152, 0.12);
+}
+
+.ks-invite-eyebrow {
+  font-family: var(--ks-font-title);
+  font-size: clamp(20px, 5vw, 26px);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--ks-berry);
+  margin-bottom: 2px;
+}
+
+.ks-invite-kr-sub {
+  font-family: var(--ks-font-sans);
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  color: var(--ks-muted);
   margin-bottom: 6px;
 }
 
-/* --------------------------------------------------------------------------
-   SECTION 1: HERO GREEN CARD (Image 4 lysfilter style)
-   -------------------------------------------------------------------------- */
-.card-hero-green {
-  background: var(--color-green-dark);
-  border-radius: var(--radius-card);
-  padding: 38px 24px 34px;
-  color: #ffffff;
-  text-align: center;
-  position: relative;
-  box-shadow: var(--shadow-soft);
-  border: 2px solid var(--color-green-deep);
-}
-.card-green-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.doodle-couple-box {
-  width: 170px;
-  height: auto;
-  margin-bottom: 12px;
-}
-.doodle-couple-svg {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-.hero-caps-tag {
-  font-family: var(--font-doodle);
-  font-size: 1.3rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 2px;
-}
-.hero-script-names {
-  font-family: var(--font-script);
-  font-size: 3.4rem;
-  font-weight: 400;
-  line-height: 1.1;
-  color: #ffffff;
-  margin-bottom: 8px;
-}
-.hero-subtext-ko {
-  font-family: var(--font-serif);
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.85);
-  line-height: 1.5;
-  margin-bottom: 8px;
-}
-.hero-little-hearts {
-  font-size: 1rem;
-  color: var(--color-gold);
-  letter-spacing: 0.35em;
+.ks-invite-subnews {
+  font-family: var(--ks-font-hand);
+  font-size: clamp(16px, 4vw, 20px);
+  font-weight: 600;
+  color: var(--ks-ink-soft);
+  margin-bottom: 6px;
 }
 
-/* --------------------------------------------------------------------------
-   SECTION 2: COUNTDOWN & WAVY CALENDAR BLOCK (Image 4)
-   -------------------------------------------------------------------------- */
-.section-calendar-block {
-  background: #ffffff;
-  border: var(--border-doodle);
-  border-radius: var(--radius-card);
-  padding: 30px 20px 28px;
-  text-align: center;
-  box-shadow: var(--shadow-soft);
-}
-
-.countdown-doodle-grid {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  margin: 16px 0 26px;
-}
-.countdown-box {
-  background: var(--color-green-light);
-  border: 1.8px dashed var(--color-green-dark);
-  border-radius: 12px;
-  padding: 8px 10px;
-  min-width: 60px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.count-val {
-  font-family: var(--font-doodle);
-  font-size: 2.1rem;
+.ks-invite-big-announcement {
+  font-family: var(--ks-font-title);
+  font-size: clamp(26px, 6.8vw, 36px);
   font-weight: 700;
-  line-height: 1;
-  color: var(--color-green-dark);
-}
-.count-lbl {
-  font-family: var(--font-sans);
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: var(--color-green-sage);
-  margin-top: 4px;
-}
-.count-colon {
-  font-family: var(--font-doodle);
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--color-green-dark);
-}
-
-/* Wavy Calendar Frame */
-.calendar-wavy-frame {
-  background: var(--color-bg);
-  border: 2px solid var(--color-green-dark);
-  border-radius: 18px;
-  padding: 22px 16px 18px;
-  position: relative;
-  margin-top: 10px;
-}
-.calendar-frame-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
+  line-height: 1.15;
+  color: var(--ks-olive-dark);
   margin-bottom: 14px;
 }
-.cal-ribbon-left, .cal-ribbon-right {
-  font-size: 1.1rem;
-  color: var(--color-green-dark);
-}
-.calendar-month-title {
-  font-family: var(--font-doodle);
-  font-size: 1.7rem;
-  font-weight: 700;
-  color: var(--color-ink);
+
+.ks-invite-couple-names {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 2px;
 }
 
-.calendar-table {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  max-width: 320px;
+.ks-name-bride,
+.ks-name-groom {
+  font-family: var(--ks-font-title);
+  font-size: clamp(22px, 5.5vw, 30px);
+  font-weight: 700;
+  color: var(--ks-berry);
+  letter-spacing: 0.05em;
+}
+
+.ks-name-amp {
+  font-family: var(--ks-font-hand);
+  font-size: clamp(20px, 5vw, 26px);
+  color: var(--ks-olive-dark);
+}
+
+.ks-invite-kr-names {
+  font-family: var(--ks-font-sans);
+  font-size: 13.5px;
+  letter-spacing: 0.15em;
+  color: var(--ks-muted);
+  margin-bottom: 16px;
+}
+
+.ks-invite-couple-illustration {
+  width: clamp(170px, 46vw, 240px);
   margin: 0 auto;
 }
-.cal-row {
+
+.ks-invite-couple-illustration img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.ks-striped-bottom-fringe {
+  width: 100%;
+  height: 14px;
+  margin-top: 16px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--ks-olive) 0,
+    var(--ks-olive) 6px,
+    transparent 6px,
+    transparent 14px
+  );
+  opacity: 0.7;
+}
+
+/* ==========================================================================
+   2. CALENDAR CARD (Date + Month grid + Doodles + WHERE Venue)
+   ========================================================================== */
+.ks-calendar-card {
+  padding: clamp(24px, 5vw, 36px) clamp(16px, 4vw, 24px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: var(--ks-cream-card);
+}
+
+.ks-cal-header-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+.ks-cal-star {
+  color: var(--ks-olive);
+  font-size: 16px;
+}
+
+.ks-cal-big-date {
+  font-family: var(--ks-font-title);
+  font-size: clamp(26px, 6.5vw, 34px);
+  font-weight: 700;
+  color: var(--ks-olive-dark);
+  letter-spacing: 0.05em;
+}
+
+.ks-cal-kr-date {
+  font-family: var(--ks-font-sans);
+  font-size: 13px;
+  color: var(--ks-muted);
+  margin-bottom: 16px;
+}
+
+.ks-cal-invitation-message {
+  font-family: var(--ks-font-hand);
+  font-size: clamp(16px, 3.8vw, 19px);
+  font-weight: 500;
+  color: var(--ks-ink-soft);
+  line-height: 1.55;
+  margin-bottom: 22px;
+  max-width: 380px;
+}
+
+.ks-calendar-wrapper {
+  width: 100%;
+  max-width: 290px;
+  margin: 0 auto 16px;
+  background: #FFFDF9;
+  border: 1.5px dashed rgba(168, 188, 122, 0.6);
+  border-radius: 14px;
+  padding: 12px 10px;
+}
+
+.ks-cal-days-header {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  text-align: center;
-  align-items: center;
-  font-family: var(--font-sans);
-  font-size: 0.92rem;
-  font-weight: 500;
-  color: var(--color-ink);
-}
-.cal-days-head {
-  font-family: var(--font-doodle);
-  font-size: 1.15rem;
+  font-family: var(--ks-font-sans);
+  font-size: 11px;
   font-weight: 700;
-  color: var(--color-green-dark);
-  border-bottom: 1.5px dashed var(--color-green-sage);
-  padding-bottom: 6px;
-  margin-bottom: 4px;
+  color: var(--ks-muted);
+  padding-bottom: 8px;
+  border-bottom: 1px dashed rgba(168, 188, 122, 0.4);
+  margin-bottom: 8px;
 }
-.cal-empty {
+
+.ks-cal-days-header .ks-sat { color: var(--ks-sky); }
+.ks-cal-days-header .ks-sun { color: var(--ks-berry); }
+
+.ks-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  font-family: var(--ks-font-title);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.ks-cal-cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--ks-ink);
+}
+
+.ks-cal-cell.is-empty {
   visibility: hidden;
 }
 
-/* Circled Wedding Day */
-.cal-wedding-day {
+.ks-cal-cell.is-wedding-date {
   position: relative;
+  background: var(--ks-berry);
+  color: #fff;
   font-weight: 700;
-  color: var(--color-green-dark);
+  box-shadow: 0 3px 10px rgba(200, 109, 152, 0.45);
+}
+
+.ks-cal-cell.is-wedding-date::after {
+  content: '♥';
+  position: absolute;
+  top: -8px;
+  right: -6px;
+  font-size: 12px;
+  color: var(--ks-berry);
+}
+
+.ks-cal-doodles {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 320px;
+  margin: 6px auto 14px;
+}
+
+.ks-doodle-ribbon {
+  width: 100px;
+  height: 36px;
+}
+
+.ks-doodle-flower {
+  width: 44px;
+  height: 44px;
+}
+
+/* Oval Badge (WHERE / GUEST SURVEY) */
+.ks-oval-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 32px;
-  width: 32px;
-  margin: 0 auto;
-}
-.doodle-heart-circle {
-  position: absolute;
-  inset: -4px;
-  width: 40px;
-  height: 40px;
-  pointer-events: none;
-  animation: heartPulse 2.5s infinite ease-in-out;
-}
-@keyframes heartPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-}
-
-.cal-day-caption {
-  font-family: var(--font-serif);
-  font-size: 0.88rem;
-  color: var(--color-green-dark);
+  gap: 6px;
+  padding: 6px 26px;
+  border: 2px solid var(--ks-olive-dark);
+  border-radius: 999px;
+  font-family: var(--ks-font-title);
+  font-size: 20px;
   font-weight: 700;
-  margin-top: 16px;
-  letter-spacing: 0.04em;
+  color: var(--ks-olive-dark);
+  background: var(--ks-olive-light);
+  margin-bottom: 10px;
 }
 
-/* --------------------------------------------------------------------------
-   SECTION 3: WEDDING INVITATION & RING EXCHANGE (Image 3 & 2)
-   -------------------------------------------------------------------------- */
-.section-invitation-message {
-  background: #ffffff;
-  border: var(--border-doodle);
-  border-radius: var(--radius-card);
-  padding: 32px 22px;
-  text-align: center;
-  box-shadow: var(--shadow-soft);
+.ks-badge-pink {
+  border-color: var(--ks-berry);
+  color: var(--ks-berry);
+  background: var(--ks-blush-light);
 }
-.doodle-rings-box {
-  width: 140px;
-  margin: 0 auto 10px;
+
+.ks-badge-double-ring {
+  flex-direction: column;
+  padding: 10px 28px;
+  border: 3px double var(--ks-olive-dark);
+  background: transparent;
+  color: var(--ks-olive-dark);
 }
-.doodle-rings-svg {
+
+.ks-badge-double-ring small {
+  font-family: var(--ks-font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--ks-muted);
+  margin-top: 2px;
+}
+
+.ks-venue-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.ks-venue-hotel-name {
+  font-family: var(--ks-font-title);
+  font-size: clamp(20px, 5vw, 25px);
+  font-weight: 700;
+  color: var(--ks-ink);
+  margin-bottom: 2px;
+}
+
+.ks-venue-korean {
+  font-family: var(--ks-font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ks-berry);
+  margin-bottom: 4px;
+}
+
+.ks-venue-street {
+  font-family: var(--ks-font-sans);
+  font-size: 13px;
+  color: var(--ks-ink-soft);
+  margin-bottom: 4px;
+}
+
+.ks-venue-start-time {
+  font-family: var(--ks-font-hand);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ks-olive-dark);
+  margin-bottom: 14px;
+}
+
+.ks-venue-map-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 22px;
+  border: 1.5px solid var(--ks-olive-dark);
+  border-radius: 999px;
+  font-family: var(--ks-font-sans);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ks-olive-dark);
+  background: #fff;
+  transition: all 0.25s ease;
+}
+
+.ks-venue-map-action:hover {
+  background: var(--ks-olive-dark);
+  color: #fff;
+}
+
+/* ==========================================================================
+   3. RECEPTION MENU CARD (Pink Ribbon Dinner Table Stage)
+   ========================================================================== */
+.ks-menu-card {
+  padding: 0;
+  background: var(--ks-cream-card);
+}
+
+.ks-menu-table-stage {
+  position: relative;
+  width: 100%;
+}
+
+.ks-menu-frame-img {
   width: 100%;
   height: auto;
   display: block;
 }
-.invitation-text-card {
-  margin-top: 14px;
+
+.ks-menu-inner-overlay {
+  position: absolute;
+  top: clamp(38px, 9vw, 68px);
+  left: clamp(20px, 6vw, 42px);
+  right: clamp(20px, 6vw, 42px);
+  bottom: clamp(140px, 30vw, 210px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
 }
-.invite-ko-headline {
-  font-family: var(--font-serif);
-  font-size: 1.25rem;
+
+.ks-menu-top-tag {
+  font-family: var(--ks-font-sans);
+  font-size: 10.5px;
   font-weight: 700;
-  color: var(--color-green-dark);
+  letter-spacing: 0.18em;
+  color: var(--ks-berry);
+  margin-bottom: 2px;
+}
+
+.ks-menu-title {
+  font-family: var(--ks-font-title);
+  font-size: clamp(26px, 6.5vw, 34px);
+  font-weight: 700;
+  color: var(--ks-ink);
+  line-height: 1.1;
+  margin-bottom: 2px;
+}
+
+.ks-menu-kr-title {
+  font-family: var(--ks-font-sans);
+  font-size: 12px;
+  color: var(--ks-muted);
+  margin-bottom: 16px;
+}
+
+.ks-menu-course-list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 2.2vw, 14px);
+  width: 100%;
+}
+
+.ks-menu-course {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ks-course-type {
+  font-family: var(--ks-font-sans);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--ks-olive-dark);
+  margin-bottom: 1px;
+}
+
+.ks-course-name {
+  font-family: var(--ks-font-title);
+  font-size: clamp(16px, 3.8vw, 19px);
+  font-weight: 700;
+  color: var(--ks-ink);
+  line-height: 1.25;
+}
+
+.ks-course-sub {
+  font-family: var(--ks-font-hand);
+  font-size: clamp(13px, 3.2vw, 15px);
+  color: var(--ks-ink-soft);
+}
+
+/* ==========================================================================
+   4. WELCOME OUTFITS CARD (Right Column Item 1)
+   ========================================================================== */
+.ks-welcome-card {
+  padding: clamp(20px, 4vw, 32px);
+  background: #FFFDF9;
+}
+
+.ks-welcome-art-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.ks-welcome-outfits-img {
+  width: 100%;
+  max-width: 340px;
+  border-radius: 14px;
+}
+
+.ks-welcome-caption-box {
+  position: absolute;
+  right: 12px;
+  bottom: 8px;
+  text-align: right;
+  background: rgba(255, 253, 249, 0.92);
+  padding: 6px 14px;
+  border-radius: 10px;
+  border: 1px dashed var(--ks-olive);
+}
+
+.ks-welcome-script-text {
+  font-family: var(--ks-font-hand);
+  font-size: clamp(20px, 4.5vw, 26px);
+  font-weight: 700;
+  color: var(--ks-berry);
+  line-height: 1;
+}
+
+.ks-welcome-names-text {
+  font-family: var(--ks-font-title);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ks-olive-dark);
+}
+
+/* ==========================================================================
+   5. DRESS CODE CARD (Dancers + Wavy Frame + 4 Swatches)
+   (Exact replication of Reference Images 1 & 2)
+   ========================================================================== */
+.ks-dresscode-card {
+  padding: clamp(20px, 4vw, 32px) clamp(16px, 4vw, 24px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.ks-dresscode-dancers-art {
+  width: 100%;
+  max-width: 360px;
+  margin-bottom: 16px;
+}
+
+.ks-dresscode-dancers-art img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.ks-wavy-dresscode-frame {
+  width: 100%;
+  border: 3.5px dashed var(--ks-berry);
+  border-radius: 16px;
+  padding: clamp(20px, 4.5vw, 30px) clamp(14px, 3.5vw, 22px);
+  background: var(--ks-blush-light);
+}
+
+.ks-dc-title {
+  font-family: var(--ks-font-title);
+  font-size: clamp(24px, 6vw, 32px);
+  font-weight: 700;
+  color: var(--ks-berry);
+  margin-bottom: 2px;
+}
+
+.ks-dc-kr-sub {
+  font-family: var(--ks-font-sans);
+  font-size: 12px;
+  color: var(--ks-muted);
   margin-bottom: 12px;
 }
-.invite-ko-body {
-  font-family: var(--font-serif);
-  font-size: 0.95rem;
-  line-height: 1.85;
-  color: #333333;
-}
-.invite-divider-wave {
-  font-family: var(--font-serif);
-  font-size: 0.9rem;
-  color: var(--color-gold);
-  margin: 16px 0;
-  letter-spacing: 0.15em;
-}
-.invite-en-body {
-  font-family: var(--font-sans);
-  font-size: 0.88rem;
-  line-height: 1.65;
-  color: var(--color-ink-muted);
-  font-style: italic;
+
+.ks-dc-description {
+  font-family: var(--ks-font-hand);
+  font-size: clamp(15px, 3.6vw, 18px);
+  font-weight: 500;
+  color: var(--ks-ink-soft);
+  line-height: 1.55;
   margin-bottom: 20px;
 }
-.invite-family-names {
-  border-top: 1px dashed #d5d0c5;
-  padding-top: 16px;
-  font-family: var(--font-serif);
-  font-size: 0.92rem;
-  color: #444444;
-  line-height: 1.8;
+
+.ks-dc-swatches-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
 }
 
-/* --------------------------------------------------------------------------
-   SECTION 4: LOCATION & VENUE LINE SKETCH (Image 4 & 2)
-   -------------------------------------------------------------------------- */
-.section-location {
-  background: #ffffff;
-  border: var(--border-doodle);
-  border-radius: var(--radius-card);
-  padding: 30px 20px;
-  text-align: center;
-  box-shadow: var(--shadow-soft);
-}
-.venue-sketch-box {
-  width: 100%;
-  max-width: 290px;
-  margin: 10px auto 16px;
-}
-.doodle-venue-svg {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-.venue-info-box {
+.ks-swatch-item {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4px;
 }
-.venue-name-ko {
-  font-family: var(--font-serif);
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--color-green-dark);
-}
-.venue-name-en {
-  font-family: var(--font-sans);
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--color-ink);
-}
-.venue-address {
-  font-family: var(--font-serif);
-  font-size: 0.88rem;
-  color: var(--color-ink-muted);
-  margin-top: 4px;
-}
-.venue-sub-details {
-  font-family: var(--font-sans);
-  font-size: 0.78rem;
-  color: #777777;
+
+.ks-swatch-circle {
+  width: clamp(40px, 9vw, 56px);
+  height: clamp(40px, 9vw, 56px);
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0 4px 10px rgba(50, 40, 30, 0.15);
+  transition: transform 0.25s ease;
 }
 
-.btn-doodle-map {
-  display: inline-flex;
+.ks-swatch-item:hover .ks-swatch-circle {
+  transform: scale(1.1);
+}
+
+.ks-swatch-name {
+  font-family: var(--ks-font-sans);
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--ks-ink);
+  line-height: 1.2;
+}
+
+.ks-swatch-hex {
+  font-family: var(--ks-font-sans);
+  font-size: 9.5px;
+  color: var(--ks-muted);
+}
+
+/* Wavy Ribbon Separator */
+.ks-wavy-ribbon-divider {
+  display: flex;
   align-items: center;
-  gap: 8px;
-  background: var(--color-green-dark);
-  color: #ffffff;
-  text-decoration: none;
-  font-family: var(--font-doodle);
-  font-size: 1.35rem;
-  font-weight: 700;
-  padding: 10px 24px;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+  height: 28px;
+  margin-top: 20px;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(246, 239, 227, 0.8) 0%, transparent 70%),
+    repeating-linear-gradient(
+      90deg,
+      var(--ks-blush) 0,
+      var(--ks-blush) 12px,
+      transparent 12px,
+      transparent 24px
+    );
   border-radius: 999px;
-  border: 2px solid var(--color-green-deep);
-  margin-top: 16px;
-  transition: transform 0.2s ease, background-color 0.2s ease;
-  box-shadow: 0 6px 16px rgba(45, 74, 54, 0.2);
-}
-.btn-doodle-map:hover {
-  background: var(--color-green-deep);
-  transform: translateY(-2px);
-}
-.btn-map-pin {
-  font-size: 1.1rem;
+  opacity: 0.85;
 }
 
-/* --------------------------------------------------------------------------
-   SECTION 5: WEDDING TIMELINE / PROGRAM (Image 4 & 1)
-   -------------------------------------------------------------------------- */
-.section-program {
+.ks-ribbon-sparkle { color: var(--ks-berry); font-size: 14px; }
+.ks-ribbon-flower { color: var(--ks-olive-dark); font-size: 16px; }
+
+/* ==========================================================================
+   6. PARTY SCENE & COUNTDOWN CARD
+   ========================================================================== */
+.ks-party-card {
+  padding: 0;
+  background: var(--ks-cream-card);
+}
+
+.ks-party-stage {
+  position: relative;
   width: 100%;
 }
-.card-timeline-green {
-  background: var(--color-green-dark);
-  border: 2px solid var(--color-green-deep);
-  border-radius: var(--radius-card);
-  padding: 34px 20px 30px;
-  color: #ffffff;
-  box-shadow: var(--shadow-soft);
+
+.ks-party-bg-img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
-.timeline-headline {
-  font-family: var(--font-doodle);
-  font-size: 2.1rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+
+.ks-party-inner-overlay {
+  position: absolute;
+  top: clamp(80px, 18vw, 130px);
+  left: 20px;
+  right: 20px;
+  bottom: clamp(110px, 24vw, 170px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
+  overflow: hidden;
+}
+
+.ks-party-title {
+  font-family: var(--ks-font-title);
+  font-size: clamp(24px, 6vw, 32px);
+  font-weight: 700;
+  color: var(--ks-berry);
+  line-height: 1.1;
   margin-bottom: 2px;
 }
-.timeline-subheadline {
-  font-family: var(--font-serif);
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.82);
-  text-align: center;
-  margin-bottom: 24px;
+
+.ks-party-kr-sub {
+  font-family: var(--ks-font-sans);
+  font-size: 12px;
+  color: var(--ks-muted);
+  margin-bottom: 12px;
 }
 
-.timeline-doodle-list {
+.ks-timeline-mini {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 5px;
+  width: 100%;
+  max-width: 290px;
+  margin-bottom: 14px;
 }
-.timeline-item {
+
+.ks-tl-item {
   display: flex;
   align-items: center;
-  gap: 14px;
-  background: rgba(255, 255, 255, 0.07);
-  border: 1.5px dashed rgba(255, 255, 255, 0.3);
-  border-radius: 16px;
-  padding: 12px 14px;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-}
-.timeline-item:hover {
-  background: rgba(255, 255, 255, 0.12);
-  transform: translateX(3px);
-}
-.timeline-item.highlight {
-  background: rgba(255, 255, 255, 0.15);
-  border: 1.8px solid var(--color-gold);
+  gap: 8px;
+  font-size: 12.5px;
+  background: rgba(255, 253, 249, 0.88);
+  padding: 3px 10px;
+  border-radius: 6px;
+  border-left: 3px solid var(--ks-olive);
 }
 
-.timeline-icon-box {
-  width: 44px;
-  height: 44px;
-  flex-shrink: 0;
+.ks-tl-time {
+  font-weight: 700;
+  color: var(--ks-olive-dark);
+}
+
+.ks-tl-desc {
+  font-family: var(--ks-font-sans);
+  color: var(--ks-ink);
+  font-size: 11.5px;
+}
+
+.ks-countdown-box {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-}
-.tl-icon-svg {
-  width: 100%;
-  height: 100%;
-}
-.timeline-details {
-  display: flex;
-  flex-direction: column;
-}
-.tl-time {
-  font-family: var(--font-doodle);
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: var(--color-gold);
-  line-height: 1;
-}
-.tl-title {
-  font-family: var(--font-sans);
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin-top: 2px;
-}
-.tl-desc {
-  font-family: var(--font-serif);
-  font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.8);
 }
 
-/* --------------------------------------------------------------------------
-   SECTION 6: WEDDING DETAILS & GIFT (Image 4 lysfilter style)
-   -------------------------------------------------------------------------- */
-.section-details {
-  background: #ffffff;
-  border: var(--border-doodle);
-  border-radius: var(--radius-card);
-  padding: 30px 20px;
-  text-align: center;
-  box-shadow: var(--shadow-soft);
-}
-.doodle-table-box {
-  width: 110px;
-  margin: 6px auto 14px;
-}
-.doodle-table-svg {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.details-cards-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 22px;
-}
-.detail-box {
-  background: var(--color-bg);
-  border: 1.5px dashed var(--color-green-sage);
-  border-radius: 14px;
-  padding: 16px;
-  text-align: left;
-}
-.detail-box-title {
-  font-family: var(--font-doodle);
-  font-size: 1.35rem;
+.ks-countdown-label {
+  font-family: var(--ks-font-sans);
+  font-size: 10px;
   font-weight: 700;
-  color: var(--color-green-dark);
+  letter-spacing: 0.16em;
+  color: var(--ks-olive-dark);
   margin-bottom: 6px;
 }
-.detail-box-text {
-  font-family: var(--font-serif);
-  font-size: 0.88rem;
-  line-height: 1.6;
-  color: #333333;
-}
 
-/* Wedding Gift Box */
-.wedding-gift-card {
-  border: 2px solid var(--color-green-dark);
-  border-radius: 18px;
-  padding: 22px 16px;
-  background: #ffffff;
-}
-.gift-icon-box {
-  width: 58px;
-  height: 58px;
-  margin: 0 auto 8px;
-}
-.doodle-gift-svg {
-  width: 100%;
-  height: 100%;
-}
-.gift-title {
-  font-family: var(--font-serif);
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--color-green-dark);
-  margin-bottom: 6px;
-}
-.gift-desc {
-  font-family: var(--font-serif);
-  font-size: 0.85rem;
-  color: var(--color-ink-muted);
-  line-height: 1.55;
-  margin-bottom: 16px;
-}
-
-.gift-accounts-list {
+.ks-countdown-timer {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.bank-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: var(--color-bg);
-  border: 1px solid #d5d0c5;
-  border-radius: 12px;
-  padding: 10px 14px;
-  text-align: left;
-}
-.bank-info {
-  display: flex;
-  flex-direction: column;
-}
-.bank-tag {
-  font-family: var(--font-sans);
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--color-green-sage);
-}
-.bank-num {
-  font-family: var(--font-sans);
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--color-ink);
-}
-.bank-holder {
-  font-family: var(--font-serif);
-  font-size: 0.8rem;
-  color: #666;
-}
-
-.btn-copy-account {
-  background: var(--color-green-dark);
-  color: #ffffff;
-  border: none;
-  border-radius: 8px;
-  padding: 6px 14px;
-  font-family: var(--font-serif);
-  font-size: 0.82rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-.btn-copy-account:hover {
-  background: var(--color-green-deep);
-}
-
-/* --------------------------------------------------------------------------
-   SECTION 7: DRESS CODE (Image 2 & 5)
-   -------------------------------------------------------------------------- */
-.section-dress-code {
-  background: #ffffff;
-  border: var(--border-doodle);
-  border-radius: var(--radius-card);
-  padding: 28px 20px;
-  text-align: center;
-  box-shadow: var(--shadow-soft);
-}
-.doodle-bow-header {
-  width: 70px;
-  margin: 0 auto 6px;
-}
-.doodle-bow-svg {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-.dress-code-subtitle {
-  font-family: var(--font-serif);
-  font-size: 0.9rem;
-  color: var(--color-green-sage);
-  margin-bottom: 16px;
-}
-
-.dress-palette-circles {
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-  margin: 18px 0;
-}
-.palette-item {
-  display: flex;
-  flex-direction: column;
   align-items: center;
   gap: 6px;
 }
-.circle-swatch {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  border: 2px solid var(--color-ink);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-}
-.circle-label {
-  font-family: var(--font-doodle);
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--color-ink);
-}
-.dress-code-note {
-  font-family: var(--font-serif);
-  font-size: 0.85rem;
-  color: var(--color-ink-muted);
-  line-height: 1.6;
-}
 
-/* --------------------------------------------------------------------------
-   SECTION 8: A JOURNEY OF LOVE (Polaroid Cards, Image 4)
-   -------------------------------------------------------------------------- */
-.section-journey {
-  width: 100%;
-}
-.card-journey-green {
-  background: var(--color-green-dark);
-  border: 2px solid var(--color-green-deep);
-  border-radius: var(--radius-card);
-  padding: 34px 18px 30px;
-  color: #ffffff;
-  text-align: center;
-  box-shadow: var(--shadow-soft);
-}
-.journey-headline {
-  font-family: var(--font-doodle);
-  font-size: 2.1rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  margin-bottom: 2px;
-}
-.journey-subheadline {
-  font-family: var(--font-serif);
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.82);
-  margin-bottom: 24px;
-}
-
-.polaroid-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin: 10px 0 20px;
-}
-.polaroid-card {
-  background: #ffffff;
-  border-radius: 4px;
-  padding: 8px 8px 18px;
-  color: var(--color-ink);
-  box-shadow: var(--shadow-polaroid);
-  position: relative;
-  transition: transform 0.25s ease;
-}
-.polaroid-card.pol-left { transform: rotate(-3deg); }
-.polaroid-card.pol-center { transform: rotate(2deg) translateY(-4px); }
-.polaroid-card.pol-right { transform: rotate(-2deg); }
-
-.polaroid-card:hover {
-  transform: scale(1.04) rotate(0deg);
-  z-index: 5;
-}
-
-.washi-tape {
-  position: absolute;
-  top: -8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 44px;
-  height: 14px;
-  background: var(--color-tape);
-  opacity: 0.9;
-  border-radius: 2px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.06);
-}
-.pol-img-wrap {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  border-radius: 2px;
-  background: #eee;
-}
-.pol-img-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.pol-caption {
-  margin-top: 8px;
-  text-align: center;
-}
-.pol-title {
-  font-family: var(--font-doodle);
-  font-size: 1.05rem;
-  font-weight: 700;
-  line-height: 1.1;
-  color: var(--color-ink);
-}
-.pol-sub {
-  font-family: var(--font-serif);
-  font-size: 0.68rem;
-  color: #666;
-  margin-top: 2px;
-}
-
-.journey-love-script {
+.ks-cd-col {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: var(--font-script);
-  font-size: 2.8rem;
-  color: var(--color-gold);
-  line-height: 0.9;
-  margin-top: 10px;
-}
-.squiggle-underline {
-  width: 90px;
-  height: auto;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1.5px solid var(--ks-olive);
+  border-radius: 8px;
+  padding: 4px 8px;
+  min-width: 44px;
+  box-shadow: 0 2px 8px rgba(70, 60, 48, 0.1);
 }
 
-/* --------------------------------------------------------------------------
-   SECTION 9: WEDDING PHOTOS GALLERY (Image 4 & 3)
-   -------------------------------------------------------------------------- */
-.section-gallery {
-  background: #ffffff;
-  border: var(--border-doodle);
-  border-radius: var(--radius-card);
-  padding: 30px 18px;
+.ks-cd-digit {
+  font-family: var(--ks-font-title);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ks-berry);
+  line-height: 1;
+}
+
+.ks-cd-tag {
+  font-family: var(--ks-font-sans);
+  font-size: 8.5px;
+  font-weight: 700;
+  color: var(--ks-muted);
+}
+
+.ks-cd-colon {
+  font-family: var(--ks-font-title);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ks-olive-dark);
+}
+
+/* ==========================================================================
+   7. GUEST SURVEY (RSVP) CARD
+   (Exact replication of Reference Images 1 & 2)
+   ========================================================================== */
+.ks-rsvp-card {
+  padding: clamp(24px, 5vw, 36px) clamp(16px, 4vw, 24px);
+}
+
+.ks-rsvp-inner-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  box-shadow: var(--shadow-soft);
 }
-.doodle-kiss-frame {
-  width: 75px;
-  height: 75px;
-  margin: 0 auto 8px;
-}
-.kiss-frame-svg {
-  width: 100%;
-  height: 100%;
-}
-.gallery-subtitle {
-  font-family: var(--font-serif);
-  font-size: 0.9rem;
-  color: var(--color-green-sage);
+
+.ks-rsvp-prompt-text {
+  font-family: var(--ks-font-hand);
+  font-size: clamp(15px, 3.6vw, 18px);
+  color: var(--ks-ink-soft);
+  line-height: 1.5;
   margin-bottom: 20px;
 }
 
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-}
-.gallery-item {
-  position: relative;
-  background: #ffffff;
-  border: 1.5px solid var(--color-ink);
-  border-radius: 8px;
-  padding: 6px;
-  cursor: pointer;
-  overflow: hidden;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.06);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-.gallery-item:hover {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 10px 22px rgba(0,0,0,0.12);
-}
-.gallery-item img {
+.ks-rsvp-form {
   width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  border-radius: 4px;
-  display: block;
-}
-.photo-tape {
-  position: absolute;
-  top: -4px;
-  right: 12px;
-  width: 32px;
-  height: 10px;
-  background: var(--color-tape);
-  transform: rotate(8deg);
-  border-radius: 1px;
-}
-
-/* --------------------------------------------------------------------------
-   SECTION 10: RSVP FORM (Image 4 lysfilter style)
-   -------------------------------------------------------------------------- */
-.section-rsvp {
-  width: 100%;
-}
-.card-rsvp-green {
-  background: var(--color-green-dark);
-  border: 2px solid var(--color-green-deep);
-  border-radius: var(--radius-card);
-  padding: 34px 22px 30px;
-  color: #ffffff;
-  box-shadow: var(--shadow-soft);
-}
-.doodle-rsvp-bow {
-  width: 80px;
-  margin: 0 auto 10px;
-}
-.rsvp-bow-svg {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-.rsvp-headline {
-  font-family: var(--font-doodle);
-  font-size: 2.2rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-align: center;
-  margin-bottom: 2px;
-}
-.rsvp-subheadline {
-  font-family: var(--font-serif);
-  font-size: 0.88rem;
-  line-height: 1.55;
-  color: rgba(255, 255, 255, 0.85);
-  text-align: center;
-  margin-bottom: 24px;
-}
-
-.rsvp-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-}
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+  gap: 14px;
   text-align: left;
 }
-.form-group label {
-  font-family: var(--font-sans);
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #ffffff;
-}
-.req {
-  color: var(--color-gold);
+
+.ks-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
-.form-group input[type="text"],
-.form-group input[type="tel"],
-.form-group select,
-.form-group textarea {
+.ks-form-field label,
+.ks-field-legend {
+  font-family: var(--ks-font-title);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ks-ink);
+}
+
+.ks-form-field input[type="text"],
+.ks-form-field select,
+.ks-form-field textarea {
   width: 100%;
-  background: #ffffff;
-  border: 1.5px solid var(--color-ink);
-  border-radius: 10px;
   padding: 10px 14px;
-  font-family: var(--font-sans);
-  font-size: 0.95rem;
-  color: var(--color-ink);
-  outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-  border-color: var(--color-gold);
-  box-shadow: 0 0 0 3px rgba(209, 168, 104, 0.35);
-}
-
-.radio-options {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-.radio-card {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1.5px dashed rgba(255, 255, 255, 0.4);
+  border: 1.5px solid rgba(168, 188, 122, 0.7);
   border-radius: 10px;
-  padding: 8px 10px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+  background: #FFFDF9;
+  font-family: var(--ks-font-sans);
+  font-size: 14px;
+  color: var(--ks-ink);
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
-.radio-card:hover {
-  background: rgba(255, 255, 255, 0.15);
+
+.ks-form-field input[type="text"]:focus,
+.ks-form-field select:focus,
+.ks-form-field textarea:focus {
+  outline: none;
+  border-color: var(--ks-berry);
+  box-shadow: 0 0 0 3px rgba(200, 109, 152, 0.2);
 }
-.radio-card input {
-  accent-color: var(--color-gold);
-}
-.radio-text {
+
+.ks-radio-group {
   display: flex;
   flex-direction: column;
-}
-.radio-text strong {
-  font-family: var(--font-sans);
-  font-size: 0.82rem;
-  color: #ffffff;
-}
-.radio-text small {
-  font-family: var(--font-serif);
-  font-size: 0.72rem;
-  color: rgba(255, 255, 255, 0.75);
-}
-
-.btn-rsvp-submit {
-  background: #ffffff;
-  color: var(--color-green-dark);
-  border: 2px solid var(--color-green-deep);
-  border-radius: 999px;
-  padding: 12px 24px;
-  font-family: var(--font-doodle);
-  font-size: 1.45rem;
-  font-weight: 700;
-  cursor: pointer;
-  margin-top: 8px;
-  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-}
-.btn-rsvp-submit:hover {
-  background: #fdfaf2;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(0,0,0,0.22);
-}
-
-.rsvp-success-box {
-  background: rgba(255, 255, 255, 0.15);
-  border: 2px solid var(--color-gold);
-  border-radius: 14px;
-  padding: 20px;
-  text-align: center;
-  margin-top: 16px;
-}
-.success-icon {
-  font-size: 2.2rem;
-  margin-bottom: 6px;
-}
-.rsvp-success-box h4 {
-  font-family: var(--font-serif);
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin-bottom: 6px;
-}
-.rsvp-success-box p {
-  font-family: var(--font-serif);
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.88);
-}
-
-/* --------------------------------------------------------------------------
-   SECTION 11: CLOSING & SIGNATURE (Image 4 & 1)
-   -------------------------------------------------------------------------- */
-.section-footer {
-  background: #ffffff;
-  border: var(--border-doodle);
-  border-radius: var(--radius-card);
-  padding: 32px 20px 28px;
-  text-align: center;
-  box-shadow: var(--shadow-soft);
-}
-.doodle-cheers-box {
-  width: 110px;
-  margin: 0 auto 12px;
-}
-.doodle-cheers-svg {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.footer-thanks-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   gap: 8px;
 }
-.footer-text-en {
-  font-family: var(--font-sans);
-  font-size: 0.86rem;
-  line-height: 1.6;
-  color: var(--color-ink);
-  font-style: italic;
+
+.ks-radio-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-family: var(--ks-font-hand);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ks-ink-soft);
 }
-.footer-text-ko {
-  font-family: var(--font-serif);
-  font-size: 0.88rem;
-  color: var(--color-green-sage);
-  line-height: 1.6;
+
+.ks-radio-option input[type="radio"] {
+  accent-color: var(--ks-olive-dark);
+  width: 18px;
+  height: 18px;
+}
+
+.ks-rsvp-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 13px 24px;
+  margin-top: 6px;
+  border: 2px solid var(--ks-olive-dark);
+  border-radius: 999px;
+  background: var(--ks-olive-dark);
+  color: #fff;
+  font-family: var(--ks-font-title);
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(100, 123, 54, 0.25);
+}
+
+.ks-rsvp-submit-btn:hover {
+  background: #fff;
+  color: var(--ks-olive-dark);
+}
+
+.ks-submit-arrow {
+  font-size: 18px;
+}
+
+.ks-rsvp-status-msg {
+  font-family: var(--ks-font-sans);
+  font-size: 13px;
+  color: var(--ks-berry);
+  text-align: center;
+  min-height: 1.4em;
   margin-top: 4px;
 }
 
-.footer-signatures {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  margin-top: 14px;
-}
-.sig-script {
-  font-family: var(--font-script);
-  font-size: 2.8rem;
-  color: var(--color-green-dark);
-  line-height: 1;
-}
-.sig-korean {
-  font-family: var(--font-serif);
-  font-size: 0.9rem;
-  color: #666666;
-  letter-spacing: 0.15em;
+/* Zig-zag Doodle */
+.ks-zigzag-doodle {
+  width: 100%;
+  height: 12px;
+  margin: 18px 0 14px;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--ks-berry) 0,
+    var(--ks-berry) 2px,
+    transparent 2px,
+    transparent 8px
+  );
+  opacity: 0.55;
 }
 
 /* ==========================================================================
-   FLOATING AUDIO WIDGET
+   8. CLOSING CARD (Just Married Retro Car)
    ========================================================================== */
-.floating-audio-dock {
-  position: fixed;
-  bottom: 20px;
-  right: 18px;
-  z-index: 1000;
-}
-.btn-audio-toggle {
-  background: rgba(34, 34, 34, 0.88);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  color: #ffffff;
-  border: 1.5px solid rgba(255, 255, 255, 0.2);
-  border-radius: 999px;
-  padding: 6px 14px 6px 6px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-  transition: transform 0.2s ease, background-color 0.2s ease;
-}
-.btn-audio-toggle:hover {
-  transform: scale(1.04);
-  background: rgba(34, 34, 34, 0.96);
+.ks-closing-card {
+  padding: 0;
+  background: var(--ks-cream-card);
 }
 
-.vinyl-record {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: #111111;
-  border: 1.5px solid #444444;
+.ks-closing-stage {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: transform 0.3s ease;
-}
-.is-playing .vinyl-record {
-  animation: spinVinyl 3.5s linear infinite;
-}
-@keyframes spinVinyl {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  width: 100%;
 }
 
-.vinyl-groove {
-  position: absolute;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-}
-.vinyl-groove.g1 { inset: 5px; }
-.vinyl-groove.g2 { inset: 9px; }
-.vinyl-center {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--color-gold);
-  color: #111;
-  font-size: 7px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-}
-
-.audio-track-info {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-}
-.track-title {
-  font-family: var(--font-sans);
-  font-size: 0.76rem;
-  font-weight: 700;
-  color: #ffffff;
-  line-height: 1.1;
-  white-space: nowrap;
-}
-.track-artist {
-  font-family: var(--font-sans);
-  font-size: 0.65rem;
-  color: var(--color-gold);
-}
-
-.audio-soundwaves {
-  display: flex;
-  align-items: flex-end;
-  gap: 2px;
-  height: 14px;
-  margin-left: 2px;
-}
-.audio-soundwaves .bar {
-  width: 2.5px;
-  background: var(--color-gold);
-  border-radius: 1px;
-  height: 4px;
-}
-.is-playing .audio-soundwaves .bar.b1 { animation: waveBar 0.7s infinite alternate ease-in-out; }
-.is-playing .audio-soundwaves .bar.b2 { animation: waveBar 0.9s infinite alternate ease-in-out 0.2s; }
-.is-playing .audio-soundwaves .bar.b3 { animation: waveBar 0.6s infinite alternate ease-in-out 0.4s; }
-
-@keyframes waveBar {
-  0% { height: 3px; }
-  100% { height: 13px; }
-}
-
-/* ==========================================================================
-   LIGHTBOX MODAL FOR PHOTO GALLERY
-   ========================================================================== */
-.lightbox-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 10000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.lightbox-modal[hidden] {
-  display: none;
-}
-.lightbox-backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(15, 25, 18, 0.88);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-}
-.lightbox-content {
-  position: relative;
-  z-index: 2;
-  max-width: 90vw;
-  max-height: 85vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-}
-.btn-lightbox-close {
-  position: absolute;
-  top: -42px;
-  right: 0;
-  background: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-  border: none;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  font-size: 1.1rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.2s ease;
-}
-.btn-lightbox-close:hover {
-  background: rgba(255, 255, 255, 0.4);
-}
-.lightbox-frame {
-  background: #ffffff;
-  border: 3px solid var(--color-ink);
-  border-radius: 12px;
-  padding: 8px;
-  max-height: 70vh;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
-}
-.lightbox-frame img {
-  max-width: 82vw;
-  max-height: 66vh;
-  object-fit: contain;
-  border-radius: 6px;
+.ks-closing-car-img {
+  width: 100%;
+  height: auto;
   display: block;
 }
-.lightbox-nav {
+
+.ks-closing-inner-overlay {
+  position: absolute;
+  top: clamp(85px, 18vw, 130px);
+  left: 28px;
+  right: 28px;
+  bottom: clamp(150px, 30vw, 210px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.ks-closing-tag {
+  font-family: var(--ks-font-sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--ks-olive-dark);
+  margin-bottom: 4px;
+}
+
+.ks-closing-heading {
+  font-family: var(--ks-font-title);
+  font-size: clamp(22px, 5.5vw, 29px);
+  font-weight: 700;
+  color: var(--ks-berry);
+  line-height: 1.18;
+  margin-bottom: 8px;
+}
+
+.ks-closing-poem {
+  font-family: var(--ks-font-sans);
+  font-size: 12.5px;
+  color: var(--ks-ink-soft);
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+
+.ks-closing-signatures {
   display: flex;
   align-items: center;
-  gap: 18px;
-  color: #ffffff;
-  font-family: var(--font-sans);
+  gap: 8px;
+  font-family: var(--ks-font-hand);
+  font-size: clamp(24px, 5vw, 30px);
+  font-weight: 700;
+  color: var(--ks-ink);
 }
-.btn-lb-prev, .btn-lb-next {
-  background: rgba(255, 255, 255, 0.25);
-  color: #ffffff;
-  border: none;
-  border-radius: 50%;
+
+.ks-sig-heart {
+  color: var(--ks-berry);
+  font-size: 0.7em;
+}
+
+/* ==========================================================================
+   GLOBAL FOOTER
+   ========================================================================== */
+.ks-global-footer {
+  position: relative;
+  z-index: 2;
+  max-width: 500px;
+  margin: 28px auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 3px;
+  padding: 24px 16px;
+  color: var(--ks-muted);
+}
+
+.ks-footer-monogram {
   width: 36px;
   height: 36px;
-  font-size: 1.5rem;
-  line-height: 1;
-  cursor: pointer;
+  border: 1.5px solid var(--ks-olive);
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.2s ease;
+  font-family: var(--ks-font-title);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ks-olive-dark);
+  margin-bottom: 4px;
 }
-.btn-lb-prev:hover, .btn-lb-next:hover {
-  background: rgba(255, 255, 255, 0.45);
+
+.ks-footer-couple {
+  font-family: var(--ks-font-title);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--ks-ink-soft);
 }
-.lightbox-counter {
-  font-size: 0.9rem;
+
+.ks-footer-hall,
+.ks-footer-brand {
+  font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
 /* ==========================================================================
-   TOAST NOTIFICATION
+   DESKTOP 2-COLUMN LAYOUT (≥860px)
+   (Exact Match to Reference Image 2: Two Side-by-Side Cards on Meadow/Tulip Background)
    ========================================================================== */
-.toast-message {
-  position: fixed;
-  bottom: 80px;
-  left: 50%;
-  transform: translateX(-50%) translateY(30px);
-  background: rgba(34, 34, 34, 0.92);
-  color: #ffffff;
-  font-family: var(--font-sans);
-  font-size: 0.88rem;
-  padding: 10px 20px;
-  border-radius: 999px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-  z-index: 10001;
-  opacity: 0;
-  pointer-events: none;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-.toast-message.show {
-  transform: translateX(-50%) translateY(0);
-  opacity: 1;
+@media (min-width: 860px) {
+  .ks-invitation-content {
+    padding: 48px 24px 80px;
+  }
+
+  .ks-layout-container {
+    max-width: 960px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+
+  .ks-global-footer {
+    max-width: 960px;
+  }
+
+  .ks-column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .ks-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .ks-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 22px 52px rgba(50, 42, 32, 0.18);
+  }
 }
 
-/* ==========================================================================
-   RESPONSIVE REFINEMENTS
-   ========================================================================== */
-@media (max-width: 380px) {
-  .gate-couple-script {
-    font-size: 2.6rem;
-  }
-  .hero-script-names {
-    font-size: 2.7rem;
-  }
-  .countdown-box {
-    min-width: 50px;
-    padding: 6px 8px;
-  }
-  .count-val {
-    font-size: 1.7rem;
-  }
-  .polaroid-row {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  .polaroid-card {
-    max-width: 220px;
-    margin: 0 auto;
-  }
-  .radio-options {
-    grid-template-columns: 1fr;
+@media (min-width: 1200px) {
+  .ks-layout-container {
+    max-width: 1020px;
+    gap: 36px;
   }
 }
